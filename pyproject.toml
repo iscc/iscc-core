@@ -3,14 +3,16 @@ name = "iscc-core"
 version = "0.1.0"
 description = "ISCC: Reference Implementation of standardized core algorithms."
 authors = ["Titusz <tp@py7.de>"]
-license="BSD 3-clause"
+license = "BSD 3-clause"
 readme = "README.md"
 
 [tool.poetry.dependencies]
-python = "^3.6"
+python = "^3.6.2"
+blake3 = "^0.1.8"
 
 [tool.poetry.dev-dependencies]
 pytest = "^5.2"
+black = "^21.7b0"
 
 [build-system]
 requires = ["poetry-core>=1.0.0"]
