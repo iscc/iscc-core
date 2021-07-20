@@ -6,10 +6,15 @@ from typing import Optional
 from iscc_core.base import Data, Stream
 
 
+VERSION_INSTANCE_HASH = 0
 BUFFER_SIZE = os.getenv("ISCC_BUFFER_SIZE", io.DEFAULT_BUFFER_SIZE)
 
 
 def hash_instance(stream: Stream) -> bytes:
+    return hash_instance_v0(stream)
+
+
+def hash_instance_v0(stream: Stream) -> bytes:
     data = stream.read(BUFFER_SIZE)
     hasher = InstanceHasher(data)
     while data:
@@ -18,7 +23,7 @@ def hash_instance(stream: Stream) -> bytes:
     return hasher.digest()
 
 
-class InstanceHasher:
+class InstanceHasherV0:
     def __init__(self, data: Optional[Data] = None):
         self.hasher = blake3.blake3(data)
 
@@ -27,3 +32,6 @@ class InstanceHasher:
 
     def digest(self):
         return self.hasher.digest()
+
+
+InstanceHasher = InstanceHasherV0
