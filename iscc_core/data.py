@@ -12,10 +12,9 @@ def hash_data(stream: Stream) -> bytes:
 
 
 def hash_data_v0(stream: Stream) -> bytes:
+    hasher = DataHasherV0()
     data = stream.read(CDC_READ_SIZE)
-    hasher = DataHasherV0(data)
 
-    data = stream.read(CDC_READ_SIZE)
     while data:
         hasher.push(data)
         data = stream.read(CDC_READ_SIZE)
@@ -28,10 +27,10 @@ class DataHasherV0:
         self.chunk_features = []
         self.chunk_sizes = []
         self.tail = None
-        if data is not None:
-            self.push(data)
+        data = data or b""
+        self.push(data)
 
-    def push(self, data: Optional[Data]):
+    def push(self, data: Data):
 
         if self.tail:
             data = self.tail + data
@@ -41,9 +40,9 @@ class DataHasherV0:
             self.chunk_features.append(xxhash.xxh32_intdigest(chunk))
 
         # Last chunk may not be final
+        self.tail = chunk
         self.chunk_features = self.chunk_features[:-1]
         self.chunk_sizes = self.chunk_sizes[:-1]
-        self.tail = chunk
 
     def digest(self):
         chunk_features = self.chunk_features
