@@ -1,6 +1,7 @@
 [tool.poetry]
 name = "iscc-core"
 version = "0.1.0"
+build = "build.py"
 description = "ISCC: Reference Implementation of standardized core algorithms."
 authors = ["Titusz <tp@py7.de>"]
 license = "BSD 3-clause"
@@ -8,7 +9,12 @@ readme = "README.md"
 
 [tool.poetry.dependencies]
 python = "^3.6.2"
+cython = { version = "^0.29.24", optional = true }
 blake3 = "^0.1.8"
+xxhash = "^2.0.2"
+
+[tool.poetry.extras]
+turbo = ["cython"]
 
 [tool.poetry.dev-dependencies]
 pytest = "^5.2"
