@@ -11,6 +11,6 @@ def test_hash_instance_empty():
 
 def test_hash_instance_zero():
     assert (
-        instance.hash_instance(BytesIO(b"\00")).hex()
+        instance.hash_instance(BytesIO(b"\x00")).hex()
         == "2d3adedff11b61f14c886e35afa036736dcd87a74d27b5c1510225d0f592e213"
     )
