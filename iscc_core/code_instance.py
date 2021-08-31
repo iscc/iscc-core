@@ -20,7 +20,7 @@ def hash_instance_v0(stream: Stream) -> bytes:
 class InstanceHasherV0:
     def __init__(self, data: Optional[Data] = None):
         self.hasher = blake3.blake3()
-        data = data or b''
+        data = data or b""
         self.push(data)
 
     def push(self, data: Data) -> None:
