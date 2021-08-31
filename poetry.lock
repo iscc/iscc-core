@@ -114,7 +114,7 @@ testing = ["pytest (>=4.6)", "pytest-checkdocs (>=2.4)", "pytest-flake8", "pytes
 name = "more-itertools"
 version = "8.8.0"
 description = "More routines for operating on iterables, beyond itertools"
-category = "dev"
+category = "main"
 optional = false
 python-versions = ">=3.5"
 
@@ -276,7 +276,7 @@ turbo = ["cython"]
 [metadata]
 lock-version = "1.1"
 python-versions = "^3.6.2"
-content-hash = "ac4b5e7bcbbcda4537d852c934822fe6f210c2736a24da46963089f5663ccf71"
+content-hash = "956d022d4b6989678e8d02d13bd37adb3eb0c2996ca75955bca7f97a7e640be0"
 
 [metadata.files]
 atomicwrites = [
