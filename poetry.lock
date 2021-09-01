@@ -21,6 +21,14 @@ tests = ["coverage[toml] (>=5.0.2)", "hypothesis", "pympler", "pytest (>=4.3.0)"
 tests_no_zope = ["coverage[toml] (>=5.0.2)", "hypothesis", "pympler", "pytest (>=4.3.0)", "six", "mypy", "pytest-mypy-plugins"]
 
 [[package]]
+name = "bitarray-hardbyte"
+version = "1.6.2"
+description = "efficient arrays of booleans -- C extension"
+category = "main"
+optional = false
+python-versions = "*"
+
+[[package]]
 name = "black"
 version = "21.8b0"
 description = "The uncompromising code formatter."
@@ -276,7 +284,7 @@ turbo = ["cython"]
 [metadata]
 lock-version = "1.1"
 python-versions = "^3.6.2"
-content-hash = "956d022d4b6989678e8d02d13bd37adb3eb0c2996ca75955bca7f97a7e640be0"
+content-hash = "3c7abf386caeb9dd530de814830d935c6b157d6de35bd3ffb5579239ed920031"
 
 [metadata.files]
 atomicwrites = [
@@ -286,6 +294,48 @@ atomicwrites = [
 attrs = [
     {file = "attrs-21.2.0-py2.py3-none-any.whl", hash = "sha256:149e90d6d8ac20db7a955ad60cf0e6881a3f20d37096140088356da6c716b0b1"},
     {file = "attrs-21.2.0.tar.gz", hash = "sha256:ef6aaac3ca6cd92904cdd0d83f629a15f18053ec84e6432106f7a4d04ae4f5fb"},
+]
+bitarray-hardbyte = [
+    {file = "bitarray-hardbyte-1.6.2.tar.gz", hash = "sha256:d4dd77ee51ebf3ebf5fa6520231388365a1888006acab9c0f98f29bbc3aa5658"},
+    {file = "bitarray_hardbyte-1.6.2-cp27-cp27m-macosx_10_6_intel.whl", hash = "sha256:fee59107026d50057b73413f8dd3308d233770863d953bccb3b2dff4d042e301"},
+    {file = "bitarray_hardbyte-1.6.2-cp27-cp27m-manylinux1_i686.whl", hash = "sha256:949c032d791356094a60ca77987d5cd49c59ee26ef0c71c5fdc6f9c90007efd0"},
+    {file = "bitarray_hardbyte-1.6.2-cp27-cp27m-manylinux1_x86_64.whl", hash = "sha256:981bc3eceaef31bde06915709ffe76e7871b46f5b65598c85220b34ccd66248e"},
+    {file = "bitarray_hardbyte-1.6.2-cp27-cp27m-manylinux2010_i686.whl", hash = "sha256:dcf7f22c44b94fb0f815abbdbd70a9b193de3431e8aabc4c04914fe60a685092"},
+    {file = "bitarray_hardbyte-1.6.2-cp27-cp27m-manylinux2010_x86_64.whl", hash = "sha256:eb24f3ddbb0f33f8ba17dcad0c95af0e5a7dfb33256f3791fd9e6d916fc6f3fe"},
+    {file = "bitarray_hardbyte-1.6.2-cp27-cp27m-win32.whl", hash = "sha256:9a1fbbf9b7c48b0572902f6245764dbb51c488ca901d6b136780f4aeb55d7c93"},
+    {file = "bitarray_hardbyte-1.6.2-cp27-cp27m-win_amd64.whl", hash = "sha256:00bcdcbe9dcac417b751ca0f2310159f75b82bb55f3eb074fa38f42c288b89ea"},
+    {file = "bitarray_hardbyte-1.6.2-cp27-cp27mu-manylinux1_i686.whl", hash = "sha256:a90e729853a537f08e1b6851856ab1a3ef06bd50cd50178c6df616876976c1ab"},
+    {file = "bitarray_hardbyte-1.6.2-cp27-cp27mu-manylinux1_x86_64.whl", hash = "sha256:fd3d60600c699c358d3ba5c69db86c4ae8dcab91ffac251022375fb2c62bffc2"},
+    {file = "bitarray_hardbyte-1.6.2-cp27-cp27mu-manylinux2010_i686.whl", hash = "sha256:4216817de7eb3e1124b34d35bcd6aa4051376f0f59060d9f785893aaac03d8f4"},
+    {file = "bitarray_hardbyte-1.6.2-cp27-cp27mu-manylinux2010_x86_64.whl", hash = "sha256:74e393b58e86ba5632707a523f8968fcdbb6432015f0bc5ce255d2b4973f89ad"},
+    {file = "bitarray_hardbyte-1.6.2-cp35-cp35m-macosx_10_6_intel.whl", hash = "sha256:710f12f98f665966bb02c9014749a12d53170a748c6f4b1a6b2941b4fd5b5e23"},
+    {file = "bitarray_hardbyte-1.6.2-cp35-cp35m-manylinux1_i686.whl", hash = "sha256:9785e66650c3b0a1fcc06842b4e6ce0b4e21aba15654bef0a377629e779f79cf"},
+    {file = "bitarray_hardbyte-1.6.2-cp35-cp35m-manylinux1_x86_64.whl", hash = "sha256:f5b21356c0229118b182b3824e8aa4f744c25b8bc91d30c1dad75e444552573b"},
+    {file = "bitarray_hardbyte-1.6.2-cp35-cp35m-manylinux2010_i686.whl", hash = "sha256:dc744618b512b40f7e7827e319a5ba427a6b5c8aed533cc9c1c4ba2995e3d214"},
+    {file = "bitarray_hardbyte-1.6.2-cp35-cp35m-manylinux2010_x86_64.whl", hash = "sha256:5c8524301eb2f8810266dc0541a4a05903cfae67394df583951abefcbefbce7b"},
+    {file = "bitarray_hardbyte-1.6.2-cp35-cp35m-win32.whl", hash = "sha256:c2cf67bb0baeb2ce6260aef2660fddc4ef986bfe203f45c0ea1596fef36ade64"},
+    {file = "bitarray_hardbyte-1.6.2-cp35-cp35m-win_amd64.whl", hash = "sha256:9d89736338aa2411fcd983dd7e114386b54788ace487823e93773478cdf2a4de"},
+    {file = "bitarray_hardbyte-1.6.2-cp36-cp36m-macosx_10_6_intel.whl", hash = "sha256:30b06f1cd42bbbc820d8d542e905e9de38c6615b4ed0c1579c36207d0642b907"},
+    {file = "bitarray_hardbyte-1.6.2-cp36-cp36m-manylinux1_i686.whl", hash = "sha256:04ac9556e59c3e8a1bd7896632e2a7eee00c532bd578baba3ba4b47fa69f5fe8"},
+    {file = "bitarray_hardbyte-1.6.2-cp36-cp36m-manylinux1_x86_64.whl", hash = "sha256:db9825b9f7b1bba2cf9d6473505fe1d3eb9a4e284931f1cff7da0a7c464f0ecf"},
+    {file = "bitarray_hardbyte-1.6.2-cp36-cp36m-manylinux2010_i686.whl", hash = "sha256:cc2c0829c4491d223abf29711ca60b7a1913ae06d2ccff7d33db881d507dca21"},
+    {file = "bitarray_hardbyte-1.6.2-cp36-cp36m-manylinux2010_x86_64.whl", hash = "sha256:bb65dfb22c43e257e04a3b8e896737c8833b9b2c95bced7f0822d45fe83be6ba"},
+    {file = "bitarray_hardbyte-1.6.2-cp36-cp36m-win32.whl", hash = "sha256:2ea48f6f256197c025b64881021049a0774863f375a91c3202c5184f94d8fe65"},
+    {file = "bitarray_hardbyte-1.6.2-cp36-cp36m-win_amd64.whl", hash = "sha256:596b426cdbfe25958c0f02ce2a60774db2ef99e1a436815020e7348e09192402"},
+    {file = "bitarray_hardbyte-1.6.2-cp37-cp37m-macosx_10_6_intel.whl", hash = "sha256:3191013cef5618edbebdc956d90167b12775e5c9235098372db49da7325661b2"},
+    {file = "bitarray_hardbyte-1.6.2-cp37-cp37m-manylinux1_i686.whl", hash = "sha256:428dbc44a8970a8ccd0ef56f53da7e3c5b5cf8780a8345d6f89d0371bf999779"},
+    {file = "bitarray_hardbyte-1.6.2-cp37-cp37m-manylinux1_x86_64.whl", hash = "sha256:ecb5011a0fdda2cbf09542aa849a3722d026afc401f248909ef2c49734278904"},
+    {file = "bitarray_hardbyte-1.6.2-cp37-cp37m-manylinux2010_i686.whl", hash = "sha256:cf988e2d7adbae1a7c6d67bb9f200c082deedb19954d146ae9d41dc3509c766d"},
+    {file = "bitarray_hardbyte-1.6.2-cp37-cp37m-manylinux2010_x86_64.whl", hash = "sha256:eab88f6ee4564a08c5b4ed5bf58f710fe78af68b86caf4fdb5b595819fe0af54"},
+    {file = "bitarray_hardbyte-1.6.2-cp37-cp37m-win32.whl", hash = "sha256:b8f4737da3b512b168a4076f379bb1f86f7130762c548064e191a7670af59f11"},
+    {file = "bitarray_hardbyte-1.6.2-cp37-cp37m-win_amd64.whl", hash = "sha256:a5c3db6ad922bba96a46fc3eebbd9191e79d206e5526fe0c3a7ce6344f91714a"},
+    {file = "bitarray_hardbyte-1.6.2-cp38-cp38-macosx_10_9_x86_64.whl", hash = "sha256:2ac5c110fdcf14ce33e357ac13d1f68946c0b7cb3923ea15d291db9e6c037b8a"},
+    {file = "bitarray_hardbyte-1.6.2-cp38-cp38-manylinux1_i686.whl", hash = "sha256:a7e137ce3e76f742c73b9575be33d020fd53771df8964074eca48fb24e0808b0"},
+    {file = "bitarray_hardbyte-1.6.2-cp38-cp38-manylinux1_x86_64.whl", hash = "sha256:d55c872559dacd436e3e18808a21547cc3700f44619ea2434973e961d9a55ec9"},
+    {file = "bitarray_hardbyte-1.6.2-cp38-cp38-manylinux2010_i686.whl", hash = "sha256:c631c177b66ade9320bb51e6dcf2d9c1a3574c19b59fe9661d3e40d7de3cad6e"},
+    {file = "bitarray_hardbyte-1.6.2-cp38-cp38-manylinux2010_x86_64.whl", hash = "sha256:eae0784cd091f3dcf3026a7e387de4b5a81db14310d0283698ae1d915eb25d7b"},
+    {file = "bitarray_hardbyte-1.6.2-cp38-cp38-win32.whl", hash = "sha256:0363dda495d6169b588b60c446692a374fa61c3781e49dd40f5b7dc44b2e8fe0"},
+    {file = "bitarray_hardbyte-1.6.2-cp38-cp38-win_amd64.whl", hash = "sha256:f130c0caee00d493876bbc175628a20cf70422cc39f376e4b7767c083863ff79"},
 ]
 black = [
     {file = "black-21.8b0-py3-none-any.whl", hash = "sha256:2a0f9a8c2b2a60dbcf1ccb058842fb22bdbbcb2f32c6cc02d9578f90b92ce8b7"},
