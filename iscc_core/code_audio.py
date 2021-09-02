@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 from typing import Iterable
-from more_itertools import windowed, chunked, divide
+from more_itertools import divide
 from iscc_core.simhash import similarity_hash
 
 
