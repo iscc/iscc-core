@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+import pytest
 from iscc_core import code_image
 
 
@@ -21,6 +22,23 @@ def test_hash_image_sample():
         code_image.hash_image(IMG_SAMPLE).hex()
         == "c36843e130f99e7c3c8e96698e1a65968647649332c9cc9e72e3d2c9e59b3167"
     )
+
+
+def test_dct_empty():
+    with pytest.raises(ValueError):
+        code_image.dct([])
+
+
+def test_dct_zeros():
+    assert code_image.dct([0] * 64) == [0] * 64
+
+
+def test_dct_ones():
+    assert code_image.dct([1] * 64) == [64] + [0] * 63
+
+
+def test_dct_range():
+    assert code_image.dct(range(64))[0] == 2016
 
 
 IMG_WHITE = [[255] * 64] * 64

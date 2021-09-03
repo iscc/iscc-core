@@ -37,4 +37,3 @@ def meta_hash(title, extra="", ngram_size=META_NGRAM_SIZE):
         simhash_digest = bytes(simhash_digest)
 
     return simhash_digest
-
