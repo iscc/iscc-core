@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 """
-ISCC Content-Code Audio
+ISCC Content-Code Audio - A similarity preserving hash for audio content (soft hash).
 
 The Content-Code Audio is generated from a Chromaprint fingerprint provided as a vector
 of 32-bit signed integers. (See https://acoustid.org/chromaprint).
@@ -24,7 +24,11 @@ def code_audio_v0(cv: Iterable[int], bits=64) -> str:
     """Create an ISCC Content-Code Audio with algorithm v0."""
     digest = hash_audio_v0(cv)
     audio_code = codec.encode_component(
-        codec.MT.CONTENT, codec.ST_CC.AUDIO, version=0, length=bits, digest=digest
+        mtype=codec.MT.CONTENT,
+        stype=codec.ST_CC.AUDIO,
+        version=codec.VS.V0,
+        length=bits,
+        digest=digest,
     )
     return audio_code
 
