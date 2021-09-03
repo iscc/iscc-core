@@ -16,18 +16,16 @@ from iscc_core import codec
 
 
 def code_audio(cv: Iterable[int], bits=64) -> str:
-    """Create an ISCC Content-Code Audio with the latest version of the algorithm."""
+    """Create an ISCC Content-Code Audio with the latest standard algorithm."""
     return code_audio_v0(cv, bits)
 
 
 def code_audio_v0(cv: Iterable[int], bits=64) -> str:
     """Create an ISCC Content-Code Audio with algorithm v0."""
-    nbytes = bits // 8
-    header = codec.write_header(
-        codec.MT.CONTENT, codec.ST_CC.AUDIO, version=0, length=bits
+    digest = hash_audio_v0(cv)
+    audio_code = codec.encode_component(
+        codec.MT.CONTENT, codec.ST_CC.AUDIO, 0, bits, digest
     )
-    digest = hash_audio_v0(cv)[:nbytes]
-    audio_code = codec.encode_base32(header + digest)
     return audio_code
 
 

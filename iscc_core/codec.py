@@ -64,6 +64,15 @@ class LN(enum.IntEnum):
     L256 = 256
 
 
+def encode_component(mtype, stype, version, length, body):
+    """Encode an ISCC standard component"""
+    nbytes = length // 8
+    header = write_header(mtype, stype, version, length)
+    body = body[:nbytes]
+    component_code = encode_base32(header + body)
+    return component_code
+
+
 def write_header(mtype: int, stype: int, version: int = 0, length: int = 64) -> bytes:
     """
     Encodes header values with nibble-sized variable-length encoding.
