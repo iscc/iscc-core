@@ -1,19 +1,43 @@
 # -*- coding: utf-8 -*-
+"""
+ISCC Meta-Code
+"""
 from more_itertools import interleave, sliced
+
+from iscc_core import codec
 from iscc_core.base import META_NGRAM_SIZE
 from iscc_core.utils import sliding_window
 from iscc_core.simhash import similarity_hash
 from blake3 import blake3
 
 
-def meta_hash(title, extra=""):
-    # type: (str, str) -> bytes
-    """Latest version of matadata similarity hash."""
-    return meta_hash_v0(title, extra)
+def code_meta(title, extra="", bits=64):
+    # type: (str, str, int) -> str
+    """Create an ISCC Meta-Code with the latest standard algorithm.
+
+    :param str title: Title of the work manifested in the digital asset.
+    :param str extra: Optional additional text for disambiguation of the work.
+    :returns str: ISCC Meta-Code
+    """
+    return code_meta_v0(title, extra, bits)
 
 
-def meta_hash_v0(title, extra="", ngram_size=META_NGRAM_SIZE):
-    # type: (str, str) -> bytes
+def code_meta_v0(title, extra="", bits=64):
+    # type: (str, str, int) -> str
+    """Create an ISCC Meta-Code with the algorithm v0."""
+    digest = hash_meta_v0(title, extra)
+    meta_code = codec.encode_component(
+        mtype=codec.MT.META,
+        stype=codec.ST.NONE,
+        version=codec.VS.V0,
+        length=bits,
+        digest=digest,
+    )
+    return meta_code
+
+
+def hash_meta_v0(title, extra="", ngram_size=META_NGRAM_SIZE):
+    # type: (str, str, int) -> bytes
     """
     Calculate simmilarity preserving 256-bit hash digest from metadata.
     Text input should be stripped of markup, normalized and trimmed before hashing.
@@ -32,7 +56,7 @@ def meta_hash_v0(title, extra="", ngram_size=META_NGRAM_SIZE):
         extra_hash_digests = [blake3(s.encode("utf-8")).digest() for s in extra_n_grams]
         extra_simhash_digest = similarity_hash(extra_hash_digests)
 
-        # Interleave first half pf title and extra simhashes in 32-bit chunks
+        # Interleave first half of title and extra simhashes in 32-bit chunks
         chunks_simhash_digest = sliced(simhash_digest[:16], 4)
         chunks_extra_simhash_digest = sliced(extra_simhash_digest[:16], 4)
         interleaved = interleave(chunks_simhash_digest, chunks_extra_simhash_digest)
