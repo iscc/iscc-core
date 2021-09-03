@@ -64,16 +64,18 @@ class LN(enum.IntEnum):
     L256 = 256
 
 
-def encode_component(mtype, stype, version, length, body):
+def encode_component(mtype, stype, version, length, digest):
+    # type: (int, int, int, int, bytes) -> str
     """Encode an ISCC standard component"""
     nbytes = length // 8
     header = write_header(mtype, stype, version, length)
-    body = body[:nbytes]
+    body = digest[:nbytes]
     component_code = encode_base32(header + body)
     return component_code
 
 
-def write_header(mtype: int, stype: int, version: int = 0, length: int = 64) -> bytes:
+def write_header(mtype, stype, version=0, length=64):
+    # type: (int, int, int, int) -> bytes
     """
     Encodes header values with nibble-sized variable-length encoding.
     The result is minimum 2 and maximum 8 bytes long. If the final count of nibbles
@@ -89,7 +91,8 @@ def write_header(mtype: int, stype: int, version: int = 0, length: int = 64) -> 
     return header.tobytes()
 
 
-def read_header(data: bytes) -> Tuple[int, int, int, int, bytes]:
+def read_header(data):
+    # type: (bytes) -> Tuple[int, int, int, int, bytes]
     """
     Decodes varnibble encoded header and returns it together with remaining bytes.
     :returns: (type, subtype, version, length, remaining bytes)
@@ -117,14 +120,16 @@ def read_header(data: bytes) -> Tuple[int, int, int, int, bytes]:
     return tuple(result)
 
 
-def encode_base32(data: bytes) -> str:
+def encode_base32(data):
+    # type: (bytes) -> str
     """
     Standard RFC4648 base32 encoding without padding.
     """
     return b32encode(data).decode("ascii").rstrip("=")
 
 
-def decode_base32(code: str) -> bytes:
+def decode_base32(code):
+    # type: (str) -> bytes
     """
     Standard RFC4648 base32 decoding without padding and with casefolding.
     """
@@ -135,7 +140,8 @@ def decode_base32(code: str) -> bytes:
     return bytes(b32decode(code + "=" * pad_length, casefold=True))
 
 
-def _write_varnibble(n: int) -> bitarray:
+def _write_varnibble(n):
+    # type: (int) -> bitarray
     """
     Writes integer to variable length sequence of 4-bit chunks.
     Variable-length encoding scheme:
@@ -160,7 +166,8 @@ def _write_varnibble(n: int) -> bitarray:
         raise ValueError("Value must be between 0 and 4679")
 
 
-def _read_varnibble(b: bitarray) -> Tuple[int, bitarray]:
+def _read_varnibble(b):
+    # type: (bitarray) -> Tuple[int, bitarray]
     """Reads first varnibble, returns its integer value and remaining bits."""
 
     bits = len(b)
@@ -177,7 +184,8 @@ def _read_varnibble(b: bitarray) -> Tuple[int, bitarray]:
     raise ValueError("Invalid bitarray")
 
 
-def clean(iscc: str) -> str:
+def clean(iscc):
+    # type: (str) -> str
     """Cleanup ISCC String.
 
     Removes leading scheme and dashes.
