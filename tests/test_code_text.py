@@ -24,15 +24,30 @@ TEXT_C = u"""
 
 
 def test_hash_text_a():
-    a = code_text.hash_text(TEXT_A).hex()
+    a = code_text.hash_text_v0(TEXT_A).hex()
     assert a == "1f869a735c10bf9c32107ab4114e13d2bf93614cda99513ee9f989faf3d6983f"
 
 
 def test_hash_text_b():
-    b = code_text.hash_text(TEXT_B).hex()
+    b = code_text.hash_text_v0(TEXT_B).hex()
     assert b == "1f869a735c18bfcc32107ab4114e13d2bf9b614cda91513ee9f189faf3d6987f"
 
 
 def test_hash_text_c():
-    c = code_text.hash_text(TEXT_C).hex()
+    c = code_text.hash_text_v0(TEXT_C).hex()
     assert c == "366f2f1b08ba65efbbb48acf4b9953d144be674fa0af8802e7a6f1769b19c576"
+
+
+def test_code_text_a_default():
+    a = code_text.code_text_v0(TEXT_A)
+    assert a == "EAAR7BU2ONOBBP44"
+
+
+def test_code_text_b_128_bits():
+    b = code_text.code_text_v0(TEXT_B, 128)
+    assert b == "EABR7BU2ONOBRP6MGIIHVNARJYJ5E"
+
+
+def test_code_text_c_256_bits():
+    c = code_text.code_text_v0(TEXT_C, 256)
+    assert c == "EADTM3ZPDMELUZPPXO2IVT2LTFJ5CRF6M5H2BL4IALT2N4LWTMM4K5Q"
