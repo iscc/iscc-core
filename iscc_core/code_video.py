@@ -30,7 +30,11 @@ def code_video_v0(frame_signatures, bits=64):
     """Create an ISCC Content-Code Video with algorithm v0."""
     digest = hash_video_v0(frame_signatures)
     video_code = codec.encode_component(
-        codec.MT.CONTENT, codec.ST_CC.VIDEO, version=0, length=bits, digest=digest
+        mtype=codec.MT.CONTENT,
+        stype=codec.ST_CC.VIDEO,
+        version=codec.VS.V0,
+        length=bits,
+        digest=digest,
     )
     return video_code
 
