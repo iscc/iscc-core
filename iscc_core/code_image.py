@@ -1,12 +1,36 @@
 # -*- coding: utf-8 -*-
+"""
+ISCC Content-Code Image - A similarity preserving perceptual hash for image content.
+"""
 import math
 from statistics import median
 from typing import List, Sequence
+from iscc_core import codec
 
 
-def hash_image(pixels: List[List[int]]) -> bytes:
-    """Calculate image hash from 64x64 grayscale pixel matrix."""
-    return hash_image_v0(pixels)
+def code_image(pixels, bits=64):
+    # type: (List[List[int]], int) -> str
+    """Create an ISCC Content-Code Image with the latest standard algorithm.
+
+    :param List pixels: 64 x 64 grayscale (uint8) pixel matrix.
+    :param int bits: Bit-length of ISCC Code (default 64).
+    :retuns str: ISCC Content-Code Image.
+    """
+    return code_image_v0(pixels, bits)
+
+
+def code_image_v0(pixels, bits=64):
+    # type: (List[List[int]], int) -> str
+    """Create an ISCC Content-Code Image with algorithm v0."""
+    digest = hash_image_v0(pixels)
+    image_code = codec.encode_component(
+        mtype=codec.MT.CONTENT,
+        stype=codec.ST_CC.IMAGE,
+        version=codec.VS.V0,
+        length=bits,
+        digest=digest,
+    )
+    return image_code
 
 
 def hash_image_v0(pixels: List[List[int]]) -> bytes:

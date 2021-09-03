@@ -3,24 +3,39 @@ import pytest
 from iscc_core import code_image
 
 
-def test_hash_image_white():
+def test_hash_image_v0_white():
     assert (
-        code_image.hash_image(IMG_WHITE).hex()
+        code_image.hash_image_v0(IMG_WHITE).hex()
         == "8000000000000000000000000000000000000000000000000000000000000000"
     )
 
 
-def test_hash_image_black():
+def test_hash_image_v0_black():
     assert (
-        code_image.hash_image(IMG_BLACK).hex()
+        code_image.hash_image_v0(IMG_BLACK).hex()
         == "0000000000000000000000000000000000000000000000000000000000000000"
     )
 
 
-def test_hash_image_sample():
+def test_hash_image_v0_sample():
     assert (
-        code_image.hash_image(IMG_SAMPLE).hex()
+        code_image.hash_image_v0(IMG_SAMPLE).hex()
         == "c36843e130f99e7c3c8e96698e1a65968647649332c9cc9e72e3d2c9e59b3167"
+    )
+
+
+def test_code_image_v0_white_default():
+    assert code_image.code_image_v0(IMG_WHITE) == "EEAYAAAAAAAAAAAA"
+
+
+def test_code_image_v0_black_127bit():
+    assert code_image.code_image_v0(IMG_BLACK, 128) == "EEBQAAAAAAAAAAAAAAAAAAAAAAAAA"
+
+
+def test_code_image_v0_sample_256bit():
+    assert (
+        code_image.code_image_v0(IMG_SAMPLE, 256)
+        == "EED4G2CD4EYPTHT4HSHJM2MODJSZNBSHMSJTFSOMTZZOHUWJ4WNTCZY"
     )
 
 
