@@ -66,7 +66,10 @@ class LN(enum.IntEnum):
 
 def encode_component(mtype, stype, version, length, digest):
     # type: (int, int, int, int, bytes) -> str
-    """Encode an ISCC standard component"""
+    """Encode an ISCC standard component.
+
+    Note: Oversized digests will be truncated to specified length.
+    """
     nbytes = length // 8
     header = write_header(mtype, stype, version, length)
     body = digest[:nbytes]
