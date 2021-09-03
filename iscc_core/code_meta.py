@@ -1,12 +1,18 @@
 # -*- coding: utf-8 -*-
-from more_itertools import interleave, sliced, chunked
+from more_itertools import interleave, sliced
 from iscc_core.base import META_NGRAM_SIZE
 from iscc_core.utils import sliding_window
 from iscc_core.simhash import similarity_hash
 from blake3 import blake3
 
 
-def meta_hash(title, extra="", ngram_size=META_NGRAM_SIZE):
+def meta_hash(title, extra=""):
+    # type: (str, str) -> bytes
+    """Latest version of matadata similarity hash."""
+    return meta_hash_v0(title, extra)
+
+
+def meta_hash_v0(title, extra="", ngram_size=META_NGRAM_SIZE):
     # type: (str, str) -> bytes
     """
     Calculate simmilarity preserving 256-bit hash digest from metadata.
