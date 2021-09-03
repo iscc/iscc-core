@@ -24,7 +24,7 @@ def code_audio_v0(cv: Iterable[int], bits=64) -> str:
     """Create an ISCC Content-Code Audio with algorithm v0."""
     digest = hash_audio_v0(cv)
     audio_code = codec.encode_component(
-        codec.MT.CONTENT, codec.ST_CC.AUDIO, 0, bits, digest
+        codec.MT.CONTENT, codec.ST_CC.AUDIO, version=0, length=bits, digest=digest
     )
     return audio_code
 
