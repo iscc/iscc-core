@@ -12,10 +12,23 @@ $ fpcalc -raw -json -signed -length 0 myaudiofile.mp3
 from typing import Iterable
 from more_itertools import divide
 from iscc_core.simhash import similarity_hash
+from iscc_core import codec
 
 
-def hash_audio(cv: Iterable[int]) -> bytes:
-    return hash_audio_v0(cv)
+def code_audio(cv: Iterable[int], bits=64) -> str:
+    """Create an ISCC Content-Code Audio with the latest version of the algorithm."""
+    return code_audio_v0(cv, bits)
+
+
+def code_audio_v0(cv: Iterable[int], bits=64) -> str:
+    """Create an ISCC Content-Code Audio with algorithm v0."""
+    nbytes = bits // 8
+    header = codec.write_header(
+        codec.MT.CONTENT, codec.ST_CC.AUDIO, version=0, length=bits
+    )
+    digest = hash_audio_v0(cv)[:nbytes]
+    audio_code = codec.encode_base32(header + digest)
+    return audio_code
 
 
 def hash_audio_v0(cv: Iterable[int]) -> bytes:
