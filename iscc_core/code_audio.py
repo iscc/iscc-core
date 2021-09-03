@@ -1,4 +1,14 @@
 # -*- coding: utf-8 -*-
+"""
+ISCC Content-Code Audio
+
+The Content-Code Audio is generated from a Chromaprint fingerprint provided as a vector
+of 32-bit signed integers. (See https://acoustid.org/chromaprint).
+Chromaprints are extracted with fpcalc 1.5.0 (see https://acoustid.org/chromaprint)
+using the following command line parameters:
+
+$ fpcalc -raw -json -signed -length 0 myaudiofile.mp3
+"""
 from typing import Iterable
 from more_itertools import divide
 from iscc_core.simhash import similarity_hash
