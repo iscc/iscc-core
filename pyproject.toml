@@ -14,9 +14,10 @@ blake3 = "^0.1.8"
 xxhash = "^2.0.2"
 more-itertools = "^8.8.0"
 bitarray-hardbyte = "^1.6.2"
+pybase64 = { version = "^1.1.4", optional = true }
 
 [tool.poetry.extras]
-turbo = ["cython"]
+turbo = ["cython", "pybase64"]
 
 [tool.poetry.dev-dependencies]
 pytest = "^5.2"
