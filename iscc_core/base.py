@@ -10,7 +10,7 @@ CDC_READ_SIZE: int = os.getenv("CDC_READ_SIZE", 262144)
 CDC_AVG_CHUNK_SIZE: int = os.getenv("CDC_AVG_CHUNK_SIZE", 1024)
 INSTANCE_READ_SIZE: int = os.getenv("INSTANCE_READ_SIZE", 262144)
 TEXT_NGRAM_SIZE: int = os.getenv("TEXT_NGRAM_SIZE", 13)
-
+META_NGRAM_SIZE: int = os.getenv("META_NGRAM_SIZE", 3)
 
 # Types
 Data = Union[bytes, bytearray, memoryview]
