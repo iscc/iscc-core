@@ -3,12 +3,12 @@
 ISCC Content-Code Video
 
 The Content-Code Video is generated from MPEG-7 Video Frame Signatures.
-Frame Signatures can be extracted with ffmpeg (see: https://www.ffmpeg.org/).
-MPEG-7 Signature can be extracted with the following command line parameters:
+Frame Signatures can be extracted with ffmpeg (see: https://www.ffmpeg.org/) using the
+following command line parameters:
 
 $ ffmpeg -i video.mpg -vf fps=fps=5,signature=format=xml:filename=sig.xml -f null -
 
-The relevant Frame vectors can be parsed from the following xml elements:
+The relevant frame signatures can be parsed from the following elements in sig.xml:
 <FrameSignature>0  0  0  1  0  0  1  0  1  1  0  0  1  1 ...</FrameSignature>
 
 Note: it is also possible to extract the signatures in a more compact binary format
