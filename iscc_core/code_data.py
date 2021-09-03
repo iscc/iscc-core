@@ -4,14 +4,30 @@ from iscc_core.base import Data, Stream
 from iscc_core.cdc import data_chunks
 from iscc_core.base import CDC_READ_SIZE
 from iscc_core.minhash import minhash_256
+from iscc_core import codec
 import xxhash
 
 
-def hash_data(stream: Stream) -> bytes:
-    return hash_data_v0(stream)
+def code_data(stream, bits=64):
+    # type: (Stream, int) -> str
+    return code_data_v0(stream, bits)
 
 
-def hash_data_v0(stream: Stream) -> bytes:
+def code_data_v0(stream, bits=64):
+    # type: (Stream, int) -> str
+    digest = hash_data_v0(stream)
+    data_code = codec.encode_component(
+        mtype=codec.MT.DATA,
+        stype=codec.ST.NONE,
+        version=codec.VS.V0,
+        length=bits,
+        digest=digest,
+    )
+    return data_code
+
+
+def hash_data_v0(stream):
+    # type: (Stream) -> bytes
     hasher = DataHasherV0()
     data = stream.read(CDC_READ_SIZE)
 
@@ -23,15 +39,16 @@ def hash_data_v0(stream: Stream) -> bytes:
 
 
 class DataHasherV0:
-    def __init__(self, data: Optional[Data] = None):
+    def __init__(self, data=None):
+        # type: (Optional[Data]) -> None
         self.chunk_features = []
         self.chunk_sizes = []
         self.tail = None
         data = data or b""
         self.push(data)
 
-    def push(self, data: Data):
-
+    def push(self, data):
+        # type: (Data) -> None
         if self.tail:
             data = self.tail + data
 
@@ -45,6 +62,7 @@ class DataHasherV0:
         self.chunk_sizes = self.chunk_sizes[:-1]
 
     def digest(self):
+        # type: () -> bytes
         chunk_features = self.chunk_features
         chunk_sizes = self.chunk_sizes
         if self.tail is not None:

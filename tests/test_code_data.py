@@ -7,9 +7,9 @@ MB1 = 1024 * 1024
 TEST_DATA = static_bytes(MB1)
 
 
-def test_hash_data():
+def test_hash_data_v0_test_data():
     assert (
-        code_data.hash_data(BytesIO(TEST_DATA)).hex()
+        code_data.hash_data_v0(BytesIO(TEST_DATA)).hex()
         == "e5b3daf1118cf09cb5c5ac323a9f68ca04465f9e3942297ebd1e6360f5bb98df"
     )
 
@@ -91,6 +91,6 @@ def test_hash_data_1mib_robust():
 
 
 def test_DataHasher():
-    assert code_data.DataHasher(TEST_DATA).digest() == code_data.hash_data(
+    assert code_data.DataHasher(TEST_DATA).digest() == code_data.hash_data_v0(
         BytesIO(TEST_DATA)
     )
