@@ -1,59 +1,62 @@
 # -*- coding: utf-8 -*-
 import pytest
-from iscc_core import code_image
+from iscc_core import code_content_image
 
 
 def test_hash_image_v0_white():
     assert (
-        code_image.hash_image_v0(IMG_WHITE).hex()
+        code_content_image.hash_image_v0(IMG_WHITE).hex()
         == "8000000000000000000000000000000000000000000000000000000000000000"
     )
 
 
 def test_hash_image_v0_black():
     assert (
-        code_image.hash_image_v0(IMG_BLACK).hex()
+        code_content_image.hash_image_v0(IMG_BLACK).hex()
         == "0000000000000000000000000000000000000000000000000000000000000000"
     )
 
 
 def test_hash_image_v0_sample():
     assert (
-        code_image.hash_image_v0(IMG_SAMPLE).hex()
+        code_content_image.hash_image_v0(IMG_SAMPLE).hex()
         == "c36843e130f99e7c3c8e96698e1a65968647649332c9cc9e72e3d2c9e59b3167"
     )
 
 
 def test_code_image_v0_white_default():
-    assert code_image.code_image_v0(IMG_WHITE) == "EEAYAAAAAAAAAAAA"
+    assert code_content_image.code_image_v0(IMG_WHITE) == "EEAYAAAAAAAAAAAA"
 
 
 def test_code_image_v0_black_127bit():
-    assert code_image.code_image_v0(IMG_BLACK, 128) == "EEBQAAAAAAAAAAAAAAAAAAAAAAAAA"
+    assert (
+        code_content_image.code_image_v0(IMG_BLACK, 128)
+        == "EEBQAAAAAAAAAAAAAAAAAAAAAAAAA"
+    )
 
 
 def test_code_image_v0_sample_256bit():
     assert (
-        code_image.code_image_v0(IMG_SAMPLE, 256)
+        code_content_image.code_image_v0(IMG_SAMPLE, 256)
         == "EED4G2CD4EYPTHT4HSHJM2MODJSZNBSHMSJTFSOMTZZOHUWJ4WNTCZY"
     )
 
 
 def test_dct_empty():
     with pytest.raises(ValueError):
-        code_image.dct([])
+        code_content_image.dct([])
 
 
 def test_dct_zeros():
-    assert code_image.dct([0] * 64) == [0] * 64
+    assert code_content_image.dct([0] * 64) == [0] * 64
 
 
 def test_dct_ones():
-    assert code_image.dct([1] * 64) == [64] + [0] * 63
+    assert code_content_image.dct([1] * 64) == [64] + [0] * 63
 
 
 def test_dct_range():
-    assert code_image.dct(range(64))[0] == 2016
+    assert code_content_image.dct(range(64))[0] == 2016
 
 
 IMG_WHITE = [[255] * 64] * 64

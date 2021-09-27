@@ -1,11 +1,11 @@
 # -*- coding: utf-8 -*-
-from iscc_core import code_audio
+from iscc_core import code_content_audio
 
 
 def test_hash_audio_001_empty():
     cv = []
     assert (
-        code_audio.hash_audio_v0(cv).hex()
+        code_content_audio.hash_audio_v0(cv).hex()
         == "0000000000000000000000000000000000000000000000000000000000000000"
     )
 
@@ -13,7 +13,7 @@ def test_hash_audio_001_empty():
 def test_hash_audio_002_single():
     cv = [1]
     assert (
-        code_audio.hash_audio_v0(cv).hex()
+        code_content_audio.hash_audio_v0(cv).hex()
         == "0000000100000001000000000000000000000000000000010000000000000000"
     )
 
@@ -21,7 +21,7 @@ def test_hash_audio_002_single():
 def test_hash_audio_003_short():
     cv = [1, 2]
     assert (
-        code_audio.hash_audio_v0(cv).hex()
+        code_content_audio.hash_audio_v0(cv).hex()
         == "0000000300000001000000020000000000000000000000010000000200000000"
     )
 
@@ -29,40 +29,42 @@ def test_hash_audio_003_short():
 def test_hash_audio_004_signed():
     cv = [-1, 0, 1]
     assert (
-        code_audio.hash_audio_v0(cv).hex()
+        code_content_audio.hash_audio_v0(cv).hex()
         == "00000001ffffffff000000000000000100000000ffffffff0000000000000001"
     )
 
 
 def test_hash_audio_005_sample():
     assert (
-        code_audio.hash_audio_v0(CHROMA_VECTOR).hex()
+        code_content_audio.hash_audio_v0(CHROMA_VECTOR).hex()
         == "6a24a22672e4e2a33a4e88876a84a0266a24a2263a4ea0836264a22468842a2f"
     )
 
 
 def test_code_audio_v0_default():
-    assert code_audio.code_audio_v0(CHROMA_VECTOR) == "EIAWUJFCEZZOJYVD"
+    assert code_content_audio.code_audio_v0(CHROMA_VECTOR) == "EIAWUJFCEZZOJYVD"
 
 
 def test_code_audio_v0_32bits():
-    assert code_audio.code_audio_v0(CHROMA_VECTOR, bits=32) == "EIAGUJFCEY"
+    assert code_content_audio.code_audio_v0(CHROMA_VECTOR, bits=32) == "EIAGUJFCEY"
 
 
 def test_code_audio_v0_64bits():
-    assert code_audio.code_audio_v0(CHROMA_VECTOR, bits=64) == "EIAWUJFCEZZOJYVD"
+    assert (
+        code_content_audio.code_audio_v0(CHROMA_VECTOR, bits=64) == "EIAWUJFCEZZOJYVD"
+    )
 
 
 def test_code_audio_v0_128bits():
     assert (
-        code_audio.code_audio_v0(CHROMA_VECTOR, bits=128)
+        code_content_audio.code_audio_v0(CHROMA_VECTOR, bits=128)
         == "EIBWUJFCEZZOJYVDHJHIRB3KQSQCM"
     )
 
 
 def test_code_audio_v0_256bits():
     assert (
-        code_audio.code_audio_v0(CHROMA_VECTOR, bits=256)
+        code_content_audio.code_audio_v0(CHROMA_VECTOR, bits=256)
         == "EIDWUJFCEZZOJYVDHJHIRB3KQSQCM2REUITDUTVAQNRGJIRENCCCULY"
     )
 

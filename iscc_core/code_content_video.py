@@ -1,18 +1,20 @@
 # -*- coding: utf-8 -*-
 """
-ISCC Content-Code Video
+# ISCC Content-Code Video
 
-The Content-Code Video is generated from MPEG-7 Video Frame Signatures.
+The **Content-Code Video** is generated from MPEG-7 Video Frame Signatures.
 Frame Signatures can be extracted with ffmpeg (see: https://www.ffmpeg.org/) using the
 following command line parameters:
 
-$ ffmpeg -i video.mpg -vf fps=fps=5,signature=format=xml:filename=sig.xml -f null -
+`$ ffmpeg -i video.mpg -vf fps=fps=5,signature=format=xml:filename=sig.xml -f null -`
 
 The relevant frame signatures can be parsed from the following elements in sig.xml:
-<FrameSignature>0  0  0  1  0  0  1  0  1  1  0  0  1  1 ...</FrameSignature>
 
-Note: it is also possible to extract the signatures in a more compact binary format
-but it requires a custom binary parser to decode the frame signaturs.
+`<FrameSignature>0  0  0  1  0  0  1  0  1  1  0  0  1  1 ...</FrameSignature>`
+
+!!! note
+    it is also possible to extract the signatures in a more compact binary format
+    but it requires a custom binary parser to decode the frame signaturs.
 """
 from typing import Sequence, Tuple
 from iscc_core.wtahash import wtahash
