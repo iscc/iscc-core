@@ -19,6 +19,7 @@ def data_chunks(data, utf32=False, avg_chunk_size=CDC_AVG_CHUNK_SIZE):
     :param utf32: If true assume we are chunking text that is utf32 encoded.
     :param avg_chunk_size: Target chunk size in number of bytes.
     :return: A generator that yields chunks of variable sizes.
+    :rtype: Generator
     """
 
     stream = io.BytesIO(data)
@@ -43,6 +44,7 @@ def data_chunks(data, utf32=False, avg_chunk_size=CDC_AVG_CHUNK_SIZE):
 
 
 def cdc_offset(buffer, mi, ma, cs, mask_s, mask_l):
+    """Calculate breakpoint offset."""
 
     pattern = 0
     i = mi
@@ -62,7 +64,11 @@ def cdc_offset(buffer, mi, ma, cs, mask_s, mask_l):
     return i
 
 
-def get_params(avg_size):
+def get_params(avg_size: int) -> tuple:
+    """Calculate CDC parameters
+    :param int avg_size: Target average size of chunks in number of bytes.
+    :returns: Tuple of (min_size, max_size, center_size, mask_s, mask_l).
+    """
     ceil_div = lambda x, y: (x + y - 1) // y
     mask = lambda b: 2 ** b - 1
     min_size = avg_size // 4
