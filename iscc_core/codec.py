@@ -1,13 +1,13 @@
 # -*- coding: utf-8 -*-
 """
-The iscc.codec module provides encoding, decoding and transcoding related functions.
+The `iscc.codec` module provides encoding, decoding and transcoding related functions.
 
-ISCC Component Structure:
+#ISCC Component Structure:
 
-Header:
-    <type> <subtype> <version> <length> each coded as a variable-length 4-bit sequence.
-Body:
-    <hash-digest> with number of bits as indicated by <length>
+**Header:** `<type> <subtype> <version> <length>` each coded as a variable-length 4-bit
+sequence.
+
+**Body:** `<hash-digest>` with number of bits as indicated by `<length>`
 """
 import enum
 import math
@@ -68,7 +68,8 @@ def encode_component(mtype, stype, version, length, digest):
     # type: (int, int, int, int, bytes) -> str
     """Encode an ISCC standard component.
 
-    Note: Oversized digests will be truncated to specified length.
+    !!! note
+        Oversized digests will be truncated to specified length.
     """
     nbytes = length // 8
     header = write_header(mtype, stype, version, length)
@@ -155,7 +156,6 @@ def _write_varnibble(n):
     | 10          | 2       | 6         | 8 - 71         |
     | 110         | 3       | 9         | 72 - 583       |
     | 1110        | 4       | 12        | 584 - 4679     |
-    ------------------------------------------------------
     """
     if 0 <= n < 8:
         return int2ba(n, length=4)
