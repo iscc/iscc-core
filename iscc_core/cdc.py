@@ -3,7 +3,7 @@
 Content Defined Chunking
 
 Simple CDC implementation.
-Compatible with https://pypi.org/project/fastcdc/ v1.3.0
+Compatible with [fastcdc](https://pypi.org/project/fastcdc/ v1.3.0)
 """
 import io
 from math import log2
@@ -12,14 +12,21 @@ from iscc_core.base import Data, CDC_AVG_CHUNK_SIZE, CDC_READ_SIZE
 
 
 def data_chunks(data, utf32=False, avg_chunk_size=CDC_AVG_CHUNK_SIZE):
-    # type: (Data, bool, int) -> Generator
-    """Split data into data-dependent chunks.
+    # type: (Data, bool, int) -> Generator[bytes]
+    """A generator that yields data-dependent chunks for `data`.
 
-    :param data: Raw data for vriable sized chunking.
-    :param utf32: If true assume we are chunking text that is utf32 encoded.
-    :param avg_chunk_size: Target chunk size in number of bytes.
-    :return: A generator that yields chunks of variable sizes.
-    :rtype: Generator
+    Usage Example:
+
+    ```python
+    for chunk in data_chunks(data):
+        hash(chunk)
+    ```
+
+    :param bytes data: Raw data for variable sized chunking.
+    :param bool utf32: If true assume we are chunking text that is utf32 encoded.
+    :param int avg_chunk_size: Target chunk size in number of bytes.
+    :returns: A generator that yields data chunks of variable sizes.
+    :rtype: Generator[bytes]
     """
 
     stream = io.BytesIO(data)
@@ -44,7 +51,18 @@ def data_chunks(data, utf32=False, avg_chunk_size=CDC_AVG_CHUNK_SIZE):
 
 
 def cdc_offset(buffer, mi, ma, cs, mask_s, mask_l):
-    """Calculate breakpoint offset."""
+    # type: (Data, int, int, int, int, int) -> int
+    """Find breakpoint offset for a given buffer.
+
+    :param Data buffer: The data to be chunked.
+    :param int mi: Minimum chunk size.
+    :param int ma: Maximung chunk size.
+    :param int cs: Center size.
+    :param int mask_s: Small mask.
+    :param int mask_l: Large mask.
+    :return: Offset of dynamic cutpoint in number of bytes.
+    :rtype: int
+    """
 
     pattern = 0
     i = mi

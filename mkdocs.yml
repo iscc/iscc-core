@@ -14,12 +14,14 @@ plugins:
           selection:
             docstring_style: restructured-text
           rendering:
-            show_source: false
+            show_source: true
             show_object_full_path: false
             members_order: source
 
 markdown_extensions:
   - admonition
+  - pymdownx.highlight
+  - pymdownx.superfences
 
 nav:
   - Home: index.md
