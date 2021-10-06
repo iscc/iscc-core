@@ -17,7 +17,7 @@ plugins:
           selection:
             docstring_style: restructured-text
           rendering:
-            show_root_heading: true
+            show_root_heading: false
             show_root_toc_entry: true
             show_root_full_path: true
             show_object_full_path: false
@@ -43,10 +43,10 @@ nav:
     - Meta-Code: components/code_meta.md
     - Content-Code:
       - components/content/index.md
-      - Text: components/code_content_text.md
-      - Image: components/code_content_image.md
-      - Audio: components/code_content_audio.md
-      - Video: components/code_content_video.md
+      - Text: components/content/code_content_text.md
+      - Image: components/content/code_content_image.md
+      - Audio: components/content/code_content_audio.md
+      - Video: components/content/code_content_video.md
     - Data-Code: components/code_data.md
     - Instance-Code: components/code_instance.md
   - Algorithms:
