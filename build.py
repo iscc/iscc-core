@@ -12,7 +12,13 @@ def build(setup_kwargs):
 
         setup_kwargs.update(
             dict(
-                ext_modules=cythonize(["./iscc_core/cdc.py", "./iscc_core/minhash.py"]),
+                ext_modules=cythonize(
+                    [
+                        "./iscc_core/cdc.py",
+                        "./iscc_core/minhash.py",
+                        "./iscc_core/simhash.py",
+                    ]
+                ),
                 cmdclass=dict(build_ext=build_ext),
             )
         )

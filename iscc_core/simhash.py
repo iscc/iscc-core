@@ -1,11 +1,14 @@
 # -*- coding: utf-8 -*-
-from typing import Sequence
 
 
 def similarity_hash(hash_digests):
-    # type: (Sequence[bytes]) -> bytes
+    # type: (list[bytes]) -> bytes
     """
     Creates a similarity preserving hash from a sequence of equal sized hash digests.
+
+    :param list hash_digests: A sequence of equaly sized byte-hashes.
+    :returns: Similarity byte-hash
+    :rtype: bytes
     """
 
     n_bytes = len(hash_digests[0])
