@@ -69,7 +69,15 @@ def encode_component(mtype, stype, version, length, digest):
     """Encode an ISCC standard component.
 
     !!! note
-        Oversized digests will be truncated to specified length.
+        If `digest` has more bits than specified by `length` it wil be truncated.
+
+    :param int mtype: Main-type of component.
+    :param int stype: Sub-type of component.
+    :param int version: Version of component algorithm.
+    :param int length: Length of component in number of bits (multiple of 32)
+    :param bytes digest: The hash digest of the component.
+    :return: Base32 encoded component code.
+    :rtype: str
     """
     nbytes = length // 8
     header = write_header(mtype, stype, version, length)
@@ -81,9 +89,17 @@ def encode_component(mtype, stype, version, length, digest):
 def write_header(mtype, stype, version=0, length=64):
     # type: (int, int, int, int) -> bytes
     """
-    Encodes header values with nibble-sized variable-length encoding.
+    Encodes header values with nibble-sized (4-bit) variable-length encoding.
     The result is minimum 2 and maximum 8 bytes long. If the final count of nibbles
     is uneven it is padded with 4-bit `0000` at the end.
+
+    :param int mtype: Main-type of component.
+    :param int stype: Sub-type of component.
+    :param int version: Version of component algorithm.
+    :param int length: Length of component in number of bits (multiple of 32)
+    :return: Byte encoded ISCC header.
+    :rtype: bytes
+
     """
     assert length >= 32 and not length % 32, "Length must be a multiple of 32"
     length = (length // 32) - 1
