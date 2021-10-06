@@ -2,11 +2,14 @@ site_name: iscc-core
 
 theme:
   name: material
+  features:
+    - navigation.indexes
+#    - navigation.sections
+#    - navigation.expand
 
 plugins:
   - search
   - mkdocstrings:
-      default_handle: python
       watch:
         - iscc_core
       handlers:
@@ -14,8 +17,18 @@ plugins:
           selection:
             docstring_style: restructured-text
           rendering:
-            show_source: true
+            show_root_heading: true
+            show_root_toc_entry: true
+            show_root_full_path: true
             show_object_full_path: false
+            show_root_members_full_path: false
+            show_category_heading: true
+            show_if_no_docstring: true
+            show_signature_annotations: true
+            show_source: true
+            show_bases: true
+            group_by_category: true
+            heading_level: 2
             members_order: source
 
 markdown_extensions:
@@ -24,21 +37,22 @@ markdown_extensions:
   - pymdownx.superfences
 
 nav:
-  - Home: index.md
-  - ISCC-CORE Reference:
-      - Components:
-          - Meta-Code: code_meta.md
-          - Content-Code:
-            - Text: code_text.md
-            - Image: code_image.md
-            - Audio: code_audio.md
-            - Video: code_video.md
-          - Data-Code: code_data.md
-          - Instance-Code: code_instance.md
-      - Algorithms:
-        - CDC: cdc.md
-        - Simhash: simhash.md
-        - Minhash: minhash.md
-        - WTAHash: wtahash.md
-      - Codec: codec.md
-      - Utilities: utils.md
+  - ISCC-CORE Reference: index.md
+  - Components:
+    - components/index.md
+    - Meta-Code: components/code_meta.md
+    - Content-Code:
+      - components/content/index.md
+      - Text: components/code_content_text.md
+      - Image: components/code_content_image.md
+      - Audio: components/code_content_audio.md
+      - Video: components/code_content_video.md
+    - Data-Code: components/code_data.md
+    - Instance-Code: components/code_instance.md
+  - Algorithms:
+    - CDC: algorithms/cdc.md
+    - Simhash: algorithms/simhash.md
+    - Minhash: algorithms/minhash.md
+    - WTAHash: algorithms/wtahash.md
+  - Codec: codec/codec.md
+  - Utilities: utilities/utils.md
