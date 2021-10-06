@@ -21,7 +21,7 @@ turbo = ["cython", "pybase64"]
 
 [tool.poetry.dev-dependencies]
 pytest = "*"
-black = { version = "^21.9b0", allow-prereleases = true }
+black = { version = "*", allow-prereleases = true }
 mkdocs-material = "*"
 mkdocstrings = "*"
 toml = "0.10.1"  # 0.10.2 fails
