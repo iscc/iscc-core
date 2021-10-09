@@ -1,28 +1,39 @@
 # -*- coding: utf-8 -*-
 """
-ISCC Content-Code Image - A similarity preserving perceptual hash for image content.
+A similarity preserving perceptual hash for image content.
 """
 import math
 from statistics import median
-from typing import List, Sequence
+from typing import Sequence
+from PIL import Image
+from more_itertools import chunked
 from iscc_core import codec
+from iscc_core.base import Stream
 
 
-def gen_image_code(pixels, bits=64):
-    # type: (List[List[int]], int) -> str
+def gen_image_code(img, bits=64):
+    # type: (Stream, int) -> str
     """Create an ISCC Content-Code Image with the latest standard algorithm.
 
-    :param List pixels: 64 x 64 grayscale (uint8) pixel matrix.
-    :param int bits: Bit-length of ISCC Code (default 64).
-    :retuns str: ISCC Content-Code Image.
+    :param Stream img: Image data stream.
+    :param int bits: Bit-length of ISCC Content-Code Image (default 64).
+    :retun: ISCC Content-Code Image.
+    :rtype: str
     """
-    return gen_image_code_v0(pixels, bits)
+    return gen_image_code_v0(img, bits)
 
 
-def gen_image_code_v0(pixels, bits=64):
-    # type: (List[List[int]], int) -> str
-    """Create an ISCC Content-Code Image with algorithm v0."""
-    digest = hash_image_v0(pixels)
+def gen_image_code_v0(img, bits=64):
+    # type: (Stream, int) -> str
+    """Create an ISCC Content-Code Image with algorithm v0.
+
+    :param Stream img: Image data stream.
+    :param int bits: Bit-length of ISCC Content-Code Image (default 64).
+    :retun: ISCC Content-Code Image.
+    :rtype: str
+    """
+    pixels = normalize_image(img)
+    digest = hash_image_v0(pixels, bits=bits)
     image_code = codec.encode_component(
         mtype=codec.MT.CONTENT,
         stype=codec.ST_CC.IMAGE,
@@ -33,15 +44,51 @@ def gen_image_code_v0(pixels, bits=64):
     return image_code
 
 
-def hash_image_v0(pixels: List[List[int]]) -> bytes:
-    """Calculate image hash from 64*64 grayscale pixel matrix."""
+def normalize_image(img):
+    # type: (Stream) -> Sequence[int]
+    """Create a normalized sequence of pixels from an Image.
 
-    # 1. DCT per row
+    :param Stream img: Image data stream.
+    :return: A sequence of 1024 normalized image pixels
+    :rtype: Sequence[int]
+    """
+
+    im = Image.open(img)
+
+    # Add white background to images that have alpha transparency
+    if im.mode in ("RGBA", "LA") or (im.mode == "P" and "transparency" in im.info):
+        alpha = im.convert("RGBA").split()[-1]
+        bg = Image.new("RGBA", im.size, (255, 255, 255, 255))
+        bg.paste(im, mask=alpha)
+        im = bg
+
+    # Convert to greyscale
+    im = im.convert("L")
+
+    # Resize to 32x32
+    im = im.resize((32, 32), Image.BICUBIC)
+
+    # A flattened sequence of grayscale pixel values (1024 pixels)
+    pixels = im.getdata()
+
+    return pixels
+
+
+def hash_image_v0(pixels: Sequence[int], bits=64) -> bytes:
+    """Calculate image hash from normalized grayscale pixel sequence of length 1024.
+
+    :param Sequence[int] pixels:
+    :param int bits: Bit-length of image hash (default 64)
+    :return: similarity preserving byte hash
+    :rtype: bytes
+    """
+
+    # DCT per row
     dct_row_lists = []
-    for pixel_list in pixels:
+    for pixel_list in chunked(pixels, 32):
         dct_row_lists.append(dct(pixel_list))
 
-    # 2. DCT per col
+    # DCT per col
     dct_row_lists_t = list(map(list, zip(*dct_row_lists)))
     dct_col_lists_t = []
     for dct_list in dct_row_lists_t:
@@ -49,20 +96,32 @@ def hash_image_v0(pixels: List[List[int]]) -> bytes:
 
     dct_lists = list(map(list, zip(*dct_col_lists_t)))
 
-    # 3. Extract upper left 16x16 corner
-    flat_list = [x for sublist in dct_lists[:16] for x in sublist[:16]]
+    # Extract upper left 8 x 8 corner
+    flat_list = [x for sublist in dct_lists[:8] for x in sublist[:8]]
 
-    # 4. Calculate median
+    # Calculate median
     med = median(flat_list)
 
-    # 5. Create 64-bit digest by comparing to median
+    # Create 64-bit digest by comparing to median
     bitstring = ""
     for value in flat_list:
         if value > med:
             bitstring += "1"
         else:
             bitstring += "0"
-    hash_digest = int(bitstring, 2).to_bytes(32, "big", signed=False)
+
+    if bits in (32, 64):
+        hash_digest = int(bitstring, 2).to_bytes(8, "big", signed=False)
+    else:
+        # Extend to 256-bit
+        flat_list_ext = [x for sublist in dct_lists[8:22] for x in sublist[8:22]]
+        med = median(flat_list_ext)
+        for value in flat_list_ext[:192]:
+            if value > med:
+                bitstring += "1"
+            else:
+                bitstring += "0"
+        hash_digest = int(bitstring, 2).to_bytes(32, "big", signed=False)
 
     return hash_digest
 
