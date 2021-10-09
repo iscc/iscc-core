@@ -25,7 +25,9 @@ def test_hash_video_v0_multiple_framevectors():
 
 
 def test_code_video_v0_features():
-    assert code_content_video.gen_video_code_v0([tuple([0] * 380)]) == "EMAQAAAAAAAAAAAA"
+    assert (
+        code_content_video.gen_video_code_v0([tuple([0] * 380)]) == "EMAQAAAAAAAAAAAA"
+    )
 
 
 def test_code_video_v0_range_128():

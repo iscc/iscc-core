@@ -25,29 +25,52 @@ TEXT_C = u"""
 
 def test_hash_text_a():
     a = code_content_text.hash_text_v0(TEXT_A).hex()
-    assert a == "1f869a735c10bf9c32107ab4114e13d2bf93614cda99513ee9f989faf3d6983f"
+    assert a == "5f869a775c18bfbc3a117ab0114e13b2bf92614cda91513ee1f889fef3d6985f"
 
 
 def test_hash_text_b():
     b = code_content_text.hash_text_v0(TEXT_B).hex()
-    assert b == "1f869a735c18bfcc32107ab4114e13d2bf9b614cda91513ee9f189faf3d6987f"
+    assert b == "5f869a775c18bdfc3a117ab0114e13f2bf92610cda91513ee1f889bef3d6985f"
 
 
 def test_hash_text_c():
     c = code_content_text.hash_text_v0(TEXT_C).hex()
-    assert c == "366f2f1b08ba65efbbb48acf4b9953d144be674fa0af8802e7a6f1769b19c576"
+    assert c == "377b2f7b099a6df6bbc4a2ee4ff957b944c6434fa0e78842e7aad1169b71dd07"
 
 
-def test_code_text_a_default():
+def test_gen_text_code_a_default():
     a = code_content_text.gen_text_code_v0(TEXT_A)
-    assert a == "EAAR7BU2ONOBBP44"
+    assert a == "EAAR7BVKOFMBVNE4"
+
+
+def test_gen_text_code_a_32bits():
+    a = code_content_text.gen_text_code_v0(TEXT_A, bits=32)
+    assert a == "EAAB7BVKOE"
 
 
 def test_code_text_b_128_bits():
     b = code_content_text.gen_text_code_v0(TEXT_B, 128)
-    assert b == "EABR7BU2ONOBRP6MGIIHVNARJYJ5E"
+    assert b == "EABR7BVKOFMBVNGMGINEXNCRLYINE"
 
 
 def test_code_text_c_256_bits():
     c = code_content_text.gen_text_code_v0(TEXT_C, 256)
-    assert c == "EADTM3ZPDMELUZPPXO2IVT2LTFJ5CRF6M5H2BL4IALT2N4LWTMM4K5Q"
+    assert c == "EADTKJYPXKUZU4O7XGWIE3PK3FT7CRXOI5HIJZ54ELTP5UKVDNI5CVQ"
+
+
+def test_normalize_text():
+    txt = "  Iñtërnâtiôn\nàlizætiøn☃💩 –  is a tric\t ky \u00A0 thing!\r"
+
+    normalized = code_content_text.normalize_text(txt)
+    assert normalized == "Internation alizætiøn☃💩 is a tric ky thing!"
+
+    assert code_content_text.normalize_text(" ") == ""
+    assert code_content_text.normalize_text("  Hello  World ? ") == "Hello World ?"
+    assert code_content_text.normalize_text("Hello\nWorld") == "Hello World"
+
+
+def test_code_text_empty():
+    r64 = code_content_text.gen_text_code(b"", bits=64)
+    assert r64 == "EAASL4F2WZY7KBXB"
+    r128 = code_content_text.gen_text_code("", bits=128)
+    assert r128 == "EABSL4F2WZY7KBXBYUZPREWZ26IXU"

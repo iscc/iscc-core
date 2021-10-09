@@ -51,7 +51,8 @@ def test_code_audio_v0_32bits():
 
 def test_code_audio_v0_64bits():
     assert (
-            code_content_audio.gen_audio_code_v0(CHROMA_VECTOR, bits=64) == "EIAWUJFCEZZOJYVD"
+        code_content_audio.gen_audio_code_v0(CHROMA_VECTOR, bits=64)
+        == "EIAWUJFCEZZOJYVD"
     )
 
 
