@@ -9,6 +9,7 @@ theme:
 
 plugins:
   - search
+  - autorefs
   - mkdocstrings:
       watch:
         - iscc_core
