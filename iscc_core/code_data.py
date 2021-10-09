@@ -8,12 +8,12 @@ from iscc_core import codec
 import xxhash
 
 
-def code_data(stream, bits=64):
+def gen_data_code(stream, bits=64):
     # type: (Stream, int) -> str
-    return code_data_v0(stream, bits)
+    return gen_data_code_v0(stream, bits)
 
 
-def code_data_v0(stream, bits=64):
+def gen_data_code_v0(stream, bits=64):
     # type: (Stream, int) -> str
     digest = hash_data_v0(stream)
     data_code = codec.encode_component(

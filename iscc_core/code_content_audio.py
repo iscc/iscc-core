@@ -15,12 +15,12 @@ from iscc_core.simhash import similarity_hash
 from iscc_core import codec
 
 
-def code_audio(cv: Iterable[int], bits=64) -> str:
+def gen_audio_code(cv: Iterable[int], bits=64) -> str:
     """Create an ISCC Content-Code Audio with the latest standard algorithm."""
-    return code_audio_v0(cv, bits)
+    return gen_audio_code_v0(cv, bits)
 
 
-def code_audio_v0(cv: Iterable[int], bits=64) -> str:
+def gen_audio_code_v0(cv: Iterable[int], bits=64) -> str:
     """Create an ISCC Content-Code Audio with algorithm v0."""
     digest = hash_audio_v0(cv)
     audio_code = codec.encode_component(

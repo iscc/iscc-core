@@ -22,17 +22,17 @@ def test_hash_meta_v0_interleaved():
 
 
 def test_code_meta_v0_empty_default():
-    m = code_meta.code_meta_v0("")
+    m = code_meta.gen_meta_code_v0("")
     assert m == "AAA26E2JXH27TING"
 
 
 def test_code_meta_v0_extra_only_128_bits():
-    m = code_meta.code_meta_v0("", "Hello", 128)
+    m = code_meta.gen_meta_code_v0("", "Hello", 128)
     assert m == "AAB26E2JXFSSZZN36X42DJR724AYU"
 
 
 def test_code_meta_v0_interleaved():
-    ma = code_meta.code_meta_v0("", "")
-    mb = code_meta.code_meta_v0("", "hello")
+    ma = code_meta.gen_meta_code_v0("", "")
+    mb = code_meta.gen_meta_code_v0("", "hello")
     assert ma == "AAA26E2JXH27TING"
     assert mb == "AAA26E2JXFSSZZN3"

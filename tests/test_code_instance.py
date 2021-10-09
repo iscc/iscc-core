@@ -17,15 +17,15 @@ def test_hash_instance_v0_zero():
 
 
 def test_code_instance_v0_empty_default():
-    assert code_instance.code_instance_v0(BytesIO(b"")) == "IAA26E2JXH27TING"
+    assert code_instance.gen_instance_code_v0(BytesIO(b"")) == "IAA26E2JXH27TING"
 
 
 def test_code_instance_v0_zero_default():
-    assert code_instance.code_instance_v0(BytesIO(b"\x00")) == "IAAS2OW637YRWYPR"
+    assert code_instance.gen_instance_code_v0(BytesIO(b"\x00")) == "IAAS2OW637YRWYPR"
 
 
 def test_code_instance_v0_hello_world_128():
     assert (
-        code_instance.code_instance_v0(BytesIO(b"hello world"), 128)
+        code_instance.gen_instance_code_v0(BytesIO(b"hello world"), 128)
         == "IAB5OSMB56TQUDEIBOGYYGMF2B25W"
     )

@@ -21,13 +21,13 @@ from iscc_core.wtahash import wtahash
 from iscc_core import codec
 
 
-def code_video(frame_signatures, bits=64):
+def gen_video_code(frame_signatures, bits=64):
     # type: (Sequence[Tuple[int]], int) -> str
     """Create an ISCC Content-Code Video with the latest standard algorithm."""
-    return code_video_v0(frame_signatures, bits)
+    return gen_video_code_v0(frame_signatures, bits)
 
 
-def code_video_v0(frame_signatures, bits=64):
+def gen_video_code_v0(frame_signatures, bits=64):
     # type: (Sequence[Tuple[int]], int) -> str
     """Create an ISCC Content-Code Video with algorithm v0."""
     digest = hash_video_v0(frame_signatures)

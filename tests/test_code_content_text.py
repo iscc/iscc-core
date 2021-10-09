@@ -39,15 +39,15 @@ def test_hash_text_c():
 
 
 def test_code_text_a_default():
-    a = code_content_text.code_text_v0(TEXT_A)
+    a = code_content_text.gen_text_code_v0(TEXT_A)
     assert a == "EAAR7BU2ONOBBP44"
 
 
 def test_code_text_b_128_bits():
-    b = code_content_text.code_text_v0(TEXT_B, 128)
+    b = code_content_text.gen_text_code_v0(TEXT_B, 128)
     assert b == "EABR7BU2ONOBRP6MGIIHVNARJYJ5E"
 
 
 def test_code_text_c_256_bits():
-    c = code_content_text.code_text_v0(TEXT_C, 256)
+    c = code_content_text.gen_text_code_v0(TEXT_C, 256)
     assert c == "EADTM3ZPDMELUZPPXO2IVT2LTFJ5CRF6M5H2BL4IALT2N4LWTMM4K5Q"

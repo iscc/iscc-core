@@ -11,7 +11,7 @@ from iscc_core.simhash import similarity_hash
 from blake3 import blake3
 
 
-def code_meta(title, extra="", bits=64):
+def gen_meta_code(title, extra="", bits=64):
     # type: (str, str, int) -> str
     """Create an ISCC Meta-Code using the latest standard algorithm.
 
@@ -21,10 +21,10 @@ def code_meta(title, extra="", bits=64):
     :return: ISCC Meta-Code.
     :rtype: str
     """
-    return code_meta_v0(title, extra, bits)
+    return gen_meta_code_v0(title, extra, bits)
 
 
-def code_meta_v0(title, extra="", bits=64):
+def gen_meta_code_v0(title, extra="", bits=64):
     # type: (str, str, int) -> str
     """Create an ISCC Meta-Code with the algorithm version 0.
 

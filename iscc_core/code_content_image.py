@@ -8,7 +8,7 @@ from typing import List, Sequence
 from iscc_core import codec
 
 
-def code_image(pixels, bits=64):
+def gen_image_code(pixels, bits=64):
     # type: (List[List[int]], int) -> str
     """Create an ISCC Content-Code Image with the latest standard algorithm.
 
@@ -16,10 +16,10 @@ def code_image(pixels, bits=64):
     :param int bits: Bit-length of ISCC Code (default 64).
     :retuns str: ISCC Content-Code Image.
     """
-    return code_image_v0(pixels, bits)
+    return gen_image_code_v0(pixels, bits)
 
 
-def code_image_v0(pixels, bits=64):
+def gen_image_code_v0(pixels, bits=64):
     # type: (List[List[int]], int) -> str
     """Create an ISCC Content-Code Image with algorithm v0."""
     digest = hash_image_v0(pixels)

@@ -13,7 +13,7 @@ from iscc_core.utils import sliding_window
 from iscc_core import codec
 
 
-def code_text(text, bits=64):
+def gen_text_code(text, bits=64):
     # type: (str, int) -> str
     """Create an ISCC Content-Code Text with the latest standard algorithm.
 
@@ -21,10 +21,10 @@ def code_text(text, bits=64):
     :param int bits: Bit-length of ISCC Code Hash (default 64).
     :returns str: ISCC Content-Code Text.
     """
-    return code_text_v0(text, bits)
+    return gen_text_code_v0(text, bits)
 
 
-def code_text_v0(text, bits=64):
+def gen_text_code_v0(text, bits=64):
     # type: (str, int) -> str
     """Create ISCC Content-Code Text with algorithm v0"""
     digest = hash_text_v0(text)

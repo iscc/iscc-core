@@ -5,13 +5,13 @@ from iscc_core.base import Data, Stream, INSTANCE_READ_SIZE
 from iscc_core import codec
 
 
-def code_instance(stream, bits=64):
+def gen_instance_code(stream, bits=64):
     # type: (Stream, int) -> str
     """Create an ISCC Instance-Code with the latest standard algorithm"""
-    return code_instance_v0(stream, bits)
+    return gen_instance_code_v0(stream, bits)
 
 
-def code_instance_v0(stream, bits=64):
+def gen_instance_code_v0(stream, bits=64):
     # type: (Stream, int) -> str
     """Create an ISCC Instance-Code with algorithm v0"""
     digest = hash_instance_v0(stream)

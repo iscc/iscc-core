@@ -25,19 +25,19 @@ def test_hash_image_v0_sample():
 
 
 def test_code_image_v0_white_default():
-    assert code_content_image.code_image_v0(IMG_WHITE) == "EEAYAAAAAAAAAAAA"
+    assert code_content_image.gen_image_code_v0(IMG_WHITE) == "EEAYAAAAAAAAAAAA"
 
 
 def test_code_image_v0_black_127bit():
     assert (
-        code_content_image.code_image_v0(IMG_BLACK, 128)
+        code_content_image.gen_image_code_v0(IMG_BLACK, 128)
         == "EEBQAAAAAAAAAAAAAAAAAAAAAAAAA"
     )
 
 
 def test_code_image_v0_sample_256bit():
     assert (
-        code_content_image.code_image_v0(IMG_SAMPLE, 256)
+        code_content_image.gen_image_code_v0(IMG_SAMPLE, 256)
         == "EED4G2CD4EYPTHT4HSHJM2MODJSZNBSHMSJTFSOMTZZOHUWJ4WNTCZY"
     )
 
