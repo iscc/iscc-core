@@ -1,7 +1,8 @@
 # -*- coding: utf-8 -*-
 """
-A similarity preserving hash for text content (soft hash). The Content-Code Text is
-generated from plain-text that has been extracted from different media assets.
+A similarity preserving hash for text content (soft hash).
+The **ISCC Content-Code Text** is generated from plain-text that has been extracted
+from different media assets.
 """
 import unicodedata
 import xxhash
@@ -45,6 +46,9 @@ UNICODE_FILTER = frozenset(
 def gen_text_code(text, bits=64):
     # type: (str, int) -> str
     """Create an ISCC Content-Code Text with the latest standard algorithm.
+
+    !!! note
+        If `text` input includes markup (like HTML tags) it must be removed beforehand.
 
     :param str text: Plain text for Text-Code creation.
     :param int bits: Bit-length (multiple of 32) for ISCC Code Hash (default 64).
