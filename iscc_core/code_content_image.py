@@ -1,6 +1,10 @@
 # -*- coding: utf-8 -*-
 """
 A similarity preserving perceptual hash for image content.
+
+The ISCC Content-Code Image is created by calculating a dicrete cosine transform on the
+normalized image-pixels and comparing the values from the upper left area of the
+dct-matrix against their median values to set the hash bits.
 """
 import math
 from statistics import median
@@ -17,7 +21,7 @@ def gen_image_code(img, bits=64):
 
     :param Stream img: Image data stream.
     :param int bits: Bit-length of ISCC Content-Code Image (default 64).
-    :retun: ISCC Content-Code Image.
+    :return: ISCC Content-Code Image.
     :rtype: str
     """
     return gen_image_code_v0(img, bits)
@@ -29,7 +33,7 @@ def gen_image_code_v0(img, bits=64):
 
     :param Stream img: Image data stream.
     :param int bits: Bit-length of ISCC Content-Code Image (default 64).
-    :retun: ISCC Content-Code Image.
+    :return: ISCC Content-Code Image.
     :rtype: str
     """
     pixels = normalize_image(img)
@@ -46,7 +50,11 @@ def gen_image_code_v0(img, bits=64):
 
 def normalize_image(img):
     # type: (Stream) -> Sequence[int]
-    """Create a normalized sequence of pixels from an Image.
+    """Normalize image for hash calculation.
+
+    - Add white background to images with alpha transparency
+    - Convert to grayscale
+    - Resize (bicubic) to 32x32 pixiels
 
     :param Stream img: Image data stream.
     :return: A sequence of 1024 normalized image pixels
@@ -62,7 +70,7 @@ def normalize_image(img):
         bg.paste(im, mask=alpha)
         im = bg
 
-    # Convert to greyscale
+    # Convert to grayscale
     im = im.convert("L")
 
     # Resize to 32x32
@@ -74,7 +82,8 @@ def normalize_image(img):
     return pixels
 
 
-def hash_image_v0(pixels: Sequence[int], bits=64) -> bytes:
+def hash_image_v0(pixels, bits=64):
+    # type: (Sequence[int], int) -> bytes
     """Calculate image hash from normalized grayscale pixel sequence of length 1024.
 
     :param Sequence[int] pixels:
@@ -96,7 +105,7 @@ def hash_image_v0(pixels: Sequence[int], bits=64) -> bytes:
     for dct_list in dct_row_lists_t:
         dct_col_lists_t.append(dct(dct_list))
 
-    m = list(map(list, zip(*dct_col_lists_t)))
+    dct_matrix = list(map(list, zip(*dct_col_lists_t)))
 
     def flatten(m, x, y):
         """Extract and flatten an 8 x 8 slice from a 2d matrix starting at col/row."""
@@ -107,7 +116,7 @@ def hash_image_v0(pixels: Sequence[int], bits=64) -> bytes:
 
     for xy in slices:
         # Extract 8 x 8 slice
-        flat_list = flatten(m, *xy)
+        flat_list = flatten(dct_matrix, *xy)
 
         # Calculate median
         med = median(flat_list)
@@ -124,10 +133,16 @@ def hash_image_v0(pixels: Sequence[int], bits=64) -> bytes:
             return hash_digest
 
 
-def dct(v: Sequence[float]):
-    """
-    Discrete cosine transform by Project Nayuki. (MIT License)
-    See: https://www.nayuki.io/page/fast-discrete-cosine-transform-algorithms
+def dct(v):
+    # type: (Sequence[float]) -> Sequence[float]
+    """Discrete cosine transform.
+
+    Copyright (c) 2020 Project Nayuki (MIT License).
+    See: https://www.nayuki.io/page/fast-discrete-cosine-transform-algorithms).
+
+    :param Sequence[float] v: Input vector for DCT calculation.
+    :return: Transformed vector.
+    :rtype: list
     """
 
     n = len(v)
