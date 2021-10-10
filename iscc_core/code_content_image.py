@@ -78,10 +78,12 @@ def hash_image_v0(pixels: Sequence[int], bits=64) -> bytes:
     """Calculate image hash from normalized grayscale pixel sequence of length 1024.
 
     :param Sequence[int] pixels:
-    :param int bits: Bit-length of image hash (default 64)
-    :return: similarity preserving byte hash
+    :param int bits: Bit-length of image hash (default 64).
+    :return: Similarity preserving byte hash.
     :rtype: bytes
     """
+
+    assert bits <= 256
 
     # DCT per row
     dct_row_lists = []
@@ -94,36 +96,32 @@ def hash_image_v0(pixels: Sequence[int], bits=64) -> bytes:
     for dct_list in dct_row_lists_t:
         dct_col_lists_t.append(dct(dct_list))
 
-    dct_lists = list(map(list, zip(*dct_col_lists_t)))
+    m = list(map(list, zip(*dct_col_lists_t)))
 
-    # Extract upper left 8 x 8 corner
-    flat_list = [x for sublist in dct_lists[:8] for x in sublist[:8]]
+    def flatten(m, x, y):
+        """Extract and flatten an 8 x 8 slice from a 2d matrix starting at col/row."""
+        return [v for sublist in m[y : y + 8] for v in sublist[x : x + 8]]
 
-    # Calculate median
-    med = median(flat_list)
-
-    # Create 64-bit digest by comparing to median
     bitstring = ""
-    for value in flat_list:
-        if value > med:
-            bitstring += "1"
-        else:
-            bitstring += "0"
+    slices = ((0, 0), (1, 0), (0, 1), (1, 1))
 
-    if bits in (32, 64):
-        hash_digest = int(bitstring, 2).to_bytes(8, "big", signed=False)
-    else:
-        # Extend to 256-bit
-        flat_list_ext = [x for sublist in dct_lists[8:22] for x in sublist[8:22]]
-        med = median(flat_list_ext)
-        for value in flat_list_ext[:192]:
+    for xy in slices:
+        # Extract 8 x 8 slice
+        flat_list = flatten(m, *xy)
+
+        # Calculate median
+        med = median(flat_list)
+
+        # Append 64-bit digest by comparing to median
+        for value in flat_list:
             if value > med:
                 bitstring += "1"
             else:
                 bitstring += "0"
-        hash_digest = int(bitstring, 2).to_bytes(32, "big", signed=False)
-
-    return hash_digest
+        bl = len(bitstring)
+        if bl >= bits:
+            hash_digest = int(bitstring, 2).to_bytes(bl // 8, "big", signed=False)
+            return hash_digest
 
 
 def dct(v: Sequence[float]):

@@ -20,7 +20,7 @@ def test_gen_image_code_v0_256bit():
     with open(images()[0].as_posix(), "rb") as stream:
         assert (
             code_content_image.gen_image_code_v0(stream, 256)
-            == "EED4GQZQTY6J5DTHI7RE3TEZ46J6DZZHJGZVS6NQIGYYEZWMHB43UWA"
+            == "EED4GQZQTY6J5DTHQ2DWCPDZHQOM6QZQTY6J5DTFZ2DWCPDZHQOMXDI"
         )
 
 
@@ -62,7 +62,7 @@ def test_hash_image_v0_sample():
 
     assert (
         code_content_image.hash_image_v0(IMG_SAMPLE_PIXELS, 256).hex()
-        == "c343309e3c9e8e6747e24dcc99e793e1e72749b35979b041b18266cc3879ba58"
+        == "c343309e3c9e8e678687613c793c1ccf43309e3c9e8e65ce87613c793c1ccb8d"
     )
 
 
