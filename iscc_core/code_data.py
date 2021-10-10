@@ -73,6 +73,3 @@ class DataHasherV0:
 
 
 DataHasher = DataHasherV0
-
-
-print(DataHasher(b"\x00").digest().hex())
