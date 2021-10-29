@@ -8,14 +8,14 @@ license = "BSD 3-clause"
 readme = "README.md"
 
 [tool.poetry.dependencies]
-python = "^3.6.2"
+python = ">=3.6,<4.0"
 cython = { version = "*", optional = true }
 blake3 = "*"
 xxhash = "*"
 more-itertools = "*"
 bitarray-hardbyte = "*"
 pybase64 = { version = "*", optional = true }
-Pillow = "^8.3.2"
+Pillow = "*"
 
 [tool.poetry.extras]
 turbo = ["cython", "pybase64"]
@@ -25,8 +25,8 @@ pytest = "*"
 black = { version = "*", allow-prereleases = true }
 mkdocs-material = "*"
 mkdocstrings = "*"
-toml = "0.10.1"  # 0.10.2 fails
-iscc-samples = "^0.4.0"
+toml = "*"
+iscc-samples = "*"
 
 [build-system]
 requires = ["poetry-core>=1.1.11"]
