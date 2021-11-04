@@ -46,7 +46,6 @@ class ST_CC(enum.IntEnum):
     IMAGE = 1
     AUDIO = 2
     VIDEO = 3
-    GENERIC = 4
 
 
 class VS(enum.IntEnum):
