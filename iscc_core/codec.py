@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 """
-The `iscc.codec` module provides encoding, decoding and transcoding related functions.
+The `iscc_core.codec` module provides encoding, decoding and transcoding related functions.
 
 #ISCC Component Structure:
 

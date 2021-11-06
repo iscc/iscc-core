@@ -3,7 +3,6 @@
 ISCC Meta-Code
 """
 from more_itertools import interleave, sliced
-
 from iscc_core import codec
 from iscc_core.base import META_NGRAM_SIZE
 from iscc_core.utils import sliding_window
