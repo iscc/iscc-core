@@ -19,15 +19,16 @@ The relevant frame signatures can be parsed from the following elements in sig.x
 from typing import Sequence, Tuple
 from iscc_core.wtahash import wtahash
 from iscc_core import codec
+from iscc_core.options import opts
 
 
-def gen_video_code(frame_signatures, bits=64):
+def gen_video_code(frame_signatures, bits=opts.video_bits):
     # type: (Sequence[Tuple[int]], int) -> str
     """Create an ISCC Content-Code Video with the latest standard algorithm."""
     return gen_video_code_v0(frame_signatures, bits)
 
 
-def gen_video_code_v0(frame_signatures, bits=64):
+def gen_video_code_v0(frame_signatures, bits=opts.video_bits):
     # type: (Sequence[Tuple[int]], int) -> str
     """Create an ISCC Content-Code Video with algorithm v0."""
     digest = hash_video_v0(frame_signatures)

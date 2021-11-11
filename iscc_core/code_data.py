@@ -1,20 +1,39 @@
 # -*- coding: utf-8 -*-
+"""
+*A similarity perserving hash for binary data (soft hash).*
+"""
 from typing import Optional
 from iscc_core.base import Data, Stream
 from iscc_core.cdc import data_chunks
-from iscc_core.options import opts
 from iscc_core.minhash import minhash_256
 from iscc_core import codec
+from iscc_core.options import opts
 import xxhash
 
 
-def gen_data_code(stream, bits=64):
+def gen_data_code(stream, bits=opts.data_bits):
     # type: (Stream, int) -> str
+    """
+    Create a similarity preserving ISCC Data-Code with the latest standard algorithm.
+
+    :param stream: Input data stream.
+    :param int bits: Bit-length of ISCC Data-Code (default 64).
+    :return: ISCC Data-Code
+    :rtype: str
+    """
     return gen_data_code_v0(stream, bits)
 
 
-def gen_data_code_v0(stream, bits=64):
+def gen_data_code_v0(stream, bits=opts.data_bits):
     # type: (Stream, int) -> str
+    """
+    Create an ISCC Data-Code with algorithm v0.
+
+    :param stream: Input data stream.
+    :param int bits: Bit-length of ISCC Data-Code (default 64).
+    :return: str
+    """
+
     digest = hash_data_v0(stream)
     data_code = codec.encode_component(
         mtype=codec.MT.DATA,
@@ -28,6 +47,13 @@ def gen_data_code_v0(stream, bits=64):
 
 def hash_data_v0(stream):
     # type: (Stream) -> bytes
+    """
+    Create a similarity preserving Data-Hash digest
+
+    :param stream: Input data stream.
+    :return: Similarity preserving Data-Hash digest
+    :rtype: bytes
+    """
     hasher = DataHasherV0()
     data = stream.read(opts.cdc_read_size)
 

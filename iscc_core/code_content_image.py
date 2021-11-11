@@ -1,10 +1,10 @@
 # -*- coding: utf-8 -*-
 """
-A similarity preserving perceptual hash for image content.
+*A similarity preserving perceptual hash for images.*
 
-The ISCC Content-Code Image is created by calculating a dicrete cosine transform on the
+The ISCC Content-Code Image is created by calculating a discrete cosine transform on
 normalized image-pixels and comparing the values from the upper left area of the
-dct-matrix against their median values to set the hash bits.
+dct-matrix against their median values to set the hash-bits.
 """
 import math
 from statistics import median
@@ -13,9 +13,10 @@ from PIL import Image
 from more_itertools import chunked
 from iscc_core import codec
 from iscc_core.base import Stream
+from iscc_core.options import opts
 
 
-def gen_image_code(img, bits=64):
+def gen_image_code(img, bits=opts.image_bits):
     # type: (Stream, int) -> str
     """Create an ISCC Content-Code Image with the latest standard algorithm.
 
@@ -27,7 +28,7 @@ def gen_image_code(img, bits=64):
     return gen_image_code_v0(img, bits)
 
 
-def gen_image_code_v0(img, bits=64):
+def gen_image_code_v0(img, bits=opts.image_bits):
     # type: (Stream, int) -> str
     """Create an ISCC Content-Code Image with algorithm v0.
 
@@ -82,13 +83,13 @@ def normalize_image(img):
     return pixels
 
 
-def hash_image_v0(pixels, bits=64):
+def hash_image_v0(pixels, bits=opts.image_bits):
     # type: (Sequence[int], int) -> bytes
     """Calculate image hash from normalized grayscale pixel sequence of length 1024.
 
     :param Sequence[int] pixels:
     :param int bits: Bit-length of image hash (default 64).
-    :return: Similarity preserving byte hash.
+    :return: Similarity preserving Image-Hash digest.
     :rtype: bytes
     """
 

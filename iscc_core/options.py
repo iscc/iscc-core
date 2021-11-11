@@ -11,7 +11,9 @@ class CoreOptions(BaseSettings):
         env_file = "iscc-core.env"
         env_file_encoding = "utf-8"
 
-    meta_bits: int = Field(64, description="Default length of generated Meta-Code in bits")
+    meta_bits: int = Field(
+        64, description="Default length of generated Meta-Code in bits"
+    )
     meta_trim_title: int = Field(
         128, description="Trim title length to this mumber of bytes"
     )
@@ -26,6 +28,10 @@ class CoreOptions(BaseSettings):
     meta_ngram_size_extra_binary: int = Field(
         3,
         description="Sliding window width (bytes) for binary extra metadata",
+    )
+
+    text_bits: int = Field(
+        64, description="Default length of generated Content-Code Text in bits"
     )
 
     text_ngram_size: int = Field(
@@ -63,6 +69,22 @@ class CoreOptions(BaseSettings):
             }
         ),
         description="Common control characters considered whitespace",
+    )
+
+    image_bits: int = Field(
+        64, description="Default length of generated Content-Code Image in bits"
+    )
+
+    audio_bits: int = Field(
+        64, description="Default length of generated Content-Code Audio in bits"
+    )
+
+    video_bits: int = Field(
+        64, description="Default length of generated Content-Code Video in bits"
+    )
+
+    data_bits: int = Field(
+        64, description="Default length of generated Data-Code in bits"
     )
 
     instance_bits: int = Field(

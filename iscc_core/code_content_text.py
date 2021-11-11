@@ -13,7 +13,7 @@ from iscc_core.utils import sliding_window
 from iscc_core import codec
 
 
-def gen_text_code(text, bits=64):
+def gen_text_code(text, bits=opts.text_bits):
     # type: (str, int) -> str
     """Create an ISCC Content-Code Text with the latest standard algorithm.
 
@@ -28,7 +28,7 @@ def gen_text_code(text, bits=64):
     return gen_text_code_v0(text, bits)
 
 
-def gen_text_code_v0(text, bits=64):
+def gen_text_code_v0(text, bits=opts.text_bits):
     # type: (str, int) -> str
     """Create ISCC Content-Code Text with algorithm v0
 

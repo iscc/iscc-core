@@ -11,7 +11,7 @@ def gen_instance_code(stream, bits=opts.instance_bits):
     """Create an ISCC Instance-Code with the latest standard algorithm
 
     :param Stream stream: Binary data stream for Instance-Code generation.
-    :param int bits: Bit-length of resulting Instance-Code (multiple of 64)
+    :param int bits: Bit-length resulting Instance-Code (multiple of 64)
     :return: Instance-Code
     :rtype: str
     """

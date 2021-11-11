@@ -2,9 +2,9 @@
 """
 *A similarity preserving hash for audio content (soft hash).*
 
-The Content-Code Audio is generated from a Chromaprint fingerprint provided as a vector
-of 32-bit signed integers. (See https://acoustid.org/chromaprint).
-Chromaprints are extracted with fpcalc 1.5.0 (see https://acoustid.org/chromaprint)
+The Content-Code Audio is generated from a [Chromaprint](https://acoustid.org/chromaprint)
+fingerprint provided as a vector of 32-bit signed integers.
+Chromaprints are extracted with [fpcalc 1.5.0](https://acoustid.org/chromaprint)
 using the following command line parameters:
 
 `$ fpcalc -raw -json -signed -length 0 myaudiofile.mp3`
@@ -13,15 +13,30 @@ from typing import Iterable
 from more_itertools import divide
 from iscc_core.simhash import similarity_hash
 from iscc_core import codec
+from iscc_core.options import opts
 
 
-def gen_audio_code(cv: Iterable[int], bits=64) -> str:
-    """Create an ISCC Content-Code Audio with the latest standard algorithm."""
+def gen_audio_code(cv, bits=opts.audio_bits):
+    # type: (Iterable[int], int) -> str
+    """Create an ISCC Content-Code Audio with the latest standard algorithm.
+
+    :param Iterable[int] cv: Chromaprint vector
+    :param int bits: Bit-length resulting Content-Code Audio (multiple of 64)
+    :return: Content-Code Audio
+    :rtype: str
+    """
     return gen_audio_code_v0(cv, bits)
 
 
-def gen_audio_code_v0(cv: Iterable[int], bits=64) -> str:
-    """Create an ISCC Content-Code Audio with algorithm v0."""
+def gen_audio_code_v0(cv, bits=opts.audio_bits):
+    # type: (Iterable[int], int) -> str
+    """Create an ISCC Content-Code Audio with algorithm v0.
+
+    :param Iterable[int] cv: Chromaprint vector
+    :param int bits: Bit-length resulting Content-Code Audio (multiple of 64)
+    :return: Content-Code Audio
+    :rtype: str
+    """
     digest = hash_audio_v0(cv)
     audio_code = codec.encode_component(
         mtype=codec.MT.CONTENT,
@@ -33,8 +48,14 @@ def gen_audio_code_v0(cv: Iterable[int], bits=64) -> str:
     return audio_code
 
 
-def hash_audio_v0(cv: Iterable[int]) -> bytes:
-    """Create 256-bit audio similarity hash from a chromaprint vector."""
+def hash_audio_v0(cv):
+    # type: (Iterable[int]) -> bytes
+    """Create 256-bit audio similarity hash from a chromaprint vector.
+
+    :param Iterable[int] cv: Chromaprint vector
+    :return: 256-bit Audio-Hash digest
+    :rtype: bytes
+    """
 
     # Convert chrompaprint vector into list of 4 byte digests
     digests = [int_feature.to_bytes(4, "big", signed=True) for int_feature in cv]
