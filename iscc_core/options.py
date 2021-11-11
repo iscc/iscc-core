@@ -11,7 +11,7 @@ class CoreOptions(BaseSettings):
         env_file = "iscc-core.env"
         env_file_encoding = "utf-8"
 
-    meta_bits: int = Field(64, description="Length of generated Meta-Code in bits")
+    meta_bits: int = Field(64, description="Default length of generated Meta-Code in bits")
     meta_trim_title: int = Field(
         128, description="Trim title length to this mumber of bytes"
     )
@@ -65,6 +65,9 @@ class CoreOptions(BaseSettings):
         description="Common control characters considered whitespace",
     )
 
+    instance_bits: int = Field(
+        64, description="Default length of generated Instance-Code in bits"
+    )
     instance_read_size: int = Field(
         262144, description="File read buffer during instance hashing"
     )
