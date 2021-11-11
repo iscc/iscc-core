@@ -2,7 +2,7 @@
 from typing import Optional
 from iscc_core.base import Data, Stream
 from iscc_core.cdc import data_chunks
-from iscc_core.base import CDC_READ_SIZE
+from iscc_core.options import opts
 from iscc_core.minhash import minhash_256
 from iscc_core import codec
 import xxhash
@@ -29,11 +29,11 @@ def gen_data_code_v0(stream, bits=64):
 def hash_data_v0(stream):
     # type: (Stream) -> bytes
     hasher = DataHasherV0()
-    data = stream.read(CDC_READ_SIZE)
+    data = stream.read(opts.cdc_read_size)
 
     while data:
         hasher.push(data)
-        data = stream.read(CDC_READ_SIZE)
+        data = stream.read(opts.cdc_read_size)
 
     return hasher.digest()
 
@@ -52,7 +52,7 @@ class DataHasherV0:
         if self.tail:
             data = self.tail + data
 
-        for chunk in data_chunks(data):
+        for chunk in data_chunks(data, False):
             self.chunk_sizes.append(len(chunk))
             self.chunk_features.append(xxhash.xxh32_intdigest(chunk))
 

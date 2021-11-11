@@ -1,7 +1,8 @@
 # -*- coding: utf-8 -*-
 import blake3
 from typing import Optional
-from iscc_core.base import Data, Stream, INSTANCE_READ_SIZE
+from iscc_core.base import Data, Stream
+from iscc_core.options import opts
 from iscc_core import codec
 
 
@@ -29,10 +30,10 @@ def hash_instance_v0(stream):
     # type: (Stream) -> bytes
     """Create 256-bit hash for Instance-Code"""
     hasher = InstanceHasherV0()
-    data = stream.read(INSTANCE_READ_SIZE)
+    data = stream.read(opts.instance_read_size)
     while data:
         hasher.push(data)
-        data = stream.read(INSTANCE_READ_SIZE)
+        data = stream.read(opts.instance_read_size)
     return hasher.digest()
 
 

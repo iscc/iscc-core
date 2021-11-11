@@ -5,42 +5,12 @@ The **ISCC Content-Code Text** is generated from plain-text that has been extrac
 from different media assets.
 """
 import unicodedata
+from typing import Union
 import xxhash
 from iscc_core.minhash import minhash_256
-from iscc_core.base import TEXT_NGRAM_SIZE
+from iscc_core.options import opts
 from iscc_core.utils import sliding_window
 from iscc_core import codec
-
-
-CC_WHITESPACE = frozenset(
-    {
-        "\u0009",  # Horizontal Tab (TAB)
-        "\u000A",  # Linefeed (LF)
-        "\u000D",  # Carriage Return (CR)
-    }
-)
-"""Common control characters considered whitespace"""
-
-
-UNICODE_FILTER = frozenset(
-    {
-        "Cc",
-        "Cf",
-        "Cn",
-        "Co",
-        "Cs",
-        "Mc",
-        "Me",
-        "Mn",
-        "Pc",
-        "Pd",
-        "Pe",
-        "Pf",
-        "Pi",
-        "Ps",
-    }
-)
-"""Unicode categories to remove during text normalization"""
 
 
 def gen_text_code(text, bits=64):
@@ -85,7 +55,7 @@ def gen_text_code_v0(text, bits=64):
 
 
 def normalize_text(text):
-    # type: (Union[str, bytes], bool) -> str
+    # type: (Union[str, bytes]) -> str
     """Unicode normalization and character filtering.
 
     - Decode to Unicode.
@@ -114,9 +84,9 @@ def normalize_text(text):
     chars = []
     for c in text_decomposed:
         cat = unicodedata.category(c)
-        if cat not in UNICODE_FILTER:
+        if cat not in opts.text_unicode_filter:
             chars.append(c)
-        elif c in CC_WHITESPACE:
+        elif c in opts.text_whitespace:
             chars.append(c)
     text_filtered = "".join(chars)
 
@@ -139,7 +109,7 @@ def hash_text_v0(text):
     :return: 256-bit similarity preserving byte hash
     :rtype: bytes
     """
-    ngrams = sliding_window(text, TEXT_NGRAM_SIZE)
+    ngrams = sliding_window(text, opts.text_ngram_size)
     features = [xxhash.xxh32_intdigest(s.encode("utf-8")) for s in ngrams]
     hash_digest = minhash_256(features)
     return hash_digest
