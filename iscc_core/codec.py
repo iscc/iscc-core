@@ -39,8 +39,15 @@ class ST(enum.IntEnum):
     NONE = 0
 
 
+class ST_MC(enum.IntEnum):
+    """SubTypes for Meta-Codes - Depends on type of extra input"""
+
+    TEXT = 0
+    BYTES = 1
+
+
 class ST_CC(enum.IntEnum):
-    """SubTypes for Content Codes"""
+    """SubTypes for Content-Codes"""
 
     TEXT = 0
     IMAGE = 1
