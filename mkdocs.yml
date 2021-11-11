@@ -56,4 +56,5 @@ nav:
     - Minhash: algorithms/minhash.md
     - WTAHash: algorithms/wtahash.md
   - Codec: codec/codec.md
+  - Options: options/options.md
   - Utilities: utilities/utils.md
