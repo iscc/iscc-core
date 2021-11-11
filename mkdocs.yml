@@ -1,7 +1,26 @@
-site_name: iscc-core
+site_name: "ISCC - Core Algorithms - Python"
+site_description: 'International Standard Content Code - Core algorithms python implementation.'
+site_author: 'Titusz Pan'
+site_url: 'http://iscc.codes'
+
+# Repository
+repo_name: 'iscc/iscc-core'
+repo_url: 'https://github.com/iscc/iscc-core'
+edit_uri: 'edit/main/docs/'
+
+# Copyright
+copyright: 'Copyright © 2016-2021 The Authors
+| <a href="https://iscc.foundation/privacy">Privacy Policy</a>
+| <a href="https://iscc.foundation/cookies">Cookie Policy</a>
+| <a href="https://iscc.foundation/imprint">Imprint</a>
+| <a href="https://iscc.foundation/disclaimer">Disclaimer</a>'
 
 theme:
   name: material
+  language: en
+  palette:
+    primary: 'blue'
+    accent: 'pink'
   features:
     - navigation.indexes
 #    - navigation.sections
@@ -38,7 +57,6 @@ markdown_extensions:
   - pymdownx.superfences
 
 nav:
-  - ISCC-CORE Reference: index.md
   - Components:
     - components/index.md
     - Meta-Code: components/code_meta.md

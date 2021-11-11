@@ -1,2 +1,2 @@
-# ISCC-CORE Reference
+# ISCC-CORE - Documentation
 
