@@ -8,7 +8,7 @@ license = "BSD 3-clause"
 readme = "README.md"
 
 [tool.poetry.dependencies]
-python = ">=3.6,<4.0"
+python = ">=3.6.1,<4.0"
 cython = { version = "*", optional = true }
 blake3 = "*"
 xxhash = "*"
@@ -16,6 +16,7 @@ more-itertools = "*"
 bitarray-hardbyte = "*"
 pybase64 = { version = "*", optional = true }
 Pillow = "*"
+pydantic = "^1.8.2"
 
 [tool.poetry.extras]
 turbo = ["cython", "pybase64"]
