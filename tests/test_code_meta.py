@@ -28,9 +28,9 @@ def test_gen_meta_code_text_vs_bytes():
     m = code_meta.gen_meta_code("", "hello world")
     assert m == "AAA26E2JXH733ZNM"
     m = code_meta.gen_meta_code("", b"hello world")
-    assert m == "AEA26E2JXH733ZNM"
+    assert m == "AAA26E2JXH733ZNM"
     m = code_meta.gen_meta_code("", b"\x80")  # not utf-8 decodable
-    assert m == "AEA26E2JXG56NKPV"
+    assert m == "AAA26E2JXG56NKPV"
 
 
 def test_gen_meta_code_title_only():
