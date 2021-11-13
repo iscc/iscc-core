@@ -3,10 +3,10 @@
 *A similarity perserving hash for binary data (soft hash).*
 """
 from typing import Optional
-from iscc_core.base import Data, Stream
 from iscc_core.cdc import data_chunks
 from iscc_core.minhash import minhash_256
 from iscc_core import codec
+from iscc_core.codec import Data, Stream
 from iscc_core.options import opts
 import xxhash
 

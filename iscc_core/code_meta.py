@@ -12,7 +12,7 @@ binary form (e.g. file headers). We do not prescribe a particular schema.
 """
 from more_itertools import interleave, sliced
 from iscc_core.code_content_text import normalize_text
-from iscc_core.codec import MT, ST, ST_MC, VS, encode_component
+from iscc_core.codec import MT, ST, VS, encode_component
 from iscc_core.utils import sliding_window
 from iscc_core.simhash import similarity_hash
 from iscc_core.options import opts

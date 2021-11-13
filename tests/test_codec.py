@@ -1,5 +1,8 @@
 # -*- coding: utf-8 -*-
+from binascii import unhexlify
+
 import pytest
+import iscc_core
 from iscc_core import codec as c
 from bitarray import bitarray as ba
 
@@ -106,3 +109,78 @@ def test_iscc_clean():
     assert c.clean("ISCC: SOME-CODE") == "SOMECODE"
     assert c.clean(" SOMECODE ") == "SOMECODE"
     assert c.clean("ISCC:") == ""
+
+
+def test_code_properties():
+    c64 = c.Code(iscc_core.gen_meta_code("Hello World"))
+    c256 = c.Code(iscc_core.gen_meta_code("Hello World", bits=256))
+    assert c64.code == "AAA77PPFVS6JDUQB"
+    assert c256.code == "AAD77PPFVS6JDUQBWZDBIUGOUNAGIZYGCQ75ICNLH5QV73OXGWZV5CQ"
+    assert c64.bytes == unhexlify(c64.hex)
+    assert c64.type_id == "META-NONE-V0-64"
+    assert c64.explain == "META-NONE-V0-64-" + c64.hash_hex
+    assert isinstance(c64.hash_ints[0], int)
+    assert c64.hash_bits == "".join(str(i) for i in c64.hash_ints)
+    assert c256.hash_bits == "".join(str(i) for i in c256.hash_ints)
+    assert c64.hash_uint == 18428137780330746369
+    assert (
+        c256.hash_uint
+        == 115675295640858983304133651543519403601786105490037992581561449255353963470474
+    )
+    assert c64.maintype == c.MT.META
+    assert c64.maintype == 0
+    assert c64.subtype == c.ST.NONE
+    assert c64.subtype == 0
+    assert c64.version == c.VS.V0
+    assert c64.length == 64
+    assert c256.length == 256
+    assert c64 ^ c64 == 0
+    with pytest.raises(ValueError):
+        c64 ^ c256
+    assert c64 == c.Code(c64.bytes)
+    assert c64 == c.Code(c64.code)
+    assert c64 == c.Code(tuple(c64))
+
+
+def test_code_hashable():
+    code = c.Code.rnd()
+    assert code in {code}
+
+
+def test_compose():
+    mid = c.Code.rnd(c.MT.META, 64)
+    cid = c.Code.rnd(c.MT.CONTENT, 64)
+    did = c.Code.rnd(c.MT.DATA, 128)
+    iid = c.Code.rnd(c.MT.INSTANCE, 256)
+    ic = c.compose([mid, cid, did, iid])
+    assert ic.maintype == c.MT.ISCC
+    assert ic.length == 256
+    assert ic.explain.startswith("ISCC-")
+    assert c.compose([did, mid, cid, iid]) == ic
+
+
+def test_compose_body():
+    data = b"\x00" * 8
+    mid = c.Code.rnd(c.MT.META, data=data)
+    cid = c.Code.rnd(c.MT.CONTENT, data=data)
+    did = c.Code.rnd(c.MT.DATA, data=data)
+    iid = c.Code.rnd(c.MT.INSTANCE, data=data)
+    ic = c.compose([mid, cid, did, iid])
+    assert ic.hash_bytes == data * 4
+
+
+def test_decompose_single_component():
+    code = c.Code.rnd()
+    assert c.decompose(code)[0] == code
+    assert c.decompose(code.code)[0] == code
+    assert c.decompose(code.bytes)[0] == code
+
+
+def test_decompose_str_of_codes():
+    mco = c.Code.rnd(c.MT.META)
+    cco = c.Code.rnd(c.MT.CONTENT)
+    dco = c.Code.rnd(c.MT.DATA)
+    ico = c.Code.rnd(c.MT.INSTANCE)
+    iscc = f"ISCC:{mco.code}-{cco.code}-{dco.code}-{ico.code}"
+    codes = c.decompose(iscc)
+    assert codes == [mco, cco, dco, ico]

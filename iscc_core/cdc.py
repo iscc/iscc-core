@@ -7,7 +7,7 @@ Compatible with [fastcdc](https://pypi.org/project/fastcdc/ v1.3.0)
 import io
 from math import log2
 from typing import Generator
-from iscc_core.base import Data
+from iscc_core.codec import Data
 from iscc_core.options import opts
 
 

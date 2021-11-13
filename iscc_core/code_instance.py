@@ -1,9 +1,9 @@
 # -*- coding: utf-8 -*-
 import blake3
 from typing import Optional
-from iscc_core.base import Data, Stream
 from iscc_core.options import opts
 from iscc_core import codec
+from iscc_core.codec import Data, Stream
 
 
 def gen_instance_code(stream, bits=opts.instance_bits):

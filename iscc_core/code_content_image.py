@@ -12,7 +12,7 @@ from typing import Sequence
 from PIL import Image
 from more_itertools import chunked
 from iscc_core import codec
-from iscc_core.base import Stream
+from iscc_core.codec import Stream
 from iscc_core.options import opts
 
 
