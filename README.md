@@ -124,6 +124,8 @@ You may also want join our developer chat on Telegram at <https://t.me/iscc_dev>
 
 ## Changelog
 
+### [0.2.0] - Unreleased
+
 ### [0.1.0] - 2021-11-13
 - Initial release
 
