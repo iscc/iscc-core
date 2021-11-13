@@ -2,7 +2,7 @@
 name = "iscc-core"
 version = "0.1.0"
 build = "build.py"
-description = "ISCC: Reference Implementation of standardized core algorithms."
+description = "ISCC - Core Algorithms"
 authors = ["Titusz <tp@py7.de>"]
 license = "BSD 3-clause"
 readme = "README.md"
