@@ -9,7 +9,6 @@ MultiStr = Union[str, List[str]]
 
 
 class BaseCode(BaseModel):
-
     @property
     def code_obj(self):
         return Code(self.code)
