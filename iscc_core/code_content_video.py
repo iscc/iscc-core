@@ -23,31 +23,32 @@ from iscc_core.options import opts
 from iscc_core.models import VideoCode
 
 
-FrameSig = Sequence[Tuple[int]]
+FrameSig = Tuple[int]
 
 
-def gen_video_code(frame_signatures, bits=opts.video_bits):
-    # type: (FrameSig, int) -> VideoCode
+def gen_video_code(frame_sigs, bits=opts.video_bits):
+    # type: (Sequence[FrameSig], int) -> VideoCode
     """Create an ISCC Content-Code Video with the latest standard algorithm.
 
-    :param FrameSig frame_signatures: Sequence of MP7 frame signatures
+    :param FrameSig frame_sigs: Sequence of MP7 frame signatures
     :param int bits: Bit-length resulting Instance-Code (multiple of 64)
+    :param cutpoints:
     :return: VideoCode object with code property set
     :rtype: VideoCode
     """
-    return gen_video_code_v0(frame_signatures, bits)
+    return gen_video_code_v0(frame_sigs, bits)
 
 
-def gen_video_code_v0(frame_signatures, bits=opts.video_bits):
-    # type: (Sequence[Tuple[int]], int) -> VideoCode
+def gen_video_code_v0(frame_sigs, bits=opts.video_bits):
+    # type: (Sequence[FrameSig], int) -> VideoCode
     """Create an ISCC Content-Code Video with algorithm v0.
 
-    :param FrameSig frame_signatures: Sequence of MP7 frame signatures
+    :param FrameSig frame_sigs: Sequence of MP7 frame signatures
     :param int bits: Bit-length resulting Instance-Code (multiple of 64)
     :return: VideoCode object with code property set
     :rtype: VideoCode
     """
-    digest = hash_video_v0(frame_signatures)
+    digest = hash_video_v0(frame_sigs)
     video_code = codec.encode_component(
         mtype=codec.MT.CONTENT,
         stype=codec.ST_CC.VIDEO,
@@ -59,10 +60,10 @@ def gen_video_code_v0(frame_signatures, bits=opts.video_bits):
     return video_code_obj
 
 
-def hash_video_v0(frame_signatures):
+def hash_video_v0(frame_sigs):
     # type: (Sequence[Tuple[int]]) -> bytes
     """Compute 256-bit video hash v0 from MP7 frame signatures."""
-    sigs = set(frame_signatures)
+    sigs = set(frame_sigs)
     vecsum = [sum(col) for col in zip(*sigs)]
     video_hash_digest = wtahash(vecsum)
     return video_hash_digest

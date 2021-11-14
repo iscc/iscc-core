@@ -18,10 +18,10 @@ def gen_data_code(stream, bits=opts.data_bits, granular=opts.data_granular):
     """
     Create a similarity preserving ISCC Data-Code with the latest standard algorithm.
 
-    :param stream: Input data stream.
+    :param Stream stream: Input data stream.
     :param int bits: Bit-length of ISCC Data-Code (default 64).
     :param bool granular: Calculate additional granular data-features
-    :return: ISCC Data-Code
+    :return: ISCC Data-Code with properties: code, features, sizes
     :rtype: DataCode
     """
     return gen_data_code_v0(stream, bits, granular)
@@ -32,10 +32,10 @@ def gen_data_code_v0(stream, bits=opts.data_bits, granular=opts.data_granular):
     """
     Create an ISCC Data-Code with algorithm v0.
 
-    :param stream: Input data stream.
+    :param Stream stream: Input data stream.
     :param int bits: Bit-length of ISCC Data-Code (default 64).
     :param bool granular: Calculate additional granular data-features
-    :return: DataCode with properties: code, features, sizes
+    :return: ISCC DataCode with properties: code, features, sizes
     :rtype: DataCode
     """
     features, sizes = None, None
