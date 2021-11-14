@@ -93,11 +93,15 @@ def gen_meta_code_v0(title, extra=None, bits=opts.meta_bits):
 
     metahash = blake3(payload).hexdigest()
 
-    # Todo indicate that extra is bytes
     if isinstance(extra, bytes):
         extra = encode_base64(extra)
+        binary = True
+    else:
+        binary = False
 
-    mc_obj = MetaCode(code=meta_code, title=title, extra=extra, metahash=metahash)
+    mc_obj = MetaCode(
+        code=meta_code, title=title, extra=extra, binary=binary, metahash=metahash
+    )
     return mc_obj
 
 

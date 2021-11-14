@@ -20,7 +20,8 @@ class MetaCode(BaseCode):
     code: str = Field(..., description="Meta-Code in standard representation.")
     title: Optional[str] = Field(description="Title used for Meta-Code creation.")
     extra: Optional[str] = Field(description="Extra metadata used for Meta-Code.")
-    metahash: str = Field(description="Blake3 cryptographic hash of metadata")
+    binary: bool = Field(description="Extra metadata was supplied in binary format.")
+    metahash: str = Field(description="Blake3 cryptographic hash of metadata.")
 
 
 class ContentCodeText(BaseCode):
