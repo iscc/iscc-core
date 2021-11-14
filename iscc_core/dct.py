@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-"""Discrete cosine transform."""
+"""Discrete Cosine Transform."""
 import math
 from typing import List, Sequence
 
