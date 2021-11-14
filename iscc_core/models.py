@@ -7,6 +7,19 @@ from pydantic import BaseModel, Field
 MultiStr = Union[str, List[str]]
 
 
+class TextCode(BaseModel):
+    """TextCode standardized plaintext metadata model."""
+
+    code: str = Field(..., description="Text-Code in standard representation.")
+    title: Optional[str] = Field(description="Title as extracted from text document")
+    characters: Optional[int] = Field(
+        description="Number of text characters (after normalize_text)"
+    )
+    language: Optional[str] = Field(description="Main language of content (BCP-47)")
+    features: Optional[List[str]] = Field(description="List of hashes per text chunk")
+    sizes: Optional[List[int]] = Field(description="Sizes of text chunks in characters")
+
+
 class VideoCode(BaseModel):
     """VideoCode standardized asset metadata model."""
 
