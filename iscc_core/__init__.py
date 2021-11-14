@@ -1,4 +1,4 @@
-__version__ = "0.1.0"
+__version__ = "0.1.1"
 from iscc_core.code_meta import gen_meta_code
 from iscc_core.code_content_text import gen_text_code
 from iscc_core.code_content_image import gen_image_code
