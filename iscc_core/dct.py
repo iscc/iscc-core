@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 """Discrete cosine transform."""
 import math
-from collections import Sequence
+from typing import Sequence
 
 
 def dct(v):
