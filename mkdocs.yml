@@ -71,9 +71,11 @@ nav:
     - Instance-Code: components/code_instance.md
   - Algorithms:
     - CDC: algorithms/cdc.md
+    - DCT: algorithms/dct.md
     - Simhash: algorithms/simhash.md
     - Minhash: algorithms/minhash.md
     - WTAHash: algorithms/wtahash.md
+  - Models: models/models.md
   - Codec: codec/codec.md
   - Options: options/options.md
   - Utilities: utilities/utils.md
