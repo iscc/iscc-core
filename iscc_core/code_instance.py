@@ -25,7 +25,7 @@ def gen_instance_code_v0(stream, bits=opts.instance_bits):
 
     :param Stream stream: Binary data stream for Instance-Code generation.
     :param int bits: Bit-length of resulting Instance-Code (multiple of 64)
-    :return: InstanceCode object with code, datahash and filesize properties
+    :return: InstanceCode with properties: code, datahash, filesize
     :rtype: InstanceCode
     """
     digest, filesize = hash_instance_v0(stream)
