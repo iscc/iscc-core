@@ -26,17 +26,17 @@ TEXT_C = u"""
 
 
 def test_hash_text_a():
-    a = code_content_text.hash_text_v0(TEXT_A).hex()
+    a = code_content_text.soft_hash_text_v0(TEXT_A).hex()
     assert a == "5f869a775c18bfbc3a117ab0114e13b2bf92614cda91513ee1f889fef3d6985f"
 
 
 def test_hash_text_b():
-    b = code_content_text.hash_text_v0(TEXT_B).hex()
+    b = code_content_text.soft_hash_text_v0(TEXT_B).hex()
     assert b == "5f869a775c18bdfc3a117ab0114e13f2bf92610cda91513ee1f889bef3d6985f"
 
 
 def test_hash_text_c():
-    c = code_content_text.hash_text_v0(TEXT_C).hex()
+    c = code_content_text.soft_hash_text_v0(TEXT_C).hex()
     assert c == "377b2f7b099a6df6bbc4a2ee4ff957b944c6434fa0e78842e7aad1169b71dd07"
 
 

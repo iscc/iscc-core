@@ -39,7 +39,7 @@ def gen_audio_code_v0(cv, bits=opts.audio_bits):
     :return: ContentCodeAudio object
     :rtype: ContentCodeAudio
     """
-    digest = hash_audio_v0(cv)
+    digest = soft_hash_audio_v0(cv)
     audio_code = codec.encode_component(
         mtype=codec.MT.CONTENT,
         stype=codec.ST_CC.AUDIO,
@@ -50,7 +50,7 @@ def gen_audio_code_v0(cv, bits=opts.audio_bits):
     return ContentCodeAudio(code=audio_code)
 
 
-def hash_audio_v0(cv):
+def soft_hash_audio_v0(cv):
     # type: (Iterable[int]) -> bytes
     """Create 256-bit audio similarity hash from a chromaprint vector.
 

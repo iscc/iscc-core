@@ -39,7 +39,7 @@ def gen_image_code_v0(img, bits=opts.image_bits):
     :rtype: ContentCodeImage
     """
     pixels, width, height = normalize_image(img)
-    digest = hash_image_v0(pixels, bits=bits)
+    digest = soft_hash_image_v0(pixels, bits=bits)
     image_code = codec.encode_component(
         mtype=codec.MT.CONTENT,
         stype=codec.ST_CC.IMAGE,
@@ -85,7 +85,7 @@ def normalize_image(img):
     return pixels, width, height
 
 
-def hash_image_v0(pixels, bits=opts.image_bits):
+def soft_hash_image_v0(pixels, bits=opts.image_bits):
     # type: (Sequence[int], int) -> bytes
     """Calculate image hash from normalized grayscale pixel sequence of length 1024.
 

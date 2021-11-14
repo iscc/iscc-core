@@ -82,7 +82,7 @@ def gen_meta_code_v0(title, extra=None, bits=opts.meta_bits):
     else:
         raise ValueError("parameter `extra` must be of type str or bytes!")
 
-    digest = hash_meta_v0(title, extra)
+    digest = soft_hash_meta_v0(title, extra)
     meta_code = encode_component(
         mtype=MT.META,
         stype=ST.NONE,
@@ -101,7 +101,7 @@ def gen_meta_code_v0(title, extra=None, bits=opts.meta_bits):
     return mc_obj
 
 
-def hash_meta_v0(title, extra=None):
+def soft_hash_meta_v0(title, extra=None):
     # type: (str, Union[str,bytes,None]) -> bytes
     """Calculate simmilarity preserving 256-bit hash digest from asset metadata.
 

@@ -45,26 +45,26 @@ def test_gen_meta_code_title_only():
 
 
 def test_hash_meta_v0_empty_title_str():
-    m = code_meta.hash_meta_v0("")
+    m = code_meta.soft_hash_meta_v0("")
     assert len(m) == 32
     assert m.hex() == "af1349b9f5f9a1a6a0404dea36dcc9499bcb25c9adc112b7cc9a93cae41f3262"
 
 
 def test_hash_meta_v0_empty_title_extra_str():
-    m = code_meta.hash_meta_v0("", "")
+    m = code_meta.soft_hash_meta_v0("", "")
     assert len(m) == 32
     assert m.hex() == "af1349b9f5f9a1a6a0404dea36dcc9499bcb25c9adc112b7cc9a93cae41f3262"
 
 
 def test_hash_meta_v0_extra_only():
-    m = code_meta.hash_meta_v0("", "Hello")
+    m = code_meta.soft_hash_meta_v0("", "Hello")
     assert len(m) == 32
     assert m.hex() == "af1349b9652ce5bbf5f9a1a63fd7018aa0404dea8746265c36dcc949d8a542f4"
 
 
 def test_hash_meta_v0_interleaved():
-    ma = code_meta.hash_meta_v0("")
-    mb = code_meta.hash_meta_v0("", "hello")
+    ma = code_meta.soft_hash_meta_v0("")
+    mb = code_meta.soft_hash_meta_v0("", "hello")
     assert ma[:4] == mb[:4]
     assert ma[4:8] == mb[8:12]
 

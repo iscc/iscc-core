@@ -39,7 +39,7 @@ def gen_data_code_v0(stream, bits=opts.data_bits, granular=opts.data_granular):
     :rtype: DataCode
     """
     features, sizes = None, None
-    result = hash_data_v0(stream, granular=granular)
+    result = soft_hash_data_v0(stream, granular=granular)
     if granular:
         digest, features, sizes = result
     else:
@@ -63,7 +63,7 @@ def gen_data_code_v0(stream, bits=opts.data_bits, granular=opts.data_granular):
     return data_code_obj
 
 
-def hash_data_v0(stream, granular=opts.data_granular):
+def soft_hash_data_v0(stream, granular=opts.data_granular):
     # type: (Stream) -> Union[bytes, Tuple[bytes, List[str], List[int]]]
     """
     Create a similarity preserving Data-Hash digest

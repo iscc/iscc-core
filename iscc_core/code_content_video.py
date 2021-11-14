@@ -47,7 +47,7 @@ def gen_video_code_v0(frame_sigs, bits=opts.video_bits):
     :return: VideoCode object with code property set
     :rtype: ContentCodeVideo
     """
-    digest = hash_video_v0(frame_sigs)
+    digest = soft_hash_video_v0(frame_sigs)
     video_code = codec.encode_component(
         mtype=codec.MT.CONTENT,
         stype=codec.ST_CC.VIDEO,
@@ -59,7 +59,7 @@ def gen_video_code_v0(frame_sigs, bits=opts.video_bits):
     return video_code_obj
 
 
-def hash_video_v0(frame_sigs):
+def soft_hash_video_v0(frame_sigs):
     # type: (Sequence[Tuple[int]]) -> bytes
     """Compute 256-bit video hash v0 from MP7 frame signatures."""
     sigs = set(frame_sigs)

@@ -48,7 +48,7 @@ def gen_text_code_v0(text, bits=opts.text_bits):
     text_norm = normalize_text(text)
     characters = len(text_norm)
     text_lower = text_norm.lower()
-    digest = hash_text_v0(text_lower)
+    digest = soft_hash_text_v0(text_lower)
     text_code = codec.encode_component(
         mtype=codec.MT.CONTENT,
         stype=codec.ST_CC.TEXT,
@@ -104,7 +104,7 @@ def normalize_text(text):
     return recombined
 
 
-def hash_text_v0(text):
+def soft_hash_text_v0(text):
     # type: (str) -> bytes
     """
     Create a 256-bit similarity preserving hash for text input with v0 algorithm.

@@ -13,7 +13,7 @@ def test_data_granular_default_false():
 
 
 def test_hash_data_v0_granular_false():
-    digest = code_data.hash_data_v0(BytesIO(TEST_DATA), granular=False)
+    digest = code_data.soft_hash_data_v0(BytesIO(TEST_DATA), granular=False)
     assert (
         digest.hex()
         == "e5b3daf1118cf09cb5c5ac323a9f68ca04465f9e3942297ebd1e6360f5bb98df"
@@ -21,7 +21,9 @@ def test_hash_data_v0_granular_false():
 
 
 def test_hash_data_v0_granular_true():
-    digest, features, sizes = code_data.hash_data_v0(BytesIO(TEST_DATA), granular=True)
+    digest, features, sizes = code_data.soft_hash_data_v0(
+        BytesIO(TEST_DATA), granular=True
+    )
     assert (
         digest.hex()
         == "e5b3daf1118cf09cb5c5ac323a9f68ca04465f9e3942297ebd1e6360f5bb98df"
@@ -65,7 +67,7 @@ def test_hash_data_v0_granular_true():
 
 
 def test_hash_data_v0_empty():
-    digest = code_data.hash_data_v0(BytesIO(b""), granular=False)
+    digest = code_data.soft_hash_data_v0(BytesIO(b""), granular=False)
     assert (
         digest.hex()
         == "25f0bab671f506e1c532f892d9d7917a252e7a520832f5963a8cd4e9a7e312b5"
@@ -73,7 +75,7 @@ def test_hash_data_v0_empty():
 
 
 def test_hash_data_v0_empty_granular():
-    digest, features, sizes = code_data.hash_data_v0(BytesIO(b""), granular=True)
+    digest, features, sizes = code_data.soft_hash_data_v0(BytesIO(b""), granular=True)
     assert (
         digest.hex()
         == "25f0bab671f506e1c532f892d9d7917a252e7a520832f5963a8cd4e9a7e312b5"
@@ -83,7 +85,7 @@ def test_hash_data_v0_empty_granular():
 
 
 def test_hash_data_v0_zero():
-    digest = code_data.hash_data_v0(BytesIO(b"\x00"))
+    digest = code_data.soft_hash_data_v0(BytesIO(b"\x00"))
     assert (
         digest.hex()
         == "770f8fd225ec1e5abb95e406afaddef303defe2f0d03b74c388f7b42ef96c7af"
@@ -91,7 +93,9 @@ def test_hash_data_v0_zero():
 
 
 def test_hash_data_v0_zero_granular():
-    digest, features, sizes = code_data.hash_data_v0(BytesIO(b"\x00"), granular=True)
+    digest, features, sizes = code_data.soft_hash_data_v0(
+        BytesIO(b"\x00"), granular=True
+    )
     assert (
         digest.hex()
         == "770f8fd225ec1e5abb95e406afaddef303defe2f0d03b74c388f7b42ef96c7af"
@@ -191,19 +195,19 @@ def test_hash_data_1mib_robust():
     rpos = lambda: random.randint(0, MB1)
 
     # 9 random single byte changes in data
-    h1 = code_data.hash_data_v0(BytesIO(ba)).hex()
+    h1 = code_data.soft_hash_data_v0(BytesIO(ba)).hex()
     assert h1 == "e5b3daf1118cf09cb5c5ac323a9f68ca04465f9e3942297ebd1e6360f5bb98df"
     for x in range(9):
         ba.insert(rpos(), rbyte())
-        assert code_data.hash_data_v0(BytesIO(ba)).hex() == h1
+        assert code_data.soft_hash_data_v0(BytesIO(ba)).hex() == h1
 
     # 1-bit difference on 10th byte change
     ba.insert(rpos(), rbyte())
-    h2 = code_data.hash_data_v0(BytesIO(ba)).hex()
+    h2 = code_data.soft_hash_data_v0(BytesIO(ba)).hex()
     assert h1 != h2
 
 
 def test_DataHasher():
-    assert code_data.DataHasher(TEST_DATA).digest() == code_data.hash_data_v0(
+    assert code_data.DataHasher(TEST_DATA).digest() == code_data.soft_hash_data_v0(
         BytesIO(TEST_DATA)
     )

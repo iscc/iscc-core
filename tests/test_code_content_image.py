@@ -36,34 +36,34 @@ def test_normalize_image():
 
 def test_hash_image_v0_white():
     assert (
-        code_content_image.hash_image_v0(IMG_WHITE_PIXELS, bits=64).hex()
+        code_content_image.soft_hash_image_v0(IMG_WHITE_PIXELS, bits=64).hex()
         == "8000000000000000"
     )
     assert (
-        code_content_image.hash_image_v0(IMG_WHITE_PIXELS, bits=256).hex()
+        code_content_image.soft_hash_image_v0(IMG_WHITE_PIXELS, bits=256).hex()
         == "8000000000000000000000000000000000000000000000000000000000000000"
     )
 
 
 def test_hash_image_v0_black():
     assert (
-        code_content_image.hash_image_v0(IMG_BLACK_PIXELS, bits=64).hex()
+        code_content_image.soft_hash_image_v0(IMG_BLACK_PIXELS, bits=64).hex()
         == "0000000000000000"
     )
     assert (
-        code_content_image.hash_image_v0(IMG_BLACK_PIXELS, bits=256).hex()
+        code_content_image.soft_hash_image_v0(IMG_BLACK_PIXELS, bits=256).hex()
         == "0000000000000000000000000000000000000000000000000000000000000000"
     )
 
 
 def test_hash_image_v0_sample():
     assert (
-        code_content_image.hash_image_v0(IMG_SAMPLE_PIXELS, 64).hex()
+        code_content_image.soft_hash_image_v0(IMG_SAMPLE_PIXELS, 64).hex()
         == "c343309e3c9e8e67"
     )
 
     assert (
-        code_content_image.hash_image_v0(IMG_SAMPLE_PIXELS, 256).hex()
+        code_content_image.soft_hash_image_v0(IMG_SAMPLE_PIXELS, 256).hex()
         == "c343309e3c9e8e678687613c793c1ccf43309e3c9e8e65ce87613c793c1ccb8d"
     )
 
