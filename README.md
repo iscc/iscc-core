@@ -124,6 +124,10 @@ You may also want join our developer chat on Telegram at <https://t.me/iscc_dev>
 
 ## Changelog
 
+### [0.1.2] - Unreleased
+- Export more functions to toplevel
+- Return annotated InstanceCode object with datahash and filesize
+
 ### [0.1.1] - 2021-11-14
 - Fix packaging problems
 
