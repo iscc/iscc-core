@@ -162,6 +162,23 @@ def decode_base32(code):
     return bytes(b32decode(code + "=" * pad_length, casefold=True))
 
 
+def encode_base64(data: bytes) -> str:
+    """
+    Standard RFC4648 base64url encoding without padding.
+    """
+    code = urlsafe_b64encode(data).decode("ascii")
+    return code.rstrip("=")
+
+
+def decode_base64(code: str) -> bytes:
+    """
+    Standard RFC4648 base64url decoding without padding.
+    """
+    padding = 4 - (len(code) % 4)
+    string = code + ("=" * padding)
+    return urlsafe_b64decode(string)
+
+
 def _write_varnibble(n):
     # type: (int) -> bitarray
     """
