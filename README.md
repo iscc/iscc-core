@@ -125,7 +125,7 @@ You may also want join our developer chat on Telegram at <https://t.me/iscc_dev>
 
 ## Changelog
 
-### [0.1.2] - Unreleased
+### [0.1.2] - 2021-11-14
 - Export more functions to toplevel
 - Return schema driven objects from ISCC code generators.
 
