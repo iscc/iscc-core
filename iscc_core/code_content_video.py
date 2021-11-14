@@ -20,17 +20,33 @@ from typing import Sequence, Tuple
 from iscc_core.wtahash import wtahash
 from iscc_core import codec
 from iscc_core.options import opts
+from iscc_core.models import VideoCode
+
+
+FrameSig = Sequence[Tuple[int]]
 
 
 def gen_video_code(frame_signatures, bits=opts.video_bits):
-    # type: (Sequence[Tuple[int]], int) -> str
-    """Create an ISCC Content-Code Video with the latest standard algorithm."""
+    # type: (FrameSig, int) -> VideoCode
+    """Create an ISCC Content-Code Video with the latest standard algorithm.
+
+    :param FrameSig frame_signatures: Sequence of MP7 frame signatures
+    :param int bits: Bit-length resulting Instance-Code (multiple of 64)
+    :return: VideoCode object with code property set
+    :rtype: VideoCode
+    """
     return gen_video_code_v0(frame_signatures, bits)
 
 
 def gen_video_code_v0(frame_signatures, bits=opts.video_bits):
-    # type: (Sequence[Tuple[int]], int) -> str
-    """Create an ISCC Content-Code Video with algorithm v0."""
+    # type: (Sequence[Tuple[int]], int) -> VideoCode
+    """Create an ISCC Content-Code Video with algorithm v0.
+
+    :param FrameSig frame_signatures: Sequence of MP7 frame signatures
+    :param int bits: Bit-length resulting Instance-Code (multiple of 64)
+    :return: VideoCode object with code property set
+    :rtype: VideoCode
+    """
     digest = hash_video_v0(frame_signatures)
     video_code = codec.encode_component(
         mtype=codec.MT.CONTENT,
@@ -39,7 +55,8 @@ def gen_video_code_v0(frame_signatures, bits=opts.video_bits):
         length=bits,
         digest=digest,
     )
-    return video_code
+    video_code_obj = VideoCode(code=video_code)
+    return video_code_obj
 
 
 def hash_video_v0(frame_signatures):
