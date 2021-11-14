@@ -87,6 +87,16 @@ class CoreOptions(BaseSettings):
         64, description="Default length of generated Data-Code in bits"
     )
 
+    data_avg_chunk_size: int = Field(
+        1024, description="Average chunk size for data chunking."
+    )
+
+    data_granular: bool = Field(False, description="Calculate granular data features.")
+
+    data_granular_factor: int = Field(
+        64, description="Size of granular data chunks times average chunk size"
+    )
+
     instance_bits: int = Field(
         64, description="Default length of generated Instance-Code in bits"
     )
