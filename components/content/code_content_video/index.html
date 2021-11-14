@@ -462,8 +462,8 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#iscc_core.code_content_video.hash_video_v0" class="md-nav__link">
-    hash_video_v0()
+  <a href="#iscc_core.code_content_video.soft_hash_video_v0" class="md-nav__link">
+    soft_hash_video_v0()
   </a>
   
 </li>
@@ -547,6 +547,8 @@
         
           
         
+          
+        
       
       
         <label class="md-nav__link" for="__nav_3">
@@ -569,6 +571,20 @@
     <li class="md-nav__item">
       <a href="../../../algorithms/cdc/" class="md-nav__link">
         CDC
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../algorithms/dct/" class="md-nav__link">
+        DCT
       </a>
     </li>
   
@@ -619,6 +635,21 @@
           
         </ul>
       </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../models/models/" class="md-nav__link">
+        Models
+      </a>
     </li>
   
 
@@ -732,8 +763,8 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#iscc_core.code_content_video.hash_video_v0" class="md-nav__link">
-    hash_video_v0()
+  <a href="#iscc_core.code_content_video.soft_hash_video_v0" class="md-nav__link">
+    soft_hash_video_v0()
   </a>
   
 </li>
@@ -790,6 +821,7 @@ but it requires a custom binary parser to decode the frame signaturs.</p>
 
 
 
+
 <h3 id="iscc_core.code_content_video-functions">Functions</h3>
 
   <div class="doc doc-object doc-function">
@@ -797,7 +829,7 @@ but it requires a custom binary parser to decode the frame signaturs.</p>
 
 
 <h4 id="iscc_core.code_content_video.gen_video_code" class="doc doc-heading">
-<code class="highlight language-python"><span class="n">gen_video_code</span><span class="p">(</span><span class="n">frame_signatures</span><span class="p">,</span> <span class="n">bits</span> <span class="o">=</span> <span class="mi">64</span><span class="p">)</span></code>
+<code class="highlight language-python"><span class="n">gen_video_code</span><span class="p">(</span><span class="n">frame_sigs</span><span class="p">,</span> <span class="n">bits</span> <span class="o">=</span> <span class="mi">64</span><span class="p">)</span></code>
 
 
 </h4>
@@ -806,6 +838,46 @@ but it requires a custom binary parser to decode the frame signaturs.</p>
 
       <p>Create an ISCC Content-Code Video with the latest standard algorithm.</p>
 
+<p><strong>Parameters:</strong></p>
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Description</th>
+      <th>Default</th>
+    </tr>
+  </thead>
+  <tbody>
+      <tr>
+        <td><code>frame_sigs</code></td>
+        <td><code>FrameSig</code></td>
+        <td><p>Sequence of MP7 frame signatures</p></td>
+        <td><em>required</em></td>
+      </tr>
+      <tr>
+        <td><code>bits</code></td>
+        <td><code>int</code></td>
+        <td><p>Bit-length resulting Instance-Code (multiple of 64)</p></td>
+        <td><code>64</code></td>
+      </tr>
+  </tbody>
+</table>
+<p><strong>Returns:</strong></p>
+<table>
+  <thead>
+    <tr>
+      <th>Type</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code>ContentCodeVideo</code></td>
+      <td><p>VideoCode object with code property set</p></td>
+    </tr>
+  </tbody>
+</table>
     </div>
 
   </div>
@@ -817,7 +889,7 @@ but it requires a custom binary parser to decode the frame signaturs.</p>
 
 
 <h4 id="iscc_core.code_content_video.gen_video_code_v0" class="doc doc-heading">
-<code class="highlight language-python"><span class="n">gen_video_code_v0</span><span class="p">(</span><span class="n">frame_signatures</span><span class="p">,</span> <span class="n">bits</span> <span class="o">=</span> <span class="mi">64</span><span class="p">)</span></code>
+<code class="highlight language-python"><span class="n">gen_video_code_v0</span><span class="p">(</span><span class="n">frame_sigs</span><span class="p">,</span> <span class="n">bits</span> <span class="o">=</span> <span class="mi">64</span><span class="p">)</span></code>
 
 
 </h4>
@@ -826,6 +898,46 @@ but it requires a custom binary parser to decode the frame signaturs.</p>
 
       <p>Create an ISCC Content-Code Video with algorithm v0.</p>
 
+<p><strong>Parameters:</strong></p>
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Description</th>
+      <th>Default</th>
+    </tr>
+  </thead>
+  <tbody>
+      <tr>
+        <td><code>frame_sigs</code></td>
+        <td><code>FrameSig</code></td>
+        <td><p>Sequence of MP7 frame signatures</p></td>
+        <td><em>required</em></td>
+      </tr>
+      <tr>
+        <td><code>bits</code></td>
+        <td><code>int</code></td>
+        <td><p>Bit-length resulting Instance-Code (multiple of 64)</p></td>
+        <td><code>64</code></td>
+      </tr>
+  </tbody>
+</table>
+<p><strong>Returns:</strong></p>
+<table>
+  <thead>
+    <tr>
+      <th>Type</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code>ContentCodeVideo</code></td>
+      <td><p>VideoCode object with code property set</p></td>
+    </tr>
+  </tbody>
+</table>
     </div>
 
   </div>
@@ -836,8 +948,8 @@ but it requires a custom binary parser to decode the frame signaturs.</p>
 
 
 
-<h4 id="iscc_core.code_content_video.hash_video_v0" class="doc doc-heading">
-<code class="highlight language-python"><span class="n">hash_video_v0</span><span class="p">(</span><span class="n">frame_signatures</span><span class="p">)</span></code>
+<h4 id="iscc_core.code_content_video.soft_hash_video_v0" class="doc doc-heading">
+<code class="highlight language-python"><span class="n">soft_hash_video_v0</span><span class="p">(</span><span class="n">frame_sigs</span><span class="p">)</span></code>
 
 
 </h4>

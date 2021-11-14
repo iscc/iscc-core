@@ -434,15 +434,8 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#iscc_core.code_content_image.hash_image_v0" class="md-nav__link">
-    hash_image_v0()
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#iscc_core.code_content_image.dct" class="md-nav__link">
-    dct()
+  <a href="#iscc_core.code_content_image.soft_hash_image_v0" class="md-nav__link">
+    soft_hash_image_v0()
   </a>
   
 </li>
@@ -554,6 +547,8 @@
         
           
         
+          
+        
       
       
         <label class="md-nav__link" for="__nav_3">
@@ -576,6 +571,20 @@
     <li class="md-nav__item">
       <a href="../../../algorithms/cdc/" class="md-nav__link">
         CDC
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../algorithms/dct/" class="md-nav__link">
+        DCT
       </a>
     </li>
   
@@ -626,6 +635,21 @@
           
         </ul>
       </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../models/models/" class="md-nav__link">
+        Models
+      </a>
     </li>
   
 
@@ -739,15 +763,8 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#iscc_core.code_content_image.hash_image_v0" class="md-nav__link">
-    hash_image_v0()
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#iscc_core.code_content_image.dct" class="md-nav__link">
-    dct()
+  <a href="#iscc_core.code_content_image.soft_hash_image_v0" class="md-nav__link">
+    soft_hash_image_v0()
   </a>
   
 </li>
@@ -847,7 +864,7 @@ dct-matrix against their median values to set the hash-bits.</p>
   </thead>
   <tbody>
     <tr>
-      <td><code>str</code></td>
+      <td><code>ContentCodeImage</code></td>
       <td><p>ISCC Content-Code Image.</p></td>
     </tr>
   </tbody>
@@ -907,7 +924,7 @@ dct-matrix against their median values to set the hash-bits.</p>
   </thead>
   <tbody>
     <tr>
-      <td><code>str</code></td>
+      <td><code>ContentCodeImage</code></td>
       <td><p>ISCC Content-Code Image.</p></td>
     </tr>
   </tbody>
@@ -934,7 +951,7 @@ dct-matrix against their median values to set the hash-bits.</p>
 <ul>
 <li>Add white background to images with alpha transparency</li>
 <li>Convert to grayscale</li>
-<li>Resize (bicubic) to 32x32 pixiels</li>
+<li>Resize (bicubic) to 32x32 pixels and flatten</li>
 </ul>
 
 <p><strong>Parameters:</strong></p>
@@ -966,8 +983,8 @@ dct-matrix against their median values to set the hash-bits.</p>
   </thead>
   <tbody>
     <tr>
-      <td><code>Sequence[int]</code></td>
-      <td><p>A sequence of 1024 normalized image pixels</p></td>
+      <td><code>Tuple[Sequence[int], int, int]</code></td>
+      <td><p>A tuple of (pixels_1024, original_width, original_height</p></td>
     </tr>
   </tbody>
 </table>
@@ -981,8 +998,8 @@ dct-matrix against their median values to set the hash-bits.</p>
 
 
 
-<h4 id="iscc_core.code_content_image.hash_image_v0" class="doc doc-heading">
-<code class="highlight language-python"><span class="n">hash_image_v0</span><span class="p">(</span><span class="n">pixels</span><span class="p">,</span> <span class="n">bits</span> <span class="o">=</span> <span class="mi">64</span><span class="p">)</span></code>
+<h4 id="iscc_core.code_content_image.soft_hash_image_v0" class="doc doc-heading">
+<code class="highlight language-python"><span class="n">soft_hash_image_v0</span><span class="p">(</span><span class="n">pixels</span><span class="p">,</span> <span class="n">bits</span> <span class="o">=</span> <span class="mi">64</span><span class="p">)</span></code>
 
 
 </h4>
@@ -1028,62 +1045,6 @@ dct-matrix against their median values to set the hash-bits.</p>
     <tr>
       <td><code>bytes</code></td>
       <td><p>Similarity preserving Image-Hash digest.</p></td>
-    </tr>
-  </tbody>
-</table>
-    </div>
-
-  </div>
-
-
-
-  <div class="doc doc-object doc-function">
-
-
-
-<h4 id="iscc_core.code_content_image.dct" class="doc doc-heading">
-<code class="highlight language-python"><span class="n">dct</span><span class="p">(</span><span class="n">v</span><span class="p">)</span></code>
-
-
-</h4>
-
-    <div class="doc doc-contents ">
-
-      <p>Discrete cosine transform.</p>
-<p>Copyright (c) 2020 Project Nayuki (MIT License).
-See: https://www.nayuki.io/page/fast-discrete-cosine-transform-algorithms).</p>
-
-<p><strong>Parameters:</strong></p>
-<table>
-  <thead>
-    <tr>
-      <th>Name</th>
-      <th>Type</th>
-      <th>Description</th>
-      <th>Default</th>
-    </tr>
-  </thead>
-  <tbody>
-      <tr>
-        <td><code>v</code></td>
-        <td><code>Sequence[float]</code></td>
-        <td><p>Input vector for DCT calculation.</p></td>
-        <td><em>required</em></td>
-      </tr>
-  </tbody>
-</table>
-<p><strong>Returns:</strong></p>
-<table>
-  <thead>
-    <tr>
-      <th>Type</th>
-      <th>Description</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td><code>list</code></td>
-      <td><p>Transformed vector.</p></td>
     </tr>
   </tbody>
 </table>

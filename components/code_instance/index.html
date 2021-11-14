@@ -631,6 +631,8 @@
         
           
         
+          
+        
       
       
         <label class="md-nav__link" for="__nav_3">
@@ -653,6 +655,20 @@
     <li class="md-nav__item">
       <a href="../../algorithms/cdc/" class="md-nav__link">
         CDC
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../algorithms/dct/" class="md-nav__link">
+        DCT
       </a>
     </li>
   
@@ -703,6 +719,21 @@
           
         </ul>
       </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../models/models/" class="md-nav__link">
+        Models
+      </a>
     </li>
   
 
@@ -1190,7 +1221,7 @@ InstanceHasherV0        </code>
 
     <div class="doc doc-contents ">
 
-      <p>Create an ISCC Instance-Code with the latest standard algorithm</p>
+      <p>Create an ISCC Instance-Code with the latest standard algorithm.</p>
 
 <p><strong>Parameters:</strong></p>
 <table>
@@ -1206,7 +1237,7 @@ InstanceHasherV0        </code>
       <tr>
         <td><code>stream</code></td>
         <td><code>Stream</code></td>
-        <td><p>Binary data stream for Instance-Code generation.</p></td>
+        <td><p>Binary data stream for Instance-Code generation</p></td>
         <td><em>required</em></td>
       </tr>
       <tr>
@@ -1227,8 +1258,8 @@ InstanceHasherV0        </code>
   </thead>
   <tbody>
     <tr>
-      <td><code>str</code></td>
-      <td><p>Instance-Code</p></td>
+      <td><code>InstanceCode</code></td>
+      <td><p>InstanceCode with properties: code, datahash, filesize</p></td>
     </tr>
   </tbody>
 </table>
@@ -1250,7 +1281,7 @@ InstanceHasherV0        </code>
 
     <div class="doc doc-contents ">
 
-      <p>Create an ISCC Instance-Code with algorithm v0</p>
+      <p>Create an ISCC Instance-Code with algorithm v0.</p>
 
 <p><strong>Parameters:</strong></p>
 <table>
@@ -1266,7 +1297,7 @@ InstanceHasherV0        </code>
       <tr>
         <td><code>stream</code></td>
         <td><code>Stream</code></td>
-        <td><p>Binary data stream for Instance-Code generation.</p></td>
+        <td><p>Binary data stream for Instance-Code generation</p></td>
         <td><em>required</em></td>
       </tr>
       <tr>
@@ -1287,8 +1318,8 @@ InstanceHasherV0        </code>
   </thead>
   <tbody>
     <tr>
-      <td><code>str</code></td>
-      <td><p>Instance-Code</p></td>
+      <td><code>InstanceCode</code></td>
+      <td><p>InstanceCode with properties: code, datahash, filesize</p></td>
     </tr>
   </tbody>
 </table>
@@ -1341,8 +1372,8 @@ InstanceHasherV0        </code>
   </thead>
   <tbody>
     <tr>
-      <td><code>bytes</code></td>
-      <td><p>256-bit Instance-Hash digest</p></td>
+      <td><code>Tuple[bytes, int]</code></td>
+      <td><p>Tuple of 256-bit Instance-Hash digest and filesize in bytes</p></td>
     </tr>
   </tbody>
 </table>
