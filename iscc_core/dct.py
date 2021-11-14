@@ -1,19 +1,18 @@
 # -*- coding: utf-8 -*-
 """Discrete cosine transform."""
 import math
-from typing import Sequence
+from typing import List, Sequence
 
 
 def dct(v):
-    # type: (Sequence[float]) -> Sequence[float]
+    # type: (Sequence[float]) -> List
     """Discrete cosine transform.
 
-    Copyright (c) 2020 Project Nayuki (MIT License).
     See: https://www.nayuki.io/page/fast-discrete-cosine-transform-algorithms).
 
     :param Sequence[float] v: Input vector for DCT calculation.
-    :return: Transformed vector.
-    :rtype: list
+    :return: DCT Transformed vector.
+    :rtype: List
     """
 
     n = len(v)
