@@ -136,6 +136,7 @@ def hash_image_v0(pixels, bits=opts.image_bits):
             return hash_digest
 
 
+# Todo refactor dct into separate algorithms module
 def dct(v):
     # type: (Sequence[float]) -> Sequence[float]
     """Discrete cosine transform.

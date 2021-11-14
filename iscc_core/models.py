@@ -2,12 +2,20 @@
 """Schema of objects returned by ISCC processing algorithms"""
 from typing import List, Optional, Union
 from pydantic import BaseModel, Field
+from iscc_core.codec import Code
 
 
 MultiStr = Union[str, List[str]]
 
 
-class MetaCode(BaseModel):
+class BaseCode(BaseModel):
+
+    @property
+    def code_obj(self):
+        return Code(self.code)
+
+
+class MetaCode(BaseCode):
     """Meta-Code standardized metadata model."""
 
     code: str = Field(..., description="Meta-Code in standard representation.")
@@ -16,7 +24,7 @@ class MetaCode(BaseModel):
     metahash: str = Field(description="Blake3 cryptographic hash of metadata")
 
 
-class ContentCodeText(BaseModel):
+class ContentCodeText(BaseCode):
     """Content-Code-Text standardized metadata model."""
 
     code: str = Field(..., description="Content-Code-Text in standard representation.")
@@ -27,7 +35,7 @@ class ContentCodeText(BaseModel):
     language: Optional[str] = Field(description="Main language of content (BCP-47).")
 
 
-class ContentCodeImage(BaseModel):
+class ContentCodeImage(BaseCode):
     """Content-Code-Image standardized metadata model."""
 
     code: str = Field(..., description="Content-Code-Image in standard representation.")
@@ -36,7 +44,7 @@ class ContentCodeImage(BaseModel):
     height: Optional[int] = Field(description="Height of image in number of pixels.")
 
 
-class ContentCodeAudio(BaseModel):
+class ContentCodeAudio(BaseCode):
     """Content-Code-Audio standardized metadata model."""
 
     code: str = Field(..., description="Content-Code-Audio in standard representation.")
@@ -44,7 +52,7 @@ class ContentCodeAudio(BaseModel):
     duration: Optional[float] = Field(description="Duration of audio im seconds.")
 
 
-class ContentCodeVideo(BaseModel):
+class ContentCodeVideo(BaseCode):
     """Content-Code-Video standardized metadata model."""
 
     code: str = Field(..., description="Content-Code-Video in standard representation.")
@@ -56,7 +64,7 @@ class ContentCodeVideo(BaseModel):
     language: Optional[MultiStr] = Field(description="Main language of video (BCP 47).")
 
 
-class DataCode(BaseModel):
+class DataCode(BaseCode):
     """Data-Code standardized metadata model."""
 
     code: str = Field(..., description="Data-Code in standard representation.")
@@ -64,7 +72,7 @@ class DataCode(BaseModel):
     sizes: Optional[List[int]] = Field(description="Sizes of datachunks")
 
 
-class InstanceCode(BaseModel):
+class InstanceCode(BaseCode):
     """Instance-Code standardized metadata model."""
 
     code: str = Field(..., description="Instance-Code in standard representation.")
