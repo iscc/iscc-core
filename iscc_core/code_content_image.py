@@ -6,7 +6,6 @@ The ISCC Content-Code Image is created by calculating a discrete cosine transfor
 normalized image-pixels and comparing the values from the upper left area of the
 dct-matrix against their median values to set the hash-bits.
 """
-import math
 from statistics import median
 from typing import Sequence, Tuple
 from PIL import Image
@@ -15,6 +14,7 @@ from iscc_core import codec
 from iscc_core.codec import Stream
 from iscc_core.models import ContentCodeImage
 from iscc_core.options import opts
+from iscc_core.dct import dct
 
 
 def gen_image_code(img, bits=opts.image_bits):
@@ -134,39 +134,3 @@ def soft_hash_image_v0(pixels, bits=opts.image_bits):
         if bl >= bits:
             hash_digest = int(bitstring, 2).to_bytes(bl // 8, "big", signed=False)
             return hash_digest
-
-
-# Todo refactor dct into separate algorithms module
-def dct(v):
-    # type: (Sequence[float]) -> Sequence[float]
-    """Discrete cosine transform.
-
-    Copyright (c) 2020 Project Nayuki (MIT License).
-    See: https://www.nayuki.io/page/fast-discrete-cosine-transform-algorithms).
-
-    :param Sequence[float] v: Input vector for DCT calculation.
-    :return: Transformed vector.
-    :rtype: list
-    """
-
-    n = len(v)
-    if n == 1:
-        return list(v)
-    elif n == 0 or n % 2 != 0:
-        raise ValueError()
-    else:
-        half = n // 2
-        alpha = [(v[i] + v[-(i + 1)]) for i in range(half)]
-        beta = [
-            (v[i] - v[-(i + 1)]) / (math.cos((i + 0.5) * math.pi / n) * 2.0)
-            for i in range(half)
-        ]
-        alpha = dct(alpha)
-        beta = dct(beta)
-        result = []
-        for i in range(half - 1):
-            result.append(alpha[i])
-            result.append(beta[i] + beta[i + 1])
-        result.append(alpha[-1])
-        result.append(beta[-1])
-        return result
