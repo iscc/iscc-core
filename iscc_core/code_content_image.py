@@ -8,36 +8,37 @@ dct-matrix against their median values to set the hash-bits.
 """
 import math
 from statistics import median
-from typing import Sequence
+from typing import Sequence, Tuple
 from PIL import Image
 from more_itertools import chunked
 from iscc_core import codec
 from iscc_core.codec import Stream
+from iscc_core.models import ContentCodeImage
 from iscc_core.options import opts
 
 
 def gen_image_code(img, bits=opts.image_bits):
-    # type: (Stream, int) -> str
+    # type: (Stream, int) -> ContentCodeImage
     """Create an ISCC Content-Code Image with the latest standard algorithm.
 
     :param Stream img: Image data stream.
     :param int bits: Bit-length of ISCC Content-Code Image (default 64).
     :return: ISCC Content-Code Image.
-    :rtype: str
+    :rtype: ContentCodeImage
     """
     return gen_image_code_v0(img, bits)
 
 
 def gen_image_code_v0(img, bits=opts.image_bits):
-    # type: (Stream, int) -> str
+    # type: (Stream, int) -> ContentCodeImage
     """Create an ISCC Content-Code Image with algorithm v0.
 
     :param Stream img: Image data stream.
     :param int bits: Bit-length of ISCC Content-Code Image (default 64).
     :return: ISCC Content-Code Image.
-    :rtype: str
+    :rtype: ContentCodeImage
     """
-    pixels = normalize_image(img)
+    pixels, width, height = normalize_image(img)
     digest = hash_image_v0(pixels, bits=bits)
     image_code = codec.encode_component(
         mtype=codec.MT.CONTENT,
@@ -46,23 +47,24 @@ def gen_image_code_v0(img, bits=opts.image_bits):
         length=bits,
         digest=digest,
     )
-    return image_code
+    return ContentCodeImage(code=image_code, width=width, height=height)
 
 
 def normalize_image(img):
-    # type: (Stream) -> Sequence[int]
+    # type: (Stream) -> Tuple[Sequence[int], int, int]
     """Normalize image for hash calculation.
 
     - Add white background to images with alpha transparency
     - Convert to grayscale
-    - Resize (bicubic) to 32x32 pixiels
+    - Resize (bicubic) to 32x32 pixels and flatten
 
     :param Stream img: Image data stream.
-    :return: A sequence of 1024 normalized image pixels
-    :rtype: Sequence[int]
+    :return: A tuple of (pixels_1024, original_width, original_height
+    :rtype: Tuple[Sequence[int], int, int]
     """
 
     im = Image.open(img)
+    width, height = im.size
 
     # Add white background to images that have alpha transparency
     if im.mode in ("RGBA", "LA") or (im.mode == "P" and "transparency" in im.info):
@@ -80,7 +82,7 @@ def normalize_image(img):
     # A flattened sequence of grayscale pixel values (1024 pixels)
     pixels = im.getdata()
 
-    return pixels
+    return pixels, width, height
 
 
 def hash_image_v0(pixels, bits=opts.image_bits):

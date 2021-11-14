@@ -12,7 +12,8 @@ binary form (e.g. file headers). We do not prescribe a particular schema.
 """
 from more_itertools import interleave, sliced
 from iscc_core.code_content_text import normalize_text
-from iscc_core.codec import MT, ST, VS, encode_component
+from iscc_core.codec import MT, ST, VS, encode_base64, encode_component
+from iscc_core.models import MetaCode
 from iscc_core.utils import sliding_window
 from iscc_core.simhash import similarity_hash
 from iscc_core.options import opts
@@ -21,7 +22,7 @@ from typing import Union
 
 
 def gen_meta_code(title, extra=None, bits=opts.meta_bits):
-    # type: (str, Union[str,bytes,None], int) -> str
+    # type: (str, Union[str,bytes,None], int) -> MetaCode
     """Create an ISCC Meta-Code using the latest standard algorithm.
 
     Applications that generate ISCCs should prioritize explicitly passed `title`
@@ -45,20 +46,20 @@ def gen_meta_code(title, extra=None, bits=opts.meta_bits):
     :param Union[str,bytes,None] extra: Optional metadata for disambiguation
     :param int bits: Bit-length of resulting Meta-Code (multiple of 64)
     :return: ISCC Meta-Code
-    :rtype: str
+    :rtype: MetaCode
     """
     return gen_meta_code_v0(title, extra=extra, bits=bits)
 
 
 def gen_meta_code_v0(title, extra=None, bits=opts.meta_bits):
-    # type: (str, Union[str,bytes,None], int) -> str
+    # type: (str, Union[str,bytes,None], int) -> MetaCode
     """Create an ISCC Meta-Code with the algorithm version 0.
 
     :param str title: Title of the work manifested by the digital asset
     :param Union[str,bytes,None] extra: Optional metadata for disambiguation
     :param int bits: Bit-length of resulting Meta-Code (multiple of 64)
     :return: ISCC Meta-Code
-    :rtype: str
+    :rtype: MetaCode
     """
 
     # 1. Normalize title
@@ -66,14 +67,18 @@ def gen_meta_code_v0(title, extra=None, bits=opts.meta_bits):
     title = normalize_text(title)
     title = trim_text(title, opts.meta_trim_title)
 
+    payload = title.encode("utf-8")
+
     # 2. Normalize extra
     if extra in (None, ""):
         extra = None
     elif isinstance(extra, str):
         extra = normalize_text(extra)
         extra = trim_text(extra, opts.meta_trim_extra)
+        payload += extra.encode("utf-8")
     elif isinstance(extra, bytes):
         extra = extra[: opts.meta_trim_extra]
+        payload += extra
     else:
         raise ValueError("parameter `extra` must be of type str or bytes!")
 
@@ -85,7 +90,15 @@ def gen_meta_code_v0(title, extra=None, bits=opts.meta_bits):
         length=bits,
         digest=digest,
     )
-    return meta_code
+
+    metahash = blake3(payload).hexdigest()
+
+    # Todo indicate that extra is bytes
+    if isinstance(extra, bytes):
+        extra = encode_base64(extra)
+
+    mc_obj = MetaCode(code=meta_code, title=title, extra=extra, metahash=metahash)
+    return mc_obj
 
 
 def hash_meta_v0(title, extra=None):

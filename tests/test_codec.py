@@ -112,8 +112,8 @@ def test_iscc_clean():
 
 
 def test_code_properties():
-    c64 = c.Code(iscc_core.gen_meta_code("Hello World"))
-    c256 = c.Code(iscc_core.gen_meta_code("Hello World", bits=256))
+    c64 = c.Code(iscc_core.gen_meta_code("Hello World").code)
+    c256 = c.Code(iscc_core.gen_meta_code("Hello World", bits=256).code)
     assert c64.code == "AAA77PPFVS6JDUQB"
     assert c256.code == "AAD77PPFVS6JDUQBWZDBIUGOUNAGIZYGCQ75ICNLH5QV73OXGWZV5CQ"
     assert c64.bytes == unhexlify(c64.hex)

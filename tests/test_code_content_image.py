@@ -8,28 +8,30 @@ from iscc_samples import images
 
 def test_gen_image_code_v0():
     with open(images()[0].as_posix(), "rb") as stream:
-        assert code_content_image.gen_image_code_v0(stream) == "EEA4GQZQTY6J5DTH"
+        ic_obj = code_content_image.gen_image_code_v0(stream)
+        assert ic_obj.code == "EEA4GQZQTY6J5DTH"
 
 
 def test_gen_image_code_v0_32bit():
     with open(images()[0].as_posix(), "rb") as stream:
-        assert code_content_image.gen_image_code_v0(stream, 32) == "EEAMGQZQTY"
+        ic_obj = code_content_image.gen_image_code_v0(stream, 32)
+        assert ic_obj.code == "EEAMGQZQTY"
 
 
 def test_gen_image_code_v0_256bit():
     with open(images()[0].as_posix(), "rb") as stream:
-        assert (
-            code_content_image.gen_image_code_v0(stream, 256)
-            == "EED4GQZQTY6J5DTHQ2DWCPDZHQOM6QZQTY6J5DTFZ2DWCPDZHQOMXDI"
-        )
+        ic_obj = code_content_image.gen_image_code_v0(stream, 256)
+        assert ic_obj.code == "EED4GQZQTY6J5DTHQ2DWCPDZHQOM6QZQTY6J5DTFZ2DWCPDZHQOMXDI"
 
 
 def test_normalize_image():
     img = open(images()[0].as_posix(), "rb")
-    pixels = code_content_image.normalize_image(img)
+    pixels, width, height = code_content_image.normalize_image(img)
     assert len(pixels) == 1024
     assert pixels[0] == 23
     assert pixels[-1] == 51
+    assert width == 200
+    assert height == 133
 
 
 def test_hash_image_v0_white():
@@ -71,17 +73,19 @@ def test_code_image_v0_white():
     stream = io.BytesIO()
     img.save(stream, format="PNG")
     stream.seek(0)
-    assert code_content_image.gen_image_code_v0(stream, bits=64) == "EEAYAAAAAAAAAAAA"
     assert (
-        code_content_image.gen_image_code_v0(stream, bits=96)
+        code_content_image.gen_image_code_v0(stream, bits=64).code == "EEAYAAAAAAAAAAAA"
+    )
+    assert (
+        code_content_image.gen_image_code_v0(stream, bits=96).code
         == "EEBIAAAAAAAAAAAAAAAAAAA"
     )
     assert (
-        code_content_image.gen_image_code_v0(stream, bits=128)
+        code_content_image.gen_image_code_v0(stream, bits=128).code
         == "EEBYAAAAAAAAAAAAAAAAAAAAAAAAA"
     )
     assert (
-        code_content_image.gen_image_code_v0(stream, bits=256)
+        code_content_image.gen_image_code_v0(stream, bits=256).code
         == "EEDYAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
     )
 

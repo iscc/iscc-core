@@ -7,33 +7,57 @@ from pydantic import BaseModel, Field
 MultiStr = Union[str, List[str]]
 
 
+class MetaCode(BaseModel):
+    """Meta-Code standardized metadata model."""
+
+    code: str = Field(..., description="Meta-Code in standard representation.")
+    title: Optional[str] = Field(description="Title used for Meta-Code creation.")
+    extra: Optional[str] = Field(description="Extra metadata used for Meta-Code.")
+    metahash: str = Field(description="Blake3 cryptographic hash of metadata")
+
+
 class ContentCodeText(BaseModel):
-    """ContentCodeText standardized metadata model."""
+    """Content-Code-Text standardized metadata model."""
 
     code: str = Field(..., description="Content-Code-Text in standard representation.")
-    title: Optional[str] = Field(description="Title as extracted from text document")
+    title: Optional[str] = Field(description="Title as extracted from text document.")
     characters: Optional[int] = Field(
-        description="Number of text characters (after normalize_text)"
+        description="Number of text characters (after normalize_text)."
     )
-    language: Optional[str] = Field(description="Main language of content (BCP-47)")
-    features: Optional[List[str]] = Field(description="List of hashes per text chunk")
-    sizes: Optional[List[int]] = Field(description="Sizes of text chunks in characters")
+    language: Optional[str] = Field(description="Main language of content (BCP-47).")
+
+
+class ContentCodeImage(BaseModel):
+    """Content-Code-Image standardized metadata model."""
+
+    code: str = Field(..., description="Content-Code-Image in standard representation.")
+    title: Optional[str] = Field(description="Title as extracted from image file.")
+    width: Optional[int] = Field(description="Width of image in number of pixels.")
+    height: Optional[int] = Field(description="Height of image in number of pixels.")
+
+
+class ContentCodeAudio(BaseModel):
+    """Content-Code-Audio standardized metadata model."""
+
+    code: str = Field(..., description="Content-Code-Audio in standard representation.")
+    title: Optional[str] = Field(description="Title as extracted from audio asset.")
+    duration: Optional[float] = Field(description="Duration of audio im seconds.")
 
 
 class ContentCodeVideo(BaseModel):
-    """ContentCodeVideo standardized metadata model."""
+    """Content-Code-Video standardized metadata model."""
 
     code: str = Field(..., description="Content-Code-Video in standard representation.")
-    title: Optional[str] = Field(description="Title as extracted from video asset")
-    duration: Optional[float] = Field(description="Duration of video im seconds")
-    fps: Optional[float] = Field(description="Frames per second")
-    width: Optional[int] = Field(description="Width of video in number of pixels")
-    height: Optional[int] = Field(description="Height of video in number of pixels")
-    language: Optional[MultiStr] = Field(description="Main language of video (BCP 47)")
+    title: Optional[str] = Field(description="Title as extracted from video asset.")
+    duration: Optional[float] = Field(description="Duration of video im seconds.")
+    fps: Optional[float] = Field(description="Frames per second.")
+    width: Optional[int] = Field(description="Width of video in number of pixels.")
+    height: Optional[int] = Field(description="Height of video in number of pixels.")
+    language: Optional[MultiStr] = Field(description="Main language of video (BCP 47).")
 
 
 class DataCode(BaseModel):
-    """DataCode standardized metadata model."""
+    """Data-Code standardized metadata model."""
 
     code: str = Field(..., description="Data-Code in standard representation.")
     features: Optional[List[str]] = Field(description="List of per datachunk hashes")
@@ -41,7 +65,7 @@ class DataCode(BaseModel):
 
 
 class InstanceCode(BaseModel):
-    """InstanceCode standardized metadata model."""
+    """Instance-Code standardized metadata model."""
 
     code: str = Field(..., description="Instance-Code in standard representation.")
     datahash: str = Field(description="Multihash of digital asset (Blake3 by default.")

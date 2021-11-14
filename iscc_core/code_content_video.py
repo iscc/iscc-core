@@ -32,7 +32,6 @@ def gen_video_code(frame_sigs, bits=opts.video_bits):
 
     :param FrameSig frame_sigs: Sequence of MP7 frame signatures
     :param int bits: Bit-length resulting Instance-Code (multiple of 64)
-    :param cutpoints:
     :return: VideoCode object with code property set
     :rtype: ContentCodeVideo
     """
