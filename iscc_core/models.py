@@ -7,10 +7,10 @@ from pydantic import BaseModel, Field
 MultiStr = Union[str, List[str]]
 
 
-class TextCode(BaseModel):
-    """TextCode standardized plaintext metadata model."""
+class ContentCodeText(BaseModel):
+    """ContentCodeText standardized metadata model."""
 
-    code: str = Field(..., description="Text-Code in standard representation.")
+    code: str = Field(..., description="Content-Code-Text in standard representation.")
     title: Optional[str] = Field(description="Title as extracted from text document")
     characters: Optional[int] = Field(
         description="Number of text characters (after normalize_text)"
@@ -20,10 +20,10 @@ class TextCode(BaseModel):
     sizes: Optional[List[int]] = Field(description="Sizes of text chunks in characters")
 
 
-class VideoCode(BaseModel):
-    """VideoCode standardized asset metadata model."""
+class ContentCodeVideo(BaseModel):
+    """ContentCodeVideo standardized metadata model."""
 
-    code: str = Field(..., description="Video-Code in standard representation.")
+    code: str = Field(..., description="Content-Code-Video in standard representation.")
     title: Optional[str] = Field(description="Title as extracted from video asset")
     duration: Optional[float] = Field(description="Duration of video im seconds")
     fps: Optional[float] = Field(description="Frames per second")
@@ -33,7 +33,7 @@ class VideoCode(BaseModel):
 
 
 class DataCode(BaseModel):
-    """DataCode standardized asset metadata model."""
+    """DataCode standardized metadata model."""
 
     code: str = Field(..., description="Data-Code in standard representation.")
     features: Optional[List[str]] = Field(description="List of per datachunk hashes")
@@ -41,7 +41,7 @@ class DataCode(BaseModel):
 
 
 class InstanceCode(BaseModel):
-    """InstanceCode standardized asset metadata model."""
+    """InstanceCode standardized metadata model."""
 
     code: str = Field(..., description="Instance-Code in standard representation.")
     datahash: str = Field(description="Multihash of digital asset (Blake3 by default.")

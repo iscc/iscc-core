@@ -9,11 +9,12 @@ from iscc_core.models import InstanceCode
 
 def gen_instance_code(stream, bits=opts.instance_bits):
     # type: (Stream, int) -> InstanceCode
-    """Create an ISCC Instance-Code with the latest standard algorithm
+    """
+    Create an ISCC Instance-Code with the latest standard algorithm.
 
-    :param Stream stream: Binary data stream for Instance-Code generation.
+    :param Stream stream: Binary data stream for Instance-Code generation
     :param int bits: Bit-length resulting Instance-Code (multiple of 64)
-    :return: InstanceCode object with code, datahash and filesize properties
+    :return: InstanceCode with properties: code, datahash, filesize
     :rtype: InstanceCode
     """
     return gen_instance_code_v0(stream, bits)
@@ -21,9 +22,10 @@ def gen_instance_code(stream, bits=opts.instance_bits):
 
 def gen_instance_code_v0(stream, bits=opts.instance_bits):
     # type: (Stream, int) -> InstanceCode
-    """Create an ISCC Instance-Code with algorithm v0
+    """
+    Create an ISCC Instance-Code with algorithm v0.
 
-    :param Stream stream: Binary data stream for Instance-Code generation.
+    :param Stream stream: Binary data stream for Instance-Code generation
     :param int bits: Bit-length of resulting Instance-Code (multiple of 64)
     :return: InstanceCode with properties: code, datahash, filesize
     :rtype: InstanceCode
@@ -47,7 +49,8 @@ def gen_instance_code_v0(stream, bits=opts.instance_bits):
 
 def hash_instance_v0(stream):
     # type: (Stream) -> Tuple[bytes, int]
-    """Create 256-bit hash digest for the Instance-Code body
+    """
+    Create 256-bit hash digest for the Instance-Code body
 
     :param Stream stream: Binary data stream for hash generation.
     :return: Tuple of 256-bit Instance-Hash digest and filesize in bytes
@@ -62,7 +65,9 @@ def hash_instance_v0(stream):
 
 
 class InstanceHasherV0:
-    """Incremental Instance-Hash generator."""
+    """
+    Incremental Instance-Hash generator.
+    """
 
     def __init__(self, data=None):
         # type: (Optional[Data]) -> None
@@ -73,7 +78,8 @@ class InstanceHasherV0:
 
     def push(self, data):
         # type: (Data) -> None
-        """Push data to the Instance-Hash generator.
+        """
+        Push data to the Instance-Hash generator.
 
         :param Data data: Data to be hashed
         """
@@ -82,7 +88,8 @@ class InstanceHasherV0:
 
     def digest(self):
         # type: () -> bytes
-        """Return Instance-Hash
+        """
+        Return Instance-Hash
 
         :return: Instance-Hash digest
         :rtype: bytes
