@@ -125,7 +125,10 @@ You may also want join our developer chat on Telegram at <https://t.me/iscc_dev>
 
 ## Changelog
 
-### [0.1.3] - Unreleased
+### [0.1.4] - Unreleased
+- Simplified options
+
+### [0.1.3] - 2021-11-15
 - Try to compile Cython/C accelerator modules when installing via pip
 - Simplify soft_hash api return values
 - Add .code() method to InstanceHasher, DataHasher
