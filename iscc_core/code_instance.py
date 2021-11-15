@@ -96,5 +96,23 @@ class InstanceHasherV0:
         """
         return self.hasher.digest()
 
+    def code(self, bits=opts.instance_bits):
+        # type: (int) -> str
+        """
+        Encode digest as an ISCC Instance-Code component.
+
+        :param int bits: Number of bits for the ISCC Instance-Code
+        :return: ISCC Instance-Code
+        :rtype: str
+        """
+        instance_code = codec.encode_component(
+            mtype=codec.MT.INSTANCE,
+            stype=codec.ST.NONE,
+            version=codec.VS.V0,
+            length=bits,
+            digest=self.digest(),
+        )
+        return instance_code
+
 
 InstanceHasher = InstanceHasherV0

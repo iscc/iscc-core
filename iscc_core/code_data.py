@@ -89,7 +89,9 @@ def soft_hash_data_v0(stream, granular=opts.data_granular):
 
 
 class DataHasherV0:
-    """Incremental Data-Hash generator."""
+    """
+    Incremental Data-Hash generator.
+    """
 
     def __init__(self, data=None):
         # type: (Optional[Data]) -> None
@@ -120,6 +122,24 @@ class DataHasherV0:
         """Calculate 256-bit minhash digest from feature hashes."""
         self._finalize()
         return minhash_256(self.chunk_features)
+
+    def code(self, bits=opts.data_bits):
+        # type: (int) -> str
+        """
+        Encode digest as an ISCC Data-Code component.
+
+        :param int bits: Number of bits for the ISCC Data-Code
+        :return: ISCC Data-Code
+        :rtype: str
+        """
+        data_code = codec.encode_component(
+            mtype=codec.MT.DATA,
+            stype=codec.ST.NONE,
+            version=codec.VS.V0,
+            length=bits,
+            digest=self.digest(),
+        )
+        return data_code
 
     def features(self):
         # type: () -> List[str]
