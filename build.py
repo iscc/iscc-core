@@ -5,6 +5,7 @@ $ cythonize -X language_level=3 -a -i ./iscc_core/cdc.py
 $ cythonize -X language_level=3 -a -i ./iscc_core/minhash.py
 """
 
+# Todo test autobuild on install with iscc-core[turbo]
 
 def build(setup_kwargs):
     try:
