@@ -91,20 +91,13 @@ class CoreOptions(BaseSettings):
         1024, description="Average chunk size for data chunking."
     )
 
-    data_granular: bool = Field(False, description="Calculate granular data features.")
-
-    data_granular_factor: int = Field(
-        64, description="Size of granular data chunks times average chunk size"
-    )
-
     instance_bits: int = Field(
         64, description="Default length of generated Instance-Code in bits"
     )
-    instance_read_size: int = Field(
-        262144, description="File read buffer during instance hashing"
-    )
 
-    cdc_read_size: int = Field(262144, description="File read buffer during chunking")
+    io_read_size: int = Field(
+        262144, description="File read buffer size in bytes for hashing operations"
+    )
 
     cdc_avg_chunk_size: int = Field(
         1024, description="Target chunk size in number of bytes."

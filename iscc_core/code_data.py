@@ -39,11 +39,11 @@ def gen_data_code_v0(stream, bits=opts.data_bits):
     """
 
     hasher = DataHasherV0()
-    data = stream.read(opts.cdc_read_size)
+    data = stream.read(opts.io_read_size)
 
     while data:
         hasher.push(data)
-        data = stream.read(opts.cdc_read_size)
+        data = stream.read(opts.io_read_size)
 
     data_code = hasher.code(bits=bits)
     data_code_obj = DataCode(code=data_code)
@@ -61,11 +61,11 @@ def soft_hash_data_v0(stream):
     :rtype: bytes
     """
     hasher = DataHasherV0()
-    data = stream.read(opts.cdc_read_size)
+    data = stream.read(opts.io_read_size)
 
     while data:
         hasher.push(data)
-        data = stream.read(opts.cdc_read_size)
+        data = stream.read(opts.io_read_size)
     return hasher.digest()
 
 

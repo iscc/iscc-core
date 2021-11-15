@@ -1,15 +1,10 @@
 from io import BytesIO
 import random
 from iscc_core import code_data
-from iscc_core.options import opts
 from tests.utils import static_bytes
 
 MB1 = 1024 * 1024
 TEST_DATA = static_bytes(MB1)
-
-
-def test_data_granular_default_false():
-    assert opts.data_granular is False
 
 
 def test_hash_data_v0():

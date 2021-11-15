@@ -30,7 +30,7 @@ def data_chunks(data, utf32, avg_chunk_size=opts.cdc_avg_chunk_size):
     """
 
     stream = io.BytesIO(data)
-    buffer = stream.read(opts.cdc_read_size)
+    buffer = stream.read(opts.io_read_size)
     if not buffer:
         yield b""
 
@@ -39,7 +39,7 @@ def data_chunks(data, utf32, avg_chunk_size=opts.cdc_avg_chunk_size):
     buffer = memoryview(buffer)
     while buffer:
         if len(buffer) <= ma:
-            buffer = memoryview(bytes(buffer) + stream.read(opts.cdc_read_size))
+            buffer = memoryview(bytes(buffer) + stream.read(opts.io_read_size))
         cut_point = cdc_offset(buffer, mi, ma, cs, mask_s, mask_l)
 
         # Make sure cut points are at 4-byte aligned for utf32 encoded text

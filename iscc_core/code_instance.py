@@ -31,10 +31,10 @@ def gen_instance_code_v0(stream, bits=opts.instance_bits):
     :rtype: InstanceCode
     """
     hasher = InstanceHasherV0()
-    data = stream.read(opts.instance_read_size)
+    data = stream.read(opts.io_read_size)
     while data:
         hasher.push(data)
-        data = stream.read(opts.instance_read_size)
+        data = stream.read(opts.io_read_size)
 
     instance_code_obj = InstanceCode(
         code=hasher.code(bits=bits),
@@ -55,10 +55,10 @@ def hash_instance_v0(stream):
     :rtype: bytes
     """
     hasher = InstanceHasherV0()
-    data = stream.read(opts.instance_read_size)
+    data = stream.read(opts.io_read_size)
     while data:
         hasher.push(data)
-        data = stream.read(opts.instance_read_size)
+        data = stream.read(opts.io_read_size)
     return hasher.digest()
 
 
