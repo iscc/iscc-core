@@ -13,7 +13,7 @@ from iscc_core.models import DataCode
 import xxhash
 
 
-def gen_data_code(stream, bits=opts.data_bits, granular=opts.data_granular):
+def gen_data_code(stream, bits=opts.data_bits):
     # type: (Stream, int) -> DataCode
     """
     Create a similarity preserving ISCC Data-Code with the latest standard algorithm.
@@ -24,55 +24,20 @@ def gen_data_code(stream, bits=opts.data_bits, granular=opts.data_granular):
     :return: ISCC Data-Code with properties: code, features, sizes
     :rtype: DataCode
     """
-    return gen_data_code_v0(stream, bits, granular)
+    return gen_data_code_v0(stream, bits)
 
 
-def gen_data_code_v0(stream, bits=opts.data_bits, granular=opts.data_granular):
+def gen_data_code_v0(stream, bits=opts.data_bits):
     # type: (Stream, int) -> DataCode
     """
     Create an ISCC Data-Code with algorithm v0.
 
     :param Stream stream: Input data stream.
     :param int bits: Bit-length of ISCC Data-Code (default 64).
-    :param bool granular: Calculate additional granular data-features
-    :return: ISCC DataCode with properties: code, features, sizes
+    :return: Standardized ISCC DataCode object
     :rtype: DataCode
     """
-    features, sizes = None, None
-    result = soft_hash_data_v0(stream, granular=granular)
-    if granular:
-        digest, features, sizes = result
-    else:
-        digest = result
 
-    data_code = codec.encode_component(
-        mtype=codec.MT.DATA,
-        stype=codec.ST.NONE,
-        version=codec.VS.V0,
-        length=bits,
-        digest=digest,
-    )
-    data_code_obj = DataCode(
-        code=data_code,
-    )
-
-    if granular:
-        data_code_obj.features = features
-        data_code_obj.sizes = sizes
-
-    return data_code_obj
-
-
-def soft_hash_data_v0(stream, granular=opts.data_granular):
-    # type: (Stream) -> Union[bytes, Tuple[bytes, List[str], List[int]]]
-    """
-    Create a similarity preserving Data-Hash digest
-
-    :param stream: Input data stream.
-    :param bool granular: Calculate additional granular data-features
-    :return: 256-bit data soft-hash (if granular: a tuple of digest, features, sizes)
-    :rtype: Union[bytes, Tuple[bytes, List[str], List[int]]]
-    """
     hasher = DataHasherV0()
     data = stream.read(opts.cdc_read_size)
 
@@ -80,12 +45,28 @@ def soft_hash_data_v0(stream, granular=opts.data_granular):
         hasher.push(data)
         data = stream.read(opts.cdc_read_size)
 
-    if granular is False:
-        return hasher.digest()
-    elif granular is True:
-        return hasher.digest(), hasher.features(), hasher.sizes()
-    else:
-        raise ValueError("parameter granular must be True or False")
+    data_code = hasher.code(bits=bits)
+    data_code_obj = DataCode(code=data_code)
+
+    return data_code_obj
+
+
+def soft_hash_data_v0(stream):
+    # type: (Stream) -> bytes
+    """
+    Create a similarity preserving Data-Hash digest
+
+    :param stream: Input data stream.
+    :return: 256-bit Data-Hash (soft-hash) digest used as body for Data-Code
+    :rtype: bytes
+    """
+    hasher = DataHasherV0()
+    data = stream.read(opts.cdc_read_size)
+
+    while data:
+        hasher.push(data)
+        data = stream.read(opts.cdc_read_size)
+    return hasher.digest()
 
 
 class DataHasherV0:
