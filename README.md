@@ -126,6 +126,7 @@ You may also want join our developer chat on Telegram at <https://t.me/iscc_dev>
 ## Changelog
 
 ### [0.1.3] - Unreleased
+- Try to compile Cython/C accelerator modules when installing via pip
 - Simplify soft_hash api return values
 - Add .code() method to InstanceHasher, DataHasher
 - Remove granular fingerprint calculation
