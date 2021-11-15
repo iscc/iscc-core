@@ -32,7 +32,7 @@ programming languages.
 
 ## ISCC Architecture
 
-![ISCC Architecure](./docs/images/iscc-architecture.png)
+![ISCC Architecure](docs/images/iscc-architecture.png)
 
 ## Installation
 
