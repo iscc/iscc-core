@@ -1,4 +1,4 @@
-__version__ = "0.1.2"
+__version__ = "0.1.3"
 from iscc_core.code_meta import (
     gen_meta_code,
     gen_meta_code_v0,
@@ -35,6 +35,7 @@ from iscc_core.code_data import (
     soft_hash_data_v0,
     DataCode,
     DataHasher,
+    DataHasherV0,
 )
 from iscc_core.code_instance import (
     gen_instance_code,
@@ -42,5 +43,6 @@ from iscc_core.code_instance import (
     hash_instance_v0,
     InstanceCode,
     InstanceHasher,
+    InstanceHasherV0,
 )
 from iscc_core.codec import Code, compose, decompose

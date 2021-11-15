@@ -125,6 +125,12 @@ You may also want join our developer chat on Telegram at <https://t.me/iscc_dev>
 
 ## Changelog
 
+### [0.1.3] - Unreleased
+- Simplify soft_hash api return values
+- Add .code() method to InstanceHasher, DataHasher
+- Remove granular fingerprint calculation
+- Add more top-level imports
+
 ### [0.1.2] - 2021-11-14
 - Export more functions to toplevel
 - Return schema driven objects from ISCC code generators.
