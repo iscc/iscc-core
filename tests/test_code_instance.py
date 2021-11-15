@@ -3,21 +3,19 @@ from iscc_core import code_instance
 
 
 def test_hash_instance_v0_empty():
-    digest, filesize = code_instance.hash_instance_v0(BytesIO(b""))
+    digest = code_instance.hash_instance_v0(BytesIO(b""))
     assert (
         digest.hex()
         == "af1349b9f5f9a1a6a0404dea36dcc9499bcb25c9adc112b7cc9a93cae41f3262"
     )
-    assert filesize == 0
 
 
 def test_hash_instance_v0_zero():
-    digest, filesize = code_instance.hash_instance_v0(BytesIO(b"\x00"))
+    digest = code_instance.hash_instance_v0(BytesIO(b"\x00"))
     assert (
         digest.hex()
         == "2d3adedff11b61f14c886e35afa036736dcd87a74d27b5c1510225d0f592e213"
     )
-    assert filesize == 1
 
 
 def test_code_instance_v0_empty_default():

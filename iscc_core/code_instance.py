@@ -30,38 +30,36 @@ def gen_instance_code_v0(stream, bits=opts.instance_bits):
     :return: InstanceCode with properties: code, datahash, filesize
     :rtype: InstanceCode
     """
-    digest, filesize = hash_instance_v0(stream)
-    instance_code = codec.encode_component(
-        mtype=codec.MT.INSTANCE,
-        stype=codec.ST.NONE,
-        version=codec.VS.V0,
-        length=bits,
-        digest=digest,
-    )
+    hasher = InstanceHasherV0()
+    data = stream.read(opts.instance_read_size)
+    while data:
+        hasher.push(data)
+        data = stream.read(opts.instance_read_size)
 
     instance_code_obj = InstanceCode(
-        code=instance_code,
-        datahash=digest.hex(),
-        filesize=filesize,
+        code=hasher.code(bits=bits),
+        datahash=hasher.digest().hex(),
+        filesize=hasher.filesize,
     )
+
     return instance_code_obj
 
 
 def hash_instance_v0(stream):
-    # type: (Stream) -> Tuple[bytes, int]
+    # type: (Stream) -> bytes
     """
     Create 256-bit hash digest for the Instance-Code body
 
     :param Stream stream: Binary data stream for hash generation.
-    :return: Tuple of 256-bit Instance-Hash digest and filesize in bytes
-    :rtype: Tuple[bytes, int]
+    :return: 256-bit Instance-Hash digest used as body of Instance-Code
+    :rtype: bytes
     """
     hasher = InstanceHasherV0()
     data = stream.read(opts.instance_read_size)
     while data:
         hasher.push(data)
         data = stream.read(opts.instance_read_size)
-    return hasher.digest(), hasher.filesize
+    return hasher.digest()
 
 
 class InstanceHasherV0:
