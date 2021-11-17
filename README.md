@@ -127,9 +127,10 @@ You may also want join our developer chat on Telegram at <https://t.me/iscc_dev>
 
 ## Changelog
 
-### [0.1.5] - Unreleased
+### [0.1.5] - 2021-11-17
 
 - Fix documentation
+- Change metahash creation logic
 
 ### [0.1.4] - 2021-11-17
 - Simplified options
