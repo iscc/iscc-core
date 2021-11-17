@@ -20,7 +20,6 @@ def gen_data_code(stream, bits=opts.data_bits):
 
     :param Stream stream: Input data stream.
     :param int bits: Bit-length of ISCC Data-Code (default 64).
-    :param bool granular: Calculate additional granular data-features
     :return: ISCC Data-Code with properties: code, features, sizes
     :rtype: DataCode
     """

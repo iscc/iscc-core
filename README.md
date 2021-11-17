@@ -127,6 +127,10 @@ You may also want join our developer chat on Telegram at <https://t.me/iscc_dev>
 
 ## Changelog
 
+### [0.1.5] - Unreleased
+
+- Fix documentation
+
 ### [0.1.4] - 2021-11-17
 - Simplified options
 - Optimize video WTA-hash for use with 64-bit granular features
