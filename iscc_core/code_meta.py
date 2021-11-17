@@ -67,18 +67,17 @@ def gen_meta_code_v0(title, extra=None, bits=opts.meta_bits):
     title = normalize_text(title)
     title = trim_text(title, opts.meta_trim_title)
 
-    payload = title.encode("utf-8")
-
     # 2. Normalize extra
     if extra in (None, ""):
         extra = None
+        metahash_payload = title.encode("utf-8")
     elif isinstance(extra, str):
+        metahash_payload = extra.encode("utf-8")  # assumed JCS normalized if JSON
         extra = normalize_text(extra)
         extra = trim_text(extra, opts.meta_trim_extra)
-        payload += extra.encode("utf-8")
     elif isinstance(extra, bytes):
+        metahash_payload = extra
         extra = extra[: opts.meta_trim_extra]
-        payload += extra
     else:
         raise ValueError("parameter `extra` must be of type str or bytes!")
 
@@ -91,7 +90,7 @@ def gen_meta_code_v0(title, extra=None, bits=opts.meta_bits):
         digest=digest,
     )
 
-    metahash = blake3(payload).hexdigest()
+    metahash = blake3(metahash_payload).hexdigest()
 
     if isinstance(extra, bytes):
         extra = encode_base64(extra)
