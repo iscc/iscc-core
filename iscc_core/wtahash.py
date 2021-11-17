@@ -4,13 +4,13 @@ from typing import Sequence
 from bitarray import bitarray
 
 
-def wtahash(vec: Sequence[float]) -> bytes:
-    """Calculate 256-bit WTA Hash for vector with 380 values (MP7 frame signature)."""
+def wtahash(vec: Sequence[float], bits) -> bytes:
+    """Calculate WTA Hash for vector with 380 values (MP7 frame signature)."""
     h = []
     for n, perm in enumerate(WTA_VIDEO_ID_PERMUTATIONS):
         v = vec[perm[0]], vec[perm[1]]
         h.append(v.index(max(v)))
-        if len(h) == 256:
+        if len(h) == bits:
             break
     h = bitarray(h).tobytes()
     return h
