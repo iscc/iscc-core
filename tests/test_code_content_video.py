@@ -3,7 +3,10 @@ from iscc_core import code_content_video
 
 
 def test_hash_video_v0_features():
-    assert code_content_video.soft_hash_video_v0([tuple([0] * 380)], bits=256) == b"\x00" * 32
+    assert (
+        code_content_video.soft_hash_video_v0([tuple([0] * 380)], bits=256)
+        == b"\x00" * 32
+    )
 
 
 def test_hash_video_v0_range():
