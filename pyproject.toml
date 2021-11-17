@@ -6,7 +6,6 @@ description = "ISCC - Core Algorithms"
 authors = ["Titusz <tp@py7.de>"]
 license = "BSD 3-clause"
 readme = "README.md"
-include = ["tests", "docs", "examples"]
 homepage = "https://github.com/iscc/iscc-core"
 repository = "https://github.com/iscc/iscc-core"
 keywords=["iscc", "identifier", "media", "content", "hash", "blockchain", "similarity"]

@@ -1,6 +1,8 @@
 # iscc-core - ISCC Core Algorithms
 
 [![Build](https://github.com/iscc/iscc-core/actions/workflows/tests.yml/badge.svg)](https://github.com/iscc/iscc-core/actions/workflows/tests.yml)
+[![Version](https://img.shields.io/pypi/v/iscc-core.svg)](https://pypi.python.org/pypi/iscc-core/)
+[![Downloads](https://pepy.tech/badge/iscc-core)](https://pepy.tech/project/iscc-core)
 
 > **iscc-core** is a Python library that implements the core algorithms of [ISCC v1.1](https://iscc.codes)
 (International Standard Content Code)
@@ -32,7 +34,7 @@ programming languages.
 
 ## ISCC Architecture
 
-![ISCC Architecure](docs/images/iscc-architecture.png)
+![ISCC Architecure](https://raw.githubusercontent.com/iscc/iscc-core/master/docs/images/iscc-architecture.png)
 
 ## Installation
 
