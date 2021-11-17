@@ -2,97 +2,97 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
     <url>
          <loc>http://iscc.codes/</loc>
-         <lastmod>2021-11-14</lastmod>
+         <lastmod>2021-11-17</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>http://iscc.codes/algorithms/cdc/</loc>
-         <lastmod>2021-11-14</lastmod>
+         <lastmod>2021-11-17</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>http://iscc.codes/algorithms/dct/</loc>
-         <lastmod>2021-11-14</lastmod>
+         <lastmod>2021-11-17</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>http://iscc.codes/algorithms/minhash/</loc>
-         <lastmod>2021-11-14</lastmod>
+         <lastmod>2021-11-17</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>http://iscc.codes/algorithms/simhash/</loc>
-         <lastmod>2021-11-14</lastmod>
+         <lastmod>2021-11-17</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>http://iscc.codes/algorithms/wtahash/</loc>
-         <lastmod>2021-11-14</lastmod>
+         <lastmod>2021-11-17</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>http://iscc.codes/codec/codec/</loc>
-         <lastmod>2021-11-14</lastmod>
+         <lastmod>2021-11-17</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>http://iscc.codes/components/</loc>
-         <lastmod>2021-11-14</lastmod>
+         <lastmod>2021-11-17</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>http://iscc.codes/components/code_data/</loc>
-         <lastmod>2021-11-14</lastmod>
+         <lastmod>2021-11-17</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>http://iscc.codes/components/code_instance/</loc>
-         <lastmod>2021-11-14</lastmod>
+         <lastmod>2021-11-17</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>http://iscc.codes/components/code_meta/</loc>
-         <lastmod>2021-11-14</lastmod>
+         <lastmod>2021-11-17</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>http://iscc.codes/components/content/</loc>
-         <lastmod>2021-11-14</lastmod>
+         <lastmod>2021-11-17</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>http://iscc.codes/components/content/code_content_audio/</loc>
-         <lastmod>2021-11-14</lastmod>
+         <lastmod>2021-11-17</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>http://iscc.codes/components/content/code_content_image/</loc>
-         <lastmod>2021-11-14</lastmod>
+         <lastmod>2021-11-17</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>http://iscc.codes/components/content/code_content_text/</loc>
-         <lastmod>2021-11-14</lastmod>
+         <lastmod>2021-11-17</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>http://iscc.codes/components/content/code_content_video/</loc>
-         <lastmod>2021-11-14</lastmod>
+         <lastmod>2021-11-17</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>http://iscc.codes/models/models/</loc>
-         <lastmod>2021-11-14</lastmod>
+         <lastmod>2021-11-17</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>http://iscc.codes/options/options/</loc>
-         <lastmod>2021-11-14</lastmod>
+         <lastmod>2021-11-17</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>http://iscc.codes/utilities/utils/</loc>
-         <lastmod>2021-11-14</lastmod>
+         <lastmod>2021-11-17</lastmod>
          <changefreq>daily</changefreq>
     </url>
 </urlset>

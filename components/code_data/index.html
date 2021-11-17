@@ -490,6 +490,13 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#iscc_core.code_data.DataHasher.code" class="md-nav__link">
+    code()
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#iscc_core.code_data.DataHasher.features" class="md-nav__link">
     features()
   </a>
@@ -539,6 +546,13 @@
           <li class="md-nav__item">
   <a href="#iscc_core.code_data.DataHasherV0.digest" class="md-nav__link">
     digest()
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#iscc_core.code_data.DataHasherV0.code" class="md-nav__link">
+    code()
   </a>
   
 </li>
@@ -884,6 +898,13 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#iscc_core.code_data.DataHasher.code" class="md-nav__link">
+    code()
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#iscc_core.code_data.DataHasher.features" class="md-nav__link">
     features()
   </a>
@@ -933,6 +954,13 @@
           <li class="md-nav__item">
   <a href="#iscc_core.code_data.DataHasherV0.digest" class="md-nav__link">
     digest()
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#iscc_core.code_data.DataHasherV0.code" class="md-nav__link">
+    code()
   </a>
   
 </li>
@@ -1111,6 +1139,60 @@ DataHasher        </code>
 
 
 
+<h6 id="iscc_core.code_data.DataHasher.code" class="doc doc-heading">
+<code class="highlight language-python"><span class="n">code</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">bits</span> <span class="o">=</span> <span class="mi">64</span><span class="p">)</span></code>
+
+
+</h6>
+
+    <div class="doc doc-contents ">
+
+      <p>Encode digest as an ISCC Data-Code component.</p>
+
+<p><strong>Parameters:</strong></p>
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Description</th>
+      <th>Default</th>
+    </tr>
+  </thead>
+  <tbody>
+      <tr>
+        <td><code>bits</code></td>
+        <td><code>int</code></td>
+        <td><p>Number of bits for the ISCC Data-Code</p></td>
+        <td><code>64</code></td>
+      </tr>
+  </tbody>
+</table>
+<p><strong>Returns:</strong></p>
+<table>
+  <thead>
+    <tr>
+      <th>Type</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code>str</code></td>
+      <td><p>ISCC Data-Code</p></td>
+    </tr>
+  </tbody>
+</table>
+    </div>
+
+  </div>
+
+
+
+  <div class="doc doc-object doc-method">
+
+
+
 <h6 id="iscc_core.code_data.DataHasher.features" class="doc doc-heading">
 <code class="highlight language-python"><span class="n">features</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span></code>
 
@@ -1261,6 +1343,60 @@ DataHasherV0        </code>
 
 
 
+<h6 id="iscc_core.code_data.DataHasherV0.code" class="doc doc-heading">
+<code class="highlight language-python"><span class="n">code</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">bits</span> <span class="o">=</span> <span class="mi">64</span><span class="p">)</span></code>
+
+
+</h6>
+
+    <div class="doc doc-contents ">
+
+      <p>Encode digest as an ISCC Data-Code component.</p>
+
+<p><strong>Parameters:</strong></p>
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Description</th>
+      <th>Default</th>
+    </tr>
+  </thead>
+  <tbody>
+      <tr>
+        <td><code>bits</code></td>
+        <td><code>int</code></td>
+        <td><p>Number of bits for the ISCC Data-Code</p></td>
+        <td><code>64</code></td>
+      </tr>
+  </tbody>
+</table>
+<p><strong>Returns:</strong></p>
+<table>
+  <thead>
+    <tr>
+      <th>Type</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code>str</code></td>
+      <td><p>ISCC Data-Code</p></td>
+    </tr>
+  </tbody>
+</table>
+    </div>
+
+  </div>
+
+
+
+  <div class="doc doc-object doc-method">
+
+
+
 <h6 id="iscc_core.code_data.DataHasherV0.features" class="doc doc-heading">
 <code class="highlight language-python"><span class="n">features</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span></code>
 
@@ -1343,7 +1479,7 @@ DataHasherV0        </code>
 
 
 <h4 id="iscc_core.code_data.gen_data_code" class="doc doc-heading">
-<code class="highlight language-python"><span class="n">gen_data_code</span><span class="p">(</span><span class="n">stream</span><span class="p">,</span> <span class="n">bits</span> <span class="o">=</span> <span class="mi">64</span><span class="p">,</span> <span class="n">granular</span> <span class="o">=</span> <span class="kc">False</span><span class="p">)</span></code>
+<code class="highlight language-python"><span class="n">gen_data_code</span><span class="p">(</span><span class="n">stream</span><span class="p">,</span> <span class="n">bits</span> <span class="o">=</span> <span class="mi">64</span><span class="p">)</span></code>
 
 
 </h4>
@@ -1379,7 +1515,7 @@ DataHasherV0        </code>
         <td><code>granular</code></td>
         <td><code>bool</code></td>
         <td><p>Calculate additional granular data-features</p></td>
-        <td><code>False</code></td>
+        <td><em>required</em></td>
       </tr>
   </tbody>
 </table>
@@ -1409,7 +1545,7 @@ DataHasherV0        </code>
 
 
 <h4 id="iscc_core.code_data.gen_data_code_v0" class="doc doc-heading">
-<code class="highlight language-python"><span class="n">gen_data_code_v0</span><span class="p">(</span><span class="n">stream</span><span class="p">,</span> <span class="n">bits</span> <span class="o">=</span> <span class="mi">64</span><span class="p">,</span> <span class="n">granular</span> <span class="o">=</span> <span class="kc">False</span><span class="p">)</span></code>
+<code class="highlight language-python"><span class="n">gen_data_code_v0</span><span class="p">(</span><span class="n">stream</span><span class="p">,</span> <span class="n">bits</span> <span class="o">=</span> <span class="mi">64</span><span class="p">)</span></code>
 
 
 </h4>
@@ -1441,12 +1577,6 @@ DataHasherV0        </code>
         <td><p>Bit-length of ISCC Data-Code (default 64).</p></td>
         <td><code>64</code></td>
       </tr>
-      <tr>
-        <td><code>granular</code></td>
-        <td><code>bool</code></td>
-        <td><p>Calculate additional granular data-features</p></td>
-        <td><code>False</code></td>
-      </tr>
   </tbody>
 </table>
 <p><strong>Returns:</strong></p>
@@ -1460,7 +1590,7 @@ DataHasherV0        </code>
   <tbody>
     <tr>
       <td><code>DataCode</code></td>
-      <td><p>ISCC DataCode with properties: code, features, sizes</p></td>
+      <td><p>Standardized ISCC DataCode object</p></td>
     </tr>
   </tbody>
 </table>
@@ -1475,7 +1605,7 @@ DataHasherV0        </code>
 
 
 <h4 id="iscc_core.code_data.soft_hash_data_v0" class="doc doc-heading">
-<code class="highlight language-python"><span class="n">soft_hash_data_v0</span><span class="p">(</span><span class="n">stream</span><span class="p">,</span> <span class="n">granular</span> <span class="o">=</span> <span class="kc">False</span><span class="p">)</span></code>
+<code class="highlight language-python"><span class="n">soft_hash_data_v0</span><span class="p">(</span><span class="n">stream</span><span class="p">)</span></code>
 
 
 </h4>
@@ -1501,12 +1631,6 @@ DataHasherV0        </code>
         <td><p>Input data stream.</p></td>
         <td><em>required</em></td>
       </tr>
-      <tr>
-        <td><code>granular</code></td>
-        <td><code>bool</code></td>
-        <td><p>Calculate additional granular data-features</p></td>
-        <td><code>False</code></td>
-      </tr>
   </tbody>
 </table>
 <p><strong>Returns:</strong></p>
@@ -1519,8 +1643,8 @@ DataHasherV0        </code>
   </thead>
   <tbody>
     <tr>
-      <td><code>Union[bytes, Tuple[bytes, List[str], List[int]]]</code></td>
-      <td><p>256-bit data soft-hash (if granular: a tuple of digest, features, sizes)</p></td>
+      <td><code>bytes</code></td>
+      <td><p>256-bit Data-Hash (soft-hash) digest used as body for Data-Code</p></td>
     </tr>
   </tbody>
 </table>

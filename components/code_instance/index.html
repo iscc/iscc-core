@@ -503,6 +503,13 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#iscc_core.code_instance.InstanceHasher.code" class="md-nav__link">
+    code()
+  </a>
+  
+</li>
+        
       </ul>
     </nav>
   
@@ -539,6 +546,13 @@
           <li class="md-nav__item">
   <a href="#iscc_core.code_instance.InstanceHasherV0.digest" class="md-nav__link">
     digest()
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#iscc_core.code_instance.InstanceHasherV0.code" class="md-nav__link">
+    code()
   </a>
   
 </li>
@@ -855,6 +869,13 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#iscc_core.code_instance.InstanceHasher.code" class="md-nav__link">
+    code()
+  </a>
+  
+</li>
+        
       </ul>
     </nav>
   
@@ -891,6 +912,13 @@
           <li class="md-nav__item">
   <a href="#iscc_core.code_instance.InstanceHasherV0.digest" class="md-nav__link">
     digest()
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#iscc_core.code_instance.InstanceHasherV0.code" class="md-nav__link">
+    code()
   </a>
   
 </li>
@@ -1084,6 +1112,60 @@ InstanceHasher        </code>
 
 
 
+  <div class="doc doc-object doc-method">
+
+
+
+<h6 id="iscc_core.code_instance.InstanceHasher.code" class="doc doc-heading">
+<code class="highlight language-python"><span class="n">code</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">bits</span> <span class="o">=</span> <span class="mi">64</span><span class="p">)</span></code>
+
+
+</h6>
+
+    <div class="doc doc-contents ">
+
+      <p>Encode digest as an ISCC Instance-Code component.</p>
+
+<p><strong>Parameters:</strong></p>
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Description</th>
+      <th>Default</th>
+    </tr>
+  </thead>
+  <tbody>
+      <tr>
+        <td><code>bits</code></td>
+        <td><code>int</code></td>
+        <td><p>Number of bits for the ISCC Instance-Code</p></td>
+        <td><code>64</code></td>
+      </tr>
+  </tbody>
+</table>
+<p><strong>Returns:</strong></p>
+<table>
+  <thead>
+    <tr>
+      <th>Type</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code>str</code></td>
+      <td><p>ISCC Instance-Code</p></td>
+    </tr>
+  </tbody>
+</table>
+    </div>
+
+  </div>
+
+
+
 
 
   </div>
@@ -1189,6 +1271,60 @@ InstanceHasherV0        </code>
     <tr>
       <td><code>bytes</code></td>
       <td><p>Instance-Hash digest</p></td>
+    </tr>
+  </tbody>
+</table>
+    </div>
+
+  </div>
+
+
+
+  <div class="doc doc-object doc-method">
+
+
+
+<h6 id="iscc_core.code_instance.InstanceHasherV0.code" class="doc doc-heading">
+<code class="highlight language-python"><span class="n">code</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">bits</span> <span class="o">=</span> <span class="mi">64</span><span class="p">)</span></code>
+
+
+</h6>
+
+    <div class="doc doc-contents ">
+
+      <p>Encode digest as an ISCC Instance-Code component.</p>
+
+<p><strong>Parameters:</strong></p>
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Description</th>
+      <th>Default</th>
+    </tr>
+  </thead>
+  <tbody>
+      <tr>
+        <td><code>bits</code></td>
+        <td><code>int</code></td>
+        <td><p>Number of bits for the ISCC Instance-Code</p></td>
+        <td><code>64</code></td>
+      </tr>
+  </tbody>
+</table>
+<p><strong>Returns:</strong></p>
+<table>
+  <thead>
+    <tr>
+      <th>Type</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code>str</code></td>
+      <td><p>ISCC Instance-Code</p></td>
     </tr>
   </tbody>
 </table>
@@ -1372,8 +1508,8 @@ InstanceHasherV0        </code>
   </thead>
   <tbody>
     <tr>
-      <td><code>Tuple[bytes, int]</code></td>
-      <td><p>Tuple of 256-bit Instance-Hash digest and filesize in bytes</p></td>
+      <td><code>bytes</code></td>
+      <td><p>256-bit Instance-Hash digest used as body of Instance-Code</p></td>
     </tr>
   </tbody>
 </table>

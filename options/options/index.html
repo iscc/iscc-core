@@ -757,20 +757,6 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#iscc_core.options.CoreOptions.data_granular" class="md-nav__link">
-    data_granular
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#iscc_core.options.CoreOptions.data_granular_factor" class="md-nav__link">
-    data_granular_factor
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
   <a href="#iscc_core.options.CoreOptions.instance_bits" class="md-nav__link">
     instance_bits
   </a>
@@ -778,15 +764,8 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#iscc_core.options.CoreOptions.instance_read_size" class="md-nav__link">
-    instance_read_size
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#iscc_core.options.CoreOptions.cdc_read_size" class="md-nav__link">
-    cdc_read_size
+  <a href="#iscc_core.options.CoreOptions.io_read_size" class="md-nav__link">
+    io_read_size
   </a>
   
 </li>
@@ -1005,20 +984,6 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#iscc_core.options.CoreOptions.data_granular" class="md-nav__link">
-    data_granular
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#iscc_core.options.CoreOptions.data_granular_factor" class="md-nav__link">
-    data_granular_factor
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
   <a href="#iscc_core.options.CoreOptions.instance_bits" class="md-nav__link">
     instance_bits
   </a>
@@ -1026,15 +991,8 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#iscc_core.options.CoreOptions.instance_read_size" class="md-nav__link">
-    instance_read_size
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#iscc_core.options.CoreOptions.cdc_read_size" class="md-nav__link">
-    cdc_read_size
+  <a href="#iscc_core.options.CoreOptions.io_read_size" class="md-nav__link">
+    io_read_size
   </a>
   
 </li>
@@ -1468,50 +1426,6 @@ CoreOptions            (<span title="pydantic.env_settings.BaseSettings">BaseSet
 
 
 
-<h6 id="iscc_core.options.CoreOptions.data_granular" class="doc doc-heading">
-<code class="highlight language-python"><span class="n">data_granular</span><span class="p">:</span> <span class="nb">bool</span></code>
-
-  <span class="doc doc-properties">
-      <small class="doc doc-property doc-property-pydantic-field"><code>pydantic-field</code></small>
-  </span>
-
-</h6>
-
-    <div class="doc doc-contents ">
-
-      <p>Calculate granular data features.</p>
-    </div>
-
-  </div>
-
-
-
-  <div class="doc doc-object doc-attribute">
-
-
-
-<h6 id="iscc_core.options.CoreOptions.data_granular_factor" class="doc doc-heading">
-<code class="highlight language-python"><span class="n">data_granular_factor</span><span class="p">:</span> <span class="nb">int</span></code>
-
-  <span class="doc doc-properties">
-      <small class="doc doc-property doc-property-pydantic-field"><code>pydantic-field</code></small>
-  </span>
-
-</h6>
-
-    <div class="doc doc-contents ">
-
-      <p>Size of granular data chunks times average chunk size</p>
-    </div>
-
-  </div>
-
-
-
-  <div class="doc doc-object doc-attribute">
-
-
-
 <h6 id="iscc_core.options.CoreOptions.instance_bits" class="doc doc-heading">
 <code class="highlight language-python"><span class="n">instance_bits</span><span class="p">:</span> <span class="nb">int</span></code>
 
@@ -1534,8 +1448,8 @@ CoreOptions            (<span title="pydantic.env_settings.BaseSettings">BaseSet
 
 
 
-<h6 id="iscc_core.options.CoreOptions.instance_read_size" class="doc doc-heading">
-<code class="highlight language-python"><span class="n">instance_read_size</span><span class="p">:</span> <span class="nb">int</span></code>
+<h6 id="iscc_core.options.CoreOptions.io_read_size" class="doc doc-heading">
+<code class="highlight language-python"><span class="n">io_read_size</span><span class="p">:</span> <span class="nb">int</span></code>
 
   <span class="doc doc-properties">
       <small class="doc doc-property doc-property-pydantic-field"><code>pydantic-field</code></small>
@@ -1545,29 +1459,7 @@ CoreOptions            (<span title="pydantic.env_settings.BaseSettings">BaseSet
 
     <div class="doc doc-contents ">
 
-      <p>File read buffer during instance hashing</p>
-    </div>
-
-  </div>
-
-
-
-  <div class="doc doc-object doc-attribute">
-
-
-
-<h6 id="iscc_core.options.CoreOptions.cdc_read_size" class="doc doc-heading">
-<code class="highlight language-python"><span class="n">cdc_read_size</span><span class="p">:</span> <span class="nb">int</span></code>
-
-  <span class="doc doc-properties">
-      <small class="doc doc-property doc-property-pydantic-field"><code>pydantic-field</code></small>
-  </span>
-
-</h6>
-
-    <div class="doc doc-contents ">
-
-      <p>File read buffer during chunking</p>
+      <p>File read buffer size in bytes for hashing operations</p>
     </div>
 
   </div>
