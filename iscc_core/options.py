@@ -96,7 +96,7 @@ class CoreOptions(BaseSettings):
     )
 
     io_read_size: int = Field(
-        262144, description="File read buffer size in bytes for hashing operations"
+        2097152, description="File read buffer size in bytes for hashing operations"
     )
 
     cdc_avg_chunk_size: int = Field(
