@@ -17,7 +17,7 @@ class BaseCode(BaseModel):
 class MetaCode(BaseCode):
     """Meta-Code standardized metadata model."""
 
-    code: str = Field(..., description="Meta-Code in standard representation.")
+    code: str = Field(..., description="Meta-Code in standard encoding.")
     title: Optional[str] = Field(description="Title used for Meta-Code creation.")
     extra: Optional[str] = Field(description="Extra metadata used for Meta-Code.")
     binary: bool = Field(description="Extra metadata was supplied in binary format.")
@@ -27,7 +27,7 @@ class MetaCode(BaseCode):
 class ContentCodeText(BaseCode):
     """Content-Code-Text standardized metadata model."""
 
-    code: str = Field(..., description="Content-Code-Text in standard representation.")
+    code: str = Field(..., description="Content-Code-Text in standard encoding.")
     title: Optional[str] = Field(description="Title as extracted from text document.")
     characters: Optional[int] = Field(
         description="Number of text characters (after normalize_text)."
@@ -38,7 +38,7 @@ class ContentCodeText(BaseCode):
 class ContentCodeImage(BaseCode):
     """Content-Code-Image standardized metadata model."""
 
-    code: str = Field(..., description="Content-Code-Image in standard representation.")
+    code: str = Field(..., description="Content-Code-Image in standard encoding.")
     title: Optional[str] = Field(description="Title as extracted from image file.")
     width: Optional[int] = Field(description="Width of image in number of pixels.")
     height: Optional[int] = Field(description="Height of image in number of pixels.")
@@ -47,7 +47,7 @@ class ContentCodeImage(BaseCode):
 class ContentCodeAudio(BaseCode):
     """Content-Code-Audio standardized metadata model."""
 
-    code: str = Field(..., description="Content-Code-Audio in standard representation.")
+    code: str = Field(..., description="Content-Code-Audio in standard encoding.")
     title: Optional[str] = Field(description="Title as extracted from audio asset.")
     duration: Optional[float] = Field(description="Duration of audio im seconds.")
 
@@ -55,7 +55,7 @@ class ContentCodeAudio(BaseCode):
 class ContentCodeVideo(BaseCode):
     """Content-Code-Video standardized metadata model."""
 
-    code: str = Field(..., description="Content-Code-Video in standard representation.")
+    code: str = Field(..., description="Content-Code-Video in standard encoding.")
     title: Optional[str] = Field(description="Title as extracted from video asset.")
     duration: Optional[float] = Field(description="Duration of video im seconds.")
     fps: Optional[float] = Field(description="Frames per second.")
@@ -67,7 +67,7 @@ class ContentCodeVideo(BaseCode):
 class DataCode(BaseCode):
     """Data-Code standardized metadata model."""
 
-    code: str = Field(..., description="Data-Code in standard representation.")
+    code: str = Field(..., description="Data-Code in standard encoding.")
     features: Optional[List[str]] = Field(description="List of per datachunk hashes")
     sizes: Optional[List[int]] = Field(description="Sizes of datachunks")
 
@@ -75,6 +75,6 @@ class DataCode(BaseCode):
 class InstanceCode(BaseCode):
     """Instance-Code standardized metadata model."""
 
-    code: str = Field(..., description="Instance-Code in standard representation.")
+    code: str = Field(..., description="Instance-Code in standard encoding.")
     datahash: str = Field(description="Multihash of digital asset (Blake3 by default.")
     filesize: int = Field(description="File size in bytes.")
