@@ -111,7 +111,7 @@ def soft_hash_text_v0(text):
     Text should be stripped of markup, normalized and lowercased before hash creation.
 
     :param str text: Plain text to be hashed.
-    :return: 256-bit similarity preserving byte hash
+    :return: 256-bit similarity preserving byte hash.
     :rtype: bytes
     """
     ngrams = sliding_window(text, opts.text_ngram_size)

@@ -2,6 +2,9 @@
 """
 *A similarity preserving hash for audio content (soft hash).*
 
+Creates a [ContentCodeAudio][iscc_core.ContentCodeAudio] object that provides a
+`code`-field and a `duration`-field.
+
 The Content-Code Audio is generated from a [Chromaprint](https://acoustid.org/chromaprint)
 fingerprint provided as a vector of 32-bit signed integers.
 Chromaprints are extracted with [fpcalc 1.5.0](https://acoustid.org/chromaprint)
