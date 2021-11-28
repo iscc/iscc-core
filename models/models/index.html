@@ -991,6 +991,13 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
+  <a href="#iscc_core.models.MetaCode.title" class="md-nav__link">
+    title
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#iscc_core.models.MetaCode.extra" class="md-nav__link">
     extra
   </a>
@@ -1489,6 +1496,13 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
+  <a href="#iscc_core.models.MetaCode.title" class="md-nav__link">
+    title
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#iscc_core.models.MetaCode.extra" class="md-nav__link">
     extra
   </a>
@@ -1567,7 +1581,7 @@
 
 <h4 id="iscc_core.models.BaseCode" class="doc doc-heading">
         <code>
-BaseCode            (<span title="pydantic.main.BaseModel">BaseModel</span>)
+BaseCode            (<span title="pydantic.main.BaseModel">BaseModel</span>, <span title="abc.ABC">ABC</span>)
         </code>
 
 
@@ -1590,6 +1604,7 @@ BaseCode            (<span title="pydantic.main.BaseModel">BaseModel</span>)
 
 
 <h5 id="iscc_core.models.BaseCode-attributes">Attributes</h5>
+
 
   <div class="doc doc-object doc-attribute">
 
@@ -1636,7 +1651,7 @@ BaseCode            (<span title="pydantic.main.BaseModel">BaseModel</span>)
 
 <h4 id="iscc_core.models.ContentCode" class="doc doc-heading">
         <code>
-ContentCode            (<a title="iscc_core.models.BaseCode" href="#iscc_core.models.BaseCode">BaseCode</a>)
+ContentCode            (<a title="iscc_core.models.BaseCode" href="#iscc_core.models.BaseCode">BaseCode</a>, <span title="abc.ABC">ABC</span>)
         </code>
 
 
@@ -1659,6 +1674,7 @@ ContentCode            (<a title="iscc_core.models.BaseCode" href="#iscc_core.mo
 
 
 <h5 id="iscc_core.models.ContentCode-attributes">Attributes</h5>
+
 
   <div class="doc doc-object doc-attribute">
 
@@ -1727,6 +1743,7 @@ ContentCodeAudio            (<a title="iscc_core.models.ContentCode" href="#iscc
 
 <h5 id="iscc_core.models.ContentCodeAudio-attributes">Attributes</h5>
 
+
   <div class="doc doc-object doc-attribute">
 
 
@@ -1793,6 +1810,7 @@ ContentCodeImage            (<a title="iscc_core.models.ContentCode" href="#iscc
 
 
 <h5 id="iscc_core.models.ContentCodeImage-attributes">Attributes</h5>
+
 
   <div class="doc doc-object doc-attribute">
 
@@ -1883,6 +1901,7 @@ ContentCodeMixed            (<a title="iscc_core.models.ContentCode" href="#iscc
 
 <h5 id="iscc_core.models.ContentCodeMixed-attributes">Attributes</h5>
 
+
   <div class="doc doc-object doc-attribute">
 
 
@@ -1892,7 +1911,6 @@ ContentCodeMixed            (<a title="iscc_core.models.ContentCode" href="#iscc
 
   <span class="doc doc-properties">
       <small class="doc doc-property doc-property-pydantic-field"><code>pydantic-field</code></small>
-      <small class="doc doc-property doc-property-required"><code>required</code></small>
   </span>
 
 </h6>
@@ -1950,6 +1968,7 @@ ContentCodeText            (<a title="iscc_core.models.ContentCode" href="#iscc_
 
 
 <h5 id="iscc_core.models.ContentCodeText-attributes">Attributes</h5>
+
 
   <div class="doc doc-object doc-attribute">
 
@@ -2039,6 +2058,7 @@ ContentCodeVideo            (<a title="iscc_core.models.ContentCode" href="#iscc
 
 
 <h5 id="iscc_core.models.ContentCodeVideo-attributes">Attributes</h5>
+
 
   <div class="doc doc-object doc-attribute">
 
@@ -2195,6 +2215,7 @@ DataCode            (<a title="iscc_core.models.BaseCode" href="#iscc_core.model
 
 <h5 id="iscc_core.models.DataCode-attributes">Attributes</h5>
 
+
   <div class="doc doc-object doc-attribute">
 
 
@@ -2284,6 +2305,7 @@ InstanceCode            (<a title="iscc_core.models.BaseCode" href="#iscc_core.m
 
 <h5 id="iscc_core.models.InstanceCode-attributes">Attributes</h5>
 
+
   <div class="doc doc-object doc-attribute">
 
 
@@ -2293,7 +2315,6 @@ InstanceCode            (<a title="iscc_core.models.BaseCode" href="#iscc_core.m
 
   <span class="doc doc-properties">
       <small class="doc doc-property doc-property-pydantic-field"><code>pydantic-field</code></small>
-      <small class="doc doc-property doc-property-required"><code>required</code></small>
   </span>
 
 </h6>
@@ -2316,7 +2337,6 @@ InstanceCode            (<a title="iscc_core.models.BaseCode" href="#iscc_core.m
 
   <span class="doc doc-properties">
       <small class="doc doc-property doc-property-pydantic-field"><code>pydantic-field</code></small>
-      <small class="doc doc-property doc-property-required"><code>required</code></small>
   </span>
 
 </h6>
@@ -2375,6 +2395,29 @@ MetaCode            (<a title="iscc_core.models.BaseCode" href="#iscc_core.model
 
 <h5 id="iscc_core.models.MetaCode-attributes">Attributes</h5>
 
+
+  <div class="doc doc-object doc-attribute">
+
+
+
+<h6 id="iscc_core.models.MetaCode.title" class="doc doc-heading">
+<code class="highlight language-python"><span class="n">title</span><span class="p">:</span> <span class="nb">str</span></code>
+
+  <span class="doc doc-properties">
+      <small class="doc doc-property doc-property-pydantic-field"><code>pydantic-field</code></small>
+  </span>
+
+</h6>
+
+    <div class="doc doc-contents ">
+
+      <p>Title used for Meta-Code creation.</p>
+    </div>
+
+  </div>
+
+
+
   <div class="doc doc-object doc-attribute">
 
 
@@ -2406,7 +2449,6 @@ MetaCode            (<a title="iscc_core.models.BaseCode" href="#iscc_core.model
 
   <span class="doc doc-properties">
       <small class="doc doc-property doc-property-pydantic-field"><code>pydantic-field</code></small>
-      <small class="doc doc-property doc-property-required"><code>required</code></small>
   </span>
 
 </h6>
@@ -2429,7 +2471,6 @@ MetaCode            (<a title="iscc_core.models.BaseCode" href="#iscc_core.model
 
   <span class="doc doc-properties">
       <small class="doc doc-property doc-property-pydantic-field"><code>pydantic-field</code></small>
-      <small class="doc doc-property doc-property-required"><code>required</code></small>
   </span>
 
 </h6>
