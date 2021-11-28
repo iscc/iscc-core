@@ -42,6 +42,7 @@ class MT(enum.IntEnum):
     DATA = 3
     INSTANCE = 4
     ISCC = 5
+    ID = 6
 
 
 class ST(enum.IntEnum):
@@ -58,6 +59,14 @@ class ST_CC(enum.IntEnum):
     AUDIO = 2
     VIDEO = 3
     MIXED = 4
+
+
+class ST_ID(enum.IntEnum):
+    """SubTypes for ISCC-IDs"""
+
+    PRIVATE = 0
+    BITCOIN = 1
+    ETHEREUM = 2
 
 
 class VS(enum.IntEnum):
@@ -78,7 +87,7 @@ class LN(enum.IntEnum):
 Data = Union[bytes, bytearray, memoryview]
 Stream = Union[BinaryIO, mmap.mmap, BytesIO, BufferedReader]
 IsccTuple = Tuple[
-    Union[int, MT], Union[int, ST, ST_CC], Union[int, VS], Union[int, LN], bytes
+    Union[int, MT], Union[int, ST, ST_CC, ST_ID], Union[int, VS], Union[int, LN], bytes
 ]
 AnyISCC = Union[str, IsccTuple, bytes, "Code"]
 
@@ -103,10 +112,15 @@ def write_header(mtype, stype, version=0, length=64):
     :rtype: bytes
 
     """
-    assert length >= 32 and not length % 32, "Length must be a multiple of 32"
-    length = (length // 32) - 1
+    if mtype == MT.ID:
+        # ISCC-ID length denotes the number of bytes of the trailing counter
+        assert length >= 64, "ISCC-ID minimum length 64-bits".format(length)
+        length_code = (length - 64) // 8
+    else:
+        assert length >= 32 and not length % 32, "Length must be a multiple of 32"
+        length_code = (length // 32) - 1
     header = bitarray()
-    for n in (mtype, stype, version, length):
+    for n in (mtype, stype, version, length_code):
         header += _write_varnibble(n)
     # Append zero-padding if required (right side, least significant bits).
     header.fill()
@@ -131,7 +145,11 @@ def read_header(data):
     # interpret length value
     length, data = _read_varnibble(data)
 
-    bit_length = (length + 1) * 32
+    if result[0] == MT.ID:
+        bit_length = 64 + (length * 8)
+    else:
+        bit_length = (length + 1) * 32
+
     result.append(bit_length)
 
     # Strip 4-bit padding if required
@@ -377,10 +395,12 @@ class Code:
         return MT(self._head[0])
 
     @property
-    def subtype(self) -> Union[ST, ST_CC]:
+    def subtype(self) -> Union[ST, ST_CC, ST_ID]:
         """Enum subtype of code."""
         if self.maintype in (MT.CONTENT, MT.ISCC):
             return ST_CC(self._head[1])
+        elif self.maintype == MT.ID:
+            return ST_ID(self._head[1])
         return ST(self._head[1])
 
     @property
@@ -391,14 +411,17 @@ class Code:
     @property
     def length(self) -> int:
         """Length of code hash in number of bits (without header)."""
-        return LN(self._head[3])
+        lengt_code = self._head[3]
+        return self._head[3]
 
     @classmethod
     def rnd(cls, mt=None, bits=64, data=None):
-        """Returns a syntactically correct random code (no SID support yet)"""
+        """Returns a syntactically correct random code (no MT.ID support yet)"""
 
         # MainType
-        mt = choice(list(MT)) if mt is None else mt
+        main_types = list(MT)
+        main_types.remove(MT.ID)
+        mt = choice(main_types) if mt is None else mt
 
         # SubType
         if mt == MT.CONTENT:
@@ -429,6 +452,9 @@ class Code:
         return self.uint
 
 
+#TODO Refactor compose to gen_iscc_code
+
+
 def compose(codes):
     # type: (Iterable[AnyISCC]) -> Code
     """Combine/compress componets to a code of type ISCC (canonical 4-component form).
@@ -440,6 +466,7 @@ def compose(codes):
     assert len(set(c.version for c in codes)) == 1, "Codes must have same version"
 
     types = tuple(c.maintype for c in codes)
+    assert MT.ID not in types, "Cannot compose ISCC-ID"
     assert MT.ISCC not in types, "Cannot compose canonical ISCC code"
 
     assert types == (

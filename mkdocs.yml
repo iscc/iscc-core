@@ -58,6 +58,8 @@ markdown_extensions:
 
 nav:
   - Overview: index.md
+  - ISCC-CODE: iscc_code.md
+  - ISCC-ID: iscc_id.md
   - Components:
     - components/index.md
     - Meta-Code: components/code_meta.md

@@ -51,4 +51,11 @@ from iscc_core.code_instance import (
     InstanceHasher,
     InstanceHasherV0,
 )
+from iscc_core.iscc_id import (
+    gen_iscc_id,
+    gen_iscc_id_v0,
+    soft_hash_iscc_id_v0,
+    incr_iscc_id,
+    incr_iscc_id_v0,
+)
 from iscc_core.codec import Code, compose, decompose

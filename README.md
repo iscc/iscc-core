@@ -133,6 +133,7 @@ You may also want join our developer chat on Telegram at <https://t.me/iscc_dev>
 - Change metahash creation logic
 - Refactor models
 - Add Content-Code-Mixed
+- Add ISCC-ID
 
 ### [0.1.4] - 2021-11-17
 - Simplified options
