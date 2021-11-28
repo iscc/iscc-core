@@ -3,12 +3,13 @@
 from typing import List, Optional, Union
 from pydantic import BaseModel, Field
 from iscc_core.codec import Code
+import abc
 
 
 MultiStr = Union[str, List[str]]
 
 
-class BaseCode(BaseModel):
+class BaseCode(BaseModel, abc.ABC):
     """Base schema for codes."""
 
     code: str = Field(..., description="ISCC code in standard encoding.")
@@ -18,18 +19,23 @@ class BaseCode(BaseModel):
         return Code(self.code)
 
 
-class MetaCode(BaseCode):
-    """Meta-Code standardized metadata model."""
-
-    extra: Optional[str] = Field(description="Extra metadata used for Meta-Code.")
-    binary: bool = Field(description="Extra metadata was supplied in binary format.")
-    metahash: str = Field(description="Blake3 cryptographic hash of metadata.")
-
-
-class ContentCode(BaseCode):
+class ContentCode(BaseCode, abc.ABC):
     """Base schema for Content-Codes."""
 
     title: Optional[str] = Field(description="Title as extracted from digital asset")
+
+
+class MetaCode(BaseCode):
+    """Meta-Code standardized metadata model."""
+
+    title: Optional[str] = Field(description="Title used for Meta-Code creation.")
+    extra: Optional[str] = Field(description="Extra metadata used for Meta-Code.")
+    binary: Optional[bool] = Field(
+        description="Extra metadata was supplied in binary format."
+    )
+    metahash: Optional[str] = Field(
+        description="Blake3 cryptographic hash of metadata."
+    )
 
 
 class ContentCodeText(ContentCode):
@@ -67,7 +73,7 @@ class ContentCodeVideo(ContentCode):
 class ContentCodeMixed(ContentCode):
     """Content-Code-Mixed standardized metadata model."""
 
-    parts: List[str] = Field(description="Included Content-Codes.")
+    parts: Optional[List[str]] = Field(description="Included Content-Codes.")
 
 
 class DataCode(BaseCode):
@@ -80,5 +86,7 @@ class DataCode(BaseCode):
 class InstanceCode(BaseCode):
     """Instance-Code standardized metadata model."""
 
-    datahash: str = Field(description="Multihash of digital asset (Blake3 by default.")
-    filesize: int = Field(description="File size in bytes.")
+    datahash: Optional[str] = Field(
+        description="Multihash of digital asset (Blake3 by default."
+    )
+    filesize: Optional[int] = Field(description="File size in bytes.")
