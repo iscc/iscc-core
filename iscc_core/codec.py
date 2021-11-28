@@ -57,6 +57,7 @@ class ST_CC(enum.IntEnum):
     IMAGE = 1
     AUDIO = 2
     VIDEO = 3
+    MIXED = 4
 
 
 class VS(enum.IntEnum):
@@ -113,11 +114,11 @@ def write_header(mtype, stype, version=0, length=64):
 
 
 def read_header(data):
-    # type: (bytes) -> Tuple
+    # type: (bytes) -> Tuple[int, int, int, int, bytes]
     """
-    Decodes varnibble encoded header and returns it together with remaining bytes.
+    Decodes varnibble encoded header and returns it together with hash bytes.
     :param bytes data: ISCC bytes digest
-    :return: (type, subtype, version, length, remaining bytes)
+    :return: (type, subtype, version, length, hash bytes)
     """
     result = []
     ba = bitarray()

@@ -67,6 +67,7 @@ nav:
       - Image: components/content/code_content_image.md
       - Audio: components/content/code_content_audio.md
       - Video: components/content/code_content_video.md
+      - Mixed: components/content/code_content_mixed.md
     - Data-Code: components/code_data.md
     - Instance-Code: components/code_instance.md
   - Algorithms:

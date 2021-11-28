@@ -95,6 +95,10 @@ class CoreOptions(BaseSettings):
         64, description="Default length of generated Instance-Code in bits"
     )
 
+    mixed_bits: int = Field(
+        64, description="Default length of generated Mixed-Code in bits"
+    )
+
     io_read_size: int = Field(
         2097152, description="File read buffer size in bytes for hashing operations"
     )

@@ -29,6 +29,12 @@ from iscc_core.code_content_video import (
     soft_hash_video_v0,
     ContentCodeVideo,
 )
+from iscc_core.code_content_mixed import (
+    gen_mixed_code,
+    gen_mixed_code_v0,
+    soft_hash_codes_v0,
+    ContentCodeMixed,
+)
 from iscc_core.code_data import (
     gen_data_code,
     gen_data_code_v0,
