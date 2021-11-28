@@ -316,6 +316,8 @@
         
           
         
+          
+        
       
       
         
@@ -389,6 +391,20 @@
     <li class="md-nav__item">
       <a href="../../components/content/code_content_video/" class="md-nav__link">
         Video
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../components/content/code_content_mixed/" class="md-nav__link">
+        Mixed
       </a>
     </li>
   
@@ -1536,7 +1552,7 @@ Code        </code>
 
 
 <h6 id="iscc_core.codec.Code.hash_bytes" class="doc doc-heading">
-<code class="highlight language-python"><span class="n">hash_bytes</span><span class="p">:</span> <span class="o">&lt;</span><span class="nb">property</span> <span class="nb">object</span> <span class="n">at</span> <span class="mh">0x0000028035F984A0</span><span class="o">&gt;</span></code>
+<code class="highlight language-python"><span class="n">hash_bytes</span><span class="p">:</span> <span class="o">&lt;</span><span class="nb">property</span> <span class="nb">object</span> <span class="n">at</span> <span class="mh">0x00000215B5E24860</span><span class="o">&gt;</span></code>
 
   <span class="doc doc-properties">
       <small class="doc doc-property doc-property-property"><code>property</code></small>
@@ -1674,7 +1690,7 @@ Code        </code>
 
 
 <h6 id="iscc_core.codec.Code.header_bytes" class="doc doc-heading">
-<code class="highlight language-python"><span class="n">header_bytes</span><span class="p">:</span> <span class="o">&lt;</span><span class="nb">property</span> <span class="nb">object</span> <span class="n">at</span> <span class="mh">0x0000028035F984A0</span><span class="o">&gt;</span></code>
+<code class="highlight language-python"><span class="n">header_bytes</span><span class="p">:</span> <span class="o">&lt;</span><span class="nb">property</span> <span class="nb">object</span> <span class="n">at</span> <span class="mh">0x00000215B5E24860</span><span class="o">&gt;</span></code>
 
   <span class="doc doc-properties">
       <small class="doc doc-property doc-property-property"><code>property</code></small>
@@ -2058,6 +2074,7 @@ ST_CC            (<span title="enum.IntEnum">IntEnum</span>)
 
 
 
+
   </div>
 
     </div>
@@ -2194,7 +2211,7 @@ is uneven it is padded with 4-bit <code>0000</code> at the end.</p>
 
     <div class="doc doc-contents ">
 
-      <p>Decodes varnibble encoded header and returns it together with remaining bytes.</p>
+      <p>Decodes varnibble encoded header and returns it together with hash bytes.</p>
 
 <p><strong>Parameters:</strong></p>
 <table>
@@ -2226,7 +2243,7 @@ is uneven it is padded with 4-bit <code>0000</code> at the end.</p>
   <tbody>
     <tr>
       <td></td>
-      <td><p>(type, subtype, version, length, remaining bytes)</p></td>
+      <td><p>(type, subtype, version, length, hash bytes)</p></td>
     </tr>
   </tbody>
 </table>
