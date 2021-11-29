@@ -135,6 +135,7 @@ You may also want join our developer chat on Telegram at <https://t.me/iscc_dev>
 - Add Content-Code-Mixed
 - Add ISCC-ID
 - Refactor `compose` to `gen_iscc_code`
+- Refactor `models` to `schema`
 
 ### [0.1.4] - 2021-11-17
 - Simplified options

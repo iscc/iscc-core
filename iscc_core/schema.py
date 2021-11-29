@@ -1,5 +1,11 @@
 # -*- coding: utf-8 -*-
-"""Schema of objects returned by ISCC processing algorithms"""
+"""Schema of objects returned by ISCC processing algorithms.
+
+The schemata define standard fields to be set by ISCC generating applications.
+This library only sets the fields for which information is available within the scope
+of this library. Gathering and providing values for most of the fields is left to higher
+level applications that handle format specific data extraction.
+"""
 from typing import List, Optional, Union
 from pydantic import BaseModel, Field
 from iscc_core.codec import Code
@@ -16,6 +22,7 @@ class BaseCode(BaseModel, abc.ABC):
 
     @property
     def code_obj(self):
+        """Wraps the `code` string with a `Code` object."""
         return Code(self.code)
 
 
@@ -52,6 +59,7 @@ class ContentCodeImage(ContentCode):
 
     width: Optional[int] = Field(description="Width of image in number of pixels.")
     height: Optional[int] = Field(description="Height of image in number of pixels.")
+    preview: Optional[str] = Field(description="URI of image preview thumbnail.")
 
 
 class ContentCodeAudio(ContentCode):

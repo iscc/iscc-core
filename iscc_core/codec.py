@@ -13,10 +13,9 @@ import enum
 import math
 import mmap
 from io import BufferedReader, BytesIO
-from operator import attrgetter
 from os import urandom
 from random import choice
-from typing import BinaryIO, Iterable, List, Tuple, Union
+from typing import BinaryIO, List, Tuple, Union
 from bitarray import bitarray, frozenbitarray
 from bitarray._util import count_xor
 from bitarray.util import ba2hex, int2ba, ba2int

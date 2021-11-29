@@ -20,7 +20,7 @@ from typing import Sequence, Tuple
 from iscc_core.wtahash import wtahash
 from iscc_core import codec
 from iscc_core.options import opts
-from iscc_core.models import ContentCodeVideo
+from iscc_core.schema import ContentCodeVideo
 
 
 FrameSig = Tuple[int]

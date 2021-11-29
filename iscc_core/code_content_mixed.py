@@ -16,7 +16,7 @@ assets and create individual Content-Codes per asset.
 from typing import Iterable, Sequence
 
 from iscc_core import codec
-from iscc_core.models import ContentCodeMixed
+from iscc_core.schema import ContentCodeMixed
 from iscc_core.options import opts
 from iscc_core.simhash import similarity_hash
 

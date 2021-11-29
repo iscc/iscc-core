@@ -78,7 +78,7 @@ nav:
     - Simhash: algorithms/simhash.md
     - Minhash: algorithms/minhash.md
     - WTAHash: algorithms/wtahash.md
-  - Models: models/models.md
+  - Schema: schema/schema.md
   - Codec: codec/codec.md
   - Options: options/options.md
   - Utilities: utilities/utils.md

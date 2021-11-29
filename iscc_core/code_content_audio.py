@@ -15,7 +15,7 @@ using the following command line parameters:
 from typing import Iterable
 from more_itertools import divide
 
-from iscc_core.models import ContentCodeAudio
+from iscc_core.schema import ContentCodeAudio
 from iscc_core.simhash import similarity_hash
 from iscc_core import codec
 from iscc_core.options import opts

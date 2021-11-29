@@ -12,7 +12,7 @@ from PIL import Image
 from more_itertools import chunked
 from iscc_core import codec
 from iscc_core.codec import Stream
-from iscc_core.models import ContentCodeImage
+from iscc_core.schema import ContentCodeImage
 from iscc_core.options import opts
 from iscc_core.dct import dct
 

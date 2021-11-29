@@ -4,7 +4,7 @@ from typing import Optional, Tuple
 from iscc_core.options import opts
 from iscc_core import codec
 from iscc_core.codec import Data, Stream
-from iscc_core.models import InstanceCode
+from iscc_core.schema import InstanceCode
 
 
 def gen_instance_code(stream, bits=opts.instance_bits):
