@@ -15,7 +15,7 @@
         <link rel="canonical" href="http://iscc.codes/codec/codec/">
       
       <link rel="icon" href="../../assets/images/favicon.png">
-      <meta name="generator" content="mkdocs-1.2.3, mkdocs-material-8.0.0">
+      <meta name="generator" content="mkdocs-1.2.3, mkdocs-material-8.0.1">
     
     
       
@@ -23,7 +23,7 @@
       
     
     
-      <link rel="stylesheet" href="../../assets/stylesheets/main.ad626c1e.min.css">
+      <link rel="stylesheet" href="../../assets/stylesheets/main.816931ca.min.css">
       
         
         <link rel="stylesheet" href="../../assets/stylesheets/palette.9204c3b2.min.css">
@@ -602,8 +602,8 @@
   
   
     <li class="md-nav__item">
-      <a href="../../models/models/" class="md-nav__link">
-        Models
+      <a href="../../schema/schema/" class="md-nav__link">
+        Schema
       </a>
     </li>
   
@@ -958,13 +958,6 @@
           <li class="md-nav__item">
   <a href="#iscc_core.codec.clean" class="md-nav__link">
     clean()
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#iscc_core.codec.compose" class="md-nav__link">
-    compose()
   </a>
   
 </li>
@@ -1358,13 +1351,6 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#iscc_core.codec.compose" class="md-nav__link">
-    compose()
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
   <a href="#iscc_core.codec.decompose" class="md-nav__link">
     decompose()
   </a>
@@ -1590,7 +1576,7 @@ Code        </code>
 
 
 <h6 id="iscc_core.codec.Code.hash_bytes" class="doc doc-heading">
-<code class="highlight language-python"><span class="n">hash_bytes</span><span class="p">:</span> <span class="o">&lt;</span><span class="nb">property</span> <span class="nb">object</span> <span class="n">at</span> <span class="mh">0x0000013968AABD60</span><span class="o">&gt;</span></code>
+<code class="highlight language-python"><span class="n">hash_bytes</span><span class="p">:</span> <span class="o">&lt;</span><span class="nb">property</span> <span class="nb">object</span> <span class="n">at</span> <span class="mh">0x000001A7CFF6BDB0</span><span class="o">&gt;</span></code>
 
   <span class="doc doc-properties">
       <small class="doc doc-property doc-property-property"><code>property</code></small>
@@ -1728,7 +1714,7 @@ Code        </code>
 
 
 <h6 id="iscc_core.codec.Code.header_bytes" class="doc doc-heading">
-<code class="highlight language-python"><span class="n">header_bytes</span><span class="p">:</span> <span class="o">&lt;</span><span class="nb">property</span> <span class="nb">object</span> <span class="n">at</span> <span class="mh">0x0000013968AABD60</span><span class="o">&gt;</span></code>
+<code class="highlight language-python"><span class="n">header_bytes</span><span class="p">:</span> <span class="o">&lt;</span><span class="nb">property</span> <span class="nb">object</span> <span class="n">at</span> <span class="mh">0x000001A7CFF6BDB0</span><span class="o">&gt;</span></code>
 
   <span class="doc doc-properties">
       <small class="doc doc-property doc-property-property"><code>property</code></small>
@@ -2522,45 +2508,6 @@ is uneven it is padded with 4-bit <code>0000</code> at the end.</p>
 
 
 
-<h4 id="iscc_core.codec.compose" class="doc doc-heading">
-<code class="highlight language-python"><span class="n">compose</span><span class="p">(</span><span class="n">codes</span><span class="p">)</span></code>
-
-
-</h4>
-
-    <div class="doc doc-contents ">
-
-      <p>Combine/compress componets to a code of type ISCC (canonical 4-component form).</p>
-
-<p><strong>Parameters:</strong></p>
-<table>
-  <thead>
-    <tr>
-      <th>Name</th>
-      <th>Type</th>
-      <th>Description</th>
-      <th>Default</th>
-    </tr>
-  </thead>
-  <tbody>
-      <tr>
-        <td><code>codes</code></td>
-        <td><code>Iterable[AnyISCC]</code></td>
-        <td><p>A sequence of Meta, Content, Data, Instance codes.</p></td>
-        <td><em>required</em></td>
-      </tr>
-  </tbody>
-</table>
-    </div>
-
-  </div>
-
-
-
-  <div class="doc doc-object doc-function">
-
-
-
 <h4 id="iscc_core.codec.decompose" class="doc doc-heading">
 <code class="highlight language-python"><span class="n">decompose</span><span class="p">(</span><span class="n">iscc_code</span><span class="p">)</span></code>
 
@@ -2598,7 +2545,7 @@ is uneven it is padded with 4-bit <code>0000</code> at the end.</p>
     <nav class="md-footer__inner md-grid" aria-label="Footer">
       
         
-        <a href="../../models/models/" class="md-footer__link md-footer__link--prev" aria-label="Previous: Models" rel="prev">
+        <a href="../../schema/schema/" class="md-footer__link md-footer__link--prev" aria-label="Previous: Schema" rel="prev">
           <div class="md-footer__button md-icon">
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
           </div>
@@ -2607,7 +2554,7 @@ is uneven it is padded with 4-bit <code>0000</code> at the end.</p>
               <span class="md-footer__direction">
                 Previous
               </span>
-              Models
+              Schema
             </div>
           </div>
         </a>
@@ -2657,7 +2604,7 @@ is uneven it is padded with 4-bit <code>0000</code> at the end.</p>
     <script id="__config" type="application/json">{"base": "../..", "features": ["navigation.indexes"], "translations": {"clipboard.copy": "Copy to clipboard", "clipboard.copied": "Copied to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.placeholder": "Type to start searching", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.term.missing": "Missing", "select.version.title": "Select version"}, "search": "../../assets/javascripts/workers/search.01824240.min.js"}</script>
     
     
-      <script src="../../assets/javascripts/bundle.e8a254df.min.js"></script>
+      <script src="../../assets/javascripts/bundle.a87c2adc.min.js"></script>
       
     
   </body>

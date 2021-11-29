@@ -15,7 +15,7 @@
         <link rel="canonical" href="http://iscc.codes/iscc_code/">
       
       <link rel="icon" href="../assets/images/favicon.png">
-      <meta name="generator" content="mkdocs-1.2.3, mkdocs-material-8.0.0">
+      <meta name="generator" content="mkdocs-1.2.3, mkdocs-material-8.0.1">
     
     
       
@@ -23,7 +23,7 @@
       
     
     
-      <link rel="stylesheet" href="../assets/stylesheets/main.ad626c1e.min.css">
+      <link rel="stylesheet" href="../assets/stylesheets/main.816931ca.min.css">
       
         
         <link rel="stylesheet" href="../assets/stylesheets/palette.9204c3b2.min.css">
@@ -69,6 +69,11 @@
     <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
     <label class="md-overlay" for="__drawer"></label>
     <div data-md-component="skip">
+      
+        
+        <a href="#iscc-code" class="md-skip">
+          Skip to content
+        </a>
       
     </div>
     <div data-md-component="announce">
@@ -230,10 +235,70 @@
       <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
       
       
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          ISCC-CODE
+          <span class="md-nav__icon md-icon"></span>
+        </label>
       
       <a href="./" class="md-nav__link md-nav__link--active">
         ISCC-CODE
       </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#iscc_core.iscc_code" class="md-nav__link">
+    iscc_core.iscc_code
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#iscc_core.iscc_code-functions" class="md-nav__link">
+    Functions
+  </a>
+  
+    <nav class="md-nav" aria-label="Functions">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#iscc_core.iscc_code.gen_iscc_code" class="md-nav__link">
+    gen_iscc_code()
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#iscc_core.iscc_code.gen_iscc_code_v01" class="md-nav__link">
+    gen_iscc_code_v01()
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
       
     </li>
   
@@ -605,8 +670,8 @@
   
   
     <li class="md-nav__item">
-      <a href="../models/models/" class="md-nav__link">
-        Models
+      <a href="../schema/schema/" class="md-nav__link">
+        Schema
       </a>
     </li>
   
@@ -664,6 +729,66 @@
               </div>
             
             
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#iscc_core.iscc_code" class="md-nav__link">
+    iscc_core.iscc_code
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#iscc_core.iscc_code-functions" class="md-nav__link">
+    Functions
+  </a>
+  
+    <nav class="md-nav" aria-label="Functions">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#iscc_core.iscc_code.gen_iscc_code" class="md-nav__link">
+    gen_iscc_code()
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#iscc_core.iscc_code.gen_iscc_code_v01" class="md-nav__link">
+    gen_iscc_code_v01()
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
           
           <div class="md-content" data-md-component="content">
             <article class="md-content__inner md-typeset">
@@ -674,9 +799,153 @@
 </a>
 
 
-  <h1>ISCC-CODE</h1>
+<h1 id="iscc-code">ISCC-CODE</h1>
 
 
+  <div class="doc doc-object doc-module">
+
+<a id="iscc_core.iscc_code"></a>
+    <div class="doc doc-contents first">
+
+      <p><em>The canonical multi-component identifier for digital media assets.</em></p>
+<p>An <strong>ISCC-CODE</strong> is generated from the concatenation of the digests of the following
+four components together with a single common header:</p>
+<ul>
+<li><a href="../components/code_meta/#iscc_core.code_meta">Meta-Code</a> - Encodes metadata similarity</li>
+<li><a href="/components/content/">Content-Code</a> - Encodes syntactic/perceptual similarity</li>
+<li><a href="../components/code_data/#iscc_core.code_data">Data-Code</a> - Encodes raw bitstream similarity</li>
+<li><a href="../components/code_instance/#iscc_core.code_instance">Instance-Code</a> - Data checksum</li>
+</ul>
+
+
+
+  <div class="doc doc-children">
+
+
+
+
+
+
+<h3 id="iscc_core.iscc_code-functions">Functions</h3>
+
+  <div class="doc doc-object doc-function">
+
+
+
+<h4 id="iscc_core.iscc_code.gen_iscc_code" class="doc doc-heading">
+<code class="highlight language-python"><span class="n">gen_iscc_code</span><span class="p">(</span><span class="n">codes</span><span class="p">)</span></code>
+
+
+</h4>
+
+    <div class="doc doc-contents ">
+
+      <p>Combine ISCC components to an ISCC-CODE with a single common header using the latest
+standard algorithm.</p>
+
+<p><strong>Parameters:</strong></p>
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Description</th>
+      <th>Default</th>
+    </tr>
+  </thead>
+  <tbody>
+      <tr>
+        <td><code>codes</code></td>
+        <td><code>Iterable[AnyISCC]</code></td>
+        <td><p>A sequence of Meta, Content, Data, Instance codes.</p></td>
+        <td><em>required</em></td>
+      </tr>
+  </tbody>
+</table>
+<p><strong>Returns:</strong></p>
+<table>
+  <thead>
+    <tr>
+      <th>Type</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code>Code</code></td>
+      <td><p>Code object of full ISCC-CODE</p></td>
+    </tr>
+  </tbody>
+</table>
+    </div>
+
+  </div>
+
+
+
+  <div class="doc doc-object doc-function">
+
+
+
+<h4 id="iscc_core.iscc_code.gen_iscc_code_v01" class="doc doc-heading">
+<code class="highlight language-python"><span class="n">gen_iscc_code_v01</span><span class="p">(</span><span class="n">codes</span><span class="p">)</span></code>
+
+
+</h4>
+
+    <div class="doc doc-contents ">
+
+      <p>Combine ISCC components to an ISCC-CODE with a single common header using
+algorithm v0.</p>
+
+<p><strong>Parameters:</strong></p>
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Description</th>
+      <th>Default</th>
+    </tr>
+  </thead>
+  <tbody>
+      <tr>
+        <td><code>codes</code></td>
+        <td><code>Iterable[AnyISCC]</code></td>
+        <td><p>A sequence of Meta, Content, Data, Instance codes.</p></td>
+        <td><em>required</em></td>
+      </tr>
+  </tbody>
+</table>
+<p><strong>Returns:</strong></p>
+<table>
+  <thead>
+    <tr>
+      <th>Type</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code>Code</code></td>
+      <td><p>Code object of full ISCC-CODE</p></td>
+    </tr>
+  </tbody>
+</table>
+    </div>
+
+  </div>
+
+
+
+
+
+
+  </div>
+
+    </div>
+
+  </div>
 
               
             </article>
@@ -749,7 +1018,7 @@
     <script id="__config" type="application/json">{"base": "..", "features": ["navigation.indexes"], "translations": {"clipboard.copy": "Copy to clipboard", "clipboard.copied": "Copied to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.placeholder": "Type to start searching", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.term.missing": "Missing", "select.version.title": "Select version"}, "search": "../assets/javascripts/workers/search.01824240.min.js"}</script>
     
     
-      <script src="../assets/javascripts/bundle.e8a254df.min.js"></script>
+      <script src="../assets/javascripts/bundle.a87c2adc.min.js"></script>
       
     
   </body>
