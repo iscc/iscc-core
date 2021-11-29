@@ -1,10 +1,11 @@
 # -*- coding: utf-8 -*-
-"""*The canonical multi-component identifier for digital assets.*
+"""*The canonical multi-component identifier for digital media assets.*
 
-An **ISCC-CODE** is generated from the combination of the four components:
+An **ISCC-CODE** is generated from the concatenation of the digests of the following
+four components together with a single common header:
 
 - [Meta-Code][iscc_core.code_meta] - Encodes metadata similarity
-- [Content-Code][iscc_core.models.ContentCode] - Encodes syntactic/perceptual similarity
+- [Content-Code](/components/content/) - Encodes syntactic/perceptual similarity
 - [Data-Code][iscc_core.code_data] - Encodes raw bitstream similarity
 - [Instance-Code][iscc_core.code_instance] - Data checksum
 """
@@ -18,7 +19,7 @@ from iscc_core.codec import AnyISCC, LN, MT, VS
 def gen_iscc_code(codes):
     # type: (Iterable[AnyISCC]) -> Code
     """
-    Combine components to an ISCC-CODE with a single common header using the latest
+    Combine ISCC components to an ISCC-CODE with a single common header using the latest
     standard algorithm.
 
     :param Iterable[AnyISCC] codes: A sequence of Meta, Content, Data, Instance codes.
@@ -31,7 +32,8 @@ def gen_iscc_code(codes):
 def gen_iscc_code_v01(codes):
     # type: (Iterable[AnyISCC]) -> Code
     """
-    Combine components to an ISCC-CODE with a single common header using algorithm v0.
+    Combine ISCC components to an ISCC-CODE with a single common header using
+    algorithm v0.
 
     :param Iterable[AnyISCC] codes: A sequence of Meta, Content, Data, Instance codes.
     :return: Code object of full ISCC-CODE
@@ -57,4 +59,4 @@ def gen_iscc_code_v01(codes):
         chash = b""
         for c in codes:
             chash += c.hash_bytes[:8]
-        return Code((MT.ISCC, codes[1].subtype, codes[1].version, LN.L256, chash))
+    return Code((MT.ISCC, codes[1].subtype, codes[1].version, LN.L256, chash))
