@@ -452,38 +452,6 @@ class Code:
         return self.uint
 
 
-#TODO Refactor compose to gen_iscc_code
-
-
-def compose(codes):
-    # type: (Iterable[AnyISCC]) -> Code
-    """Combine/compress componets to a code of type ISCC (canonical 4-component form).
-
-    :param Iterable[AnyISCC] codes: A sequence of Meta, Content, Data, Instance codes.
-    """
-    codes = sorted([Code(c) for c in codes], key=attrgetter("maintype"))
-    assert len(codes) == 4, "ISCC composition requires 4 codes"
-    assert len(set(c.version for c in codes)) == 1, "Codes must have same version"
-
-    types = tuple(c.maintype for c in codes)
-    assert MT.ID not in types, "Cannot compose ISCC-ID"
-    assert MT.ISCC not in types, "Cannot compose canonical ISCC code"
-
-    assert types == (
-        MT.META,
-        MT.CONTENT,
-        MT.DATA,
-        MT.INSTANCE,
-    ), "Codes must be META, CONTENT, DATA, INSTANCE"
-
-    for code in codes:
-        assert code.length >= LN.L64, "ISCC requires min 64-bit codes"
-        chash = b""
-        for c in codes:
-            chash += c.hash_bytes[:8]
-        return Code((MT.ISCC, codes[1].subtype, codes[1].version, LN.L256, chash))
-
-
 def decompose(iscc_code):
     # type: (AnyISCC) -> List[Code]
     """Decompose a canonical ISCC into a list of singular componet codes."""

@@ -1,4 +1,5 @@
 __version__ = "0.1.5"
+from iscc_core.codec import *
 from iscc_core.code_meta import (
     gen_meta_code,
     gen_meta_code_v0,
@@ -58,4 +59,7 @@ from iscc_core.iscc_id import (
     incr_iscc_id,
     incr_iscc_id_v0,
 )
-from iscc_core.codec import Code, compose, decompose
+from iscc_core.iscc_code import (
+    gen_iscc_code,
+    gen_iscc_code_v01,
+)

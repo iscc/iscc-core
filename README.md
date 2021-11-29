@@ -52,7 +52,7 @@ from iscc_core import (
     gen_image_code,
     gen_data_code,
     gen_instance_code,
-    compose,
+    gen_iscc_code,
 )
 
 image_path = "../docs/images/iscc-architecture.png"
@@ -81,7 +81,7 @@ with open(image_path, "rb") as stream:
     print("Instance-Code:\t", instance_code.code)
     print("Structure:\t\t", instance_code.code_obj.explain, end="\n\n")
 
-iscc_code = compose((meta_code.code, image_code.code, data_code.code, instance_code.code))
+iscc_code = gen_iscc_code((meta_code.code, image_code.code, data_code.code, instance_code.code))
 print("Canonical ISCC:\t ISCC:{}".format(iscc_code.code))
 print("Structure:\t\t", iscc_code.explain)
 ```
@@ -89,20 +89,20 @@ print("Structure:\t\t", iscc_code.explain)
 The output of this example is as follows:
 
 ```
-Meta-Code:       AAA5H3V6SZHWDUKX
-Structure:       META-TEXT-V0-64-d3eebe964f61d157
+Meta-Code:      AAA5H3V6SZHWDUKX
+Structure:      META-NONE-V0-64-d3eebe964f61d157
 
-Image-Code:      EEA34YXAFUJWOZ5Q
-Structure:       CONTENT-IMAGE-V0-64-be62e02d136767b0
+Image-Code:     EEA34YXAFUJWOZ5Q
+Structure:      CONTENT-IMAGE-V0-64-be62e02d136767b0
 
-Data-Code:       GAA6JYHWISAVU77Z
-Structure:       DATA-NONE-V0-64-e4e0f644815a7ff9
+Data-Code:      GAA6JYHWISAVU77Z
+Structure:      DATA-NONE-V0-64-e4e0f644815a7ff9
 
-Instance-Code:   IAAUULVLVWQLXSEM
-Structure:       INSTANCE-NONE-V0-64-4a2eabada0bbc88c
+Instance-Code:  IAAUULVLVWQLXSEM
+Structure:      INSTANCE-NONE-V0-64-4a2eabada0bbc88c
 
-Canonical ISCC:  ISCC:KED5H3V6SZHWDUKXXZROALITM5T3BZHA6ZCICWT77FFC5K5NUC54RDA
-Structure:       ISCC-IMAGE-V0-256-d3eebe964f61d157be62e02d136767b0e4e0f644815a7ff94a2eabada0bbc88c
+ISCC-CODE:      ISCC:KED5H3V6SZHWDUKXXZROALITM5T3BZHA6ZCICWT77FFC5K5NUC54RDA
+Structure:      ISCC-IMAGE-V0-256-d3eebe964f61d157be62e02d136767b0e4e0f644815a7ff94a2eabada0bbc88c
 ```
 
 ## Documentation
@@ -134,6 +134,7 @@ You may also want join our developer chat on Telegram at <https://t.me/iscc_dev>
 - Refactor models
 - Add Content-Code-Mixed
 - Add ISCC-ID
+- Refactor `compose` to `gen_iscc_code`
 
 ### [0.1.4] - 2021-11-17
 - Simplified options

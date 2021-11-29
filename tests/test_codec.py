@@ -147,28 +147,6 @@ def test_code_hashable():
     assert code in {code}
 
 
-def test_compose():
-    mid = c.Code.rnd(c.MT.META, 64)
-    cid = c.Code.rnd(c.MT.CONTENT, 64)
-    did = c.Code.rnd(c.MT.DATA, 128)
-    iid = c.Code.rnd(c.MT.INSTANCE, 256)
-    ic = c.compose([mid, cid, did, iid])
-    assert ic.maintype == c.MT.ISCC
-    assert ic.length == 256
-    assert ic.explain.startswith("ISCC-")
-    assert c.compose([did, mid, cid, iid]) == ic
-
-
-def test_compose_body():
-    data = b"\x00" * 8
-    mid = c.Code.rnd(c.MT.META, data=data)
-    cid = c.Code.rnd(c.MT.CONTENT, data=data)
-    did = c.Code.rnd(c.MT.DATA, data=data)
-    iid = c.Code.rnd(c.MT.INSTANCE, data=data)
-    ic = c.compose([mid, cid, did, iid])
-    assert ic.hash_bytes == data * 4
-
-
 def test_decompose_single_component():
     code = c.Code.rnd()
     assert c.decompose(code)[0] == code

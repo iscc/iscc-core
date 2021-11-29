@@ -3,7 +3,7 @@
 *A similarity hash for mixed media content.*
 
 Creates a [ContentCodeMixed][iscc_core.ContentCodeMixed] object that provides a
-`code`-field and a `prats`-field that lists the input codes.
+`code`-field and a `parts`-field that lists the input codes.
 
 Many digital assets embed multiple assets of different mediatypes in a single file.
 Text documents may including images, video includes audio in most cases. The ISCC

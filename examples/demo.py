@@ -4,7 +4,7 @@ from iscc_core import (
     gen_image_code,
     gen_data_code,
     gen_instance_code,
-    compose,
+    gen_iscc_code,
 )
 
 image_path = "../docs/images/iscc-architecture.png"
@@ -32,8 +32,8 @@ with open(image_path, "rb") as stream:
     print("Instance-Code:\t", instance_code.code)
     print("Structure:\t\t", instance_code.code_obj.explain, end="\n\n")
 
-iscc_code = compose(
+iscc_code = gen_iscc_code(
     (meta_code.code, image_code.code, data_code.code, instance_code.code)
 )
-print("Canonical ISCC:\t ISCC:{}".format(iscc_code.code))
+print("ISCC-CODE:\t\t ISCC:{}".format(iscc_code.code))
 print("Structure:\t\t", iscc_code.explain)
