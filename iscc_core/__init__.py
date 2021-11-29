@@ -1,4 +1,4 @@
-__version__ = "0.1.5"
+__version__ = "0.1.6"
 from iscc_core.codec import *
 from iscc_core.code_meta import (
     gen_meta_code,
