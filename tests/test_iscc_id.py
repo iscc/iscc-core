@@ -15,7 +15,15 @@ def test_gen_iscc_id_v0_single_component_uv():
     iscc_id = iscc_core.gen_iscc_id(0, tc.code, uc=1)
     assert iscc_id == "MAASB7WD7TC5XELQAE"
     code = iscc_core.Code(iscc_id)
-    assert code.explain == "ID-PRIVATE-V0-72-20fec3fcc5db917001"
+    assert code.explain == "ID-PRIVATE-V0-72-20fec3fcc5db9170-1"
+
+
+def test_gen_iscc_id_v0_single_component_uv_2byte():
+    tc = iscc_core.gen_text_code_v0("Hello World")
+    iscc_id = iscc_core.gen_iscc_id(0, tc.code, uc=257)
+    assert iscc_id == "MABCB7WD7TC5XELQQEBA"
+    code = iscc_core.Code(iscc_id)
+    assert code.explain == "ID-PRIVATE-V0-80-20fec3fcc5db9170-257"
 
 
 def test_gen_iscc_id_v0_multiple_components():

@@ -16,6 +16,8 @@ from io import BufferedReader, BytesIO
 from os import urandom
 from random import choice
 from typing import BinaryIO, List, Tuple, Union
+
+import uvarint
 from bitarray import bitarray, frozenbitarray
 from bitarray._util import count_xor
 from bitarray.util import ba2hex, int2ba, ba2int
@@ -351,6 +353,11 @@ class Code:
     @property
     def explain(self) -> str:
         """Human readble representation of code header."""
+        if self.maintype == MT.ID:
+            counter_bytes = self.hash_bytes[8:]
+            if counter_bytes:
+                counter = uvarint.decode(counter_bytes)
+                return f"{self.type_id}-{self.hash_bytes[:8].hex()}-{counter.integer}"
         return f"{self.type_id}-{self.hash_hex}"
 
     @property
