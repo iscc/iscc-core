@@ -10,7 +10,7 @@ mint colides with a pre-existing **ISCC-ID minted** from the same blockchain fro
 different **ISCC-CODE** or from an identical **ISCC-CODE** registered by a different
 signatory.
 """
-from iscc_core import simhash, codec, ST_ID
+from iscc_core import simhash, codec
 import uvarint
 
 

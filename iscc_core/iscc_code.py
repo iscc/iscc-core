@@ -11,9 +11,7 @@ four components together with a single common header:
 """
 from operator import attrgetter
 from typing import Iterable
-
-from iscc_core import Code
-from iscc_core.codec import AnyISCC, LN, MT, VS
+from iscc_core.codec import AnyISCC, LN, MT, VS, Code
 
 
 def gen_iscc_code(codes):
