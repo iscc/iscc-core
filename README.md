@@ -126,6 +126,10 @@ You may also want join our developer chat on Telegram at <https://t.me/iscc_dev>
 
 ## Changelog
 
+### [0.1.7] - next
+
+- Add dotenv for enviroment based configuration
+
 ### [0.1.6] - 2021-11-29
 - Show counter for ISCC-ID in Code.explain
 
