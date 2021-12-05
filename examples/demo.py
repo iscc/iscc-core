@@ -29,9 +29,9 @@ with open(image_path, "rb") as stream:
 iscc_code = iscc_core.gen_iscc_code(
     (meta_code.code, image_code.code, data_code.code, instance_code.code)
 )
-print(f"ISCC-CODE:     ISCC:{iscc_code}")
+print(f"ISCC-CODE:     ISCC:{iscc_code.code}")
 print(f"Structure:     {iscc_code.code_obj.explain}\n")
 
 iscc_id = iscc_core.gen_iscc_id(chain=1, iscc_code=iscc_code.code, uc=7)
-print(f"ISCC-ID:       ISCC:{iscc_id}")
+print(f"ISCC-ID:       ISCC:{iscc_id.code}")
 print(f"Structure:     ISCC:{iscc_id.code_obj.explain}")

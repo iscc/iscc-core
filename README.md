@@ -77,11 +77,11 @@ with open(image_path, "rb") as stream:
 iscc_code = iscc_core.gen_iscc_code(
     (meta_code.code, image_code.code, data_code.code, instance_code.code)
 )
-print(f"ISCC-CODE:     ISCC:{iscc_code}")
+print(f"ISCC-CODE:     ISCC:{iscc_code.code}")
 print(f"Structure:     {iscc_code.code_obj.explain}\n")
 
 iscc_id = iscc_core.gen_iscc_id(chain=1, iscc_code=iscc_code.code, uc=7)
-print(f"ISCC-ID:       ISCC:{iscc_id}")
+print(f"ISCC-ID:       ISCC:{iscc_id.code}")
 print(f"Structure:     ISCC:{iscc_id.code_obj.explain}")
 ```
 
@@ -100,10 +100,10 @@ Structure:     DATA-NONE-V0-64-6c0868f10f02e021
 Instance-Code: IAAQK76UVXOBJHJ3
 Structure:     INSTANCE-NONE-V0-64-057fd4addc149d3b
 
-ISCC-CODE:     ISCC:code='KED5H3V6SZHWDUKX5RHIKL4WTDMKM3AINDYQ6AXAEECX7VFN3QKJ2OY'
+ISCC-CODE:     ISCC:KED5H3V6SZHWDUKX5RHIKL4WTDMKM3AINDYQ6AXAEECX7VFN3QKJ2OY
 Structure:     ISCC-IMAGE-V0-256-d3eebe964f61d157ec4e852f9698d8a66c0868f10f02e021057fd4addc149d3b
 
-ISCC-ID:       ISCC:code='MEASB3COVS3Q6AGQA4'
+ISCC-ID:       ISCC:MEASB3COVS3Q6AGQA4
 Structure:     ISCC:ID-BITCOIN-V0-72-20ec4eacb70f00d0-7
 ```
 
