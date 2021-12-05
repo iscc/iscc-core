@@ -11,11 +11,12 @@ different **ISCC-CODE** or from an identical **ISCC-CODE** registered by a diffe
 signatory.
 """
 from iscc_core import simhash, codec
+from iscc_core.schema import IsccID
 import uvarint
 
 
 def gen_iscc_id(chain, iscc_code, uc=0):
-    # type: (int, str, int) -> str
+    # type: (int, str, int) -> IsccID
     """
     Generate an ISCC-ID from an ISCC-CODE with uniqueness counter 'uc' with latest
     standard algorithm.
@@ -23,14 +24,14 @@ def gen_iscc_id(chain, iscc_code, uc=0):
     :param int chain: Chain-ID of blockchain from which the ISCC-ID is minted.
     :param str iscc_code: The ISCC-CODE from which to mint the ISCC-ID.
     :param int uc: Uniqueness counter of ISCC-ID.
-    :return: ISCC-ID string.
-    :rtype: str
+    :return: ISCC-ID
+    :rtype: IsccID
     """
     return gen_iscc_id_v0(chain, iscc_code, uc)
 
 
 def gen_iscc_id_v0(chain_id, iscc_code, uc=0):
-    # type: (int, str, int) -> str
+    # type: (int, str, int) -> IsccID
     """
     Generate an ISCC-ID from an ISCC-CODE with uniqueness counter 'uc' with
     algorithm v0.
@@ -38,8 +39,8 @@ def gen_iscc_id_v0(chain_id, iscc_code, uc=0):
     :param int chain_id: Chain-ID of blockchain from which the ISCC-ID is minted.
     :param str iscc_code: The ISCC-CODE from which to mint the ISCC-ID.
     :param int uc: Uniqueness counter for ISCC-ID.
-    :return: ISCC-ID string.
-    :rtype: str
+    :return: ISCC-ID
+    :rtype: IsccID
     """
     assert chain_id in list(codec.ST_ID), "Unregistered Chain-ID {}".format(chain_id)
     digest = codec.decode_base32(iscc_code)
@@ -52,7 +53,7 @@ def gen_iscc_id_v0(chain_id, iscc_code, uc=0):
         length=iscc_id_len,
         digest=iscc_id_digest,
     )
-    return iscc_id
+    return IsccID(code=iscc_id)
 
 
 def soft_hash_iscc_id_v0(digest, uc=0):

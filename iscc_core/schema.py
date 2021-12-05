@@ -32,6 +32,14 @@ class BaseCode(BaseModel, abc.ABC):
         )
 
 
+class IsccCode(BaseCode):
+    pass
+
+
+class IsccID(BaseCode):
+    pass
+
+
 class ContentCode(BaseCode, abc.ABC):
     """Base schema for Content-Codes."""
 

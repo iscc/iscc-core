@@ -9,9 +9,9 @@ def test_gen_iscc_code_v0():
     did = c.Code.rnd(c.MT.DATA, 128)
     iid = c.Code.rnd(c.MT.INSTANCE, 256)
     icode = gen_iscc_code_v01([mid, cid, did, iid])
-    assert icode.maintype == c.MT.ISCC
-    assert icode.length == 256
-    assert icode.explain.startswith("ISCC-")
+    assert icode.code_obj.maintype == c.MT.ISCC
+    assert icode.code_obj.length == 256
+    assert icode.code_obj.explain.startswith("ISCC-")
     assert gen_iscc_code_v01([did, mid, cid, iid]) == icode
 
 
@@ -22,4 +22,4 @@ def test_gen_iscc_code_v0_body():
     did = c.Code.rnd(c.MT.DATA, data=data)
     iid = c.Code.rnd(c.MT.INSTANCE, data=data)
     icode = gen_iscc_code_v01([mid, cid, did, iid])
-    assert icode.hash_bytes == data * 4
+    assert icode.code_obj.hash_bytes == data * 4
