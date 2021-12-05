@@ -57,7 +57,7 @@ def gen_mixed_code_v0(codes, bits=opts.mixed_bits):
     for digest in digests:
         mt, st, vs, l, body = codec.read_header(digest)
         stripped_codes.append(codec.encode_component(mt, st, vs, bits, body))
-    return ContentCodeMixed(code=mixed_code, parts=stripped_codes)
+    return ContentCodeMixed(iscc=mixed_code, parts=stripped_codes)
 
 
 def soft_hash_codes_v0(cc_digests, bits=opts.mixed_bits):

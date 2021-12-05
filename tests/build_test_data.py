@@ -4,7 +4,7 @@ import yaml
 import json
 import pathlib
 import iscc_core
-from iscc_core.schema import BaseCode
+from iscc_core.schema import BaseISCC
 
 HERE = pathlib.Path(__file__).parent.absolute()
 INPUTS = HERE / "inputs.yaml"
@@ -20,7 +20,7 @@ def main():
             func = getattr(iscc_core, funcname)
             args = testdata["inputs"]
             result = func(*args)
-            if isinstance(result, BaseCode):
+            if isinstance(result, BaseISCC):
                 testdata["outputs"] = result.dict(exclude_unset=True, exclude_none=True)
             else:
                 testdata["outputs"] = result

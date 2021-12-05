@@ -40,8 +40,8 @@ from iscc_core.code_instance import (
     gen_instance_code_v0,
 )
 from iscc_core.schema import (
-    IsccCode,
-    IsccID,
+    ISCC_CODE,
+    ISCC_ID,
     MetaCode,
     ContentCodeText,
     ContentCodeImage,

@@ -307,10 +307,10 @@ class Code:
         self._body = frozenbitarray(body)
 
     def __str__(self):
-        return self.code
+        return self.iscc
 
     def __repr__(self):
-        return f'Code("{self.code}")'
+        return f'Code("{self.iscc}")'
 
     def __bytes__(self):
         return self.bytes
@@ -321,8 +321,8 @@ class Code:
         yield self.hash_bytes
 
     @property
-    def code(self) -> str:
-        """Standard base32 representation of code."""
+    def iscc(self) -> str:
+        """Standard base32 representation of an ISCC code."""
         return encode_base32(self.bytes)
 
     @property
@@ -452,7 +452,7 @@ class Code:
 
     def __eq__(self, other):
         # type: (Code) -> bool
-        return self.code == other.code
+        return self.iscc == other.iscc
 
     def __hash__(self):
         return self.uint

@@ -29,7 +29,7 @@ def test_hash_video_v0_multiple_framevectors():
 
 def test_code_video_v0_features():
     assert (
-        code_content_video.gen_video_code_v0([tuple([0] * 380)]).code
+        code_content_video.gen_video_code_v0([tuple([0] * 380)]).iscc
         == "EMAQAAAAAAAAAAAA"
     )
 
@@ -37,7 +37,7 @@ def test_code_video_v0_features():
 def test_code_video_v0_range_128():
     frame_vectors = [tuple(range(380))]
     assert (
-        code_content_video.gen_video_code_v0(frame_vectors, bits=128).code
+        code_content_video.gen_video_code_v0(frame_vectors, bits=128).iscc
         == "EMBVFD4RIMPXYSWSNEZPYBZ2FDFMS"
     )
 
@@ -47,6 +47,6 @@ def test_code_video_v0_multiple_framevectors_256():
     fb = tuple([1, 2, 1, 0, 2] * 76)
     frame_vectors = [fa, fb]
     assert (
-        code_content_video.gen_video_code_v0(frame_vectors, bits=256).code
+        code_content_video.gen_video_code_v0(frame_vectors, bits=256).iscc
         == "EMDZEMGSDFIB4AHUEZSLJPJANMAAZGCIQY23BMB4AEABB3QAVL4T4QY"
     )

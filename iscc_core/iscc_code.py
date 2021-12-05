@@ -12,31 +12,31 @@ four components together with a single common header:
 from operator import attrgetter
 from typing import Iterable
 from iscc_core.codec import AnyISCC, LN, MT, VS, Code
-from iscc_core.schema import IsccCode
+from iscc_core.schema import ISCC_CODE
 
 
 def gen_iscc_code(codes):
-    # type: (Iterable[AnyISCC]) -> IsccCode
+    # type: (Iterable[AnyISCC]) -> ISCC_CODE
     """
     Combine ISCC components to an ISCC-CODE with a single common header using the latest
     standard algorithm.
 
     :param Iterable[AnyISCC] codes: A sequence of Meta, Content, Data, Instance codes.
     :return: Code object of full ISCC-CODE
-    :rtype: IsccCode
+    :rtype: ISCC_CODE
     """
     return gen_iscc_code_v01(codes)
 
 
 def gen_iscc_code_v01(codes):
-    # type: (Iterable[AnyISCC]) -> IsccCode
+    # type: (Iterable[AnyISCC]) -> ISCC_CODE
     """
     Combine ISCC components to an ISCC-CODE with a single common header using
     algorithm v0.
 
     :param Iterable[AnyISCC] codes: A sequence of Meta, Content, Data, Instance codes.
     :return: ISCC-CODE
-    :rtype: IsccCode
+    :rtype: ISCC_CODE
     """
     codes = sorted([Code(c) for c in codes], key=attrgetter("maintype"))
     assert len(codes) == 4, "ISCC composition requires 4 codes"
@@ -60,4 +60,4 @@ def gen_iscc_code_v01(codes):
             chash += c.hash_bytes[:8]
 
     code_obj = Code((MT.ISCC, codes[1].subtype, codes[1].version, LN.L256, chash))
-    return IsccCode(code=code_obj.code)
+    return ISCC_CODE(iscc=code_obj.iscc)

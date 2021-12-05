@@ -15,15 +15,18 @@ import abc
 MultiStr = Union[str, List[str]]
 
 
-class BaseCode(BaseModel, abc.ABC):
-    """Base schema for codes."""
+class BaseISCC(BaseModel, abc.ABC):
+    """Base schema for ISCC metadata"""
 
-    code: str = Field(..., description="ISCC code in standard encoding.")
+    class Config:
+        validate_assignment = True
+
+    iscc: str = Field(..., description="ISCC code in standard encoding.")
 
     @property
     def code_obj(self):
-        """Wraps the `code` string with a `Code` object."""
-        return Code(self.code)
+        """Wraps the `iscc` string property with a `Code` object."""
+        return Code(self.iscc)
 
     def dict(self, *args, exclude_unset=True, exclude_none=True, **kwargs):
         """Change default options to exclude unset and none values."""
@@ -32,21 +35,75 @@ class BaseCode(BaseModel, abc.ABC):
         )
 
 
-class IsccCode(BaseCode):
+class ISCC_CODE(BaseISCC):
+
+    version: str = Field(
+        "0-0-0",
+        title="ISCC Schema Version",
+        description="Version of ISCC Metadata Schema (SchemaVer).",
+        const=True,
+    )
+
+    # Essential Metadata
+    title: Optional[str] = Field(
+        description="The title or name of the intangible creation manifested by the"
+        " identified digital asset"
+    )
+    extra: Optional[str] = Field(
+        description="Descriptive, industry-sector or use-case specific metadata (used "
+        "as immutable input for Meta-Code generation). Any text string "
+        "(including json or json-ld) indicative of the identity of the "
+        "referent may be used."
+    )
+
+    # File Properties
+    filename: Optional[str] = Field(
+        description="Filename of the referenced digital asset (automatically used as "
+        "fallback if no seed_title element is specified)"
+    )
+    filesize: Optional[int] = Field(description="File size of media asset in bytes.")
+    mediatype: Optional[str] = Field(description="IANA Media Type (MIME type)")
+
+    # Cryptographic hashes
+    tophash: Optional[str] = Field(
+        title="tophash",
+        description="Blake3 hash over concatenation of metahash and datahash",
+    )
+    metahash: Optional[str] = Field(
+        title="metahash", description="Blake3 hash of metadata."
+    )
+    datahash: Optional[str] = Field(
+        title="datahash", description="Blake3 hash of media file."
+    )
+
+    # Essential Media Properties
+    duration: Optional[float] = Field(
+        description="Duration of audio-visual media in secondes."
+    )
+    fps: Optional[float] = Field(description="Frames per second of video assets.")
+    width: Optional[int] = Field(description="Width of visual media in pixels.")
+    height: Optional[int] = Field(description="Height of visual media in pixels.")
+    characters: Optional[int] = Field(
+        description="Number of text characters (code points after Unicode "
+        "normalization)"
+    )
+    language: Optional[Union[str, List[str]]] = Field(
+        description="Language(s) of content (BCP-47) in weighted order."
+    )
+    preview: Optional[str] = Field(description="Uri of media asset preview.")
+
+
+class ISCC_ID(ISCC_CODE):
     pass
 
 
-class IsccID(BaseCode):
-    pass
-
-
-class ContentCode(BaseCode, abc.ABC):
+class ContentCode(BaseISCC, abc.ABC):
     """Base schema for Content-Codes."""
 
     title: Optional[str] = Field(description="Title as extracted from digital asset")
 
 
-class MetaCode(BaseCode):
+class MetaCode(BaseISCC):
     """Meta-Code standardized metadata model."""
 
     title: Optional[str] = Field(description="Title used for Meta-Code creation.")
@@ -98,14 +155,13 @@ class ContentCodeMixed(ContentCode):
     parts: Optional[List[str]] = Field(description="Included Content-Codes.")
 
 
-class DataCode(BaseCode):
+class DataCode(BaseISCC):
     """Data-Code standardized metadata model."""
 
-    features: Optional[List[str]] = Field(description="List of per datachunk hashes")
-    sizes: Optional[List[int]] = Field(description="Sizes of datachunks")
+    pass
 
 
-class InstanceCode(BaseCode):
+class InstanceCode(BaseISCC):
     """Instance-Code standardized metadata model."""
 
     datahash: Optional[str] = Field(

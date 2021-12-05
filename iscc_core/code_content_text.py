@@ -56,7 +56,7 @@ def gen_text_code_v0(text, bits=opts.text_bits):
         length=bits,
         digest=digest,
     )
-    return ContentCodeText(code=text_code, characters=characters)
+    return ContentCodeText(iscc=text_code, characters=characters)
 
 
 def normalize_text(text):

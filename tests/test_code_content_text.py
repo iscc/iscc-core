@@ -42,25 +42,25 @@ def test_hash_text_c():
 
 def test_gen_text_code_a_default():
     a = code_content_text.gen_text_code_v0(TEXT_A)
-    assert a.code == "EAAR7BVKOFMBVNE4"
+    assert a.iscc == "EAAR7BVKOFMBVNE4"
     assert a.characters == 291
 
 
 def test_gen_text_code_a_32bits():
     a = code_content_text.gen_text_code_v0(TEXT_A, bits=32)
-    assert a.code == "EAAB7BVKOE"
+    assert a.iscc == "EAAB7BVKOE"
     assert a.characters == 291
 
 
 def test_code_text_b_128_bits():
     b = code_content_text.gen_text_code_v0(TEXT_B, 128)
-    assert b.code == "EABR7BVKOFMBVNGMGINEXNCRLYINE"
+    assert b.iscc == "EABR7BVKOFMBVNGMGINEXNCRLYINE"
     assert b.characters == 289
 
 
 def test_code_text_c_256_bits():
     c = code_content_text.gen_text_code_v0(TEXT_C, 256)
-    assert c.code == "EADTKJYPXKUZU4O7XGWIE3PK3FT7CRXOI5HIJZ54ELTP5UKVDNI5CVQ"
+    assert c.iscc == "EADTKJYPXKUZU4O7XGWIE3PK3FT7CRXOI5HIJZ54ELTP5UKVDNI5CVQ"
     assert c.characters == 129
 
 
@@ -77,9 +77,9 @@ def test_normalize_text():
 
 def test_code_text_empty():
     r64 = code_content_text.gen_text_code(b"", bits=64)
-    assert r64.code == "EAASL4F2WZY7KBXB"
+    assert r64.iscc == "EAASL4F2WZY7KBXB"
     r128 = code_content_text.gen_text_code("", bits=128)
-    assert r128.code == "EABSL4F2WZY7KBXBYUZPREWZ26IXU"
+    assert r128.iscc == "EABSL4F2WZY7KBXBYUZPREWZ26IXU"
 
 
 def test_code_text_non_utf8_raises():

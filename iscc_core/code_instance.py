@@ -37,7 +37,7 @@ def gen_instance_code_v0(stream, bits=opts.instance_bits):
         data = stream.read(opts.io_read_size)
 
     instance_code_obj = InstanceCode(
-        code=hasher.code(bits=bits),
+        iscc=hasher.code(bits=bits),
         datahash=hasher.digest().hex(),
         filesize=hasher.filesize,
     )

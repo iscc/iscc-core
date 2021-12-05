@@ -43,34 +43,34 @@ def test_hash_audio_005_sample():
 
 def test_code_audio_v0_default():
     assert (
-        code_content_audio.gen_audio_code_v0(CHROMA_VECTOR).code == "EIAWUJFCEZZOJYVD"
+        code_content_audio.gen_audio_code_v0(CHROMA_VECTOR).iscc == "EIAWUJFCEZZOJYVD"
     )
 
 
 def test_code_audio_v0_32bits():
     assert (
-        code_content_audio.gen_audio_code_v0(CHROMA_VECTOR, bits=32).code
+        code_content_audio.gen_audio_code_v0(CHROMA_VECTOR, bits=32).iscc
         == "EIAGUJFCEY"
     )
 
 
 def test_code_audio_v0_64bits():
     assert (
-        code_content_audio.gen_audio_code_v0(CHROMA_VECTOR, bits=64).code
+        code_content_audio.gen_audio_code_v0(CHROMA_VECTOR, bits=64).iscc
         == "EIAWUJFCEZZOJYVD"
     )
 
 
 def test_code_audio_v0_128bits():
     assert (
-        code_content_audio.gen_audio_code_v0(CHROMA_VECTOR, bits=128).code
+        code_content_audio.gen_audio_code_v0(CHROMA_VECTOR, bits=128).iscc
         == "EIBWUJFCEZZOJYVDHJHIRB3KQSQCM"
     )
 
 
 def test_code_audio_v0_256bits():
     assert (
-        code_content_audio.gen_audio_code_v0(CHROMA_VECTOR, bits=256).code
+        code_content_audio.gen_audio_code_v0(CHROMA_VECTOR, bits=256).iscc
         == "EIDWUJFCEZZOJYVDHJHIRB3KQSQCM2REUITDUTVAQNRGJIRENCCCULY"
     )
 

@@ -47,7 +47,7 @@ def gen_image_code_v0(img, bits=opts.image_bits):
         length=bits,
         digest=digest,
     )
-    return ContentCodeImage(code=image_code, width=width, height=height)
+    return ContentCodeImage(iscc=image_code, width=width, height=height)
 
 
 def normalize_image(img):

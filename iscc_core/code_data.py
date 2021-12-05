@@ -45,7 +45,7 @@ def gen_data_code_v0(stream, bits=opts.data_bits):
         data = stream.read(opts.io_read_size)
 
     data_code = hasher.code(bits=bits)
-    data_code_obj = DataCode(code=data_code)
+    data_code_obj = DataCode(iscc=data_code)
 
     return data_code_obj
 

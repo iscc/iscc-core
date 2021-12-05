@@ -55,7 +55,7 @@ def gen_video_code_v0(frame_sigs, bits=opts.video_bits):
         length=bits,
         digest=digest,
     )
-    video_code_obj = ContentCodeVideo(code=video_code)
+    video_code_obj = ContentCodeVideo(iscc=video_code)
     return video_code_obj
 
 

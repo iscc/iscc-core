@@ -9,19 +9,19 @@ from iscc_samples import images
 def test_gen_image_code_v0():
     with open(images()[0].as_posix(), "rb") as stream:
         ic_obj = code_content_image.gen_image_code_v0(stream)
-        assert ic_obj.code == "EEA4GQZQTY6J5DTH"
+        assert ic_obj.iscc == "EEA4GQZQTY6J5DTH"
 
 
 def test_gen_image_code_v0_32bit():
     with open(images()[0].as_posix(), "rb") as stream:
         ic_obj = code_content_image.gen_image_code_v0(stream, 32)
-        assert ic_obj.code == "EEAMGQZQTY"
+        assert ic_obj.iscc == "EEAMGQZQTY"
 
 
 def test_gen_image_code_v0_256bit():
     with open(images()[0].as_posix(), "rb") as stream:
         ic_obj = code_content_image.gen_image_code_v0(stream, 256)
-        assert ic_obj.code == "EED4GQZQTY6J5DTHQ2DWCPDZHQOM6QZQTY6J5DTFZ2DWCPDZHQOMXDI"
+        assert ic_obj.iscc == "EED4GQZQTY6J5DTHQ2DWCPDZHQOM6QZQTY6J5DTFZ2DWCPDZHQOMXDI"
 
 
 def test_normalize_image():
@@ -74,18 +74,18 @@ def test_code_image_v0_white():
     img.save(stream, format="PNG")
     stream.seek(0)
     assert (
-        code_content_image.gen_image_code_v0(stream, bits=64).code == "EEAYAAAAAAAAAAAA"
+        code_content_image.gen_image_code_v0(stream, bits=64).iscc == "EEAYAAAAAAAAAAAA"
     )
     assert (
-        code_content_image.gen_image_code_v0(stream, bits=96).code
+        code_content_image.gen_image_code_v0(stream, bits=96).iscc
         == "EEBIAAAAAAAAAAAAAAAAAAA"
     )
     assert (
-        code_content_image.gen_image_code_v0(stream, bits=128).code
+        code_content_image.gen_image_code_v0(stream, bits=128).iscc
         == "EEBYAAAAAAAAAAAAAAAAAAAAAAAAA"
     )
     assert (
-        code_content_image.gen_image_code_v0(stream, bits=256).code
+        code_content_image.gen_image_code_v0(stream, bits=256).iscc
         == "EEDYAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
     )
 

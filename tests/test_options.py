@@ -16,6 +16,6 @@ def test_options_env_vars():
     import iscc_core
 
     assert (
-        iscc_core.gen_meta_code_v0("Hello World").code
+        iscc_core.gen_meta_code_v0("Hello World").iscc
         == "AAB77PPFVS6JDUQBWZDBIUGOUNAGI"
     )
