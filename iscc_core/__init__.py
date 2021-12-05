@@ -39,3 +39,15 @@ from iscc_core.code_instance import (
     gen_instance_code,
     gen_instance_code_v0,
 )
+from iscc_core.schema import (
+    IsccCode,
+    IsccID,
+    MetaCode,
+    ContentCodeText,
+    ContentCodeImage,
+    ContentCodeAudio,
+    ContentCodeVideo,
+    ContentCodeMixed,
+    DataCode,
+    InstanceCode,
+)
