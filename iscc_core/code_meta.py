@@ -98,6 +98,8 @@ def gen_meta_code_v0(title, extra=None, bits=opts.meta_bits):
     else:
         binary = False
 
+    if not title:
+        title = None
     mc_obj = MetaCode(
         code=meta_code, title=title, extra=extra, binary=binary, metahash=metahash
     )
