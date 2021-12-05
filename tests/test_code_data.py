@@ -33,7 +33,7 @@ def test_hash_data_v0_zero():
 
 def test_gen_code_data_v0_default():
     dc_obj = code_data.gen_data_code_v0(BytesIO(TEST_DATA))
-    assert dc_obj == dict(code="GAA6LM626EIYZ4E4", features=None, sizes=None)
+    assert dc_obj == dict(code="GAA6LM626EIYZ4E4")
 
 
 def test_DataHasherV0_single_shot():

@@ -23,7 +23,6 @@ def test_gen_mixed_code_codes_mixed_length():
     codes = tc_long.code, tc_short.code
     assert iscc_core.gen_mixed_code_v0(codes=codes, bits=64) == dict(
         code="EQASB7WL7325X5PW",
-        title=None,
         parts=["EAA75Q74YXNZC4EK", "EAAVUCMGOTFWLZU6"],
     )
 

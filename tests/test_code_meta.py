@@ -33,7 +33,6 @@ def test_gen_meta_code_text_vs_bytes():
     assert m.code == "AAA26E2JXG56NKPV"
     assert m == dict(
         code="AAA26E2JXG56NKPV",
-        title="",
         extra="gA",
         binary=True,
         metahash="bbe6a9f5a0146a1f4d0381e9b0ed1ac2f1a979ce9d5ad84e46ff0b58f36b5f46",
@@ -74,8 +73,6 @@ def test_code_meta_v0_empty_default():
     m = code_meta.gen_meta_code_v0("")
     assert m == dict(
         code="AAA26E2JXH27TING",
-        title="",
-        extra=None,
         binary=False,
         metahash="af1349b9f5f9a1a6a0404dea36dcc9499bcb25c9adc112b7cc9a93cae41f3262",
     )
@@ -85,7 +82,6 @@ def test_code_meta_v0_extra_only_128_bits():
     m = code_meta.gen_meta_code_v0("", "Hello", 128)
     assert m == dict(
         code="AAB26E2JXFSSZZN36X42DJR724AYU",
-        title="",
         extra="Hello",
         binary=False,
         metahash="fbc2b0516ee8744d293b980779178a3508850fdcfe965985782c39601b65794f",
@@ -99,14 +95,11 @@ def test_code_meta_v0_interleaved():
     assert mb.code == "AAA26E2JXFSSZZN3"
     assert ma == dict(
         code="AAA26E2JXH27TING",
-        title="",
-        extra=None,
         binary=False,
         metahash="af1349b9f5f9a1a6a0404dea36dcc9499bcb25c9adc112b7cc9a93cae41f3262",
     )
     assert mb == dict(
         code="AAA26E2JXFSSZZN3",
-        title="",
         extra="hello",
         binary=False,
         metahash="ea8f163db38682925e4491c5e58d4bb3506ef8c14eb78a86e908c5624a67200f",
