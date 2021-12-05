@@ -47,62 +47,64 @@ pip install iscc-core
 ## Quick Start
 
 ```python
-from iscc_core import (
-    gen_meta_code,
-    gen_image_code,
-    gen_data_code,
-    gen_instance_code,
-    gen_iscc_code,
-)
+import iscc_core
 
 image_path = "../docs/images/iscc-architecture.png"
 
-meta_code = gen_meta_code(
-    title="ISCC Architecure",
-    extra="A schematic overview of the ISCC"
+meta_code = iscc_core.gen_meta_code(
+    title="ISCC Architecure", extra="A schematic overview of the ISCC"
 )
 
-print("Meta-Code:\t\t", meta_code.code)
-print("Structure:\t\t", meta_code.code_obj.explain, end="\n\n")
+print(f"Meta-Code:     {meta_code.code}")
+print(f"Structure:     {meta_code.code_obj.explain}\n")
 
 with open(image_path, "rb") as stream:
 
-    image_code = gen_image_code(stream)
-    print("Image-Code:\t\t", image_code.code)
-    print("Structure:\t\t", image_code.code_obj.explain, end="\n\n")
+    image_code = iscc_core.gen_image_code(stream)
+    print(f"Image-Code:    {image_code.code}")
+    print(f"Structure:     {image_code.code_obj.explain}\n")
 
     stream.seek(0)
-    data_code = gen_data_code(stream)
-    print("Data-Code:\t\t", data_code.code)
-    print("Structure:\t\t", data_code.code_obj.explain, end="\n\n")
+    data_code = iscc_core.gen_data_code(stream)
+    print(f"Data-Code:     {data_code.code}")
+    print(f"Structure:     {data_code.code_obj.explain}\n")
 
     stream.seek(0)
-    instance_code = gen_instance_code(stream)
-    print("Instance-Code:\t", instance_code.code)
-    print("Structure:\t\t", instance_code.code_obj.explain, end="\n\n")
+    instance_code = iscc_core.gen_instance_code(stream)
+    print(f"Instance-Code: {instance_code.code}")
+    print(f"Structure:     {instance_code.code_obj.explain}\n")
 
-iscc_code = gen_iscc_code((meta_code.code, image_code.code, data_code.code, instance_code.code))
-print("Canonical ISCC:\t ISCC:{}".format(iscc_code.code))
-print("Structure:\t\t", iscc_code.explain)
+iscc_code = iscc_core.gen_iscc_code(
+    (meta_code.code, image_code.code, data_code.code, instance_code.code)
+)
+print(f"ISCC-CODE:     ISCC:{iscc_code}")
+print(f"Structure:     {iscc_code.code_obj.explain}\n")
+
+iscc_id = iscc_core.gen_iscc_id(chain=1, iscc_code=iscc_code.code, uc=7)
+print(f"ISCC-ID:       ISCC:{iscc_id}")
+print(f"Structure:     ISCC:{iscc_id.code_obj.explain}")
 ```
 
 The output of this example is as follows:
 
 ```
-Meta-Code:      AAA5H3V6SZHWDUKX
-Structure:      META-NONE-V0-64-d3eebe964f61d157
+Meta-Code:     AAA5H3V6SZHWDUKX
+Structure:     META-NONE-V0-64-d3eebe964f61d157
 
-Image-Code:     EEA34YXAFUJWOZ5Q
-Structure:      CONTENT-IMAGE-V0-64-be62e02d136767b0
+Image-Code:    EEA6YTUFF6LJRWFG
+Structure:     CONTENT-IMAGE-V0-64-ec4e852f9698d8a6
 
-Data-Code:      GAA6JYHWISAVU77Z
-Structure:      DATA-NONE-V0-64-e4e0f644815a7ff9
+Data-Code:     GAAWYCDI6EHQFYBB
+Structure:     DATA-NONE-V0-64-6c0868f10f02e021
 
-Instance-Code:  IAAUULVLVWQLXSEM
-Structure:      INSTANCE-NONE-V0-64-4a2eabada0bbc88c
+Instance-Code: IAAQK76UVXOBJHJ3
+Structure:     INSTANCE-NONE-V0-64-057fd4addc149d3b
 
-ISCC-CODE:      ISCC:KED5H3V6SZHWDUKXXZROALITM5T3BZHA6ZCICWT77FFC5K5NUC54RDA
-Structure:      ISCC-IMAGE-V0-256-d3eebe964f61d157be62e02d136767b0e4e0f644815a7ff94a2eabada0bbc88c
+ISCC-CODE:     ISCC:code='KED5H3V6SZHWDUKX5RHIKL4WTDMKM3AINDYQ6AXAEECX7VFN3QKJ2OY'
+Structure:     ISCC-IMAGE-V0-256-d3eebe964f61d157ec4e852f9698d8a66c0868f10f02e021057fd4addc149d3b
+
+ISCC-ID:       ISCC:code='MEASB3COVS3Q6AGQA4'
+Structure:     ISCC:ID-BITCOIN-V0-72-20ec4eacb70f00d0-7
 ```
 
 ## Documentation
@@ -130,6 +132,9 @@ You may also want join our developer chat on Telegram at <https://t.me/iscc_dev>
 
 - Add dotenv for enviroment based configuration
 - Cleanup package toplevel imports
+- Return schema objects for iscc_code and iscc_id
+- Exclude unset and none values from result dicts
+- Add conformance test system
 
 ### [0.1.6] - 2021-11-29
 - Show counter for ISCC-ID in Code.explain
