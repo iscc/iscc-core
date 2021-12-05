@@ -25,6 +25,12 @@ class BaseCode(BaseModel, abc.ABC):
         """Wraps the `code` string with a `Code` object."""
         return Code(self.code)
 
+    def dict(self, *args, exclude_unset=True, exclude_none=True, **kwargs):
+        """Change default options to exclude unset and none values."""
+        return super().dict(
+            *args, exclude_unset=exclude_unset, exclude_none=exclude_none, **kwargs
+        )
+
 
 class ContentCode(BaseCode, abc.ABC):
     """Base schema for Content-Codes."""
