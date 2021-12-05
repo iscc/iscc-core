@@ -54,6 +54,7 @@ mkdocs-material = "*"
 mkdocstrings = "*"
 toml = "*"
 iscc-samples = "*"
+PyYAML = "^6.0"
 
 [build-system]
 requires = ["poetry-core>=1.0.0", "setuptools", "wheel", "cython"]
