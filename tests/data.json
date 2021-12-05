@@ -1,0 +1,247 @@
+{
+  "gen_meta_code_v0": {
+    "test_0000_none": {
+      "inputs": [
+        null,
+        null,
+        64
+      ],
+      "outputs": {
+        "code": "AAA26E2JXH27TING",
+        "binary": false,
+        "metahash": "af1349b9f5f9a1a6a0404dea36dcc9499bcb25c9adc112b7cc9a93cae41f3262"
+      }
+    },
+    "test_0001_empty_str": {
+      "inputs": [
+        "",
+        "",
+        64
+      ],
+      "outputs": {
+        "code": "AAA26E2JXH27TING",
+        "binary": false,
+        "metahash": "af1349b9f5f9a1a6a0404dea36dcc9499bcb25c9adc112b7cc9a93cae41f3262"
+      }
+    },
+    "test_0002_title_only": {
+      "inputs": [
+        "Die Unendliche Geschichte",
+        "",
+        64
+      ],
+      "outputs": {
+        "code": "AAA3DZ6UG5MYA7MF",
+        "title": "Die Unendliche Geschichte",
+        "binary": false,
+        "metahash": "0d890ec03394de69d28750ccc89510afaa0b405eec4efbfd79df19d2d5764c83"
+      }
+    },
+    "test_0003_extra_only": {
+      "inputs": [
+        "",
+        "von Michael Ende",
+        64
+      ],
+      "outputs": {
+        "code": "AAA26E2JXEEO5DB2",
+        "extra": "von Michael Ende",
+        "binary": false,
+        "metahash": "924ac457a87303b3dc46427e84815134fed74a0aa2c7a46becc3ce80f5b99efb"
+      }
+    },
+    "test_0004_title_extra": {
+      "inputs": [
+        "Die Unendliche Geschichte",
+        "Von Michael Ende",
+        64
+      ],
+      "outputs": {
+        "code": "AAA3DZ6UG4EO5DB2",
+        "title": "Die Unendliche Geschichte",
+        "extra": "Von Michael Ende",
+        "binary": false,
+        "metahash": "2f34b6a1d6cea2bcf8d918f8df7f43e579fb0b1e9101bfd36fb6c9a3cb40d5d8"
+      }
+    },
+    "test_0005_96_bits": {
+      "inputs": [
+        "Die Unendliche Geschichte",
+        "Von Michael Ende",
+        96
+      ],
+      "outputs": {
+        "code": "AABLDZ6UG4EO5DB2LGAH3BI",
+        "title": "Die Unendliche Geschichte",
+        "extra": "Von Michael Ende",
+        "binary": false,
+        "metahash": "2f34b6a1d6cea2bcf8d918f8df7f43e579fb0b1e9101bfd36fb6c9a3cb40d5d8"
+      }
+    },
+    "test_0006_128_bits": {
+      "inputs": [
+        "Die Unendliche Geschichte",
+        "Von Michael Ende",
+        128
+      ],
+      "outputs": {
+        "code": "AAB3DZ6UG4EO5DB2LGAH3BMWZO264",
+        "title": "Die Unendliche Geschichte",
+        "extra": "Von Michael Ende",
+        "binary": false,
+        "metahash": "2f34b6a1d6cea2bcf8d918f8df7f43e579fb0b1e9101bfd36fb6c9a3cb40d5d8"
+      }
+    },
+    "test_0007_160_bits": {
+      "inputs": [
+        "Die Unendliche Geschichte",
+        "Von Michael Ende",
+        160
+      ],
+      "outputs": {
+        "code": "AACLDZ6UG4EO5DB2LGAH3BMWZO2652RHKAQA",
+        "title": "Die Unendliche Geschichte",
+        "extra": "Von Michael Ende",
+        "binary": false,
+        "metahash": "2f34b6a1d6cea2bcf8d918f8df7f43e579fb0b1e9101bfd36fb6c9a3cb40d5d8"
+      }
+    },
+    "test_0008_192_bits": {
+      "inputs": [
+        "Die Unendliche Geschichte",
+        "Von Michael Ende",
+        192
+      ],
+      "outputs": {
+        "code": "AAC3DZ6UG4EO5DB2LGAH3BMWZO2652RHKAQMXY6FUQ",
+        "title": "Die Unendliche Geschichte",
+        "extra": "Von Michael Ende",
+        "binary": false,
+        "metahash": "2f34b6a1d6cea2bcf8d918f8df7f43e579fb0b1e9101bfd36fb6c9a3cb40d5d8"
+      }
+    },
+    "test_0009_224_bits": {
+      "inputs": [
+        "Die Unendliche Geschichte",
+        "Von Michael Ende",
+        224
+      ],
+      "outputs": {
+        "code": "AADLDZ6UG4EO5DB2LGAH3BMWZO2652RHKAQMXY6FUTRSDDCS",
+        "title": "Die Unendliche Geschichte",
+        "extra": "Von Michael Ende",
+        "binary": false,
+        "metahash": "2f34b6a1d6cea2bcf8d918f8df7f43e579fb0b1e9101bfd36fb6c9a3cb40d5d8"
+      }
+    },
+    "test_0010_256_bits": {
+      "inputs": [
+        "Die Unendliche Geschichte",
+        "Von Michael Ende",
+        256
+      ],
+      "outputs": {
+        "code": "AAD3DZ6UG4EO5DB2LGAH3BMWZO2652RHKAQMXY6FUTRSDDCSP5R5BVQ",
+        "title": "Die Unendliche Geschichte",
+        "extra": "Von Michael Ende",
+        "binary": false,
+        "metahash": "2f34b6a1d6cea2bcf8d918f8df7f43e579fb0b1e9101bfd36fb6c9a3cb40d5d8"
+      }
+    },
+    "test_0011_i18n": {
+      "inputs": [
+        "Iñtërnâtiônàlizætiøn☃",
+        "Iñtërnâtiônàlizætiøn☃ Iñtërnâtiônàlizætiøn☃",
+        256
+      ],
+      "outputs": {
+        "code": "AADQPPCUKAD34VAQOCRWHDLQUNBZYLMRHPGS3GJ35UEPHQ3CBLZ4GQQ",
+        "title": "Internationalizætiøn☃",
+        "extra": "Internationalizætiøn☃ Internationalizætiøn☃",
+        "binary": false,
+        "metahash": "053fe08f9768713de7db5fc27d5ba1ad724c7723808070bd4ecbdf7662f1e2c5"
+      }
+    },
+    "test_0012_normalizeation": {
+      "inputs": [
+        "Die unéndlíche,  Geschichte",
+        "",
+        64
+      ],
+      "outputs": {
+        "code": "AAA3TZ6GX7NYB34F",
+        "title": "Die unendliche, Geschichte",
+        "binary": false,
+        "metahash": "997cff962fc703b403d3e4b592b8a3c3f66e40a681a6680e8766140a56979f58"
+      }
+    },
+    "test_0013_trim": {
+      "inputs": [
+        "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed",
+        "",
+        64
+      ],
+      "outputs": {
+        "code": "AAAS72V6FCYNQOJ7",
+        "title": "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquy",
+        "binary": false,
+        "metahash": "ccde66af338a44fd50f36fbf51a2c4ed5f2b0da54059e7eb758ddcffb4f67f5e"
+      }
+    },
+    "test_0014_trim_i18n": {
+      "inputs": [
+        "Iñtërnâtiônàlizætiøn☃ Iñtërnâtiônàlizætiøn☃ Iñtërnâtiônàlizætiøn☃ Iñtërnâtiônàlizætiøn☃ Iñtërnâtiônàlizætiøn☃ Iñtërnâtiônàlizætiøn☃",
+        "",
+        64
+      ],
+      "outputs": {
+        "code": "AAAQPPSUCDYKOQ64",
+        "title": "Internationalizætiøn☃ Internationalizætiøn☃ Internationalizætiøn☃ Internationalizætiøn☃ Internationalizætiøn",
+        "binary": false,
+        "metahash": "c8cddbf4e62739d4c38e63b8e22e2032aea3eb57f6eb5962fc3e622b1fc9217b"
+      }
+    }
+  },
+  "gen_text_code_v0": {
+    "test_0000_empty_str": {
+      "inputs": [
+        "",
+        64
+      ],
+      "outputs": {
+        "code": "EAASL4F2WZY7KBXB",
+        "characters": 0
+      }
+    },
+    "test_0001_hello_world": {
+      "inputs": [
+        "Hello World",
+        64
+      ],
+      "outputs": {
+        "code": "EAA75Q74YXNZC4EK",
+        "characters": 11
+      }
+    },
+    "test_0002_hello_world_256_bits": {
+      "inputs": [
+        "Hello World",
+        256
+      ],
+      "outputs": {
+        "code": "EAD75Q74YXNZC4EKRCQEKOXKMYHCJIUHQNZ3P5FGVJRE4IBHR3F7HRY",
+        "characters": 11
+      }
+    },
+    "test_0003_i18n": {
+      "inputs": [
+        "Iñtërnâtiônàlizætiøn☃    Iñtërnâtiônàlizætiøn☃",
+        256
+      ],
+      "outputs": {
+        "code": "EADQK3O2BVVRMYT6FSEIQGH4R7R2DO7NOA5UWIFF5644ACC7Z67P7QI",
+        "characters": 43
+      }
+    }
+  }
+}

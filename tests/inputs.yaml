@@ -1,0 +1,95 @@
+# Conformance test data for top level ISCC Core functions
+gen_meta_code_v0:
+    test_0000_none:
+        inputs:
+            - null
+            - null
+            - 64
+    test_0001_empty_str:
+        inputs:
+            - ""
+            - ""
+            - 64
+    test_0002_title_only:
+        inputs:
+            - "Die Unendliche Geschichte"
+            - ""
+            - 64
+    test_0003_extra_only:
+        inputs:
+            - ""
+            - "von Michael Ende"
+            - 64
+    test_0004_title_extra:
+        inputs:
+            - "Die Unendliche Geschichte"
+            - "Von Michael Ende"
+            - 64
+    test_0005_96_bits:
+        inputs:
+            - "Die Unendliche Geschichte"
+            - "Von Michael Ende"
+            - 96
+    test_0006_128_bits:
+        inputs:
+            - "Die Unendliche Geschichte"
+            - "Von Michael Ende"
+            - 128
+    test_0007_160_bits:
+        inputs:
+            - "Die Unendliche Geschichte"
+            - "Von Michael Ende"
+            - 160
+    test_0008_192_bits:
+        inputs:
+            - "Die Unendliche Geschichte"
+            - "Von Michael Ende"
+            - 192
+    test_0009_224_bits:
+        inputs:
+            - "Die Unendliche Geschichte"
+            - "Von Michael Ende"
+            - 224
+    test_0010_256_bits:
+        inputs:
+            - "Die Unendliche Geschichte"
+            - "Von Michael Ende"
+            - 256
+    test_0011_i18n:
+        inputs:
+            - "Iñtërnâtiônàlizætiøn☃"
+            - "Iñtërnâtiônàlizætiøn☃ Iñtërnâtiônàlizætiøn☃"
+            - 256
+    test_0012_normalizeation:
+        inputs:
+            - "Die unéndlíche,  Geschichte"
+            - ""
+            - 64
+    test_0013_trim:
+        inputs:
+            - "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed"
+            - ""
+            - 64
+    test_0014_trim_i18n:
+        inputs:
+            - "Iñtërnâtiônàlizætiøn☃ Iñtërnâtiônàlizætiøn☃ Iñtërnâtiônàlizætiøn☃ Iñtërnâtiônàlizætiøn☃ Iñtërnâtiônàlizætiøn☃ Iñtërnâtiônàlizætiøn☃"
+            - ""
+            - 64
+gen_text_code_v0:
+    test_0000_empty_str:
+        inputs:
+            - ""
+            - 64
+    test_0001_hello_world:
+        inputs:
+            - "Hello World"
+            - 64
+    test_0002_hello_world_256_bits:
+        inputs:
+            - "Hello World"
+            - 256
+    test_0003_i18n:
+        inputs:
+            - "Iñtërnâtiônàlizætiøn☃    Iñtërnâtiônàlizætiøn☃"
+            - 256
+
