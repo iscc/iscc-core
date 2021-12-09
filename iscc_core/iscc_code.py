@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-"""*The canonical multi-component identifier for digital media assets.*
+"""*ISCC - a multi-component identifier for digital media assets.*
 
 An **ISCC-CODE** is generated from the concatenation of the digests of the following
 four components together with a single common header:
@@ -8,56 +8,87 @@ four components together with a single common header:
 - [Content-Code](/components/content/) - Encodes syntactic/perceptual similarity
 - [Data-Code][iscc_core.code_data] - Encodes raw bitstream similarity
 - [Instance-Code][iscc_core.code_instance] - Data checksum
+
+The following combinations of components are possible:
+
+- Meta, Content, Data, Instance (64-bit per component)
+- Content, Data, Instance (64-bit per component)
+- Data, Instance (64 or 128-bit per component)
 """
-from operator import attrgetter
+from operator import itemgetter
 from typing import Iterable
-from iscc_core.codec import AnyISCC, LN, MT, VS, Code
-from iscc_core.schema import ISCC_CODE
+from iscc_core import codec as co
+from iscc_core.schema import IsccCode
 
 
 def gen_iscc_code(codes):
-    # type: (Iterable[AnyISCC]) -> ISCC_CODE
+    # type: (Iterable[str]) -> IsccCode
     """
-    Combine ISCC components to an ISCC-CODE with a single common header using the latest
-    standard algorithm.
+    Combine multiple ISCC components to a composite ISCC with a common header using
+    the latest standard algorithm.
 
-    :param Iterable[AnyISCC] codes: A sequence of Meta, Content, Data, Instance codes.
-    :return: Code object of full ISCC-CODE
-    :rtype: ISCC_CODE
+    :param Iterable[str] codes: A valid sequence of singluar ISCC codes.
+    :return: An IsccCode object
+    :rtype: IsccCode
     """
-    return gen_iscc_code_v01(codes)
+    return gen_iscc_code_v0(codes)
 
 
-def gen_iscc_code_v01(codes):
-    # type: (Iterable[AnyISCC]) -> ISCC_CODE
+def gen_iscc_code_v0(codes):
+    # type: (Iterable[str]) -> IsccCode
     """
-    Combine ISCC components to an ISCC-CODE with a single common header using
+    Combine multiple ISCC components to a composite ISCC with a common header using
     algorithm v0.
 
-    :param Iterable[AnyISCC] codes: A sequence of Meta, Content, Data, Instance codes.
-    :return: ISCC-CODE
-    :rtype: ISCC_CODE
+    :param Iterable[str] codes: A valid sequence of singluar ISCC codes.
+    :return: An IsccCode object
+    :rtype: IsccCode
     """
-    codes = sorted([Code(c) for c in codes], key=attrgetter("maintype"))
-    assert len(codes) == 4, "ISCC composition requires 4 codes"
-    assert all(c.version == VS.V0 for c in codes), "Codes must all be v0"
 
-    types = tuple(c.maintype for c in codes)
-    assert MT.ID not in types, "Cannot compose ISCC-ID"
-    assert MT.ISCC not in types, "Cannot compose canonical ISCC code"
+    # Validate combinatorial constraints
+    valid_mt_mix = set(
+        [
+            (co.MT.META, co.MT.CONTENT, co.MT.DATA, co.MT.INSTANCE),
+            (co.MT.CONTENT, co.MT.DATA, co.MT.INSTANCE),
+            (co.MT.DATA, co.MT.INSTANCE),
+        ]
+    )
+    decoded = sorted(
+        [co.read_header(co.decode_base32(code)) for code in codes], key=itemgetter(0)
+    )
+    main_types = tuple(d[0] for d in decoded)
 
-    assert types == (
-        MT.META,
-        MT.CONTENT,
-        MT.DATA,
-        MT.INSTANCE,
-    ), "Codes must be META, CONTENT, DATA, INSTANCE"
+    assert main_types in valid_mt_mix, f"Combinatorial constraint error: {main_types}"
 
-    for code in codes:
-        assert code.length >= LN.L64, "ISCC requires min 64-bit codes"
-        chash = b""
-        for c in codes:
-            chash += c.hash_bytes[:8]
+    # Validate component length contraints
+    lengths = set(d[3] for d in decoded)
+    assert all(l >= 64 for l in lengths), f"Component length constraint error {lengths}"
 
-    code_obj = Code((MT.ISCC, codes[1].subtype, codes[1].version, LN.L256, chash))
-    return ISCC_CODE(iscc=code_obj.iscc)
+    # Validate component version constraints
+    versions = set(d[2] for d in decoded)
+    assert all(v == co.VS.V0 for v in versions), f"Version constraint error {versions}"
+
+    # Derive per component length
+    is_di = main_types == (co.MT.DATA, co.MT.INSTANCE)
+    long_codes = all(d[3] >= 128 for d in decoded)
+    if is_di and long_codes:
+        component_nbytes = 128 // 8
+    else:
+        component_nbytes = 64 // 8
+
+    # Concatenate bodies
+    body = b"".join([d[-1][:component_nbytes] for d in decoded])
+
+    # Construct header values
+    mt = co.MT.ISCC
+    st = co.ST_CC.NONE
+    for d in decoded:
+        if d[0] == co.MT.CONTENT:
+            st = d[1]
+            break
+    ln = (component_nbytes * len(decoded)) * 8
+
+    # Build ISCC
+    iscc_code = co.encode_component(mt, st, co.VS.V0, ln, body)
+
+    return IsccCode(iscc=iscc_code)
