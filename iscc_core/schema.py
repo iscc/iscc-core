@@ -15,13 +15,13 @@ import abc
 MultiStr = Union[str, List[str]]
 
 
-class BaseISCC(BaseModel, abc.ABC):
+class IsccBase(BaseModel, abc.ABC):
     """Base schema for ISCC metadata"""
 
     class Config:
         validate_assignment = True
 
-    iscc: str = Field(..., description="ISCC code in standard encoding.")
+    iscc: str = Field(..., description="ISCC in standard encoding.")
 
     @property
     def code_obj(self):
@@ -35,7 +35,8 @@ class BaseISCC(BaseModel, abc.ABC):
         )
 
 
-class ISCC_CODE(BaseISCC):
+class IsccCode(IsccBase):
+    """A composite ISCC"""
 
     version: str = Field(
         "0-0-0",
@@ -93,17 +94,19 @@ class ISCC_CODE(BaseISCC):
     preview: Optional[str] = Field(description="Uri of media asset preview.")
 
 
-class ISCC_ID(ISCC_CODE):
+class IsccID(IsccCode):
+    """An ISCC Short-ID"""
+
     pass
 
 
-class ContentCode(BaseISCC, abc.ABC):
+class ContentCode(IsccBase, abc.ABC):
     """Base schema for Content-Codes."""
 
     title: Optional[str] = Field(description="Title as extracted from digital asset")
 
 
-class MetaCode(BaseISCC):
+class MetaCode(IsccBase):
     """Meta-Code standardized metadata model."""
 
     title: Optional[str] = Field(description="Title used for Meta-Code creation.")
@@ -155,13 +158,13 @@ class ContentCodeMixed(ContentCode):
     parts: Optional[List[str]] = Field(description="Included Content-Codes.")
 
 
-class DataCode(BaseISCC):
+class DataCode(IsccBase):
     """Data-Code standardized metadata model."""
 
     pass
 
 
-class InstanceCode(BaseISCC):
+class InstanceCode(IsccBase):
     """Instance-Code standardized metadata model."""
 
     datahash: Optional[str] = Field(

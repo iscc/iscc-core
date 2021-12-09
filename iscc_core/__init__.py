@@ -1,7 +1,7 @@
 __version__ = "0.1.6"
 from iscc_core.iscc_code import (
     gen_iscc_code,
-    gen_iscc_code_v01,
+    gen_iscc_code_v0,
 )
 from iscc_core.iscc_id import (
     gen_iscc_id,
@@ -40,8 +40,8 @@ from iscc_core.code_instance import (
     gen_instance_code_v0,
 )
 from iscc_core.schema import (
-    ISCC_CODE,
-    ISCC_ID,
+    IsccCode,
+    IsccID,
     MetaCode,
     ContentCodeText,
     ContentCodeImage,

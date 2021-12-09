@@ -1,4 +1,6 @@
 # -*- coding: utf-8 -*-
+import io
+
 import iscc_core
 
 
@@ -9,14 +11,14 @@ def test_gen_iscc_id_v0_single_component():
     assert iscc_id.code_obj.explain == "ID-PRIVATE-V0-64-20fec3fcc5db9170"
 
 
-def test_gen_iscc_id_v0_single_component_uv():
+def test_gen_iscc_id_v0_single_component_uc():
     tc = iscc_core.gen_text_code_v0("Hello World")
     iscc_id = iscc_core.gen_iscc_id(0, tc.iscc, uc=1)
     assert iscc_id.iscc == "MAASB7WD7TC5XELQAE"
     assert iscc_id.code_obj.explain == "ID-PRIVATE-V0-72-20fec3fcc5db9170-1"
 
 
-def test_gen_iscc_id_v0_single_component_uv_2byte():
+def test_gen_iscc_id_v0_single_component_uc_2byte():
     tc = iscc_core.gen_text_code_v0("Hello World")
     iscc_id = iscc_core.gen_iscc_id(0, tc.iscc, uc=257)
     assert iscc_id.iscc == "MABCB7WD7TC5XELQQEBA"
@@ -30,3 +32,10 @@ def test_gen_iscc_id_v0_multiple_components():
     iscc_id = iscc_core.gen_iscc_id(1, code)
     assert iscc_id.iscc == "MEACB7X7777574L6"
     assert iscc_id.code_obj.explain == "ID-BITCOIN-V0-64-20feffffffdff17e"
+
+
+def test_gen_iscc_id_v0_instance_only():
+    ic = iscc_core.gen_instance_code_v0(io.BytesIO(b"hello world"))
+    iscc_id = iscc_core.gen_iscc_id(0, ic.iscc)
+    assert iscc_id.iscc == "MAAEBV2JQHX2OCQM"
+    assert iscc_id.code_obj.explain == "ID-PRIVATE-V0-64-40d74981efa70a0c"

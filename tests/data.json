@@ -242,6 +242,140 @@
         "iscc": "EADQK3O2BVVRMYT6FSEIQGH4R7R2DO7NOA5UWIFF5644ACC7Z67P7QI",
         "characters": 43
       }
+    },
+    "test_0004_more": {
+      "inputs": [
+        "Their most significant and usefull property of similarity-preserving fingerprints gets lost in the fragmentation of individual, propietary and use case specific implementations. The real benefit lies in similarity preservation beyond your local data archive on a global scale accross vendors.\n",
+        128
+      ],
+      "outputs": {
+        "iscc": "EABR7BVKOFMBVNE4GINEXNCRLYINE",
+        "characters": 291
+      }
+    }
+  },
+  "gen_iscc_code_v0": {
+    "test_0000_standard": {
+      "inputs": [
+        [
+          "AAAYPXW445FTYNJ3",
+          "EAARMJLTQCUWAND2",
+          "GABVVC5DMJJGYKZ4ZBYVNYABFFYXG",
+          "IADWIK7A7JTUAQ2D6QARX7OBEIK3OOUAM42LOBLCZ4ZOGDLRHMDL6TQ"
+        ]
+      ],
+      "outputs": {
+        "iscc": "KADYPXW445FTYNJ3CYSXHAFJMA2HUWULUNRFE3BLHRSCXYH2M5AEGQY"
+      }
+    },
+    "test_0001_no_meta": {
+      "inputs": [
+        [
+          "EAARMJLTQCUWAND2",
+          "GABVVC5DMJJGYKZ4ZBYVNYABFFYXG",
+          "IADWIK7A7JTUAQ2D6QARX7OBEIK3OOUAM42LOBLCZ4ZOGDLRHMDL6TQ"
+        ]
+      ],
+      "outputs": {
+        "iscc": "KACRMJLTQCUWAND2LKF2GYSSNQVTYZBL4D5GOQCDIM"
+      }
+    },
+    "test_0002_no_meta_content_256": {
+      "inputs": [
+        [
+          "GABVVC5DMJJGYKZ4ZBYVNYABFFYXG",
+          "IADWIK7A7JTUAQ2D6QARX7OBEIK3OOUAM42LOBLCZ4ZOGDLRHMDL6TQ"
+        ]
+      ],
+      "outputs": {
+        "iscc": "KUDVVC5DMJJGYKZ4ZBYVNYABFFYXGZBL4D5GOQCDIP2ACG75YERBLNY"
+      }
+    },
+    "test_0003_no_meta_content_128": {
+      "inputs": [
+        [
+          "GAAQQICFKJYKY4KU",
+          "IADWIK7A7JTUAQ2D6QARX7OBEIK3OOUAM42LOBLCZ4ZOGDLRHMDL6TQ"
+        ]
+      ],
+      "outputs": {
+        "iscc": "KUBQQICFKJYKY4KUMQV6B6THIBBUG"
+      }
+    },
+    "test_0004_ordering": {
+      "inputs": [
+        [
+          "EAARMJLTQCUWAND2",
+          "AAAYPXW445FTYNJ3",
+          "IADWIK7A7JTUAQ2D6QARX7OBEIK3OOUAM42LOBLCZ4ZOGDLRHMDL6TQ",
+          "GABVVC5DMJJGYKZ4ZBYVNYABFFYXG"
+        ]
+      ],
+      "outputs": {
+        "iscc": "KADYPXW445FTYNJ3CYSXHAFJMA2HUWULUNRFE3BLHRSCXYH2M5AEGQY"
+      }
+    }
+  },
+  "gen_iscc_id_v0": {
+    "test_0000_single_component": {
+      "inputs": [
+        0,
+        "EAA75Q74YXNZC4EK",
+        0
+      ],
+      "outputs": {
+        "iscc": "MAACB7WD7TC5XELQ"
+      }
+    },
+    "test_0001_single_component_uc1": {
+      "inputs": [
+        0,
+        "EAA75Q74YXNZC4EK",
+        1
+      ],
+      "outputs": {
+        "iscc": "MAASB7WD7TC5XELQAE"
+      }
+    },
+    "test_0002_single_component": {
+      "inputs": [
+        0,
+        "EAA75Q74YXNZC4EK",
+        0
+      ],
+      "outputs": {
+        "iscc": "MAACB7WD7TC5XELQ"
+      }
+    },
+    "test_0003_single_component_uc_2byte": {
+      "inputs": [
+        0,
+        "EAA75Q74YXNZC4EK",
+        257
+      ],
+      "outputs": {
+        "iscc": "MABCB7WD7TC5XELQQEBA"
+      }
+    },
+    "test_0004_multi_component": {
+      "inputs": [
+        1,
+        "AAAQIPKHHND6APX6EAA75Q74YXNZC4EK",
+        0
+      ],
+      "outputs": {
+        "iscc": "MEACB7X7777574L6"
+      }
+    },
+    "test_0005_single_instance_code": {
+      "inputs": [
+        0,
+        "IAA5OSMB56TQUDEI",
+        0
+      ],
+      "outputs": {
+        "iscc": "MAAEBV2JQHX2OCQM"
+      }
     }
   }
 }

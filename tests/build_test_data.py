@@ -1,10 +1,12 @@
 # -*- coding: utf-8 -*-
 """Build conformance `data.json` from `inputs.yaml`"""
+import io
+
 import yaml
 import json
 import pathlib
 import iscc_core
-from iscc_core.schema import BaseISCC
+from iscc_core.schema import IsccBase
 
 HERE = pathlib.Path(__file__).parent.absolute()
 INPUTS = HERE / "inputs.yaml"
@@ -20,7 +22,7 @@ def main():
             func = getattr(iscc_core, funcname)
             args = testdata["inputs"]
             result = func(*args)
-            if isinstance(result, BaseISCC):
+            if isinstance(result, IsccBase):
                 testdata["outputs"] = result.dict(exclude_unset=True, exclude_none=True)
             else:
                 testdata["outputs"] = result
