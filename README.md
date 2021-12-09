@@ -128,14 +128,15 @@ You may also want join our developer chat on Telegram at <https://t.me/iscc_dev>
 
 ## Changelog
 
-### [0.1.7] - next
+### [0.1.7] - 2021-12-09
 
 - Add dotenv for enviroment based configuration
 - Cleanup package toplevel imports
 - Return schema objects for iscc_code and iscc_id
 - Exclude unset and none values from result dicts
-- Add conformance test system
-- Refactor schema
+- Add support for multiple code combinations for ISCC-CODE
+- Add support for ISCC-ID based on singular Instance-Code
+- Add initial conformance test system
 
 ### [0.1.6] - 2021-11-29
 - Show counter for ISCC-ID in Code.explain

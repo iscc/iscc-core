@@ -1,4 +1,4 @@
-__version__ = "0.1.6"
+__version__ = "0.1.7"
 from iscc_core.iscc_code import (
     gen_iscc_code,
     gen_iscc_code_v0,
