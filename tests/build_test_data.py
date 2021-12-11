@@ -1,5 +1,8 @@
 # -*- coding: utf-8 -*-
 """Build conformance `data.json` from `inputs.yaml`"""
+import io
+from copy import copy
+
 import yaml
 import json
 import pathlib
@@ -59,7 +62,10 @@ def main():
         for testname, testdata in tests.items():
             func = getattr(iscc_core, funcname)
             args = testdata["inputs"]
-            result = func(*args)
+            dargs = copy(args)
+            if isinstance(dargs[0], str) and dargs[0].startswith("stream:"):
+                dargs[0] = io.BytesIO(bytes.fromhex(dargs[0].lstrip("stream:")))
+            result = func(*dargs)
             if isinstance(result, IsccBase):
                 testdata["outputs"] = result.dict(exclude_unset=True, exclude_none=True)
             else:

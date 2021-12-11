@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 """Run conformance tests"""
+import io
 import pytest
 import json
 import pathlib
@@ -17,6 +18,15 @@ def read_test_data():
     for func_name, tests in data.items():
         func_obj = getattr(iscc_core, func_name)
         for test_name, test_values in tests.items():
+
+            # create byte-stream from first argument strings that start with `stream:`:
+            if isinstance(test_values["inputs"][0], str) and test_values["inputs"][
+                0
+            ].startswith("stream:"):
+                test_values["inputs"][0] = io.BytesIO(
+                    bytes.fromhex(test_values["inputs"][0].lstrip("stream:"))
+                )
+
             flat.append((func_obj, test_values["inputs"], test_values["outputs"]))
     return flat
 
