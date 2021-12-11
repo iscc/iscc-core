@@ -60,8 +60,15 @@ def gen_video_code_v0(frame_sigs, bits=opts.video_bits):
 
 
 def soft_hash_video_v0(frame_sigs, bits=opts.video_bits):
-    # type: (Sequence[Tuple[int]]) -> bytes
-    """Compute video hash v0 from MP7 frame signatures."""
+    # type: (Sequence[Sequence[int]], int) -> bytes
+    """Compute video hash v0 from MP7 frame signatures.
+
+    :param Sequence[Sequence[int]] frame_sigs: 2D matrix of MP7 frame signatures
+    :param int bits: Bit-length resulting Instance-Code (multiple of 64)
+    """
+
+    if not isinstance(frame_sigs[0], tuple):
+        frame_sigs = [tuple(sig) for sig in frame_sigs]
     sigs = set(frame_sigs)
     vecsum = [sum(col) for col in zip(*sigs)]
     video_hash_digest = wtahash(vecsum, bits)
