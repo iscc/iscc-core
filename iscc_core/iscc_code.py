@@ -46,13 +46,11 @@ def gen_iscc_code_v0(codes):
     """
 
     # Validate combinatorial constraints
-    valid_mt_mix = set(
-        [
-            (co.MT.META, co.MT.CONTENT, co.MT.DATA, co.MT.INSTANCE),
-            (co.MT.CONTENT, co.MT.DATA, co.MT.INSTANCE),
-            (co.MT.DATA, co.MT.INSTANCE),
-        ]
-    )
+    valid_mt_mix = {
+        (co.MT.META, co.MT.CONTENT, co.MT.DATA, co.MT.INSTANCE),
+        (co.MT.CONTENT, co.MT.DATA, co.MT.INSTANCE),
+        (co.MT.DATA, co.MT.INSTANCE),
+    }
     decoded = sorted(
         [co.read_header(co.decode_base32(code)) for code in codes], key=itemgetter(0)
     )
