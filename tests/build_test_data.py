@@ -11,6 +11,46 @@ INPUTS = HERE / "inputs.yaml"
 TEST_DATA = HERE / "../iscc_core/data.json"
 
 
+def dump_compact(data):
+    """Dump JSON with maximum depth 4 indent for better readability"""
+    depth = 4
+    space = " " * 2
+    s = json.dumps(data, indent=2, ensure_ascii=False)
+    lines = s.splitlines()
+    N = len(lines)
+
+    def is_odl(i):
+        return i in range(N) and lines[i].startswith(space * (depth + 1))
+
+    def is_obl(i):
+        return not is_odl(i) and is_odl(i + 1)
+
+    def is_cbl(i):
+        return not is_odl(i) and is_odl(i - 1)
+
+    def shorten_line(line_index):
+        if not is_obl(line_index):
+            return lines[line_index]
+        start = line_index
+        end = start
+        while not is_cbl(end):
+            end += 1
+        has_trailing_comma = lines[end][-1] == ","
+        _lines = [
+            lines[start][-1],
+            *lines[start + 1 : end],
+            lines[end].replace(",", ""),
+        ]
+        d = json.dumps(json.loads(" ".join(_lines)), ensure_ascii=False)
+        return lines[line_index][:-1] + d + ("," if has_trailing_comma else "")
+
+    s = "\n".join(
+        [shorten_line(i) for i in range(N) if not is_odl(i) and not is_cbl(i)]
+    )
+
+    return s
+
+
 def main():
     with open(INPUTS, "rt", encoding="utf-8") as stream:
         data = yaml.safe_load(stream)
@@ -25,7 +65,8 @@ def main():
             else:
                 testdata["outputs"] = result
     with open(TEST_DATA, "w", encoding="utf-8") as outf:
-        json.dump(data, outf, indent=2, ensure_ascii=False)
+        out_data = dump_compact(data)
+        outf.write(out_data)
 
 
 if __name__ == "__main__":
