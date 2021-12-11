@@ -17,28 +17,27 @@ from iscc_core.options import opts
 from iscc_core.dct import dct
 
 
-def gen_image_code(img, bits=opts.image_bits):
-    # type: (Stream, int) -> ContentCodeImage
+def gen_image_code(pixels, bits=opts.image_bits):
+    # type: (Sequence[int], int) -> ContentCodeImage
     """Create an ISCC Content-Code Image with the latest standard algorithm.
 
-    :param Stream img: Image data stream.
+    :param Sequence[int] pixels : Normalized image pixels (32x32 flattened gray values).
     :param int bits: Bit-length of ISCC Content-Code Image (default 64).
     :return: ISCC Content-Code Image.
     :rtype: ContentCodeImage
     """
-    return gen_image_code_v0(img, bits)
+    return gen_image_code_v0(pixels, bits)
 
 
-def gen_image_code_v0(img, bits=opts.image_bits):
-    # type: (Stream, int) -> ContentCodeImage
+def gen_image_code_v0(pixels, bits=opts.image_bits):
+    # type: (Sequence[int], int) -> ContentCodeImage
     """Create an ISCC Content-Code Image with algorithm v0.
 
-    :param Stream img: Image data stream.
+    :param Sequence[int] pixels : Normalized image pixels (32x32 flattened gray values)
     :param int bits: Bit-length of ISCC Content-Code Image (default 64).
     :return: ISCC Content-Code Image.
     :rtype: ContentCodeImage
     """
-    pixels, width, height = normalize_image(img)
     digest = soft_hash_image_v0(pixels, bits=bits)
     image_code = codec.encode_component(
         mtype=codec.MT.CONTENT,
@@ -47,14 +46,14 @@ def gen_image_code_v0(img, bits=opts.image_bits):
         length=bits,
         digest=digest,
     )
-    return ContentCodeImage(iscc=image_code, width=width, height=height)
+    return ContentCodeImage(iscc=image_code)
 
 
 def normalize_image(img):
     # type: (Stream) -> Tuple[Sequence[int], int, int]
     """Normalize image for hash calculation.
 
-    - Add white background to images with alpha transparency
+    - Add white background to image with alpha transparency
     - Convert to grayscale
     - Resize (bicubic) to 32x32 pixels and flatten
 
@@ -64,9 +63,8 @@ def normalize_image(img):
     """
 
     im = Image.open(img)
-    width, height = im.size
 
-    # Add white background to images that have alpha transparency
+    # Add white background to image that have alpha transparency
     if im.mode in ("RGBA", "LA") or (im.mode == "P" and "transparency" in im.info):
         alpha = im.convert("RGBA").split()[-1]
         bg = Image.new("RGBA", im.size, (255, 255, 255, 255))
@@ -82,7 +80,7 @@ def normalize_image(img):
     # A flattened sequence of grayscale pixel values (1024 pixels)
     pixels = im.getdata()
 
-    return pixels, width, height
+    return pixels
 
 
 def soft_hash_image_v0(pixels, bits=opts.image_bits):
