@@ -769,6 +769,27 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#iscc_core.options.CoreOptions.image_transpose" class="md-nav__link">
+    image_transpose
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#iscc_core.options.CoreOptions.image_fill" class="md-nav__link">
+    image_fill
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#iscc_core.options.CoreOptions.image_trim" class="md-nav__link">
+    image_trim
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#iscc_core.options.CoreOptions.audio_bits" class="md-nav__link">
     audio_bits
   </a>
@@ -1012,6 +1033,27 @@
           <li class="md-nav__item">
   <a href="#iscc_core.options.CoreOptions.image_bits" class="md-nav__link">
     image_bits
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#iscc_core.options.CoreOptions.image_transpose" class="md-nav__link">
+    image_transpose
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#iscc_core.options.CoreOptions.image_fill" class="md-nav__link">
+    image_fill
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#iscc_core.options.CoreOptions.image_trim" class="md-nav__link">
+    image_trim
   </a>
   
 </li>
@@ -1396,6 +1438,72 @@ CoreOptions            (<span title="pydantic.env_settings.BaseSettings">BaseSet
     <div class="doc doc-contents ">
 
       <p>Default length of generated Content-Code Image in bits</p>
+    </div>
+
+  </div>
+
+
+
+  <div class="doc doc-object doc-attribute">
+
+
+
+<h6 id="iscc_core.options.CoreOptions.image_transpose" class="doc doc-heading">
+<code class="highlight language-python"><span class="n">image_transpose</span><span class="p">:</span> <span class="nb">bool</span></code>
+
+  <span class="doc doc-properties">
+      <small class="doc doc-property doc-property-pydantic-field"><code>pydantic-field</code></small>
+  </span>
+
+</h6>
+
+    <div class="doc doc-contents ">
+
+      <p>Transpose image according to EXIF Orientation tag before hashing</p>
+    </div>
+
+  </div>
+
+
+
+  <div class="doc doc-object doc-attribute">
+
+
+
+<h6 id="iscc_core.options.CoreOptions.image_fill" class="doc doc-heading">
+<code class="highlight language-python"><span class="n">image_fill</span><span class="p">:</span> <span class="nb">bool</span></code>
+
+  <span class="doc doc-properties">
+      <small class="doc doc-property doc-property-pydantic-field"><code>pydantic-field</code></small>
+  </span>
+
+</h6>
+
+    <div class="doc doc-contents ">
+
+      <p>Add gray background to image if it has alpha transparency</p>
+    </div>
+
+  </div>
+
+
+
+  <div class="doc doc-object doc-attribute">
+
+
+
+<h6 id="iscc_core.options.CoreOptions.image_trim" class="doc doc-heading">
+<code class="highlight language-python"><span class="n">image_trim</span><span class="p">:</span> <span class="nb">bool</span></code>
+
+  <span class="doc doc-properties">
+      <small class="doc doc-property doc-property-pydantic-field"><code>pydantic-field</code></small>
+  </span>
+
+</h6>
+
+    <div class="doc doc-contents ">
+
+      <p>Crop empty borders of images before Image-Code generation</p>
     </div>
 
   </div>

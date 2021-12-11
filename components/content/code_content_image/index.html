@@ -460,6 +460,27 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#iscc_core.code_content_image.transpose_image" class="md-nav__link">
+    transpose_image()
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#iscc_core.code_content_image.fill_image" class="md-nav__link">
+    fill_image()
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#iscc_core.code_content_image.trim_image" class="md-nav__link">
+    trim_image()
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#iscc_core.code_content_image.soft_hash_image_v0" class="md-nav__link">
     soft_hash_image_v0()
   </a>
@@ -817,6 +838,27 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#iscc_core.code_content_image.transpose_image" class="md-nav__link">
+    transpose_image()
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#iscc_core.code_content_image.fill_image" class="md-nav__link">
+    fill_image()
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#iscc_core.code_content_image.trim_image" class="md-nav__link">
+    trim_image()
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#iscc_core.code_content_image.soft_hash_image_v0" class="md-nav__link">
     soft_hash_image_v0()
   </a>
@@ -1002,11 +1044,6 @@ dct-matrix against their median values to set the hash-bits.</p>
     <div class="doc doc-contents ">
 
       <p>Normalize image for hash calculation.</p>
-<ul>
-<li>Add white background to image with alpha transparency</li>
-<li>Convert to grayscale</li>
-<li>Resize (bicubic) to 32x32 pixels and flatten</li>
-</ul>
 
 <p><strong>Parameters:</strong></p>
 <table>
@@ -1039,6 +1076,169 @@ dct-matrix against their median values to set the hash-bits.</p>
     <tr>
       <td><code>Tuple[Sequence[int], int, int]</code></td>
       <td><p>A tuple of (pixels_1024, original_width, original_height</p></td>
+    </tr>
+  </tbody>
+</table>
+    </div>
+
+  </div>
+
+
+
+  <div class="doc doc-object doc-function">
+
+
+
+<h4 id="iscc_core.code_content_image.transpose_image" class="doc doc-heading">
+<code class="highlight language-python"><span class="n">transpose_image</span><span class="p">(</span><span class="n">imo</span><span class="p">)</span></code>
+
+
+</h4>
+
+    <div class="doc doc-contents ">
+
+      <p>Transpose image according to EXIF Orientation tag</p>
+
+<p><strong>Parameters:</strong></p>
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Description</th>
+      <th>Default</th>
+    </tr>
+  </thead>
+  <tbody>
+      <tr>
+        <td><code>imo</code></td>
+        <td><code>Image</code></td>
+        <td><p>PIL.Image object</p></td>
+        <td><em>required</em></td>
+      </tr>
+  </tbody>
+</table>
+<p><strong>Returns:</strong></p>
+<table>
+  <thead>
+    <tr>
+      <th>Type</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code>Image.Image</code></td>
+      <td><p>EXIF transposed image</p></td>
+    </tr>
+  </tbody>
+</table>
+    </div>
+
+  </div>
+
+
+
+  <div class="doc doc-object doc-function">
+
+
+
+<h4 id="iscc_core.code_content_image.fill_image" class="doc doc-heading">
+<code class="highlight language-python"><span class="n">fill_image</span><span class="p">(</span><span class="n">imo</span><span class="p">)</span></code>
+
+
+</h4>
+
+    <div class="doc doc-contents ">
+
+      <p>Add gray background to image if it has alpha transparency</p>
+
+<p><strong>Parameters:</strong></p>
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Description</th>
+      <th>Default</th>
+    </tr>
+  </thead>
+  <tbody>
+      <tr>
+        <td><code>imo</code></td>
+        <td><code>Image</code></td>
+        <td><p>PIL.Image object</p></td>
+        <td><em>required</em></td>
+      </tr>
+  </tbody>
+</table>
+<p><strong>Returns:</strong></p>
+<table>
+  <thead>
+    <tr>
+      <th>Type</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code>Image.Image</code></td>
+      <td><p>Image where alpha transparency is replaced with gray background.</p></td>
+    </tr>
+  </tbody>
+</table>
+    </div>
+
+  </div>
+
+
+
+  <div class="doc doc-object doc-function">
+
+
+
+<h4 id="iscc_core.code_content_image.trim_image" class="doc doc-heading">
+<code class="highlight language-python"><span class="n">trim_image</span><span class="p">(</span><span class="n">imo</span><span class="p">)</span></code>
+
+
+</h4>
+
+    <div class="doc doc-contents ">
+
+      <p>Trim uniform colored (empty) border.</p>
+<p>Takes the upper left pixel as reference to</p>
+
+<p><strong>Parameters:</strong></p>
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Description</th>
+      <th>Default</th>
+    </tr>
+  </thead>
+  <tbody>
+      <tr>
+        <td><code>imo</code></td>
+        <td><code>Image.Image</code></td>
+        <td><p>PIL.Image object</p></td>
+        <td><em>required</em></td>
+      </tr>
+  </tbody>
+</table>
+<p><strong>Returns:</strong></p>
+<table>
+  <thead>
+    <tr>
+      <th>Type</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code>Image.Image</code></td>
+      <td><p>Image with uniform colored (empty) border removed.</p></td>
     </tr>
   </tbody>
 </table>
