@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 import iscc_core
+from iscc_core.code_content_image import normalize_image
 
 image_path = "../docs/images/iscc-architecture.png"
 
@@ -12,7 +13,8 @@ print(f"Structure:     {meta_code.code_obj.explain}\n")
 
 with open(image_path, "rb") as stream:
 
-    image_code = iscc_core.gen_image_code(stream)
+    pixels = normalize_image(stream)
+    image_code = iscc_core.gen_image_code(pixels)
     print(f"Image-Code:    {image_code.iscc}")
     print(f"Structure:     {image_code.code_obj.explain}\n")
 

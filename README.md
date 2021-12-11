@@ -7,6 +7,9 @@
 > **iscc-core** is a Python library that implements the core algorithms of [ISCC v1.1](https://iscc.codes)
 (International Standard Content Code)
 
+| NOTE: This is a low level reference implementation. For easy generation of ISCC codes see: [iscc-cli](https://github.com/iscc/iscc-cli) |
+| --- |
+
 ## What is ISCC
 
 The **ISCC** (*International Standard Content Code*) is an identifier for digital media
@@ -48,6 +51,7 @@ pip install iscc-core
 
 ```python
 import iscc_core
+from iscc_core.code_content_image import normalize_image
 
 image_path = "../docs/images/iscc-architecture.png"
 
@@ -60,7 +64,8 @@ print(f"Structure:     {meta_code.code_obj.explain}\n")
 
 with open(image_path, "rb") as stream:
 
-    image_code = iscc_core.gen_image_code(stream)
+    pixels = normalize_image(stream)
+    image_code = iscc_core.gen_image_code(pixels)
     print(f"Image-Code:    {image_code.iscc}")
     print(f"Structure:     {image_code.code_obj.explain}\n")
 
