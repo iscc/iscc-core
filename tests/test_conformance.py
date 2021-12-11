@@ -1,36 +1,21 @@
 # -*- coding: utf-8 -*-
 """Run conformance tests"""
-import io
+from typing import Generator
 import pytest
-import json
-import pathlib
-import iscc_core
+from iscc_core import conformance
 
 
-HERE = pathlib.Path(__file__).parent.absolute()
-TEST_DATA = HERE / "../iscc_core/data.json"
+def test_generate_tests():
+    test_generator = conformance.generate_tests()
+    assert isinstance(test_generator, Generator)
 
 
-def read_test_data():
-    with open(TEST_DATA, "rb") as stream:
-        data = json.load(stream)
-    flat = []
-    for func_name, tests in data.items():
-        func_obj = getattr(iscc_core, func_name)
-        for test_name, test_values in tests.items():
-
-            # create byte-stream from first argument strings that start with `stream:`:
-            if isinstance(test_values["inputs"][0], str) and test_values["inputs"][
-                0
-            ].startswith("stream:"):
-                test_values["inputs"][0] = io.BytesIO(
-                    bytes.fromhex(test_values["inputs"][0].lstrip("stream:"))
-                )
-
-            flat.append((func_obj, test_values["inputs"], test_values["outputs"]))
-    return flat
+def test_confromance_selftest():
+    assert conformance.selftest()
 
 
-@pytest.mark.parametrize("function,inputs,outputs", read_test_data())
-def test_conformance(function, inputs, outputs):
-    assert function(*inputs).dict(exclude_unset=True, exclude_none=True) == outputs
+@pytest.mark.parametrize(
+    "testname,function,inputs,outputs", conformance.generate_tests()
+)
+def test_conformance(testname, function, inputs, outputs):
+    assert function(*inputs).dict() == outputs, f"FAILED {testname}"

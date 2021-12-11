@@ -21,7 +21,7 @@ def gen_image_code(pixels, bits=opts.image_bits):
     # type: (Sequence[int], int) -> ContentCodeImage
     """Create an ISCC Content-Code Image with the latest standard algorithm.
 
-    :param Sequence[int] pixels : Normalized image pixels (32x32 flattened gray values).
+    :param Sequence[int] pixels: Normalized image pixels (32x32 flattened gray values).
     :param int bits: Bit-length of ISCC Content-Code Image (default 64).
     :return: ISCC Content-Code Image.
     :rtype: ContentCodeImage
@@ -33,7 +33,7 @@ def gen_image_code_v0(pixels, bits=opts.image_bits):
     # type: (Sequence[int], int) -> ContentCodeImage
     """Create an ISCC Content-Code Image with algorithm v0.
 
-    :param Sequence[int] pixels : Normalized image pixels (32x32 flattened gray values)
+    :param Sequence[int] pixels: Normalized image pixels (32x32 flattened gray values)
     :param int bits: Bit-length of ISCC Content-Code Image (default 64).
     :return: ISCC Content-Code Image.
     :rtype: ContentCodeImage

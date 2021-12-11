@@ -58,7 +58,7 @@ markdown_extensions:
 
 nav:
   - Overview: index.md
-  - ISCC-CODE: iscc_code.md
+  - ISCC-Code: iscc_code.md
   - ISCC-ID: iscc_id.md
   - Components:
     - components/index.md
@@ -82,3 +82,4 @@ nav:
   - Codec: codec/codec.md
   - Options: options/options.md
   - Utilities: utilities/utils.md
+  - Conformance: conformance.md
