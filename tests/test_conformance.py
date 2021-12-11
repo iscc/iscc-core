@@ -7,7 +7,7 @@ import iscc_core
 
 
 HERE = pathlib.Path(__file__).parent.absolute()
-TEST_DATA = HERE / "data.json"
+TEST_DATA = HERE / "../iscc_core/data.json"
 
 
 def read_test_data():

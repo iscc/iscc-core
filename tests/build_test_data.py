@@ -1,7 +1,5 @@
 # -*- coding: utf-8 -*-
 """Build conformance `data.json` from `inputs.yaml`"""
-import io
-
 import yaml
 import json
 import pathlib
@@ -10,7 +8,7 @@ from iscc_core.schema import IsccBase
 
 HERE = pathlib.Path(__file__).parent.absolute()
 INPUTS = HERE / "inputs.yaml"
-TEST_DATA = HERE / "data.json"
+TEST_DATA = HERE / "../iscc_core/data.json"
 
 
 def main():
