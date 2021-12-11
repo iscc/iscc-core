@@ -8,13 +8,14 @@ dct-matrix against their median values to set the hash-bits.
 """
 from statistics import median
 from typing import Sequence, Tuple
-from PIL import Image
+from PIL import Image, ImageChops, ImageOps
 from more_itertools import chunked
 from iscc_core import codec
 from iscc_core.codec import Stream
 from iscc_core.schema import ContentCodeImage
 from iscc_core.options import opts
 from iscc_core.dct import dct
+from loguru import logger as log
 
 
 def gen_image_code(pixels, bits=opts.image_bits):
@@ -53,10 +54,6 @@ def normalize_image(img):
     # type: (Stream) -> Tuple[Sequence[int], int, int]
     """Normalize image for hash calculation.
 
-    - Add white background to image with alpha transparency
-    - Convert to grayscale
-    - Resize (bicubic) to 32x32 pixels and flatten
-
     :param Stream img: Image data stream.
     :return: A tuple of (pixels_1024, original_width, original_height
     :rtype: Tuple[Sequence[int], int, int]
@@ -64,12 +61,17 @@ def normalize_image(img):
 
     im = Image.open(img)
 
-    # Add white background to image that have alpha transparency
-    if im.mode in ("RGBA", "LA") or (im.mode == "P" and "transparency" in im.info):
-        alpha = im.convert("RGBA").split()[-1]
-        bg = Image.new("RGBA", im.size, (255, 255, 255, 255))
-        bg.paste(im, mask=alpha)
-        im = bg
+    # Transpose image according to EXIF Orientation tag
+    if opts.image_transpose:
+        im = transpose_image(im)
+
+    # Add gray background to image if it has alpha transparency
+    if opts.image_fill:
+        im = fill_image(im)
+
+    # Trim uniform colored (empty) border if there is one
+    if opts.image_trim:
+        im = trim_image(im)
 
     # Convert to grayscale
     im = im.convert("L")
@@ -81,6 +83,59 @@ def normalize_image(img):
     pixels = im.getdata()
 
     return pixels
+
+
+def transpose_image(imo):
+    # type: (Image.Image) -> Image.Image
+    """
+    Transpose image according to EXIF Orientation tag
+
+    :param Image imo: PIL.Image object
+    :return: EXIF transposed image
+    :rtype: Image.Image
+    """
+    imo = ImageOps.exif_transpose(imo)
+    log.debug(f"Image exif transpose applied")
+    return imo
+
+
+def fill_image(imo):
+    # type: (Image.Image) -> Image.Image
+    """
+    Add gray background to image if it has alpha transparency
+
+    :param Image imo: PIL.Image object
+    :return: Image where alpha transparency is replaced with gray background.
+    :rtype: Image.Image
+    """
+    if imo.mode in ("RGBA", "LA") or (imo.mode == "P" and "transparency" in imo.info):
+        if imo.mode != "RGBA":
+            imo = imo.convert("RGBA")
+        bg = Image.new("RGBA", imo.size, (126, 126, 126))
+        imo = Image.alpha_composite(bg, imo)
+        log.debug(f"Image transparency filled with gray")
+    return imo
+
+
+def trim_image(imo):
+    # type: (Image.Image) -> Image.Image
+    """Trim uniform colored (empty) border.
+
+    Takes the upper left pixel as reference to
+
+    :param Image.Image imo: PIL.Image object
+    :return: Image with uniform colored (empty) border removed.
+    :rtype: Image.Image
+    """
+
+    bg = Image.new(imo.mode, imo.size, imo.getpixel((0, 0)))
+    diff = ImageChops.difference(imo, bg)
+    diff = ImageChops.add(diff, diff)
+    bbox = diff.getbbox()
+    if bbox:
+        log.debug(f"Image has been trimmed")
+        return imo.crop(bbox)
+    return imo
 
 
 def soft_hash_image_v0(pixels, bits=opts.image_bits):

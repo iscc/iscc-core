@@ -4,6 +4,12 @@ import pytest
 from PIL import Image
 from iscc_core import code_content_image
 from iscc_samples import images
+import pathlib
+from iscc_core.options import opts
+
+
+HERE = pathlib.Path(__file__).parent.absolute()
+IMG_ALPHA = HERE / "alpha.png"
 
 
 def test_gen_image_code_v0():
@@ -89,6 +95,26 @@ def test_code_image_v0_white():
     assert (
         code_content_image.gen_image_code_v0(pixels, bits=256).iscc
         == "EEDYAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+    )
+
+
+def test_code_image_v0_opts_default():
+
+    pixels = code_content_image.normalize_image(IMG_ALPHA)
+    assert (
+        code_content_image.gen_image_code_v0(pixels, bits=256).iscc
+        == "EED7CZOOTM2GJQYZ4PFZYNTJZGDDEZ6OTM2GNQYZDTFZYNTJZWDDEOI"
+    )
+
+
+def test_code_image_v0_opts_inverted():
+    opts.image_transpose = False
+    opts.image_trim = False
+    opts.image_fill = False
+    pixels = code_content_image.normalize_image(IMG_ALPHA)
+    assert (
+        code_content_image.gen_image_code_v0(pixels, bits=256).iscc
+        == "EEDQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
     )
 
 
