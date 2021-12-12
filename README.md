@@ -4,11 +4,11 @@
 [![Version](https://img.shields.io/pypi/v/iscc-core.svg)](https://pypi.python.org/pypi/iscc-core/)
 [![Downloads](https://pepy.tech/badge/iscc-core)](https://pepy.tech/project/iscc-core)
 
-> **iscc-core** is a Python library that implements the core algorithms of [ISCC v1.1](https://iscc.codes)
+> `iscc-core` is a Python library that implements the core algorithms of the [ISCC](https://iscc.codes)
 (International Standard Content Code)
 
-| NOTE: This is a low level reference implementation. For easy generation of ISCC codes see: [iscc-cli](https://github.com/iscc/iscc-cli) |
-| --- |
+| NOTE: This is a low level reference implementation. `iscc-core` does not support content/metadata detection, extraction or preprocessing. For easy generation of ISCC codes see: [iscc-cli](https://github.com/iscc/iscc-cli) |
+|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 
 ## What is ISCC
 
