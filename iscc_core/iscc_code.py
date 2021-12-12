@@ -11,9 +11,9 @@ four components together with a single common header:
 
 The following combinations of components are possible:
 
-- Meta, Content, Data, Instance (64-bit per component)
-- Content, Data, Instance (64-bit per component)
-- Data, Instance (64 or 128-bit per component)
+- Meta, Content, Data, Instance (256-bit / 64-bit per component)
+- Content, Data, Instance (192-bit / 64-bit per component)
+- Data, Instance (256 or 128 bit / 64 or 128-bit per component)
 """
 from operator import itemgetter
 from typing import Iterable
@@ -51,6 +51,9 @@ def gen_iscc_code_v0(codes):
         (co.MT.CONTENT, co.MT.DATA, co.MT.INSTANCE),
         (co.MT.DATA, co.MT.INSTANCE),
     }
+
+    # TODO: add suport for Semantic-Code
+
     decoded = sorted(
         [co.read_header(co.decode_base32(code)) for code in codes], key=itemgetter(0)
     )

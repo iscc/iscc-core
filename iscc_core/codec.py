@@ -2,7 +2,7 @@
 """
 The `iscc_core.codec` module provides encoding, decoding and transcoding related functions.
 
-#ISCC Component Structure:
+## ISCC Component Structure
 
 **Header:** `<type> <subtype> <version> <length>` each coded as a variable-length 4-bit
 sequence.
@@ -12,14 +12,13 @@ sequence.
 import enum
 import math
 import mmap
+import uvarint
 from io import BufferedReader, BytesIO
 from os import urandom
 from random import choice
 from typing import BinaryIO, List, Tuple, Union
-import uvarint
 from bitarray import bitarray, frozenbitarray
-from bitarray._util import count_xor
-from bitarray.util import ba2hex, int2ba, ba2int
+from bitarray.util import ba2hex, int2ba, ba2int, count_xor
 from base64 import b32encode, b32decode
 
 try:
@@ -113,6 +112,7 @@ def write_header(mtype, stype, version=0, length=64):
     :rtype: bytes
 
     """
+    # TODO verify that all header params and there combination is valid
     if mtype == MT.ID:
         # ISCC-ID length denotes the number of bytes of the trailing counter
         assert length >= 64, "ISCC-ID minimum length 64-bits".format(length)
@@ -145,6 +145,8 @@ def read_header(data):
 
     # interpret length value
     length, data = _read_varnibble(data)
+
+    # TODO: verify correctness of decoded data.
 
     if result[0] == MT.ID:
         bit_length = 64 + (length * 8)
