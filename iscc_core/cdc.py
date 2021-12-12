@@ -8,10 +8,10 @@ import io
 from math import log2
 from typing import Generator
 from iscc_core.codec import Data
-from iscc_core.options import opts
+from iscc_core.options import core_opts
 
 
-def data_chunks(data, utf32, avg_chunk_size=opts.cdc_avg_chunk_size):
+def data_chunks(data, utf32, avg_chunk_size=core_opts.cdc_avg_chunk_size):
     # type: (Data, bool, int) -> Generator[bytes]
     """A generator that yields data-dependent chunks for `data`.
 
@@ -30,7 +30,7 @@ def data_chunks(data, utf32, avg_chunk_size=opts.cdc_avg_chunk_size):
     """
 
     stream = io.BytesIO(data)
-    buffer = stream.read(opts.io_read_size)
+    buffer = stream.read(core_opts.io_read_size)
     if not buffer:
         yield b""
 
@@ -39,7 +39,7 @@ def data_chunks(data, utf32, avg_chunk_size=opts.cdc_avg_chunk_size):
     buffer = memoryview(buffer)
     while buffer:
         if len(buffer) <= ma:
-            buffer = memoryview(bytes(buffer) + stream.read(opts.io_read_size))
+            buffer = memoryview(bytes(buffer) + stream.read(core_opts.io_read_size))
         cut_point = cdc_offset(buffer, mi, ma, cs, mask_s, mask_l)
 
         # Make sure cut points are at 4-byte aligned for utf32 encoded text
@@ -69,13 +69,13 @@ def cdc_offset(buffer, mi, ma, cs, mask_s, mask_l):
     size = len(buffer)
     barrier = min(cs, size)
     while i < barrier:
-        pattern = (pattern >> 1) + opts.cdc_gear[buffer[i]]
+        pattern = (pattern >> 1) + core_opts.cdc_gear[buffer[i]]
         if not pattern & mask_s:
             return i + 1
         i += 1
     barrier = min(ma, size)
     while i < barrier:
-        pattern = (pattern >> 1) + opts.cdc_gear[buffer[i]]
+        pattern = (pattern >> 1) + core_opts.cdc_gear[buffer[i]]
         if not pattern & mask_l:
             return i + 1
         i += 1

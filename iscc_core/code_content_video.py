@@ -19,14 +19,14 @@ The relevant frame signatures can be parsed from the following elements in sig.x
 from typing import Sequence, Tuple
 from iscc_core.wtahash import wtahash
 from iscc_core import codec
-from iscc_core.options import opts
+from iscc_core.options import core_opts
 from iscc_core.schema import ContentCodeVideo
 
 
 FrameSig = Tuple[int]
 
 
-def gen_video_code(frame_sigs, bits=opts.video_bits):
+def gen_video_code(frame_sigs, bits=core_opts.video_bits):
     # type: (Sequence[FrameSig], int) -> ContentCodeVideo
     """Create an ISCC Content-Code Video with the latest standard algorithm.
 
@@ -38,7 +38,7 @@ def gen_video_code(frame_sigs, bits=opts.video_bits):
     return gen_video_code_v0(frame_sigs, bits)
 
 
-def gen_video_code_v0(frame_sigs, bits=opts.video_bits):
+def gen_video_code_v0(frame_sigs, bits=core_opts.video_bits):
     # type: (Sequence[FrameSig], int) -> ContentCodeVideo
     """Create an ISCC Content-Code Video with algorithm v0.
 
@@ -59,7 +59,7 @@ def gen_video_code_v0(frame_sigs, bits=opts.video_bits):
     return video_code_obj
 
 
-def soft_hash_video_v0(frame_sigs, bits=opts.video_bits):
+def soft_hash_video_v0(frame_sigs, bits=core_opts.video_bits):
     # type: (Sequence[Sequence[int]], int) -> bytes
     """Compute video hash v0 from MP7 frame signatures.
 

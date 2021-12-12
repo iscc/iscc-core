@@ -8,12 +8,12 @@ from iscc_core.cdc import data_chunks
 from iscc_core.minhash import minhash_256, minhash_64
 from iscc_core import codec
 from iscc_core.codec import Data, Stream, encode_base64
-from iscc_core.options import opts
+from iscc_core.options import core_opts
 from iscc_core.schema import DataCode
 import xxhash
 
 
-def gen_data_code(stream, bits=opts.data_bits):
+def gen_data_code(stream, bits=core_opts.data_bits):
     # type: (Stream, int) -> DataCode
     """
     Create a similarity preserving ISCC Data-Code with the latest standard algorithm.
@@ -26,7 +26,7 @@ def gen_data_code(stream, bits=opts.data_bits):
     return gen_data_code_v0(stream, bits)
 
 
-def gen_data_code_v0(stream, bits=opts.data_bits):
+def gen_data_code_v0(stream, bits=core_opts.data_bits):
     # type: (Stream, int) -> DataCode
     """
     Create an ISCC Data-Code with algorithm v0.
@@ -38,11 +38,11 @@ def gen_data_code_v0(stream, bits=opts.data_bits):
     """
 
     hasher = DataHasherV0()
-    data = stream.read(opts.io_read_size)
+    data = stream.read(core_opts.io_read_size)
 
     while data:
         hasher.push(data)
-        data = stream.read(opts.io_read_size)
+        data = stream.read(core_opts.io_read_size)
 
     data_code = hasher.code(bits=bits)
     data_code_obj = DataCode(iscc=data_code)
@@ -60,11 +60,11 @@ def soft_hash_data_v0(stream):
     :rtype: bytes
     """
     hasher = DataHasherV0()
-    data = stream.read(opts.io_read_size)
+    data = stream.read(core_opts.io_read_size)
 
     while data:
         hasher.push(data)
-        data = stream.read(opts.io_read_size)
+        data = stream.read(core_opts.io_read_size)
     return hasher.digest()
 
 
@@ -88,7 +88,7 @@ class DataHasherV0:
             data = self.tail + data
 
         for chunk in data_chunks(
-            data, utf32=False, avg_chunk_size=opts.data_avg_chunk_size
+            data, utf32=False, avg_chunk_size=core_opts.data_avg_chunk_size
         ):
             self.chunk_sizes.append(len(chunk))
             self.chunk_features.append(xxhash.xxh32_intdigest(chunk))
@@ -103,7 +103,7 @@ class DataHasherV0:
         self._finalize()
         return minhash_256(self.chunk_features)
 
-    def code(self, bits=opts.data_bits):
+    def code(self, bits=core_opts.data_bits):
         # type: (int) -> str
         """
         Encode digest as an ISCC Data-Code component.
@@ -131,7 +131,7 @@ class DataHasherV0:
         self._finalize()
         encoded_features = [
             encode_base64(minhash_64(cf))
-            for cf in chunked(self.chunk_features, opts.data_granular_factor)
+            for cf in chunked(self.chunk_features, core_opts.data_granular_factor)
         ]
         return encoded_features
 
@@ -143,7 +143,9 @@ class DataHasherV0:
         :rtype: List[int]
         """
         self._finalize()
-        sizes = [sum(fh) for fh in chunked(self.chunk_sizes, opts.data_granular_factor)]
+        sizes = [
+            sum(fh) for fh in chunked(self.chunk_sizes, core_opts.data_granular_factor)
+        ]
         return sizes
 
     def _finalize(self):

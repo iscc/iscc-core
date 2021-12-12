@@ -18,10 +18,10 @@ from more_itertools import divide
 from iscc_core.schema import ContentCodeAudio
 from iscc_core.simhash import similarity_hash
 from iscc_core import codec
-from iscc_core.options import opts
+from iscc_core.options import core_opts
 
 
-def gen_audio_code(cv, bits=opts.audio_bits):
+def gen_audio_code(cv, bits=core_opts.audio_bits):
     # type: (Iterable[int], int) -> ContentCodeAudio
     """Create an ISCC Content-Code Audio with the latest standard algorithm.
 
@@ -33,7 +33,7 @@ def gen_audio_code(cv, bits=opts.audio_bits):
     return gen_audio_code_v0(cv, bits)
 
 
-def gen_audio_code_v0(cv, bits=opts.audio_bits):
+def gen_audio_code_v0(cv, bits=core_opts.audio_bits):
     # type: (Iterable[int], int) -> ContentCodeAudio
     """Create an ISCC Content-Code Audio with algorithm v0.
 

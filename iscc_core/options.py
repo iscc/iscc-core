@@ -370,4 +370,4 @@ class CoreOptions(BaseSettings):
     )
 
 
-opts = CoreOptions()
+core_opts = CoreOptions()

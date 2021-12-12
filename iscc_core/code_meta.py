@@ -16,12 +16,12 @@ from iscc_core.codec import MT, ST, VS, encode_base64, encode_component
 from iscc_core.schema import MetaCode
 from iscc_core.utils import sliding_window
 from iscc_core.simhash import similarity_hash
-from iscc_core.options import opts
+from iscc_core.options import core_opts
 from blake3 import blake3
 from typing import Union
 
 
-def gen_meta_code(title, extra=None, bits=opts.meta_bits):
+def gen_meta_code(title, extra=None, bits=core_opts.meta_bits):
     # type: (str, Union[str,bytes,None], int) -> MetaCode
     """Create an ISCC Meta-Code using the latest standard algorithm.
 
@@ -51,7 +51,7 @@ def gen_meta_code(title, extra=None, bits=opts.meta_bits):
     return gen_meta_code_v0(title, extra=extra, bits=bits)
 
 
-def gen_meta_code_v0(title, extra=None, bits=opts.meta_bits):
+def gen_meta_code_v0(title, extra=None, bits=core_opts.meta_bits):
     # type: (str, Union[str,bytes,None], int) -> MetaCode
     """Create an ISCC Meta-Code with the algorithm version 0.
 
@@ -65,7 +65,7 @@ def gen_meta_code_v0(title, extra=None, bits=opts.meta_bits):
     # 1. Normalize title
     title = "" if title is None else title
     title = normalize_text(title)
-    title = trim_text(title, opts.meta_trim_title)
+    title = trim_text(title, core_opts.meta_trim_title)
 
     # 2. Normalize extra
     if extra in (None, ""):
@@ -74,10 +74,10 @@ def gen_meta_code_v0(title, extra=None, bits=opts.meta_bits):
     elif isinstance(extra, str):
         metahash_payload = extra.encode("utf-8")  # assumed JCS normalized if JSON
         extra = normalize_text(extra)
-        extra = trim_text(extra, opts.meta_trim_extra)
+        extra = trim_text(extra, core_opts.meta_trim_extra)
     elif isinstance(extra, bytes):
         metahash_payload = extra
-        extra = extra[: opts.meta_trim_extra]
+        extra = extra[: core_opts.meta_trim_extra]
     else:
         raise ValueError("parameter `extra` must be of type str or bytes!")
 
@@ -135,7 +135,7 @@ def soft_hash_meta_v0(title, extra=None):
     :rtype: bytes
     """
     title = title.lower()
-    title_n_grams = sliding_window(title, width=opts.meta_ngram_size_title)
+    title_n_grams = sliding_window(title, width=core_opts.meta_ngram_size_title)
     title_hash_digests = [blake3(s.encode("utf-8")).digest() for s in title_n_grams]
     simhash_digest = similarity_hash(title_hash_digests)
 
@@ -146,13 +146,15 @@ def soft_hash_meta_v0(title, extra=None):
         if isinstance(extra, bytes):
             # Raw bytes are handled per byte
             extra_n_grams = sliding_window(
-                extra, width=opts.meta_ngram_size_extra_binary
+                extra, width=core_opts.meta_ngram_size_extra_binary
             )
             extra_hash_digests = [blake3(ngram).digest() for ngram in extra_n_grams]
         elif isinstance(extra, str):
             # Text is lower cased and handled per character (multibyte)
             extra = extra.lower()
-            extra_n_grams = sliding_window(extra, width=opts.meta_ngram_size_extra_text)
+            extra_n_grams = sliding_window(
+                extra, width=core_opts.meta_ngram_size_extra_text
+            )
             extra_hash_digests = [
                 blake3(s.encode("utf-8")).digest() for s in extra_n_grams
             ]

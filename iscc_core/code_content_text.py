@@ -9,7 +9,7 @@ from typing import Union
 import xxhash
 from iscc_core.minhash import minhash_256
 from iscc_core.schema import ContentCodeText
-from iscc_core.options import opts
+from iscc_core.options import core_opts
 from iscc_core.utils import sliding_window
 from iscc_core import codec
 
@@ -17,7 +17,7 @@ from iscc_core import codec
 Text = Union[str, bytes]
 
 
-def gen_text_code(text, bits=opts.text_bits):
+def gen_text_code(text, bits=core_opts.text_bits):
     # type: (Text, int) -> ContentCodeText
     """Create an ISCC Content-Code-Text with the latest standard algorithm.
 
@@ -32,7 +32,7 @@ def gen_text_code(text, bits=opts.text_bits):
     return gen_text_code_v0(text, bits)
 
 
-def gen_text_code_v0(text, bits=opts.text_bits):
+def gen_text_code_v0(text, bits=core_opts.text_bits):
     # type: (Text, int) -> ContentCodeText
     """Create ISCC Content-Code-Text with algorithm v0
 
@@ -89,9 +89,9 @@ def normalize_text(text):
     chars = []
     for c in text_decomposed:
         cat = unicodedata.category(c)
-        if cat not in opts.text_unicode_filter:
+        if cat not in core_opts.text_unicode_filter:
             chars.append(c)
-        elif c in opts.text_whitespace:
+        elif c in core_opts.text_whitespace:
             chars.append(c)
     text_filtered = "".join(chars)
 
@@ -114,7 +114,7 @@ def soft_hash_text_v0(text):
     :return: 256-bit similarity preserving byte hash.
     :rtype: bytes
     """
-    ngrams = sliding_window(text, opts.text_ngram_size)
+    ngrams = sliding_window(text, core_opts.text_ngram_size)
     features = [xxhash.xxh32_intdigest(s.encode("utf-8")) for s in ngrams]
     hash_digest = minhash_256(features)
     return hash_digest

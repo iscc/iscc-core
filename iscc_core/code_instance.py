@@ -1,13 +1,13 @@
 # -*- coding: utf-8 -*-
 import blake3
 from typing import Optional, Tuple
-from iscc_core.options import opts
+from iscc_core.options import core_opts
 from iscc_core import codec
 from iscc_core.codec import Data, Stream
 from iscc_core.schema import InstanceCode
 
 
-def gen_instance_code(stream, bits=opts.instance_bits):
+def gen_instance_code(stream, bits=core_opts.instance_bits):
     # type: (Stream, int) -> InstanceCode
     """
     Create an ISCC Instance-Code with the latest standard algorithm.
@@ -20,7 +20,7 @@ def gen_instance_code(stream, bits=opts.instance_bits):
     return gen_instance_code_v0(stream, bits)
 
 
-def gen_instance_code_v0(stream, bits=opts.instance_bits):
+def gen_instance_code_v0(stream, bits=core_opts.instance_bits):
     # type: (Stream, int) -> InstanceCode
     """
     Create an ISCC Instance-Code with algorithm v0.
@@ -31,10 +31,10 @@ def gen_instance_code_v0(stream, bits=opts.instance_bits):
     :rtype: InstanceCode
     """
     hasher = InstanceHasherV0()
-    data = stream.read(opts.io_read_size)
+    data = stream.read(core_opts.io_read_size)
     while data:
         hasher.push(data)
-        data = stream.read(opts.io_read_size)
+        data = stream.read(core_opts.io_read_size)
 
     instance_code_obj = InstanceCode(
         iscc=hasher.code(bits=bits),
@@ -55,10 +55,10 @@ def hash_instance_v0(stream):
     :rtype: bytes
     """
     hasher = InstanceHasherV0()
-    data = stream.read(opts.io_read_size)
+    data = stream.read(core_opts.io_read_size)
     while data:
         hasher.push(data)
-        data = stream.read(opts.io_read_size)
+        data = stream.read(core_opts.io_read_size)
     return hasher.digest()
 
 
@@ -94,7 +94,7 @@ class InstanceHasherV0:
         """
         return self.hasher.digest()
 
-    def code(self, bits=opts.instance_bits):
+    def code(self, bits=core_opts.instance_bits):
         # type: (int) -> str
         """
         Encode digest as an ISCC Instance-Code component.
