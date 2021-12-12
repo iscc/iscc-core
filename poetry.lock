@@ -198,14 +198,6 @@ optional = false
 python-versions = "*"
 
 [[package]]
-name = "iscc-samples"
-version = "0.4.0"
-description = "A collection of media files as sample data for ISCC testing."
-category = "dev"
-optional = false
-python-versions = ">=3.6,<4.0"
-
-[[package]]
 name = "jinja2"
 version = "3.0.3"
 description = "A very fast and expressive template engine."
@@ -633,7 +625,7 @@ turbo = ["cython", "pybase64"]
 [metadata]
 lock-version = "1.1"
 python-versions = ">=3.6.1,<4.0"
-content-hash = "fad8d1044a371917cc3bff1f5eaf8cc598f513d1fef93bb7cd04980d37352e0c"
+content-hash = "e49d2b092f577a1d48fa40f0f930f7c81275829e1b6e2d6894ca85f7b20af01a"
 
 [metadata.files]
 aiocontextvars = [
@@ -819,9 +811,6 @@ importlib-metadata = [
 iniconfig = [
     {file = "iniconfig-1.1.1-py2.py3-none-any.whl", hash = "sha256:011e24c64b7f47f6ebd835bb12a743f2fbe9a26d4cecaa7f53bc4f35ee9da8b3"},
     {file = "iniconfig-1.1.1.tar.gz", hash = "sha256:bc3af051d7d14b2ee5ef9969666def0cd1a000e121eaea580d4a313df4b37f32"},
-]
-iscc-samples = [
-    {file = "iscc-samples-0.4.0.tar.gz", hash = "sha256:98925bec8adcc8c843ddd42b32d0c7972ed1c2ff635cb44144fd7c08929d2a2f"},
 ]
 jinja2 = [
     {file = "Jinja2-3.0.3-py3-none-any.whl", hash = "sha256:077ce6014f7b40d03b47d1f1ca4b0fc8328a692bd284016f806ed0eaca390ad8"},

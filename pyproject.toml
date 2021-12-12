@@ -53,7 +53,6 @@ black = { version = "*", allow-prereleases = true }
 mkdocs-material = "*"
 mkdocstrings = "*"
 toml = "*"
-iscc-samples = "*"
 PyYAML = "^6.0"
 
 [build-system]
