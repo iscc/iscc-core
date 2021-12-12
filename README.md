@@ -51,36 +51,33 @@ pip install iscc-core
 
 ```python
 import iscc_core
-from iscc_core.code_content_image import normalize_image
 
-image_path = "../docs/images/iscc-architecture.png"
 
-meta_code = iscc_core.gen_meta_code(
-    title="ISCC Architecure", extra="A schematic overview of the ISCC"
-)
+meta_code = iscc_core.gen_meta_code(title="ISCC Test Document!")
 
-print(f"Meta-Code:     {meta_code.iscc}")
+print(f"Meta-Code:     ISCC:{meta_code.iscc}")
 print(f"Structure:     {meta_code.code_obj.explain}\n")
 
-with open(image_path, "rb") as stream:
+# Extract text from file
+with open('demo.txt', "rt", encoding='utf-8') as stream:
+    text = stream.read()
+    text_code = iscc_core.gen_text_code_v0(text)
+    print(f"Text-Code:     ISCC:{text_code.iscc}")
+    print(f"Structure:     {text_code.code_obj.explain}\n")
 
-    pixels = normalize_image(stream)
-    image_code = iscc_core.gen_image_code(pixels)
-    print(f"Image-Code:    {image_code.iscc}")
-    print(f"Structure:     {image_code.code_obj.explain}\n")
-
-    stream.seek(0)
+# Process raw bytes of textfile
+with open('demo.txt', "rb") as stream:
     data_code = iscc_core.gen_data_code(stream)
-    print(f"Data-Code:     {data_code.iscc}")
+    print(f"Data-Code:     ISCC:{data_code.iscc}")
     print(f"Structure:     {data_code.code_obj.explain}\n")
 
     stream.seek(0)
     instance_code = iscc_core.gen_instance_code(stream)
-    print(f"Instance-Code: {instance_code.iscc}")
+    print(f"Instance-Code: ISCC:{instance_code.iscc}")
     print(f"Structure:     {instance_code.code_obj.explain}\n")
 
 iscc_code = iscc_core.gen_iscc_code(
-    (meta_code.iscc, image_code.iscc, data_code.iscc, instance_code.iscc)
+    (meta_code.iscc, text_code.iscc, data_code.iscc, instance_code.iscc)
 )
 print(f"ISCC-CODE:     ISCC:{iscc_code.iscc}")
 print(f"Structure:     {iscc_code.code_obj.explain}\n")
@@ -88,28 +85,29 @@ print(f"Structure:     {iscc_code.code_obj.explain}\n")
 iscc_id = iscc_core.gen_iscc_id(chain=1, iscc_code=iscc_code.iscc, uc=7)
 print(f"ISCC-ID:       ISCC:{iscc_id.iscc}")
 print(f"Structure:     ISCC:{iscc_id.code_obj.explain}")
+
 ```
 
 The output of this example is as follows:
 
 ```
-Meta-Code:     AAA5H3V6SZHWDUKX
-Structure:     META-NONE-V0-64-d3eebe964f61d157
+Meta-Code:     ISCC:AAA3MGR7CSJ3O3D3
+Structure:     META-NONE-V0-64-b61a3f1493b76c7b
 
-Image-Code:    EEA6YTUFF6LJRWFG
-Structure:     CONTENT-IMAGE-V0-64-ec4e852f9698d8a6
+Text-Code:     ISCC:EAASS2POFOWX6KDJ
+Structure:     CONTENT-TEXT-V0-64-2969ee2bad7f2869
 
-Data-Code:     GAAWYCDI6EHQFYBB
-Structure:     DATA-NONE-V0-64-6c0868f10f02e021
+Data-Code:     ISCC:GAAZ5SQ47ZQ34A3V
+Structure:     DATA-NONE-V0-64-9eca1cfe61be0375
 
-Instance-Code: IAAQK76UVXOBJHJ3
-Structure:     INSTANCE-NONE-V0-64-057fd4addc149d3b
+Instance-Code: ISCC:IAASQF7FY2TLVFRC
+Structure:     INSTANCE-NONE-V0-64-2817e5c6a6ba9622
 
-ISCC-CODE:     ISCC:KED5H3V6SZHWDUKX5RHIKL4WTDMKM3AINDYQ6AXAEECX7VFN3QKJ2OY
-Structure:     ISCC-IMAGE-V0-256-d3eebe964f61d157ec4e852f9698d8a66c0868f10f02e021057fd4addc149d3b
+ISCC-CODE:     ISCC:KAD3MGR7CSJ3O3D3FFU64K5NP4UGTHWKDT7GDPQDOUUBPZOGU25JMIQ
+Structure:     ISCC-TEXT-V0-256-b61a3f1493b76c7b2969ee2bad7f28699eca1cfe61be03752817e5c6a6ba9622
 
-ISCC-ID:       ISCC:MEASB3COVS3Q6AGQA4
-Structure:     ISCC:ID-BITCOIN-V0-72-20ec4eacb70f00d0-7
+ISCC-ID:       ISCC:MEASBPSKHY7KDPZIA4
+Structure:     ISCC:ID-BITCOIN-V0-72-20be4a3e3ea1bf28-7
 ```
 
 ## Documentation
