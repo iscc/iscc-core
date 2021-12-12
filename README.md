@@ -131,7 +131,16 @@ You may also want join our developer chat on Telegram at <https://t.me/iscc_dev>
 
 ## Changelog
 
-### [0.1.8] - next
+### [0.1.8] - 2021-12-12
+- Added conformance tests for all top level functions
+- Added conformance tests to source dir
+- Added conformance module with `selftest` function
+- Changed gen_image_code to accept normalized pixels instead of stream
+- Changed opts to core_opts
+- Removed image pre-processing and Pillow dependency
+- Fixed readability of conformance tests
+- Fixed soft_hash_video_v0 to accept non-tuple sequences
+- Updated example code
 
 ### [0.1.7] - 2021-12-09
 
