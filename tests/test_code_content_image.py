@@ -1,44 +1,21 @@
 # -*- coding: utf-8 -*-
-import io
 import pytest
-from PIL import Image
 from iscc_core import code_content_image
-from iscc_samples import images
-import pathlib
-from iscc_core.options import opts
 
 
-HERE = pathlib.Path(__file__).parent.absolute()
-IMG_ALPHA = HERE / "alpha.png"
-
-
-def test_gen_image_code_v0():
-    with open(images()[0].as_posix(), "rb") as stream:
-        pixels = code_content_image.normalize_image(stream)
-        ic_obj = code_content_image.gen_image_code_v0(pixels)
-        assert ic_obj.iscc == "EEA4GQZQTY6J5DTH"
+def test_gen_image_code_v0_default():
+    ic_obj = code_content_image.gen_image_code_v0(IMG_SAMPLE_PIXELS)
+    assert ic_obj.iscc == "EEA4GQZQTY6J5DTH"
 
 
 def test_gen_image_code_v0_32bit():
-    with open(images()[0].as_posix(), "rb") as stream:
-        pixels = code_content_image.normalize_image(stream)
-        ic_obj = code_content_image.gen_image_code_v0(pixels, 32)
-        assert ic_obj.iscc == "EEAMGQZQTY"
+    ic_obj = code_content_image.gen_image_code_v0(IMG_SAMPLE_PIXELS, bits=32)
+    assert ic_obj.iscc == "EEAMGQZQTY"
 
 
 def test_gen_image_code_v0_256bit():
-    with open(images()[0].as_posix(), "rb") as stream:
-        pixels = code_content_image.normalize_image(stream)
-        ic_obj = code_content_image.gen_image_code_v0(pixels, 256)
-        assert ic_obj.iscc == "EED4GQZQTY6J5DTHQ2DWCPDZHQOM6QZQTY6J5DTFZ2DWCPDZHQOMXDI"
-
-
-def test_normalize_image():
-    img = open(images()[0].as_posix(), "rb")
-    pixels = code_content_image.normalize_image(img)
-    assert len(pixels) == 1024
-    assert pixels[0] == 23
-    assert pixels[-1] == 51
+    ic_obj = code_content_image.gen_image_code_v0(IMG_SAMPLE_PIXELS, bits=256)
+    assert ic_obj.iscc == "EED4GQZQTY6J5DTHQ2DWCPDZHQOM6QZQTY6J5DTFZ2DWCPDZHQOMXDI"
 
 
 def test_hash_image_v0_white():
@@ -75,46 +52,29 @@ def test_hash_image_v0_sample():
     )
 
 
-def test_code_image_v0_white():
-    img = Image.new("RGBA", (200, 300), (255, 255, 255, 255))
-    stream = io.BytesIO()
-    img.save(stream, format="PNG")
-    stream.seek(0)
-    pixels = code_content_image.normalize_image(stream)
+def test_gen_code_image_v0_white():
     assert (
-        code_content_image.gen_image_code_v0(pixels, bits=64).iscc == "EEAYAAAAAAAAAAAA"
+        code_content_image.gen_image_code_v0(IMG_WHITE_PIXELS, bits=64).iscc
+        == "EEAYAAAAAAAAAAAA"
     )
     assert (
-        code_content_image.gen_image_code_v0(pixels, bits=96).iscc
+        code_content_image.gen_image_code_v0(IMG_WHITE_PIXELS, bits=96).iscc
         == "EEBIAAAAAAAAAAAAAAAAAAA"
     )
     assert (
-        code_content_image.gen_image_code_v0(pixels, bits=128).iscc
+        code_content_image.gen_image_code_v0(IMG_WHITE_PIXELS, bits=128).iscc
         == "EEBYAAAAAAAAAAAAAAAAAAAAAAAAA"
     )
     assert (
-        code_content_image.gen_image_code_v0(pixels, bits=256).iscc
+        code_content_image.gen_image_code_v0(IMG_WHITE_PIXELS, bits=256).iscc
         == "EEDYAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
     )
 
 
-def test_code_image_v0_opts_default():
-
-    pixels = code_content_image.normalize_image(IMG_ALPHA)
+def test_get_code_image_v0():
     assert (
-        code_content_image.gen_image_code_v0(pixels, bits=256).iscc
-        == "EED7CZOOTM2GJQYZ4PFZYNTJZGDDEZ6OTM2GNQYZDTFZYNTJZWDDEOI"
-    )
-
-
-def test_code_image_v0_opts_inverted():
-    opts.image_transpose = False
-    opts.image_trim = False
-    opts.image_fill = False
-    pixels = code_content_image.normalize_image(IMG_ALPHA)
-    assert (
-        code_content_image.gen_image_code_v0(pixels, bits=256).iscc
-        == "EEDQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+        code_content_image.gen_image_code_v0(IMG_SAMPLE_PIXELS, bits=256).iscc
+        == "EED4GQZQTY6J5DTHQ2DWCPDZHQOM6QZQTY6J5DTFZ2DWCPDZHQOMXDI"
     )
 
 

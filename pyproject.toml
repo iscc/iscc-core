@@ -40,7 +40,6 @@ xxhash = "*"
 more-itertools = "*"
 bitarray-hardbyte = "*"
 pybase64 = { version = "*", optional = true }
-Pillow = "*"
 pydantic = {extras = ["dotenv"], version = "^1.8.2"}
 uvarint = "^1.2.0"
 loguru = "^0.5.3"

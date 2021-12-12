@@ -75,19 +75,6 @@ class CoreOptions(BaseSettings):
         64, description="Default length of generated Content-Code Image in bits"
     )
 
-    image_transpose: bool = Field(
-        True,
-        description="Transpose image according to EXIF Orientation tag before hashing"
-    )
-
-    image_fill: bool = Field(
-        True, description="Add gray background to image if it has alpha transparency"
-    )
-
-    image_trim: bool = Field(
-        True, description="Crop empty borders of images before Image-Code generation"
-    )
-
     audio_bits: int = Field(
         64, description="Default length of generated Content-Code Audio in bits"
     )
