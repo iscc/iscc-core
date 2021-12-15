@@ -17,8 +17,7 @@ from more_itertools import divide
 
 from iscc_core.schema import ContentCodeAudio
 from iscc_core.simhash import similarity_hash
-from iscc_core import codec
-from iscc_core.options import core_opts
+from iscc_core import codec, core_opts
 
 
 def gen_audio_code(cv, bits=core_opts.audio_bits):

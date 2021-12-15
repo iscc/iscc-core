@@ -1,8 +1,7 @@
 # -*- coding: utf-8 -*-
 import blake3
 from typing import Optional, Tuple
-from iscc_core.options import core_opts
-from iscc_core import codec
+from iscc_core import codec, core_opts
 from iscc_core.codec import Data, Stream
 from iscc_core.schema import InstanceCode
 

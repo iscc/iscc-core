@@ -18,8 +18,7 @@ The relevant frame signatures can be parsed from the following elements in sig.x
 """
 from typing import Sequence, Tuple
 from iscc_core.wtahash import wtahash
-from iscc_core import codec
-from iscc_core.options import core_opts
+from iscc_core import codec, core_opts
 from iscc_core.schema import ContentCodeVideo
 
 

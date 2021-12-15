@@ -1,6 +1,5 @@
 # -*- coding: utf-8 -*-
 from typing import Tuple
-
 from pydantic import BaseSettings, Field
 
 
@@ -368,6 +367,3 @@ class CoreOptions(BaseSettings):
         ),
         description="Random gear vector",
     )
-
-
-core_opts = CoreOptions()

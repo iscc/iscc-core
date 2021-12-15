@@ -9,9 +9,8 @@ from typing import Union
 import xxhash
 from iscc_core.minhash import minhash_256
 from iscc_core.schema import ContentCodeText
-from iscc_core.options import core_opts
 from iscc_core.utils import sliding_window
-from iscc_core import codec
+from iscc_core import codec, core_opts
 
 
 Text = Union[str, bytes]

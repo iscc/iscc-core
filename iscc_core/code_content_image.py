@@ -18,9 +18,8 @@ Images must be normalized before using gen_image_code. Prepare images as follows
 from statistics import median
 from typing import Sequence
 from more_itertools import chunked
-from iscc_core import codec
+from iscc_core import codec, core_opts
 from iscc_core.schema import ContentCodeImage
-from iscc_core.options import core_opts
 from iscc_core.dct import dct
 
 

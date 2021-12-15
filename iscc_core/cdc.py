@@ -8,7 +8,7 @@ import io
 from math import log2
 from typing import Generator
 from iscc_core.codec import Data
-from iscc_core.options import core_opts
+from iscc_core import core_opts
 
 
 def data_chunks(data, utf32, avg_chunk_size=core_opts.cdc_avg_chunk_size):

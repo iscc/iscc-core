@@ -6,9 +6,8 @@ from typing import List, Optional, Tuple
 from more_itertools import chunked
 from iscc_core.cdc import data_chunks
 from iscc_core.minhash import minhash_256, minhash_64
-from iscc_core import codec
+from iscc_core import codec, core_opts
 from iscc_core.codec import Data, Stream, encode_base64
-from iscc_core.options import core_opts
 from iscc_core.schema import DataCode
 import xxhash
 

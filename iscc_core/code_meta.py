@@ -16,7 +16,7 @@ from iscc_core.codec import MT, ST, VS, encode_base64, encode_component
 from iscc_core.schema import MetaCode
 from iscc_core.utils import sliding_window
 from iscc_core.simhash import similarity_hash
-from iscc_core.options import core_opts
+from iscc_core import core_opts
 from blake3 import blake3
 from typing import Union
 
