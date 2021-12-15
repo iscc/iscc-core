@@ -1,8 +1,10 @@
 __version__ = "0.1.9"
+from iscc_core import options
 
-from iscc_core.options import CoreOptions
+core_opts = options.CoreOptions()
+options_conformant = options.check_options(core_opts)
 
-core_opts = CoreOptions()
+from iscc_core import conformance
 
 from iscc_core.iscc_code import (
     gen_iscc_code,

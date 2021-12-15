@@ -1,35 +1,35 @@
 # -*- coding: utf-8 -*-
-from iscc_core import code_meta
+import iscc_core
 
 
 def test_gen_meta_code_title_none():
-    m = code_meta.gen_meta_code(None)
+    m = iscc_core.code_meta.gen_meta_code(None)
     assert m.iscc == "AAA26E2JXH27TING"
 
 
 def test_gen_meta_code_title_empty_str():
-    m = code_meta.gen_meta_code("")
+    m = iscc_core.code_meta.gen_meta_code("")
     assert m.iscc == "AAA26E2JXH27TING"
 
 
 def test_gen_meta_code_title_with_extra():
     empty = "AAA26E2JXH27TING"
-    m = code_meta.gen_meta_code(None, None)
+    m = iscc_core.code_meta.gen_meta_code(None, None)
     assert m.iscc == empty
-    m = code_meta.gen_meta_code(None, "")
+    m = iscc_core.code_meta.gen_meta_code(None, "")
     assert m.iscc == empty
-    m = code_meta.gen_meta_code("", None)
+    m = iscc_core.code_meta.gen_meta_code("", None)
     assert m.iscc == empty
-    m = code_meta.gen_meta_code("", "")
+    m = iscc_core.code_meta.gen_meta_code("", "")
     assert m.iscc == empty
 
 
 def test_gen_meta_code_text_vs_bytes():
-    m = code_meta.gen_meta_code("", "hello world")
+    m = iscc_core.code_meta.gen_meta_code("", "hello world")
     assert m.iscc == "AAA26E2JXH733ZNM"
-    m = code_meta.gen_meta_code("", b"hello world")
+    m = iscc_core.code_meta.gen_meta_code("", b"hello world")
     assert m.iscc == "AAA26E2JXH733ZNM"
-    m = code_meta.gen_meta_code("", b"\x80")  # not utf-8 decodable
+    m = iscc_core.code_meta.gen_meta_code("", b"\x80")  # not utf-8 decodable
     assert m.iscc == "AAA26E2JXG56NKPV"
     assert m == dict(
         iscc="AAA26E2JXG56NKPV",
@@ -40,37 +40,37 @@ def test_gen_meta_code_text_vs_bytes():
 
 
 def test_gen_meta_code_title_only():
-    m = code_meta.gen_meta_code("Hello World")
+    m = iscc_core.code_meta.gen_meta_code("Hello World")
     assert m.iscc == "AAA77PPFVS6JDUQB"
 
 
 def test_hash_meta_v0_empty_title_str():
-    m = code_meta.soft_hash_meta_v0("")
+    m = iscc_core.code_meta.soft_hash_meta_v0("")
     assert len(m) == 32
     assert m.hex() == "af1349b9f5f9a1a6a0404dea36dcc9499bcb25c9adc112b7cc9a93cae41f3262"
 
 
 def test_hash_meta_v0_empty_title_extra_str():
-    m = code_meta.soft_hash_meta_v0("", "")
+    m = iscc_core.code_meta.soft_hash_meta_v0("", "")
     assert len(m) == 32
     assert m.hex() == "af1349b9f5f9a1a6a0404dea36dcc9499bcb25c9adc112b7cc9a93cae41f3262"
 
 
 def test_hash_meta_v0_extra_only():
-    m = code_meta.soft_hash_meta_v0("", "Hello")
+    m = iscc_core.code_meta.soft_hash_meta_v0("", "Hello")
     assert len(m) == 32
     assert m.hex() == "af1349b9652ce5bbf5f9a1a63fd7018aa0404dea8746265c36dcc949d8a542f4"
 
 
 def test_hash_meta_v0_interleaved():
-    ma = code_meta.soft_hash_meta_v0("")
-    mb = code_meta.soft_hash_meta_v0("", "hello")
+    ma = iscc_core.code_meta.soft_hash_meta_v0("")
+    mb = iscc_core.code_meta.soft_hash_meta_v0("", "hello")
     assert ma[:4] == mb[:4]
     assert ma[4:8] == mb[8:12]
 
 
 def test_code_meta_v0_empty_default():
-    m = code_meta.gen_meta_code_v0("")
+    m = iscc_core.code_meta.gen_meta_code_v0("")
     assert m == dict(
         iscc="AAA26E2JXH27TING",
         binary=False,
@@ -79,7 +79,7 @@ def test_code_meta_v0_empty_default():
 
 
 def test_code_meta_v0_extra_only_128_bits():
-    m = code_meta.gen_meta_code_v0("", "Hello", 128)
+    m = iscc_core.code_meta.gen_meta_code_v0("", "Hello", 128)
     assert m == dict(
         iscc="AAB26E2JXFSSZZN36X42DJR724AYU",
         extra="Hello",
@@ -89,8 +89,8 @@ def test_code_meta_v0_extra_only_128_bits():
 
 
 def test_code_meta_v0_interleaved():
-    ma = code_meta.gen_meta_code_v0("")
-    mb = code_meta.gen_meta_code_v0("", "hello")
+    ma = iscc_core.code_meta.gen_meta_code_v0("")
+    mb = iscc_core.code_meta.gen_meta_code_v0("", "hello")
     assert ma.iscc == "AAA26E2JXH27TING"
     assert mb.iscc == "AAA26E2JXFSSZZN3"
     assert ma == dict(
@@ -108,16 +108,16 @@ def test_code_meta_v0_interleaved():
 
 def test_trim_text():
     multibyte_2 = "ü" * 128
-    trimmed = code_meta.trim_text(multibyte_2, 128)
+    trimmed = iscc_core.code_meta.trim_text(multibyte_2, 128)
     assert 64 == len(trimmed)
     assert 128 == len(trimmed.encode("utf-8"))
 
     multibyte_3 = "驩" * 128
-    trimmed = code_meta.trim_text(multibyte_3, 128)
+    trimmed = iscc_core.code_meta.trim_text(multibyte_3, 128)
     assert 42 == len(trimmed)
     assert 126 == len(trimmed.encode("utf-8"))
 
     mixed = "Iñtërnâtiônàlizætiøn☃💩" * 6
-    trimmed = code_meta.trim_text(mixed, 128)
+    trimmed = iscc_core.code_meta.trim_text(mixed, 128)
     assert 85 == len(trimmed)
     assert 128 == len(trimmed.encode("utf-8"))

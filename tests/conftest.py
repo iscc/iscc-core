@@ -1,8 +1,17 @@
 # -*- coding: utf-8 -*-
 import io
+import pytest
+
+MB1 = 1024 * 1024
 
 
-def static_bytes(n: int, block_size: int = 4) -> bytes:
+@pytest.fixture(scope="module", name="static_bytes")
+def static_bytes_(n: int = MB1, block_size: int = 4) -> bytes:
+    """Wraps static_bytes function as a fixture (both can be used)."""
+    return static_bytes(n, block_size)
+
+
+def static_bytes(n: int = MB1, block_size: int = 4) -> bytes:
     """Returns a deterministic inspectable bytesequence with counter bytes for testing.
 
     Source:

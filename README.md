@@ -131,7 +131,7 @@ You may also want join our developer chat on Telegram at <https://t.me/iscc_dev>
 
 ## Changelog
 
-### [0.1.9] - next
+### [0.1.9] - Unreleased
 
 ### [0.1.8] - 2021-12-12
 - Added conformance tests for all top level functions

@@ -1,12 +1,14 @@
 # -*- coding: utf-8 -*-
 from typing import Tuple
 from pydantic import BaseSettings, Field
+from loguru import logger
 
 
 class CoreOptions(BaseSettings):
     """Parameters with defaults for ISCC calculations."""
 
     class Config:
+        env_prefix = "ISCC_CORE_"
         env_file = "iscc-core.env"
         env_file_encoding = "utf-8"
 
@@ -87,7 +89,7 @@ class CoreOptions(BaseSettings):
     )
 
     data_avg_chunk_size: int = Field(
-        1024, description="Average chunk size for data chunking."
+        1024, description="Target chunk size for data chunking in number of bytes."
     )
 
     instance_bits: int = Field(
@@ -100,10 +102,6 @@ class CoreOptions(BaseSettings):
 
     io_read_size: int = Field(
         2097152, description="File read buffer size in bytes for hashing operations"
-    )
-
-    cdc_avg_chunk_size: int = Field(
-        1024, description="Target chunk size in number of bytes."
     )
 
     cdc_gear: Tuple = Field(
@@ -367,3 +365,33 @@ class CoreOptions(BaseSettings):
         ),
         description="Random gear vector",
     )
+
+
+# Conformance critical options that produce non-interoperable codes if changed
+conformanc_critical = {
+    "meta_trim_title",
+    "meta_trim_extra",
+    "meta_ngram_size_title",
+    "meta_ngram_size_extra_text",
+    "meta_ngram_size_extra_binary",
+    "text_ngram_size",
+    "text_unicode_filter",
+    "text_whitespace",
+    "data_avg_chunk_size",
+    "cdc_gear",
+}
+has_logged_confromance = False
+
+
+def check_options(opts):
+    # type: (CoreOptions) -> bool
+    """Check and log if options have non-default conformance critical values"""
+    global has_logged_confromance
+    result = True
+    for key, value in opts.dict(exclude_defaults=True).items():
+        if key in conformanc_critical:
+            if not has_logged_confromance:
+                logger.warning(f"Non-interoperable custom option {key}={value}")
+                result = False
+    has_logged_confromance = True
+    return result

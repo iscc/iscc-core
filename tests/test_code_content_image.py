@@ -1,98 +1,102 @@
 # -*- coding: utf-8 -*-
 import pytest
-from iscc_core import code_content_image
+import iscc_core
 
 
 def test_gen_image_code_v0_default():
-    ic_obj = code_content_image.gen_image_code_v0(IMG_SAMPLE_PIXELS)
+    ic_obj = iscc_core.gen_image_code_v0(IMG_SAMPLE_PIXELS)
     assert ic_obj.iscc == "EEA4GQZQTY6J5DTH"
 
 
 def test_gen_image_code_v0_32bit():
-    ic_obj = code_content_image.gen_image_code_v0(IMG_SAMPLE_PIXELS, bits=32)
+    ic_obj = iscc_core.gen_image_code_v0(IMG_SAMPLE_PIXELS, bits=32)
     assert ic_obj.iscc == "EEAMGQZQTY"
 
 
 def test_gen_image_code_v0_256bit():
-    ic_obj = code_content_image.gen_image_code_v0(IMG_SAMPLE_PIXELS, bits=256)
+    ic_obj = iscc_core.gen_image_code_v0(IMG_SAMPLE_PIXELS, bits=256)
     assert ic_obj.iscc == "EED4GQZQTY6J5DTHQ2DWCPDZHQOM6QZQTY6J5DTFZ2DWCPDZHQOMXDI"
 
 
 def test_hash_image_v0_white():
     assert (
-        code_content_image.soft_hash_image_v0(IMG_WHITE_PIXELS, bits=64).hex()
+        iscc_core.code_content_image.soft_hash_image_v0(IMG_WHITE_PIXELS, bits=64).hex()
         == "8000000000000000"
     )
     assert (
-        code_content_image.soft_hash_image_v0(IMG_WHITE_PIXELS, bits=256).hex()
+        iscc_core.code_content_image.soft_hash_image_v0(
+            IMG_WHITE_PIXELS, bits=256
+        ).hex()
         == "8000000000000000000000000000000000000000000000000000000000000000"
     )
 
 
 def test_hash_image_v0_black():
     assert (
-        code_content_image.soft_hash_image_v0(IMG_BLACK_PIXELS, bits=64).hex()
+        iscc_core.code_content_image.soft_hash_image_v0(IMG_BLACK_PIXELS, bits=64).hex()
         == "0000000000000000"
     )
     assert (
-        code_content_image.soft_hash_image_v0(IMG_BLACK_PIXELS, bits=256).hex()
+        iscc_core.code_content_image.soft_hash_image_v0(
+            IMG_BLACK_PIXELS, bits=256
+        ).hex()
         == "0000000000000000000000000000000000000000000000000000000000000000"
     )
 
 
 def test_hash_image_v0_sample():
     assert (
-        code_content_image.soft_hash_image_v0(IMG_SAMPLE_PIXELS, 64).hex()
+        iscc_core.code_content_image.soft_hash_image_v0(IMG_SAMPLE_PIXELS, 64).hex()
         == "c343309e3c9e8e67"
     )
 
     assert (
-        code_content_image.soft_hash_image_v0(IMG_SAMPLE_PIXELS, 256).hex()
+        iscc_core.code_content_image.soft_hash_image_v0(IMG_SAMPLE_PIXELS, 256).hex()
         == "c343309e3c9e8e678687613c793c1ccf43309e3c9e8e65ce87613c793c1ccb8d"
     )
 
 
 def test_gen_code_image_v0_white():
     assert (
-        code_content_image.gen_image_code_v0(IMG_WHITE_PIXELS, bits=64).iscc
+        iscc_core.code_content_image.gen_image_code_v0(IMG_WHITE_PIXELS, bits=64).iscc
         == "EEAYAAAAAAAAAAAA"
     )
     assert (
-        code_content_image.gen_image_code_v0(IMG_WHITE_PIXELS, bits=96).iscc
+        iscc_core.code_content_image.gen_image_code_v0(IMG_WHITE_PIXELS, bits=96).iscc
         == "EEBIAAAAAAAAAAAAAAAAAAA"
     )
     assert (
-        code_content_image.gen_image_code_v0(IMG_WHITE_PIXELS, bits=128).iscc
+        iscc_core.code_content_image.gen_image_code_v0(IMG_WHITE_PIXELS, bits=128).iscc
         == "EEBYAAAAAAAAAAAAAAAAAAAAAAAAA"
     )
     assert (
-        code_content_image.gen_image_code_v0(IMG_WHITE_PIXELS, bits=256).iscc
+        iscc_core.code_content_image.gen_image_code_v0(IMG_WHITE_PIXELS, bits=256).iscc
         == "EEDYAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
     )
 
 
 def test_get_code_image_v0():
     assert (
-        code_content_image.gen_image_code_v0(IMG_SAMPLE_PIXELS, bits=256).iscc
+        iscc_core.code_content_image.gen_image_code_v0(IMG_SAMPLE_PIXELS, bits=256).iscc
         == "EED4GQZQTY6J5DTHQ2DWCPDZHQOM6QZQTY6J5DTFZ2DWCPDZHQOMXDI"
     )
 
 
 def test_dct_empty():
     with pytest.raises(ValueError):
-        code_content_image.dct([])
+        iscc_core.code_content_image.dct([])
 
 
 def test_dct_zeros():
-    assert code_content_image.dct([0] * 64) == [0] * 64
+    assert iscc_core.code_content_image.dct([0] * 64) == [0] * 64
 
 
 def test_dct_ones():
-    assert code_content_image.dct([1] * 64) == [64] + [0] * 63
+    assert iscc_core.code_content_image.dct([1] * 64) == [64] + [0] * 63
 
 
 def test_dct_range():
-    assert code_content_image.dct(range(64))[0] == 2016
+    assert iscc_core.code_content_image.dct(range(64))[0] == 2016
 
 
 IMG_WHITE_PIXELS = [255] * 1024
