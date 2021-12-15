@@ -11,7 +11,7 @@ from iscc_core.codec import Data
 from iscc_core import core_opts
 
 
-def data_chunks(data, utf32, avg_chunk_size=core_opts.cdc_avg_chunk_size):
+def data_chunks(data, utf32, avg_chunk_size=core_opts.data_avg_chunk_size):
     # type: (Data, bool, int) -> Generator[bytes]
     """A generator that yields data-dependent chunks for `data`.
 
