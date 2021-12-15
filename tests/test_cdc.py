@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 from blake3 import blake3
-from conftest import static_bytes
+from .conftest import static_bytes
 import iscc_core.cdc
 
 
