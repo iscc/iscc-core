@@ -6,8 +6,8 @@
 
 > `iscc-core` is a Python library that implements the core algorithms of the [**ISCC**](https://iscc.codes) (*International Standard Content Code*)
 
-| NOTE: This is a low level reference implementation. `iscc-core` does not support content/metadata detection, extraction or preprocessing. For easy generation of ISCC codes see: [iscc-cli](https://github.com/iscc/iscc-cli) |
-|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| NOTE: This is a low level reference implementation. `iscc-core` does not support content/metadata detection, extraction or preprocessing. For easy generation of ISCC codes see: [iscc-cli](https://github.com/iscc/iscc-cli/releases) |
+|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 
 ## What is an ISCC
 
@@ -57,14 +57,14 @@ print(f"Meta-Code:     ISCC:{meta_code.iscc}")
 print(f"Structure:     {meta_code.code_obj.explain}\n")
 
 # Extract text from file
-with open('demo.txt', "rt", encoding='utf-8') as stream:
+with open("demo.txt", "rt", encoding="utf-8") as stream:
     text = stream.read()
     text_code = iscc_core.gen_text_code_v0(text)
     print(f"Text-Code:     ISCC:{text_code.iscc}")
     print(f"Structure:     {text_code.code_obj.explain}\n")
 
 # Process raw bytes of textfile
-with open('demo.txt', "rb") as stream:
+with open("demo.txt", "rb") as stream:
     data_code = iscc_core.gen_data_code(stream)
     print(f"Data-Code:     ISCC:{data_code.iscc}")
     print(f"Structure:     {data_code.code_obj.explain}\n")
@@ -78,12 +78,13 @@ iscc_code = iscc_core.gen_iscc_code(
     (meta_code.iscc, text_code.iscc, data_code.iscc, instance_code.iscc)
 )
 print(f"ISCC-CODE:     ISCC:{iscc_code.iscc}")
-print(f"Structure:     {iscc_code.code_obj.explain}\n")
+print(f"Structure:     {iscc_code.code_obj.explain}")
+print(f"Multiformat:   {iscc_code.code_obj.mf_base32}\n")
 
 iscc_id = iscc_core.gen_iscc_id(chain=1, iscc_code=iscc_code.iscc, uc=7)
 print(f"ISCC-ID:       ISCC:{iscc_id.iscc}")
-print(f"Structure:     ISCC:{iscc_id.code_obj.explain}")
-
+print(f"Structure:     {iscc_id.code_obj.explain}")
+print(f"Multiformat:   {iscc_code.code_obj.mf_base32}")
 ```
 
 The output of this example is as follows:
@@ -103,9 +104,11 @@ Structure:     INSTANCE-NONE-V0-64-2817e5c6a6ba9622
 
 ISCC-CODE:     ISCC:KAD3MGR7CSJ3O3D3FFU64K5NP4UGTHWKDT7GDPQDOUUBPZOGU25JMIQ
 Structure:     ISCC-TEXT-V0-256-b61a3f1493b76c7b2969ee2bad7f28699eca1cfe61be03752817e5c6a6ba9622
+Multiformat:   bzqavab5wdi7rje5xnr5ss2pofowx6kdjt3fbz7tbxybxkkax4xdknouwei
 
 ISCC-ID:       ISCC:MEASBPSKHY7KDPZIA4
-Structure:     ISCC:ID-BITCOIN-V0-72-20be4a3e3ea1bf28-7
+Structure:     ID-BITCOIN-V0-72-20be4a3e3ea1bf28-7
+Multiformat:   bzqavab5wdi7rje5xnr5ss2pofowx6kdjt3fbz7tbxybxkkax4xdknouwei
 ```
 
 ## Documentation
@@ -130,6 +133,9 @@ You may also want join our developer chat on Telegram at <https://t.me/iscc_dev>
 ## Changelog
 
 ### [0.1.9] - Unreleased
+- Added multiformats support
+- Added uri representation
+- Updated codec format documentation
 
 ### [0.1.8] - 2021-12-12
 - Added conformance tests for all top level functions

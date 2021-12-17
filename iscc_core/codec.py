@@ -21,6 +21,7 @@ from bitarray import bitarray, frozenbitarray
 from bitarray.util import ba2hex, int2ba, ba2int, count_xor
 from base64 import b32encode, b32decode
 
+
 try:
     from pybase64 import urlsafe_b64encode, urlsafe_b64decode
 except ImportError:
@@ -82,6 +83,13 @@ class LN(enum.IntEnum):
     L64 = 64
     L128 = 128
     L256 = 256
+
+
+class MULTIBASE(str, enum.Enum):
+    """Multibase encodings"""
+
+    base32 = "b"
+    base64url = "u"
 
 
 Data = Union[bytes, bytearray, memoryview]
@@ -283,6 +291,9 @@ def clean(iscc):
 class Code:
     """Convenience class to handle different representations of an ISCC code."""
 
+    #: Multicodec prefix code
+    mc_prefix: bytes = b"\xcc\x01"
+
     def __init__(self, code):
         # type: (AnyISCC) -> None
         """Initialize a Code object from any kind of representation of an ISCC.
@@ -326,6 +337,11 @@ class Code:
     def code(self) -> str:
         """Standard base32 representation of an ISCC code."""
         return encode_base32(self.bytes)
+
+    @property
+    def uri(self) -> str:
+        """Standard uri representation of an ISCC code."""
+        return f"iscc:{self.code.lower()}"
 
     @property
     def bytes(self) -> bytes:
@@ -419,7 +435,6 @@ class Code:
     @property
     def length(self) -> int:
         """Length of code hash in number of bits (without header)."""
-        lengt_code = self._head[3]
         return self._head[3]
 
     @classmethod
@@ -447,6 +462,30 @@ class Code:
         data = urandom(ln // 8) if data is None else data
 
         return cls((mt, st, vs, ln, data))
+
+    @property
+    def mc_bytes(self):
+        """ISCC header + body with multicodec prefix."""
+        return self.mc_prefix + self.bytes
+
+    @property
+    def mf_base32(self):
+        """Multiformats base32 encoded."""
+        return "b" + encode_base32(self.mc_bytes).lower()
+
+    @property
+    def mf_base64url(self):
+        """Multiformats base64url encoded."""
+        return "u" + encode_base64(self.mc_bytes)
+
+    # TODO: bech32m support
+    # @property
+    # def bech32m(self):
+    #     """Encode as bech32m with hrp `iscc`"""
+    #     data = [bech32.CHARSET.find(c) for c in self.code.lower()]
+    #     return bech32.bech32_encode(
+    #         "iscc", data, bech32.Encoding.BECH32M
+    #     )
 
     def __xor__(self, other) -> int:
         """Use XOR operator for hamming distance calculation."""

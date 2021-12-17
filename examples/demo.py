@@ -29,8 +29,11 @@ iscc_code = iscc_core.gen_iscc_code(
     (meta_code.iscc, text_code.iscc, data_code.iscc, instance_code.iscc)
 )
 print(f"ISCC-CODE:     ISCC:{iscc_code.iscc}")
-print(f"Structure:     {iscc_code.code_obj.explain}\n")
+print(f"Structure:     {iscc_code.code_obj.explain}")
+print(f"Multiformat:   {iscc_code.code_obj.mf_base32}\n")
 
 iscc_id = iscc_core.gen_iscc_id(chain=1, iscc_code=iscc_code.iscc, uc=7)
 print(f"ISCC-ID:       ISCC:{iscc_id.iscc}")
-print(f"Structure:     ISCC:{iscc_id.code_obj.explain}")
+print(f"Structure:     {iscc_id.code_obj.explain}")
+print(f"Multiformat:   {iscc_code.code_obj.mf_base32}")
+

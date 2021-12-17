@@ -162,7 +162,7 @@ def test_code_hashable():
 
 
 def test_decompose_single_component():
-    code = iscc_core.codec.Code.rnd()
+    code = iscc_core.codec.Code.rnd(iscc_core.codec.MT.META)
     # assert c.decompose(code)[0] == code
     assert iscc_core.codec.decompose(code.code)[0] == code.code
     # assert c.decompose(code.bytes)[0] == code
@@ -176,3 +176,21 @@ def test_decompose_str_of_codes():
     iscc = f"ISCC:{mco.code}-{cco.code}-{dco.code}-{ico.code}"
     codes = iscc_core.codec.decompose(iscc)
     assert codes == [mco.code, cco.code, dco.code, ico.code]
+
+
+def test_Code_uri():
+    mco = iscc_core.gen_meta_code("This is an URI representation of a Meta-Code")
+    assert mco.code_obj.code == "AAARFRYHMQI6KPP6"
+    assert mco.code_obj.uri == "iscc:aaarfryhmqi6kpp6"
+
+
+def test_Code_mf_base32():
+    mco = iscc_core.gen_meta_code("Hello base32")
+    assert mco.code_obj.code == "AAAW277H32PJOVML"
+    assert mco.code_obj.mf_base32 == "bzqaqaalnp7t55huxkwfq"
+
+
+def test_Code_mf_base64url():
+    mco = iscc_core.gen_meta_code("This is a base64url encoded Meta-Code")
+    assert mco.code_obj.code == "AAARQFT7MCK4LPO7"
+    assert mco.code_obj.mf_base64url == "uzAEAARgWf2CVxb3f"
