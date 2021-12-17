@@ -132,9 +132,11 @@ You may also want join our developer chat on Telegram at <https://t.me/iscc_dev>
 
 ## Changelog
 
-### [0.1.9] - Unreleased
+### [0.1.9] - 2021-12-17
+- Added warning on non-standard options
 - Added multiformats support
 - Added uri representation
+- Removed redundant cdc_avg_chunk_size option
 - Updated codec format documentation
 
 ### [0.1.8] - 2021-12-12
