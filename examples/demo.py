@@ -36,4 +36,3 @@ iscc_id = iscc_core.gen_iscc_id(chain=1, iscc_code=iscc_code.iscc, uc=7)
 print(f"ISCC-ID:       ISCC:{iscc_id.iscc}")
 print(f"Structure:     {iscc_id.code_obj.explain}")
 print(f"Multiformat:   {iscc_code.code_obj.mf_base32}")
-
