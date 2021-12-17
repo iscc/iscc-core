@@ -4,40 +4,38 @@
 [![Version](https://img.shields.io/pypi/v/iscc-core.svg)](https://pypi.python.org/pypi/iscc-core/)
 [![Downloads](https://pepy.tech/badge/iscc-core)](https://pepy.tech/project/iscc-core)
 
-> `iscc-core` is a Python library that implements the core algorithms of the [ISCC](https://iscc.codes)
-(International Standard Content Code)
+> `iscc-core` is a Python library that implements the core algorithms of the [**ISCC**](https://iscc.codes) (*International Standard Content Code*)
 
 | NOTE: This is a low level reference implementation. `iscc-core` does not support content/metadata detection, extraction or preprocessing. For easy generation of ISCC codes see: [iscc-cli](https://github.com/iscc/iscc-cli) |
 |-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 
-## What is ISCC
+## What is an ISCC
 
-The **ISCC** (*International Standard Content Code*) is an identifier for digital media
-assets.
+The **ISCC** is similarity preserving identifier for digital media assets.
 
-An **ISCC** is derived algorithmically from the digital content itself, just like
-cryptographic hashes. However, instead of using a single cryptographic hash function to
-identify data only, the ISCC uses a variety of algorithms to create a composite
-identifier that exhibits similarity-preserving properties (soft hash).
+An **ISCC** is derived algorithmically from the digital content itself, just like cryptographic hashes. However, instead of using a single cryptographic hash function to identify data only, the **ISCC** uses a variety of algorithms to create a composite identifier that exhibits similarity-preserving properties (soft hash).
 
-The component-based structure of the ISCC identifies content at multiple levels of
-abstraction. Each component is self-describing, modular and can be used separately or
-in conjunction with others to aid in various content identification tasks.
-
-The algorithmic design supports scenarios that require content deduplication, database
-synchronisation and indexing, integrity verification, timestamping, versioning, data
-provenance, similarity clustering, anomaly detection, usage tracking, allocation of
-royalties, fact-checking and general digital asset management use-cases.
+The component-based structure of the **ISCC** identifies content at multiple levels of abstraction. Each component is self-describing, modular and can be used separately or in conjunction with others to aid in various content identification tasks. The algorithmic design supports scenarios that require content deduplication, database synchronisation and indexing, integrity verification, timestamping, versioning, data provenance, similarity clustering, anomaly detection, usage tracking, allocation of royalties, fact-checking and general digital asset management use-cases.
 
 ## What is `iscc-core`
 
-`iscc-core` is the python based library of the core algorithms to create standard
-compliant **ISCC** codes. It also serves as a reference for porting ISCC to other
-programming languages.
+`iscc-core` is the python based library of the core algorithms to create standard compliant **ISCC** codes. It also serves as a reference for porting **ISCC** to other programming languages.
 
 ## ISCC Architecture
 
-![ISCC Architecure](https://raw.githubusercontent.com/iscc/iscc-core/master/docs/images/iscc-architecture.png)
+![ISCC Architecure](https://raw.githubusercontent.com/iscc/iscc-core/master/docs/images/iscc-codec-format.png)
+
+### ISCC MainTypes
+
+| Idx  | Slug     | Bits | Purpose                                                  |
+| ---- | :------- | ---- |----------------------------------------------------------|
+| 0    | META     | 0000 | Match on metadata similarity                             |
+| 1    | SEMANTIC | 0001 | Match on semantic content similarity                     |
+| 2    | CONTENT  | 0010 | Match on perceptual content similarity                   |
+| 3    | DATA     | 0011 | Match on data similarity                                 |
+| 4    | INSTANCE | 0100 | Match based data identity                                |
+| 5    | ISCC     | 0101 | Composite of two or more components with common header   |
+| 6    | ID       | 0110 | Short unique identifier bound to ISCC, timestamp, pubkey |
 
 ## Installation
 
@@ -187,5 +185,4 @@ You may also want join our developer chat on Telegram at <https://t.me/iscc_dev>
 
 ### [0.1.0] - 2021-11-13
 - Initial release
-
 
