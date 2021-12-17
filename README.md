@@ -33,7 +33,7 @@ The component-based structure of the **ISCC** identifies content at multiple lev
 | 1    | SEMANTIC | 0001 | Match on semantic content similarity                     |
 | 2    | CONTENT  | 0010 | Match on perceptual content similarity                   |
 | 3    | DATA     | 0011 | Match on data similarity                                 |
-| 4    | INSTANCE | 0100 | Match based data identity                                |
+| 4    | INSTANCE | 0100 | Match on data identity                                   |
 | 5    | ISCC     | 0101 | Composite of two or more components with common header   |
 | 6    | ID       | 0110 | Short unique identifier bound to ISCC, timestamp, pubkey |
 
