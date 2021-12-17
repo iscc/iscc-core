@@ -15,7 +15,7 @@
         <link rel="canonical" href="http://iscc.codes/codec/codec/">
       
       <link rel="icon" href="../../assets/images/favicon.png">
-      <meta name="generator" content="mkdocs-1.2.3, mkdocs-material-8.1.0">
+      <meta name="generator" content="mkdocs-1.2.3, mkdocs-material-8.1.2">
     
     
       
@@ -23,10 +23,10 @@
       
     
     
-      <link rel="stylesheet" href="../../assets/stylesheets/main.82f3c0b9.min.css">
+      <link rel="stylesheet" href="../../assets/stylesheets/main.f7951f6f.min.css">
       
         
-        <link rel="stylesheet" href="../../assets/stylesheets/palette.9204c3b2.min.css">
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.e6a45f82.min.css">
         
           
           
@@ -701,6 +701,13 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#iscc_core.codec.Code.uri" class="md-nav__link">
+    uri
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#iscc_core.codec.Code.bytes" class="md-nav__link">
     bytes
   </a>
@@ -812,6 +819,27 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#iscc_core.codec.Code.mc_bytes" class="md-nav__link">
+    mc_bytes
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#iscc_core.codec.Code.mf_base32" class="md-nav__link">
+    mf_base32
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#iscc_core.codec.Code.mf_base64url" class="md-nav__link">
+    mf_base64url
+  </a>
+  
+</li>
+        
       </ul>
     </nav>
   
@@ -866,6 +894,13 @@
           <li class="md-nav__item">
   <a href="#iscc_core.codec.MT" class="md-nav__link">
     MT
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#iscc_core.codec.MULTIBASE" class="md-nav__link">
+    MULTIBASE
   </a>
   
 </li>
@@ -1110,6 +1145,13 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#iscc_core.codec.Code.uri" class="md-nav__link">
+    uri
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#iscc_core.codec.Code.bytes" class="md-nav__link">
     bytes
   </a>
@@ -1221,6 +1263,27 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#iscc_core.codec.Code.mc_bytes" class="md-nav__link">
+    mc_bytes
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#iscc_core.codec.Code.mf_base32" class="md-nav__link">
+    mf_base32
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#iscc_core.codec.Code.mf_base64url" class="md-nav__link">
+    mf_base64url
+  </a>
+  
+</li>
+        
       </ul>
     </nav>
   
@@ -1275,6 +1338,13 @@
           <li class="md-nav__item">
   <a href="#iscc_core.codec.MT" class="md-nav__link">
     MT
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#iscc_core.codec.MULTIBASE" class="md-nav__link">
+    MULTIBASE
   </a>
   
 </li>
@@ -1459,6 +1529,7 @@ Code        </code>
 
 <h5 id="iscc_core.codec.Code-attributes">Attributes</h5>
 
+
   <div class="doc doc-object doc-attribute">
 
 
@@ -1476,6 +1547,29 @@ Code        </code>
     <div class="doc doc-contents ">
 
       <p>Standard base32 representation of an ISCC code.</p>
+    </div>
+
+  </div>
+
+
+
+  <div class="doc doc-object doc-attribute">
+
+
+
+<h6 id="iscc_core.codec.Code.uri" class="doc doc-heading">
+<code class="highlight language-python"><span class="n">uri</span><span class="p">:</span> <span class="nb">str</span></code>
+
+  <span class="doc doc-properties">
+      <small class="doc doc-property doc-property-property"><code>property</code></small>
+      <small class="doc doc-property doc-property-readonly"><code>readonly</code></small>
+  </span>
+
+</h6>
+
+    <div class="doc doc-contents ">
+
+      <p>Standard uri representation of an ISCC code.</p>
     </div>
 
   </div>
@@ -1602,7 +1696,7 @@ Code        </code>
 
 
 <h6 id="iscc_core.codec.Code.hash_bytes" class="doc doc-heading">
-<code class="highlight language-python"><span class="n">hash_bytes</span><span class="p">:</span> <span class="o">&lt;</span><span class="nb">property</span> <span class="nb">object</span> <span class="n">at</span> <span class="mh">0x0000022542604810</span><span class="o">&gt;</span></code>
+<code class="highlight language-python"><span class="n">hash_bytes</span><span class="p">:</span> <span class="o">&lt;</span><span class="nb">property</span> <span class="nb">object</span> <span class="n">at</span> <span class="mh">0x000002473B18CEA0</span><span class="o">&gt;</span></code>
 
   <span class="doc doc-properties">
       <small class="doc doc-property doc-property-property"><code>property</code></small>
@@ -1740,7 +1834,7 @@ Code        </code>
 
 
 <h6 id="iscc_core.codec.Code.header_bytes" class="doc doc-heading">
-<code class="highlight language-python"><span class="n">header_bytes</span><span class="p">:</span> <span class="o">&lt;</span><span class="nb">property</span> <span class="nb">object</span> <span class="n">at</span> <span class="mh">0x0000022542604810</span><span class="o">&gt;</span></code>
+<code class="highlight language-python"><span class="n">header_bytes</span><span class="p">:</span> <span class="o">&lt;</span><span class="nb">property</span> <span class="nb">object</span> <span class="n">at</span> <span class="mh">0x000002473B18CEA0</span><span class="o">&gt;</span></code>
 
   <span class="doc doc-properties">
       <small class="doc doc-property doc-property-property"><code>property</code></small>
@@ -1844,6 +1938,75 @@ Code        </code>
     <div class="doc doc-contents ">
 
       <p>Length of code hash in number of bits (without header).</p>
+    </div>
+
+  </div>
+
+
+
+  <div class="doc doc-object doc-attribute">
+
+
+
+<h6 id="iscc_core.codec.Code.mc_bytes" class="doc doc-heading">
+<code class="highlight language-python"><span class="n">mc_bytes</span></code>
+
+  <span class="doc doc-properties">
+      <small class="doc doc-property doc-property-property"><code>property</code></small>
+      <small class="doc doc-property doc-property-readonly"><code>readonly</code></small>
+  </span>
+
+</h6>
+
+    <div class="doc doc-contents ">
+
+      <p>ISCC header + body with multicodec prefix.</p>
+    </div>
+
+  </div>
+
+
+
+  <div class="doc doc-object doc-attribute">
+
+
+
+<h6 id="iscc_core.codec.Code.mf_base32" class="doc doc-heading">
+<code class="highlight language-python"><span class="n">mf_base32</span></code>
+
+  <span class="doc doc-properties">
+      <small class="doc doc-property doc-property-property"><code>property</code></small>
+      <small class="doc doc-property doc-property-readonly"><code>readonly</code></small>
+  </span>
+
+</h6>
+
+    <div class="doc doc-contents ">
+
+      <p>Multiformats base32 encoded.</p>
+    </div>
+
+  </div>
+
+
+
+  <div class="doc doc-object doc-attribute">
+
+
+
+<h6 id="iscc_core.codec.Code.mf_base64url" class="doc doc-heading">
+<code class="highlight language-python"><span class="n">mf_base64url</span></code>
+
+  <span class="doc doc-properties">
+      <small class="doc doc-property doc-property-property"><code>property</code></small>
+      <small class="doc doc-property doc-property-readonly"><code>readonly</code></small>
+  </span>
+
+</h6>
+
+    <div class="doc doc-contents ">
+
+      <p>Multiformats base64url encoded.</p>
     </div>
 
   </div>
@@ -2027,6 +2190,48 @@ MT            (<span title="enum.IntEnum">IntEnum</span>)
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+  </div>
+
+    </div>
+
+  </div>
+
+
+
+  <div class="doc doc-object doc-class">
+
+
+
+<h4 id="iscc_core.codec.MULTIBASE" class="doc doc-heading">
+        <code>
+MULTIBASE            (<span title="str">str</span>, <span title="enum.Enum">Enum</span>)
+        </code>
+
+
+
+</h4>
+
+    <div class="doc doc-contents ">
+
+      <p>Multibase encodings</p>
+
+
+
+
+  <div class="doc doc-children">
 
 
 
@@ -2628,10 +2833,10 @@ is uneven it is padded with 4-bit <code>0000</code> at the end.</p>
     <div class="md-dialog" data-md-component="dialog">
       <div class="md-dialog__inner md-typeset"></div>
     </div>
-    <script id="__config" type="application/json">{"base": "../..", "features": ["navigation.indexes"], "translations": {"clipboard.copy": "Copy to clipboard", "clipboard.copied": "Copied to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.placeholder": "Type to start searching", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.term.missing": "Missing", "select.version.title": "Select version"}, "search": "../../assets/javascripts/workers/search.cefbb252.min.js"}</script>
+    <script id="__config" type="application/json">{"base": "../..", "features": ["navigation.indexes"], "translations": {"clipboard.copy": "Copy to clipboard", "clipboard.copied": "Copied to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.placeholder": "Type to start searching", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.term.missing": "Missing", "select.version.title": "Select version"}, "search": "../../assets/javascripts/workers/search.0bbba5b5.min.js"}</script>
     
     
-      <script src="../../assets/javascripts/bundle.17f42bbf.min.js"></script>
+      <script src="../../assets/javascripts/bundle.649a939e.min.js"></script>
       
     
   </body>
