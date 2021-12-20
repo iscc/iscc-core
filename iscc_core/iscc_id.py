@@ -118,5 +118,5 @@ def incr_iscc_id_v0(iscc_id):
         code_digest += uvarint.encode(1)
     else:
         decoded = uvarint.decode(code_digest[10:])
-        code_digest = code_digest[:10] + uvarint.encode(decoded.integer)
+        code_digest = code_digest[:10] + uvarint.encode(decoded.integer + 1)
     return codec.encode_base32(code_digest)
