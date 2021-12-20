@@ -31,3 +31,6 @@ jobs:
 
       - name: Run Tests (With Extension Modules)
         run: poetry run coverage run -m pytest -q tests
+
+      - name: Upload coverage to Codecov
+        uses: codecov/codecov-action@v2
