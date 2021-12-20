@@ -144,7 +144,7 @@ def soft_hash_meta_v0(title, extra=None):
     title_hash_digests = [blake3(s.encode("utf-8")).digest() for s in title_n_grams]
     simhash_digest = similarity_hash(title_hash_digests)
 
-    if extra in (None, "", b""):
+    if extra in {None, "", b""}:
         return simhash_digest
     else:
         # Augment with interleaved hash for extra metadata
