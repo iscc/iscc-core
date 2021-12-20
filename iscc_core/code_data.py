@@ -1,7 +1,5 @@
 # -*- coding: utf-8 -*-
-"""
-*A similarity perserving hash for binary data (soft hash).*
-"""
+"""*A similarity perserving hash for binary data (soft hash).*"""
 from typing import List, Optional, Tuple
 from more_itertools import chunked
 from iscc_core.cdc import data_chunks

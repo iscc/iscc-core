@@ -1,6 +1,5 @@
 # -*- coding: utf-8 -*-
-"""
-*ISCC - a multi-component identifier for digital media assets.*
+"""*ISCC - a multi-component identifier for digital media assets.*
 
 An **ISCC-CODE** is generated from the concatenation of the digests of the following
 four components together with a single common header:

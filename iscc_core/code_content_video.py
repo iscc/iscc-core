@@ -1,6 +1,5 @@
 # -*- coding: utf-8 -*-
-"""
-# ISCC Content-Code Video
+"""*A similarity preserving hash for video content*
 
 The **Content-Code Video** is generated from MPEG-7 Video Frame Signatures.
 Frame Signatures can be extracted with ffmpeg (see: https://www.ffmpeg.org/) using the

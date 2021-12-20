@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
-"""
-A similarity preserving hash for text content (soft hash).
+"""*A similarity preserving hash for text content (soft hash).*
+
 The **ISCC Content-Code Text** is generated from plain-text that has been extracted
 from different media assets.
 """

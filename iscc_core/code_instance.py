@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+"""*A data checksum.*"""
 import blake3
 from typing import Optional, Tuple
 from iscc_core import codec, core_opts
