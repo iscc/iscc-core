@@ -62,9 +62,7 @@ def hash_instance_v0(stream):
 
 
 class InstanceHasherV0:
-    """
-    Incremental Instance-Hash generator.
-    """
+    """Incremental Instance-Hash generator."""
 
     def __init__(self, data=None):
         # type: (Optional[Data]) -> None

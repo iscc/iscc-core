@@ -27,7 +27,8 @@ FrameSig = Tuple[int]
 
 def gen_video_code(frame_sigs, bits=core_opts.video_bits):
     # type: (Sequence[FrameSig], int) -> ContentCodeVideo
-    """Create an ISCC Content-Code Video with the latest standard algorithm.
+    """
+    Create an ISCC Content-Code Video with the latest standard algorithm.
 
     :param FrameSig frame_sigs: Sequence of MP7 frame signatures
     :param int bits: Bit-length resulting Instance-Code (multiple of 64)
@@ -39,7 +40,8 @@ def gen_video_code(frame_sigs, bits=core_opts.video_bits):
 
 def gen_video_code_v0(frame_sigs, bits=core_opts.video_bits):
     # type: (Sequence[FrameSig], int) -> ContentCodeVideo
-    """Create an ISCC Content-Code Video with algorithm v0.
+    """
+    Create an ISCC Content-Code Video with algorithm v0.
 
     :param FrameSig frame_sigs: Sequence of MP7 frame signatures
     :param int bits: Bit-length resulting Instance-Code (multiple of 64)
@@ -60,7 +62,8 @@ def gen_video_code_v0(frame_sigs, bits=core_opts.video_bits):
 
 def soft_hash_video_v0(frame_sigs, bits=core_opts.video_bits):
     # type: (Sequence[Sequence[int]], int) -> bytes
-    """Compute video hash v0 from MP7 frame signatures.
+    """
+    Compute video hash v0 from MP7 frame signatures.
 
     :param Sequence[Sequence[int]] frame_sigs: 2D matrix of MP7 frame signatures
     :param int bits: Bit-length resulting Instance-Code (multiple of 64)

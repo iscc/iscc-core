@@ -262,7 +262,8 @@ def _read_varnibble(b):
 
 def encode_component(mtype, stype, version, length, digest):
     # type: (int, int, int, int, bytes) -> str
-    """Encode a ISCC component inlcuding header and body with standard base32 encoding.
+    """
+    Encode a ISCC component inlcuding header and body with standard base32 encoding.
 
     !!! note
         If `digest` has more bits than specified by `length` it wil be truncated.
@@ -299,7 +300,8 @@ class Code:
 
     def __init__(self, code):
         # type: (AnyISCC) -> None
-        """Initialize a Code object from any kind of representation of an ISCC.
+        """
+        Initialize a Code object from any kind of representation of an ISCC.
 
         :param AnyISCC code: Any valid representation of an ISCC
         """

@@ -51,7 +51,8 @@ TEST_DATA = HERE / "data.json"
 
 def generate_tests():
     # type: () -> Generator[Tuple[str, Callable, List[Any], List[Any]]]
-    """Yield tuples of test data.
+    """
+    Yield tuples of test data.
 
     :return: Tuple with testdata (test_name, func_obj, inputs, outputs)
     :rtype: Generator[Tuple[str, Callable, List[Any], List[Any]]]
@@ -74,7 +75,8 @@ def generate_tests():
 
 def selftest():
     # type: () -> bool
-    """Run conformance tests.
+    """
+    Run conformance tests.
 
     :return: whether all tests passed
     :rtype: bool

@@ -6,7 +6,8 @@ from typing import List, Sequence
 
 def dct(v):
     # type: (Sequence[float]) -> List
-    """Discrete cosine transform.
+    """
+    Discrete cosine transform.
 
     See: https://www.nayuki.io/page/fast-discrete-cosine-transform-algorithms).
 

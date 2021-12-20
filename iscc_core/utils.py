@@ -6,6 +6,7 @@ def sliding_window(seq, width):
     # type: (Sequence, int) -> Generator
     """
     Generate a sequence of equal "width" slices each advancing by one elemnt.
+
     All types that have a length and can be sliced are supported (list, tuple, str ...).
     The result type matches the type of the input sequence.
     Fragment slices smaller than the width at the end of the sequence are not produced.

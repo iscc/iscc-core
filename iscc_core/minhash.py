@@ -30,7 +30,8 @@ def minhash_256(features):
 
 def compress(mhash, lsb=4):
     # type: (List[int], int) -> bytes
-    """Compress minhash vector to byte hash-digest.
+    """
+    Compress minhash vector to byte hash-digest.
 
     Concatenates `lsb` number of  least significant bits from each integer in `mhash`.
     For example an `mhash` with 64 integers will produce a 256-bit summary of the

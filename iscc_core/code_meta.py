@@ -23,7 +23,8 @@ from typing import Union
 
 def gen_meta_code(title, extra=None, bits=core_opts.meta_bits):
     # type: (str, Union[str,bytes,None], int) -> MetaCode
-    """Create an ISCC Meta-Code using the latest standard algorithm.
+    """
+    Create an ISCC Meta-Code using the latest standard algorithm.
 
     Applications that generate ISCCs should prioritize explicitly passed `title`
     information. If not available they should try to extract a title form the digital
@@ -53,7 +54,8 @@ def gen_meta_code(title, extra=None, bits=core_opts.meta_bits):
 
 def gen_meta_code_v0(title, extra=None, bits=core_opts.meta_bits):
     # type: (str, Union[str,bytes,None], int) -> MetaCode
-    """Create an ISCC Meta-Code with the algorithm version 0.
+    """
+    Create an ISCC Meta-Code with the algorithm version 0.
 
     :param str title: Title of the work manifested by the digital asset
     :param Union[str,bytes,None] extra: Optional metadata for disambiguation
@@ -108,7 +110,8 @@ def gen_meta_code_v0(title, extra=None, bits=core_opts.meta_bits):
 
 def soft_hash_meta_v0(title, extra=None):
     # type: (str, Union[str,bytes,None]) -> bytes
-    """Calculate simmilarity preserving 256-bit hash digest from asset metadata.
+    """
+    Calculate simmilarity preserving 256-bit hash digest from asset metadata.
 
     Textual input should be stripped of markup, normalized and trimmed before hashing.
     Json metadata should be normalized with

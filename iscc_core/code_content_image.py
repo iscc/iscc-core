@@ -25,7 +25,8 @@ from iscc_core.dct import dct
 
 def gen_image_code(pixels, bits=core_opts.image_bits):
     # type: (Sequence[int], int) -> ContentCodeImage
-    """Create an ISCC Content-Code Image with the latest standard algorithm.
+    """
+    Create an ISCC Content-Code Image with the latest standard algorithm.
 
     :param Sequence[int] pixels: Normalized image pixels (32x32 flattened gray values).
     :param int bits: Bit-length of ISCC Content-Code Image (default 64).
@@ -37,7 +38,8 @@ def gen_image_code(pixels, bits=core_opts.image_bits):
 
 def gen_image_code_v0(pixels, bits=core_opts.image_bits):
     # type: (Sequence[int], int) -> ContentCodeImage
-    """Create an ISCC Content-Code Image with algorithm v0.
+    """
+    Create an ISCC Content-Code Image with algorithm v0.
 
     :param Sequence[int] pixels: Normalized image pixels (32x32 flattened gray values)
     :param int bits: Bit-length of ISCC Content-Code Image (default 64).
@@ -57,7 +59,8 @@ def gen_image_code_v0(pixels, bits=core_opts.image_bits):
 
 def soft_hash_image_v0(pixels, bits=core_opts.image_bits):
     # type: (Sequence[int], int) -> bytes
-    """Calculate image hash from normalized grayscale pixel sequence of length 1024.
+    """
+    Calculate image hash from normalized grayscale pixel sequence of length 1024.
 
     :param Sequence[int] pixels:
     :param int bits: Bit-length of image hash (default 64).

@@ -68,9 +68,7 @@ def soft_hash_data_v0(stream):
 
 
 class DataHasherV0:
-    """
-    Incremental Data-Hash generator.
-    """
+    """Incremental Data-Hash generator."""
 
     def __init__(self, data=None):
         # type: (Optional[Data]) -> None
@@ -122,7 +120,8 @@ class DataHasherV0:
 
     def features(self):
         # type: () -> List[str]
-        """Calculate and encode granular feature hashes.
+        """
+        Calculate and encode granular feature hashes.
 
         :return: Base64 encoded granular features (64-bit soft hashes)
         :rtype: List[str]
@@ -136,7 +135,8 @@ class DataHasherV0:
 
     def sizes(self):
         # type: () -> List[int]
-        """Calculate sizes of granular feature chunks
+        """
+        Calculate sizes of granular feature chunks
 
         :return: List of sizes of granular features in number of bytes
         :rtype: List[int]

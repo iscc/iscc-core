@@ -22,7 +22,8 @@ from iscc_core.simhash import similarity_hash
 
 def gen_mixed_code(codes, bits=core_opts.mixed_bits):
     # type: (Sequence[str], int) -> ContentCodeMixed
-    """Create an ISCC Content-Code-Mixed with the latest standard algorithm.
+    """
+    Create an ISCC Content-Code-Mixed with the latest standard algorithm.
 
     :param Iterable[str] codes: a list of Content-Codes.
     :param int bits: Target bit-length of generated Content-Code-Mixed.
@@ -34,7 +35,8 @@ def gen_mixed_code(codes, bits=core_opts.mixed_bits):
 
 def gen_mixed_code_v0(codes, bits=core_opts.mixed_bits):
     # type: (Sequence[str], int) -> ContentCodeMixed
-    """Create an ISCC Content-Code-Mixed with algorithm v0.
+    """
+    Create an ISCC Content-Code-Mixed with algorithm v0.
 
     If the provided codes are of mixed length they are stripped to `bits` length.
 
@@ -61,7 +63,8 @@ def gen_mixed_code_v0(codes, bits=core_opts.mixed_bits):
 
 def soft_hash_codes_v0(cc_digests, bits=core_opts.mixed_bits):
     # type: (Sequence[bytes], int) -> bytes
-    """Create a similarity hash from multiple Content-Code digests.
+    """
+    Create a similarity hash from multiple Content-Code digests.
 
     The similarity hash is created from the bodies of the input codes with the first
     byte of the code-header prepended.

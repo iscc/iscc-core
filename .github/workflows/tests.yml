@@ -24,10 +24,10 @@ jobs:
         run: poetry install
 
       - name: Run Tests (Pure Python)
-        run: poetry run pytest -q tests
+        run: poetry run coverage run -m pytest -q tests
 
       - name: Build Extension modules
         run: poetry install --extras turbo
 
       - name: Run Tests (With Extension Modules)
-        run: poetry run pytest -q tests
+        run: poetry run coverage run -m pytest -q tests

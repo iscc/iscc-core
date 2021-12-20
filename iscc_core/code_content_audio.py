@@ -22,7 +22,8 @@ from iscc_core import codec, core_opts
 
 def gen_audio_code(cv, bits=core_opts.audio_bits):
     # type: (Iterable[int], int) -> ContentCodeAudio
-    """Create an ISCC Content-Code Audio with the latest standard algorithm.
+    """
+    Create an ISCC Content-Code Audio with the latest standard algorithm.
 
     :param Iterable[int] cv: Chromaprint vector
     :param int bits: Bit-length resulting Content-Code Audio (multiple of 64)
@@ -34,7 +35,8 @@ def gen_audio_code(cv, bits=core_opts.audio_bits):
 
 def gen_audio_code_v0(cv, bits=core_opts.audio_bits):
     # type: (Iterable[int], int) -> ContentCodeAudio
-    """Create an ISCC Content-Code Audio with algorithm v0.
+    """
+    Create an ISCC Content-Code Audio with algorithm v0.
 
     :param Iterable[int] cv: Chromaprint vector
     :param int bits: Bit-length resulting Content-Code Audio (multiple of 64)
@@ -54,7 +56,8 @@ def gen_audio_code_v0(cv, bits=core_opts.audio_bits):
 
 def soft_hash_audio_v0(cv):
     # type: (Iterable[int]) -> bytes
-    """Create 256-bit audio similarity hash from a chromaprint vector.
+    """
+    Create 256-bit audio similarity hash from a chromaprint vector.
 
     :param Iterable[int] cv: Chromaprint vector
     :return: 256-bit Audio-Hash digest
