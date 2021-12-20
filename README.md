@@ -2,7 +2,9 @@
 
 [![Build](https://github.com/iscc/iscc-core/actions/workflows/tests.yml/badge.svg)](https://github.com/iscc/iscc-core/actions/workflows/tests.yml)
 [![Version](https://img.shields.io/pypi/v/iscc-core.svg)](https://pypi.python.org/pypi/iscc-core/)
+[![Quality](https://app.codacy.com/project/badge/Grade/ad1cc48ac0c0413ea2373a938148f019)](https://www.codacy.com/gh/iscc/iscc-core/dashboard?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=iscc/iscc-core&amp;utm_campaign=Badge_Grade)
 [![Downloads](https://pepy.tech/badge/iscc-core)](https://pepy.tech/project/iscc-core)
+[![Code Quality](https://app.codacy.com/project/badge/Grade/ad1cc48ac0c0413ea2373a938148f019)](https://www.codacy.com/gh/iscc/iscc-core/dashboard?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=iscc/iscc-core&amp;utm_campaign=Badge_Grade)
 
 > `iscc-core` is a Python library that implements the core algorithms of the [**ISCC**](https://iscc.codes) (*International Standard Content Code*)
 

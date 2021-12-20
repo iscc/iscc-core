@@ -1,8 +1,10 @@
 __version__ = "0.2.0"
 from iscc_core import options
 
+
 core_opts = options.CoreOptions()
 options_conformant = options.check_options(core_opts)
+
 
 from iscc_core import conformance
 
@@ -61,6 +63,8 @@ from iscc_core.schema import (
 
 
 __all__ = [
+    "core_opts",
+    "options_conformant",
     "conformance",
     "gen_iscc_code",
     "gen_iscc_code_v0",

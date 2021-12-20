@@ -9,7 +9,7 @@ from bitarray import bitarray
 def wtahash(vec: Sequence[float], bits) -> bytes:
     """Calculate WTA Hash for vector with 380 values (MP7 frame signature)."""
     h = []
-    for n, perm in enumerate(WTA_VIDEO_ID_PERMUTATIONS):
+    for perm in WTA_VIDEO_ID_PERMUTATIONS:
         v = vec[perm[0]], vec[perm[1]]
         h.append(v.index(max(v)))
         if len(h) == bits:

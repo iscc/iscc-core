@@ -160,7 +160,7 @@ def read_header(data):
     ba = bitarray()
     ba.frombytes(data)
     data = ba
-    for x in range(3):
+    for _ in range(3):
         value, data = _read_varnibble(data)
         result.append(value)
 

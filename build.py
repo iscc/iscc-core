@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
-"""Build cython extension modules.
+"""
+Build cython extension modules.
 
 The shared library can also be built manually using the command:
 $ cythonize -X language_level=3 -a -i ./iscc_core/cdc.py
