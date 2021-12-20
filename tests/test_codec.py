@@ -1,7 +1,8 @@
 # -*- coding: utf-8 -*-
+import os
 from binascii import unhexlify
 import pytest
-from bitarray import bitarray as ba
+from bitarray import bitarray as ba, frozenbitarray
 import iscc_core
 
 
@@ -60,6 +61,12 @@ def test_decode_base32():
     assert iscc_core.codec.decode_base32("MZXW6YQ") == b"foob"
     assert iscc_core.codec.decode_base32("MZXW6YTB") == b"fooba"
     assert iscc_core.codec.decode_base32("MZXW6YTBOI") == b"foobar"
+
+
+def test_decode_base_64():
+    data = os.urandom(8)
+    enc = iscc_core.codec.encode_base64(data)
+    assert iscc_core.codec.decode_base64(enc) == data
 
 
 def test_write_varnibble():
@@ -154,6 +161,7 @@ def test_code_properties():
     assert c64 == iscc_core.codec.Code(c64.bytes)
     assert c64 == iscc_core.codec.Code(c64.code)
     assert c64 == iscc_core.codec.Code(tuple(c64))
+    assert isinstance(c64.hash_ba, frozenbitarray)
 
 
 def test_code_hashable():
@@ -194,3 +202,23 @@ def test_Code_mf_base64url():
     mco = iscc_core.gen_meta_code("This is a base64url encoded Meta-Code")
     assert mco.code_obj.code == "AAARQFT7MCK4LPO7"
     assert mco.code_obj.mf_base64url == "uzAEAARgWf2CVxb3f"
+
+
+def test_Code_raises():
+    with pytest.raises(ValueError):
+        iscc_core.codec.Code(13)
+
+
+def test_Code_Code():
+    code = iscc_core.codec.Code.rnd(iscc_core.codec.MT.META)
+    assert iscc_core.codec.Code(code) == code
+
+
+def test_Code_str_repr():
+    mco = iscc_core.gen_meta_code("Hello str")
+    assert mco.code_obj.code == "AAAWOMHEVMWZ2EYF"
+    assert str(mco.code_obj) == "AAAWOMHEVMWZ2EYF"
+    assert repr(mco.code_obj) == 'Code("AAAWOMHEVMWZ2EYF")'
+    assert (
+        bytes(mco.code_obj).hex() == "00016730e4ab2d9d1305" == mco.code_obj.bytes.hex()
+    )

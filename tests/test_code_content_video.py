@@ -50,3 +50,13 @@ def test_code_video_v0_multiple_framevectors_256():
         iscc_core.code_content_video.gen_video_code_v0(frame_vectors, bits=256).iscc
         == "EMDZEMGSDFIB4AHUEZSLJPJANMAAZGCIQY23BMB4AEABB3QAVL4T4QY"
     )
+
+
+def test_code_video_multiple_framevectors_256():
+    fa = tuple([0, 1, 0, 2, 1] * 76)
+    fb = tuple([1, 2, 1, 0, 2] * 76)
+    frame_vectors = [fa, fb]
+    assert (
+        iscc_core.code_content_video.gen_video_code(frame_vectors, bits=256).iscc
+        == "EMDZEMGSDFIB4AHUEZSLJPJANMAAZGCIQY23BMB4AEABB3QAVL4T4QY"
+    )

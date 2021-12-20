@@ -35,3 +35,8 @@ def test_minhash_compress():
     compressed = iscc_core.minhash.compress(mh)
     as_int = int.from_bytes(compressed, "big", signed=False)
     assert as_int == 0b1000_0100_0010_0001
+
+
+def test_minhash_64():
+    mh = iscc_core.minhash.minhash_64([2 ** 16])
+    assert mh.hex() == "a18e2fb2bd663d21"

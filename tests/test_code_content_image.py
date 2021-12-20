@@ -82,6 +82,13 @@ def test_get_code_image_v0():
     )
 
 
+def test_get_code_image():
+    assert (
+        iscc_core.code_content_image.gen_image_code(IMG_SAMPLE_PIXELS, bits=256).iscc
+        == "EED4GQZQTY6J5DTHQ2DWCPDZHQOM6QZQTY6J5DTFZ2DWCPDZHQOMXDI"
+    )
+
+
 def test_dct_empty():
     with pytest.raises(ValueError):
         iscc_core.code_content_image.dct([])

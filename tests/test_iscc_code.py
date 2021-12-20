@@ -10,6 +10,15 @@ IID_256 = "IADWIK7A7JTUAQ2D6QARX7OBEIK3OOUAM42LOBLCZ4ZOGDLRHMDL6TQ"
 DID_64 = "GAAQQICFKJYKY4KU"
 
 
+def test_gen_iscc_code_full():
+    icode = iscc_core.gen_iscc_code([MID_64, CID_64, DID_128, IID_256])
+    assert icode == {"iscc": "KADYPXW445FTYNJ3CYSXHAFJMA2HUWULUNRFE3BLHRSCXYH2M5AEGQY"}
+    assert (
+        icode.code_obj.explain
+        == "ISCC-TEXT-V0-256-87dedce74b3c353b16257380a960347a5a8ba362526c2b3c642be0fa67404343"
+    )
+
+
 def test_gen_iscc_code_v0_full():
     icode = iscc_core.gen_iscc_code_v0([MID_64, CID_64, DID_128, IID_256])
     assert icode == {"iscc": "KADYPXW445FTYNJ3CYSXHAFJMA2HUWULUNRFE3BLHRSCXYH2M5AEGQY"}

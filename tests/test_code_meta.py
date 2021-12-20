@@ -1,4 +1,6 @@
 # -*- coding: utf-8 -*-
+import pytest
+
 import iscc_core
 
 
@@ -44,6 +46,16 @@ def test_gen_meta_code_title_only():
     assert m.iscc == "AAA77PPFVS6JDUQB"
 
 
+def test_gen_meta_code_v0_raises():
+    with pytest.raises(ValueError):
+        iscc_core.code_meta.gen_meta_code_v0("Hello", extra=123)
+
+
+def test_soft_hash_meta_v0_raises():
+    with pytest.raises(ValueError):
+        iscc_core.code_meta.soft_hash_meta_v0("Hello", extra=123)
+
+
 def test_hash_meta_v0_empty_title_str():
     m = iscc_core.code_meta.soft_hash_meta_v0("")
     assert len(m) == 32
@@ -69,7 +81,7 @@ def test_hash_meta_v0_interleaved():
     assert ma[4:8] == mb[8:12]
 
 
-def test_code_meta_v0_empty_default():
+def test_gen_meta_code_v0_empty_default():
     m = iscc_core.code_meta.gen_meta_code_v0("")
     assert m == dict(
         iscc="AAA26E2JXH27TING",
@@ -78,7 +90,7 @@ def test_code_meta_v0_empty_default():
     )
 
 
-def test_code_meta_v0_extra_only_128_bits():
+def test_gen_meta_code_v0_extra_only_128_bits():
     m = iscc_core.code_meta.gen_meta_code_v0("", "Hello", 128)
     assert m == dict(
         iscc="AAB26E2JXFSSZZN36X42DJR724AYU",
@@ -88,7 +100,7 @@ def test_code_meta_v0_extra_only_128_bits():
     )
 
 
-def test_code_meta_v0_interleaved():
+def test_gen_meta_code_v0_interleaved():
     ma = iscc_core.code_meta.gen_meta_code_v0("")
     mb = iscc_core.code_meta.gen_meta_code_v0("", "hello")
     assert ma.iscc == "AAA26E2JXH27TING"

@@ -78,3 +78,21 @@ def test_data_chunks_max_even():
     hashes = [blake3(c).hexdigest() for c in iscc_core.cdc.data_chunks(data, False)]
     assert len(hashes) == 8
     assert hashes == expected
+
+
+def test_data_chunks_utf32():
+    expected = [
+        "bc0dcea65a2cc750bd1d9b46eb67b6ea54d1fd43088343ceafda3788ac515a31",
+        "62066f8394ff7bb7afdd7081ffa0c39a0341f8bd4985ad318bf28ab238a2327f",
+        "d6e1586e7c3265a237335f76ad3f20d4323c66dd8ec269aaf5bbafcb7179430b",
+        "a1ff4a40219292bd44e5bd71c89f3d411bb984853ecf1f32bcc34da07438374e",
+        "dab6f7b0b12d135fb459d88bf44a97f8ab46f3105f634937a5a1d9034ab572c8",
+        "a3e94d7f29498a6572d7e95a496470444283c8f84cd3ce9e9935477c82cc91ef",
+        "66ad20c3d28f25f526b5e1684f0d008e8e35b55bc4e35fc1643e4aab80948761",
+        "b0c9b6ea63f1667d903a7fb8ff18c2b3233fbb378f327102c605d19cd26f37dd",
+        "f249cbe070bba6b689251074ddb75aa3ddfc02caa357f2f8f714cfeb39523d96",
+    ]
+    data = static_bytes(8192 + 1000)
+    hashes = [blake3(c).hexdigest() for c in iscc_core.cdc.data_chunks(data, True)]
+    assert len(hashes) == 9
+    assert hashes == expected

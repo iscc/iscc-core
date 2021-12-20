@@ -32,6 +32,11 @@ def test_gen_code_data_v0_default(static_bytes):
     assert dc_obj == dict(iscc="GAA6LM626EIYZ4E4")
 
 
+def test_gen_code_data_default(static_bytes):
+    dc_obj = iscc_core.code_data.gen_data_code(BytesIO(static_bytes))
+    assert dc_obj == dict(iscc="GAA6LM626EIYZ4E4")
+
+
 def test_DataHasherV0_single_shot(static_bytes):
     hasher = iscc_core.code_data.DataHasherV0(static_bytes)
     assert (
