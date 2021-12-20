@@ -24,13 +24,13 @@ jobs:
         run: poetry install
 
       - name: Run Tests (Pure Python)
-        run: poetry run coverage run -m pytest -q tests
+        run: poetry run pytest -q tests
 
       - name: Build Extension modules
         run: poetry install --extras turbo
 
       - name: Run Tests (With Extension Modules)
-        run: poetry run coverage run -m pytest -q tests
+        run: poetry run pytest --cov=./ --cov-report=xml -q tests
 
       - name: Upload coverage to Codecov
         uses: codecov/codecov-action@v2

@@ -55,6 +55,7 @@ mkdocstrings = "*"
 toml = "*"
 PyYAML = "^6.0"
 coverage = "^6.2"
+pytest-cov = "^3.0.0"
 
 
 [build-system]
