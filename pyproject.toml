@@ -54,6 +54,8 @@ mkdocs-material = "*"
 mkdocstrings = "*"
 toml = "*"
 PyYAML = "^6.0"
+coverage = "^6.2"
+
 
 [build-system]
 requires = ["poetry-core>=1.0.0", "setuptools", "wheel", "cython"]
