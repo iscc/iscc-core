@@ -13,15 +13,15 @@
 
 ## What is an ISCC
 
-The **ISCC** is similarity preserving identifier for digital media assets.
+The **ISCC** is a similarity preserving identifier for digital media assets.
 
-An **ISCC** is derived algorithmically from the digital content itself, just like cryptographic hashes. However, instead of using a single cryptographic hash function to identify data only, the **ISCC** uses a variety of algorithms to create a composite identifier that exhibits similarity-preserving properties (soft hash).
+**ISCCs** are generated algorithmically from digital content, just like cryptographic hashes. However, instead of using a single cryptographic hash function to identify data only, the **ISCC** uses various algorithms to create a composite identifier that exhibits similarity-preserving properties (soft hash).
 
-The component-based structure of the **ISCC** identifies content at multiple levels of abstraction. Each component is self-describing, modular and can be used separately or in conjunction with others to aid in various content identification tasks. The algorithmic design supports scenarios that require content deduplication, database synchronisation and indexing, integrity verification, timestamping, versioning, data provenance, similarity clustering, anomaly detection, usage tracking, allocation of royalties, fact-checking and general digital asset management use-cases.
+The component-based structure of the **ISCC** identifies content at multiple levels of abstraction. Each component is self-describing, modular, and can be used separately or with others to aid in various content identification tasks. The algorithmic design supports content deduplication, database synchronization, indexing, integrity verification, timestamping, versioning, data provenance, similarity clustering, anomaly detection, usage tracking, allocation of royalties, fact-checking and general digital asset management use-cases.
 
 ## What is `iscc-core`
 
-`iscc-core` is the python based library of the core algorithms to create standard compliant **ISCC** codes. It also serves as a reference for porting **ISCC** to other programming languages.
+`iscc-core` is the python based library of the core algorithms to create standard-compliant **ISCC** codes. It also serves as a reference for porting **ISCC** to other programming languages.
 
 ## ISCC Architecture
 
@@ -127,8 +127,7 @@ ISCC is in the process of being standardized within
 
 ## Contributing
 
-Pull requests are welcome. For major changes, please open an issue first to discuss
-what you would like to change. Please make sure to update tests as appropriate.
+Pull requests are welcome. For significant changes, please open an issue first to discuss your plans. Please make sure to update tests as appropriate.
 
 You may also want join our developer chat on Telegram at <https://t.me/iscc_dev>.
 
@@ -138,6 +137,7 @@ You may also want join our developer chat on Telegram at <https://t.me/iscc_dev>
 - Code cleanup
 
 ### 0.1.9 - 2021-12-17
+
 - Added warning on non-standard options
 - Added multiformats support
 - Added uri representation
