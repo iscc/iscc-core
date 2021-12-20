@@ -1,5 +1,7 @@
 # -*- coding: utf-8 -*-
-"""Minimum Hash"""
+"""
+Minimum Hash
+"""
 from typing import List
 
 

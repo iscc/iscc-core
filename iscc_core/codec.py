@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
-"""*ISCC encoding, decoding and transcoding related functions.*
+"""
+*ISCC encoding, decoding and transcoding related functions.*
 
 ## ISCC Component Structure
 

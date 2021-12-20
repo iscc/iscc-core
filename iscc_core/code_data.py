@@ -52,7 +52,7 @@ def soft_hash_data_v0(stream):
     """
     Create a similarity preserving Data-Hash digest
 
-    :param stream: Input data stream.
+    :param Stream stream: Input data stream.
     :return: 256-bit Data-Hash (soft-hash) digest used as body for Data-Code
     :rtype: bytes
     """
@@ -73,7 +73,7 @@ class DataHasherV0:
         """
         Create a DataHasher
 
-        :param: Optional[Data] data: initial payload for hashing.
+        :param Optional[Data] data: initial payload for hashing.
         """
         self.chunk_features = []
         self.chunk_sizes = []

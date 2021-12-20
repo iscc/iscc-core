@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
-"""Content Defined Chunking
+"""
+*Content Defined Chunking*
 
 Compatible with [fastcdc](https://pypi.org/project/fastcdc/ v1.3.0)
 """

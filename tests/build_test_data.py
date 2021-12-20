@@ -59,7 +59,7 @@ def main():
         data = yaml.safe_load(stream)
 
     for funcname, tests in data.items():
-        for testname, testdata in tests.items():
+        for _, testdata in tests.items():
             func = getattr(iscc_core, funcname)
             args = testdata["inputs"]
             dargs = copy(args)

@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
-"""*A similarity hash for mixed media content.*
+"""
+*A similarity hash for mixed media content.*
 
 Creates a [ContentCodeMixed][iscc_core.ContentCodeMixed] object that provides a
 `code`-field and a `parts`-field that lists the input codes.

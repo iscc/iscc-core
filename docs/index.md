@@ -33,7 +33,7 @@ The component-based structure of the **ISCC** identifies content at multiple lev
 | 1    | SEMANTIC | 0001 | Match on semantic content similarity                     |
 | 2    | CONTENT  | 0010 | Match on perceptual content similarity                   |
 | 3    | DATA     | 0011 | Match on data similarity                                 |
-| 4    | INSTANCE | 0100 | Match based data identity                                |
+| 4    | INSTANCE | 0100 | Match on data identity                                   |
 | 5    | ISCC     | 0101 | Composite of two or more components with common header   |
 | 6    | ID       | 0110 | Short unique identifier bound to ISCC, timestamp, pubkey |
 
@@ -132,63 +132,65 @@ You may also want join our developer chat on Telegram at <https://t.me/iscc_dev>
 
 ## Changelog
 
-### [0.1.9] - Unreleased
-- Added multiformats support
-- Added uri representation
-- Updated codec format documentation
+### 0.2.0 - Unreleased
+  - Code cleanup
 
-### [0.1.8] - 2021-12-12
-- Added conformance tests for all top level functions
-- Added conformance tests to source dir
-- Added conformance module with `selftest` function
-- Changed gen_image_code to accept normalized pixels instead of stream
-- Changed opts to core_opts
-- Removed image pre-processing and Pillow dependency
-- Fixed readability of conformance tests
-- Fixed soft_hash_video_v0 to accept non-tuple sequences
-- Updated example code
+### 0.1.9 - 2021-12-17
+  - Added warning on non-standard options
+  - Added multiformats support
+  - Added uri representation
+  - Removed redundant cdc_avg_chunk_size option
+  - Updated codec format documentation
 
-### [0.1.7] - 2021-12-09
+### 0.1.8 - 2021-12-12
+  - Added conformance tests for all top level functions
+  - Added conformance tests to source dir
+  - Added conformance module with `selftest` function
+  - Changed gen_image_code to accept normalized pixels instead of stream
+  - Changed opts to core_opts
+  - Removed image pre-processing and Pillow dependency
+  - Fixed readability of conformance tests
+  - Fixed soft_hash_video_v0 to accept non-tuple sequences
+  - Updated example code
 
-- Add dotenv for enviroment based configuration
-- Cleanup package toplevel imports
-- Return schema objects for iscc_code and iscc_id
-- Exclude unset and none values from result dicts
-- Add support for multiple code combinations for ISCC-CODE
-- Add support for ISCC-ID based on singular Instance-Code
-- Add initial conformance test system
+### 0.1.7 - 2021-12-09
+  - Add dotenv for enviroment based configuration
+  - Cleanup package toplevel imports
+  - Return schema objects for iscc_code and iscc_id
+  - Exclude unset and none values from result dicts
+  - Add support for multiple code combinations for ISCC-CODE
+  - Add support for ISCC-ID based on singular Instance-Code
+  - Add initial conformance test system
 
-### [0.1.6] - 2021-11-29
-- Show counter for ISCC-ID in Code.explain
+### 0.1.6 - 2021-11-29
+  - Show counter for ISCC-ID in Code.explain
 
-### [0.1.5] - 2021-11-28
+### 0.1.5 - 2021-11-28
+  - Fix documentation
+  - Change metahash creation logic
+  - Refactor models
+  - Add Content-Code-Mixed
+  - Add ISCC-ID
+  - Refactor `compose` to `gen_iscc_code`
+  - Refactor `models` to `schema`
 
-- Fix documentation
-- Change metahash creation logic
-- Refactor models
-- Add Content-Code-Mixed
-- Add ISCC-ID
-- Refactor `compose` to `gen_iscc_code`
-- Refactor `models` to `schema`
+### 0.1.4 - 2021-11-17
+  - Simplified options
+  - Optimize video WTA-hash for use with 64-bit granular features
 
-### [0.1.4] - 2021-11-17
-- Simplified options
-- Optimize video WTA-hash for use with 64-bit granular features
+### 0.1.3 - 2021-11-15
+  - Try to compile Cython/C accelerator modules when installing via pip
+  - Simplify soft_hash api return values
+  - Add .code() method to InstanceHasher, DataHasher
+  - Remove granular fingerprint calculation
+  - Add more top-level imports
 
-### [0.1.3] - 2021-11-15
-- Try to compile Cython/C accelerator modules when installing via pip
-- Simplify soft_hash api return values
-- Add .code() method to InstanceHasher, DataHasher
-- Remove granular fingerprint calculation
-- Add more top-level imports
+### 0.1.2 - 2021-11-14
+  - Export more functions to toplevel
+  - Return schema driven objects from ISCC code generators.
 
-### [0.1.2] - 2021-11-14
-- Export more functions to toplevel
-- Return schema driven objects from ISCC code generators.
+### 0.1.1 - 2021-11-14
+  - Fix packaging problems
 
-### [0.1.1] - 2021-11-14
-- Fix packaging problems
-
-### [0.1.0] - 2021-11-13
-- Initial release
-
+### 0.1.0 - 2021-11-13
+  - Initial release

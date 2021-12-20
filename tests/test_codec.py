@@ -150,7 +150,7 @@ def test_code_properties():
     assert c256.length == 256
     assert c64 ^ c64 == 0
     with pytest.raises(ValueError):
-        c64 ^ c256
+        _ = c64 ^ c256
     assert c64 == iscc_core.codec.Code(c64.bytes)
     assert c64 == iscc_core.codec.Code(c64.code)
     assert c64 == iscc_core.codec.Code(tuple(c64))

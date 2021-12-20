@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
-"""*A similarity preserving hash for audio content (soft hash).*
+"""
+*A similarity preserving hash for audio content (soft hash).*
 
 Creates a [ContentCodeAudio][iscc_core.ContentCodeAudio] object that provides a
 `code`-field and a `duration`-field.

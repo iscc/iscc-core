@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
-"""*Schema of objects returned by ISCC processing algorithms.*
+"""
+*Schema of objects returned by ISCC processing algorithms.*
 
 The schemata define standard fields to be set by ISCC generating applications.
 This library only sets the fields for which information is available within the scope

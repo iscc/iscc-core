@@ -77,7 +77,7 @@ def test_hash_data_1mib_robust(static_bytes):
     # 9 random single byte changes in data
     h1 = iscc_core.code_data.soft_hash_data_v0(BytesIO(ba)).hex()
     assert h1 == "e5b3daf1118cf09cb5c5ac323a9f68ca04465f9e3942297ebd1e6360f5bb98df"
-    for x in range(9):
+    for _ in range(9):
         ba.insert(rpos(), rbyte())
         assert iscc_core.code_data.soft_hash_data_v0(BytesIO(ba)).hex() == h1
 

@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
-"""*A decentralized short identifier for digital assets.*
+"""
+*A decentralized short identifier for digital assets.*
 
 The **ISCC-ID** is generated from a similarity-hash of the components of an
 **ISCC-CODE**. Its SubType designates the blockchain from which the **ISCC-ID** was
@@ -110,7 +111,7 @@ def incr_iscc_id_v0(iscc_id):
     :rtype: str
     """
     code_digest = codec.decode_base32(iscc_id)
-    mt, _, vs, _, digest = codec.read_header(code_digest)
+    mt, _, vs, _, _ = codec.read_header(code_digest)
     assert mt == codec.MT.ID, "MainType {} is not ISCC-ID".format(mt)
     assert vs == codec.VS.V0, "Version {} is not v0".format(vs)
     if len(code_digest) == 10:
