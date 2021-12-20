@@ -121,35 +121,6 @@ class DataHasherV0:
         )
         return data_code
 
-    def features(self):
-        # type: () -> List[str]
-        """
-        Calculate and encode granular feature hashes.
-
-        :return: Base64 encoded granular features (64-bit soft hashes)
-        :rtype: List[str]
-        """
-        self._finalize()
-        encoded_features = [
-            encode_base64(minhash_64(cf))
-            for cf in chunked(self.chunk_features, core_opts.data_granular_factor)
-        ]
-        return encoded_features
-
-    def sizes(self):
-        # type: () -> List[int]
-        """
-        Calculate sizes of granular feature chunks
-
-        :return: List of sizes of granular features in number of bytes
-        :rtype: List[int]
-        """
-        self._finalize()
-        sizes = [
-            sum(fh) for fh in chunked(self.chunk_sizes, core_opts.data_granular_factor)
-        ]
-        return sizes
-
     def _finalize(self):
         if self.tail is not None:
             self.chunk_features.append(xxhash.xxh32_intdigest(self.tail))
