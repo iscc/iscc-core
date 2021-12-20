@@ -1,6 +1,5 @@
 # -*- coding: utf-8 -*-
-"""
-Content Defined Chunking
+"""Content Defined Chunking
 
 Compatible with [fastcdc](https://pypi.org/project/fastcdc/ v1.3.0)
 """
@@ -12,8 +11,9 @@ from iscc_core import core_opts
 
 
 def data_chunks(data, utf32, avg_chunk_size=core_opts.data_avg_chunk_size):
-    # type: (Data, bool, int) -> Generator[bytes]
-    """A generator that yields data-dependent chunks for `data`.
+    # type: (Data, bool, int) -> Generator[bytes, None, None]
+    """
+    A generator that yields data-dependent chunks for `data`.
 
     Usage Example:
 
@@ -52,7 +52,8 @@ def data_chunks(data, utf32, avg_chunk_size=core_opts.data_avg_chunk_size):
 
 def cdc_offset(buffer, mi, ma, cs, mask_s, mask_l):
     # type: (Data, int, int, int, int, int) -> int
-    """Find breakpoint offset for a given buffer.
+    """
+    Find breakpoint offset for a given buffer.
 
     :param Data buffer: The data to be chunked.
     :param int mi: Minimum chunk size.
@@ -83,7 +84,9 @@ def cdc_offset(buffer, mi, ma, cs, mask_s, mask_l):
 
 
 def get_params(avg_size: int) -> tuple:
-    """Calculate CDC parameters
+    """
+    Calculate CDC parameters
+
     :param int avg_size: Target average size of chunks in number of bytes.
     :returns: Tuple of (min_size, max_size, center_size, mask_s, mask_l).
     """

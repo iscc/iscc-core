@@ -133,9 +133,9 @@ You may also want join our developer chat on Telegram at <https://t.me/iscc_dev>
 ## Changelog
 
 ### [0.2.0] - Unreleased
+  - Code cleanup
 
 ### [0.1.9] - 2021-12-17
-
   - Added warning on non-standard options
   - Added multiformats support
   - Added uri representation
@@ -143,7 +143,6 @@ You may also want join our developer chat on Telegram at <https://t.me/iscc_dev>
   - Updated codec format documentation
 
 ### [0.1.8] - 2021-12-12
-
   - Added conformance tests for all top level functions
   - Added conformance tests to source dir
   - Added conformance module with `selftest` function
@@ -155,7 +154,6 @@ You may also want join our developer chat on Telegram at <https://t.me/iscc_dev>
   - Updated example code
 
 ### [0.1.7] - 2021-12-09
-
   - Add dotenv for enviroment based configuration
   - Cleanup package toplevel imports
   - Return schema objects for iscc_code and iscc_id
@@ -165,11 +163,9 @@ You may also want join our developer chat on Telegram at <https://t.me/iscc_dev>
   - Add initial conformance test system
 
 ### [0.1.6] - 2021-11-29
-
   - Show counter for ISCC-ID in Code.explain
 
 ### [0.1.5] - 2021-11-28
-
   - Fix documentation
   - Change metahash creation logic
   - Refactor models
@@ -179,12 +175,10 @@ You may also want join our developer chat on Telegram at <https://t.me/iscc_dev>
   - Refactor `models` to `schema`
 
 ### [0.1.4] - 2021-11-17
-
   - Simplified options
   - Optimize video WTA-hash for use with 64-bit granular features
 
 ### [0.1.3] - 2021-11-15
-
   - Try to compile Cython/C accelerator modules when installing via pip
   - Simplify soft_hash api return values
   - Add .code() method to InstanceHasher, DataHasher
@@ -192,15 +186,11 @@ You may also want join our developer chat on Telegram at <https://t.me/iscc_dev>
   - Add more top-level imports
 
 ### [0.1.2] - 2021-11-14
-
   - Export more functions to toplevel
   - Return schema driven objects from ISCC code generators.
 
 ### [0.1.1] - 2021-11-14
-
   - Fix packaging problems
 
 ### [0.1.0] - 2021-11-13
-
   - Initial release
-

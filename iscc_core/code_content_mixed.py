@@ -56,7 +56,7 @@ def gen_mixed_code_v0(codes, bits=core_opts.mixed_bits):
     )
     stripped_codes = []
     for digest in digests:
-        mt, st, vs, l, body = codec.read_header(digest)
+        mt, st, vs, _, body = codec.read_header(digest)
         stripped_codes.append(codec.encode_component(mt, st, vs, bits, body))
     return ContentCodeMixed(iscc=mixed_code, parts=stripped_codes)
 

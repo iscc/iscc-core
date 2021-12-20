@@ -16,7 +16,9 @@ MultiStr = Union[str, List[str]]
 
 
 class IsccBase(BaseModel, abc.ABC):
-    """Base schema for ISCC metadata"""
+    """
+    Base schema for ISCC metadata
+    """
 
     class Config:
         validate_assignment = True
@@ -36,7 +38,9 @@ class IsccBase(BaseModel, abc.ABC):
 
 
 class IsccCode(IsccBase):
-    """A composite ISCC"""
+    """
+    A composite ISCC
+    """
 
     version: str = Field(
         "0-0-0",
@@ -95,19 +99,25 @@ class IsccCode(IsccBase):
 
 
 class IsccID(IsccCode):
-    """An ISCC Short-ID"""
+    """
+    An ISCC Short-ID
+    """
 
     pass
 
 
 class ContentCode(IsccBase, abc.ABC):
-    """Base schema for Content-Codes."""
+    """
+    Base schema for Content-Codes.
+    """
 
     title: Optional[str] = Field(description="Title as extracted from digital asset")
 
 
 class MetaCode(IsccBase):
-    """Meta-Code standardized metadata model."""
+    """
+    Meta-Code standardized metadata model.
+    """
 
     title: Optional[str] = Field(description="Title used for Meta-Code creation.")
     extra: Optional[str] = Field(description="Extra metadata used for Meta-Code.")
@@ -120,7 +130,9 @@ class MetaCode(IsccBase):
 
 
 class ContentCodeText(ContentCode):
-    """Content-Code-Text standardized metadata model."""
+    """
+    Content-Code-Text standardized metadata model.
+    """
 
     characters: Optional[int] = Field(
         description="Number of text characters (after normalize_text)."
@@ -129,7 +141,9 @@ class ContentCodeText(ContentCode):
 
 
 class ContentCodeImage(ContentCode):
-    """Content-Code-Image standardized metadata model."""
+    """
+    Content-Code-Image standardized metadata model.
+    """
 
     width: Optional[int] = Field(description="Width of image in number of pixels.")
     height: Optional[int] = Field(description="Height of image in number of pixels.")
@@ -137,13 +151,17 @@ class ContentCodeImage(ContentCode):
 
 
 class ContentCodeAudio(ContentCode):
-    """Content-Code-Audio standardized metadata model."""
+    """
+    Content-Code-Audio standardized metadata model.
+    """
 
     duration: Optional[float] = Field(description="Duration of audio im seconds.")
 
 
 class ContentCodeVideo(ContentCode):
-    """Content-Code-Video standardized metadata model."""
+    """
+    Content-Code-Video standardized metadata model.
+    """
 
     duration: Optional[float] = Field(description="Duration of video im seconds.")
     fps: Optional[float] = Field(description="Frames per second.")
@@ -153,19 +171,25 @@ class ContentCodeVideo(ContentCode):
 
 
 class ContentCodeMixed(ContentCode):
-    """Content-Code-Mixed standardized metadata model."""
+    """
+    Content-Code-Mixed standardized metadata model.
+    """
 
     parts: Optional[List[str]] = Field(description="Included Content-Codes.")
 
 
 class DataCode(IsccBase):
-    """Data-Code standardized metadata model."""
+    """
+    Data-Code standardized metadata model.
+    """
 
     pass
 
 
 class InstanceCode(IsccBase):
-    """Instance-Code standardized metadata model."""
+    """
+    Instance-Code standardized metadata model.
+    """
 
     datahash: Optional[str] = Field(
         description="Multihash of digital asset (Blake3 by default."

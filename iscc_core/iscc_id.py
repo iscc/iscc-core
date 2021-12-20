@@ -18,8 +18,7 @@ import uvarint
 def gen_iscc_id(chain, iscc_code, uc=0):
     # type: (int, str, int) -> IsccID
     """
-    Generate an ISCC-ID from an ISCC-CODE with uniqueness counter 'uc' with latest
-    standard algorithm.
+    Generate  ISCC-ID from ISCC-CODE with the latest standard algorithm.
 
     :param int chain: Chain-ID of blockchain from which the ISCC-ID is minted.
     :param str iscc_code: The ISCC-CODE from which to mint the ISCC-ID.
@@ -111,7 +110,7 @@ def incr_iscc_id_v0(iscc_id):
     :rtype: str
     """
     code_digest = codec.decode_base32(iscc_id)
-    mt, st, vs, l, digest = codec.read_header(code_digest)
+    mt, _, vs, _, digest = codec.read_header(code_digest)
     assert mt == codec.MT.ID, "MainType {} is not ISCC-ID".format(mt)
     assert vs == codec.VS.V0, "Version {} is not v0".format(vs)
     if len(code_digest) == 10:
