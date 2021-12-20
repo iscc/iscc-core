@@ -132,6 +132,8 @@ You may also want join our developer chat on Telegram at <https://t.me/iscc_dev>
 
 ## Changelog
 
+### [0.2.0] - Unreleased
+
 ### [0.1.9] - 2021-12-17
 - Added warning on non-standard options
 - Added multiformats support
