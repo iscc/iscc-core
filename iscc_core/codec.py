@@ -62,6 +62,9 @@ class ST_CC(enum.IntEnum):
     NONE = 5
 
 
+# TODO: create custom subtypes for MT.ISCC (as ST_CC with added SUM subtype)
+
+
 class ST_ID(enum.IntEnum):
     """SubTypes for ISCC-IDs"""
 
