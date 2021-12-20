@@ -72,6 +72,11 @@ class DataHasherV0:
 
     def __init__(self, data=None):
         # type: (Optional[Data]) -> None
+        """
+        Create a DataHasher
+
+        :param: Optional[Data] data: initial payload for hashing.
+        """
         self.chunk_features = []
         self.chunk_sizes = []
         self.tail = None

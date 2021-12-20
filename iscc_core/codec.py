@@ -34,7 +34,9 @@ except ImportError:
 
 
 class MT(enum.IntEnum):
-    """ISCC MainTypes"""
+    """
+    ISCC MainTypes
+    """
 
     META = 0
     SEMANTIC = 1
@@ -46,13 +48,17 @@ class MT(enum.IntEnum):
 
 
 class ST(enum.IntEnum):
-    """Generic SubTypes"""
+    """
+    Generic SubTypes
+    """
 
     NONE = 0
 
 
 class ST_CC(enum.IntEnum):
-    """SubTypes for ISCC-Codes and Content-Codes"""
+    """
+    SubTypes for ISCC-Codes and Content-Codes
+    """
 
     TEXT = 0
     IMAGE = 1
@@ -80,7 +86,9 @@ class VS(enum.IntEnum):
 
 
 class LN(enum.IntEnum):
-    """ISCC length in bits"""
+    """
+    ISCC length in bits
+    """
 
     L32 = 32
     L64 = 64
@@ -89,7 +97,9 @@ class LN(enum.IntEnum):
 
 
 class MULTIBASE(str, enum.Enum):
-    """Multibase encodings"""
+    """
+    Multibase encodings
+    """
 
     base32 = "b"
     base64url = "u"
@@ -126,7 +136,7 @@ def write_header(mtype, stype, version=0, length=64):
     # TODO verify that all header params and there combination is valid
     if mtype == MT.ID:
         # ISCC-ID length denotes the number of bytes of the trailing counter
-        assert length >= 64, "ISCC-ID minimum length 64-bits".format(length)
+        assert length >= 64, f"ISCC-ID minimum length 64-bits but got {length}"
         length_code = (length - 64) // 8
     else:
         assert length >= 32 and not length % 32, "Length must be a multiple of 32"
