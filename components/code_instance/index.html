@@ -12,25 +12,21 @@
         <meta name="author" content="Titusz Pan">
       
       
-        <link rel="canonical" href="http://iscc.codes/components/code_instance/">
+        <link rel="canonical" href="https://iscc.codes/components/code_instance/">
       
-      <link rel="icon" href="../../assets/images/favicon.png">
-      <meta name="generator" content="mkdocs-1.2.3, mkdocs-material-8.1.2">
+      <link rel="icon" href="../../images/iscc-logo-icon-black.svg">
+      <meta name="generator" content="mkdocs-1.2.3, mkdocs-material-8.1.3">
     
     
       
-        <title>Instance-Code - ISCC - Core Algorithms</title>
+        <title>Instance-Code - ISCC - Codec & Algorithms</title>
       
     
     
-      <link rel="stylesheet" href="../../assets/stylesheets/main.f7951f6f.min.css">
+      <link rel="stylesheet" href="../../assets/stylesheets/main.edf004c2.min.css">
       
         
         <link rel="stylesheet" href="../../assets/stylesheets/palette.e6a45f82.min.css">
-        
-          
-          
-          <meta name="theme-color" content="#2094f3">
         
       
     
@@ -39,12 +35,14 @@
       
         
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,400i,700%7CRoboto+Mono&display=fallback">
-        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Quicksand:300,400,400i,700%7CInconsolata&display=fallback">
+        <style>:root{--md-text-font:"Quicksand";--md-code-font:"Inconsolata"}</style>
       
     
     
       <link rel="stylesheet" href="../../assets/_mkdocstrings.css">
+    
+      <link rel="stylesheet" href="../../stylesheets/extra.css">
     
     <script>__md_scope=new URL("../..",location),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
@@ -57,12 +55,16 @@
   
     
     
+      
     
     
     
-    <body dir="ltr" data-md-color-scheme="" data-md-color-primary="blue" data-md-color-accent="pink">
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="" data-md-color-accent="">
   
     
+    
+      <script>var palette=__md_get("__palette");if(palette&&"object"==typeof palette.color)for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)</script>
     
     <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
     <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
@@ -82,12 +84,13 @@
     
       
 
-<header class="md-header" data-md-component="header">
-  <nav class="md-header__inner md-grid" aria-label="Header">
-    <a href="../.." title="ISCC - Core Algorithms" class="md-header__button md-logo" aria-label="ISCC - Core Algorithms" data-md-component="logo">
-      
   
-  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54z"/></svg>
+
+<header class="md-header md-header--lifted" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../.." title="ISCC - Codec &amp; Algorithms" class="md-header__button md-logo" aria-label="ISCC - Codec & Algorithms" data-md-component="logo">
+      
+  <img src="../../images/iscc-logo-icon-white.svg" alt="logo">
 
     </a>
     <label class="md-header__button md-icon" for="__drawer">
@@ -97,7 +100,7 @@
       <div class="md-header__ellipsis">
         <div class="md-header__topic">
           <span class="md-ellipsis">
-            ISCC - Core Algorithms
+            ISCC - Codec & Algorithms
           </span>
         </div>
         <div class="md-header__topic" data-md-component="header-topic">
@@ -109,6 +112,28 @@
         </div>
       </div>
     </div>
+    
+      <form class="md-header__option" data-md-component="palette">
+        
+          
+          
+          <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="" data-md-color-accent=""  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_1">
+          
+            <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_2" hidden>
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M17 6H7c-3.31 0-6 2.69-6 6s2.69 6 6 6h10c3.31 0 6-2.69 6-6s-2.69-6-6-6zm0 10H7c-2.21 0-4-1.79-4-4s1.79-4 4-4h10c2.21 0 4 1.79 4 4s-1.79 4-4 4zM7 9c-1.66 0-3 1.34-3 3s1.34 3 3 3 3-1.34 3-3-1.34-3-3-3z"/></svg>
+            </label>
+          
+        
+          
+          
+          <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="" data-md-color-accent=""  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_2">
+          
+            <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_1" hidden>
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M17 7H7a5 5 0 0 0-5 5 5 5 0 0 0 5 5h10a5 5 0 0 0 5-5 5 5 0 0 0-5-5m0 8a3 3 0 0 1-3-3 3 3 0 0 1 3-3 3 3 0 0 1 3 3 3 3 0 0 1-3 3z"/></svg>
+            </label>
+          
+        
+      </form>
     
     
     
@@ -160,13 +185,152 @@
     
   </nav>
   
+    
+      
+<nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
+  <div class="md-tabs__inner md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+
+
+  <li class="md-tabs__item">
+    <a href="../.." class="md-tabs__link">
+      Overview
+    </a>
+  </li>
+
+      
+        
+  
+  
+
+
+  <li class="md-tabs__item">
+    <a href="../../codec/codec/" class="md-tabs__link">
+      Codec
+    </a>
+  </li>
+
+      
+        
+  
+  
+
+
+  <li class="md-tabs__item">
+    <a href="../../iscc_code/" class="md-tabs__link">
+      ISCC-CODE
+    </a>
+  </li>
+
+      
+        
+  
+  
+
+
+  <li class="md-tabs__item">
+    <a href="../../iscc_id/" class="md-tabs__link">
+      ISCC-ID
+    </a>
+  </li>
+
+      
+        
+  
+  
+    
+  
+
+
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../" class="md-tabs__link md-tabs__link--active">
+        Components
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+
+
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../algorithms/cdc/" class="md-tabs__link">
+        Algorithms
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+
+
+  <li class="md-tabs__item">
+    <a href="../../schema/schema/" class="md-tabs__link">
+      Schema
+    </a>
+  </li>
+
+      
+        
+  
+  
+
+
+  <li class="md-tabs__item">
+    <a href="../../options/options/" class="md-tabs__link">
+      Options
+    </a>
+  </li>
+
+      
+        
+  
+  
+
+
+  <li class="md-tabs__item">
+    <a href="../../utilities/utils/" class="md-tabs__link">
+      Utilities
+    </a>
+  </li>
+
+      
+        
+  
+  
+
+
+  <li class="md-tabs__item">
+    <a href="../../conformance/" class="md-tabs__link">
+      Conformance
+    </a>
+  </li>
+
+      
+    </ul>
+  </div>
+</nav>
+    
+  
 </header>
     
     <div class="md-container" data-md-component="container">
       
       
-        
-          
         
       
       <main class="md-main" data-md-component="main">
@@ -179,16 +343,19 @@
                   <div class="md-sidebar__inner">
                     
 
-
-<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
-  <label class="md-nav__title" for="__drawer">
-    <a href="../.." title="ISCC - Core Algorithms" class="md-nav__button md-logo" aria-label="ISCC - Core Algorithms" data-md-component="logo">
-      
   
-  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54z"/></svg>
+
+
+  
+
+<nav class="md-nav md-nav--primary md-nav--lifted md-nav--integrated" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="ISCC - Codec &amp; Algorithms" class="md-nav__button md-logo" aria-label="ISCC - Codec & Algorithms" data-md-component="logo">
+      
+  <img src="../../images/iscc-logo-icon-white.svg" alt="logo">
 
     </a>
-    ISCC - Core Algorithms
+    ISCC - Codec & Algorithms
   </label>
   
     <div class="md-nav__source">
@@ -228,8 +395,23 @@
   
   
     <li class="md-nav__item">
+      <a href="../../codec/codec/" class="md-nav__link">
+        Codec
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../../iscc_code/" class="md-nav__link">
-        ISCC-Code
+        ISCC-CODE
       </a>
     </li>
   
@@ -263,7 +445,7 @@
     <li class="md-nav__item md-nav__item--active md-nav__item--nested">
       
       
-        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_4" type="checkbox" id="__nav_4" checked>
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_5" type="checkbox" id="__nav_5" checked>
       
       
       
@@ -287,20 +469,19 @@
         <div class="md-nav__link md-nav__link--index ">
           <a href="../">Components</a>
           
-            <label for="__nav_4">
+            <label for="__nav_5">
               <span class="md-nav__icon md-icon"></span>
             </label>
           
         </div>
       
       <nav class="md-nav" aria-label="Components" data-md-level="1">
-        <label class="md-nav__title" for="__nav_4">
+        <label class="md-nav__title" for="__nav_5">
           <span class="md-nav__icon md-icon"></span>
           Components
         </label>
         <ul class="md-nav__list" data-md-scrollfix>
           
-            
             
           
             
@@ -326,7 +507,7 @@
     <li class="md-nav__item md-nav__item--nested">
       
       
-        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_4_3" type="checkbox" id="__nav_4_3" >
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_5_3" data-md-state="indeterminate" type="checkbox" id="__nav_5_3" checked>
       
       
       
@@ -350,22 +531,21 @@
         
         
         <div class="md-nav__link md-nav__link--index ">
-          <a href="../content/">Content-Code</a>
+          <a href="../content/">Content-Codes</a>
           
-            <label for="__nav_4_3">
+            <label for="__nav_5_3">
               <span class="md-nav__icon md-icon"></span>
             </label>
           
         </div>
       
-      <nav class="md-nav" aria-label="Content-Code" data-md-level="2">
-        <label class="md-nav__title" for="__nav_4_3">
+      <nav class="md-nav" aria-label="Content-Codes" data-md-level="2">
+        <label class="md-nav__title" for="__nav_5_3">
           <span class="md-nav__icon md-icon"></span>
-          Content-Code
+          Content-Codes
         </label>
         <ul class="md-nav__list" data-md-scrollfix>
           
-            
             
           
             
@@ -375,7 +555,7 @@
   
     <li class="md-nav__item">
       <a href="../content/code_content_text/" class="md-nav__link">
-        Text
+        Text-Code
       </a>
     </li>
   
@@ -389,7 +569,7 @@
   
     <li class="md-nav__item">
       <a href="../content/code_content_image/" class="md-nav__link">
-        Image
+        Image-Code
       </a>
     </li>
   
@@ -403,7 +583,7 @@
   
     <li class="md-nav__item">
       <a href="../content/code_content_audio/" class="md-nav__link">
-        Audio
+        Audio-Code
       </a>
     </li>
   
@@ -417,7 +597,7 @@
   
     <li class="md-nav__item">
       <a href="../content/code_content_video/" class="md-nav__link">
-        Video
+        Video-Code
       </a>
     </li>
   
@@ -431,7 +611,7 @@
   
     <li class="md-nav__item">
       <a href="../content/code_content_mixed/" class="md-nav__link">
-        Mixed
+        Mixed-Code
       </a>
     </li>
   
@@ -499,34 +679,11 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#iscc_core.code_instance" class="md-nav__link">
-    iscc_core.code_instance
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#iscc_core.code_instance-classes" class="md-nav__link">
-    Classes
-  </a>
-  
-    <nav class="md-nav" aria-label="Classes">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
   <a href="#iscc_core.code_instance.InstanceHasher" class="md-nav__link">
     InstanceHasher
   </a>
   
     <nav class="md-nav" aria-label="InstanceHasher">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#iscc_core.code_instance.InstanceHasher-methods" class="md-nav__link">
-    Methods
-  </a>
-  
-    <nav class="md-nav" aria-label="Methods">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
@@ -554,26 +711,13 @@
     </nav>
   
 </li>
-        
-      </ul>
-    </nav>
-  
-</li>
-        
-          <li class="md-nav__item">
+      
+        <li class="md-nav__item">
   <a href="#iscc_core.code_instance.InstanceHasherV0" class="md-nav__link">
     InstanceHasherV0
   </a>
   
     <nav class="md-nav" aria-label="InstanceHasherV0">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#iscc_core.code_instance.InstanceHasherV0-methods" class="md-nav__link">
-    Methods
-  </a>
-  
-    <nav class="md-nav" aria-label="Methods">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
@@ -601,48 +745,25 @@
     </nav>
   
 </li>
-        
-      </ul>
-    </nav>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
       
         <li class="md-nav__item">
-  <a href="#iscc_core.code_instance-functions" class="md-nav__link">
-    Functions
-  </a>
-  
-    <nav class="md-nav" aria-label="Functions">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
   <a href="#iscc_core.code_instance.gen_instance_code" class="md-nav__link">
     gen_instance_code()
   </a>
   
 </li>
-        
-          <li class="md-nav__item">
+      
+        <li class="md-nav__item">
   <a href="#iscc_core.code_instance.gen_instance_code_v0" class="md-nav__link">
     gen_instance_code_v0()
   </a>
   
 </li>
-        
-          <li class="md-nav__item">
+      
+        <li class="md-nav__item">
   <a href="#iscc_core.code_instance.hash_instance_v0" class="md-nav__link">
     hash_instance_v0()
   </a>
-  
-</li>
-        
-      </ul>
-    </nav>
   
 </li>
       
@@ -672,7 +793,7 @@
     <li class="md-nav__item md-nav__item--nested">
       
       
-        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_5" type="checkbox" id="__nav_5" >
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_6" data-md-state="indeterminate" type="checkbox" id="__nav_6" checked>
       
       
       
@@ -689,13 +810,13 @@
         
       
       
-        <label class="md-nav__link" for="__nav_5">
+        <label class="md-nav__link" for="__nav_6">
           Algorithms
           <span class="md-nav__icon md-icon"></span>
         </label>
       
       <nav class="md-nav" aria-label="Algorithms" data-md-level="1">
-        <label class="md-nav__title" for="__nav_5">
+        <label class="md-nav__title" for="__nav_6">
           <span class="md-nav__icon md-icon"></span>
           Algorithms
         </label>
@@ -800,21 +921,6 @@
   
   
     <li class="md-nav__item">
-      <a href="../../codec/codec/" class="md-nav__link">
-        Codec
-      </a>
-    </li>
-  
-
-    
-      
-      
-      
-
-  
-  
-  
-    <li class="md-nav__item">
       <a href="../../options/options/" class="md-nav__link">
         Options
       </a>
@@ -859,180 +965,6 @@
               </div>
             
             
-              
-              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
-                <div class="md-sidebar__scrollwrap">
-                  <div class="md-sidebar__inner">
-                    
-
-<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
-  
-  
-  
-    
-  
-  
-    <label class="md-nav__title" for="__toc">
-      <span class="md-nav__icon md-icon"></span>
-      Table of contents
-    </label>
-    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
-      
-        <li class="md-nav__item">
-  <a href="#iscc_core.code_instance" class="md-nav__link">
-    iscc_core.code_instance
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#iscc_core.code_instance-classes" class="md-nav__link">
-    Classes
-  </a>
-  
-    <nav class="md-nav" aria-label="Classes">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#iscc_core.code_instance.InstanceHasher" class="md-nav__link">
-    InstanceHasher
-  </a>
-  
-    <nav class="md-nav" aria-label="InstanceHasher">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#iscc_core.code_instance.InstanceHasher-methods" class="md-nav__link">
-    Methods
-  </a>
-  
-    <nav class="md-nav" aria-label="Methods">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#iscc_core.code_instance.InstanceHasher.push" class="md-nav__link">
-    push()
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#iscc_core.code_instance.InstanceHasher.digest" class="md-nav__link">
-    digest()
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#iscc_core.code_instance.InstanceHasher.code" class="md-nav__link">
-    code()
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#iscc_core.code_instance.InstanceHasherV0" class="md-nav__link">
-    InstanceHasherV0
-  </a>
-  
-    <nav class="md-nav" aria-label="InstanceHasherV0">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#iscc_core.code_instance.InstanceHasherV0-methods" class="md-nav__link">
-    Methods
-  </a>
-  
-    <nav class="md-nav" aria-label="Methods">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#iscc_core.code_instance.InstanceHasherV0.push" class="md-nav__link">
-    push()
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#iscc_core.code_instance.InstanceHasherV0.digest" class="md-nav__link">
-    digest()
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#iscc_core.code_instance.InstanceHasherV0.code" class="md-nav__link">
-    code()
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#iscc_core.code_instance-functions" class="md-nav__link">
-    Functions
-  </a>
-  
-    <nav class="md-nav" aria-label="Functions">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#iscc_core.code_instance.gen_instance_code" class="md-nav__link">
-    gen_instance_code()
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#iscc_core.code_instance.gen_instance_code_v0" class="md-nav__link">
-    gen_instance_code_v0()
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#iscc_core.code_instance.hash_instance_v0" class="md-nav__link">
-    hash_instance_v0()
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-    </ul>
-  
-</nav>
-                  </div>
-                </div>
-              </div>
-            
           
           <div class="md-content" data-md-component="content">
             <article class="md-content__inner md-typeset">
@@ -1043,14 +975,15 @@
 </a>
 
 
-<h1 id="iscc-instance-code">ISCC Instance-Code</h1>
+<h1 id="iscc-instance-code"><strong>ISCC</strong> - Instance-Code<a class="headerlink" href="#iscc-instance-code" title="Permanent link">#</a></h1>
 
 
   <div class="doc doc-object doc-module">
 
-<a id="iscc_core.code_instance"></a>
+
     <div class="doc doc-contents first">
 
+      <p><em>A data checksum.</em></p>
 
 
 
@@ -1059,20 +992,17 @@
 
 
 
-
-<h3 id="iscc_core.code_instance-classes">Classes</h3>
-
   <div class="doc doc-object doc-class">
 
 
 
-<h4 id="iscc_core.code_instance.InstanceHasher" class="doc doc-heading">
+<h2 id="iscc_core.code_instance.InstanceHasher" class="doc doc-heading">
         <code>
 InstanceHasher        </code>
 
 
 
-</h4>
+<a href="#iscc_core.code_instance.InstanceHasher" class="headerlink" title="Permanent link">#</a></h2>
 
     <div class="doc doc-contents ">
 
@@ -1089,18 +1019,15 @@ InstanceHasher        </code>
 
 
 
-<h5 id="iscc_core.code_instance.InstanceHasher-methods">Methods</h5>
-
-
   <div class="doc doc-object doc-method">
 
 
 
-<h6 id="iscc_core.code_instance.InstanceHasher.push" class="doc doc-heading">
+<h3 id="iscc_core.code_instance.InstanceHasher.push" class="doc doc-heading">
 <code class="highlight language-python"><span class="n">push</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">)</span></code>
 
 
-</h6>
+<a href="#iscc_core.code_instance.InstanceHasher.push" class="headerlink" title="Permanent link">#</a></h3>
 
     <div class="doc doc-contents ">
 
@@ -1131,15 +1058,17 @@ InstanceHasher        </code>
 
 
 
+
+
   <div class="doc doc-object doc-method">
 
 
 
-<h6 id="iscc_core.code_instance.InstanceHasher.digest" class="doc doc-heading">
+<h3 id="iscc_core.code_instance.InstanceHasher.digest" class="doc doc-heading">
 <code class="highlight language-python"><span class="n">digest</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span></code>
 
 
-</h6>
+<a href="#iscc_core.code_instance.InstanceHasher.digest" class="headerlink" title="Permanent link">#</a></h3>
 
     <div class="doc doc-contents ">
 
@@ -1166,15 +1095,17 @@ InstanceHasher        </code>
 
 
 
+
+
   <div class="doc doc-object doc-method">
 
 
 
-<h6 id="iscc_core.code_instance.InstanceHasher.code" class="doc doc-heading">
+<h3 id="iscc_core.code_instance.InstanceHasher.code" class="doc doc-heading">
 <code class="highlight language-python"><span class="n">code</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">bits</span> <span class="o">=</span> <span class="mi">64</span><span class="p">)</span></code>
 
 
-</h6>
+<a href="#iscc_core.code_instance.InstanceHasher.code" class="headerlink" title="Permanent link">#</a></h3>
 
     <div class="doc doc-contents ">
 
@@ -1227,6 +1158,8 @@ InstanceHasher        </code>
     </div>
 
   </div>
+
+
 
 
 
@@ -1234,13 +1167,13 @@ InstanceHasher        </code>
 
 
 
-<h4 id="iscc_core.code_instance.InstanceHasherV0" class="doc doc-heading">
+<h2 id="iscc_core.code_instance.InstanceHasherV0" class="doc doc-heading">
         <code>
 InstanceHasherV0        </code>
 
 
 
-</h4>
+<a href="#iscc_core.code_instance.InstanceHasherV0" class="headerlink" title="Permanent link">#</a></h2>
 
     <div class="doc doc-contents ">
 
@@ -1257,18 +1190,15 @@ InstanceHasherV0        </code>
 
 
 
-<h5 id="iscc_core.code_instance.InstanceHasherV0-methods">Methods</h5>
-
-
   <div class="doc doc-object doc-method">
 
 
 
-<h6 id="iscc_core.code_instance.InstanceHasherV0.push" class="doc doc-heading">
+<h3 id="iscc_core.code_instance.InstanceHasherV0.push" class="doc doc-heading">
 <code class="highlight language-python"><span class="n">push</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">)</span></code>
 
 
-</h6>
+<a href="#iscc_core.code_instance.InstanceHasherV0.push" class="headerlink" title="Permanent link">#</a></h3>
 
     <div class="doc doc-contents ">
 
@@ -1299,15 +1229,17 @@ InstanceHasherV0        </code>
 
 
 
+
+
   <div class="doc doc-object doc-method">
 
 
 
-<h6 id="iscc_core.code_instance.InstanceHasherV0.digest" class="doc doc-heading">
+<h3 id="iscc_core.code_instance.InstanceHasherV0.digest" class="doc doc-heading">
 <code class="highlight language-python"><span class="n">digest</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span></code>
 
 
-</h6>
+<a href="#iscc_core.code_instance.InstanceHasherV0.digest" class="headerlink" title="Permanent link">#</a></h3>
 
     <div class="doc doc-contents ">
 
@@ -1334,15 +1266,17 @@ InstanceHasherV0        </code>
 
 
 
+
+
   <div class="doc doc-object doc-method">
 
 
 
-<h6 id="iscc_core.code_instance.InstanceHasherV0.code" class="doc doc-heading">
+<h3 id="iscc_core.code_instance.InstanceHasherV0.code" class="doc doc-heading">
 <code class="highlight language-python"><span class="n">code</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">bits</span> <span class="o">=</span> <span class="mi">64</span><span class="p">)</span></code>
 
 
-</h6>
+<a href="#iscc_core.code_instance.InstanceHasherV0.code" class="headerlink" title="Permanent link">#</a></h3>
 
     <div class="doc doc-contents ">
 
@@ -1397,17 +1331,18 @@ InstanceHasherV0        </code>
   </div>
 
 
-<h3 id="iscc_core.code_instance-functions">Functions</h3>
+
+
 
   <div class="doc doc-object doc-function">
 
 
 
-<h4 id="iscc_core.code_instance.gen_instance_code" class="doc doc-heading">
+<h2 id="iscc_core.code_instance.gen_instance_code" class="doc doc-heading">
 <code class="highlight language-python"><span class="n">gen_instance_code</span><span class="p">(</span><span class="n">stream</span><span class="p">,</span> <span class="n">bits</span> <span class="o">=</span> <span class="mi">64</span><span class="p">)</span></code>
 
 
-</h4>
+<a href="#iscc_core.code_instance.gen_instance_code" class="headerlink" title="Permanent link">#</a></h2>
 
     <div class="doc doc-contents ">
 
@@ -1459,15 +1394,17 @@ InstanceHasherV0        </code>
 
 
 
+
+
   <div class="doc doc-object doc-function">
 
 
 
-<h4 id="iscc_core.code_instance.gen_instance_code_v0" class="doc doc-heading">
+<h2 id="iscc_core.code_instance.gen_instance_code_v0" class="doc doc-heading">
 <code class="highlight language-python"><span class="n">gen_instance_code_v0</span><span class="p">(</span><span class="n">stream</span><span class="p">,</span> <span class="n">bits</span> <span class="o">=</span> <span class="mi">64</span><span class="p">)</span></code>
 
 
-</h4>
+<a href="#iscc_core.code_instance.gen_instance_code_v0" class="headerlink" title="Permanent link">#</a></h2>
 
     <div class="doc doc-contents ">
 
@@ -1519,15 +1456,17 @@ InstanceHasherV0        </code>
 
 
 
+
+
   <div class="doc doc-object doc-function">
 
 
 
-<h4 id="iscc_core.code_instance.hash_instance_v0" class="doc doc-heading">
+<h2 id="iscc_core.code_instance.hash_instance_v0" class="doc doc-heading">
 <code class="highlight language-python"><span class="n">hash_instance_v0</span><span class="p">(</span><span class="n">stream</span><span class="p">)</span></code>
 
 
-</h4>
+<a href="#iscc_core.code_instance.hash_instance_v0" class="headerlink" title="Permanent link">#</a></h2>
 
     <div class="doc doc-contents ">
 
@@ -1570,7 +1509,6 @@ InstanceHasherV0        </code>
     </div>
 
   </div>
-
 
 
 
@@ -1650,10 +1588,10 @@ InstanceHasherV0        </code>
     <div class="md-dialog" data-md-component="dialog">
       <div class="md-dialog__inner md-typeset"></div>
     </div>
-    <script id="__config" type="application/json">{"base": "../..", "features": ["navigation.indexes"], "translations": {"clipboard.copy": "Copy to clipboard", "clipboard.copied": "Copied to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.placeholder": "Type to start searching", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.term.missing": "Missing", "select.version.title": "Select version"}, "search": "../../assets/javascripts/workers/search.0bbba5b5.min.js"}</script>
+    <script id="__config" type="application/json">{"base": "../..", "features": ["toc.integrate", "navigation.indexes", "navigation.tracking", "navigation.tabs", "navigation.tabs.sticky", "navigation.expand"], "translations": {"clipboard.copy": "Copy to clipboard", "clipboard.copied": "Copied to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.placeholder": "Type to start searching", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.term.missing": "Missing", "select.version.title": "Select version"}, "search": "../../assets/javascripts/workers/search.0bbba5b5.min.js"}</script>
     
     
-      <script src="../../assets/javascripts/bundle.649a939e.min.js"></script>
+      <script src="../../assets/javascripts/bundle.e1a181d9.min.js"></script>
       
     
   </body>

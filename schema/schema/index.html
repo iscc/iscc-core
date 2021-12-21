@@ -12,25 +12,21 @@
         <meta name="author" content="Titusz Pan">
       
       
-        <link rel="canonical" href="http://iscc.codes/schema/schema/">
+        <link rel="canonical" href="https://iscc.codes/schema/schema/">
       
-      <link rel="icon" href="../../assets/images/favicon.png">
-      <meta name="generator" content="mkdocs-1.2.3, mkdocs-material-8.1.2">
+      <link rel="icon" href="../../images/iscc-logo-icon-black.svg">
+      <meta name="generator" content="mkdocs-1.2.3, mkdocs-material-8.1.3">
     
     
       
-        <title>Schema - ISCC - Core Algorithms</title>
+        <title>Schema - ISCC - Codec & Algorithms</title>
       
     
     
-      <link rel="stylesheet" href="../../assets/stylesheets/main.f7951f6f.min.css">
+      <link rel="stylesheet" href="../../assets/stylesheets/main.edf004c2.min.css">
       
         
         <link rel="stylesheet" href="../../assets/stylesheets/palette.e6a45f82.min.css">
-        
-          
-          
-          <meta name="theme-color" content="#2094f3">
         
       
     
@@ -39,12 +35,14 @@
       
         
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,400i,700%7CRoboto+Mono&display=fallback">
-        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Quicksand:300,400,400i,700%7CInconsolata&display=fallback">
+        <style>:root{--md-text-font:"Quicksand";--md-code-font:"Inconsolata"}</style>
       
     
     
       <link rel="stylesheet" href="../../assets/_mkdocstrings.css">
+    
+      <link rel="stylesheet" href="../../stylesheets/extra.css">
     
     <script>__md_scope=new URL("../..",location),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
@@ -57,12 +55,16 @@
   
     
     
+      
     
     
     
-    <body dir="ltr" data-md-color-scheme="" data-md-color-primary="blue" data-md-color-accent="pink">
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="" data-md-color-accent="">
   
     
+    
+      <script>var palette=__md_get("__palette");if(palette&&"object"==typeof palette.color)for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)</script>
     
     <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
     <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
@@ -82,12 +84,13 @@
     
       
 
-<header class="md-header" data-md-component="header">
-  <nav class="md-header__inner md-grid" aria-label="Header">
-    <a href="../.." title="ISCC - Core Algorithms" class="md-header__button md-logo" aria-label="ISCC - Core Algorithms" data-md-component="logo">
-      
   
-  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54z"/></svg>
+
+<header class="md-header md-header--lifted" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../.." title="ISCC - Codec &amp; Algorithms" class="md-header__button md-logo" aria-label="ISCC - Codec & Algorithms" data-md-component="logo">
+      
+  <img src="../../images/iscc-logo-icon-white.svg" alt="logo">
 
     </a>
     <label class="md-header__button md-icon" for="__drawer">
@@ -97,7 +100,7 @@
       <div class="md-header__ellipsis">
         <div class="md-header__topic">
           <span class="md-ellipsis">
-            ISCC - Core Algorithms
+            ISCC - Codec & Algorithms
           </span>
         </div>
         <div class="md-header__topic" data-md-component="header-topic">
@@ -109,6 +112,28 @@
         </div>
       </div>
     </div>
+    
+      <form class="md-header__option" data-md-component="palette">
+        
+          
+          
+          <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="" data-md-color-accent=""  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_1">
+          
+            <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_2" hidden>
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M17 6H7c-3.31 0-6 2.69-6 6s2.69 6 6 6h10c3.31 0 6-2.69 6-6s-2.69-6-6-6zm0 10H7c-2.21 0-4-1.79-4-4s1.79-4 4-4h10c2.21 0 4 1.79 4 4s-1.79 4-4 4zM7 9c-1.66 0-3 1.34-3 3s1.34 3 3 3 3-1.34 3-3-1.34-3-3-3z"/></svg>
+            </label>
+          
+        
+          
+          
+          <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="" data-md-color-accent=""  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_2">
+          
+            <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_1" hidden>
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M17 7H7a5 5 0 0 0-5 5 5 5 0 0 0 5 5h10a5 5 0 0 0 5-5 5 5 0 0 0-5-5m0 8a3 3 0 0 1-3-3 3 3 0 0 1 3-3 3 3 0 0 1 3 3 3 3 0 0 1-3 3z"/></svg>
+            </label>
+          
+        
+      </form>
     
     
     
@@ -160,13 +185,152 @@
     
   </nav>
   
+    
+      
+<nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
+  <div class="md-tabs__inner md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+
+
+  <li class="md-tabs__item">
+    <a href="../.." class="md-tabs__link">
+      Overview
+    </a>
+  </li>
+
+      
+        
+  
+  
+
+
+  <li class="md-tabs__item">
+    <a href="../../codec/codec/" class="md-tabs__link">
+      Codec
+    </a>
+  </li>
+
+      
+        
+  
+  
+
+
+  <li class="md-tabs__item">
+    <a href="../../iscc_code/" class="md-tabs__link">
+      ISCC-CODE
+    </a>
+  </li>
+
+      
+        
+  
+  
+
+
+  <li class="md-tabs__item">
+    <a href="../../iscc_id/" class="md-tabs__link">
+      ISCC-ID
+    </a>
+  </li>
+
+      
+        
+  
+  
+
+
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../components/" class="md-tabs__link">
+        Components
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+
+
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../algorithms/cdc/" class="md-tabs__link">
+        Algorithms
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+    
+  
+
+
+  <li class="md-tabs__item">
+    <a href="./" class="md-tabs__link md-tabs__link--active">
+      Schema
+    </a>
+  </li>
+
+      
+        
+  
+  
+
+
+  <li class="md-tabs__item">
+    <a href="../../options/options/" class="md-tabs__link">
+      Options
+    </a>
+  </li>
+
+      
+        
+  
+  
+
+
+  <li class="md-tabs__item">
+    <a href="../../utilities/utils/" class="md-tabs__link">
+      Utilities
+    </a>
+  </li>
+
+      
+        
+  
+  
+
+
+  <li class="md-tabs__item">
+    <a href="../../conformance/" class="md-tabs__link">
+      Conformance
+    </a>
+  </li>
+
+      
+    </ul>
+  </div>
+</nav>
+    
+  
 </header>
     
     <div class="md-container" data-md-component="container">
       
       
-        
-          
         
       
       <main class="md-main" data-md-component="main">
@@ -179,16 +343,19 @@
                   <div class="md-sidebar__inner">
                     
 
-
-<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
-  <label class="md-nav__title" for="__drawer">
-    <a href="../.." title="ISCC - Core Algorithms" class="md-nav__button md-logo" aria-label="ISCC - Core Algorithms" data-md-component="logo">
-      
   
-  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54z"/></svg>
+
+
+  
+
+<nav class="md-nav md-nav--primary md-nav--lifted md-nav--integrated" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="ISCC - Codec &amp; Algorithms" class="md-nav__button md-logo" aria-label="ISCC - Codec & Algorithms" data-md-component="logo">
+      
+  <img src="../../images/iscc-logo-icon-white.svg" alt="logo">
 
     </a>
-    ISCC - Core Algorithms
+    ISCC - Codec & Algorithms
   </label>
   
     <div class="md-nav__source">
@@ -228,8 +395,23 @@
   
   
     <li class="md-nav__item">
+      <a href="../../codec/codec/" class="md-nav__link">
+        Codec
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../../iscc_code/" class="md-nav__link">
-        ISCC-Code
+        ISCC-CODE
       </a>
     </li>
   
@@ -261,7 +443,7 @@
     <li class="md-nav__item md-nav__item--nested">
       
       
-        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_4" type="checkbox" id="__nav_4" >
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_5" data-md-state="indeterminate" type="checkbox" id="__nav_5" checked>
       
       
       
@@ -285,20 +467,19 @@
         <div class="md-nav__link md-nav__link--index ">
           <a href="../../components/">Components</a>
           
-            <label for="__nav_4">
+            <label for="__nav_5">
               <span class="md-nav__icon md-icon"></span>
             </label>
           
         </div>
       
       <nav class="md-nav" aria-label="Components" data-md-level="1">
-        <label class="md-nav__title" for="__nav_4">
+        <label class="md-nav__title" for="__nav_5">
           <span class="md-nav__icon md-icon"></span>
           Components
         </label>
         <ul class="md-nav__list" data-md-scrollfix>
           
-            
             
           
             
@@ -324,7 +505,7 @@
     <li class="md-nav__item md-nav__item--nested">
       
       
-        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_4_3" type="checkbox" id="__nav_4_3" >
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_5_3" data-md-state="indeterminate" type="checkbox" id="__nav_5_3" checked>
       
       
       
@@ -348,22 +529,21 @@
         
         
         <div class="md-nav__link md-nav__link--index ">
-          <a href="../../components/content/">Content-Code</a>
+          <a href="../../components/content/">Content-Codes</a>
           
-            <label for="__nav_4_3">
+            <label for="__nav_5_3">
               <span class="md-nav__icon md-icon"></span>
             </label>
           
         </div>
       
-      <nav class="md-nav" aria-label="Content-Code" data-md-level="2">
-        <label class="md-nav__title" for="__nav_4_3">
+      <nav class="md-nav" aria-label="Content-Codes" data-md-level="2">
+        <label class="md-nav__title" for="__nav_5_3">
           <span class="md-nav__icon md-icon"></span>
-          Content-Code
+          Content-Codes
         </label>
         <ul class="md-nav__list" data-md-scrollfix>
           
-            
             
           
             
@@ -373,7 +553,7 @@
   
     <li class="md-nav__item">
       <a href="../../components/content/code_content_text/" class="md-nav__link">
-        Text
+        Text-Code
       </a>
     </li>
   
@@ -387,7 +567,7 @@
   
     <li class="md-nav__item">
       <a href="../../components/content/code_content_image/" class="md-nav__link">
-        Image
+        Image-Code
       </a>
     </li>
   
@@ -401,7 +581,7 @@
   
     <li class="md-nav__item">
       <a href="../../components/content/code_content_audio/" class="md-nav__link">
-        Audio
+        Audio-Code
       </a>
     </li>
   
@@ -415,7 +595,7 @@
   
     <li class="md-nav__item">
       <a href="../../components/content/code_content_video/" class="md-nav__link">
-        Video
+        Video-Code
       </a>
     </li>
   
@@ -429,7 +609,7 @@
   
     <li class="md-nav__item">
       <a href="../../components/content/code_content_mixed/" class="md-nav__link">
-        Mixed
+        Mixed-Code
       </a>
     </li>
   
@@ -488,7 +668,7 @@
     <li class="md-nav__item md-nav__item--nested">
       
       
-        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_5" type="checkbox" id="__nav_5" >
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_6" data-md-state="indeterminate" type="checkbox" id="__nav_6" checked>
       
       
       
@@ -505,13 +685,13 @@
         
       
       
-        <label class="md-nav__link" for="__nav_5">
+        <label class="md-nav__link" for="__nav_6">
           Algorithms
           <span class="md-nav__icon md-icon"></span>
         </label>
       
       <nav class="md-nav" aria-label="Algorithms" data-md-level="1">
-        <label class="md-nav__title" for="__nav_5">
+        <label class="md-nav__title" for="__nav_6">
           <span class="md-nav__icon md-icon"></span>
           Algorithms
         </label>
@@ -635,34 +815,11 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#iscc_core.schema" class="md-nav__link">
-    iscc_core.schema
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#iscc_core.schema-classes" class="md-nav__link">
-    Classes
-  </a>
-  
-    <nav class="md-nav" aria-label="Classes">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
   <a href="#iscc_core.schema.ContentCode" class="md-nav__link">
     ContentCode
   </a>
   
     <nav class="md-nav" aria-label="ContentCode">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#iscc_core.schema.ContentCode-attributes" class="md-nav__link">
-    Attributes
-  </a>
-  
-    <nav class="md-nav" aria-label="Attributes">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
@@ -676,26 +833,13 @@
     </nav>
   
 </li>
-        
-      </ul>
-    </nav>
-  
-</li>
-        
-          <li class="md-nav__item">
+      
+        <li class="md-nav__item">
   <a href="#iscc_core.schema.ContentCodeAudio" class="md-nav__link">
     ContentCodeAudio
   </a>
   
     <nav class="md-nav" aria-label="ContentCodeAudio">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#iscc_core.schema.ContentCodeAudio-attributes" class="md-nav__link">
-    Attributes
-  </a>
-  
-    <nav class="md-nav" aria-label="Attributes">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
@@ -709,26 +853,13 @@
     </nav>
   
 </li>
-        
-      </ul>
-    </nav>
-  
-</li>
-        
-          <li class="md-nav__item">
+      
+        <li class="md-nav__item">
   <a href="#iscc_core.schema.ContentCodeImage" class="md-nav__link">
     ContentCodeImage
   </a>
   
     <nav class="md-nav" aria-label="ContentCodeImage">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#iscc_core.schema.ContentCodeImage-attributes" class="md-nav__link">
-    Attributes
-  </a>
-  
-    <nav class="md-nav" aria-label="Attributes">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
@@ -756,26 +887,13 @@
     </nav>
   
 </li>
-        
-      </ul>
-    </nav>
-  
-</li>
-        
-          <li class="md-nav__item">
+      
+        <li class="md-nav__item">
   <a href="#iscc_core.schema.ContentCodeMixed" class="md-nav__link">
     ContentCodeMixed
   </a>
   
     <nav class="md-nav" aria-label="ContentCodeMixed">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#iscc_core.schema.ContentCodeMixed-attributes" class="md-nav__link">
-    Attributes
-  </a>
-  
-    <nav class="md-nav" aria-label="Attributes">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
@@ -789,26 +907,13 @@
     </nav>
   
 </li>
-        
-      </ul>
-    </nav>
-  
-</li>
-        
-          <li class="md-nav__item">
+      
+        <li class="md-nav__item">
   <a href="#iscc_core.schema.ContentCodeText" class="md-nav__link">
     ContentCodeText
   </a>
   
     <nav class="md-nav" aria-label="ContentCodeText">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#iscc_core.schema.ContentCodeText-attributes" class="md-nav__link">
-    Attributes
-  </a>
-  
-    <nav class="md-nav" aria-label="Attributes">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
@@ -829,26 +934,13 @@
     </nav>
   
 </li>
-        
-      </ul>
-    </nav>
-  
-</li>
-        
-          <li class="md-nav__item">
+      
+        <li class="md-nav__item">
   <a href="#iscc_core.schema.ContentCodeVideo" class="md-nav__link">
     ContentCodeVideo
   </a>
   
     <nav class="md-nav" aria-label="ContentCodeVideo">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#iscc_core.schema.ContentCodeVideo-attributes" class="md-nav__link">
-    Attributes
-  </a>
-  
-    <nav class="md-nav" aria-label="Attributes">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
@@ -890,33 +982,20 @@
     </nav>
   
 </li>
-        
-      </ul>
-    </nav>
-  
-</li>
-        
-          <li class="md-nav__item">
+      
+        <li class="md-nav__item">
   <a href="#iscc_core.schema.DataCode" class="md-nav__link">
     DataCode
   </a>
   
 </li>
-        
-          <li class="md-nav__item">
+      
+        <li class="md-nav__item">
   <a href="#iscc_core.schema.InstanceCode" class="md-nav__link">
     InstanceCode
   </a>
   
     <nav class="md-nav" aria-label="InstanceCode">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#iscc_core.schema.InstanceCode-attributes" class="md-nav__link">
-    Attributes
-  </a>
-  
-    <nav class="md-nav" aria-label="Attributes">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
@@ -937,26 +1016,13 @@
     </nav>
   
 </li>
-        
-      </ul>
-    </nav>
-  
-</li>
-        
-          <li class="md-nav__item">
+      
+        <li class="md-nav__item">
   <a href="#iscc_core.schema.IsccBase" class="md-nav__link">
     IsccBase
   </a>
   
     <nav class="md-nav" aria-label="IsccBase">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#iscc_core.schema.IsccBase-attributes" class="md-nav__link">
-    Attributes
-  </a>
-  
-    <nav class="md-nav" aria-label="Attributes">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
@@ -973,19 +1039,6 @@
   
 </li>
         
-      </ul>
-    </nav>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#iscc_core.schema.IsccBase-methods" class="md-nav__link">
-    Methods
-  </a>
-  
-    <nav class="md-nav" aria-label="Methods">
-      <ul class="md-nav__list">
-        
           <li class="md-nav__item">
   <a href="#iscc_core.schema.IsccBase.dict" class="md-nav__link">
     dict()
@@ -997,26 +1050,13 @@
     </nav>
   
 </li>
-        
-      </ul>
-    </nav>
-  
-</li>
-        
-          <li class="md-nav__item">
+      
+        <li class="md-nav__item">
   <a href="#iscc_core.schema.IsccCode" class="md-nav__link">
     IsccCode
   </a>
   
     <nav class="md-nav" aria-label="IsccCode">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#iscc_core.schema.IsccCode-attributes" class="md-nav__link">
-    Attributes
-  </a>
-  
-    <nav class="md-nav" aria-label="Attributes">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
@@ -1135,33 +1175,20 @@
     </nav>
   
 </li>
-        
-      </ul>
-    </nav>
-  
-</li>
-        
-          <li class="md-nav__item">
+      
+        <li class="md-nav__item">
   <a href="#iscc_core.schema.IsccID" class="md-nav__link">
     IsccID
   </a>
   
 </li>
-        
-          <li class="md-nav__item">
+      
+        <li class="md-nav__item">
   <a href="#iscc_core.schema.MetaCode" class="md-nav__link">
     MetaCode
   </a>
   
     <nav class="md-nav" aria-label="MetaCode">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#iscc_core.schema.MetaCode-attributes" class="md-nav__link">
-    Attributes
-  </a>
-  
-    <nav class="md-nav" aria-label="Attributes">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
@@ -1196,36 +1223,11 @@
     </nav>
   
 </li>
-        
-      </ul>
-    </nav>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
       
     </ul>
   
 </nav>
       
-    </li>
-  
-
-    
-      
-      
-      
-
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../codec/codec/" class="md-nav__link">
-        Codec
-      </a>
     </li>
   
 
@@ -1282,605 +1284,6 @@
               </div>
             
             
-              
-              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
-                <div class="md-sidebar__scrollwrap">
-                  <div class="md-sidebar__inner">
-                    
-
-<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
-  
-  
-  
-    
-  
-  
-    <label class="md-nav__title" for="__toc">
-      <span class="md-nav__icon md-icon"></span>
-      Table of contents
-    </label>
-    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
-      
-        <li class="md-nav__item">
-  <a href="#iscc_core.schema" class="md-nav__link">
-    iscc_core.schema
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#iscc_core.schema-classes" class="md-nav__link">
-    Classes
-  </a>
-  
-    <nav class="md-nav" aria-label="Classes">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#iscc_core.schema.ContentCode" class="md-nav__link">
-    ContentCode
-  </a>
-  
-    <nav class="md-nav" aria-label="ContentCode">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#iscc_core.schema.ContentCode-attributes" class="md-nav__link">
-    Attributes
-  </a>
-  
-    <nav class="md-nav" aria-label="Attributes">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#iscc_core.schema.ContentCode.title" class="md-nav__link">
-    title
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#iscc_core.schema.ContentCodeAudio" class="md-nav__link">
-    ContentCodeAudio
-  </a>
-  
-    <nav class="md-nav" aria-label="ContentCodeAudio">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#iscc_core.schema.ContentCodeAudio-attributes" class="md-nav__link">
-    Attributes
-  </a>
-  
-    <nav class="md-nav" aria-label="Attributes">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#iscc_core.schema.ContentCodeAudio.duration" class="md-nav__link">
-    duration
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#iscc_core.schema.ContentCodeImage" class="md-nav__link">
-    ContentCodeImage
-  </a>
-  
-    <nav class="md-nav" aria-label="ContentCodeImage">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#iscc_core.schema.ContentCodeImage-attributes" class="md-nav__link">
-    Attributes
-  </a>
-  
-    <nav class="md-nav" aria-label="Attributes">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#iscc_core.schema.ContentCodeImage.width" class="md-nav__link">
-    width
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#iscc_core.schema.ContentCodeImage.height" class="md-nav__link">
-    height
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#iscc_core.schema.ContentCodeImage.preview" class="md-nav__link">
-    preview
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#iscc_core.schema.ContentCodeMixed" class="md-nav__link">
-    ContentCodeMixed
-  </a>
-  
-    <nav class="md-nav" aria-label="ContentCodeMixed">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#iscc_core.schema.ContentCodeMixed-attributes" class="md-nav__link">
-    Attributes
-  </a>
-  
-    <nav class="md-nav" aria-label="Attributes">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#iscc_core.schema.ContentCodeMixed.parts" class="md-nav__link">
-    parts
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#iscc_core.schema.ContentCodeText" class="md-nav__link">
-    ContentCodeText
-  </a>
-  
-    <nav class="md-nav" aria-label="ContentCodeText">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#iscc_core.schema.ContentCodeText-attributes" class="md-nav__link">
-    Attributes
-  </a>
-  
-    <nav class="md-nav" aria-label="Attributes">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#iscc_core.schema.ContentCodeText.characters" class="md-nav__link">
-    characters
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#iscc_core.schema.ContentCodeText.language" class="md-nav__link">
-    language
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#iscc_core.schema.ContentCodeVideo" class="md-nav__link">
-    ContentCodeVideo
-  </a>
-  
-    <nav class="md-nav" aria-label="ContentCodeVideo">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#iscc_core.schema.ContentCodeVideo-attributes" class="md-nav__link">
-    Attributes
-  </a>
-  
-    <nav class="md-nav" aria-label="Attributes">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#iscc_core.schema.ContentCodeVideo.duration" class="md-nav__link">
-    duration
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#iscc_core.schema.ContentCodeVideo.fps" class="md-nav__link">
-    fps
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#iscc_core.schema.ContentCodeVideo.width" class="md-nav__link">
-    width
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#iscc_core.schema.ContentCodeVideo.height" class="md-nav__link">
-    height
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#iscc_core.schema.ContentCodeVideo.language" class="md-nav__link">
-    language
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#iscc_core.schema.DataCode" class="md-nav__link">
-    DataCode
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#iscc_core.schema.InstanceCode" class="md-nav__link">
-    InstanceCode
-  </a>
-  
-    <nav class="md-nav" aria-label="InstanceCode">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#iscc_core.schema.InstanceCode-attributes" class="md-nav__link">
-    Attributes
-  </a>
-  
-    <nav class="md-nav" aria-label="Attributes">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#iscc_core.schema.InstanceCode.datahash" class="md-nav__link">
-    datahash
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#iscc_core.schema.InstanceCode.filesize" class="md-nav__link">
-    filesize
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#iscc_core.schema.IsccBase" class="md-nav__link">
-    IsccBase
-  </a>
-  
-    <nav class="md-nav" aria-label="IsccBase">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#iscc_core.schema.IsccBase-attributes" class="md-nav__link">
-    Attributes
-  </a>
-  
-    <nav class="md-nav" aria-label="Attributes">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#iscc_core.schema.IsccBase.iscc" class="md-nav__link">
-    iscc
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#iscc_core.schema.IsccBase.code_obj" class="md-nav__link">
-    code_obj
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#iscc_core.schema.IsccBase-methods" class="md-nav__link">
-    Methods
-  </a>
-  
-    <nav class="md-nav" aria-label="Methods">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#iscc_core.schema.IsccBase.dict" class="md-nav__link">
-    dict()
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#iscc_core.schema.IsccCode" class="md-nav__link">
-    IsccCode
-  </a>
-  
-    <nav class="md-nav" aria-label="IsccCode">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#iscc_core.schema.IsccCode-attributes" class="md-nav__link">
-    Attributes
-  </a>
-  
-    <nav class="md-nav" aria-label="Attributes">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#iscc_core.schema.IsccCode.version" class="md-nav__link">
-    version
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#iscc_core.schema.IsccCode.title" class="md-nav__link">
-    title
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#iscc_core.schema.IsccCode.extra" class="md-nav__link">
-    extra
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#iscc_core.schema.IsccCode.filename" class="md-nav__link">
-    filename
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#iscc_core.schema.IsccCode.filesize" class="md-nav__link">
-    filesize
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#iscc_core.schema.IsccCode.mediatype" class="md-nav__link">
-    mediatype
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#iscc_core.schema.IsccCode.tophash" class="md-nav__link">
-    tophash
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#iscc_core.schema.IsccCode.metahash" class="md-nav__link">
-    metahash
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#iscc_core.schema.IsccCode.datahash" class="md-nav__link">
-    datahash
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#iscc_core.schema.IsccCode.duration" class="md-nav__link">
-    duration
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#iscc_core.schema.IsccCode.fps" class="md-nav__link">
-    fps
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#iscc_core.schema.IsccCode.width" class="md-nav__link">
-    width
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#iscc_core.schema.IsccCode.height" class="md-nav__link">
-    height
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#iscc_core.schema.IsccCode.characters" class="md-nav__link">
-    characters
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#iscc_core.schema.IsccCode.language" class="md-nav__link">
-    language
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#iscc_core.schema.IsccCode.preview" class="md-nav__link">
-    preview
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#iscc_core.schema.IsccID" class="md-nav__link">
-    IsccID
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#iscc_core.schema.MetaCode" class="md-nav__link">
-    MetaCode
-  </a>
-  
-    <nav class="md-nav" aria-label="MetaCode">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#iscc_core.schema.MetaCode-attributes" class="md-nav__link">
-    Attributes
-  </a>
-  
-    <nav class="md-nav" aria-label="Attributes">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#iscc_core.schema.MetaCode.title" class="md-nav__link">
-    title
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#iscc_core.schema.MetaCode.extra" class="md-nav__link">
-    extra
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#iscc_core.schema.MetaCode.binary" class="md-nav__link">
-    binary
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#iscc_core.schema.MetaCode.metahash" class="md-nav__link">
-    metahash
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-    </ul>
-  
-</nav>
-                  </div>
-                </div>
-              </div>
-            
           
           <div class="md-content" data-md-component="content">
             <article class="md-content__inner md-typeset">
@@ -1891,15 +1294,15 @@
 </a>
 
 
-<h1 id="iscc-schema">ISCC - Schema</h1>
+<h1 id="iscc-schema"><strong>ISCC</strong> - Schema<a class="headerlink" href="#iscc-schema" title="Permanent link">#</a></h1>
 
 
   <div class="doc doc-object doc-module">
 
-<a id="iscc_core.schema"></a>
+
     <div class="doc doc-contents first">
 
-      <p>Schema of objects returned by ISCC processing algorithms.</p>
+      <p><em>Schema of objects returned by ISCC processing algorithms.</em></p>
 <p>The schemata define standard fields to be set by ISCC generating applications.
 This library only sets the fields for which information is available within the scope
 of this library. Gathering and providing values for most of the fields is left to higher
@@ -1912,25 +1315,20 @@ level applications that handle format specific data extraction.</p>
 
 
 
-
-
-<h3 id="iscc_core.schema-classes">Classes</h3>
-
   <div class="doc doc-object doc-class">
 
 
 
-<h4 id="iscc_core.schema.ContentCode" class="doc doc-heading">
+<h2 id="iscc_core.schema.ContentCode" class="doc doc-heading">
         <code>
-ContentCode            (<a title="iscc_core.schema.IsccBase" href="#iscc_core.schema.IsccBase">IsccBase</a>, <span title="abc.ABC">ABC</span>)
-        </code>
+ContentCode        </code>
 
 
   <span class="doc doc-properties">
       <small class="doc doc-property doc-property-pydantic-model"><code>pydantic-model</code></small>
   </span>
 
-</h4>
+<a href="#iscc_core.schema.ContentCode" class="headerlink" title="Permanent link">#</a></h2>
 
     <div class="doc doc-contents ">
 
@@ -1944,21 +1342,27 @@ ContentCode            (<a title="iscc_core.schema.IsccBase" href="#iscc_core.sc
 
 
 
-<h5 id="iscc_core.schema.ContentCode-attributes">Attributes</h5>
+
+
+
+
+
+
+
 
 
   <div class="doc doc-object doc-attribute">
 
 
 
-<h6 id="iscc_core.schema.ContentCode.title" class="doc doc-heading">
+<h3 id="iscc_core.schema.ContentCode.title" class="doc doc-heading">
 <code class="highlight language-python"><span class="n">title</span><span class="p">:</span> <span class="nb">str</span></code>
 
   <span class="doc doc-properties">
       <small class="doc doc-property doc-property-pydantic-field"><code>pydantic-field</code></small>
   </span>
 
-</h6>
+<a href="#iscc_core.schema.ContentCode.title" class="headerlink" title="Permanent link">#</a></h3>
 
     <div class="doc doc-contents ">
 
@@ -1971,11 +1375,6 @@ ContentCode            (<a title="iscc_core.schema.IsccBase" href="#iscc_core.sc
 
 
 
-
-
-
-
-
   </div>
 
     </div>
@@ -1984,21 +1383,22 @@ ContentCode            (<a title="iscc_core.schema.IsccBase" href="#iscc_core.sc
 
 
 
+
+
   <div class="doc doc-object doc-class">
 
 
 
-<h4 id="iscc_core.schema.ContentCodeAudio" class="doc doc-heading">
+<h2 id="iscc_core.schema.ContentCodeAudio" class="doc doc-heading">
         <code>
-ContentCodeAudio            (<a title="iscc_core.schema.ContentCode" href="#iscc_core.schema.ContentCode">ContentCode</a>)
-        </code>
+ContentCodeAudio        </code>
 
 
   <span class="doc doc-properties">
       <small class="doc doc-property doc-property-pydantic-model"><code>pydantic-model</code></small>
   </span>
 
-</h4>
+<a href="#iscc_core.schema.ContentCodeAudio" class="headerlink" title="Permanent link">#</a></h2>
 
     <div class="doc doc-contents ">
 
@@ -2012,21 +1412,27 @@ ContentCodeAudio            (<a title="iscc_core.schema.ContentCode" href="#iscc
 
 
 
-<h5 id="iscc_core.schema.ContentCodeAudio-attributes">Attributes</h5>
+
+
+
+
+
+
+
 
 
   <div class="doc doc-object doc-attribute">
 
 
 
-<h6 id="iscc_core.schema.ContentCodeAudio.duration" class="doc doc-heading">
+<h3 id="iscc_core.schema.ContentCodeAudio.duration" class="doc doc-heading">
 <code class="highlight language-python"><span class="n">duration</span><span class="p">:</span> <span class="nb">float</span></code>
 
   <span class="doc doc-properties">
       <small class="doc doc-property doc-property-pydantic-field"><code>pydantic-field</code></small>
   </span>
 
-</h6>
+<a href="#iscc_core.schema.ContentCodeAudio.duration" class="headerlink" title="Permanent link">#</a></h3>
 
     <div class="doc doc-contents ">
 
@@ -2039,11 +1445,6 @@ ContentCodeAudio            (<a title="iscc_core.schema.ContentCode" href="#iscc
 
 
 
-
-
-
-
-
   </div>
 
     </div>
@@ -2052,21 +1453,22 @@ ContentCodeAudio            (<a title="iscc_core.schema.ContentCode" href="#iscc
 
 
 
+
+
   <div class="doc doc-object doc-class">
 
 
 
-<h4 id="iscc_core.schema.ContentCodeImage" class="doc doc-heading">
+<h2 id="iscc_core.schema.ContentCodeImage" class="doc doc-heading">
         <code>
-ContentCodeImage            (<a title="iscc_core.schema.ContentCode" href="#iscc_core.schema.ContentCode">ContentCode</a>)
-        </code>
+ContentCodeImage        </code>
 
 
   <span class="doc doc-properties">
       <small class="doc doc-property doc-property-pydantic-model"><code>pydantic-model</code></small>
   </span>
 
-</h4>
+<a href="#iscc_core.schema.ContentCodeImage" class="headerlink" title="Permanent link">#</a></h2>
 
     <div class="doc doc-contents ">
 
@@ -2080,21 +1482,27 @@ ContentCodeImage            (<a title="iscc_core.schema.ContentCode" href="#iscc
 
 
 
-<h5 id="iscc_core.schema.ContentCodeImage-attributes">Attributes</h5>
+
+
+
+
+
+
+
 
 
   <div class="doc doc-object doc-attribute">
 
 
 
-<h6 id="iscc_core.schema.ContentCodeImage.width" class="doc doc-heading">
+<h3 id="iscc_core.schema.ContentCodeImage.width" class="doc doc-heading">
 <code class="highlight language-python"><span class="n">width</span><span class="p">:</span> <span class="nb">int</span></code>
 
   <span class="doc doc-properties">
       <small class="doc doc-property doc-property-pydantic-field"><code>pydantic-field</code></small>
   </span>
 
-</h6>
+<a href="#iscc_core.schema.ContentCodeImage.width" class="headerlink" title="Permanent link">#</a></h3>
 
     <div class="doc doc-contents ">
 
@@ -2105,18 +1513,20 @@ ContentCodeImage            (<a title="iscc_core.schema.ContentCode" href="#iscc
 
 
 
+
+
   <div class="doc doc-object doc-attribute">
 
 
 
-<h6 id="iscc_core.schema.ContentCodeImage.height" class="doc doc-heading">
+<h3 id="iscc_core.schema.ContentCodeImage.height" class="doc doc-heading">
 <code class="highlight language-python"><span class="n">height</span><span class="p">:</span> <span class="nb">int</span></code>
 
   <span class="doc doc-properties">
       <small class="doc doc-property doc-property-pydantic-field"><code>pydantic-field</code></small>
   </span>
 
-</h6>
+<a href="#iscc_core.schema.ContentCodeImage.height" class="headerlink" title="Permanent link">#</a></h3>
 
     <div class="doc doc-contents ">
 
@@ -2127,18 +1537,20 @@ ContentCodeImage            (<a title="iscc_core.schema.ContentCode" href="#iscc
 
 
 
+
+
   <div class="doc doc-object doc-attribute">
 
 
 
-<h6 id="iscc_core.schema.ContentCodeImage.preview" class="doc doc-heading">
+<h3 id="iscc_core.schema.ContentCodeImage.preview" class="doc doc-heading">
 <code class="highlight language-python"><span class="n">preview</span><span class="p">:</span> <span class="nb">str</span></code>
 
   <span class="doc doc-properties">
       <small class="doc doc-property doc-property-pydantic-field"><code>pydantic-field</code></small>
   </span>
 
-</h6>
+<a href="#iscc_core.schema.ContentCodeImage.preview" class="headerlink" title="Permanent link">#</a></h3>
 
     <div class="doc doc-contents ">
 
@@ -2151,11 +1563,6 @@ ContentCodeImage            (<a title="iscc_core.schema.ContentCode" href="#iscc
 
 
 
-
-
-
-
-
   </div>
 
     </div>
@@ -2164,21 +1571,22 @@ ContentCodeImage            (<a title="iscc_core.schema.ContentCode" href="#iscc
 
 
 
+
+
   <div class="doc doc-object doc-class">
 
 
 
-<h4 id="iscc_core.schema.ContentCodeMixed" class="doc doc-heading">
+<h2 id="iscc_core.schema.ContentCodeMixed" class="doc doc-heading">
         <code>
-ContentCodeMixed            (<a title="iscc_core.schema.ContentCode" href="#iscc_core.schema.ContentCode">ContentCode</a>)
-        </code>
+ContentCodeMixed        </code>
 
 
   <span class="doc doc-properties">
       <small class="doc doc-property doc-property-pydantic-model"><code>pydantic-model</code></small>
   </span>
 
-</h4>
+<a href="#iscc_core.schema.ContentCodeMixed" class="headerlink" title="Permanent link">#</a></h2>
 
     <div class="doc doc-contents ">
 
@@ -2192,21 +1600,27 @@ ContentCodeMixed            (<a title="iscc_core.schema.ContentCode" href="#iscc
 
 
 
-<h5 id="iscc_core.schema.ContentCodeMixed-attributes">Attributes</h5>
+
+
+
+
+
+
+
 
 
   <div class="doc doc-object doc-attribute">
 
 
 
-<h6 id="iscc_core.schema.ContentCodeMixed.parts" class="doc doc-heading">
+<h3 id="iscc_core.schema.ContentCodeMixed.parts" class="doc doc-heading">
 <code class="highlight language-python"><span class="n">parts</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span></code>
 
   <span class="doc doc-properties">
       <small class="doc doc-property doc-property-pydantic-field"><code>pydantic-field</code></small>
   </span>
 
-</h6>
+<a href="#iscc_core.schema.ContentCodeMixed.parts" class="headerlink" title="Permanent link">#</a></h3>
 
     <div class="doc doc-contents ">
 
@@ -2219,11 +1633,6 @@ ContentCodeMixed            (<a title="iscc_core.schema.ContentCode" href="#iscc
 
 
 
-
-
-
-
-
   </div>
 
     </div>
@@ -2232,21 +1641,22 @@ ContentCodeMixed            (<a title="iscc_core.schema.ContentCode" href="#iscc
 
 
 
+
+
   <div class="doc doc-object doc-class">
 
 
 
-<h4 id="iscc_core.schema.ContentCodeText" class="doc doc-heading">
+<h2 id="iscc_core.schema.ContentCodeText" class="doc doc-heading">
         <code>
-ContentCodeText            (<a title="iscc_core.schema.ContentCode" href="#iscc_core.schema.ContentCode">ContentCode</a>)
-        </code>
+ContentCodeText        </code>
 
 
   <span class="doc doc-properties">
       <small class="doc doc-property doc-property-pydantic-model"><code>pydantic-model</code></small>
   </span>
 
-</h4>
+<a href="#iscc_core.schema.ContentCodeText" class="headerlink" title="Permanent link">#</a></h2>
 
     <div class="doc doc-contents ">
 
@@ -2260,21 +1670,27 @@ ContentCodeText            (<a title="iscc_core.schema.ContentCode" href="#iscc_
 
 
 
-<h5 id="iscc_core.schema.ContentCodeText-attributes">Attributes</h5>
+
+
+
+
+
+
+
 
 
   <div class="doc doc-object doc-attribute">
 
 
 
-<h6 id="iscc_core.schema.ContentCodeText.characters" class="doc doc-heading">
+<h3 id="iscc_core.schema.ContentCodeText.characters" class="doc doc-heading">
 <code class="highlight language-python"><span class="n">characters</span><span class="p">:</span> <span class="nb">int</span></code>
 
   <span class="doc doc-properties">
       <small class="doc doc-property doc-property-pydantic-field"><code>pydantic-field</code></small>
   </span>
 
-</h6>
+<a href="#iscc_core.schema.ContentCodeText.characters" class="headerlink" title="Permanent link">#</a></h3>
 
     <div class="doc doc-contents ">
 
@@ -2285,18 +1701,20 @@ ContentCodeText            (<a title="iscc_core.schema.ContentCode" href="#iscc_
 
 
 
+
+
   <div class="doc doc-object doc-attribute">
 
 
 
-<h6 id="iscc_core.schema.ContentCodeText.language" class="doc doc-heading">
+<h3 id="iscc_core.schema.ContentCodeText.language" class="doc doc-heading">
 <code class="highlight language-python"><span class="n">language</span><span class="p">:</span> <span class="nb">str</span></code>
 
   <span class="doc doc-properties">
       <small class="doc doc-property doc-property-pydantic-field"><code>pydantic-field</code></small>
   </span>
 
-</h6>
+<a href="#iscc_core.schema.ContentCodeText.language" class="headerlink" title="Permanent link">#</a></h3>
 
     <div class="doc doc-contents ">
 
@@ -2309,11 +1727,6 @@ ContentCodeText            (<a title="iscc_core.schema.ContentCode" href="#iscc_
 
 
 
-
-
-
-
-
   </div>
 
     </div>
@@ -2322,21 +1735,22 @@ ContentCodeText            (<a title="iscc_core.schema.ContentCode" href="#iscc_
 
 
 
+
+
   <div class="doc doc-object doc-class">
 
 
 
-<h4 id="iscc_core.schema.ContentCodeVideo" class="doc doc-heading">
+<h2 id="iscc_core.schema.ContentCodeVideo" class="doc doc-heading">
         <code>
-ContentCodeVideo            (<a title="iscc_core.schema.ContentCode" href="#iscc_core.schema.ContentCode">ContentCode</a>)
-        </code>
+ContentCodeVideo        </code>
 
 
   <span class="doc doc-properties">
       <small class="doc doc-property doc-property-pydantic-model"><code>pydantic-model</code></small>
   </span>
 
-</h4>
+<a href="#iscc_core.schema.ContentCodeVideo" class="headerlink" title="Permanent link">#</a></h2>
 
     <div class="doc doc-contents ">
 
@@ -2350,21 +1764,27 @@ ContentCodeVideo            (<a title="iscc_core.schema.ContentCode" href="#iscc
 
 
 
-<h5 id="iscc_core.schema.ContentCodeVideo-attributes">Attributes</h5>
+
+
+
+
+
+
+
 
 
   <div class="doc doc-object doc-attribute">
 
 
 
-<h6 id="iscc_core.schema.ContentCodeVideo.duration" class="doc doc-heading">
+<h3 id="iscc_core.schema.ContentCodeVideo.duration" class="doc doc-heading">
 <code class="highlight language-python"><span class="n">duration</span><span class="p">:</span> <span class="nb">float</span></code>
 
   <span class="doc doc-properties">
       <small class="doc doc-property doc-property-pydantic-field"><code>pydantic-field</code></small>
   </span>
 
-</h6>
+<a href="#iscc_core.schema.ContentCodeVideo.duration" class="headerlink" title="Permanent link">#</a></h3>
 
     <div class="doc doc-contents ">
 
@@ -2375,18 +1795,20 @@ ContentCodeVideo            (<a title="iscc_core.schema.ContentCode" href="#iscc
 
 
 
+
+
   <div class="doc doc-object doc-attribute">
 
 
 
-<h6 id="iscc_core.schema.ContentCodeVideo.fps" class="doc doc-heading">
+<h3 id="iscc_core.schema.ContentCodeVideo.fps" class="doc doc-heading">
 <code class="highlight language-python"><span class="n">fps</span><span class="p">:</span> <span class="nb">float</span></code>
 
   <span class="doc doc-properties">
       <small class="doc doc-property doc-property-pydantic-field"><code>pydantic-field</code></small>
   </span>
 
-</h6>
+<a href="#iscc_core.schema.ContentCodeVideo.fps" class="headerlink" title="Permanent link">#</a></h3>
 
     <div class="doc doc-contents ">
 
@@ -2397,18 +1819,20 @@ ContentCodeVideo            (<a title="iscc_core.schema.ContentCode" href="#iscc
 
 
 
+
+
   <div class="doc doc-object doc-attribute">
 
 
 
-<h6 id="iscc_core.schema.ContentCodeVideo.width" class="doc doc-heading">
+<h3 id="iscc_core.schema.ContentCodeVideo.width" class="doc doc-heading">
 <code class="highlight language-python"><span class="n">width</span><span class="p">:</span> <span class="nb">int</span></code>
 
   <span class="doc doc-properties">
       <small class="doc doc-property doc-property-pydantic-field"><code>pydantic-field</code></small>
   </span>
 
-</h6>
+<a href="#iscc_core.schema.ContentCodeVideo.width" class="headerlink" title="Permanent link">#</a></h3>
 
     <div class="doc doc-contents ">
 
@@ -2419,18 +1843,20 @@ ContentCodeVideo            (<a title="iscc_core.schema.ContentCode" href="#iscc
 
 
 
+
+
   <div class="doc doc-object doc-attribute">
 
 
 
-<h6 id="iscc_core.schema.ContentCodeVideo.height" class="doc doc-heading">
+<h3 id="iscc_core.schema.ContentCodeVideo.height" class="doc doc-heading">
 <code class="highlight language-python"><span class="n">height</span><span class="p">:</span> <span class="nb">int</span></code>
 
   <span class="doc doc-properties">
       <small class="doc doc-property doc-property-pydantic-field"><code>pydantic-field</code></small>
   </span>
 
-</h6>
+<a href="#iscc_core.schema.ContentCodeVideo.height" class="headerlink" title="Permanent link">#</a></h3>
 
     <div class="doc doc-contents ">
 
@@ -2441,18 +1867,20 @@ ContentCodeVideo            (<a title="iscc_core.schema.ContentCode" href="#iscc
 
 
 
+
+
   <div class="doc doc-object doc-attribute">
 
 
 
-<h6 id="iscc_core.schema.ContentCodeVideo.language" class="doc doc-heading">
+<h3 id="iscc_core.schema.ContentCodeVideo.language" class="doc doc-heading">
 <code class="highlight language-python"><span class="n">language</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]]</span></code>
 
   <span class="doc doc-properties">
       <small class="doc doc-property doc-property-pydantic-field"><code>pydantic-field</code></small>
   </span>
 
-</h6>
+<a href="#iscc_core.schema.ContentCodeVideo.language" class="headerlink" title="Permanent link">#</a></h3>
 
     <div class="doc doc-contents ">
 
@@ -2465,11 +1893,6 @@ ContentCodeVideo            (<a title="iscc_core.schema.ContentCode" href="#iscc
 
 
 
-
-
-
-
-
   </div>
 
     </div>
@@ -2478,21 +1901,22 @@ ContentCodeVideo            (<a title="iscc_core.schema.ContentCode" href="#iscc
 
 
 
+
+
   <div class="doc doc-object doc-class">
 
 
 
-<h4 id="iscc_core.schema.DataCode" class="doc doc-heading">
+<h2 id="iscc_core.schema.DataCode" class="doc doc-heading">
         <code>
-DataCode            (<a title="iscc_core.schema.IsccBase" href="#iscc_core.schema.IsccBase">IsccBase</a>)
-        </code>
+DataCode        </code>
 
 
   <span class="doc doc-properties">
       <small class="doc doc-property doc-property-pydantic-model"><code>pydantic-model</code></small>
   </span>
 
-</h4>
+<a href="#iscc_core.schema.DataCode" class="headerlink" title="Permanent link">#</a></h2>
 
     <div class="doc doc-contents ">
 
@@ -2515,7 +1939,6 @@ DataCode            (<a title="iscc_core.schema.IsccBase" href="#iscc_core.schem
 
 
 
-
   </div>
 
     </div>
@@ -2524,21 +1947,22 @@ DataCode            (<a title="iscc_core.schema.IsccBase" href="#iscc_core.schem
 
 
 
+
+
   <div class="doc doc-object doc-class">
 
 
 
-<h4 id="iscc_core.schema.InstanceCode" class="doc doc-heading">
+<h2 id="iscc_core.schema.InstanceCode" class="doc doc-heading">
         <code>
-InstanceCode            (<a title="iscc_core.schema.IsccBase" href="#iscc_core.schema.IsccBase">IsccBase</a>)
-        </code>
+InstanceCode        </code>
 
 
   <span class="doc doc-properties">
       <small class="doc doc-property doc-property-pydantic-model"><code>pydantic-model</code></small>
   </span>
 
-</h4>
+<a href="#iscc_core.schema.InstanceCode" class="headerlink" title="Permanent link">#</a></h2>
 
     <div class="doc doc-contents ">
 
@@ -2552,21 +1976,27 @@ InstanceCode            (<a title="iscc_core.schema.IsccBase" href="#iscc_core.s
 
 
 
-<h5 id="iscc_core.schema.InstanceCode-attributes">Attributes</h5>
+
+
+
+
+
+
+
 
 
   <div class="doc doc-object doc-attribute">
 
 
 
-<h6 id="iscc_core.schema.InstanceCode.datahash" class="doc doc-heading">
+<h3 id="iscc_core.schema.InstanceCode.datahash" class="doc doc-heading">
 <code class="highlight language-python"><span class="n">datahash</span><span class="p">:</span> <span class="nb">str</span></code>
 
   <span class="doc doc-properties">
       <small class="doc doc-property doc-property-pydantic-field"><code>pydantic-field</code></small>
   </span>
 
-</h6>
+<a href="#iscc_core.schema.InstanceCode.datahash" class="headerlink" title="Permanent link">#</a></h3>
 
     <div class="doc doc-contents ">
 
@@ -2577,18 +2007,20 @@ InstanceCode            (<a title="iscc_core.schema.IsccBase" href="#iscc_core.s
 
 
 
+
+
   <div class="doc doc-object doc-attribute">
 
 
 
-<h6 id="iscc_core.schema.InstanceCode.filesize" class="doc doc-heading">
+<h3 id="iscc_core.schema.InstanceCode.filesize" class="doc doc-heading">
 <code class="highlight language-python"><span class="n">filesize</span><span class="p">:</span> <span class="nb">int</span></code>
 
   <span class="doc doc-properties">
       <small class="doc doc-property doc-property-pydantic-field"><code>pydantic-field</code></small>
   </span>
 
-</h6>
+<a href="#iscc_core.schema.InstanceCode.filesize" class="headerlink" title="Permanent link">#</a></h3>
 
     <div class="doc doc-contents ">
 
@@ -2601,11 +2033,6 @@ InstanceCode            (<a title="iscc_core.schema.IsccBase" href="#iscc_core.s
 
 
 
-
-
-
-
-
   </div>
 
     </div>
@@ -2614,21 +2041,22 @@ InstanceCode            (<a title="iscc_core.schema.IsccBase" href="#iscc_core.s
 
 
 
+
+
   <div class="doc doc-object doc-class">
 
 
 
-<h4 id="iscc_core.schema.IsccBase" class="doc doc-heading">
+<h2 id="iscc_core.schema.IsccBase" class="doc doc-heading">
         <code>
-IsccBase            (<span title="pydantic.main.BaseModel">BaseModel</span>, <span title="abc.ABC">ABC</span>)
-        </code>
+IsccBase        </code>
 
 
   <span class="doc doc-properties">
       <small class="doc doc-property doc-property-pydantic-model"><code>pydantic-model</code></small>
   </span>
 
-</h4>
+<a href="#iscc_core.schema.IsccBase" class="headerlink" title="Permanent link">#</a></h2>
 
     <div class="doc doc-contents ">
 
@@ -2642,14 +2070,23 @@ IsccBase            (<span title="pydantic.main.BaseModel">BaseModel</span>, <sp
 
 
 
-<h5 id="iscc_core.schema.IsccBase-attributes">Attributes</h5>
+
+
+
+
+
+
+
+
+
+
 
 
   <div class="doc doc-object doc-attribute">
 
 
 
-<h6 id="iscc_core.schema.IsccBase.iscc" class="doc doc-heading">
+<h3 id="iscc_core.schema.IsccBase.iscc" class="doc doc-heading">
 <code class="highlight language-python"><span class="n">iscc</span><span class="p">:</span> <span class="nb">str</span></code>
 
   <span class="doc doc-properties">
@@ -2657,7 +2094,7 @@ IsccBase            (<span title="pydantic.main.BaseModel">BaseModel</span>, <sp
       <small class="doc doc-property doc-property-required"><code>required</code></small>
   </span>
 
-</h6>
+<a href="#iscc_core.schema.IsccBase.iscc" class="headerlink" title="Permanent link">#</a></h3>
 
     <div class="doc doc-contents ">
 
@@ -2668,11 +2105,13 @@ IsccBase            (<span title="pydantic.main.BaseModel">BaseModel</span>, <sp
 
 
 
+
+
   <div class="doc doc-object doc-attribute">
 
 
 
-<h6 id="iscc_core.schema.IsccBase.code_obj" class="doc doc-heading">
+<h3 id="iscc_core.schema.IsccBase.code_obj" class="doc doc-heading">
 <code class="highlight language-python"><span class="n">code_obj</span></code>
 
   <span class="doc doc-properties">
@@ -2680,7 +2119,7 @@ IsccBase            (<span title="pydantic.main.BaseModel">BaseModel</span>, <sp
       <small class="doc doc-property doc-property-readonly"><code>readonly</code></small>
   </span>
 
-</h6>
+<a href="#iscc_core.schema.IsccBase.code_obj" class="headerlink" title="Permanent link">#</a></h3>
 
     <div class="doc doc-contents ">
 
@@ -2693,19 +2132,15 @@ IsccBase            (<span title="pydantic.main.BaseModel">BaseModel</span>, <sp
 
 
 
-
-<h5 id="iscc_core.schema.IsccBase-methods">Methods</h5>
-
-
   <div class="doc doc-object doc-method">
 
 
 
-<h6 id="iscc_core.schema.IsccBase.dict" class="doc doc-heading">
+<h3 id="iscc_core.schema.IsccBase.dict" class="doc doc-heading">
 <code class="highlight language-python"><span class="nb">dict</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">*</span><span class="p">,</span> <span class="n">exclude_unset</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span> <span class="n">exclude_none</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span></code>
 
 
-</h6>
+<a href="#iscc_core.schema.IsccBase.dict" class="headerlink" title="Permanent link">#</a></h3>
 
     <div class="doc doc-contents ">
 
@@ -2727,21 +2162,22 @@ IsccBase            (<span title="pydantic.main.BaseModel">BaseModel</span>, <sp
 
 
 
+
+
   <div class="doc doc-object doc-class">
 
 
 
-<h4 id="iscc_core.schema.IsccCode" class="doc doc-heading">
+<h2 id="iscc_core.schema.IsccCode" class="doc doc-heading">
         <code>
-IsccCode            (<a title="iscc_core.schema.IsccBase" href="#iscc_core.schema.IsccBase">IsccBase</a>)
-        </code>
+IsccCode        </code>
 
 
   <span class="doc doc-properties">
       <small class="doc doc-property doc-property-pydantic-model"><code>pydantic-model</code></small>
   </span>
 
-</h4>
+<a href="#iscc_core.schema.IsccCode" class="headerlink" title="Permanent link">#</a></h2>
 
     <div class="doc doc-contents ">
 
@@ -2755,21 +2191,27 @@ IsccCode            (<a title="iscc_core.schema.IsccBase" href="#iscc_core.schem
 
 
 
-<h5 id="iscc_core.schema.IsccCode-attributes">Attributes</h5>
+
+
+
+
+
+
+
 
 
   <div class="doc doc-object doc-attribute">
 
 
 
-<h6 id="iscc_core.schema.IsccCode.version" class="doc doc-heading">
+<h3 id="iscc_core.schema.IsccCode.version" class="doc doc-heading">
 <code class="highlight language-python"><span class="n">version</span><span class="p">:</span> <span class="nb">str</span></code>
 
   <span class="doc doc-properties">
       <small class="doc doc-property doc-property-pydantic-field"><code>pydantic-field</code></small>
   </span>
 
-</h6>
+<a href="#iscc_core.schema.IsccCode.version" class="headerlink" title="Permanent link">#</a></h3>
 
     <div class="doc doc-contents ">
 
@@ -2780,18 +2222,20 @@ IsccCode            (<a title="iscc_core.schema.IsccBase" href="#iscc_core.schem
 
 
 
+
+
   <div class="doc doc-object doc-attribute">
 
 
 
-<h6 id="iscc_core.schema.IsccCode.title" class="doc doc-heading">
+<h3 id="iscc_core.schema.IsccCode.title" class="doc doc-heading">
 <code class="highlight language-python"><span class="n">title</span><span class="p">:</span> <span class="nb">str</span></code>
 
   <span class="doc doc-properties">
       <small class="doc doc-property doc-property-pydantic-field"><code>pydantic-field</code></small>
   </span>
 
-</h6>
+<a href="#iscc_core.schema.IsccCode.title" class="headerlink" title="Permanent link">#</a></h3>
 
     <div class="doc doc-contents ">
 
@@ -2802,18 +2246,20 @@ IsccCode            (<a title="iscc_core.schema.IsccBase" href="#iscc_core.schem
 
 
 
+
+
   <div class="doc doc-object doc-attribute">
 
 
 
-<h6 id="iscc_core.schema.IsccCode.extra" class="doc doc-heading">
+<h3 id="iscc_core.schema.IsccCode.extra" class="doc doc-heading">
 <code class="highlight language-python"><span class="n">extra</span><span class="p">:</span> <span class="nb">str</span></code>
 
   <span class="doc doc-properties">
       <small class="doc doc-property doc-property-pydantic-field"><code>pydantic-field</code></small>
   </span>
 
-</h6>
+<a href="#iscc_core.schema.IsccCode.extra" class="headerlink" title="Permanent link">#</a></h3>
 
     <div class="doc doc-contents ">
 
@@ -2824,18 +2270,20 @@ IsccCode            (<a title="iscc_core.schema.IsccBase" href="#iscc_core.schem
 
 
 
+
+
   <div class="doc doc-object doc-attribute">
 
 
 
-<h6 id="iscc_core.schema.IsccCode.filename" class="doc doc-heading">
+<h3 id="iscc_core.schema.IsccCode.filename" class="doc doc-heading">
 <code class="highlight language-python"><span class="n">filename</span><span class="p">:</span> <span class="nb">str</span></code>
 
   <span class="doc doc-properties">
       <small class="doc doc-property doc-property-pydantic-field"><code>pydantic-field</code></small>
   </span>
 
-</h6>
+<a href="#iscc_core.schema.IsccCode.filename" class="headerlink" title="Permanent link">#</a></h3>
 
     <div class="doc doc-contents ">
 
@@ -2846,18 +2294,20 @@ IsccCode            (<a title="iscc_core.schema.IsccBase" href="#iscc_core.schem
 
 
 
+
+
   <div class="doc doc-object doc-attribute">
 
 
 
-<h6 id="iscc_core.schema.IsccCode.filesize" class="doc doc-heading">
+<h3 id="iscc_core.schema.IsccCode.filesize" class="doc doc-heading">
 <code class="highlight language-python"><span class="n">filesize</span><span class="p">:</span> <span class="nb">int</span></code>
 
   <span class="doc doc-properties">
       <small class="doc doc-property doc-property-pydantic-field"><code>pydantic-field</code></small>
   </span>
 
-</h6>
+<a href="#iscc_core.schema.IsccCode.filesize" class="headerlink" title="Permanent link">#</a></h3>
 
     <div class="doc doc-contents ">
 
@@ -2868,18 +2318,20 @@ IsccCode            (<a title="iscc_core.schema.IsccBase" href="#iscc_core.schem
 
 
 
+
+
   <div class="doc doc-object doc-attribute">
 
 
 
-<h6 id="iscc_core.schema.IsccCode.mediatype" class="doc doc-heading">
+<h3 id="iscc_core.schema.IsccCode.mediatype" class="doc doc-heading">
 <code class="highlight language-python"><span class="n">mediatype</span><span class="p">:</span> <span class="nb">str</span></code>
 
   <span class="doc doc-properties">
       <small class="doc doc-property doc-property-pydantic-field"><code>pydantic-field</code></small>
   </span>
 
-</h6>
+<a href="#iscc_core.schema.IsccCode.mediatype" class="headerlink" title="Permanent link">#</a></h3>
 
     <div class="doc doc-contents ">
 
@@ -2890,18 +2342,20 @@ IsccCode            (<a title="iscc_core.schema.IsccBase" href="#iscc_core.schem
 
 
 
+
+
   <div class="doc doc-object doc-attribute">
 
 
 
-<h6 id="iscc_core.schema.IsccCode.tophash" class="doc doc-heading">
+<h3 id="iscc_core.schema.IsccCode.tophash" class="doc doc-heading">
 <code class="highlight language-python"><span class="n">tophash</span><span class="p">:</span> <span class="nb">str</span></code>
 
   <span class="doc doc-properties">
       <small class="doc doc-property doc-property-pydantic-field"><code>pydantic-field</code></small>
   </span>
 
-</h6>
+<a href="#iscc_core.schema.IsccCode.tophash" class="headerlink" title="Permanent link">#</a></h3>
 
     <div class="doc doc-contents ">
 
@@ -2912,18 +2366,20 @@ IsccCode            (<a title="iscc_core.schema.IsccBase" href="#iscc_core.schem
 
 
 
+
+
   <div class="doc doc-object doc-attribute">
 
 
 
-<h6 id="iscc_core.schema.IsccCode.metahash" class="doc doc-heading">
+<h3 id="iscc_core.schema.IsccCode.metahash" class="doc doc-heading">
 <code class="highlight language-python"><span class="n">metahash</span><span class="p">:</span> <span class="nb">str</span></code>
 
   <span class="doc doc-properties">
       <small class="doc doc-property doc-property-pydantic-field"><code>pydantic-field</code></small>
   </span>
 
-</h6>
+<a href="#iscc_core.schema.IsccCode.metahash" class="headerlink" title="Permanent link">#</a></h3>
 
     <div class="doc doc-contents ">
 
@@ -2934,18 +2390,20 @@ IsccCode            (<a title="iscc_core.schema.IsccBase" href="#iscc_core.schem
 
 
 
+
+
   <div class="doc doc-object doc-attribute">
 
 
 
-<h6 id="iscc_core.schema.IsccCode.datahash" class="doc doc-heading">
+<h3 id="iscc_core.schema.IsccCode.datahash" class="doc doc-heading">
 <code class="highlight language-python"><span class="n">datahash</span><span class="p">:</span> <span class="nb">str</span></code>
 
   <span class="doc doc-properties">
       <small class="doc doc-property doc-property-pydantic-field"><code>pydantic-field</code></small>
   </span>
 
-</h6>
+<a href="#iscc_core.schema.IsccCode.datahash" class="headerlink" title="Permanent link">#</a></h3>
 
     <div class="doc doc-contents ">
 
@@ -2956,18 +2414,20 @@ IsccCode            (<a title="iscc_core.schema.IsccBase" href="#iscc_core.schem
 
 
 
+
+
   <div class="doc doc-object doc-attribute">
 
 
 
-<h6 id="iscc_core.schema.IsccCode.duration" class="doc doc-heading">
+<h3 id="iscc_core.schema.IsccCode.duration" class="doc doc-heading">
 <code class="highlight language-python"><span class="n">duration</span><span class="p">:</span> <span class="nb">float</span></code>
 
   <span class="doc doc-properties">
       <small class="doc doc-property doc-property-pydantic-field"><code>pydantic-field</code></small>
   </span>
 
-</h6>
+<a href="#iscc_core.schema.IsccCode.duration" class="headerlink" title="Permanent link">#</a></h3>
 
     <div class="doc doc-contents ">
 
@@ -2978,18 +2438,20 @@ IsccCode            (<a title="iscc_core.schema.IsccBase" href="#iscc_core.schem
 
 
 
+
+
   <div class="doc doc-object doc-attribute">
 
 
 
-<h6 id="iscc_core.schema.IsccCode.fps" class="doc doc-heading">
+<h3 id="iscc_core.schema.IsccCode.fps" class="doc doc-heading">
 <code class="highlight language-python"><span class="n">fps</span><span class="p">:</span> <span class="nb">float</span></code>
 
   <span class="doc doc-properties">
       <small class="doc doc-property doc-property-pydantic-field"><code>pydantic-field</code></small>
   </span>
 
-</h6>
+<a href="#iscc_core.schema.IsccCode.fps" class="headerlink" title="Permanent link">#</a></h3>
 
     <div class="doc doc-contents ">
 
@@ -3000,18 +2462,20 @@ IsccCode            (<a title="iscc_core.schema.IsccBase" href="#iscc_core.schem
 
 
 
+
+
   <div class="doc doc-object doc-attribute">
 
 
 
-<h6 id="iscc_core.schema.IsccCode.width" class="doc doc-heading">
+<h3 id="iscc_core.schema.IsccCode.width" class="doc doc-heading">
 <code class="highlight language-python"><span class="n">width</span><span class="p">:</span> <span class="nb">int</span></code>
 
   <span class="doc doc-properties">
       <small class="doc doc-property doc-property-pydantic-field"><code>pydantic-field</code></small>
   </span>
 
-</h6>
+<a href="#iscc_core.schema.IsccCode.width" class="headerlink" title="Permanent link">#</a></h3>
 
     <div class="doc doc-contents ">
 
@@ -3022,18 +2486,20 @@ IsccCode            (<a title="iscc_core.schema.IsccBase" href="#iscc_core.schem
 
 
 
+
+
   <div class="doc doc-object doc-attribute">
 
 
 
-<h6 id="iscc_core.schema.IsccCode.height" class="doc doc-heading">
+<h3 id="iscc_core.schema.IsccCode.height" class="doc doc-heading">
 <code class="highlight language-python"><span class="n">height</span><span class="p">:</span> <span class="nb">int</span></code>
 
   <span class="doc doc-properties">
       <small class="doc doc-property doc-property-pydantic-field"><code>pydantic-field</code></small>
   </span>
 
-</h6>
+<a href="#iscc_core.schema.IsccCode.height" class="headerlink" title="Permanent link">#</a></h3>
 
     <div class="doc doc-contents ">
 
@@ -3044,18 +2510,20 @@ IsccCode            (<a title="iscc_core.schema.IsccBase" href="#iscc_core.schem
 
 
 
+
+
   <div class="doc doc-object doc-attribute">
 
 
 
-<h6 id="iscc_core.schema.IsccCode.characters" class="doc doc-heading">
+<h3 id="iscc_core.schema.IsccCode.characters" class="doc doc-heading">
 <code class="highlight language-python"><span class="n">characters</span><span class="p">:</span> <span class="nb">int</span></code>
 
   <span class="doc doc-properties">
       <small class="doc doc-property doc-property-pydantic-field"><code>pydantic-field</code></small>
   </span>
 
-</h6>
+<a href="#iscc_core.schema.IsccCode.characters" class="headerlink" title="Permanent link">#</a></h3>
 
     <div class="doc doc-contents ">
 
@@ -3066,18 +2534,20 @@ IsccCode            (<a title="iscc_core.schema.IsccBase" href="#iscc_core.schem
 
 
 
+
+
   <div class="doc doc-object doc-attribute">
 
 
 
-<h6 id="iscc_core.schema.IsccCode.language" class="doc doc-heading">
+<h3 id="iscc_core.schema.IsccCode.language" class="doc doc-heading">
 <code class="highlight language-python"><span class="n">language</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]]</span></code>
 
   <span class="doc doc-properties">
       <small class="doc doc-property doc-property-pydantic-field"><code>pydantic-field</code></small>
   </span>
 
-</h6>
+<a href="#iscc_core.schema.IsccCode.language" class="headerlink" title="Permanent link">#</a></h3>
 
     <div class="doc doc-contents ">
 
@@ -3088,18 +2558,20 @@ IsccCode            (<a title="iscc_core.schema.IsccBase" href="#iscc_core.schem
 
 
 
+
+
   <div class="doc doc-object doc-attribute">
 
 
 
-<h6 id="iscc_core.schema.IsccCode.preview" class="doc doc-heading">
+<h3 id="iscc_core.schema.IsccCode.preview" class="doc doc-heading">
 <code class="highlight language-python"><span class="n">preview</span><span class="p">:</span> <span class="nb">str</span></code>
 
   <span class="doc doc-properties">
       <small class="doc doc-property doc-property-pydantic-field"><code>pydantic-field</code></small>
   </span>
 
-</h6>
+<a href="#iscc_core.schema.IsccCode.preview" class="headerlink" title="Permanent link">#</a></h3>
 
     <div class="doc doc-contents ">
 
@@ -3112,11 +2584,6 @@ IsccCode            (<a title="iscc_core.schema.IsccBase" href="#iscc_core.schem
 
 
 
-
-
-
-
-
   </div>
 
     </div>
@@ -3125,21 +2592,22 @@ IsccCode            (<a title="iscc_core.schema.IsccBase" href="#iscc_core.schem
 
 
 
+
+
   <div class="doc doc-object doc-class">
 
 
 
-<h4 id="iscc_core.schema.IsccID" class="doc doc-heading">
+<h2 id="iscc_core.schema.IsccID" class="doc doc-heading">
         <code>
-IsccID            (<a title="iscc_core.schema.IsccCode" href="#iscc_core.schema.IsccCode">IsccCode</a>)
-        </code>
+IsccID        </code>
 
 
   <span class="doc doc-properties">
       <small class="doc doc-property doc-property-pydantic-model"><code>pydantic-model</code></small>
   </span>
 
-</h4>
+<a href="#iscc_core.schema.IsccID" class="headerlink" title="Permanent link">#</a></h2>
 
     <div class="doc doc-contents ">
 
@@ -3162,7 +2630,6 @@ IsccID            (<a title="iscc_core.schema.IsccCode" href="#iscc_core.schema.
 
 
 
-
   </div>
 
     </div>
@@ -3171,21 +2638,22 @@ IsccID            (<a title="iscc_core.schema.IsccCode" href="#iscc_core.schema.
 
 
 
+
+
   <div class="doc doc-object doc-class">
 
 
 
-<h4 id="iscc_core.schema.MetaCode" class="doc doc-heading">
+<h2 id="iscc_core.schema.MetaCode" class="doc doc-heading">
         <code>
-MetaCode            (<a title="iscc_core.schema.IsccBase" href="#iscc_core.schema.IsccBase">IsccBase</a>)
-        </code>
+MetaCode        </code>
 
 
   <span class="doc doc-properties">
       <small class="doc doc-property doc-property-pydantic-model"><code>pydantic-model</code></small>
   </span>
 
-</h4>
+<a href="#iscc_core.schema.MetaCode" class="headerlink" title="Permanent link">#</a></h2>
 
     <div class="doc doc-contents ">
 
@@ -3199,21 +2667,27 @@ MetaCode            (<a title="iscc_core.schema.IsccBase" href="#iscc_core.schem
 
 
 
-<h5 id="iscc_core.schema.MetaCode-attributes">Attributes</h5>
+
+
+
+
+
+
+
 
 
   <div class="doc doc-object doc-attribute">
 
 
 
-<h6 id="iscc_core.schema.MetaCode.title" class="doc doc-heading">
+<h3 id="iscc_core.schema.MetaCode.title" class="doc doc-heading">
 <code class="highlight language-python"><span class="n">title</span><span class="p">:</span> <span class="nb">str</span></code>
 
   <span class="doc doc-properties">
       <small class="doc doc-property doc-property-pydantic-field"><code>pydantic-field</code></small>
   </span>
 
-</h6>
+<a href="#iscc_core.schema.MetaCode.title" class="headerlink" title="Permanent link">#</a></h3>
 
     <div class="doc doc-contents ">
 
@@ -3224,18 +2698,20 @@ MetaCode            (<a title="iscc_core.schema.IsccBase" href="#iscc_core.schem
 
 
 
+
+
   <div class="doc doc-object doc-attribute">
 
 
 
-<h6 id="iscc_core.schema.MetaCode.extra" class="doc doc-heading">
+<h3 id="iscc_core.schema.MetaCode.extra" class="doc doc-heading">
 <code class="highlight language-python"><span class="n">extra</span><span class="p">:</span> <span class="nb">str</span></code>
 
   <span class="doc doc-properties">
       <small class="doc doc-property doc-property-pydantic-field"><code>pydantic-field</code></small>
   </span>
 
-</h6>
+<a href="#iscc_core.schema.MetaCode.extra" class="headerlink" title="Permanent link">#</a></h3>
 
     <div class="doc doc-contents ">
 
@@ -3246,18 +2722,20 @@ MetaCode            (<a title="iscc_core.schema.IsccBase" href="#iscc_core.schem
 
 
 
+
+
   <div class="doc doc-object doc-attribute">
 
 
 
-<h6 id="iscc_core.schema.MetaCode.binary" class="doc doc-heading">
+<h3 id="iscc_core.schema.MetaCode.binary" class="doc doc-heading">
 <code class="highlight language-python"><span class="n">binary</span><span class="p">:</span> <span class="nb">bool</span></code>
 
   <span class="doc doc-properties">
       <small class="doc doc-property doc-property-pydantic-field"><code>pydantic-field</code></small>
   </span>
 
-</h6>
+<a href="#iscc_core.schema.MetaCode.binary" class="headerlink" title="Permanent link">#</a></h3>
 
     <div class="doc doc-contents ">
 
@@ -3268,18 +2746,20 @@ MetaCode            (<a title="iscc_core.schema.IsccBase" href="#iscc_core.schem
 
 
 
+
+
   <div class="doc doc-object doc-attribute">
 
 
 
-<h6 id="iscc_core.schema.MetaCode.metahash" class="doc doc-heading">
+<h3 id="iscc_core.schema.MetaCode.metahash" class="doc doc-heading">
 <code class="highlight language-python"><span class="n">metahash</span><span class="p">:</span> <span class="nb">str</span></code>
 
   <span class="doc doc-properties">
       <small class="doc doc-property doc-property-pydantic-field"><code>pydantic-field</code></small>
   </span>
 
-</h6>
+<a href="#iscc_core.schema.MetaCode.metahash" class="headerlink" title="Permanent link">#</a></h3>
 
     <div class="doc doc-contents ">
 
@@ -3292,16 +2772,12 @@ MetaCode            (<a title="iscc_core.schema.IsccBase" href="#iscc_core.schem
 
 
 
-
-
-
-
-
   </div>
 
     </div>
 
   </div>
+
 
 
 
@@ -3343,13 +2819,13 @@ MetaCode            (<a title="iscc_core.schema.IsccBase" href="#iscc_core.schem
       
       
         
-        <a href="../../codec/codec/" class="md-footer__link md-footer__link--next" aria-label="Next: Codec" rel="next">
+        <a href="../../options/options/" class="md-footer__link md-footer__link--next" aria-label="Next: Options" rel="next">
           <div class="md-footer__title">
             <div class="md-ellipsis">
               <span class="md-footer__direction">
                 Next
               </span>
-              Codec
+              Options
             </div>
           </div>
           <div class="md-footer__button md-icon">
@@ -3383,10 +2859,10 @@ MetaCode            (<a title="iscc_core.schema.IsccBase" href="#iscc_core.schem
     <div class="md-dialog" data-md-component="dialog">
       <div class="md-dialog__inner md-typeset"></div>
     </div>
-    <script id="__config" type="application/json">{"base": "../..", "features": ["navigation.indexes"], "translations": {"clipboard.copy": "Copy to clipboard", "clipboard.copied": "Copied to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.placeholder": "Type to start searching", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.term.missing": "Missing", "select.version.title": "Select version"}, "search": "../../assets/javascripts/workers/search.0bbba5b5.min.js"}</script>
+    <script id="__config" type="application/json">{"base": "../..", "features": ["toc.integrate", "navigation.indexes", "navigation.tracking", "navigation.tabs", "navigation.tabs.sticky", "navigation.expand"], "translations": {"clipboard.copy": "Copy to clipboard", "clipboard.copied": "Copied to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.placeholder": "Type to start searching", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.term.missing": "Missing", "select.version.title": "Select version"}, "search": "../../assets/javascripts/workers/search.0bbba5b5.min.js"}</script>
     
     
-      <script src="../../assets/javascripts/bundle.649a939e.min.js"></script>
+      <script src="../../assets/javascripts/bundle.e1a181d9.min.js"></script>
       
     
   </body>
