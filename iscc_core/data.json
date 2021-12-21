@@ -812,5 +812,51 @@
       ],
       "outputs": "ISCC:AAARX2RV2FDPUZK6"
     }
+  },
+  "similarity": {
+    "test_similarity_single_64": {
+      "inputs": [
+        "EEAQADYAAAAAAAAA",
+        "EEA7ADYAAAAAAAAA"
+      ],
+      "outputs": 93
+    },
+    "test_similarity_single_256": {
+      "inputs": [
+        "AAD7SATLZUS57KXZZL2HXAD7HT6264AHEIRZQ4QTLB6LHVRXNTLE7MA",
+        "AAD7CATK5QX46LX5YL2HXIH7FT626UAHE4RYC4QTDB6LXVRXNDJE7MA"
+      ],
+      "outputs": 90
+    },
+    "test_similarity_composite": {
+      "inputs": [
+        "KQD7SATLZUS57KXZN2N6SA6A3THBJRQW4B5CZPGWU2PR566ZQNLM2AA",
+        "KQD7CATK5QX46LX5N2N6SA6A3THBJRQW4B5CZPGWU2PR566ZQNLM2AA"
+      ],
+      "outputs": 96
+    }
+  },
+  "distance": {
+    "test_distance_single_64": {
+      "inputs": [
+        "EEAQADYAAAAAAAAA",
+        "EEA7ADYAAAAAAAAA"
+      ],
+      "outputs": 4
+    },
+    "test_distance_single_256": {
+      "inputs": [
+        "AAD7SATLZUS57KXZZL2HXAD7HT6264AHEIRZQ4QTLB6LHVRXNTLE7MA",
+        "AAD7CATK5QX46LX5YL2HXIH7FT626UAHE4RYC4QTDB6LXVRXNDJE7MA"
+      ],
+      "outputs": 24
+    },
+    "test_distance_composite": {
+      "inputs": [
+        "KQD7SATLZUS57KXZN2N6SA6A3THBJRQW4B5CZPGWU2PR566ZQNLM2AA",
+        "KQD7CATK5QX46LX5N2N6SA6A3THBJRQW4B5CZPGWU2PR566ZQNLM2AA"
+      ],
+      "outputs": 10
+    }
   }
 }

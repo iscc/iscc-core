@@ -1,13 +1,8 @@
 # -*- coding: utf-8 -*-
 """
-*ISCC encoding, decoding and transcoding related functions.*
+*encoding, decoding and transcoding related functions.*
 
-## ISCC Component Structure
-
-**Header:** `<type> <subtype> <version> <length>` each coded as a variable-length 4-bit
-sequence.
-
-**Body:** `<hash-digest>` with number of bits as indicated by `<length>`
+![ISCC - data structure](../images/iscc-data-structure.svg)
 """
 import enum
 import math

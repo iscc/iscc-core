@@ -80,6 +80,10 @@ from iscc_core.codec import (
     read_header,
     write_header,
 )
+from iscc_core.utils import (
+    similarity,
+    distance,
+)
 
 __all__ = [
     "core_opts",
@@ -133,4 +137,6 @@ __all__ = [
     "clean",
     "read_header",
     "write_header",
+    "similarity",
+    "distance",
 ]

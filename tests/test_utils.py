@@ -1,5 +1,60 @@
 # -*- coding: utf-8 -*-
+import pytest
+
 import iscc_core.utils
+
+A_INT = 0b00000000_00001111_00000000_00000000_00000000_00000000_00000000_00000000
+B_INT = 0b11110000_00001111_00000000_00000000_00000000_00000000_00000000_00000000
+A_BYT = A_INT.to_bytes(length=8, byteorder="big", signed=False)
+B_BYT = B_INT.to_bytes(length=8, byteorder="big", signed=False)
+
+
+def test_hamming_distance():
+    assert iscc_core.utils.hamming_distance(A_BYT, B_BYT) == 4
+
+
+def test_similarity_single_64():
+    ia = iscc_core.Code.rnd(
+        mt=iscc_core.MT.CONTENT, st=iscc_core.ST_ISCC.IMAGE, bits=64, data=A_BYT
+    ).code
+    ib = iscc_core.Code.rnd(
+        mt=iscc_core.MT.CONTENT, st=iscc_core.ST_ISCC.IMAGE, bits=64, data=B_BYT
+    ).code
+    assert iscc_core.similarity(ia, ib) == 93
+
+
+def test_similarity_single_256():
+    a = "AAD7SATLZUS57KXZZL2HXAD7HT6264AHEIRZQ4QTLB6LHVRXNTLE7MA"
+    b = "AAD7CATK5QX46LX5YL2HXIH7FT626UAHE4RYC4QTDB6LXVRXNDJE7MA"
+    assert iscc_core.similarity(a, b) == 90
+
+
+def test_similarity_composite():
+    a = "KQD7SATLZUS57KXZN2N6SA6A3THBJRQW4B5CZPGWU2PR566ZQNLM2AA"
+    b = "KQD7CATK5QX46LX5N2N6SA6A3THBJRQW4B5CZPGWU2PR566ZQNLM2AA"
+    assert iscc_core.similarity(a, b) == 96
+
+
+def test_distance_single_64():
+    ia = iscc_core.Code.rnd(
+        mt=iscc_core.MT.CONTENT, st=iscc_core.ST_ISCC.IMAGE, bits=64, data=A_BYT
+    ).code
+    ib = iscc_core.Code.rnd(
+        mt=iscc_core.MT.CONTENT, st=iscc_core.ST_ISCC.IMAGE, bits=64, data=B_BYT
+    ).code
+    assert iscc_core.distance(ia, ib) == 4
+
+
+def test_distance_single_256():
+    a = "AAD7SATLZUS57KXZZL2HXAD7HT6264AHEIRZQ4QTLB6LHVRXNTLE7MA"
+    b = "AAD7CATK5QX46LX5YL2HXIH7FT626UAHE4RYC4QTDB6LXVRXNDJE7MA"
+    assert iscc_core.distance(a, b) == 24
+
+
+def test_distance_composite():
+    a = "KQD7SATLZUS57KXZN2N6SA6A3THBJRQW4B5CZPGWU2PR566ZQNLM2AA"
+    b = "KQD7CATK5QX46LX5N2N6SA6A3THBJRQW4B5CZPGWU2PR566ZQNLM2AA"
+    assert iscc_core.distance(a, b) == 10
 
 
 def test_sliding_window():
@@ -37,3 +92,10 @@ def test_sliding_window_bigger_than_sequence():
 
     slices = list(iscc_core.utils.sliding_window("hello", 5))
     assert slices[0] == "hello"
+
+
+def test__safe_unpack():
+    a = iscc_core.Code.rnd(iscc_core.MT.META, bits=64).code
+    b = iscc_core.Code.rnd(iscc_core.MT.DATA, bits=64).code
+    with pytest.raises(ValueError):
+        iscc_core.utils._safe_unpack(a, b)

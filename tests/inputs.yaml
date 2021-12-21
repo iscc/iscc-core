@@ -340,3 +340,29 @@ normalize:
     test_normalize_mf_base64_url_single:
         inputs:
             - "uzAEAARvqNdFG-mVe"
+similarity:
+    test_similarity_single_64:
+        inputs:
+            - "EEAQADYAAAAAAAAA"
+            - "EEA7ADYAAAAAAAAA"
+    test_similarity_single_256:
+        inputs:
+            - "AAD7SATLZUS57KXZZL2HXAD7HT6264AHEIRZQ4QTLB6LHVRXNTLE7MA"
+            - "AAD7CATK5QX46LX5YL2HXIH7FT626UAHE4RYC4QTDB6LXVRXNDJE7MA"
+    test_similarity_composite:
+        inputs:
+            - "KQD7SATLZUS57KXZN2N6SA6A3THBJRQW4B5CZPGWU2PR566ZQNLM2AA"
+            - "KQD7CATK5QX46LX5N2N6SA6A3THBJRQW4B5CZPGWU2PR566ZQNLM2AA"
+distance:
+    test_distance_single_64:
+        inputs:
+            - "EEAQADYAAAAAAAAA"
+            - "EEA7ADYAAAAAAAAA"
+    test_distance_single_256:
+        inputs:
+            - "AAD7SATLZUS57KXZZL2HXAD7HT6264AHEIRZQ4QTLB6LHVRXNTLE7MA"
+            - "AAD7CATK5QX46LX5YL2HXIH7FT626UAHE4RYC4QTDB6LXVRXNDJE7MA"
+    test_distance_composite:
+        inputs:
+            - "KQD7SATLZUS57KXZN2N6SA6A3THBJRQW4B5CZPGWU2PR566ZQNLM2AA"
+            - "KQD7CATK5QX46LX5N2N6SA6A3THBJRQW4B5CZPGWU2PR566ZQNLM2AA"
