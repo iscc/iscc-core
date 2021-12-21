@@ -169,23 +169,6 @@ def test_code_hashable():
     assert code in {code}
 
 
-def test_decompose_single_component():
-    code = iscc_core.codec.Code.rnd(iscc_core.codec.MT.META)
-    # assert c.decompose(code)[0] == code
-    assert iscc_core.codec.decompose(code.code)[0] == code.code
-    # assert c.decompose(code.bytes)[0] == code
-
-
-def test_decompose_str_of_codes():
-    mco = iscc_core.codec.Code.rnd(iscc_core.codec.MT.META)
-    cco = iscc_core.codec.Code.rnd(iscc_core.codec.MT.CONTENT)
-    dco = iscc_core.codec.Code.rnd(iscc_core.codec.MT.DATA)
-    ico = iscc_core.codec.Code.rnd(iscc_core.codec.MT.INSTANCE)
-    iscc = f"ISCC:{mco.code}-{cco.code}-{dco.code}-{ico.code}"
-    codes = iscc_core.codec.decompose(iscc)
-    assert codes == [mco.code, cco.code, dco.code, ico.code]
-
-
 def test_Code_uri():
     mco = iscc_core.gen_meta_code("This is an URI representation of a Meta-Code")
     assert mco.code_obj.code == "AAARFRYHMQI6KPP6"
@@ -222,3 +205,20 @@ def test_Code_str_repr():
     assert (
         bytes(mco.code_obj).hex() == "00016730e4ab2d9d1305" == mco.code_obj.bytes.hex()
     )
+
+
+def test_decompose_single_component():
+    code = iscc_core.codec.Code.rnd(iscc_core.codec.MT.META)
+    # assert c.decompose(code)[0] == code
+    assert iscc_core.codec.decompose(code.code)[0] == code.code
+    # assert c.decompose(code.bytes)[0] == code
+
+
+def test_decompose_str_of_codes():
+    mco = iscc_core.codec.Code.rnd(iscc_core.codec.MT.META)
+    cco = iscc_core.codec.Code.rnd(iscc_core.codec.MT.CONTENT)
+    dco = iscc_core.codec.Code.rnd(iscc_core.codec.MT.DATA)
+    ico = iscc_core.codec.Code.rnd(iscc_core.codec.MT.INSTANCE)
+    iscc = f"ISCC:{mco.code}-{cco.code}-{dco.code}-{ico.code}"
+    codes = iscc_core.codec.decompose(iscc)
+    assert codes == [mco.code, cco.code, dco.code, ico.code]

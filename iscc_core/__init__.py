@@ -60,7 +60,24 @@ from iscc_core.schema import (
     DataCode,
     InstanceCode,
 )
-
+from iscc_core.codec import (
+    Code,
+    MT,
+    ST,
+    ST_CC,
+    ST_ID,
+    VS,
+    LN,
+    encode_base32,
+    encode_base64,
+    decode_base32,
+    decode_base64,
+    encode_component,
+    decompose,
+    clean,
+    read_header,
+    write_header,
+)
 
 __all__ = [
     "core_opts",
@@ -96,4 +113,20 @@ __all__ = [
     "ContentCodeMixed",
     "DataCode",
     "InstanceCode",
+    "Code",
+    "MT",
+    "ST",
+    "ST_CC",
+    "ST_ID",
+    "VS",
+    "LN",
+    "encode_base32",
+    "encode_base64",
+    "decode_base32",
+    "decode_base64",
+    "encode_component",
+    "decompose",
+    "clean",
+    "read_header",
+    "write_header",
 ]
