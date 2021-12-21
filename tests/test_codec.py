@@ -208,10 +208,54 @@ def test_Code_str_repr():
 
 
 def test_decompose_single_component():
-    code = iscc_core.codec.Code.rnd(iscc_core.codec.MT.META)
-    # assert c.decompose(code)[0] == code
-    assert iscc_core.codec.decompose(code.code)[0] == code.code
-    # assert c.decompose(code.bytes)[0] == code
+    mts = (
+        iscc_core.MT.META,
+        iscc_core.MT.CONTENT,
+        iscc_core.MT.DATA,
+        iscc_core.MT.INSTANCE,
+    )
+    for mt in mts:
+        code = iscc_core.codec.Code.rnd(mt=mt)
+        assert iscc_core.codec.decompose(code.code)[0] == code.code
+
+
+def test_decompose_data_instance():
+    data = "GABTMCHNLCHTI2NHZFXOLEB53KSPU"
+    inst = "IAB3GN6WUSNSX3MJBT6PBTVFAQZ7G"
+    di = [data, inst]
+    code = iscc_core.iscc_code.gen_iscc_code_v0([data, inst]).iscc
+    assert code == "KUDTMCHNLCHTI2NHZFXOLEB53KSPVMZX22SJWK7NREGPZ4GOUUCDH4Y"
+    assert iscc_core.decompose(code) == di
+
+
+def test_decompose_content_data_instance():
+    cont = "EMARIURG4CVZ3M7N"
+    data = "GAA7ER72LMA6IOIO"
+    inst = "IAAX3C2BUFV6XPQV"
+    di = [cont, data, inst]
+    code = iscc_core.iscc_code.gen_iscc_code_v0([cont, data, inst]).iscc
+    assert code == "KMCRIURG4CVZ3M7N6JD7UWYB4Q4Q47MLIGQWX256CU"
+    assert iscc_core.decompose(code) == di
+
+
+def test_decompose_meta_content_data_instance():
+    meta = "AAA4CPEJKZZ7A4HZ"
+    cont = "EEAWM2CZ44CHDRHV"
+    data = "GAA2F344YTSCRKBD"
+    inst = "IAA4FWMY2ANPAYWJ"
+    di = [meta, cont, data, inst]
+    code = iscc_core.iscc_code.gen_iscc_code_v0([meta, cont, data, inst]).iscc
+    assert code == "KED4CPEJKZZ7A4HZMZUFTZYEOHCPLIXPTTCOIKFIEPBNTGGQDLYGFSI"
+    assert iscc_core.decompose(code) == di
+
+
+def test_decompose_invalid():
+    body = os.urandom(16)
+    code = iscc_core.encode_component(
+        iscc_core.MT.ISCC, iscc_core.ST_ISCC.TEXT, 0, 128, body
+    )
+    with pytest.raises(ValueError):
+        iscc_core.decompose(code)
 
 
 def test_decompose_str_of_codes():
@@ -222,3 +266,12 @@ def test_decompose_str_of_codes():
     iscc = f"ISCC:{mco.code}-{cco.code}-{dco.code}-{ico.code}"
     codes = iscc_core.codec.decompose(iscc)
     assert codes == [mco.code, cco.code, dco.code, ico.code]
+
+
+def test_Code_rnd():
+    cco = iscc_core.Code.rnd(mt=iscc_core.MT.CONTENT, st=iscc_core.ST_CC.TEXT)
+    assert cco.maintype == iscc_core.MT.CONTENT
+    assert cco.subtype == iscc_core.ST_CC.TEXT
+    assert iscc_core.Code.rnd(iscc_core.MT.ISCC).maintype == iscc_core.MT.ISCC
+    assert iscc_core.Code.rnd(iscc_core.MT.ID).maintype == iscc_core.MT.ID
+    assert iscc_core.Code.rnd(iscc_core.MT.DATA).maintype == iscc_core.MT.DATA

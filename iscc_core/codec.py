@@ -20,12 +20,7 @@ from typing import BinaryIO, List, Tuple, Union
 from bitarray import bitarray, frozenbitarray
 from bitarray.util import ba2hex, int2ba, ba2int, count_xor
 from base64 import b32encode, b32decode
-
-
-try:
-    from pybase64 import urlsafe_b64encode, urlsafe_b64decode
-except ImportError:
-    from base64 import urlsafe_b64encode, urlsafe_b64decode
+from pybase64 import urlsafe_b64encode, urlsafe_b64decode
 
 
 ########################################################################################
@@ -57,7 +52,7 @@ class ST(enum.IntEnum):
 
 class ST_CC(enum.IntEnum):
     """
-    SubTypes for ISCC-Codes and Content-Codes
+    SubTypes for Content-Codes
     """
 
     TEXT = 0
@@ -65,10 +60,19 @@ class ST_CC(enum.IntEnum):
     AUDIO = 2
     VIDEO = 3
     MIXED = 4
-    NONE = 5
 
 
-# TODO: create custom subtypes for MT.ISCC (as ST_CC with added SUM subtype)
+class ST_ISCC(enum.IntEnum):
+    """
+    SubTypes for ISCC-Codes
+    """
+
+    TEXT = 0
+    IMAGE = 1
+    AUDIO = 2
+    VIDEO = 3
+    MIXED = 4
+    SUM = 5
 
 
 class ST_ID(enum.IntEnum):
@@ -220,6 +224,53 @@ def decode_base64(code: str) -> bytes:
     padding = 4 - (len(code) % 4)
     string = code + ("=" * padding)
     return urlsafe_b64decode(string)
+
+
+def decompose(iscc_code):
+    # type: (str) -> List[str]
+    """Decompose a multi-component ISCC into a list of singular componet codes."""
+
+    iscc_code = clean(iscc_code)
+    components = []
+    raw_code = decode_base32(iscc_code)
+    while raw_code:
+        mt, st, vs, ln, body = read_header(raw_code)
+        if mt == MT.ISCC:
+            if st == ST_ISCC.SUM:
+                # Body is Data + Instance Code
+                cl = ln // 2
+                assert cl in (64, 128), "ISCC-SUM compontents must be 64 or 128 bits"
+                data_code = encode_component(MT.DATA, ST.NONE, vs, cl, body[: cl // 8])
+                instance_code = encode_component(
+                    MT.INSTANCE, ST.NONE, vs, cl, body[cl // 8 :]
+                )
+                components.extend([data_code, instance_code])
+            elif ln == 192:
+                # Body is Content + Data + Instance Code
+                content_code = encode_component(MT.CONTENT, st, vs, 64, body[:8])
+                data_code = encode_component(MT.DATA, ST.NONE, vs, 64, body[8:16])
+                instance_code = encode_component(
+                    MT.INSTANCE, ST.NONE, vs, 64, body[16:24]
+                )
+                components.extend([content_code, data_code, instance_code])
+            elif ln == 256:
+                # Body is Meta + Content + Data + Instance Code
+                meta_code = encode_component(MT.META, ST.NONE, vs, 64, body[:8])
+                content_code = encode_component(MT.CONTENT, st, vs, 64, body[8:16])
+                data_code = encode_component(MT.DATA, ST.NONE, vs, 64, body[16:24])
+                instance_code = encode_component(
+                    MT.INSTANCE, ST.NONE, vs, 64, body[24:32]
+                )
+                components.extend([meta_code, content_code, data_code, instance_code])
+            else:
+                raise ValueError(f"Invalid ISCC: {iscc_code}")
+            raw_code = body[ln // 8 :]
+        else:
+            nbytes = ln // 8
+            body, raw_code = body[:nbytes], body[nbytes:]
+            component = encode_component(mt, st, vs, ln, body)
+            components.append(component)
+    return components
 
 
 def _write_varnibble(n):
@@ -434,10 +485,12 @@ class Code:
         return MT(self._head[0])
 
     @property
-    def subtype(self) -> Union[ST, ST_CC, ST_ID]:
+    def subtype(self) -> Union[ST, ST_CC, ST_ISCC, ST_ID]:
         """Enum subtype of code."""
-        if self.maintype in (MT.CONTENT, MT.ISCC):
+        if self.maintype == MT.CONTENT:
             return ST_CC(self._head[1])
+        elif self.maintype == MT.ISCC:
+            return ST_ISCC(self._head[1])
         elif self.maintype == MT.ID:
             return ST_ID(self._head[1])
         return ST(self._head[1])
@@ -453,19 +506,22 @@ class Code:
         return self._head[3]
 
     @classmethod
-    def rnd(cls, mt=None, bits=64, data=None):
-        """Returns a syntactically correct random code (no MT.ID support yet)"""
+    def rnd(cls, mt=None, st=None, bits=64, data=None):
+        """Returns a syntactically correct random code."""
 
         # MainType
-        main_types = list(MT)
-        main_types.remove(MT.ID)
-        mt = choice(main_types) if mt is None else mt
+        mt = choice(list(MT)) if mt is None else mt
 
         # SubType
-        if mt == MT.CONTENT:
-            st = choice(list(ST_CC))
-        else:
-            st = choice(list(ST))
+        if st is None:
+            if mt == MT.CONTENT:
+                st = choice(list(ST_CC))
+            elif mt == MT.ISCC:
+                st = choice(list(ST_ISCC))
+            elif mt == MT.ID:
+                st = choice(list(ST_ID))
+            else:
+                st = choice(list(ST))
 
         # Version
         vs = VS.V0
@@ -512,49 +568,3 @@ class Code:
 
     def __hash__(self):
         return self.uint
-
-
-def decompose(iscc_code):
-    # type: (str) -> List[str]
-    """Decompose an ISCC into a list of singular componet codes."""
-
-    iscc_code = clean(iscc_code)
-    components = []
-    raw_code = decode_base32(iscc_code)
-    while raw_code:
-        mt, st, vs, ln, body = read_header(raw_code)
-        if mt == MT.ISCC:
-            if st == ST_CC.NONE:
-                # Body is Data + Instance Code
-                cl = ln // 2
-                data_code = encode_component(MT.DATA, ST.NONE, vs, cl, body[: cl // 8])
-                instance_code = encode_component(
-                    MT.INSTANCE, ST.NONE, vs, cl, body[cl // 8 :]
-                )
-                components.extend([data_code, instance_code])
-            elif ln == 192:
-                # Body is Content + Data + Instance Code
-                content_code = encode_component(MT.CONTENT, st, vs, 64, body[:8])
-                data_code = encode_component(MT.DATA, ST.NONE, vs, 64, body[8:16])
-                instance_code = encode_component(
-                    MT.INSTANCE, ST.NONE, vs, 64, body[16:24]
-                )
-                components.extend([content_code, data_code, instance_code])
-            elif ln == 256:
-                # Body is Meta + Content + Data + Instance Code
-                meta_code = encode_component(MT.META, ST.NONE, vs, 64, body[:8])
-                content_code = encode_component(MT.CONTENT, st, vs, 64, body[8:16])
-                data_code = encode_component(MT.DATA, ST.NONE, vs, 64, body[16:24])
-                instance_code = encode_component(
-                    MT.INSTANCE, ST.NONE, vs, 64, body[24:32]
-                )
-                components.extend([meta_code, content_code, data_code, instance_code])
-            else:
-                raise ValueError(f"Invalid ISCC: {iscc_code}")
-            raw_code = body[ln // 8 :]
-        else:
-            nbytes = ln // 8
-            body, raw_code = body[:nbytes], body[nbytes:]
-            component = encode_component(mt, st, vs, ln, body)
-            components.append(component)
-    return components

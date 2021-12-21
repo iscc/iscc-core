@@ -83,7 +83,7 @@ def gen_iscc_code_v0(codes):
 
     # Construct header values
     mt = co.MT.ISCC
-    st = co.ST_CC.NONE
+    st = co.ST_ISCC.SUM
     for d in decoded:
         if d[0] == co.MT.CONTENT:
             st = d[1]

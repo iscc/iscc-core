@@ -42,14 +42,14 @@ def test_gen_iscc_code_v0_no_meta_content_256():
     assert icode == {"iscc": "KUDVVC5DMJJGYKZ4ZBYVNYABFFYXGZBL4D5GOQCDIP2ACG75YERBLNY"}
     assert (
         icode.code_obj.explain
-        == "ISCC-NONE-V0-256-5a8ba362526c2b3cc87156e001297173642be0fa67404343f4011bfdc12215b7"
+        == "ISCC-SUM-V0-256-5a8ba362526c2b3cc87156e001297173642be0fa67404343f4011bfdc12215b7"
     )
 
 
 def test_gen_iscc_code_v0_no_meta_content_128():
     icode = iscc_core.gen_iscc_code_v0([DID_64, IID_256])
     assert icode == {"iscc": "KUBQQICFKJYKY4KUMQV6B6THIBBUG"}
-    assert icode.code_obj.explain == "ISCC-NONE-V0-128-0820455270ac7154642be0fa67404343"
+    assert icode.code_obj.explain == "ISCC-SUM-V0-128-0820455270ac7154642be0fa67404343"
 
 
 def test_gen_iscc_code_v0_ordering():

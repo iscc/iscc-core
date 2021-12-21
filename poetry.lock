@@ -410,7 +410,7 @@ name = "pybase64"
 version = "1.2.0"
 description = "Fast Base64 encoding/decoding"
 category = "main"
-optional = true
+optional = false
 python-versions = ">=3.6"
 
 [package.extras]
@@ -657,12 +657,12 @@ docs = ["sphinx", "jaraco.packaging (>=8.2)", "rst.linker (>=1.9)"]
 testing = ["pytest (>=4.6)", "pytest-checkdocs (>=2.4)", "pytest-flake8", "pytest-cov", "pytest-enabler (>=1.0.1)", "jaraco.itertools", "func-timeout", "pytest-black (>=0.3.7)", "pytest-mypy"]
 
 [extras]
-turbo = ["cython", "pybase64"]
+turbo = ["cython"]
 
 [metadata]
 lock-version = "1.1"
 python-versions = ">=3.6.1,<4.0"
-content-hash = "20f958a806c15fa3163058e226d04fa81e897ed4ab0df868f530cd4232da531e"
+content-hash = "2ec85387de7e57a429a154b91b1528c9c01c1c1cba543a5b09e5c46f62d610da"
 
 [metadata.files]
 aiocontextvars = [
