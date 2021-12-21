@@ -240,30 +240,103 @@ gen_iscc_id_v0:
             - "IAA5OSMB56TQUDEI"
             - 0
 decompose:
-    test_0000_single:
+    test_decompose_single:
         inputs:
             - "AAA4IHEHG3JNF7GN"
-    test_0001_data_inst:
+    test_decompose_data_inst:
         inputs:
             - "KUDTMCHNLCHTI2NHZFXOLEB53KSPVMZX22SJWK7NREGPZ4GOUUCDH4Y"
-    test_0002_cont_data_inst:
+    test_decompose_cont_data_inst:
         inputs:
             - "KMCRIURG4CVZ3M7N6JD7UWYB4Q4Q47MLIGQWX256CU"
-    test_0003_meta_cont_data_inst:
+    test_decompose_meta_cont_data_inst:
         inputs:
             - "KED4CPEJKZZ7A4HZMZUFTZYEOHCPLIXPTTCOIKFIEPBNTGGQDLYGFSI"
-    test_0004_joined:
+    test_decompose_joined:
         inputs:
             - "AAARS67E5BGP2MUTEEA2TP65D54KZZH7GAA34ZX6EPOUZPLTIAA7IV54BH4JI2SB"
-    test_0005_joined_dash:
+    test_decompose_joined_dash:
         inputs:
             - "AAARS67E5BGP2MUT-EEA2TP65D54KZZH7-GAA34ZX6EPOUZPLT-IAA7IV54BH4JI2SB"
-    test_0004_norm_with_prefix:
+    test_decompose_norm_with_prefix:
         inputs:
             - "ISCC:KEDRS67E5BGP2MUTVG752H3YVTSP7PTG7YR52TF5OP2FPPAJ7CKGUQI"
-    test_0004_with_prefix_joined:
+    test_decompose_with_prefix_joined:
         inputs:
             - "ISCC:AAARS67E5BGP2MUTEEA2TP65D54KZZH7GAA34ZX6EPOUZPLTIAA7IV54BH4JI2SB"
-    test_0004_with_prefix_joined_dash:
+    test_decompose_with_prefix_joined_dash:
         inputs:
             - "ISCC:AAARS67E5BGP2MUT-EEA2TP65D54KZZH7-GAA34ZX6EPOUZPLT-IAA7IV54BH4JI2SB"
+normalize:
+    test_normalize_single_canonical:
+        inputs:
+            - "ISCC:AAATTZCKVH3S42TP"
+    test_normalize_single_no_scheme:
+        inputs:
+            - "AAATTZCKVH3S42TP"
+    test_normalize_single_lower:
+        inputs:
+            - "aaattzckvh3s42tp"
+    test_normalize_single_mixed_case:
+        inputs:
+            - "AaAtTzckVh3s42tP"
+    test_normalize_dual:
+        inputs:
+            - "GAAW2PRCRS5LNVZVIAAUVACQKXE3V44W"
+    test_normalize_dual_dash:
+        inputs:
+            - "GAAW2PRCRS5LNVZV-IAAUVACQKXE3V44W"
+    test_normalize_dual_scheme:
+        inputs:
+            - "ISCC:GAAW2PRCRS5LNVZVIAAUVACQKXE3V44W"
+    test_normalize_dual_scheme_dash:
+        inputs:
+            - "ISCC:GAAW2PRCRS5LNVZV-IAAUVACQKXE3V44W"
+    test_normalize_triple:
+        inputs:
+            - "EMAZQGH26X5XQ5HAGAA5U77EOAU2NU4YIAAU4SKRQCZZEYQD"
+    test_normalize_triple_dash:
+        inputs:
+            - "EMAZQGH26X5XQ5HA-GAA5U77EOAU2NU4Y-IAAU4SKRQCZZEYQ"
+    test_normalize_triple_scheme:
+        inputs:
+            - "ISCC:EMAZQGH26X5XQ5HAGAA5U77EOAU2NU4YIAAU4SKRQCZZEYQD"
+    test_normalize_triple_scheme_dash:
+        inputs:
+            - "ISCC:EMAZQGH26X5XQ5HA-GAA5U77EOAU2NU4Y-IAAU4SKRQCZZEYQD"
+    test_normalize_full_scheme:
+        inputs:
+            - "ISCC:KED4CPEJKZZ7A4HZMZUFTZYEOHCPLIXPTTCOIKFIEPBNTGGQDLYGFSI"
+    test_normalize_full_scheme_lower:
+        inputs:
+            - "iscc:ked4cpejkzz7a4hzmzuftzyeohcplixpttcoikfiepbntggqdlygfsi"
+    test_normalize_full_no_scheme:
+        inputs:
+            - "KED4CPEJKZZ7A4HZMZUFTZYEOHCPLIXPTTCOIKFIEPBNTGGQDLYGFSI"
+    test_normalize_full_lower_no_scheme:
+        inputs:
+            - "ked4cpejkzz7a4hzmzuftzyeohcplixpttcoikfiepbntggqdlygfsi"
+    test_normalize_iscc_id:
+        inputs:
+            - "MAAGZTFQTTVIZPJR"
+    test_normalize_iscc_id_lower:
+        inputs:
+            - "maagztfqttvizpjr"
+    test_normalize_iscc_id_mixed:
+        inputs:
+            - "MaaGZTfqttvizpjr"
+    test_normalize_iscc_id_scheme:
+        inputs:
+            - "ISCC:MAAGZTFQTTVIZPJR"
+    test_normalize_iscc_id_scheme_lower:
+        inputs:
+            - "iscc:maagztfqttvizpjr"
+    test_normalize_iscc_id_scheme_mixed:
+        inputs:
+            - "Iscc:Maagztfqttvizpjr"
+    test_normalize_mf_base32_single:
+        inputs:
+            - "bzqaqaai35i25crx2mvpa"
+    test_normalize_mf_base64_url_single:
+        inputs:
+            - "uzAEAARvqNdFG-mVe"

@@ -18,12 +18,11 @@ The following combinations of components are possible:
 """
 from operator import itemgetter
 from typing import Iterable
-from iscc_core import codec as co
-from iscc_core.schema import IsccCode
+import iscc_core as ic
 
 
 def gen_iscc_code(codes):
-    # type: (Iterable[str]) -> IsccCode
+    # type: (Iterable[str]) -> ic.IsccCode
     """
     Combine multiple ISCC components to a composite ISCC with a common header using
     the latest standard algorithm.
@@ -36,7 +35,7 @@ def gen_iscc_code(codes):
 
 
 def gen_iscc_code_v0(codes):
-    # type: (Iterable[str]) -> IsccCode
+    # type: (Iterable[str]) -> ic.IsccCode
     """
     Combine multiple ISCC components to a composite ISCC with a common header using
     algorithm v0.
@@ -48,15 +47,15 @@ def gen_iscc_code_v0(codes):
 
     # Validate combinatorial constraints
     valid_mt_mix = {
-        (co.MT.META, co.MT.CONTENT, co.MT.DATA, co.MT.INSTANCE),
-        (co.MT.CONTENT, co.MT.DATA, co.MT.INSTANCE),
-        (co.MT.DATA, co.MT.INSTANCE),
+        (ic.MT.META, ic.MT.CONTENT, ic.MT.DATA, ic.MT.INSTANCE),
+        (ic.MT.CONTENT, ic.MT.DATA, ic.MT.INSTANCE),
+        (ic.MT.DATA, ic.MT.INSTANCE),
     }
 
     # TODO: add suport for Semantic-Code
 
     decoded = sorted(
-        [co.read_header(co.decode_base32(code)) for code in codes], key=itemgetter(0)
+        [ic.read_header(ic.decode_base32(code)) for code in codes], key=itemgetter(0)
     )
     main_types = tuple(d[0] for d in decoded)
 
@@ -68,10 +67,10 @@ def gen_iscc_code_v0(codes):
 
     # Validate component version constraints
     versions = set(d[2] for d in decoded)
-    assert all(v == co.VS.V0 for v in versions), f"Version constraint error {versions}"
+    assert all(v == ic.VS.V0 for v in versions), f"Version constraint error {versions}"
 
     # Derive per component length
-    is_di = main_types == (co.MT.DATA, co.MT.INSTANCE)
+    is_di = main_types == (ic.MT.DATA, ic.MT.INSTANCE)
     long_codes = all(d[3] >= 128 for d in decoded)
     if is_di and long_codes:
         component_nbytes = 128 // 8
@@ -82,15 +81,15 @@ def gen_iscc_code_v0(codes):
     body = b"".join([d[-1][:component_nbytes] for d in decoded])
 
     # Construct header values
-    mt = co.MT.ISCC
-    st = co.ST_ISCC.SUM
+    mt = ic.MT.ISCC
+    st = ic.ST_ISCC.SUM
     for d in decoded:
-        if d[0] == co.MT.CONTENT:
+        if d[0] == ic.MT.CONTENT:
             st = d[1]
             break
     ln = (component_nbytes * len(decoded)) * 8
 
     # Build ISCC
-    iscc_code = co.encode_component(mt, st, co.VS.V0, ln, body)
+    iscc_code = ic.encode_component(mt, st, ic.VS.V0, ln, body)
 
-    return IsccCode(iscc=iscc_code)
+    return ic.IsccCode(iscc=iscc_code)

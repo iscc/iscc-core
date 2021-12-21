@@ -21,6 +21,7 @@ from bitarray import bitarray, frozenbitarray
 from bitarray.util import ba2hex, int2ba, ba2int, count_xor
 from base64 import b32encode, b32decode
 from pybase64 import urlsafe_b64encode, urlsafe_b64decode
+from iscc_core import gen_iscc_code_v0
 
 
 ########################################################################################
@@ -271,6 +272,30 @@ def decompose(iscc_code):
             component = encode_component(mt, st, vs, ln, body)
             components.append(component)
     return components
+
+
+def normalize(iscc_code):
+    # type: (str) -> str
+    """
+    Normalize an ISCC to its canonical form.
+
+    :param str iscc_code: Any valid ISCC string
+    :return: Normalized ISCC
+    :rtype: str
+    """
+    # Unpack if multibase - multiformats encoded
+    if iscc_code.startswith("b"):
+        decoded = decode_base32(iscc_code.lstrip("b"))
+        iscc_code = encode_base32(decoded.lstrip(Code.mc_prefix))
+    if iscc_code.startswith("u"):
+        decoded = decode_base64(iscc_code.lstrip("u"))
+        iscc_code = encode_base32(decoded.lstrip(Code.mc_prefix))
+
+    decomposed = decompose(iscc_code)
+    recomposed = (
+        gen_iscc_code_v0(decomposed).iscc if len(decomposed) >= 2 else decomposed[0]
+    )
+    return f"ISCC:{recomposed}"
 
 
 def _write_varnibble(n):
