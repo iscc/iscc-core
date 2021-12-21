@@ -1,3 +1,3 @@
-# **ISCC** -  Instance-Code
+# **ISCC** - Instance-Code
 
 ::: iscc_core.code_instance

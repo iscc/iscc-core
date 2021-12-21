@@ -69,55 +69,55 @@ def test_decode_base_64():
 
 def test_write_varnibble():
     with pytest.raises(ValueError):
-        ic.codec._write_varnibble(-1)
-    assert ic.codec._write_varnibble(0) == ba("0000")
-    assert ic.codec._write_varnibble(7) == ba("0111")
-    assert ic.codec._write_varnibble(8) == ba("10000000")
-    assert ic.codec._write_varnibble(9) == ba("10000001")
-    assert ic.codec._write_varnibble(71) == ba("10111111")
-    assert ic.codec._write_varnibble(72) == ba("110000000000")
-    assert ic.codec._write_varnibble(73) == ba("110000000001")
-    assert ic.codec._write_varnibble(583) == ba("110111111111")
-    assert ic.codec._write_varnibble(584) == ba("1110000000000000")
-    assert ic.codec._write_varnibble(4679) == ba("1110111111111111")
+        ic.codec.write_varnibble(-1)
+    assert ic.codec.write_varnibble(0) == ba("0000")
+    assert ic.codec.write_varnibble(7) == ba("0111")
+    assert ic.codec.write_varnibble(8) == ba("10000000")
+    assert ic.codec.write_varnibble(9) == ba("10000001")
+    assert ic.codec.write_varnibble(71) == ba("10111111")
+    assert ic.codec.write_varnibble(72) == ba("110000000000")
+    assert ic.codec.write_varnibble(73) == ba("110000000001")
+    assert ic.codec.write_varnibble(583) == ba("110111111111")
+    assert ic.codec.write_varnibble(584) == ba("1110000000000000")
+    assert ic.codec.write_varnibble(4679) == ba("1110111111111111")
     with pytest.raises(ValueError):
-        ic.codec._write_varnibble(4680)
+        ic.codec.write_varnibble(4680)
     with pytest.raises(TypeError):
-        ic.codec._write_varnibble(1.0)
+        ic.codec.write_varnibble(1.0)
 
 
 def test_read_varnibble():
     with pytest.raises(ValueError):
-        ic.codec._read_varnibble(ba("0"))
+        ic.codec.read_varnibble(ba("0"))
     with pytest.raises(ValueError):
-        ic.codec._read_varnibble(ba("1"))
+        ic.codec.read_varnibble(ba("1"))
     with pytest.raises(ValueError):
-        ic.codec._read_varnibble(ba("011"))
+        ic.codec.read_varnibble(ba("011"))
     with pytest.raises(ValueError):
-        ic.codec._read_varnibble(ba("100"))
-    assert ic.codec._read_varnibble(ba("0000")) == (0, ba())
-    assert ic.codec._read_varnibble(ba("000000")) == (0, ba("00"))
-    assert ic.codec._read_varnibble(ba("0111")) == (7, ba())
-    assert ic.codec._read_varnibble(ba("01110")) == (7, ba("0"))
-    assert ic.codec._read_varnibble(ba("01111")) == (7, ba("1"))
-    assert ic.codec._read_varnibble(ba("10000000")) == (8, ba())
-    assert ic.codec._read_varnibble(ba("10000001")) == (9, ba())
-    assert ic.codec._read_varnibble(ba("10000001110")) == (9, ba("110"))
-    assert ic.codec._read_varnibble(ba("10111111")) == (71, ba())
-    assert ic.codec._read_varnibble(ba("101111110")) == (71, ba("0"))
-    assert ic.codec._read_varnibble(ba("110000000000")) == (72, ba())
-    assert ic.codec._read_varnibble(ba("11000000000010")) == (72, ba("10"))
-    assert ic.codec._read_varnibble(ba("110000000001")) == (73, ba())
-    assert ic.codec._read_varnibble(ba("110000000001010")) == (73, ba("010"))
-    assert ic.codec._read_varnibble(ba("110111111111")) == (583, ba())
-    assert ic.codec._read_varnibble(ba("1101111111111010")) == (583, ba("1010"))
-    assert ic.codec._read_varnibble(ba("1110000000000000")) == (584, ba())
-    assert ic.codec._read_varnibble(ba("111000000000000001010")) == (
+        ic.codec.read_varnibble(ba("100"))
+    assert ic.codec.read_varnibble(ba("0000")) == (0, ba())
+    assert ic.codec.read_varnibble(ba("000000")) == (0, ba("00"))
+    assert ic.codec.read_varnibble(ba("0111")) == (7, ba())
+    assert ic.codec.read_varnibble(ba("01110")) == (7, ba("0"))
+    assert ic.codec.read_varnibble(ba("01111")) == (7, ba("1"))
+    assert ic.codec.read_varnibble(ba("10000000")) == (8, ba())
+    assert ic.codec.read_varnibble(ba("10000001")) == (9, ba())
+    assert ic.codec.read_varnibble(ba("10000001110")) == (9, ba("110"))
+    assert ic.codec.read_varnibble(ba("10111111")) == (71, ba())
+    assert ic.codec.read_varnibble(ba("101111110")) == (71, ba("0"))
+    assert ic.codec.read_varnibble(ba("110000000000")) == (72, ba())
+    assert ic.codec.read_varnibble(ba("11000000000010")) == (72, ba("10"))
+    assert ic.codec.read_varnibble(ba("110000000001")) == (73, ba())
+    assert ic.codec.read_varnibble(ba("110000000001010")) == (73, ba("010"))
+    assert ic.codec.read_varnibble(ba("110111111111")) == (583, ba())
+    assert ic.codec.read_varnibble(ba("1101111111111010")) == (583, ba("1010"))
+    assert ic.codec.read_varnibble(ba("1110000000000000")) == (584, ba())
+    assert ic.codec.read_varnibble(ba("111000000000000001010")) == (
         584,
         ba("01010"),
     )
-    assert ic.codec._read_varnibble(ba("1110111111111111")) == (4679, ba())
-    assert ic.codec._read_varnibble(ba("1110111111111111101010")) == (
+    assert ic.codec.read_varnibble(ba("1110111111111111")) == (4679, ba())
+    assert ic.codec.read_varnibble(ba("1110111111111111101010")) == (
         4679,
         ba("101010"),
     )

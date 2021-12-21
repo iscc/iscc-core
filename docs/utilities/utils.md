@@ -1,2 +1,3 @@
-# ISCC-CORE - Utilities
+# **ISCC** - Utilities
+
 ::: iscc_core.utils

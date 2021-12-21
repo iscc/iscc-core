@@ -1,14 +1,13 @@
 # -*- coding: utf-8 -*-
-"""
-*ISCC - a multi-component identifier for digital media assets.*
+"""*A multi-component identifier for digital media assets.*
 
 An **ISCC-CODE** is generated from the concatenation of the digests of the following
 four components together with a single common header:
 
-- [Meta-Code][iscc_core.code_meta] - Encodes metadata similarity
+- [Meta-Code](/components/code_meta/) - Encodes metadata similarity
 - [Content-Code](/components/content/) - Encodes syntactic/perceptual similarity
-- [Data-Code][iscc_core.code_data] - Encodes raw bitstream similarity
-- [Instance-Code][iscc_core.code_instance] - Data checksum
+- [Data-Code](/components/code_data/) - Encodes raw bitstream similarity
+- [Instance-Code](/components/code_instance/) - Data checksum
 
 The following combinations of components are possible:
 

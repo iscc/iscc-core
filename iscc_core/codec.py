@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
-"""
-*encoding, decoding and transcoding related functions.*
+"""This module implements encoding, decoding and transcoding functions of ISCC
 
+## Codec Overview
 ![ISCC - data structure](../images/iscc-data-structure.svg)
 """
 import enum
@@ -143,7 +143,7 @@ def write_header(mtype, stype, version=0, length=64):
         length_code = (length // 32) - 1
     header = bitarray()
     for n in (mtype, stype, version, length_code):
-        header += _write_varnibble(n)
+        header += write_varnibble(n)
     # Append zero-padding if required (right side, least significant bits).
     header.fill()
     return header.tobytes()
@@ -161,11 +161,11 @@ def read_header(data):
     ba.frombytes(data)
     data = ba
     for _ in range(3):
-        value, data = _read_varnibble(data)
+        value, data = read_varnibble(data)
         result.append(value)
 
     # interpret length value
-    length, data = _read_varnibble(data)
+    length, data = read_varnibble(data)
 
     # TODO: verify correctness of decoded data.
 
@@ -293,7 +293,7 @@ def normalize(iscc_code):
     return f"ISCC:{recomposed}"
 
 
-def _write_varnibble(n):
+def write_varnibble(n):
     # type: (int) -> bitarray
     """
     Writes integer to variable length sequence of 4-bit chunks.
@@ -305,6 +305,10 @@ def _write_varnibble(n):
     | 10          | 2       | 6         | 8 - 71         |
     | 110         | 3       | 9         | 72 - 583       |
     | 1110        | 4       | 12        | 584 - 4679     |
+
+    :param int n: Positive integer to be encoded as varnibble (0-4679)
+    :return: Varnibble encoded integera
+    :rtype: bitarray
     """
     if 0 <= n < 8:
         return int2ba(n, length=4)
@@ -318,7 +322,7 @@ def _write_varnibble(n):
         raise ValueError("Value must be between 0 and 4679")
 
 
-def _read_varnibble(b):
+def read_varnibble(b):
     # type: (bitarray) -> Tuple[int, bitarray]
     """Reads first varnibble, returns its integer value and remaining bits."""
 

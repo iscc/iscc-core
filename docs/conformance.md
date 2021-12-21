@@ -1,3 +1,2 @@
-# ISCC - Core Algorithms - Conformance
-
+# **ISCC** - Conformance Testing
 ::: iscc_core.conformance

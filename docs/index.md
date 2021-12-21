@@ -1,4 +1,4 @@
-# ISCC - Codec and Algorithms
+# **ISCC** - Codec & Algorithms
 
 [![Build](https://github.com/iscc/iscc-core/actions/workflows/tests.yml/badge.svg)](https://github.com/iscc/iscc-core/actions/workflows/tests.yml)
 [![Version](https://img.shields.io/pypi/v/iscc-core.svg)](https://pypi.python.org/pypi/iscc-core/)
@@ -27,7 +27,7 @@ The component-based structure of the **ISCC** identifies content at multiple lev
 
 ![ISCC Architecure](https://raw.githubusercontent.com/iscc/iscc-core/master/docs/images/iscc-codec-format.png)
 
-### ISCC MainTypes
+## ISCC MainTypes
 
 | Idx | Slug     | Bits | Purpose                                                  |
 |-----|:---------|------|----------------------------------------------------------|

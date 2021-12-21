@@ -1,13 +1,16 @@
 # -*- coding: utf-8 -*-
-"""
-Minimum Hash
-"""
 from typing import List
 
 
 def minhash(features):
     # type: (List[int]) -> List[int]
-    """Calculate a 64 dimensional minhash integer vector."""
+    """
+    Calculate a 64 dimensional minhash integer vector.
+
+    :param List[int] features: List of integer features
+    :return: Minhash vector
+    :rtype: List[int]
+    """
     return [
         min([(((a * f + b) & MAXI64) % MPRIME) & MAXH for f in features])
         for a, b in zip(MPA, MPB)
@@ -16,13 +19,25 @@ def minhash(features):
 
 def minhash_64(features):
     # type: (List[int]) -> bytes
-    """Create 64-bit minimum hash digest."""
+    """
+    Create 64-bit minimum hash digest.
+
+    :param List[int] features: List of integer features
+    :return: 64-bit binary from the least significant bits of the minhash values
+    :rtype: bytes
+    """
     return compress(minhash(features), 1)
 
 
 def minhash_256(features):
     # type: (List[int]) -> bytes
-    """Create 256-bit minimum hash digest."""
+    """
+    Create 256-bit minimum hash digest.
+
+    :param List[int] features: List of integer features
+    :return: 256-bit binary from the least significant bits of the minhash values
+    :rtype: bytes
+    """
     return compress(minhash(features), 4)
 
 
@@ -32,8 +47,13 @@ def compress(mhash, lsb=4):
     Compress minhash vector to byte hash-digest.
 
     Concatenates `lsb` number of  least significant bits from each integer in `mhash`.
-    For example an `mhash` with 64 integers will produce a 256-bit summary of the
-    minhash vector.
+    For example an `mhash` with 64 integers and `lsb=4` will produce a 256-bit summary
+    of the minhash vector.
+
+    :param List[int] mhash: List of minhash integer features
+    :param int lsb: Number of the least significant bits to retain
+    :return: 256-bit binary from the least significant bits of the minhash values
+    :rtype: bytes
     """
     bits: str = ""
     for bitpos in range(lsb):

@@ -1,3 +1,3 @@
-# **ISCC** - Canonical ISCC-CODE
+# **ISCC-CODE**
 
 ::: iscc_core.iscc_code

@@ -1,6 +1,5 @@
 # -*- coding: utf-8 -*-
-"""
-*A sililarity preserving hash for digital asset metadata*.
+"""*A sililarity preserving hash for digital asset metadata*.
 
 The Meta-Code is the first component of a canonical ISCC. It is calculated as a
 similarity preserving hash from the metadata of a digital asset. The purpose of the

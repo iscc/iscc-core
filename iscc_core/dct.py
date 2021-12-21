@@ -1,7 +1,4 @@
 # -*- coding: utf-8 -*-
-"""
-Discrete Cosine Transform.
-"""
 import math
 from typing import List, Sequence
 
@@ -11,7 +8,7 @@ def dct(v):
     """
     Discrete cosine transform.
 
-    See: https://www.nayuki.io/page/fast-discrete-cosine-transform-algorithms).
+    See: [nayuki.io](https://www.nayuki.io/page/fast-discrete-cosine-transform-algorithms).
 
     :param Sequence[float] v: Input vector for DCT calculation.
     :return: DCT Transformed vector.

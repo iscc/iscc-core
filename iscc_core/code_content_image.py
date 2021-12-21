@@ -1,6 +1,5 @@
 # -*- coding: utf-8 -*-
-"""
-*A similarity preserving perceptual hash for images.*
+"""*A similarity preserving perceptual hash for images.*
 
 The ISCC Content-Code Image is created by calculating a discrete cosine transform on
 normalized image-pixels and comparing the values from the upper left area of the

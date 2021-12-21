@@ -1,9 +1,5 @@
 # -*- coding: utf-8 -*-
-"""
-*Content Defined Chunking*
-
-Compatible with [fastcdc](https://pypi.org/project/fastcdc/ v1.3.0)
-"""
+"""Compatible with [fastcdc](https://pypi.org/project/fastcdc/)"""
 import io
 from math import log2
 from typing import Generator

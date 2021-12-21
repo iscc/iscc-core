@@ -1,6 +1,5 @@
 # -*- coding: utf-8 -*-
-"""
-*A decentralized short identifier for digital assets.*
+"""*A decentralized short identifier for digital assets.*
 
 The **ISCC-ID** is generated from a similarity-hash of the components of an
 **ISCC-CODE**. Its SubType designates the blockchain from which the **ISCC-ID** was

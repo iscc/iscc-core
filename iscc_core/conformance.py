@@ -1,8 +1,5 @@
 # -*- coding: utf-8 -*-
-"""
-Conformance Testing
-
-An application that claims ISCC conformance MUST pass all core functions from the
+"""An application that claims ISCC conformance MUST pass all core functions from the
 ISCC conformance test suite. The test suite is available as JSON data on
 [Github](https://raw.githubusercontent.com/iscc/iscc-core/master/iscc_core/data.json).
 Test data is structured as follows:

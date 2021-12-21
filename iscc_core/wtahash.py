@@ -1,7 +1,4 @@
 # -*- coding: utf-8 -*-
-"""
-*Winner Takes All Hash*
-"""
 from typing import Sequence
 from bitarray import bitarray
 
