@@ -73,7 +73,7 @@ def generate_tests():
             yield test_name, func_obj, test_values["inputs"], test_values["outputs"]
 
 
-def selftest():
+def selftest():  # pragma: no cover
     # type: () -> bool
     """
     Run conformance tests.
@@ -90,7 +90,3 @@ def selftest():
             log.error(f"FAILED: {func.__name__}.{test_name} with {e}")
             passed = False
     return passed
-
-
-if __name__ == "__main__":
-    selftest()
