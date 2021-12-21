@@ -18,4 +18,8 @@ def test_confromance_selftest():
     "testname,function,inputs,outputs", conformance.generate_tests()
 )
 def test_conformance(testname, function, inputs, outputs):
-    assert function(*inputs).dict() == outputs, f"FAILED {testname}"
+    result = function(*inputs)
+    if hasattr(result, "dict"):
+        assert result.dict() == outputs, f"FAILED {testname}"
+    else:
+        assert result == outputs
