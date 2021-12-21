@@ -1,4 +1,4 @@
-# iscc-core - ISCC Core Algorithms
+# ISCC - Codec and Algorithms
 
 [![Build](https://github.com/iscc/iscc-core/actions/workflows/tests.yml/badge.svg)](https://github.com/iscc/iscc-core/actions/workflows/tests.yml)
 [![Version](https://img.shields.io/pypi/v/iscc-core.svg)](https://pypi.python.org/pypi/iscc-core/)

@@ -45,7 +45,7 @@ plugins:
             show_category_heading: true
             show_if_no_docstring: false
             show_signature_annotations: true
-            show_source: false
+            show_source: true
             show_bases: true
             group_by_category: true
             heading_level: 3
@@ -58,6 +58,7 @@ markdown_extensions:
 
 nav:
   - Overview: index.md
+  - Codec: codec/codec.md
   - ISCC-Code: iscc_code.md
   - ISCC-ID: iscc_id.md
   - Components:
@@ -79,7 +80,6 @@ nav:
     - Minhash: algorithms/minhash.md
     - WTAHash: algorithms/wtahash.md
   - Schema: schema/schema.md
-  - Codec: codec/codec.md
   - Options: options/options.md
   - Utilities: utilities/utils.md
   - Conformance: conformance.md

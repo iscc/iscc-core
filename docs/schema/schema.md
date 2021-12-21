@@ -1,3 +1,3 @@
-# ISCC - Schema
+# **ISCC** - Schema
 
 ::: iscc_core.schema
