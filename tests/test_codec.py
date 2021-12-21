@@ -63,6 +63,12 @@ def test_decode_base32():
     assert iscc_core.codec.decode_base32("MZXW6YTBOI") == b"foobar"
 
 
+def test_decode_base32_case_fold():
+    assert iscc_core.decode_base32("MZXW6YTBOI") == iscc_core.decode_base32(
+        "mZxW6ytBOI"
+    )
+
+
 def test_decode_base_64():
     data = os.urandom(8)
     enc = iscc_core.codec.encode_base64(data)
