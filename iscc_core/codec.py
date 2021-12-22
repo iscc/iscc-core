@@ -4,7 +4,7 @@ import math
 import uvarint
 from os import urandom
 from random import choice
-from typing import Tuple, Union
+from typing import List, Tuple, Union
 import base58
 from bitarray import bitarray, frozenbitarray
 from bitarray.util import ba2hex, int2ba, ba2int, count_xor
@@ -25,7 +25,7 @@ SubType = Union[int, "ST", "ST_CC", "ST_ISCC", "ST_ID"]
 Version = Union[int, "VS"]
 Length = Union[int, "LN"]
 Header = Tuple[MainType, SubType, Version, Length]
-IsccTuple = Tuple[Header, bytes]
+IsccTuple = Tuple[MainType, SubType, Version, Length, bytes]
 IsccAny = Union[str, IsccTuple, bytes, "Code"]
 
 
@@ -277,7 +277,8 @@ def read_header(data):
     # type: (bytes) -> IsccTuple
     """
     Decodes varnibble encoded header and returns it together with hash bytes.
-    :param bytes data: ISCC bytes digest
+
+    :param bytes data: ISCC bytes
     :return: (MainType, SubType, Version, length, HashDigest)
     :rtype: IsccTuple
     """
@@ -366,7 +367,7 @@ def decode_base64(code: str) -> bytes:
 
 
 def decompose(iscc_code):
-    # type: (str) -> list[str]
+    # type: (str) -> List[str]
     """Decompose a multi-component ISCC into a list of singular componet codes."""
 
     iscc_code = clean(iscc_code)
@@ -577,7 +578,7 @@ class Code:
         return self._body.to01()
 
     @property
-    def hash_ints(self) -> list[int]:
+    def hash_ints(self) -> List[int]:
         """List of 0,1 integers representing the bits of the code (without header)."""
         return self._body.tolist(True)
 
