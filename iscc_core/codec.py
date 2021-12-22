@@ -1,17 +1,10 @@
 # -*- coding: utf-8 -*-
-"""This module implements encoding, decoding and transcoding functions of ISCC
-
-## Codec Overview
-![ISCC - data structure](../images/iscc-data-structure.svg)
-"""
 import enum
 import math
-import mmap
 import uvarint
-from io import BufferedReader, BytesIO
 from os import urandom
 from random import choice
-from typing import BinaryIO, List, Tuple, Union
+from typing import Tuple, Union
 import base58
 from bitarray import bitarray, frozenbitarray
 from bitarray.util import ba2hex, int2ba, ba2int, count_xor
@@ -25,9 +18,30 @@ from iscc_core import gen_iscc_code_v0
 ########################################################################################
 
 
+Data = Union[bytes, bytearray, memoryview]
+Stream = Union["BinaryIO", "mmap.mmap", "BytesIO", "BufferedReader"]
+MainType = Union[int, "MT"]
+SubType = Union[int, "ST", "ST_CC", "ST_ISCC", "ST_ID"]
+Version = Union[int, "VS"]
+Length = Union[int, "LN"]
+Header = Tuple[MainType, SubType, Version, Length]
+IsccTuple = Tuple[Header, bytes]
+IsccAny = Union[str, IsccTuple, bytes, "Code"]
+
+
 class MT(enum.IntEnum):
     """
-    ISCC MainTypes
+    ## MT - MainTypes
+
+    | Uint | Symbol   | Bits | Purpose                                                 |
+    |----- |:---------|------|---------------------------------------------------------|
+    | 0    | META     | 0000 | Match on metadata similarity                            |
+    | 1    | SEMANTIC | 0001 | Match on semantic content similarity                    |
+    | 2    | CONTENT  | 0010 | Match on perceptual content similarity                  |
+    | 3    | DATA     | 0011 | Match on data similarity                                |
+    | 4    | INSTANCE | 0100 | Match on data identity                                  |
+    | 5    | ISCC     | 0101 | Composite of two or more components with common header  |
+    | 6    | ID       | 0110 | Short unique identifier bound to ISCC, timestamp, pubkey|
     """
 
     META = 0
@@ -41,7 +55,11 @@ class MT(enum.IntEnum):
 
 class ST(enum.IntEnum):
     """
-    Generic SubTypes
+    ## ST - SubTypes
+
+    | Uint | Symbol   | Bits | Purpose                                                 |
+    |----- |:---------|------|---------------------------------------------------------|
+    | 0    | NONE     | 0000 | For MainTypes that do not specify SubTypes              |
     """
 
     NONE = 0
@@ -49,7 +67,17 @@ class ST(enum.IntEnum):
 
 class ST_CC(enum.IntEnum):
     """
-    SubTypes for Content-Codes
+    ### ST_CC
+
+    SubTypes for `MT.CONTENT`
+
+    | Uint | Symbol   | Bits | Purpose                                                 |
+    |----- |:---------|------|---------------------------------------------------------|
+    | 0    | TEXT     | 0000 | Match on syntactic text similarity                      |
+    | 1    | IMAGE    | 0001 | Match on perceptual image similarity                    |
+    | 2    | AUDIO    | 0010 | Match on audio chroma similarity                        |
+    | 3    | VIDEO    | 0011 | Match on perceptual similarity                          |
+    | 4    | MIXED    | 0100 | Match on similarity of content codes                    |
     """
 
     TEXT = 0
@@ -61,7 +89,18 @@ class ST_CC(enum.IntEnum):
 
 class ST_ISCC(enum.IntEnum):
     """
-    SubTypes for ISCC-Codes
+    ### ST_ISCC
+
+    SubTypes for `MT.ISCC`
+
+    | Uint | Symbol   | Bits | Purpose                                                 |
+    |----- |:---------|------|---------------------------------------------------------|
+    | 0    | TEXT     | 0000 | Composite ISCC inlcuding Text-Code                      |
+    | 1    | IMAGE    | 0001 | Composite ISCC inlcuding Image-Code                     |
+    | 2    | AUDIO    | 0010 | Composite ISCC inlcuding Audio-Code                     |
+    | 3    | VIDEO    | 0011 | Composite ISCC inlcuding Video-Code                     |
+    | 4    | MIXED    | 0100 | Composite ISCC inlcuding Mixed-Code                     |
+    | 4    | SUM      | 0101 | Composite ISCC inlcuding only Data- and Instance-Code   |
     """
 
     TEXT = 0
@@ -73,7 +112,17 @@ class ST_ISCC(enum.IntEnum):
 
 
 class ST_ID(enum.IntEnum):
-    """SubTypes for ISCC-IDs"""
+    """
+    ### ST_ID
+
+    SubTypes for `MT.ID`
+
+    | Uint | Symbol   | Bits | Purpose                                                 |
+    |----- |:---------|------|---------------------------------------------------------|
+    | 0    | PRIVATE  | 0000 | ISCC-ID minted via private repository (not unique)      |
+    | 1    | BITCOIN  | 0001 | ISCC-ID minted via Bitcoin mainchain                    |
+    | 2    | ETHEREUM | 0010 | ISCC-ID minted via Ethereum mainchain                   |
+    """
 
     PRIVATE = 0
     BITCOIN = 1
@@ -81,19 +130,45 @@ class ST_ID(enum.IntEnum):
 
 
 class VS(enum.IntEnum):
-    """ISCC code Versions"""
+    """
+    ## VS - Version
+
+    Code Version
+
+    | Uint | Symbol   | Bits | Purpose                                                 |
+    |----- |:---------|------|---------------------------------------------------------|
+    | 0    | V0       | 0000 | Initial Version of Code without breaking changes        |
+
+    """
 
     V0 = 0
 
 
 class LN(enum.IntEnum):
     """
-    ISCC length in bits
+    ## LN - Length
+
+    length of hash digest
+
+    | Uint | Symbol   | Bits | Purpose             |
+    |----- |:---------|------|---------------------|
+    | 0    | LN32     | 0000 |  32-bit hash digest |
+    | 1    | LM64     | 0001 |  64-bit hash digest |
+    | 2    | LN96     | 0010 |  96-bit hash digest |
+    | 3    | LN128    | 0011 | 128-bit hash digest |
+    | 4    | LN160    | 0100 | 160-bit hash digest |
+    | 5    | LN192    | 0101 | 192-bit hash digest |
+    | 6    | LN224    | 0110 | 224-bit hash digest |
+    | 7    | LN256    | 0111 | 256-bit hash digest |
     """
 
     L32 = 32
     L64 = 64
+    L96 = 96
     L128 = 128
+    L160 = 160
+    L192 = 192
+    L224 = 224
     L256 = 256
 
 
@@ -108,31 +183,46 @@ class MULTIBASE(str, enum.Enum):
     base64url = "u"
 
 
-Data = Union[bytes, bytearray, memoryview]
-Stream = Union[BinaryIO, mmap.mmap, BytesIO, BufferedReader]
-IsccTuple = Tuple[
-    Union[int, MT], Union[int, ST, ST_CC, ST_ID], Union[int, VS], Union[int, LN], bytes
-]
-AnyISCC = Union[str, IsccTuple, bytes, "Code"]
-
-
 ########################################################################################
 # Core codec functions                                                                 #
 ########################################################################################
 
 
+def encode_component(mtype, stype, version, length, digest):
+    # type: (MainType, SubType, Version, Length, bytes) -> str
+    """
+    Encode an ISCC component inlcuding header and body with standard base32 encoding.
+
+    !!! note
+        If `digest` has more bits than specified by `length` it wil be truncated.
+
+    :param MainType mtype: Maintype of component (0-6)
+    :param SubType stype: SubType of component depending on MainType (0-5)
+    :param Version version: Version of component algorithm (0).
+    :param length length: Length of component in number of bits (multiple of 32)
+    :param bytes digest: The hash digest of the component.
+    :return: Base32 encoded component code.
+    :rtype: str
+    """
+    nbytes = length // 8
+    header = write_header(mtype, stype, version, length)
+    body = digest[:nbytes]
+    component_code = encode_base32(header + body)
+    return component_code
+
+
 def write_header(mtype, stype, version=0, length=64):
-    # type: (int, int, int, int) -> bytes
+    # type: (MainType, SubType, Version, Length) -> bytes
     """
     Encodes header values with nibble-sized (4-bit) variable-length encoding.
     The result is minimum 2 and maximum 8 bytes long. If the final count of nibbles
     is uneven it is padded with 4-bit `0000` at the end.
 
-    :param int mtype: Main-type of component.
-    :param int stype: Sub-type of component.
-    :param int version: Version of component algorithm.
-    :param int length: Length of component in number of bits (multiple of 32)
-    :return: Byte encoded ISCC header.
+    :param MainType mtype: Main-type of component.
+    :param SubType stype: Sub-type of component.
+    :param Version version: Version of component algorithm.
+    :param Length length: Length of component in number of bits (multiple of 32)
+    :return: Varnibble stream encoded ISCC header as bytes.
     :rtype: bytes
 
     """
@@ -152,12 +242,44 @@ def write_header(mtype, stype, version=0, length=64):
     return header.tobytes()
 
 
+def write_varnibble(n):
+    # type: (int) -> bitarray
+    """
+    Writes integer to variable length sequence of 4-bit chunks.
+
+    Variable-length encoding scheme:
+
+    ------------------------------------------------------
+    | prefix bits | nibbles | data bits | unsigned range |
+    | ----------- | ------- | --------- | -------------- |
+    | 0           | 1       | 3         | 0 - 7          |
+    | 10          | 2       | 6         | 8 - 71         |
+    | 110         | 3       | 9         | 72 - 583       |
+    | 1110        | 4       | 12        | 584 - 4679     |
+
+    :param int n: Positive integer to be encoded as varnibble (0-4679)
+    :return: Varnibble encoded integera
+    :rtype: bitarray
+    """
+    if 0 <= n < 8:
+        return int2ba(n, length=4)
+    elif 8 <= n < 72:
+        return bitarray("10") + int2ba(n - 8, length=6)
+    elif 72 <= n < 584:
+        return bitarray("110") + int2ba(n - 72, length=9)
+    elif 584 <= n < 4680:
+        return bitarray("1110") + int2ba(n - 584, length=12)
+    else:
+        raise ValueError("Value must be between 0 and 4679")
+
+
 def read_header(data):
-    # type: (bytes) -> Tuple[int, int, int, int, bytes]
+    # type: (bytes) -> IsccTuple
     """
     Decodes varnibble encoded header and returns it together with hash bytes.
     :param bytes data: ISCC bytes digest
-    :return: (type, subtype, version, length, hash bytes)
+    :return: (MainType, SubType, Version, length, HashDigest)
+    :rtype: IsccTuple
     """
     result = []
     ba = bitarray()
@@ -186,6 +308,24 @@ def read_header(data):
     result.append(data.tobytes())
 
     return tuple(result)
+
+
+def read_varnibble(b):
+    # type: (bitarray) -> Tuple[int, bitarray]
+    """Reads first varnibble, returns its integer value and remaining bits."""
+
+    bits = len(b)
+
+    if bits >= 4 and b[0] == 0:
+        return ba2int(b[:4]), b[4:]
+    if bits >= 8 and b[1] == 0:
+        return ba2int(b[2:8]) + 8, b[8:]
+    if bits >= 12 and b[2] == 0:
+        return ba2int(b[3:12]) + 72, b[12:]
+    if bits >= 16 and b[3] == 0:
+        return ba2int(b[4:16]) + 584, b[16:]
+
+    raise ValueError("Invalid bitarray")
 
 
 def encode_base32(data):
@@ -226,7 +366,7 @@ def decode_base64(code: str) -> bytes:
 
 
 def decompose(iscc_code):
-    # type: (str) -> List[str]
+    # type: (str) -> list[str]
     """Decompose a multi-component ISCC into a list of singular componet codes."""
 
     iscc_code = clean(iscc_code)
@@ -277,16 +417,30 @@ def normalize(iscc_code):
     """
     Normalize an ISCC to its canonical form.
 
+    The canonical form of an ISCC is its shortest base32 encoded representation
+    prefixed with the string `ISCC:`.
+
+    !!! info
+        A concatenated sequence of codes will be composed ino a single ISCC of MainType
+        `MT.ISCC` if possible.
+
+    !!! example
+        ``` py
+        >>> import iscc_core
+        >>> iscc_core.normalize("GAAW2PRCRS5LNVZV-IAAUVACQKXE3V44W")
+        ISCC:KUBW2PRCRS5LNVZVJKAFAVOJXLZZM
+        ```
+
     :param str iscc_code: Any valid ISCC string
     :return: Normalized ISCC
     :rtype: str
     """
 
     decoders = {
-        "f": bytes.fromhex,
-        "b": decode_base32,
-        "z": base58.b58decode,
-        "u": decode_base64,
+        MULTIBASE.base16: bytes.fromhex,
+        MULTIBASE.base32: decode_base32,
+        MULTIBASE.base58btc: base58.b58decode,
+        MULTIBASE.base64url: decode_base64,
     }
 
     # Transcode if <multibase><multicodec> encoded
@@ -302,79 +456,9 @@ def normalize(iscc_code):
     return f"ISCC:{recomposed}"
 
 
-def write_varnibble(n):
-    # type: (int) -> bitarray
-    """
-    Writes integer to variable length sequence of 4-bit chunks.
-    Variable-length encoding scheme:
-    ------------------------------------------------------
-    | prefix bits | nibbles | data bits | unsigned range |
-    | ----------- | ------- | --------- | -------------- |
-    | 0           | 1       | 3         | 0 - 7          |
-    | 10          | 2       | 6         | 8 - 71         |
-    | 110         | 3       | 9         | 72 - 583       |
-    | 1110        | 4       | 12        | 584 - 4679     |
-
-    :param int n: Positive integer to be encoded as varnibble (0-4679)
-    :return: Varnibble encoded integera
-    :rtype: bitarray
-    """
-    if 0 <= n < 8:
-        return int2ba(n, length=4)
-    elif 8 <= n < 72:
-        return bitarray("10") + int2ba(n - 8, length=6)
-    elif 72 <= n < 584:
-        return bitarray("110") + int2ba(n - 72, length=9)
-    elif 584 <= n < 4680:
-        return bitarray("1110") + int2ba(n - 584, length=12)
-    else:
-        raise ValueError("Value must be between 0 and 4679")
-
-
-def read_varnibble(b):
-    # type: (bitarray) -> Tuple[int, bitarray]
-    """Reads first varnibble, returns its integer value and remaining bits."""
-
-    bits = len(b)
-
-    if bits >= 4 and b[0] == 0:
-        return ba2int(b[:4]), b[4:]
-    if bits >= 8 and b[1] == 0:
-        return ba2int(b[2:8]) + 8, b[8:]
-    if bits >= 12 and b[2] == 0:
-        return ba2int(b[3:12]) + 72, b[12:]
-    if bits >= 16 and b[3] == 0:
-        return ba2int(b[4:16]) + 584, b[16:]
-
-    raise ValueError("Invalid bitarray")
-
-
 ########################################################################################
 # Convenience functions and classes                                                    #
 ########################################################################################
-
-
-def encode_component(mtype, stype, version, length, digest):
-    # type: (int, int, int, int, bytes) -> str
-    """
-    Encode a ISCC component inlcuding header and body with standard base32 encoding.
-
-    !!! note
-        If `digest` has more bits than specified by `length` it wil be truncated.
-
-    :param int mtype: Main-type of component.
-    :param int stype: Sub-type of component.
-    :param int version: Version of component algorithm.
-    :param int length: Length of component in number of bits (multiple of 32)
-    :param bytes digest: The hash digest of the component.
-    :return: Base32 encoded component code.
-    :rtype: str
-    """
-    nbytes = length // 8
-    header = write_header(mtype, stype, version, length)
-    body = digest[:nbytes]
-    component_code = encode_base32(header + body)
-    return component_code
 
 
 def clean(iscc):
@@ -393,7 +477,7 @@ class Code:
     mc_prefix: bytes = b"\xcc\x01"
 
     def __init__(self, code):
-        # type: (AnyISCC) -> None
+        # type: (IsccAny) -> None
         """
         Initialize a Code object from any kind of representation of an ISCC.
 
@@ -493,7 +577,7 @@ class Code:
         return self._body.to01()
 
     @property
-    def hash_ints(self) -> List[int]:
+    def hash_ints(self) -> list[int]:
         """List of 0,1 integers representing the bits of the code (without header)."""
         return self._body.tolist(True)
 
