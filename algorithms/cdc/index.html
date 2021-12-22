@@ -938,8 +938,8 @@
 
       <p>A generator that yields data-dependent chunks for <code>data</code>.</p>
 <p>Usage Example:</p>
-<div class="highlight"><pre><span></span><code><span class="k">for</span> <span class="n">chunk</span> <span class="ow">in</span> <span class="n">data_chunks</span><span class="p">(</span><span class="n">data</span><span class="p">):</span>
-    <span class="nb">hash</span><span class="p">(</span><span class="n">chunk</span><span class="p">)</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1"></a><span class="k">for</span> <span class="n">chunk</span> <span class="ow">in</span> <span class="n">data_chunks</span><span class="p">(</span><span class="n">data</span><span class="p">):</span>
+<a id="__codelineno-0-2" name="__codelineno-0-2"></a>    <span class="nb">hash</span><span class="p">(</span><span class="n">chunk</span><span class="p">)</span>
 </code></pre></div>
 
 <p><strong>Parameters:</strong></p>
@@ -990,44 +990,44 @@
 </table>
         <details class="quote">
           <summary>Source code in <code>iscc_core\cdc.py</code></summary>
-          <div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">data_chunks</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">utf32</span><span class="p">,</span> <span class="n">avg_chunk_size</span><span class="o">=</span><span class="n">core_opts</span><span class="o">.</span><span class="n">data_avg_chunk_size</span><span class="p">):</span>
-    <span class="c1"># type: (Data, bool, int) -&gt; Generator[bytes, None, None]</span>
-    <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    A generator that yields data-dependent chunks for `data`.</span>
-
-<span class="sd">    Usage Example:</span>
-
-<span class="sd">    ```python</span>
-<span class="sd">    for chunk in data_chunks(data):</span>
-<span class="sd">        hash(chunk)</span>
-<span class="sd">    ```</span>
-
-<span class="sd">    :param bytes data: Raw data for variable sized chunking.</span>
-<span class="sd">    :param bool utf32: If true assume we are chunking text that is utf32 encoded.</span>
-<span class="sd">    :param int avg_chunk_size: Target chunk size in number of bytes.</span>
-<span class="sd">    :return: A generator that yields data chunks of variable sizes.</span>
-<span class="sd">    :rtype: Generator[bytes]</span>
-<span class="sd">    &quot;&quot;&quot;</span>
-
-    <span class="n">stream</span> <span class="o">=</span> <span class="n">io</span><span class="o">.</span><span class="n">BytesIO</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
-    <span class="n">buffer</span> <span class="o">=</span> <span class="n">stream</span><span class="o">.</span><span class="n">read</span><span class="p">(</span><span class="n">core_opts</span><span class="o">.</span><span class="n">io_read_size</span><span class="p">)</span>
-    <span class="k">if</span> <span class="ow">not</span> <span class="n">buffer</span><span class="p">:</span>
-        <span class="k">yield</span> <span class="sa">b</span><span class="s2">&quot;&quot;</span>
-
-    <span class="n">mi</span><span class="p">,</span> <span class="n">ma</span><span class="p">,</span> <span class="n">cs</span><span class="p">,</span> <span class="n">mask_s</span><span class="p">,</span> <span class="n">mask_l</span> <span class="o">=</span> <span class="n">get_params</span><span class="p">(</span><span class="n">avg_chunk_size</span><span class="p">)</span>
-
-    <span class="n">buffer</span> <span class="o">=</span> <span class="nb">memoryview</span><span class="p">(</span><span class="n">buffer</span><span class="p">)</span>
-    <span class="k">while</span> <span class="n">buffer</span><span class="p">:</span>
-        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">buffer</span><span class="p">)</span> <span class="o">&lt;=</span> <span class="n">ma</span><span class="p">:</span>
-            <span class="n">buffer</span> <span class="o">=</span> <span class="nb">memoryview</span><span class="p">(</span><span class="nb">bytes</span><span class="p">(</span><span class="n">buffer</span><span class="p">)</span> <span class="o">+</span> <span class="n">stream</span><span class="o">.</span><span class="n">read</span><span class="p">(</span><span class="n">core_opts</span><span class="o">.</span><span class="n">io_read_size</span><span class="p">))</span>
-        <span class="n">cut_point</span> <span class="o">=</span> <span class="n">cdc_offset</span><span class="p">(</span><span class="n">buffer</span><span class="p">,</span> <span class="n">mi</span><span class="p">,</span> <span class="n">ma</span><span class="p">,</span> <span class="n">cs</span><span class="p">,</span> <span class="n">mask_s</span><span class="p">,</span> <span class="n">mask_l</span><span class="p">)</span>
-
-        <span class="c1"># Make sure cut points are at 4-byte aligned for utf32 encoded text</span>
-        <span class="k">if</span> <span class="n">utf32</span><span class="p">:</span>
-            <span class="n">cut_point</span> <span class="o">-=</span> <span class="n">cut_point</span> <span class="o">%</span> <span class="mi">4</span>
-
-        <span class="k">yield</span> <span class="nb">bytes</span><span class="p">(</span><span class="n">buffer</span><span class="p">[:</span><span class="n">cut_point</span><span class="p">])</span>
-        <span class="n">buffer</span> <span class="o">=</span> <span class="n">buffer</span><span class="p">[</span><span class="n">cut_point</span><span class="p">:]</span>
+          <div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1"></a><span class="k">def</span> <span class="nf">data_chunks</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">utf32</span><span class="p">,</span> <span class="n">avg_chunk_size</span><span class="o">=</span><span class="n">core_opts</span><span class="o">.</span><span class="n">data_avg_chunk_size</span><span class="p">):</span>
+<a id="__codelineno-0-2" name="__codelineno-0-2"></a>    <span class="c1"># type: (Data, bool, int) -&gt; Generator[bytes, None, None]</span>
+<a id="__codelineno-0-3" name="__codelineno-0-3"></a>    <span class="sd">&quot;&quot;&quot;</span>
+<a id="__codelineno-0-4" name="__codelineno-0-4"></a><span class="sd">    A generator that yields data-dependent chunks for `data`.</span>
+<a id="__codelineno-0-5" name="__codelineno-0-5"></a>
+<a id="__codelineno-0-6" name="__codelineno-0-6"></a><span class="sd">    Usage Example:</span>
+<a id="__codelineno-0-7" name="__codelineno-0-7"></a>
+<a id="__codelineno-0-8" name="__codelineno-0-8"></a><span class="sd">    ```python</span>
+<a id="__codelineno-0-9" name="__codelineno-0-9"></a><span class="sd">    for chunk in data_chunks(data):</span>
+<a id="__codelineno-0-10" name="__codelineno-0-10"></a><span class="sd">        hash(chunk)</span>
+<a id="__codelineno-0-11" name="__codelineno-0-11"></a><span class="sd">    ```</span>
+<a id="__codelineno-0-12" name="__codelineno-0-12"></a>
+<a id="__codelineno-0-13" name="__codelineno-0-13"></a><span class="sd">    :param bytes data: Raw data for variable sized chunking.</span>
+<a id="__codelineno-0-14" name="__codelineno-0-14"></a><span class="sd">    :param bool utf32: If true assume we are chunking text that is utf32 encoded.</span>
+<a id="__codelineno-0-15" name="__codelineno-0-15"></a><span class="sd">    :param int avg_chunk_size: Target chunk size in number of bytes.</span>
+<a id="__codelineno-0-16" name="__codelineno-0-16"></a><span class="sd">    :return: A generator that yields data chunks of variable sizes.</span>
+<a id="__codelineno-0-17" name="__codelineno-0-17"></a><span class="sd">    :rtype: Generator[bytes]</span>
+<a id="__codelineno-0-18" name="__codelineno-0-18"></a><span class="sd">    &quot;&quot;&quot;</span>
+<a id="__codelineno-0-19" name="__codelineno-0-19"></a>
+<a id="__codelineno-0-20" name="__codelineno-0-20"></a>    <span class="n">stream</span> <span class="o">=</span> <span class="n">io</span><span class="o">.</span><span class="n">BytesIO</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+<a id="__codelineno-0-21" name="__codelineno-0-21"></a>    <span class="n">buffer</span> <span class="o">=</span> <span class="n">stream</span><span class="o">.</span><span class="n">read</span><span class="p">(</span><span class="n">core_opts</span><span class="o">.</span><span class="n">io_read_size</span><span class="p">)</span>
+<a id="__codelineno-0-22" name="__codelineno-0-22"></a>    <span class="k">if</span> <span class="ow">not</span> <span class="n">buffer</span><span class="p">:</span>
+<a id="__codelineno-0-23" name="__codelineno-0-23"></a>        <span class="k">yield</span> <span class="sa">b</span><span class="s2">&quot;&quot;</span>
+<a id="__codelineno-0-24" name="__codelineno-0-24"></a>
+<a id="__codelineno-0-25" name="__codelineno-0-25"></a>    <span class="n">mi</span><span class="p">,</span> <span class="n">ma</span><span class="p">,</span> <span class="n">cs</span><span class="p">,</span> <span class="n">mask_s</span><span class="p">,</span> <span class="n">mask_l</span> <span class="o">=</span> <span class="n">get_params</span><span class="p">(</span><span class="n">avg_chunk_size</span><span class="p">)</span>
+<a id="__codelineno-0-26" name="__codelineno-0-26"></a>
+<a id="__codelineno-0-27" name="__codelineno-0-27"></a>    <span class="n">buffer</span> <span class="o">=</span> <span class="nb">memoryview</span><span class="p">(</span><span class="n">buffer</span><span class="p">)</span>
+<a id="__codelineno-0-28" name="__codelineno-0-28"></a>    <span class="k">while</span> <span class="n">buffer</span><span class="p">:</span>
+<a id="__codelineno-0-29" name="__codelineno-0-29"></a>        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">buffer</span><span class="p">)</span> <span class="o">&lt;=</span> <span class="n">ma</span><span class="p">:</span>
+<a id="__codelineno-0-30" name="__codelineno-0-30"></a>            <span class="n">buffer</span> <span class="o">=</span> <span class="nb">memoryview</span><span class="p">(</span><span class="nb">bytes</span><span class="p">(</span><span class="n">buffer</span><span class="p">)</span> <span class="o">+</span> <span class="n">stream</span><span class="o">.</span><span class="n">read</span><span class="p">(</span><span class="n">core_opts</span><span class="o">.</span><span class="n">io_read_size</span><span class="p">))</span>
+<a id="__codelineno-0-31" name="__codelineno-0-31"></a>        <span class="n">cut_point</span> <span class="o">=</span> <span class="n">cdc_offset</span><span class="p">(</span><span class="n">buffer</span><span class="p">,</span> <span class="n">mi</span><span class="p">,</span> <span class="n">ma</span><span class="p">,</span> <span class="n">cs</span><span class="p">,</span> <span class="n">mask_s</span><span class="p">,</span> <span class="n">mask_l</span><span class="p">)</span>
+<a id="__codelineno-0-32" name="__codelineno-0-32"></a>
+<a id="__codelineno-0-33" name="__codelineno-0-33"></a>        <span class="c1"># Make sure cut points are at 4-byte aligned for utf32 encoded text</span>
+<a id="__codelineno-0-34" name="__codelineno-0-34"></a>        <span class="k">if</span> <span class="n">utf32</span><span class="p">:</span>
+<a id="__codelineno-0-35" name="__codelineno-0-35"></a>            <span class="n">cut_point</span> <span class="o">-=</span> <span class="n">cut_point</span> <span class="o">%</span> <span class="mi">4</span>
+<a id="__codelineno-0-36" name="__codelineno-0-36"></a>
+<a id="__codelineno-0-37" name="__codelineno-0-37"></a>        <span class="k">yield</span> <span class="nb">bytes</span><span class="p">(</span><span class="n">buffer</span><span class="p">[:</span><span class="n">cut_point</span><span class="p">])</span>
+<a id="__codelineno-0-38" name="__codelineno-0-38"></a>        <span class="n">buffer</span> <span class="o">=</span> <span class="n">buffer</span><span class="p">[</span><span class="n">cut_point</span><span class="p">:]</span>
 </code></pre></div>
         </details>
     </div>
@@ -1118,37 +1118,37 @@
 </table>
         <details class="quote">
           <summary>Source code in <code>iscc_core\cdc.py</code></summary>
-          <div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">cdc_offset</span><span class="p">(</span><span class="n">buffer</span><span class="p">,</span> <span class="n">mi</span><span class="p">,</span> <span class="n">ma</span><span class="p">,</span> <span class="n">cs</span><span class="p">,</span> <span class="n">mask_s</span><span class="p">,</span> <span class="n">mask_l</span><span class="p">):</span>
-    <span class="c1"># type: (Data, int, int, int, int, int) -&gt; int</span>
-    <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Find breakpoint offset for a given buffer.</span>
-
-<span class="sd">    :param Data buffer: The data to be chunked.</span>
-<span class="sd">    :param int mi: Minimum chunk size.</span>
-<span class="sd">    :param int ma: Maximung chunk size.</span>
-<span class="sd">    :param int cs: Center size.</span>
-<span class="sd">    :param int mask_s: Small mask.</span>
-<span class="sd">    :param int mask_l: Large mask.</span>
-<span class="sd">    :return: Offset of dynamic cutpoint in number of bytes.</span>
-<span class="sd">    :rtype: int</span>
-<span class="sd">    &quot;&quot;&quot;</span>
-
-    <span class="n">pattern</span> <span class="o">=</span> <span class="mi">0</span>
-    <span class="n">i</span> <span class="o">=</span> <span class="n">mi</span>
-    <span class="n">size</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">buffer</span><span class="p">)</span>
-    <span class="n">barrier</span> <span class="o">=</span> <span class="nb">min</span><span class="p">(</span><span class="n">cs</span><span class="p">,</span> <span class="n">size</span><span class="p">)</span>
-    <span class="k">while</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">barrier</span><span class="p">:</span>
-        <span class="n">pattern</span> <span class="o">=</span> <span class="p">(</span><span class="n">pattern</span> <span class="o">&gt;&gt;</span> <span class="mi">1</span><span class="p">)</span> <span class="o">+</span> <span class="n">core_opts</span><span class="o">.</span><span class="n">cdc_gear</span><span class="p">[</span><span class="n">buffer</span><span class="p">[</span><span class="n">i</span><span class="p">]]</span>
-        <span class="k">if</span> <span class="ow">not</span> <span class="n">pattern</span> <span class="o">&amp;</span> <span class="n">mask_s</span><span class="p">:</span>
-            <span class="k">return</span> <span class="n">i</span> <span class="o">+</span> <span class="mi">1</span>
-        <span class="n">i</span> <span class="o">+=</span> <span class="mi">1</span>
-    <span class="n">barrier</span> <span class="o">=</span> <span class="nb">min</span><span class="p">(</span><span class="n">ma</span><span class="p">,</span> <span class="n">size</span><span class="p">)</span>
-    <span class="k">while</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">barrier</span><span class="p">:</span>
-        <span class="n">pattern</span> <span class="o">=</span> <span class="p">(</span><span class="n">pattern</span> <span class="o">&gt;&gt;</span> <span class="mi">1</span><span class="p">)</span> <span class="o">+</span> <span class="n">core_opts</span><span class="o">.</span><span class="n">cdc_gear</span><span class="p">[</span><span class="n">buffer</span><span class="p">[</span><span class="n">i</span><span class="p">]]</span>
-        <span class="k">if</span> <span class="ow">not</span> <span class="n">pattern</span> <span class="o">&amp;</span> <span class="n">mask_l</span><span class="p">:</span>
-            <span class="k">return</span> <span class="n">i</span> <span class="o">+</span> <span class="mi">1</span>
-        <span class="n">i</span> <span class="o">+=</span> <span class="mi">1</span>
-    <span class="k">return</span> <span class="n">i</span>
+          <div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1"></a><span class="k">def</span> <span class="nf">cdc_offset</span><span class="p">(</span><span class="n">buffer</span><span class="p">,</span> <span class="n">mi</span><span class="p">,</span> <span class="n">ma</span><span class="p">,</span> <span class="n">cs</span><span class="p">,</span> <span class="n">mask_s</span><span class="p">,</span> <span class="n">mask_l</span><span class="p">):</span>
+<a id="__codelineno-0-2" name="__codelineno-0-2"></a>    <span class="c1"># type: (Data, int, int, int, int, int) -&gt; int</span>
+<a id="__codelineno-0-3" name="__codelineno-0-3"></a>    <span class="sd">&quot;&quot;&quot;</span>
+<a id="__codelineno-0-4" name="__codelineno-0-4"></a><span class="sd">    Find breakpoint offset for a given buffer.</span>
+<a id="__codelineno-0-5" name="__codelineno-0-5"></a>
+<a id="__codelineno-0-6" name="__codelineno-0-6"></a><span class="sd">    :param Data buffer: The data to be chunked.</span>
+<a id="__codelineno-0-7" name="__codelineno-0-7"></a><span class="sd">    :param int mi: Minimum chunk size.</span>
+<a id="__codelineno-0-8" name="__codelineno-0-8"></a><span class="sd">    :param int ma: Maximung chunk size.</span>
+<a id="__codelineno-0-9" name="__codelineno-0-9"></a><span class="sd">    :param int cs: Center size.</span>
+<a id="__codelineno-0-10" name="__codelineno-0-10"></a><span class="sd">    :param int mask_s: Small mask.</span>
+<a id="__codelineno-0-11" name="__codelineno-0-11"></a><span class="sd">    :param int mask_l: Large mask.</span>
+<a id="__codelineno-0-12" name="__codelineno-0-12"></a><span class="sd">    :return: Offset of dynamic cutpoint in number of bytes.</span>
+<a id="__codelineno-0-13" name="__codelineno-0-13"></a><span class="sd">    :rtype: int</span>
+<a id="__codelineno-0-14" name="__codelineno-0-14"></a><span class="sd">    &quot;&quot;&quot;</span>
+<a id="__codelineno-0-15" name="__codelineno-0-15"></a>
+<a id="__codelineno-0-16" name="__codelineno-0-16"></a>    <span class="n">pattern</span> <span class="o">=</span> <span class="mi">0</span>
+<a id="__codelineno-0-17" name="__codelineno-0-17"></a>    <span class="n">i</span> <span class="o">=</span> <span class="n">mi</span>
+<a id="__codelineno-0-18" name="__codelineno-0-18"></a>    <span class="n">size</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">buffer</span><span class="p">)</span>
+<a id="__codelineno-0-19" name="__codelineno-0-19"></a>    <span class="n">barrier</span> <span class="o">=</span> <span class="nb">min</span><span class="p">(</span><span class="n">cs</span><span class="p">,</span> <span class="n">size</span><span class="p">)</span>
+<a id="__codelineno-0-20" name="__codelineno-0-20"></a>    <span class="k">while</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">barrier</span><span class="p">:</span>
+<a id="__codelineno-0-21" name="__codelineno-0-21"></a>        <span class="n">pattern</span> <span class="o">=</span> <span class="p">(</span><span class="n">pattern</span> <span class="o">&gt;&gt;</span> <span class="mi">1</span><span class="p">)</span> <span class="o">+</span> <span class="n">core_opts</span><span class="o">.</span><span class="n">cdc_gear</span><span class="p">[</span><span class="n">buffer</span><span class="p">[</span><span class="n">i</span><span class="p">]]</span>
+<a id="__codelineno-0-22" name="__codelineno-0-22"></a>        <span class="k">if</span> <span class="ow">not</span> <span class="n">pattern</span> <span class="o">&amp;</span> <span class="n">mask_s</span><span class="p">:</span>
+<a id="__codelineno-0-23" name="__codelineno-0-23"></a>            <span class="k">return</span> <span class="n">i</span> <span class="o">+</span> <span class="mi">1</span>
+<a id="__codelineno-0-24" name="__codelineno-0-24"></a>        <span class="n">i</span> <span class="o">+=</span> <span class="mi">1</span>
+<a id="__codelineno-0-25" name="__codelineno-0-25"></a>    <span class="n">barrier</span> <span class="o">=</span> <span class="nb">min</span><span class="p">(</span><span class="n">ma</span><span class="p">,</span> <span class="n">size</span><span class="p">)</span>
+<a id="__codelineno-0-26" name="__codelineno-0-26"></a>    <span class="k">while</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">barrier</span><span class="p">:</span>
+<a id="__codelineno-0-27" name="__codelineno-0-27"></a>        <span class="n">pattern</span> <span class="o">=</span> <span class="p">(</span><span class="n">pattern</span> <span class="o">&gt;&gt;</span> <span class="mi">1</span><span class="p">)</span> <span class="o">+</span> <span class="n">core_opts</span><span class="o">.</span><span class="n">cdc_gear</span><span class="p">[</span><span class="n">buffer</span><span class="p">[</span><span class="n">i</span><span class="p">]]</span>
+<a id="__codelineno-0-28" name="__codelineno-0-28"></a>        <span class="k">if</span> <span class="ow">not</span> <span class="n">pattern</span> <span class="o">&amp;</span> <span class="n">mask_l</span><span class="p">:</span>
+<a id="__codelineno-0-29" name="__codelineno-0-29"></a>            <span class="k">return</span> <span class="n">i</span> <span class="o">+</span> <span class="mi">1</span>
+<a id="__codelineno-0-30" name="__codelineno-0-30"></a>        <span class="n">i</span> <span class="o">+=</span> <span class="mi">1</span>
+<a id="__codelineno-0-31" name="__codelineno-0-31"></a>    <span class="k">return</span> <span class="n">i</span>
 </code></pre></div>
         </details>
     </div>
@@ -1209,23 +1209,23 @@
 </table>
         <details class="quote">
           <summary>Source code in <code>iscc_core\cdc.py</code></summary>
-          <div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">get_params</span><span class="p">(</span><span class="n">avg_size</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">tuple</span><span class="p">:</span>
-    <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Calculate CDC parameters</span>
-
-<span class="sd">    :param int avg_size: Target average size of chunks in number of bytes.</span>
-<span class="sd">    :returns: Tuple of (min_size, max_size, center_size, mask_s, mask_l).</span>
-<span class="sd">    &quot;&quot;&quot;</span>
-    <span class="n">ceil_div</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">:</span> <span class="p">(</span><span class="n">x</span> <span class="o">+</span> <span class="n">y</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span> <span class="o">//</span> <span class="n">y</span>
-    <span class="n">mask</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">b</span><span class="p">:</span> <span class="mi">2</span> <span class="o">**</span> <span class="n">b</span> <span class="o">-</span> <span class="mi">1</span>
-    <span class="n">min_size</span> <span class="o">=</span> <span class="n">avg_size</span> <span class="o">//</span> <span class="mi">4</span>
-    <span class="n">max_size</span> <span class="o">=</span> <span class="n">avg_size</span> <span class="o">*</span> <span class="mi">8</span>
-    <span class="n">offset</span> <span class="o">=</span> <span class="n">min_size</span> <span class="o">+</span> <span class="n">ceil_div</span><span class="p">(</span><span class="n">min_size</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
-    <span class="n">center_size</span> <span class="o">=</span> <span class="n">avg_size</span> <span class="o">-</span> <span class="n">offset</span>
-    <span class="n">bits</span> <span class="o">=</span> <span class="nb">round</span><span class="p">(</span><span class="n">log2</span><span class="p">(</span><span class="n">avg_size</span><span class="p">))</span>
-    <span class="n">mask_s</span> <span class="o">=</span> <span class="n">mask</span><span class="p">(</span><span class="n">bits</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>
-    <span class="n">mask_l</span> <span class="o">=</span> <span class="n">mask</span><span class="p">(</span><span class="n">bits</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span>
-    <span class="k">return</span> <span class="n">min_size</span><span class="p">,</span> <span class="n">max_size</span><span class="p">,</span> <span class="n">center_size</span><span class="p">,</span> <span class="n">mask_s</span><span class="p">,</span> <span class="n">mask_l</span>
+          <div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1"></a><span class="k">def</span> <span class="nf">get_params</span><span class="p">(</span><span class="n">avg_size</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">tuple</span><span class="p">:</span>
+<a id="__codelineno-0-2" name="__codelineno-0-2"></a>    <span class="sd">&quot;&quot;&quot;</span>
+<a id="__codelineno-0-3" name="__codelineno-0-3"></a><span class="sd">    Calculate CDC parameters</span>
+<a id="__codelineno-0-4" name="__codelineno-0-4"></a>
+<a id="__codelineno-0-5" name="__codelineno-0-5"></a><span class="sd">    :param int avg_size: Target average size of chunks in number of bytes.</span>
+<a id="__codelineno-0-6" name="__codelineno-0-6"></a><span class="sd">    :returns: Tuple of (min_size, max_size, center_size, mask_s, mask_l).</span>
+<a id="__codelineno-0-7" name="__codelineno-0-7"></a><span class="sd">    &quot;&quot;&quot;</span>
+<a id="__codelineno-0-8" name="__codelineno-0-8"></a>    <span class="n">ceil_div</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">:</span> <span class="p">(</span><span class="n">x</span> <span class="o">+</span> <span class="n">y</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span> <span class="o">//</span> <span class="n">y</span>
+<a id="__codelineno-0-9" name="__codelineno-0-9"></a>    <span class="n">mask</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">b</span><span class="p">:</span> <span class="mi">2</span> <span class="o">**</span> <span class="n">b</span> <span class="o">-</span> <span class="mi">1</span>
+<a id="__codelineno-0-10" name="__codelineno-0-10"></a>    <span class="n">min_size</span> <span class="o">=</span> <span class="n">avg_size</span> <span class="o">//</span> <span class="mi">4</span>
+<a id="__codelineno-0-11" name="__codelineno-0-11"></a>    <span class="n">max_size</span> <span class="o">=</span> <span class="n">avg_size</span> <span class="o">*</span> <span class="mi">8</span>
+<a id="__codelineno-0-12" name="__codelineno-0-12"></a>    <span class="n">offset</span> <span class="o">=</span> <span class="n">min_size</span> <span class="o">+</span> <span class="n">ceil_div</span><span class="p">(</span><span class="n">min_size</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
+<a id="__codelineno-0-13" name="__codelineno-0-13"></a>    <span class="n">center_size</span> <span class="o">=</span> <span class="n">avg_size</span> <span class="o">-</span> <span class="n">offset</span>
+<a id="__codelineno-0-14" name="__codelineno-0-14"></a>    <span class="n">bits</span> <span class="o">=</span> <span class="nb">round</span><span class="p">(</span><span class="n">log2</span><span class="p">(</span><span class="n">avg_size</span><span class="p">))</span>
+<a id="__codelineno-0-15" name="__codelineno-0-15"></a>    <span class="n">mask_s</span> <span class="o">=</span> <span class="n">mask</span><span class="p">(</span><span class="n">bits</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>
+<a id="__codelineno-0-16" name="__codelineno-0-16"></a>    <span class="n">mask_l</span> <span class="o">=</span> <span class="n">mask</span><span class="p">(</span><span class="n">bits</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span>
+<a id="__codelineno-0-17" name="__codelineno-0-17"></a>    <span class="k">return</span> <span class="n">min_size</span><span class="p">,</span> <span class="n">max_size</span><span class="p">,</span> <span class="n">center_size</span><span class="p">,</span> <span class="n">mask_s</span><span class="p">,</span> <span class="n">mask_l</span>
 </code></pre></div>
         </details>
     </div>
