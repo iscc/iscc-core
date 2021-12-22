@@ -334,9 +334,15 @@ normalize:
     test_normalize_iscc_id_scheme_mixed:
         inputs:
             - "Iscc:Maagztfqttvizpjr"
+    test_normalize_mf_base16_single:
+        inputs:
+            - "fcc010001657fe7cafe9791bb"
     test_normalize_mf_base32_single:
         inputs:
             - "bzqaqaai35i25crx2mvpa"
+    test_normalize_mf_base58btc_single:
+        inputs:
+            - "z4rHVQUUrBJhyW2Hqs"
     test_normalize_mf_base64_url_single:
         inputs:
             - "uzAEAARvqNdFG-mVe"

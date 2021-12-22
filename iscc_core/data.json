@@ -800,11 +800,23 @@
       ],
       "outputs": "ISCC:MAAGZTFQTTVIZPJR"
     },
+    "test_normalize_mf_base16_single": {
+      "inputs": [
+        "fcc010001657fe7cafe9791bb"
+      ],
+      "outputs": "ISCC:AAAWK77HZL7JPEN3"
+    },
     "test_normalize_mf_base32_single": {
       "inputs": [
         "bzqaqaai35i25crx2mvpa"
       ],
       "outputs": "ISCC:AAARX2RV2FDPUZK6"
+    },
+    "test_normalize_mf_base58btc_single": {
+      "inputs": [
+        "z4rHVQUUrBJhyW2Hqs"
+      ],
+      "outputs": "ISCC:AAASO77HR4FFOEOK"
     },
     "test_normalize_mf_base64_url_single": {
       "inputs": [

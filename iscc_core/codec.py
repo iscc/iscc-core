@@ -12,6 +12,7 @@ from io import BufferedReader, BytesIO
 from os import urandom
 from random import choice
 from typing import BinaryIO, List, Tuple, Union
+import base58
 from bitarray import bitarray, frozenbitarray
 from bitarray.util import ba2hex, int2ba, ba2int, count_xor
 from base64 import b32encode, b32decode
@@ -98,10 +99,12 @@ class LN(enum.IntEnum):
 
 class MULTIBASE(str, enum.Enum):
     """
-    Multibase encodings
+    Supported Multibase encodings
     """
 
+    base16 = "f"
     base32 = "b"
+    base58btc = "z"
     base64url = "u"
 
 
@@ -278,12 +281,18 @@ def normalize(iscc_code):
     :return: Normalized ISCC
     :rtype: str
     """
-    # Unpack if multibase - multiformats encoded
-    if iscc_code.startswith("b"):
-        decoded = decode_base32(iscc_code.lstrip("b"))
-        iscc_code = encode_base32(decoded.lstrip(Code.mc_prefix))
-    if iscc_code.startswith("u"):
-        decoded = decode_base64(iscc_code.lstrip("u"))
+
+    decoders = {
+        "f": bytes.fromhex,
+        "b": decode_base32,
+        "z": base58.b58decode,
+        "u": decode_base64,
+    }
+
+    # Transcode if <multibase><multicodec> encoded
+    prefix = iscc_code[0]
+    if prefix in decoders.keys():
+        decoded = decoders[prefix](iscc_code.lstrip(prefix))
         iscc_code = encode_base32(decoded.lstrip(Code.mc_prefix))
 
     decomposed = decompose(iscc_code)
@@ -564,12 +573,22 @@ class Code:
         return self.mc_prefix + self.bytes
 
     @property
-    def mf_base32(self):
+    def mf_base16(self) -> str:
+        """Multiformats base16 encoded."""
+        return "f" + self.mc_bytes.hex()
+
+    @property
+    def mf_base32(self) -> str:
         """Multiformats base32 encoded."""
         return "b" + encode_base32(self.mc_bytes).lower()
 
     @property
-    def mf_base64url(self):
+    def mf_base58btc(self) -> str:
+        """Multiformats base58btc encoded."""
+        return "z" + base58.b58encode(self.mc_bytes).decode("ascii")
+
+    @property
+    def mf_base64url(self) -> str:
         """Multiformats base64url encoded."""
         return "u" + encode_base64(self.mc_bytes)
 

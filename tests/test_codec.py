@@ -173,16 +173,32 @@ def test_Code_uri():
     assert mco.code_obj.uri == "iscc:aaarfryhmqi6kpp6"
 
 
+def test_Code_mf_base16():
+    mco = ic.gen_meta_code("Hello base16")
+    assert mco.code_obj.code == "AAAWK77HZL7JPEN3"
+    assert mco.code_obj.mf_base16 == "fcc010001657fe7cafe9791bb"
+    assert ic.normalize("fcc010001657fe7cafe9791bb") == "ISCC:AAAWK77HZL7JPEN3"
+
+
 def test_Code_mf_base32():
     mco = ic.gen_meta_code("Hello base32")
     assert mco.code_obj.code == "AAAW277H32PJOVML"
     assert mco.code_obj.mf_base32 == "bzqaqaalnp7t55huxkwfq"
+    assert ic.normalize("bzqaqaalnp7t55huxkwfq") == "ISCC:AAAW277H32PJOVML"
+
+
+def test_Code_mf_base58btc():
+    mco = ic.gen_meta_code("Hello base58btc")
+    assert mco.code_obj.code == "AAASO77HR4FFOEOK"
+    assert mco.code_obj.mf_base58btc == "z4rHVQUUrBJhyW2Hqs"
+    assert ic.normalize("z4rHVQUUrBJhyW2Hqs") == "ISCC:AAASO77HR4FFOEOK"
 
 
 def test_Code_mf_base64url():
     mco = ic.gen_meta_code("This is a base64url encoded Meta-Code")
     assert mco.code_obj.code == "AAARQFT7MCK4LPO7"
     assert mco.code_obj.mf_base64url == "uzAEAARgWf2CVxb3f"
+    assert ic.normalize("uzAEAARgWf2CVxb3f") == "ISCC:AAARQFT7MCK4LPO7"
 
 
 def test_Code_raises():
@@ -377,8 +393,16 @@ def test_normalize_iscc_id_scheme_mixed():
     assert ic.normalize("Iscc:Maagztfqttvizpjr") == "ISCC:MAAGZTFQTTVIZPJR"
 
 
+def test_normalize_mf_base16_single():
+    assert ic.normalize("fcc010001657fe7cafe9791bb") == "ISCC:AAAWK77HZL7JPEN3"
+
+
 def test_normalize_mf_base32_single():
     assert ic.normalize("bzqaqaai35i25crx2mvpa") == "ISCC:AAARX2RV2FDPUZK6"
+
+
+def test_normalize_mf_base58btc_single():
+    assert ic.normalize("z4rHVQUUrBJhyW2Hqs") == "ISCC:AAASO77HR4FFOEOK"
 
 
 def test_normalize_mf_base64_url_single():

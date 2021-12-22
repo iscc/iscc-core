@@ -43,6 +43,7 @@ pybase64 = "*"
 pydantic = {extras = ["dotenv"], version = "^1.8.2"}
 uvarint = "^1.2.0"
 loguru = "^0.5.3"
+base58 = "^2.1.1"
 
 [tool.poetry.extras]
 turbo = ["cython"]
