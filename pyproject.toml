@@ -33,7 +33,7 @@ classifiers=[
 ]
 
 [tool.poetry.dependencies]
-python = ">=3.6.1,<4.0"
+python = ">=3.6.2,<4.0"
 cython = { version = "*", optional = true }
 blake3 = "*"
 xxhash = "*"
@@ -57,6 +57,14 @@ toml = "*"
 PyYAML = "^6.0"
 coverage = "^6.2"
 pytest-cov = "^3.0.0"
+poethepoet = "^0.11.0"
+
+[tool.poe.tasks]
+format = { cmd = "black .", help = "Code style formating with black" }
+gentests = { script = "tests.build_test_data:main", help = "Generate conformance test data" }
+genschema = { script = "tests.build_json_schema:main", help = "Generate iscc json schema" }
+test = { cmd = "pytest --cov=iscc_core --cov-fail-under=100", help = "Run tests with coverage" }
+all = ["gentests", "genschema", "format", "test"]
 
 [build-system]
 requires = ["poetry-core>=1.0.0", "setuptools", "wheel", "cython"]
