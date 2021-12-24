@@ -1,0 +1,106 @@
+{
+  "title": "IsccCode",
+  "description": "A composite ISCC",
+  "type": "object",
+  "properties": {
+    "iscc": {
+      "title": "Iscc",
+      "description": "ISCC in standard encoding.",
+      "type": "string"
+    },
+    "version": {
+      "title": "ISCC Schema Version",
+      "description": "Version of ISCC Metadata Schema (SchemaVer).",
+      "const": "0-0-0",
+      "type": "string"
+    },
+    "title": {
+      "title": "Title",
+      "description": "The title or name of the intangible creation manifested by the identified digital asset",
+      "type": "string"
+    },
+    "extra": {
+      "title": "Extra",
+      "description": "Descriptive, industry-sector or use-case specific metadata (used as immutable input for Meta-Code generation). Any text string (including json or json-ld) indicative of the identity of the referent may be used.",
+      "type": "string"
+    },
+    "filename": {
+      "title": "Filename",
+      "description": "Filename of the referenced digital asset (automatically used as fallback if no seed_title element is specified)",
+      "type": "string"
+    },
+    "filesize": {
+      "title": "Filesize",
+      "description": "File size of media asset in bytes.",
+      "type": "integer"
+    },
+    "mediatype": {
+      "title": "Mediatype",
+      "description": "IANA Media Type (MIME type)",
+      "type": "string"
+    },
+    "tophash": {
+      "title": "tophash",
+      "description": "Blake3 hash over concatenation of metahash and datahash",
+      "type": "string"
+    },
+    "metahash": {
+      "title": "metahash",
+      "description": "Blake3 hash of metadata.",
+      "type": "string"
+    },
+    "datahash": {
+      "title": "datahash",
+      "description": "Blake3 hash of media file.",
+      "type": "string"
+    },
+    "duration": {
+      "title": "Duration",
+      "description": "Duration of audio-visual media in secondes.",
+      "type": "number"
+    },
+    "fps": {
+      "title": "Fps",
+      "description": "Frames per second of video assets.",
+      "type": "number"
+    },
+    "width": {
+      "title": "Width",
+      "description": "Width of visual media in pixels.",
+      "type": "integer"
+    },
+    "height": {
+      "title": "Height",
+      "description": "Height of visual media in pixels.",
+      "type": "integer"
+    },
+    "characters": {
+      "title": "Characters",
+      "description": "Number of text characters (code points after Unicode normalization)",
+      "type": "integer"
+    },
+    "language": {
+      "title": "Language",
+      "description": "Language(s) of content (BCP-47) in weighted order.",
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      ]
+    },
+    "preview": {
+      "title": "Preview",
+      "description": "Uri of media asset preview.",
+      "type": "string"
+    }
+  },
+  "required": [
+    "iscc"
+  ]
+}
