@@ -1,8 +1,67 @@
 # -*- coding: utf-8 -*-
+from hashlib import sha3_224
 from typing import Generator, Sequence, Tuple
+import uvarint
 from bitarray import bitarray
 from bitarray.util import count_xor
 import iscc_core as ic
+
+
+def ipfs_hash(stream):
+    # type: (Stream) -> str
+    """
+    Create an [IPFS](https://ipfs.io) hash for ISCC metadata.
+
+    We use a specialized `base16` encoded `CIDv1` with `sha3-224` and chunksize
+    `1048576` as hashing algorithm for ISCC metadata.
+
+    !!! example
+        With IPFS v0.11.0 this equals to:
+        ```bash
+        $ipfs add --cid-version=1 --chunker=size-1048576 --hash=sha3-224 <myfile>
+        <my-cid>
+        $ipfs cid format -b=base16 <my-cid>
+        ```
+
+    !!! note
+        The rationale for this trickery is that we want to be able to use an IPFS hash as an
+        [ERC-721](https://eips.ethereum.org/EIPS/eip-721)/[ERC-1155](https://eips.ethereum.org/EIPS/eip-1155) `uint256 _tokenID` and
+        also support ID substitution for the metadata URI. For details see discussion at
+        [OpenZeppelin Forum](https://forum.openzeppelin.com/t/how-to-erc-1155-id-substitution-for-token-uri/3312/14)
+
+    Learn more about IPFS CIDv1 at [ProtoSchool](https://proto.school/anatomy-of-a-cid)
+
+    :param Stream stream: Data to be hashed (currently max 1048576)
+    :return: A valid IPFS CIDv1 that can be used as token-id and metadata-uri
+    :rtype: str
+    """
+
+    ipfs_max_size = 1048576
+    data = stream.read()
+    if len(data) > ipfs_max_size:
+        raise ValueError(
+            f"Data exceeds current max size {ipfs_max_size} for ipfs_hash: {len(data)}"
+        )
+
+    digest = sha3_224(data).digest()
+    multibase_prefix = "f"
+    multicodec_cidv1 = b"\x01"
+    multicodec_content_type = b"\x55"  # raw
+    multicodec_mutihash_type = b"\x17"  # sha3-224
+    multicodec_mutihash_len = uvarint.encode(28)  # 28 byte length (varint encoded 0x1c)
+
+    cid_v1_digest = b"".join(
+        (
+            multicodec_cidv1,
+            multicodec_content_type,
+            multicodec_mutihash_type,
+            multicodec_mutihash_len,
+            digest,
+        )
+    )
+
+    cid_v1 = multibase_prefix + cid_v1_digest.hex()
+    return cid_v1
 
 
 def sliding_window(seq, width):

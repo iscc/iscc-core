@@ -81,6 +81,7 @@ from iscc_core.codec import (
     write_header,
 )
 from iscc_core.utils import (
+    ipfs_hash,
     similarity,
     distance,
 )
@@ -137,6 +138,7 @@ __all__ = [
     "clean",
     "read_header",
     "write_header",
+    "ipfs_hash",
     "similarity",
     "distance",
 ]

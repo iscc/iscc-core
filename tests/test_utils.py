@@ -1,4 +1,6 @@
 # -*- coding: utf-8 -*-
+import io
+
 import pytest
 
 import iscc_core.utils
@@ -99,3 +101,16 @@ def test__safe_unpack():
     b = iscc_core.Code.rnd(iscc_core.MT.DATA, bits=64).code
     with pytest.raises(ValueError):
         iscc_core.utils._safe_unpack(a, b)
+
+
+def test_ipfs_hash(static_bytes):
+    assert (
+        iscc_core.ipfs_hash(io.BytesIO(static_bytes))
+        == "f0155171c4dda3d7c7b4833d2f73890173860f1e6ab3fa19c4e57b854fc7f960b"
+    )
+
+
+def test_ipfs_hash_raises(static_bytes):
+    MB2 = static_bytes + static_bytes
+    with pytest.raises(ValueError):
+        iscc_core.ipfs_hash(io.BytesIO(MB2))
