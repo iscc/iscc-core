@@ -9,7 +9,6 @@ SCHEMA_PATH = join(HERE, "../iscc_core/iscc.json")
 
 def main():
     """Generate iscc.json schema"""
-    from os.path import dirname, abspath, join
 
     with open(SCHEMA_PATH, "wt", encoding="UTF-8") as outf:
         outf.write(iscc_core.IsccCode.schema_json(indent=2))

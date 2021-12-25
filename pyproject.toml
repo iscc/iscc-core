@@ -63,8 +63,9 @@ poethepoet = "^0.11.0"
 format = { cmd = "black .", help = "Code style formating with black" }
 gentests = { script = "tests.build_test_data:main", help = "Generate conformance test data" }
 genschema = { script = "tests.build_json_schema:main", help = "Generate iscc json schema" }
+docs = { script = "tests.build_docs:main", help = "Copy README.md to /docs" }
 test = { cmd = "pytest --cov=iscc_core --cov-fail-under=100", help = "Run tests with coverage" }
-all = ["gentests", "genschema", "format", "test"]
+all = ["gentests", "genschema", "format", "docs", "test"]
 
 [build-system]
 requires = ["poetry-core>=1.0.0", "setuptools", "wheel", "cython"]
