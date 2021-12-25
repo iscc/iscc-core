@@ -2407,25 +2407,26 @@ prefixed with the string <code>ISCC:</code>.</p>
 <a id="__codelineno-0-21" name="__codelineno-0-21"></a><span class="sd">    :return: Normalized ISCC</span>
 <a id="__codelineno-0-22" name="__codelineno-0-22"></a><span class="sd">    :rtype: str</span>
 <a id="__codelineno-0-23" name="__codelineno-0-23"></a><span class="sd">    &quot;&quot;&quot;</span>
-<a id="__codelineno-0-24" name="__codelineno-0-24"></a>
-<a id="__codelineno-0-25" name="__codelineno-0-25"></a>    <span class="n">decoders</span> <span class="o">=</span> <span class="p">{</span>
-<a id="__codelineno-0-26" name="__codelineno-0-26"></a>        <span class="n">MULTIBASE</span><span class="o">.</span><span class="n">base16</span><span class="p">:</span> <span class="nb">bytes</span><span class="o">.</span><span class="n">fromhex</span><span class="p">,</span>
-<a id="__codelineno-0-27" name="__codelineno-0-27"></a>        <span class="n">MULTIBASE</span><span class="o">.</span><span class="n">base32</span><span class="p">:</span> <span class="n">decode_base32</span><span class="p">,</span>
-<a id="__codelineno-0-28" name="__codelineno-0-28"></a>        <span class="n">MULTIBASE</span><span class="o">.</span><span class="n">base58btc</span><span class="p">:</span> <span class="n">base58</span><span class="o">.</span><span class="n">b58decode</span><span class="p">,</span>
-<a id="__codelineno-0-29" name="__codelineno-0-29"></a>        <span class="n">MULTIBASE</span><span class="o">.</span><span class="n">base64url</span><span class="p">:</span> <span class="n">decode_base64</span><span class="p">,</span>
-<a id="__codelineno-0-30" name="__codelineno-0-30"></a>    <span class="p">}</span>
-<a id="__codelineno-0-31" name="__codelineno-0-31"></a>
-<a id="__codelineno-0-32" name="__codelineno-0-32"></a>    <span class="c1"># Transcode if &lt;multibase&gt;&lt;multicodec&gt; encoded</span>
-<a id="__codelineno-0-33" name="__codelineno-0-33"></a>    <span class="n">prefix</span> <span class="o">=</span> <span class="n">iscc_code</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
-<a id="__codelineno-0-34" name="__codelineno-0-34"></a>    <span class="k">if</span> <span class="n">prefix</span> <span class="ow">in</span> <span class="n">decoders</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
-<a id="__codelineno-0-35" name="__codelineno-0-35"></a>        <span class="n">decoded</span> <span class="o">=</span> <span class="n">decoders</span><span class="p">[</span><span class="n">prefix</span><span class="p">](</span><span class="n">iscc_code</span><span class="o">.</span><span class="n">lstrip</span><span class="p">(</span><span class="n">prefix</span><span class="p">))</span>
-<a id="__codelineno-0-36" name="__codelineno-0-36"></a>        <span class="n">iscc_code</span> <span class="o">=</span> <span class="n">encode_base32</span><span class="p">(</span><span class="n">decoded</span><span class="o">.</span><span class="n">lstrip</span><span class="p">(</span><span class="n">Code</span><span class="o">.</span><span class="n">mc_prefix</span><span class="p">))</span>
-<a id="__codelineno-0-37" name="__codelineno-0-37"></a>
-<a id="__codelineno-0-38" name="__codelineno-0-38"></a>    <span class="n">decomposed</span> <span class="o">=</span> <span class="n">decompose</span><span class="p">(</span><span class="n">iscc_code</span><span class="p">)</span>
-<a id="__codelineno-0-39" name="__codelineno-0-39"></a>    <span class="n">recomposed</span> <span class="o">=</span> <span class="p">(</span>
-<a id="__codelineno-0-40" name="__codelineno-0-40"></a>        <span class="n">gen_iscc_code_v0</span><span class="p">(</span><span class="n">decomposed</span><span class="p">)</span><span class="o">.</span><span class="n">iscc</span> <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">decomposed</span><span class="p">)</span> <span class="o">&gt;=</span> <span class="mi">2</span> <span class="k">else</span> <span class="n">decomposed</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
-<a id="__codelineno-0-41" name="__codelineno-0-41"></a>    <span class="p">)</span>
-<a id="__codelineno-0-42" name="__codelineno-0-42"></a>    <span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;ISCC:</span><span class="si">{</span><span class="n">recomposed</span><span class="si">}</span><span class="s2">&quot;</span>
+<a id="__codelineno-0-24" name="__codelineno-0-24"></a>    <span class="kn">from</span> <span class="nn">iscc_core.iscc_code</span> <span class="kn">import</span> <span class="n">gen_iscc_code_v0</span>
+<a id="__codelineno-0-25" name="__codelineno-0-25"></a>
+<a id="__codelineno-0-26" name="__codelineno-0-26"></a>    <span class="n">decoders</span> <span class="o">=</span> <span class="p">{</span>
+<a id="__codelineno-0-27" name="__codelineno-0-27"></a>        <span class="n">MULTIBASE</span><span class="o">.</span><span class="n">base16</span><span class="p">:</span> <span class="nb">bytes</span><span class="o">.</span><span class="n">fromhex</span><span class="p">,</span>
+<a id="__codelineno-0-28" name="__codelineno-0-28"></a>        <span class="n">MULTIBASE</span><span class="o">.</span><span class="n">base32</span><span class="p">:</span> <span class="n">decode_base32</span><span class="p">,</span>
+<a id="__codelineno-0-29" name="__codelineno-0-29"></a>        <span class="n">MULTIBASE</span><span class="o">.</span><span class="n">base58btc</span><span class="p">:</span> <span class="n">base58</span><span class="o">.</span><span class="n">b58decode</span><span class="p">,</span>
+<a id="__codelineno-0-30" name="__codelineno-0-30"></a>        <span class="n">MULTIBASE</span><span class="o">.</span><span class="n">base64url</span><span class="p">:</span> <span class="n">decode_base64</span><span class="p">,</span>
+<a id="__codelineno-0-31" name="__codelineno-0-31"></a>    <span class="p">}</span>
+<a id="__codelineno-0-32" name="__codelineno-0-32"></a>
+<a id="__codelineno-0-33" name="__codelineno-0-33"></a>    <span class="c1"># Transcode if &lt;multibase&gt;&lt;multicodec&gt; encoded</span>
+<a id="__codelineno-0-34" name="__codelineno-0-34"></a>    <span class="n">prefix</span> <span class="o">=</span> <span class="n">iscc_code</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+<a id="__codelineno-0-35" name="__codelineno-0-35"></a>    <span class="k">if</span> <span class="n">prefix</span> <span class="ow">in</span> <span class="n">decoders</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
+<a id="__codelineno-0-36" name="__codelineno-0-36"></a>        <span class="n">decoded</span> <span class="o">=</span> <span class="n">decoders</span><span class="p">[</span><span class="n">prefix</span><span class="p">](</span><span class="n">iscc_code</span><span class="o">.</span><span class="n">lstrip</span><span class="p">(</span><span class="n">prefix</span><span class="p">))</span>
+<a id="__codelineno-0-37" name="__codelineno-0-37"></a>        <span class="n">iscc_code</span> <span class="o">=</span> <span class="n">encode_base32</span><span class="p">(</span><span class="n">decoded</span><span class="o">.</span><span class="n">lstrip</span><span class="p">(</span><span class="n">Code</span><span class="o">.</span><span class="n">mc_prefix</span><span class="p">))</span>
+<a id="__codelineno-0-38" name="__codelineno-0-38"></a>
+<a id="__codelineno-0-39" name="__codelineno-0-39"></a>    <span class="n">decomposed</span> <span class="o">=</span> <span class="n">decompose</span><span class="p">(</span><span class="n">iscc_code</span><span class="p">)</span>
+<a id="__codelineno-0-40" name="__codelineno-0-40"></a>    <span class="n">recomposed</span> <span class="o">=</span> <span class="p">(</span>
+<a id="__codelineno-0-41" name="__codelineno-0-41"></a>        <span class="n">gen_iscc_code_v0</span><span class="p">(</span><span class="n">decomposed</span><span class="p">)</span><span class="o">.</span><span class="n">iscc</span> <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">decomposed</span><span class="p">)</span> <span class="o">&gt;=</span> <span class="mi">2</span> <span class="k">else</span> <span class="n">decomposed</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+<a id="__codelineno-0-42" name="__codelineno-0-42"></a>    <span class="p">)</span>
+<a id="__codelineno-0-43" name="__codelineno-0-43"></a>    <span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;ISCC:</span><span class="si">{</span><span class="n">recomposed</span><span class="si">}</span><span class="s2">&quot;</span>
 </code></pre></div>
         </details>
     </div>

@@ -943,7 +943,7 @@ binary form (e.g. file headers). We do not prescribe a particular schema.</p>
 
 
 <h2 id="iscc_core.code_meta.gen_meta_code" class="doc doc-heading">
-<code class="highlight language-python"><span class="n">gen_meta_code</span><span class="p">(</span><span class="n">title</span><span class="p">,</span> <span class="n">extra</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">bits</span> <span class="o">=</span> <span class="mi">64</span><span class="p">)</span></code>
+<code class="highlight language-python"><span class="n">gen_meta_code</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">description</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">bits</span> <span class="o">=</span> <span class="mi">64</span><span class="p">)</span></code>
 
 
 <a href="#iscc_core.code_meta.gen_meta_code" class="headerlink" title="Permanent link">#</a></h2>
@@ -951,12 +951,14 @@ binary form (e.g. file headers). We do not prescribe a particular schema.</p>
     <div class="doc doc-contents ">
 
       <p>Create an ISCC Meta-Code using the latest standard algorithm.</p>
-<p>Applications that generate ISCCs should prioritize explicitly passed <code>title</code>
-information. If not available they should try to extract a title form the digital
+<p>Applications that generate ISCCs should prioritize explicitly passed <code>name</code>
+information. If not available they should try to extract a <code>name</code> form the digital
 asset itself. If extraction fails, the application should resort to a normalized
 filename before falling back to an empty string.</p>
-<p>Optional additional metadata may be supplied via the <code>extra</code>-field.
-The input can be:</p>
+<p>And optional additional user presentable <code>description</code> may be supplied via the
+<code>description</code>-field. Markdown will be preserved for presenting the description
+publicly.</p>
+<p>The input can be:</p>
 <ul>
 <li>A textual description of the identified work for disambiguation purposes</li>
 <li>Structured (JSON) metadata conforming to an industry specific metadata schema</li>
@@ -981,15 +983,15 @@ manifested by the digital asset.</p>
   </thead>
   <tbody>
       <tr>
-        <td><code>title</code></td>
+        <td><code>name</code></td>
         <td><code>str</code></td>
-        <td><p>Title of the work manifested by the digital asset</p></td>
+        <td><p>Name or title of the work manifested by the digital asset</p></td>
         <td><em>required</em></td>
       </tr>
       <tr>
-        <td><code>extra</code></td>
+        <td><code>description</code></td>
         <td><code>Union[str,bytes,None]</code></td>
-        <td><p>Optional metadata for disambiguation</p></td>
+        <td><p>Optional description for disambiguation</p></td>
         <td><code>None</code></td>
       </tr>
       <tr>
@@ -1010,8 +1012,8 @@ manifested by the digital asset.</p>
   </thead>
   <tbody>
     <tr>
-      <td><code>MetaCode</code></td>
-      <td><p>ISCC Meta-Code</p></td>
+      <td><code>ISCC</code></td>
+      <td><p>ISCC object with Meta-Code and properties name, description, metahash</p></td>
     </tr>
   </tbody>
 </table>
@@ -1028,7 +1030,7 @@ manifested by the digital asset.</p>
 
 
 <h2 id="iscc_core.code_meta.gen_meta_code_v0" class="doc doc-heading">
-<code class="highlight language-python"><span class="n">gen_meta_code_v0</span><span class="p">(</span><span class="n">title</span><span class="p">,</span> <span class="n">extra</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">bits</span> <span class="o">=</span> <span class="mi">64</span><span class="p">)</span></code>
+<code class="highlight language-python"><span class="n">gen_meta_code_v0</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">description</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">bits</span> <span class="o">=</span> <span class="mi">64</span><span class="p">)</span></code>
 
 
 <a href="#iscc_core.code_meta.gen_meta_code_v0" class="headerlink" title="Permanent link">#</a></h2>
@@ -1049,13 +1051,13 @@ manifested by the digital asset.</p>
   </thead>
   <tbody>
       <tr>
-        <td><code>title</code></td>
+        <td><code>name</code></td>
         <td><code>str</code></td>
         <td><p>Title of the work manifested by the digital asset</p></td>
         <td><em>required</em></td>
       </tr>
       <tr>
-        <td><code>extra</code></td>
+        <td><code>description</code></td>
         <td><code>Union[str,bytes,None]</code></td>
         <td><p>Optional metadata for disambiguation</p></td>
         <td><code>None</code></td>
