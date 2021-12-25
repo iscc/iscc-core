@@ -845,6 +845,13 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
+  <a href="#iscc_core.utils.ipfs_hash" class="md-nav__link">
+    ipfs_hash()
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#iscc_core.utils.sliding_window" class="md-nav__link">
     sliding_window()
   </a>
@@ -924,6 +931,80 @@
 
 
   <div class="doc doc-children">
+
+
+
+
+  <div class="doc doc-object doc-function">
+
+
+
+<h2 id="iscc_core.utils.ipfs_hash" class="doc doc-heading">
+<code class="highlight language-python"><span class="n">ipfs_hash</span><span class="p">(</span><span class="n">stream</span><span class="p">)</span></code>
+
+
+<a href="#iscc_core.utils.ipfs_hash" class="headerlink" title="Permanent link">#</a></h2>
+
+    <div class="doc doc-contents ">
+
+      <p>Create an <a href="https://ipfs.io">IPFS</a> hash for ISCC metadata.</p>
+<p>We use a specialized <code>base16</code> encoded <code>CIDv1</code> with <code>sha3-224</code> and chunksize
+1048576 as hashing algorithm for ISCC metadata.</p>
+<div class="admonition example">
+<p class="admonition-title">Example</p>
+<p>With IPFS v0.11.0 this equals to:
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1"></a><span class="nv">$ipfs</span> add --cid-version<span class="o">=</span><span class="m">1</span> --chunker<span class="o">=</span>size-1048576 --hash<span class="o">=</span>sha3-224 &lt;myfile&gt;
+<a id="__codelineno-0-2" name="__codelineno-0-2"></a>&lt;my-cid&gt;
+<a id="__codelineno-0-3" name="__codelineno-0-3"></a><span class="nv">$ipfs</span> cid format -b<span class="o">=</span>base16 &lt;my-cid&gt;
+</code></pre></div></p>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The rationale for this trickery is that we want to be able to use an IPFS hash as an
+<a href="https://eips.ethereum.org/EIPS/eip-721">ERC-721</a>/<a href="https://eips.ethereum.org/EIPS/eip-1155">ERC-1155</a> <code>uint256 _tokenID</code> and
+also support ID substitution for the metadata URI. For details see discussion at
+<a href="https://forum.openzeppelin.com/t/how-to-erc-1155-id-substitution-for-token-uri/3312/14">OpenZeppelin Forum</a></p>
+</div>
+<p>Learn more about IPFS CIDv1 at <a href="https://proto.school/anatomy-of-a-cid">ProtoSchool</a></p>
+
+<p><strong>Parameters:</strong></p>
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Description</th>
+      <th>Default</th>
+    </tr>
+  </thead>
+  <tbody>
+      <tr>
+        <td><code>stream</code></td>
+        <td><code>Stream</code></td>
+        <td><p>Data to be hashed (currently max 1048576)</p></td>
+        <td><em>required</em></td>
+      </tr>
+  </tbody>
+</table>
+<p><strong>Returns:</strong></p>
+<table>
+  <thead>
+    <tr>
+      <th>Type</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code>str</code></td>
+      <td><p>A valid IPFS CIDv1 that can be used as token-id and metadata-uri</p></td>
+    </tr>
+  </tbody>
+</table>
+    </div>
+
+  </div>
+
 
 
 
