@@ -7,7 +7,7 @@ import yaml
 import json
 import pathlib
 import iscc_core
-from iscc_core.schema import IsccBase
+from iscc_core.schema import ISCC
 
 HERE = pathlib.Path(__file__).parent.absolute()
 INPUTS = HERE / "inputs.yaml"
@@ -66,7 +66,7 @@ def main():
             if isinstance(dargs[0], str) and dargs[0].startswith("stream:"):
                 dargs[0] = io.BytesIO(bytes.fromhex(dargs[0].lstrip("stream:")))
             result = func(*dargs)
-            if isinstance(result, IsccBase):
+            if isinstance(result, ISCC):
                 testdata["outputs"] = result.dict(exclude_unset=True, exclude_none=True)
             else:
                 testdata["outputs"] = result

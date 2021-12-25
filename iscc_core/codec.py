@@ -10,7 +10,6 @@ from bitarray import bitarray, frozenbitarray
 from bitarray.util import ba2hex, int2ba, ba2int, count_xor
 from base64 import b32encode, b32decode
 from pybase64 import urlsafe_b64encode, urlsafe_b64decode
-from iscc_core import gen_iscc_code_v0
 
 
 ########################################################################################
@@ -436,6 +435,7 @@ def normalize(iscc_code):
     :return: Normalized ISCC
     :rtype: str
     """
+    from iscc_core.iscc_code import gen_iscc_code_v0
 
     decoders = {
         MULTIBASE.base16: bytes.fromhex,

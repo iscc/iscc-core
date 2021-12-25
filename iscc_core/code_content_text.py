@@ -8,7 +8,7 @@ import unicodedata
 from typing import Union
 import xxhash
 from iscc_core.minhash import minhash_256
-from iscc_core.schema import ContentCodeText
+from iscc_core.schema import ISCC
 from iscc_core.utils import sliding_window
 from iscc_core import codec, core_opts
 
@@ -17,23 +17,23 @@ Text = Union[str, bytes]
 
 
 def gen_text_code(text, bits=core_opts.text_bits):
-    # type: (Text, int) -> ContentCodeText
+    # type: (Text, int) -> ISCC
     """
-    Create an ISCC Content-Code-Text with the latest standard algorithm.
+    Create an ISCC Text-Code with the latest standard algorithm.
 
     !!! note
         If `text` input includes markup (like HTML tags) it must be removed beforehand.
 
     :param Text text: Plain text for Text-Code creation.
     :param int bits: Bit-length (multiple of 32) for ISCC Code Hash (default 64).
-    :return: TextCode with properties: code, characters
-    :rtype: ContentCodeText
+    :return: ISCC object with Text-Code and an aditional property `characters`
+    :rtype: ISCC
     """
     return gen_text_code_v0(text, bits)
 
 
 def gen_text_code_v0(text, bits=core_opts.text_bits):
-    # type: (Text, int) -> ContentCodeText
+    # type: (Text, int) -> ISCC
     """
     Create ISCC Content-Code-Text with algorithm v0
 
@@ -43,8 +43,8 @@ def gen_text_code_v0(text, bits=core_opts.text_bits):
 
     :param Text text: Normalized text for Text-Code creation.
     :param int bits: Bit-length of ISCC Code Hash (default 64).
-    :return: TextCode with properties: code, characters
-    :rtype: ContentCodeText
+    :return: ISCC object with Text-Code and an aditional property `characters`
+    :rtype: ISCC
     """
     text_norm = normalize_text(text)
     characters = len(text_norm)
@@ -57,7 +57,7 @@ def gen_text_code_v0(text, bits=core_opts.text_bits):
         length=bits,
         digest=digest,
     )
-    return ContentCodeText(iscc=text_code, characters=characters)
+    return ISCC(iscc=text_code, characters=characters)
 
 
 def normalize_text(text):

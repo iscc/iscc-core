@@ -7,39 +7,16 @@ of this library. Gathering and providing values for most of the fields is left t
 level applications that handle format specific data extraction.
 """
 from typing import List, Optional, Union
-from pydantic import BaseModel, Field
+from pydantic import BaseModel, Field, AnyUrl, HttpUrl
 from iscc_core.codec import Code
-import abc
 
 
 MultiStr = Union[str, List[str]]
 
 
-class IsccBase(BaseModel, abc.ABC):
+class ISCC(BaseModel):
     """
-    Base schema for ISCC metadata
-    """
-
-    class Config:
-        validate_assignment = True
-
-    iscc: str = Field(..., description="ISCC in standard encoding.")
-
-    @property
-    def code_obj(self):
-        """Wraps the `iscc` string property with a `Code` object."""
-        return Code(self.iscc)
-
-    def dict(self, *args, exclude_unset=True, exclude_none=True, **kwargs):
-        """Change default options to exclude unset and none values."""
-        return super().dict(
-            *args, exclude_unset=exclude_unset, exclude_none=exclude_none, **kwargs
-        )
-
-
-class IsccCode(IsccBase):
-    """
-    A composite ISCC
+    ISCC Metadata Schema
     """
 
     version: str = Field(
@@ -49,16 +26,23 @@ class IsccCode(IsccBase):
         const=True,
     )
 
-    # Essential Metadata
-    title: Optional[str] = Field(
-        description="The title or name of the intangible creation manifested by the"
+    iscc: str = Field(..., description="ISCC in standard encoding.")
+
+    # Essential metadata (ERC-721/ERC-1155 compatible)
+    name: Optional[str] = Field(
+        description="The name or title of the intangible creation manifested by the"
         " identified digital asset"
     )
-    extra: Optional[str] = Field(
-        description="Descriptive, industry-sector or use-case specific metadata (used "
-        "as immutable input for Meta-Code generation). Any text string "
-        "(including json or json-ld) indicative of the identity of the "
-        "referent may be used."
+
+    description: Optional[str] = Field(
+        description="Description of the digital asset identified by the ISCC (used "
+        "as input for Meta-Code generation). Any user presentable text string (includ"
+        "ing Markdown text) indicative of the identity of the referent may be used. "
+    )
+
+    image: Optional[AnyUrl] = Field(
+        description="URI for a user presentable image that serves as a preview of "
+        "identified digital content or, in case of an NFT, the digital content itself."
     )
 
     # File Properties
@@ -95,103 +79,26 @@ class IsccCode(IsccBase):
     language: Optional[Union[str, List[str]]] = Field(
         description="Language(s) of content (BCP-47) in weighted order."
     )
-    preview: Optional[str] = Field(description="Uri of media asset preview.")
-
-
-class IsccID(IsccCode):
-    """
-    An ISCC Short-ID
-    """
-
-    pass
-
-
-class ContentCode(IsccBase, abc.ABC):
-    """
-    Base schema for Content-Codes.
-    """
-
-    title: Optional[str] = Field(description="Title as extracted from digital asset")
-
-
-class MetaCode(IsccBase):
-    """
-    Meta-Code standardized metadata model.
-    """
-
-    title: Optional[str] = Field(description="Title used for Meta-Code creation.")
-    extra: Optional[str] = Field(description="Extra metadata used for Meta-Code.")
-    binary: Optional[bool] = Field(
-        description="Extra metadata was supplied in binary format."
-    )
-    metahash: Optional[str] = Field(
-        description="Blake3 cryptographic hash of metadata."
-    )
-
-
-class ContentCodeText(ContentCode):
-    """
-    Content-Code-Text standardized metadata model.
-    """
-
-    characters: Optional[int] = Field(
-        description="Number of text characters (after normalize_text)."
-    )
-    language: Optional[str] = Field(description="Main language of content (BCP-47).")
-
-
-class ContentCodeImage(ContentCode):
-    """
-    Content-Code-Image standardized metadata model.
-    """
-
-    width: Optional[int] = Field(description="Width of image in number of pixels.")
-    height: Optional[int] = Field(description="Height of image in number of pixels.")
-    preview: Optional[str] = Field(description="URI of image preview thumbnail.")
-
-
-class ContentCodeAudio(ContentCode):
-    """
-    Content-Code-Audio standardized metadata model.
-    """
-
-    duration: Optional[float] = Field(description="Duration of audio im seconds.")
-
-
-class ContentCodeVideo(ContentCode):
-    """
-    Content-Code-Video standardized metadata model.
-    """
-
-    duration: Optional[float] = Field(description="Duration of video im seconds.")
-    fps: Optional[float] = Field(description="Frames per second.")
-    width: Optional[int] = Field(description="Width of video in number of pixels.")
-    height: Optional[int] = Field(description="Height of video in number of pixels.")
-    language: Optional[MultiStr] = Field(description="Main language of video (BCP 47).")
-
-
-class ContentCodeMixed(ContentCode):
-    """
-    Content-Code-Mixed standardized metadata model.
-    """
 
     parts: Optional[List[str]] = Field(description="Included Content-Codes.")
 
-
-class DataCode(IsccBase):
-    """
-    Data-Code standardized metadata model.
-    """
-
-    pass
-
-
-class InstanceCode(IsccBase):
-    """
-    Instance-Code standardized metadata model.
-    """
-
-    datahash: Optional[str] = Field(
-        description="Multihash of digital asset (Blake3 by default."
+    license: Optional[AnyUrl] = Field(
+        description="URI of license for the identified digital content."
     )
-    filesize: Optional[int] = Field(description="File size in bytes.")
+
+    redirect: Optional[HttpUrl] = Field(
+        description="URL to which a resolver should redirect an ISCC-ID that has "
+        "been minted from a declartion that includes the IPFS-hash of this metadata "
+        "instance."
+    )
+
+    @property
+    def code_obj(self):
+        """Wraps the `iscc` string property with a `Code` object."""
+        return Code(self.iscc)
+
+    def dict(self, *args, exclude_unset=True, exclude_none=True, **kwargs):
+        """Exclude unset and none values by default."""
+        return super().dict(
+            *args, exclude_unset=exclude_unset, exclude_none=exclude_none, **kwargs
+        )

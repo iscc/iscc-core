@@ -2,7 +2,7 @@
 import iscc_core
 
 
-meta_code = iscc_core.gen_meta_code(title="ISCC Test Document!")
+meta_code = iscc_core.gen_meta_code(name="ISCC Test Document!")
 
 print(f"Meta-Code:     ISCC:{meta_code.iscc}")
 print(f"Structure:     {meta_code.code_obj.explain}\n")

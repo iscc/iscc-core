@@ -11,7 +11,7 @@ def main():
     """Generate iscc.json schema"""
 
     with open(SCHEMA_PATH, "wt", encoding="UTF-8") as outf:
-        outf.write(iscc_core.IsccCode.schema_json(indent=2))
+        outf.write(iscc_core.ISCC.schema_json(indent=2))
 
 
 if __name__ == "__main__":

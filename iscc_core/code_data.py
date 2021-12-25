@@ -1,37 +1,36 @@
 # -*- coding: utf-8 -*-
 """*A similarity perserving hash for binary data (soft hash).*"""
-from typing import List, Optional, Tuple
-from more_itertools import chunked
+from typing import Optional
 from iscc_core.cdc import data_chunks
-from iscc_core.minhash import minhash_256, minhash_64
+from iscc_core.minhash import minhash_256
 from iscc_core import codec, core_opts
-from iscc_core.codec import Data, Stream, encode_base64
-from iscc_core.schema import DataCode
+from iscc_core.codec import Data, Stream
+from iscc_core.schema import ISCC
 import xxhash
 
 
 def gen_data_code(stream, bits=core_opts.data_bits):
-    # type: (Stream, int) -> DataCode
+    # type: (Stream, int) -> ISCC
     """
     Create a similarity preserving ISCC Data-Code with the latest standard algorithm.
 
     :param Stream stream: Input data stream.
     :param int bits: Bit-length of ISCC Data-Code (default 64).
-    :return: ISCC Data-Code with properties: code, features, sizes
-    :rtype: DataCode
+    :return: ISCC Data-Code
+    :rtype: ISCC
     """
     return gen_data_code_v0(stream, bits)
 
 
 def gen_data_code_v0(stream, bits=core_opts.data_bits):
-    # type: (Stream, int) -> DataCode
+    # type: (Stream, int) -> ISCC
     """
     Create an ISCC Data-Code with algorithm v0.
 
     :param Stream stream: Input data stream.
     :param int bits: Bit-length of ISCC Data-Code (default 64).
-    :return: Standardized ISCC DataCode object
-    :rtype: DataCode
+    :return: ISCC object with Data-Code
+    :rtype: ISCC
     """
 
     hasher = DataHasherV0()
@@ -42,7 +41,7 @@ def gen_data_code_v0(stream, bits=core_opts.data_bits):
         data = stream.read(core_opts.io_read_size)
 
     data_code = hasher.code(bits=bits)
-    data_code_obj = DataCode(iscc=data_code)
+    data_code_obj = ISCC(iscc=data_code)
 
     return data_code_obj
 

@@ -48,18 +48,7 @@ from iscc_core.code_instance import (
     gen_instance_code,
     gen_instance_code_v0,
 )
-from iscc_core.schema import (
-    IsccCode,
-    IsccID,
-    MetaCode,
-    ContentCodeText,
-    ContentCodeImage,
-    ContentCodeAudio,
-    ContentCodeVideo,
-    ContentCodeMixed,
-    DataCode,
-    InstanceCode,
-)
+from iscc_core.schema import ISCC
 from iscc_core.codec import (
     Code,
     MT,
@@ -110,16 +99,7 @@ __all__ = [
     "gen_data_code_v0",
     "gen_instance_code",
     "gen_instance_code_v0",
-    "IsccCode",
-    "IsccID",
-    "MetaCode",
-    "ContentCodeText",
-    "ContentCodeImage",
-    "ContentCodeAudio",
-    "ContentCodeVideo",
-    "ContentCodeMixed",
-    "DataCode",
-    "InstanceCode",
+    "ISCC",
     "Code",
     "MT",
     "ST",

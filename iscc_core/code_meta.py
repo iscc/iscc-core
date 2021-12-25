@@ -14,7 +14,7 @@ binary form (e.g. file headers). We do not prescribe a particular schema.
 from more_itertools import interleave, sliced
 from iscc_core.code_content_text import normalize_text
 from iscc_core.codec import MT, ST, VS, encode_base64, encode_component
-from iscc_core.schema import MetaCode
+from iscc_core.schema import ISCC
 from iscc_core.utils import sliding_window
 from iscc_core.simhash import similarity_hash
 from iscc_core import core_opts
@@ -22,17 +22,20 @@ from blake3 import blake3
 from typing import Union
 
 
-def gen_meta_code(title, extra=None, bits=core_opts.meta_bits):
-    # type: (str, Union[str,bytes,None], int) -> MetaCode
+def gen_meta_code(name, description=None, bits=core_opts.meta_bits):
+    # type: (str, Union[str,bytes,None], int) -> ISCC
     """
     Create an ISCC Meta-Code using the latest standard algorithm.
 
-    Applications that generate ISCCs should prioritize explicitly passed `title`
-    information. If not available they should try to extract a title form the digital
+    Applications that generate ISCCs should prioritize explicitly passed `name`
+    information. If not available they should try to extract a `name` form the digital
     asset itself. If extraction fails, the application should resort to a normalized
     filename before falling back to an empty string.
 
-    Optional additional metadata may be supplied via the `extra`-field.
+    And optional additional user presentable `description` may be supplied via the
+    `description`-field. Markdown will be preserved for presenting the description
+    publicly.
+
     The input can be:
 
     - A textual description of the identified work for disambiguation purposes
@@ -44,47 +47,47 @@ def gen_meta_code(title, extra=None, bits=core_opts.meta_bits):
         It is recommended to use the minimal metadata required to disambiguate the work
         manifested by the digital asset.
 
-    :param str title: Title of the work manifested by the digital asset
-    :param Union[str,bytes,None] extra: Optional metadata for disambiguation
+    :param str name: Name or title of the work manifested by the digital asset
+    :param Union[str,bytes,None] description: Optional description for disambiguation
     :param int bits: Bit-length of resulting Meta-Code (multiple of 64)
-    :return: ISCC Meta-Code
-    :rtype: MetaCode
+    :return: ISCC object with Meta-Code and properties name, description, metahash
+    :rtype: ISCC
     """
-    return gen_meta_code_v0(title, extra=extra, bits=bits)
+    return gen_meta_code_v0(name, description=description, bits=bits)
 
 
-def gen_meta_code_v0(title, extra=None, bits=core_opts.meta_bits):
-    # type: (str, Union[str,bytes,None], int) -> MetaCode
+def gen_meta_code_v0(name, description=None, bits=core_opts.meta_bits):
+    # type: (str, Union[str,bytes,None], int) -> ISCC
     """
     Create an ISCC Meta-Code with the algorithm version 0.
 
-    :param str title: Title of the work manifested by the digital asset
-    :param Union[str,bytes,None] extra: Optional metadata for disambiguation
+    :param str name: Title of the work manifested by the digital asset
+    :param Union[str,bytes,None] description: Optional metadata for disambiguation
     :param int bits: Bit-length of resulting Meta-Code (multiple of 64)
     :return: ISCC Meta-Code
     :rtype: MetaCode
     """
 
     # 1. Normalize title
-    title = "" if title is None else title
-    title = normalize_text(title)
-    title = trim_text(title, core_opts.meta_trim_title)
+    name = "" if name is None else name
+    name = normalize_text(name)
+    name = trim_text(name, core_opts.meta_trim_title)
 
     # 2. Normalize extra
-    if extra in (None, ""):
-        extra = None
-        metahash_payload = title.encode("utf-8")
-    elif isinstance(extra, str):
-        metahash_payload = extra.encode("utf-8")  # assumed JCS normalized if JSON
-        extra = normalize_text(extra)
-        extra = trim_text(extra, core_opts.meta_trim_extra)
-    elif isinstance(extra, bytes):
-        metahash_payload = extra
-        extra = extra[: core_opts.meta_trim_extra]
+    if description in (None, ""):
+        description = None
+        metahash_payload = name.encode("utf-8")
+    elif isinstance(description, str):
+        metahash_payload = description.encode("utf-8")  # assumed JCS normalized if JSON
+        description = normalize_text(description)
+        description = trim_text(description, core_opts.meta_trim_extra)
+    elif isinstance(description, bytes):
+        metahash_payload = description
+        description = description[: core_opts.meta_trim_extra]
     else:
         raise ValueError("parameter `extra` must be of type str or bytes!")
 
-    digest = soft_hash_meta_v0(title, extra)
+    digest = soft_hash_meta_v0(name, description)
     meta_code = encode_component(
         mtype=MT.META,
         stype=ST.NONE,
@@ -95,17 +98,15 @@ def gen_meta_code_v0(title, extra=None, bits=core_opts.meta_bits):
 
     metahash = blake3(metahash_payload).hexdigest()
 
-    if isinstance(extra, bytes):
-        extra = encode_base64(extra)
+    if isinstance(description, bytes):
+        description = encode_base64(description)
         binary = True
     else:
         binary = False
 
-    if not title:
-        title = None
-    mc_obj = MetaCode(
-        iscc=meta_code, title=title, extra=extra, binary=binary, metahash=metahash
-    )
+    if not name:
+        name = None
+    mc_obj = ISCC(iscc=meta_code, name=name, description=description, metahash=metahash)
     return mc_obj
 
 

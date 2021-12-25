@@ -14,33 +14,33 @@ using the following command line parameters:
 from typing import Iterable
 from more_itertools import divide
 
-from iscc_core.schema import ContentCodeAudio
+from iscc_core.schema import ISCC
 from iscc_core.simhash import similarity_hash
 from iscc_core import codec, core_opts
 
 
 def gen_audio_code(cv, bits=core_opts.audio_bits):
-    # type: (Iterable[int], int) -> ContentCodeAudio
+    # type: (Iterable[int], int) -> ISCC
     """
     Create an ISCC Content-Code Audio with the latest standard algorithm.
 
     :param Iterable[int] cv: Chromaprint vector
     :param int bits: Bit-length resulting Content-Code Audio (multiple of 64)
-    :return: ContentCodeAudio object
-    :rtype: ContentCodeAudio
+    :return: ISCC object with Content-Code Audio
+    :rtype: ISCC
     """
     return gen_audio_code_v0(cv, bits)
 
 
 def gen_audio_code_v0(cv, bits=core_opts.audio_bits):
-    # type: (Iterable[int], int) -> ContentCodeAudio
+    # type: (Iterable[int], int) -> ISCC
     """
     Create an ISCC Content-Code Audio with algorithm v0.
 
     :param Iterable[int] cv: Chromaprint vector
     :param int bits: Bit-length resulting Content-Code Audio (multiple of 64)
-    :return: ContentCodeAudio object
-    :rtype: ContentCodeAudio
+    :return: ISCC object with Content-Code Audio
+    :rtype: ISCC
     """
     digest = soft_hash_audio_v0(cv)
     audio_code = codec.encode_component(
@@ -50,7 +50,7 @@ def gen_audio_code_v0(cv, bits=core_opts.audio_bits):
         length=bits,
         digest=digest,
     )
-    return ContentCodeAudio(iscc=audio_code)
+    return ISCC(iscc=audio_code)
 
 
 def soft_hash_audio_v0(cv):

@@ -15,25 +15,25 @@ assets and create individual Content-Codes per asset.
 from typing import Iterable, Sequence
 
 from iscc_core import codec, core_opts
-from iscc_core.schema import ContentCodeMixed
+from iscc_core.schema import ISCC
 from iscc_core.simhash import similarity_hash
 
 
 def gen_mixed_code(codes, bits=core_opts.mixed_bits):
-    # type: (Sequence[str], int) -> ContentCodeMixed
+    # type: (Sequence[str], int) -> ISCC
     """
-    Create an ISCC Content-Code-Mixed with the latest standard algorithm.
+    Create an ISCC Content-Code Mixed with the latest standard algorithm.
 
     :param Iterable[str] codes: a list of Content-Codes.
     :param int bits: Target bit-length of generated Content-Code-Mixed.
-    :return: Similarity preserving code that aggregates multiple Content-Codes.
-    :rtype: ContentCodeMixed
+    :return: ISCC object with Content-Code Mixed.
+    :rtype: ISCC
     """
     return gen_mixed_code_v0(codes, bits=bits)
 
 
 def gen_mixed_code_v0(codes, bits=core_opts.mixed_bits):
-    # type: (Sequence[str], int) -> ContentCodeMixed
+    # type: (Sequence[str], int) -> ISCC
     """
     Create an ISCC Content-Code-Mixed with algorithm v0.
 
@@ -41,8 +41,8 @@ def gen_mixed_code_v0(codes, bits=core_opts.mixed_bits):
 
     :param Iterable[str] codes: a list of Content-Codes.
     :param int bits: Target bit-length of generated Content-Code-Mixed.
-    :return: Similarity preserving code that aggregates multiple Content-Codes.
-    :rtype: ContentCodeMixed
+    :return: ISCC object with Content-Code Mixed.
+    :rtype: ISCC
     """
     digests = [codec.decode_base32(code) for code in codes]
     digest = soft_hash_codes_v0(digests, bits=bits)
@@ -57,7 +57,7 @@ def gen_mixed_code_v0(codes, bits=core_opts.mixed_bits):
     for digest in digests:
         mt, st, vs, _, body = codec.read_header(digest)
         stripped_codes.append(codec.encode_component(mt, st, vs, bits, body))
-    return ContentCodeMixed(iscc=mixed_code, parts=stripped_codes)
+    return ISCC(iscc=mixed_code, parts=stripped_codes)
 
 
 def soft_hash_codes_v0(cc_digests, bits=core_opts.mixed_bits):

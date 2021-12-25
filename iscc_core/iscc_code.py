@@ -17,31 +17,32 @@ The following combinations of components are possible:
 """
 from operator import itemgetter
 from typing import Iterable
+from iscc_core.schema import ISCC
 import iscc_core as ic
 
 
 def gen_iscc_code(codes):
-    # type: (Iterable[str]) -> ic.IsccCode
+    # type: (Iterable[str]) -> ISCC
     """
-    Combine multiple ISCC components to a composite ISCC with a common header using
+    Combine multiple ISCC components to a composite ISCC-CODE with a common header using
     the latest standard algorithm.
 
     :param Iterable[str] codes: A valid sequence of singluar ISCC codes.
-    :return: An IsccCode object
-    :rtype: IsccCode
+    :return: An ISCC object with ISCC-CODE
+    :rtype: ISCC
     """
     return gen_iscc_code_v0(codes)
 
 
 def gen_iscc_code_v0(codes):
-    # type: (Iterable[str]) -> ic.IsccCode
+    # type: (Iterable[str]) -> ISCC
     """
-    Combine multiple ISCC components to a composite ISCC with a common header using
+    Combine multiple ISCC components to a composite ISCC-CODE with a common header using
     algorithm v0.
 
     :param Iterable[str] codes: A valid sequence of singluar ISCC codes.
-    :return: An IsccCode object
-    :rtype: IsccCode
+    :return: An ISCC object with ISCC-CODE
+    :rtype: ISCC
     """
 
     # Validate combinatorial constraints
@@ -91,4 +92,4 @@ def gen_iscc_code_v0(codes):
     # Build ISCC
     iscc_code = ic.encode_component(mt, st, ic.VS.V0, ln, body)
 
-    return ic.IsccCode(iscc=iscc_code)
+    return ISCC(iscc=iscc_code)

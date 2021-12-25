@@ -4,30 +4,30 @@ import blake3
 from typing import Optional, Tuple
 from iscc_core import codec, core_opts
 from iscc_core.codec import Data, Stream
-from iscc_core.schema import InstanceCode
+from iscc_core.schema import ISCC
 
 
 def gen_instance_code(stream, bits=core_opts.instance_bits):
-    # type: (Stream, int) -> InstanceCode
+    # type: (Stream, int) -> ISCC
     """
     Create an ISCC Instance-Code with the latest standard algorithm.
 
     :param Stream stream: Binary data stream for Instance-Code generation
     :param int bits: Bit-length resulting Instance-Code (multiple of 64)
-    :return: InstanceCode with properties: code, datahash, filesize
-    :rtype: InstanceCode
+    :return: ISCC object with Instance-Code and properties: datahash, filesize
+    :rtype: ISCC
     """
     return gen_instance_code_v0(stream, bits)
 
 
 def gen_instance_code_v0(stream, bits=core_opts.instance_bits):
-    # type: (Stream, int) -> InstanceCode
+    # type: (Stream, int) -> ISCC
     """
     Create an ISCC Instance-Code with algorithm v0.
 
     :param Stream stream: Binary data stream for Instance-Code generation
     :param int bits: Bit-length of resulting Instance-Code (multiple of 64)
-    :return: InstanceCode with properties: code, datahash, filesize
+    :return: ISCC object with Instance-Code and properties: datahash, filesize
     :rtype: InstanceCode
     """
     hasher = InstanceHasherV0()
@@ -36,7 +36,7 @@ def gen_instance_code_v0(stream, bits=core_opts.instance_bits):
         hasher.push(data)
         data = stream.read(core_opts.io_read_size)
 
-    instance_code_obj = InstanceCode(
+    instance_code_obj = ISCC(
         iscc=hasher.code(bits=bits),
         datahash=hasher.digest().hex(),
         filesize=hasher.filesize,
