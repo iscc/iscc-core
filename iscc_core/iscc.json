@@ -32,6 +32,14 @@
       "format": "uri",
       "type": "string"
     },
+    "keywords": {
+      "title": "Keywords",
+      "description": "List of keywords relevant to the identified digital content.",
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
     "filename": {
       "title": "Filename",
       "description": "Filename of the referenced digital asset (automatically used as fallback if no seed_title element is specified)",

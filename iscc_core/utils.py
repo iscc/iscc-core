@@ -1,10 +1,22 @@
 # -*- coding: utf-8 -*-
 from hashlib import sha3_224
-from typing import Generator, Sequence, Tuple
+from typing import Dict, Generator, Sequence, Tuple
 import uvarint
 from bitarray import bitarray
 from bitarray.util import count_xor
 import iscc_core as ic
+import jcs
+
+
+def canonicalize(obj):
+    # type: (Dict) -> bytes
+    """
+    Canonical, deterministic serialization of ISCC metadata.
+
+    We serialize ISCC metadata in a deterministic/reproducible manner by using
+    [JCS (RFC 8785)](https://datatracker.ietf.org/doc/html/rfc8785) canonicalization.
+    """
+    return jcs.canonicalize(obj)
 
 
 def ipfs_hash(stream):

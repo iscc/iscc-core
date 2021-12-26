@@ -6,10 +6,11 @@ This library only sets the fields for which information is available within the 
 of this library. Gathering and providing values for most of the fields is left to higher
 level applications that handle format specific data extraction.
 """
+import io
 from typing import List, Optional, Union
 from pydantic import BaseModel, Field, AnyUrl, HttpUrl
 from iscc_core.codec import Code
-
+from iscc_core.utils import canonicalize, ipfs_hash
 
 MultiStr = Union[str, List[str]]
 
@@ -106,3 +107,17 @@ class ISCC(BaseModel):
         return super().dict(
             *args, exclude_unset=exclude_unset, exclude_none=exclude_none, **kwargs
         )
+
+    def jcs(self):
+        # type: () -> bytes
+        """
+        Serialize metadata in conformance with JCS (RFC 8785) JSON canonicalization
+        """
+        return canonicalize(self.dict())
+
+    def ipfs_hash(self):
+        # type: () -> str
+        """
+        Create canonical IPFS hash for ISCC metadata
+        """
+        return ipfs_hash(io.BytesIO(self.jcs()))

@@ -114,3 +114,11 @@ def test_ipfs_hash_raises(static_bytes):
     MB2 = static_bytes + static_bytes
     with pytest.raises(ValueError):
         iscc_core.ipfs_hash(io.BytesIO(MB2))
+
+
+def test_canonicalize():
+    md = iscc_core.ISCC(iscc="AAD7SATLZUS57KXZZL2HXAD7HT6264AHEIRZQ4QTLB6LHVRXNTLE7MA")
+    assert (
+        iscc_core.canonicalize(md.dict())
+        == b'{"iscc":"AAD7SATLZUS57KXZZL2HXAD7HT6264AHEIRZQ4QTLB6LHVRXNTLE7MA"}'
+    )

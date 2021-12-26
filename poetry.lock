@@ -220,6 +220,14 @@ optional = false
 python-versions = "*"
 
 [[package]]
+name = "jcs"
+version = "0.1.0"
+description = "JSC - JSON Canonicalization"
+category = "main"
+optional = false
+python-versions = ">=3.6,<4.0"
+
+[[package]]
 name = "jinja2"
 version = "3.0.3"
 description = "A very fast and expressive template engine."
@@ -694,7 +702,7 @@ turbo = ["cython"]
 [metadata]
 lock-version = "1.1"
 python-versions = ">=3.6.2,<4.0"
-content-hash = "bd4406c39f5ef5e4c98e39d22a02d2398883faf7082cf059121605de1dfd1bb8"
+content-hash = "50637f35fd02fc5c781c2a8e2873c2ae6b15b687f70bfca11bc72297cd37b19b"
 
 [metadata.files]
 aiocontextvars = [
@@ -940,6 +948,9 @@ importlib-metadata = [
 iniconfig = [
     {file = "iniconfig-1.1.1-py2.py3-none-any.whl", hash = "sha256:011e24c64b7f47f6ebd835bb12a743f2fbe9a26d4cecaa7f53bc4f35ee9da8b3"},
     {file = "iniconfig-1.1.1.tar.gz", hash = "sha256:bc3af051d7d14b2ee5ef9969666def0cd1a000e121eaea580d4a313df4b37f32"},
+]
+jcs = [
+    {file = "jcs-0.1.0.tar.gz", hash = "sha256:d6a5f57062abf0c30abdf5428d2376f3391d19c6951dc118b69cd09bf63daa17"},
 ]
 jinja2 = [
     {file = "Jinja2-3.0.3-py3-none-any.whl", hash = "sha256:077ce6014f7b40d03b47d1f1ca4b0fc8328a692bd284016f806ed0eaca390ad8"},
