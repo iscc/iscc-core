@@ -858,6 +858,13 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#iscc_core.schema.ISCC.keywords" class="md-nav__link">
+    keywords
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#iscc_core.schema.ISCC.filename" class="md-nav__link">
     filename
   </a>
@@ -972,6 +979,20 @@
           <li class="md-nav__item">
   <a href="#iscc_core.schema.ISCC.dict" class="md-nav__link">
     dict()
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#iscc_core.schema.ISCC.jcs" class="md-nav__link">
+    jcs()
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#iscc_core.schema.ISCC.ipfs_hash" class="md-nav__link">
+    ipfs_hash()
   </a>
   
 </li>
@@ -1218,6 +1239,30 @@ ISCC        </code>
     <div class="doc doc-contents ">
 
       <p>URI for a user presentable image that serves as a preview of identified digital content or, in case of an NFT, the digital content itself.</p>
+    </div>
+
+  </div>
+
+
+
+
+
+  <div class="doc doc-object doc-attribute">
+
+
+
+<h3 id="iscc_core.schema.ISCC.keywords" class="doc doc-heading">
+<code class="highlight language-python"><span class="n">keywords</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span></code>
+
+  <span class="doc doc-properties">
+      <small class="doc doc-property doc-property-pydantic-field"><code>pydantic-field</code></small>
+  </span>
+
+<a href="#iscc_core.schema.ISCC.keywords" class="headerlink" title="Permanent link">#</a></h3>
+
+    <div class="doc doc-contents ">
+
+      <p>List of keywords relevant to the identified digital content.</p>
     </div>
 
   </div>
@@ -1624,6 +1669,50 @@ ISCC        </code>
     <div class="doc doc-contents ">
 
       <p>Exclude unset and none values by default.</p>
+
+    </div>
+
+  </div>
+
+
+
+
+
+  <div class="doc doc-object doc-method">
+
+
+
+<h3 id="iscc_core.schema.ISCC.jcs" class="doc doc-heading">
+<code class="highlight language-python"><span class="n">jcs</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span></code>
+
+
+<a href="#iscc_core.schema.ISCC.jcs" class="headerlink" title="Permanent link">#</a></h3>
+
+    <div class="doc doc-contents ">
+
+      <p>Serialize metadata in conformance with JCS (RFC 8785) JSON canonicalization</p>
+
+    </div>
+
+  </div>
+
+
+
+
+
+  <div class="doc doc-object doc-method">
+
+
+
+<h3 id="iscc_core.schema.ISCC.ipfs_hash" class="doc doc-heading">
+<code class="highlight language-python"><span class="n">ipfs_hash</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span></code>
+
+
+<a href="#iscc_core.schema.ISCC.ipfs_hash" class="headerlink" title="Permanent link">#</a></h3>
+
+    <div class="doc doc-contents ">
+
+      <p>Create canonical IPFS hash for ISCC metadata</p>
 
     </div>
 
