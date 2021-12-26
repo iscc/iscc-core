@@ -37,8 +37,10 @@ def ipfs_hash(stream):
     """
 
     ipfs_max_size = 1048576
-    data = stream.read()
-    if len(data) > ipfs_max_size:
+    data = stream.read(ipfs_max_size)
+
+    # fail if we have more data than ipfs_max_size
+    if stream.read(1):
         raise ValueError(
             f"Data exceeds current max size {ipfs_max_size} for ipfs_hash: {len(data)}"
         )
