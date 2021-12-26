@@ -45,6 +45,10 @@ class ISCC(BaseModel):
         "identified digital content or, in case of an NFT, the digital content itself."
     )
 
+    keywords: Optional[List[str]] = Field(
+        description="List of keywords relevant to the identified digital content."
+    )
+
     # File Properties
     filename: Optional[str] = Field(
         description="Filename of the referenced digital asset (automatically used as "
