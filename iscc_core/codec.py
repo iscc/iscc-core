@@ -99,7 +99,7 @@ class ST_ISCC(enum.IntEnum):
     | 2    | AUDIO    | 0010 | Composite ISCC inlcuding Audio-Code                     |
     | 3    | VIDEO    | 0011 | Composite ISCC inlcuding Video-Code                     |
     | 4    | MIXED    | 0100 | Composite ISCC inlcuding Mixed-Code                     |
-    | 4    | SUM      | 0101 | Composite ISCC inlcuding only Data- and Instance-Code   |
+    | 5    | SUM      | 0101 | Composite ISCC inlcuding only Data- and Instance-Code   |
     """
 
     TEXT = 0
