@@ -73,5 +73,5 @@ test = { cmd = "pytest --cov=iscc_core --cov-fail-under=100", help = "Run tests 
 all = ["update", "gentests", "genschema", "format", "docs", "test"]
 
 [build-system]
-requires = ["poetry-core>=1.0.0", "setuptools", "wheel", "cython"]
-build-backend = "poetry.core.masonry.api"
+requires = ["poetry==1.1.5", "setuptools", "wheel"]
+build-backend = "poetry.masonry.api"
