@@ -101,7 +101,7 @@
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>https://iscc.codes/context/identifier/</loc>
+         <loc>https://iscc.codes/context/0.2.0/identifier/</loc>
          <lastmod>2021-12-28</lastmod>
          <changefreq>daily</changefreq>
     </url>
