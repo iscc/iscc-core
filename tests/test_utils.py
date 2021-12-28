@@ -120,5 +120,5 @@ def test_canonicalize():
     md = iscc_core.ISCC(iscc="AAD7SATLZUS57KXZZL2HXAD7HT6264AHEIRZQ4QTLB6LHVRXNTLE7MA")
     assert (
         iscc_core.canonicalize(md.dict())
-        == b'{"iscc":"AAD7SATLZUS57KXZZL2HXAD7HT6264AHEIRZQ4QTLB6LHVRXNTLE7MA"}'
+        == b'{"@context":"https://purl.org/iscc/context/0.2.0.json","iscc":"AAD7SATLZUS57KXZZL2HXAD7HT6264AHEIRZQ4QTLB6LHVRXNTLE7MA","type":"https://purl.org/iscc/schema/0.2.0.json"}'
     )

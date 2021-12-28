@@ -3,15 +3,27 @@
   "description": "ISCC Metadata Schema",
   "type": "object",
   "properties": {
-    "version": {
-      "title": "ISCC Schema Version",
-      "description": "Version of ISCC Metadata Schema (SchemaVer).",
-      "const": "0-0-0",
+    "@context": {
+      "title": "@Context",
+      "description": "JSON-LD Context URI",
+      "const": "https://purl.org/iscc/context/0.2.0.json",
+      "minLength": 1,
+      "maxLength": 65536,
+      "format": "uri",
+      "type": "string"
+    },
+    "type": {
+      "title": "Type",
+      "description": "JSON Schema URI",
+      "const": "https://purl.org/iscc/schema/0.2.0.json",
+      "minLength": 1,
+      "maxLength": 65536,
+      "format": "uri",
       "type": "string"
     },
     "iscc": {
       "title": "Iscc",
-      "description": "ISCC in standard encoding.",
+      "description": "ISCC in canonical encoding.",
       "type": "string"
     },
     "name": {
@@ -40,19 +52,38 @@
         "type": "string"
       }
     },
+    "identifier": {
+      "title": "Identifier",
+      "description": "Other identifier(s) such as those defined by ISO/TC 46/SC 9 referencing the work, product or other abstraction of which the referenced digital asset is a full or partial manifestation.",
+      "context": "https://purl.org/iscc/context/0.2.0/identifier",
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      ]
+    },
     "filename": {
       "title": "Filename",
       "description": "Filename of the referenced digital asset (automatically used as fallback if no seed_title element is specified)",
+      "context": "https://dbpedia.org/ontology/filename",
       "type": "string"
     },
     "filesize": {
       "title": "Filesize",
       "description": "File size of media asset in bytes.",
+      "context": "https://dbpedia.org/ontology/fileSize",
       "type": "integer"
     },
     "mediatype": {
       "title": "Mediatype",
       "description": "IANA Media Type (MIME type)",
+      "context": "encodingFormat",
       "type": "string"
     },
     "tophash": {
@@ -98,6 +129,7 @@
     "language": {
       "title": "Language",
       "description": "Language(s) of content (BCP-47) in weighted order.",
+      "context": "inLanguage",
       "anyOf": [
         {
           "type": "string"

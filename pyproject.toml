@@ -45,6 +45,7 @@ uvarint = "^1.2.0"
 loguru = "^0.5.3"
 base58 = "^2.1.1"
 jcs = "^0.1.0"
+PyLD = "^2.0.3"
 
 [tool.poetry.extras]
 turbo = ["cython"]
@@ -65,6 +66,7 @@ update = { cmd = "poetry update", help = "Update project dependencies"}
 format = { cmd = "black .", help = "Code style formating with black" }
 gentests = { script = "tests.build_test_data:main", help = "Generate conformance test data" }
 genschema = { script = "tests.build_json_schema:main", help = "Generate iscc json schema" }
+gencontext = { script = "tests.buld_json_ld_context:main", help = "Generate iscc json-ld context" }
 docs = { script = "tests.build_docs:main", help = "Copy README.md to /docs" }
 test = { cmd = "pytest --cov=iscc_core --cov-fail-under=100", help = "Run tests with coverage" }
 all = ["update", "gentests", "genschema", "format", "docs", "test"]

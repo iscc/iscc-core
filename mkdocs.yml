@@ -18,6 +18,9 @@ copyright: 'Copyright © 2016-2021 The Authors
 extra_css:
   - stylesheets/extra.css
 
+extra_javascript:
+    - https://unpkg.com/mermaid/dist/mermaid.min.js
+
 theme:
   name: material
   logo: images/iscc-logo-icon-white.svg
@@ -68,6 +71,7 @@ plugins:
             group_by_category: false
             heading_level: 2
             members_order: source
+
 
 markdown_extensions:
   - toc:

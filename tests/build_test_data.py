@@ -67,7 +67,7 @@ def main():
                 dargs[0] = io.BytesIO(bytes.fromhex(dargs[0].lstrip("stream:")))
             result = func(*dargs)
             if isinstance(result, ISCC):
-                testdata["outputs"] = result.dict(exclude_unset=True, exclude_none=True)
+                testdata["outputs"] = result.dict()
             else:
                 testdata["outputs"] = result
     with open(TEST_DATA, "w", encoding="utf-8") as outf:

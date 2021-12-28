@@ -7,10 +7,12 @@ of this library. Gathering and providing values for most of the fields is left t
 level applications that handle format specific data extraction.
 """
 import io
-from typing import List, Optional, Union
+from typing import Dict, List, Optional, Union
 from pydantic import BaseModel, Field, AnyUrl, HttpUrl
 from iscc_core.codec import Code
 from iscc_core.utils import canonicalize, ipfs_hash
+from iscc_core import __version__
+
 
 MultiStr = Union[str, List[str]]
 
@@ -20,43 +22,65 @@ class ISCC(BaseModel):
     ISCC Metadata Schema
     """
 
-    version: str = Field(
-        "0-0-0",
-        title="ISCC Schema Version",
-        description="Version of ISCC Metadata Schema (SchemaVer).",
+    context: AnyUrl = Field(
+        f"https://purl.org/iscc/context/{__version__}.json",
+        description="JSON-LD Context URI",
+        alias="@context",
         const=True,
     )
 
-    iscc: str = Field(..., description="ISCC in standard encoding.")
+    type: AnyUrl = Field(
+        f"https://purl.org/iscc/schema/{__version__}.json",
+        description="JSON Schema URI",
+        const=True,
+    )
+
+    iscc: str = Field(..., description="ISCC in canonical encoding.")
 
     # Essential metadata (ERC-721/ERC-1155 compatible)
     name: Optional[str] = Field(
         description="The name or title of the intangible creation manifested by the"
-        " identified digital asset"
+        " identified digital asset",
     )
 
     description: Optional[str] = Field(
         description="Description of the digital asset identified by the ISCC (used "
         "as input for Meta-Code generation). Any user presentable text string (includ"
-        "ing Markdown text) indicative of the identity of the referent may be used. "
+        "ing Markdown text) indicative of the identity of the referent may be used. ",
     )
 
     image: Optional[AnyUrl] = Field(
         description="URI for a user presentable image that serves as a preview of "
-        "identified digital content or, in case of an NFT, the digital content itself."
+        "identified digital content or, in case of an NFT, the digital content itself.",
     )
 
     keywords: Optional[List[str]] = Field(
-        description="List of keywords relevant to the identified digital content."
+        description="List of keywords relevant to the identified digital content.",
+    )
+
+    identifier: Optional[Union[str, List[str]]] = Field(
+        description="Other identifier(s) such as those defined by ISO/TC 46/SC 9 "
+        "referencing the work, product or other abstraction of which the referenced "
+        "digital asset is a full or partial manifestation.",
+        context=f"https://purl.org/iscc/context/{__version__}/identifier",
     )
 
     # File Properties
     filename: Optional[str] = Field(
         description="Filename of the referenced digital asset (automatically used as "
-        "fallback if no seed_title element is specified)"
+        "fallback if no seed_title element is specified)",
+        context="https://dbpedia.org/ontology/filename",
     )
-    filesize: Optional[int] = Field(description="File size of media asset in bytes.")
-    mediatype: Optional[str] = Field(description="IANA Media Type (MIME type)")
+
+    filesize: Optional[int] = Field(
+        description="File size of media asset in bytes.",
+        context="https://dbpedia.org/ontology/fileSize",
+    )
+
+    mediatype: Optional[str] = Field(
+        description="IANA Media Type (MIME type)",
+        context="encodingFormat",
+    )
 
     # Cryptographic hashes
     tophash: Optional[str] = Field(
@@ -82,7 +106,8 @@ class ISCC(BaseModel):
         "normalization)"
     )
     language: Optional[Union[str, List[str]]] = Field(
-        description="Language(s) of content (BCP-47) in weighted order."
+        description="Language(s) of content (BCP-47) in weighted order.",
+        context="inLanguage",
     )
 
     parts: Optional[List[str]] = Field(description="Included Content-Codes.")
@@ -97,23 +122,68 @@ class ISCC(BaseModel):
         "instance."
     )
 
+    def dict(self, *args, exclude_none=True, by_alias=True, **kwargs):
+        """
+        Exclude empty fields and support @context alias.
+
+        !!! note
+            This overides the default BaseModel.dict()
+        """
+        return super().dict(
+            *args,
+            exclude_none=exclude_none,
+            by_alias=by_alias,
+            **kwargs,
+        )
+
+    def dict_raw(self):
+        """Exclude any versioned properties (used mostly for testing)"""
+        return self.dict(exclude={"context", "type"})
+
+    def json(self, *args, exclude_none=True, by_alias=True, **kwargs):
+        """
+        Exclude empty fields and use @context alias.
+
+        The by_alias=True allows us to generate valid JSON-LD by default. It translates
+        our python "context" property to @context
+
+        !!! note
+            This overides the default BaseModel.json()
+        """
+        return super().json(
+            *args,
+            exclude_none=exclude_none,
+            by_alias=by_alias,
+            **kwargs,
+        )
+
     @property
     def code_obj(self):
         """Wraps the `iscc` string property with a `Code` object."""
         return Code(self.iscc)
 
-    def dict(self, *args, exclude_unset=True, exclude_none=True, **kwargs):
-        """Exclude unset and none values by default."""
-        return super().dict(
-            *args, exclude_unset=exclude_unset, exclude_none=exclude_none, **kwargs
-        )
-
     def jcs(self):
         # type: () -> bytes
         """
-        Serialize metadata in conformance with JCS (RFC 8785) JSON canonicalization
+        Serialize metadata in conformance with JCS (RFC 8785) JSON canonicalization.
+
+        Used as payload for cryptographic hashing.
         """
-        return canonicalize(self.dict())
+        obj = self.dict(by_alias=True, exclude_none=True)
+        return canonicalize(obj)
+
+    def jsonld_norm(self):
+        """
+        Returns `URDNA2015` normalized JSON-LD in `application/n-quads` format.
+
+        Used for cryptographically binding assertions from metadata
+        """
+        from pyld import jsonld
+
+        jsonld.set_document_loader(jsonld.requests_document_loader(timeout=10))
+        return jsonld.normalize(
+            self.dict(), {"algorithm": "URDNA2015", "format": "application/n-quads"}
+        )
 
     def ipfs_hash(self):
         # type: () -> str
@@ -121,3 +191,28 @@ class ISCC(BaseModel):
         Create canonical IPFS hash for ISCC metadata
         """
         return ipfs_hash(io.BytesIO(self.jcs()))
+
+    @classmethod
+    def jsonld_context(cls):
+        # type: () -> Dict
+        """
+        Build JSON-LD context from ISCC model for publishing
+
+        :return: Serialized JSON-LD context for publishing.
+        :rtype: str
+        """
+        wrapper = {
+            "@context": [
+                "https://schema.org/docs/jsonldcontext.jsonld",
+                {
+                    "type": "@type",
+                    "iscc": "@id",
+                },
+            ]
+        }
+        ctx = wrapper["@context"][1]
+        for prop, fields in cls.schema()["properties"].items():
+            if "context" in fields:
+                ctx[prop] = fields["context"]
+
+        return wrapper
