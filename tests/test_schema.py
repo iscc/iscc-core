@@ -2,6 +2,22 @@
 import iscc_core
 
 
+def test_ISCC_json():
+    mc = iscc_core.gen_meta_code("Hello", "World")
+    assert (
+        mc.json() == '{"@context": "https://purl.org/iscc/context/0.2.0.json", '
+        '"type": "https://purl.org/iscc/schema/0.2.0.json", '
+        '"iscc": "AAAWKLHFXNSF7NNE", "name": "Hello", "description": "World", '
+        '"metahash": '
+        '"bf73d18575a736e4037d45f9e316085b86c19be6363de6aa789e13deaacc1c4e"}'
+    )
+
+
+def test_ISCC_code():
+    mc = iscc_core.gen_meta_code("Hello", "World")
+    assert mc.code == "AAAWKLHFXNSF7NNE"
+
+
 def test_ISCC_jcs():
     mc = iscc_core.gen_meta_code("Hello", "World")
     assert mc.jcs() == (
@@ -35,3 +51,11 @@ def test_ISCC_jsonld_context():
             },
         ]
     }
+
+
+def test_ISCC_jsonld_norm():
+    mc = iscc_core.gen_meta_code("Hello", "World")
+    assert (
+        mc.jsonld_norm()
+        == '<ISCC:AAAWKLHFXNSF7NNE> <http://schema.org/description> "World" .\n<ISCC:AAAWKLHFXNSF7NNE> <http://schema.org/metahash> "bf73d18575a736e4037d45f9e316085b86c19be6363de6aa789e13deaacc1c4e" .\n<ISCC:AAAWKLHFXNSF7NNE> <http://schema.org/name> "Hello" .\n<ISCC:AAAWKLHFXNSF7NNE> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <https://purl.org/iscc/schema/0.2.0.json> .\n'
+    )

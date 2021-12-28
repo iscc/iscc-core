@@ -158,7 +158,14 @@ class ISCC(BaseModel):
         )
 
     @property
+    def code(self):
+        # type: () -> str
+        """Code without `ISCC:`-prefix"""
+        return self.iscc.lstrip("ISCC:")
+
+    @property
     def code_obj(self):
+        # type: () -> Code
         """Wraps the `iscc` string property with a `Code` object."""
         return Code(self.iscc)
 
@@ -181,8 +188,12 @@ class ISCC(BaseModel):
         from pyld import jsonld
 
         jsonld.set_document_loader(jsonld.requests_document_loader(timeout=10))
+
+        data = self.dict()
+        data["iscc"] = "ISCC:" + data["iscc"]
+
         return jsonld.normalize(
-            self.dict(), {"algorithm": "URDNA2015", "format": "application/n-quads"}
+            data, {"algorithm": "URDNA2015", "format": "application/n-quads"}
         )
 
     def ipfs_hash(self):

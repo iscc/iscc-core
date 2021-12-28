@@ -46,6 +46,7 @@ loguru = "^0.5.3"
 base58 = "^2.1.1"
 jcs = "^0.1.0"
 PyLD = "^2.0.3"
+requests = "^2.26.0"
 
 [tool.poetry.extras]
 turbo = ["cython"]
