@@ -823,8 +823,15 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#iscc_core.schema.ISCC.version" class="md-nav__link">
-    version
+  <a href="#iscc_core.schema.ISCC.context" class="md-nav__link">
+    context
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#iscc_core.schema.ISCC.type" class="md-nav__link">
+    type
   </a>
   
 </li>
@@ -860,6 +867,13 @@
           <li class="md-nav__item">
   <a href="#iscc_core.schema.ISCC.keywords" class="md-nav__link">
     keywords
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#iscc_core.schema.ISCC.identifier" class="md-nav__link">
+    identifier
   </a>
   
 </li>
@@ -970,15 +984,29 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#iscc_core.schema.ISCC.code_obj" class="md-nav__link">
-    code_obj
+  <a href="#iscc_core.schema.ISCC.dict" class="md-nav__link">
+    dict()
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#iscc_core.schema.ISCC.dict" class="md-nav__link">
-    dict()
+  <a href="#iscc_core.schema.ISCC.dict_raw" class="md-nav__link">
+    dict_raw()
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#iscc_core.schema.ISCC.json" class="md-nav__link">
+    json()
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#iscc_core.schema.ISCC.code_obj" class="md-nav__link">
+    code_obj
   </a>
   
 </li>
@@ -991,8 +1019,22 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#iscc_core.schema.ISCC.jsonld_norm" class="md-nav__link">
+    jsonld_norm()
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#iscc_core.schema.ISCC.ipfs_hash" class="md-nav__link">
     ipfs_hash()
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#iscc_core.schema.ISCC.jsonld_context" class="md-nav__link">
+    jsonld_context()
   </a>
   
 </li>
@@ -1093,6 +1135,9 @@ level applications that handle format specific data extraction.</p>
 
 
 
+
+
+
   <div class="doc doc-object doc-class">
 
 
@@ -1130,18 +1175,42 @@ ISCC        </code>
 
 
 
-<h3 id="iscc_core.schema.ISCC.version" class="doc doc-heading">
-<code class="highlight language-python"><span class="n">version</span><span class="p">:</span> <span class="nb">str</span></code>
+<h3 id="iscc_core.schema.ISCC.context" class="doc doc-heading">
+<code class="highlight language-python"><span class="n">context</span><span class="p">:</span> <span class="n">AnyUrl</span></code>
 
   <span class="doc doc-properties">
       <small class="doc doc-property doc-property-pydantic-field"><code>pydantic-field</code></small>
   </span>
 
-<a href="#iscc_core.schema.ISCC.version" class="headerlink" title="Permanent link">#</a></h3>
+<a href="#iscc_core.schema.ISCC.context" class="headerlink" title="Permanent link">#</a></h3>
 
     <div class="doc doc-contents ">
 
-      <p>Version of ISCC Metadata Schema (SchemaVer).</p>
+      <p>JSON-LD Context URI</p>
+    </div>
+
+  </div>
+
+
+
+
+
+  <div class="doc doc-object doc-attribute">
+
+
+
+<h3 id="iscc_core.schema.ISCC.type" class="doc doc-heading">
+<code class="highlight language-python"><span class="nb">type</span><span class="p">:</span> <span class="n">AnyUrl</span></code>
+
+  <span class="doc doc-properties">
+      <small class="doc doc-property doc-property-pydantic-field"><code>pydantic-field</code></small>
+  </span>
+
+<a href="#iscc_core.schema.ISCC.type" class="headerlink" title="Permanent link">#</a></h3>
+
+    <div class="doc doc-contents ">
+
+      <p>JSON Schema URI</p>
     </div>
 
   </div>
@@ -1166,7 +1235,7 @@ ISCC        </code>
 
     <div class="doc doc-contents ">
 
-      <p>ISCC in standard encoding.</p>
+      <p>ISCC in canonical encoding.</p>
     </div>
 
   </div>
@@ -1263,6 +1332,30 @@ ISCC        </code>
     <div class="doc doc-contents ">
 
       <p>List of keywords relevant to the identified digital content.</p>
+    </div>
+
+  </div>
+
+
+
+
+
+  <div class="doc doc-object doc-attribute">
+
+
+
+<h3 id="iscc_core.schema.ISCC.identifier" class="doc doc-heading">
+<code class="highlight language-python"><span class="n">identifier</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]]</span></code>
+
+  <span class="doc doc-properties">
+      <small class="doc doc-property doc-property-pydantic-field"><code>pydantic-field</code></small>
+  </span>
+
+<a href="#iscc_core.schema.ISCC.identifier" class="headerlink" title="Permanent link">#</a></h3>
+
+    <div class="doc doc-contents ">
+
+      <p>Other identifier(s) such as those defined by ISO/TC 46/SC 9 referencing the work, product or other abstraction of which the referenced digital asset is a full or partial manifestation.</p>
     </div>
 
   </div>
@@ -1631,6 +1724,82 @@ ISCC        </code>
 
 
 
+  <div class="doc doc-object doc-method">
+
+
+
+<h3 id="iscc_core.schema.ISCC.dict" class="doc doc-heading">
+<code class="highlight language-python"><span class="nb">dict</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">*</span><span class="p">,</span> <span class="n">exclude_none</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span> <span class="n">by_alias</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span></code>
+
+
+<a href="#iscc_core.schema.ISCC.dict" class="headerlink" title="Permanent link">#</a></h3>
+
+    <div class="doc doc-contents ">
+
+      <p>Exclude empty fields and support @context alias.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>This overides the default BaseModel.dict()</p>
+</div>
+
+    </div>
+
+  </div>
+
+
+
+
+
+  <div class="doc doc-object doc-method">
+
+
+
+<h3 id="iscc_core.schema.ISCC.dict_raw" class="doc doc-heading">
+<code class="highlight language-python"><span class="n">dict_raw</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span></code>
+
+
+<a href="#iscc_core.schema.ISCC.dict_raw" class="headerlink" title="Permanent link">#</a></h3>
+
+    <div class="doc doc-contents ">
+
+      <p>Exclude any versioned properties (used mostly for testing)</p>
+
+    </div>
+
+  </div>
+
+
+
+
+
+  <div class="doc doc-object doc-method">
+
+
+
+<h3 id="iscc_core.schema.ISCC.json" class="doc doc-heading">
+<code class="highlight language-python"><span class="n">json</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">*</span><span class="p">,</span> <span class="n">exclude_none</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span> <span class="n">by_alias</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span></code>
+
+
+<a href="#iscc_core.schema.ISCC.json" class="headerlink" title="Permanent link">#</a></h3>
+
+    <div class="doc doc-contents ">
+
+      <p>Exclude empty fields and use @context alias.</p>
+<p>The by_alias=True allows us to generate valid JSON-LD by default. It translates
+our python "context" property to @context</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>This overides the default BaseModel.json()</p>
+</div>
+
+    </div>
+
+  </div>
+
+
+
+
+
   <div class="doc doc-object doc-attribute">
 
 
@@ -1660,15 +1829,16 @@ ISCC        </code>
 
 
 
-<h3 id="iscc_core.schema.ISCC.dict" class="doc doc-heading">
-<code class="highlight language-python"><span class="nb">dict</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">*</span><span class="p">,</span> <span class="n">exclude_unset</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span> <span class="n">exclude_none</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span></code>
+<h3 id="iscc_core.schema.ISCC.jcs" class="doc doc-heading">
+<code class="highlight language-python"><span class="n">jcs</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span></code>
 
 
-<a href="#iscc_core.schema.ISCC.dict" class="headerlink" title="Permanent link">#</a></h3>
+<a href="#iscc_core.schema.ISCC.jcs" class="headerlink" title="Permanent link">#</a></h3>
 
     <div class="doc doc-contents ">
 
-      <p>Exclude unset and none values by default.</p>
+      <p>Serialize metadata in conformance with JCS (RFC 8785) JSON canonicalization.</p>
+<p>Used as payload for cryptographic hashing.</p>
 
     </div>
 
@@ -1682,15 +1852,16 @@ ISCC        </code>
 
 
 
-<h3 id="iscc_core.schema.ISCC.jcs" class="doc doc-heading">
-<code class="highlight language-python"><span class="n">jcs</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span></code>
+<h3 id="iscc_core.schema.ISCC.jsonld_norm" class="doc doc-heading">
+<code class="highlight language-python"><span class="n">jsonld_norm</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span></code>
 
 
-<a href="#iscc_core.schema.ISCC.jcs" class="headerlink" title="Permanent link">#</a></h3>
+<a href="#iscc_core.schema.ISCC.jsonld_norm" class="headerlink" title="Permanent link">#</a></h3>
 
     <div class="doc doc-contents ">
 
-      <p>Serialize metadata in conformance with JCS (RFC 8785) JSON canonicalization</p>
+      <p>Returns <code>URDNA2015</code> normalized JSON-LD in <code>application/n-quads</code> format.</p>
+<p>Used for cryptographically binding assertions from metadata</p>
 
     </div>
 
@@ -1722,14 +1893,51 @@ ISCC        </code>
 
 
 
-  </div>
+  <div class="doc doc-object doc-method">
 
+
+
+<h3 id="iscc_core.schema.ISCC.jsonld_context" class="doc doc-heading">
+<code class="highlight language-python"><span class="n">jsonld_context</span><span class="p">()</span></code>
+
+  <span class="doc doc-properties">
+      <small class="doc doc-property doc-property-classmethod"><code>classmethod</code></small>
+  </span>
+
+<a href="#iscc_core.schema.ISCC.jsonld_context" class="headerlink" title="Permanent link">#</a></h3>
+
+    <div class="doc doc-contents ">
+
+      <p>Build JSON-LD context from ISCC model for publishing</p>
+
+<p><strong>Returns:</strong></p>
+<table>
+  <thead>
+    <tr>
+      <th>Type</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code>str</code></td>
+      <td><p>Serialized JSON-LD context for publishing.</p></td>
+    </tr>
+  </tbody>
+</table>
     </div>
 
   </div>
 
 
 
+
+
+  </div>
+
+    </div>
+
+  </div>
 
 
 
@@ -1813,6 +2021,8 @@ ISCC        </code>
     
     
       <script src="../../assets/javascripts/bundle.e1a181d9.min.js"></script>
+      
+        <script src="https://unpkg.com/mermaid/dist/mermaid.min.js"></script>
       
     
   </body>
