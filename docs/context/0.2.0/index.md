@@ -63,17 +63,17 @@ hide:
 ## tophash
 
 !!! term ""
-    Blake3 hash over concatenation of metahash and datahash
+    Multihash hash over concatenation of metahash and datahash
 
 ## metahash
 
 !!! term ""
-    Blake3 hash of metadata.
+    Multihash hash of metadata.
 
 ## datahash
 
 !!! term ""
-    Blake3 hash of media file.
+    Multihash hash of media file.
 
 ## duration
 

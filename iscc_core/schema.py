@@ -84,21 +84,27 @@ class ISCC(BaseModel):
 
     # Cryptographic hashes
     tophash: Optional[str] = Field(
-        title="tophash",
-        description="Blake3 hash over concatenation of metahash and datahash",
+        description="Multihash hash over concatenation of metahash and datahash",
+        context=f"https://purl.org/iscc/context/{__version__}/#tophash",
     )
     metahash: Optional[str] = Field(
-        title="metahash", description="Blake3 hash of metadata."
+        description="Multihash hash of metadata.",
+        context=f"https://purl.org/iscc/context/{__version__}/#metahash",
     )
     datahash: Optional[str] = Field(
-        title="datahash", description="Blake3 hash of media file."
+        description="Multihash hash of media file.",
+        context=f"https://purl.org/iscc/context/{__version__}/#datahash",
     )
 
     # Essential Media Properties
     duration: Optional[float] = Field(
-        description="Duration of audio-visual media in secondes."
+        description="Duration of audio-visual media in secondes.",
+        context="https://dbpedia.org/ontology/duration",
     )
-    fps: Optional[float] = Field(description="Frames per second of video assets.")
+    fps: Optional[float] = Field(
+        description="Frames per second of video assets.",
+        context="http://id.loc.gov/ontologies/bibframe/ProjectionSpeed",
+    )
     width: Optional[int] = Field(description="Width of visual media in pixels.")
     height: Optional[int] = Field(description="Height of visual media in pixels.")
     characters: Optional[int] = Field(
