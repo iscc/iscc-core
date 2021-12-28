@@ -8,6 +8,11 @@
             "filename": "https://dbpedia.org/ontology/filename",
             "filesize": "https://dbpedia.org/ontology/fileSize",
             "mediatype": "encodingFormat",
+            "tophash": "https://purl.org/iscc/context/0.2.0/#tophash",
+            "metahash": "https://purl.org/iscc/context/0.2.0/#metahash",
+            "datahash": "https://purl.org/iscc/context/0.2.0/#datahash",
+            "duration": "https://dbpedia.org/ontology/duration",
+            "fps": "http://id.loc.gov/ontologies/bibframe/ProjectionSpeed",
             "language": "inLanguage"
         }
     ]

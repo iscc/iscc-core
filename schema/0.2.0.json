@@ -87,28 +87,33 @@
       "type": "string"
     },
     "tophash": {
-      "title": "tophash",
-      "description": "Blake3 hash over concatenation of metahash and datahash",
+      "title": "Tophash",
+      "description": "Multihash hash over concatenation of metahash and datahash",
+      "context": "https://purl.org/iscc/context/0.2.0/#tophash",
       "type": "string"
     },
     "metahash": {
-      "title": "metahash",
-      "description": "Blake3 hash of metadata.",
+      "title": "Metahash",
+      "description": "Multihash hash of metadata.",
+      "context": "https://purl.org/iscc/context/0.2.0/#metahash",
       "type": "string"
     },
     "datahash": {
-      "title": "datahash",
-      "description": "Blake3 hash of media file.",
+      "title": "Datahash",
+      "description": "Multihash hash of media file.",
+      "context": "https://purl.org/iscc/context/0.2.0/#datahash",
       "type": "string"
     },
     "duration": {
       "title": "Duration",
       "description": "Duration of audio-visual media in secondes.",
+      "context": "https://dbpedia.org/ontology/duration",
       "type": "number"
     },
     "fps": {
       "title": "Fps",
       "description": "Frames per second of video assets.",
+      "context": "http://id.loc.gov/ontologies/bibframe/ProjectionSpeed",
       "type": "number"
     },
     "width": {
