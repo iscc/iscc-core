@@ -55,7 +55,7 @@
     "identifier": {
       "title": "Identifier",
       "description": "Other identifier(s) such as those defined by ISO/TC 46/SC 9 referencing the work, product or other abstraction of which the referenced digital asset is a full or partial manifestation.",
-      "context": "https://purl.org/iscc/context/0.2.0/identifier",
+      "context": "https://purl.org/iscc/context/0.2.0/#identifier",
       "anyOf": [
         {
           "type": "string"

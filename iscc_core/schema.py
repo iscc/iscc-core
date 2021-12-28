@@ -62,7 +62,7 @@ class ISCC(BaseModel):
         description="Other identifier(s) such as those defined by ISO/TC 46/SC 9 "
         "referencing the work, product or other abstraction of which the referenced "
         "digital asset is a full or partial manifestation.",
-        context=f"https://purl.org/iscc/context/{__version__}/identifier",
+        context=f"https://purl.org/iscc/context/{__version__}/#identifier",
     )
 
     # File Properties

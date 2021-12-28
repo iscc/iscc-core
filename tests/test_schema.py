@@ -43,7 +43,7 @@ def test_ISCC_jsonld_context():
             {
                 "type": "@type",
                 "iscc": "@id",
-                "identifier": "https://purl.org/iscc/context/0.2.0/identifier",
+                "identifier": "https://purl.org/iscc/context/0.2.0/#identifier",
                 "filename": "https://dbpedia.org/ontology/filename",
                 "filesize": "https://dbpedia.org/ontology/fileSize",
                 "mediatype": "encodingFormat",

@@ -74,14 +74,15 @@ plugins:
 
 
 markdown_extensions:
-  - toc:
-      permalink: "#"
+  - meta
   - admonition
   - pymdownx.details
   - abbr
   - attr_list
   - md_in_html
   - footnotes
+  - toc:
+      permalink: "#"
   - pymdownx.highlight:
       anchor_linenums: true
   - pymdownx.inlinehilite
