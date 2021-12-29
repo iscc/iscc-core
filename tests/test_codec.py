@@ -123,11 +123,21 @@ def test_read_varnibble():
     )
 
 
-def test_iscc_clean():
+def test_codec_clean():
     assert ic.codec.clean("somecode") == "somecode"
     assert ic.codec.clean("ISCC: SOME-CODE") == "SOMECODE"
     assert ic.codec.clean(" SOMECODE ") == "SOMECODE"
     assert ic.codec.clean("ISCC:") == ""
+
+
+def test_codec_clean_raises_bad_scheme():
+    with pytest.raises(ValueError):
+        ic.clean("http://whatever")
+
+
+def test_codec_clean_raises_multiple_colom():
+    with pytest.raises(ValueError):
+        ic.clean("ISCC:something:something")
 
 
 def test_code_properties():
@@ -319,6 +329,13 @@ def test_normalize_dual_dash():
     assert n == "ISCC:KUBW2PRCRS5LNVZVJKAFAVOJXLZZM"
 
 
+def test_clean_dual_dash():
+    assert (
+        ic.clean("GAAW2PRCRS5LNVZV-IAAUVACQKXE3V44W")
+        == "GAAW2PRCRS5LNVZVIAAUVACQKXE3V44W"
+    )
+
+
 def test_normalize_dual_scheme():
     n = ic.normalize("ISCC:GAAW2PRCRS5LNVZVIAAUVACQKXE3V44W")
     assert n == "ISCC:KUBW2PRCRS5LNVZVJKAFAVOJXLZZM"
@@ -407,3 +424,10 @@ def test_normalize_mf_base58btc_single():
 
 def test_normalize_mf_base64_url_single():
     assert ic.normalize("uzAEAARvqNdFG-mVe") == "ISCC:AAARX2RV2FDPUZK6"
+
+
+def test_codec_normalize_raises():
+    code = ic.gen_meta_code("Hello", "World")
+    bad = "f" + (b"\xcc\xff" + code.code_obj.bytes).hex()
+    with pytest.raises(ValueError):
+        ic.normalize(bad)

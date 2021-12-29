@@ -51,10 +51,11 @@ def test_gen_iscc_id_v0_data_instance():
 
 def test_incr_iscc_id():
     assert iscc_core.iscc_id.incr_iscc_id("MAADB7WD7TC5XELQ") == "MAADB7WD7TC5XELQAE"
-    assert (
-        iscc_core.codec.Code("MAADB7WD7TC5XELQAE").explain
-        == "ID-PRIVATE-V0-64-30fec3fcc5db9170-1"
-    )
+
+
+def test_incr_iscc_id_explain():
+    incr = iscc_core.iscc_id.incr_iscc_id("MAADB7WD7TC5XELQ")
+    assert iscc_core.codec.Code(incr).explain == "ID-PRIVATE-V0-64-30fec3fcc5db9170-1"
 
 
 def test_incr_iscc_id_v0():

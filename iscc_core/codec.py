@@ -367,7 +367,9 @@ def decode_base64(code: str) -> bytes:
 
 def decompose(iscc_code):
     # type: (str) -> List[str]
-    """Decompose a multi-component ISCC into a list of singular componet codes."""
+    """
+    Decompose a multi-component ISCC into a list of singular componet codes.
+    """
 
     iscc_code = clean(iscc_code)
     components = []
@@ -415,13 +417,21 @@ def decompose(iscc_code):
 def normalize(iscc_code):
     # type: (str) -> str
     """
-    Normalize an ISCC to its canonical form.
+    Normalize an ISCC to its canonical URI form.
 
     The canonical form of an ISCC is its shortest base32 encoded representation
     prefixed with the string `ISCC:`.
 
+    Possible valid inputs:
+        MEACB7X7777574L6
+        ISCC:MEACB7X7777574L6
+        fcc010001657fe7cafe9791bb
+        iscc:maagztfqttvizpjr
+        Iscc:Maagztfqttvizpjr
+
+
     !!! info
-        A concatenated sequence of codes will be composed ino a single ISCC of MainType
+        A concatenated sequence of codes will be composed into a single ISCC of MainType
         `MT.ISCC` if possible.
 
     !!! example
@@ -434,21 +444,25 @@ def normalize(iscc_code):
     :param str iscc_code: Any valid ISCC string
     :return: Normalized ISCC
     :rtype: str
+    :raise: ValueError on malformed ISCC string
     """
     from iscc_core.iscc_code import gen_iscc_code_v0
 
     decoders = {
-        MULTIBASE.base16: bytes.fromhex,
-        MULTIBASE.base32: decode_base32,
-        MULTIBASE.base58btc: base58.b58decode,
-        MULTIBASE.base64url: decode_base64,
+        MULTIBASE.base16: bytes.fromhex,  # f
+        MULTIBASE.base32: decode_base32,  # b
+        MULTIBASE.base58btc: base58.b58decode,  # z
+        MULTIBASE.base64url: decode_base64,  # u
     }
 
-    # Transcode if <multibase><multicodec> encoded
-    prefix = iscc_code[0]
-    if prefix in decoders.keys():
-        decoded = decoders[prefix](iscc_code.lstrip(prefix))
-        iscc_code = encode_base32(decoded.lstrip(Code.mc_prefix))
+    # Transcode to base32 if <multibase><multicodec> encoded
+    multibase_prefix = iscc_code[0]
+    if multibase_prefix in decoders.keys():
+        decoder = decoders[multibase_prefix]
+        decoded = decoder(iscc_code[1:])
+        if not decoded.startswith(Code.mc_prefix):
+            raise ValueError(f"Malformed multiformat codec: {decoded[:2]}")
+        iscc_code = encode_base32(decoded[2:])
 
     decomposed = decompose(iscc_code)
     recomposed = (
@@ -464,15 +478,35 @@ def normalize(iscc_code):
 
 def clean(iscc):
     # type: (str) -> str
-    """Cleanup ISCC String.
-
-    Removes leading scheme and dashes.
     """
-    return iscc.split(":")[-1].strip().replace("-", "")
+    Cleanup ISCC string.
+
+    Removes leading scheme, dashes, leading/trailing whitespace.
+
+    :param str iscc: Any valid ISCC string
+    :return: Cleaned ISCC string.
+    :rtype: str
+    """
+    split = [part.strip() for part in iscc.strip().split(":")]
+    if len(split) == 1:
+        code = split[0]
+        # remove dashes if not multiformat
+        if code[0] not in list(MULTIBASE):
+            code = code.replace("-", "")
+        return code
+    elif len(split) == 2:
+        scheme, code = split
+        if scheme.lower() != "iscc":
+            raise ValueError(f"Invalid scheme: {scheme}")
+        return code.replace("-", "")
+    else:
+        raise ValueError(f"Malformed ISCC string: {iscc}")
 
 
 class Code:
-    """Convenience class to handle different representations of an ISCC code."""
+    """
+    Convenience class to handle different representations of an ISCC.
+    """
 
     #: Multicodec prefix code
     mc_prefix: bytes = b"\xcc\x01"
@@ -490,6 +524,7 @@ class Code:
         if isinstance(code, Code):
             code_fields = code._head + (code.hash_bytes,)
         elif isinstance(code, str):
+            # code = clean(code)
             code_fields = read_header(decode_base32(code))
         elif isinstance(code, tuple):
             code_fields = code
