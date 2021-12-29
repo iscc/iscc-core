@@ -210,17 +210,125 @@ def encode_component(mtype, stype, version, length, digest):
     return component_code
 
 
-def write_header(mtype, stype, version=0, length=64):
+# Possible combinations of ISCC units for the first 3 components of MT.ISCC
+UNITS = (
+    tuple(),
+    (MT.CONTENT,),
+    (MT.SEMANTIC,),
+    (MT.CONTENT, MT.SEMANTIC),
+    (MT.META,),
+    (MT.META, MT.CONTENT),
+    (MT.META, MT.SEMANTIC),
+    (MT.META, MT.SEMANTIC, MT.META.CONTENT),
+)
+
+
+def encode_units(units):
+    # type: (Tuple) -> int
+    """
+    Encodes a combination of ISCC units to an integer between 0-7 to be used as length
+    value for the final encoding of MT.ISCC
+    """
+    return UNITS.index(units)
+
+
+def decode_units(unit_id):
+    # type: (int) -> Tuple[MT, ...]
+    """
+    Decodes an ISCC header length value that has been encoded with a unit_id to an
+    ordered tuple of MainTypes.
+    """
+    units = sorted(UNITS[unit_id])
+    return tuple(MT(u) for u in units)
+
+
+def encode_length(mtype, length):
+    # type: (MainType, Length) -> int
+    """
+    Encode length to integer value for header encoding.
+
+    The `length` value has MainType-specific semantics:
+
+    MainTypes `META`, `SEMANTIC`, `CONTENT`, `DATA`, `INSTANCE`:
+        Length means number of bits for the body.
+        Length is encoded as number of 32-bit chunks (0 being 32bits)
+        Examples: 32 -> 0, 64 -> 1, 96 -> 2 ...
+
+    MainType `ID`:
+        Lengths means number the number of bits for the body including the counter
+        Length is encoded as number of bytes of the counter (64-bit body is implicit)
+        Examples:
+            64 -> 0 (No counter)
+            72 -> 1 (One byte counter)
+            80 -> 2 (Two byte counter)
+            ...
+
+    MainType `ISCC`:
+        Length means the composition of optional 64-bit components included in the ISCC
+        Examples:
+            No optional components -> 0000 -> 0
+            CONTENT                -> 0001 -> 1
+            SEMANTIC               -> 0010 -> 2
+            SEMANTIC, CONTENT      -> 0011 -> 3
+            META                   -> 0100 -> 4
+            META, CONTENT          -> 0101 -> 5
+            ...
+
+    :param MainType mtype: The MainType for which to encode the length value.
+    :param Length length: The length expressed according to the semantics of the type
+    :return: The length value encoded as integer for use with write_header.
+    """
+
+    error = f"Invalid length {length} for MainType {mtype}"
+    # standard case (length field denotes number of 32-bit chunks, 0 being 32-bits)
+    if mtype in (MT.META, MT.SEMANTIC, MT.CONTENT, MT.DATA, MT.INSTANCE):
+        if length >= 32 and not length % 32:
+            return (length // 32) - 1
+        raise ValueError(error)
+    # flag type encoding of included components (pass through as encoded out-of-band)
+    elif mtype == MT.ISCC:
+        if 0 <= length <= 7:
+            return length
+        raise ValueError(error)
+    # counter byte lenght encoding
+    elif mtype == MT.ID:
+        if 64 <= length <= 96:
+            return (length - 64) // 8
+        raise ValueError(error)
+    else:
+        raise ValueError(error)
+
+
+def decode_length(mtype, length):
+    # type: (MainType, Length) -> Union[LN, Tuple[MT, ...]]
+    """
+    Dedoce raw length value from ISCC header to length in number of bits.
+
+    Decodes a raw header integer value in to its semantically meaningfull value (eg.
+    number of bits, combination of units.
+    For MT.ISCC it will return the unit composition of the ISCC (tuple of MainTypes).
+    """
+    if mtype in (MT.META, MT.SEMANTIC, MT.CONTENT, MT.DATA, MT.INSTANCE):
+        return LN((length + 1) * 32)
+    elif mtype == MT.ISCC:
+        return decode_units(length)
+    elif mtype == MT.ID:
+        return LN(length * 8 + 64)
+    else:
+        raise ValueError(f"Invalid length {length} for MainType {mtype}")
+
+
+def write_header(mtype, stype, version=0, length=1):
     # type: (MainType, SubType, Version, Length) -> bytes
     """
     Encodes header values with nibble-sized (4-bit) variable-length encoding.
     The result is minimum 2 and maximum 8 bytes long. If the final count of nibbles
     is uneven it is padded with 4-bit `0000` at the end.
 
-    :param MainType mtype: Main-type of component.
-    :param SubType stype: Sub-type of component.
+    :param MainType mtype: MainType of component.
+    :param SubType stype: SubType of component.
     :param Version version: Version of component algorithm.
-    :param Length length: Length of component in number of bits (multiple of 32)
+    :param Length length: Length of component (default 1 means 64-bits)
     :return: Varnibble stream encoded ISCC header as bytes.
     :rtype: bytes
 
