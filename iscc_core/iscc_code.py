@@ -15,19 +15,19 @@ The following combinations of components are possible:
 - Content, Data, Instance (192-bit / 64-bit per component)
 - Data, Instance (256 or 128 bit / 64 or 128-bit per component)
 """
+from typing import Sequence
 from operator import itemgetter
-from typing import Iterable
 from iscc_core.schema import ISCC
 import iscc_core as ic
 
 
 def gen_iscc_code(codes):
-    # type: (Iterable[str]) -> ISCC
+    # type: (Sequence[str]) -> ISCC
     """
     Combine multiple ISCC components to a composite ISCC-CODE with a common header using
     the latest standard algorithm.
 
-    :param Iterable[str] codes: A valid sequence of singluar ISCC codes.
+    :param Sequence[str] codes: A valid sequence of singluar ISCC codes.
     :return: An ISCC object with ISCC-CODE
     :rtype: ISCC
     """
@@ -35,61 +35,47 @@ def gen_iscc_code(codes):
 
 
 def gen_iscc_code_v0(codes):
-    # type: (Iterable[str]) -> ISCC
+    # type: (Sequence[str]) -> ISCC
     """
-    Combine multiple ISCC components to a composite ISCC-CODE with a common header using
+    Combine multiple ISCC-UNITS to an ISCC-CODE with a common header using
     algorithm v0.
 
-    :param Iterable[str] codes: A valid sequence of singluar ISCC codes.
+    :param Sequence[str] codes: A valid sequence of singluar ISCC-UNITS.
     :return: An ISCC object with ISCC-CODE
     :rtype: ISCC
     """
 
-    # Validate combinatorial constraints
-    valid_mt_mix = {
-        (ic.MT.META, ic.MT.CONTENT, ic.MT.DATA, ic.MT.INSTANCE),
-        (ic.MT.CONTENT, ic.MT.DATA, ic.MT.INSTANCE),
-        (ic.MT.DATA, ic.MT.INSTANCE),
-    }
+    codes = [ic.clean(code) for code in codes]
 
-    # TODO: add suport for Semantic-Code
+    # Check basic constraints
+    if len(codes) < 2:
+        raise ValueError("Minimum two ISCC units required to generate valid ISCC-CODE")
+    for code in codes:
+        if len(code) < 16:
+            raise ValueError(
+                f"Cannot build ISCC-CODE from units shorter than 64-bits: {code}"
+            )
 
+    # Decode units and sort by MainType
     decoded = sorted(
         [ic.read_header(ic.decode_base32(code)) for code in codes], key=itemgetter(0)
     )
     main_types = tuple(d[0] for d in decoded)
+    if main_types[-2:] != (ic.MT.DATA, ic.MT.INSTANCE):
+        raise ValueError(f"ISCC-CODE requires at least MT.DATA and MT.INSTANCE units.")
 
-    assert main_types in valid_mt_mix, f"Combinatorial constraint error: {main_types}"
+    # Determine SubType (generic mediatype)
+    sub_types = [t[1] for t in decoded if t[0] in {ic.MT.SEMANTIC, ic.MT.CONTENT}]
+    if len(set(sub_types)) > 1:
+        raise ValueError(f"Semantic-Code and Content-Code must be of same SubType")
+    st = sub_types.pop() if sub_types else ic.ST_ISCC.SUM
 
-    # Validate component length contraints
-    lengths = set(d[3] for d in decoded)
-    assert all(l >= 64 for l in lengths), f"Component length constraint error {lengths}"
+    # Encode unit combination
+    encoded_length = ic.encode_units(main_types[:-2])
 
-    # Validate component version constraints
-    versions = set(d[2] for d in decoded)
-    assert all(v == ic.VS.V0 for v in versions), f"Version constraint error {versions}"
+    # Collect and truncate unit digests to 64-bit
+    digest = b"".join([t[-1][:8] for t in decoded])
+    header = ic.write_header(ic.MT.ISCC, st, ic.VS.V0, encoded_length)
 
-    # Derive per component length
-    is_di = main_types == (ic.MT.DATA, ic.MT.INSTANCE)
-    long_codes = all(d[3] >= 128 for d in decoded)
-    if is_di and long_codes:
-        component_nbytes = 128 // 8
-    else:
-        component_nbytes = 64 // 8
-
-    # Concatenate bodies
-    body = b"".join([d[-1][:component_nbytes] for d in decoded])
-
-    # Construct header values
-    mt = ic.MT.ISCC
-    st = ic.ST_ISCC.SUM
-    for d in decoded:
-        if d[0] == ic.MT.CONTENT:
-            st = d[1]
-            break
-    ln = (component_nbytes * len(decoded)) * 8
-
-    # Build ISCC
-    iscc_code = ic.encode_component(mt, st, ic.VS.V0, ln, body)
-
-    return ISCC(iscc=iscc_code)
+    code = ic.encode_base32(header + digest)
+    return ISCC(iscc=code)

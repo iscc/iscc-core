@@ -8,6 +8,7 @@ import json
 import pathlib
 import iscc_core
 from iscc_core.schema import ISCC
+from loguru import logger as log
 
 HERE = pathlib.Path(__file__).parent.absolute()
 INPUTS = HERE / "inputs.yaml"
@@ -59,13 +60,17 @@ def main():
         data = yaml.safe_load(stream)
 
     for funcname, tests in data.items():
-        for _, testdata in tests.items():
+        for testname, testdata in tests.items():
             func = getattr(iscc_core, funcname)
             args = testdata["inputs"]
             dargs = copy(args)
             if isinstance(dargs[0], str) and dargs[0].startswith("stream:"):
                 dargs[0] = io.BytesIO(bytes.fromhex(dargs[0].lstrip("stream:")))
-            result = func(*dargs)
+            try:
+                result = func(*dargs)
+            except Exception as e:
+                log.error(f"{testname}.{funcname} called with {dargs} raised {e}")
+                raise
             if isinstance(result, ISCC):
                 testdata["outputs"] = result.dict()
             else:

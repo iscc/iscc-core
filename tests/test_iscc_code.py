@@ -1,4 +1,6 @@
 # -*- coding: utf-8 -*-
+import pytest
+
 import iscc_core
 
 
@@ -13,57 +15,80 @@ DID_64 = "GAAQQICFKJYKY4KU"
 def test_gen_iscc_code_full():
     icode = iscc_core.gen_iscc_code([MID_64, CID_64, DID_128, IID_256])
     assert icode.dict_raw() == {
-        "iscc": "KADYPXW445FTYNJ3CYSXHAFJMA2HUWULUNRFE3BLHRSCXYH2M5AEGQY"
+        "iscc": "KACYPXW445FTYNJ3CYSXHAFJMA2HUWULUNRFE3BLHRSCXYH2M5AEGQY"
     }
     assert (
         icode.code_obj.explain
-        == "ISCC-TEXT-V0-256-87dedce74b3c353b16257380a960347a5a8ba362526c2b3c642be0fa67404343"
+        == "ISCC-TEXT-V0-MCDI-87dedce74b3c353b16257380a960347a5a8ba362526c2b3c642be0fa67404343"
     )
 
 
 def test_gen_iscc_code_v0_full():
     icode = iscc_core.gen_iscc_code_v0([MID_64, CID_64, DID_128, IID_256])
     assert icode.dict_raw() == {
-        "iscc": "KADYPXW445FTYNJ3CYSXHAFJMA2HUWULUNRFE3BLHRSCXYH2M5AEGQY"
+        "iscc": "KACYPXW445FTYNJ3CYSXHAFJMA2HUWULUNRFE3BLHRSCXYH2M5AEGQY"
     }
     assert (
         icode.code_obj.explain
-        == "ISCC-TEXT-V0-256-87dedce74b3c353b16257380a960347a5a8ba362526c2b3c642be0fa67404343"
+        == "ISCC-TEXT-V0-MCDI-87dedce74b3c353b16257380a960347a5a8ba362526c2b3c642be0fa67404343"
     )
 
 
 def test_gen_iscc_code_v0_no_meta():
     icode = iscc_core.gen_iscc_code_v0([CID_64, DID_128, IID_256])
-    assert icode.dict_raw() == {"iscc": "KACRMJLTQCUWAND2LKF2GYSSNQVTYZBL4D5GOQCDIM"}
+    assert icode.dict_raw() == {"iscc": "KAARMJLTQCUWAND2LKF2GYSSNQVTYZBL4D5GOQCDIM"}
     assert (
         icode.code_obj.explain
-        == "ISCC-TEXT-V0-192-16257380a960347a5a8ba362526c2b3c642be0fa67404343"
+        == "ISCC-TEXT-V0-CDI-16257380a960347a5a8ba362526c2b3c642be0fa67404343"
     )
 
 
-def test_gen_iscc_code_v0_no_meta_content_256():
+def test_gen_iscc_code_v0_no_meta_content():
     icode = iscc_core.gen_iscc_code_v0([DID_128, IID_256])
-    assert icode.dict_raw() == {
-        "iscc": "KUDVVC5DMJJGYKZ4ZBYVNYABFFYXGZBL4D5GOQCDIP2ACG75YERBLNY"
-    }
-    assert (
-        icode.code_obj.explain
-        == "ISCC-SUM-V0-256-5a8ba362526c2b3cc87156e001297173642be0fa67404343f4011bfdc12215b7"
-    )
+    assert icode.dict_raw() == {"iscc": "KUAFVC5DMJJGYKZ4MQV6B6THIBBUG"}
+    # TODO mabye show length for SubType SUM as we now the unit composition.
+    # we may also get a ISCC-SUM-V0-256 version
+    assert icode.code_obj.explain == "ISCC-SUM-V0-DI-5a8ba362526c2b3c642be0fa67404343"
 
 
 def test_gen_iscc_code_v0_no_meta_content_128():
     icode = iscc_core.gen_iscc_code_v0([DID_64, IID_256])
-    assert icode.dict_raw() == {"iscc": "KUBQQICFKJYKY4KUMQV6B6THIBBUG"}
-    assert icode.code_obj.explain == "ISCC-SUM-V0-128-0820455270ac7154642be0fa67404343"
+    assert icode.dict_raw() == {"iscc": "KUAAQICFKJYKY4KUMQV6B6THIBBUG"}
+    assert icode.code_obj.explain == "ISCC-SUM-V0-DI-0820455270ac7154642be0fa67404343"
 
 
 def test_gen_iscc_code_v0_ordering():
     icode = iscc_core.gen_iscc_code_v0([CID_64, MID_64, IID_256, DID_128])
     assert icode.dict_raw() == {
-        "iscc": "KADYPXW445FTYNJ3CYSXHAFJMA2HUWULUNRFE3BLHRSCXYH2M5AEGQY"
+        "iscc": "KACYPXW445FTYNJ3CYSXHAFJMA2HUWULUNRFE3BLHRSCXYH2M5AEGQY"
     }
     assert (
         icode.code_obj.explain
-        == "ISCC-TEXT-V0-256-87dedce74b3c353b16257380a960347a5a8ba362526c2b3c642be0fa67404343"
+        == "ISCC-TEXT-V0-MCDI-87dedce74b3c353b16257380a960347a5a8ba362526c2b3c642be0fa67404343"
     )
+
+
+def test_gen_iscc_code_v0_insufficient_codes_raises():
+    with pytest.raises(ValueError) as e:
+        iscc_core.gen_iscc_code_v0([CID_64])
+        assert "Minimum two" in str(e)
+
+
+def test_gen_iscc_code_v0_32_bit_codes_raise():
+    with pytest.raises(ValueError) as e:
+        iscc_core.gen_iscc_code_v0(["AAAGKLHFXM", "EAAP5Q74YU"])
+        assert "Cannot build" in str(e)
+
+
+def test_gen_iscc_code_v0_data_or_instance_missing_raises():
+    with pytest.raises(ValueError) as e:
+        iscc_core.gen_iscc_code_v0([MID_64, CID_64, DID_128])
+        assert "ISCC-CODE requires" in str(e)
+
+
+def test_gen_iscc_code_v0_incompat_semantic_content_raises():
+    sema = iscc_core.Code.rnd(iscc_core.MT.SEMANTIC, 0, bits=64).code
+    cont = iscc_core.Code.rnd(iscc_core.MT.CONTENT, 1, bits=64).code
+    with pytest.raises(ValueError) as e:
+        iscc_core.gen_iscc_code_v0([sema, cont, DID_64, IID_256])
+        assert "Semantic-Code" in str(e)

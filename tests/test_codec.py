@@ -12,27 +12,27 @@ def test_main_type():
 
 
 def test_write_header():
-    with pytest.raises(AssertionError):
-        ic.codec.write_header(0, 0, 0, 0)
-    assert ic.codec.write_header(0, 0, 0, 32) == bytes([0b0000_0000, 0b0000_0000])
-    assert ic.codec.write_header(1, 0, 0, 32) == bytes([0b0001_0000, 0b0000_0000])
-    assert ic.codec.write_header(7, 1, 1, 64) == bytes([0b0111_0001, 0b0001_0001])
-    assert ic.codec.write_header(8, 1, 1, 64) == bytes(
+    # with pytest.raises(AssertionError):
+    #     ic.codec.write_header(0, 0, 0, 0)
+    assert ic.codec.write_header(0, 0, 0, 0) == bytes([0b0000_0000, 0b0000_0000])
+    assert ic.codec.write_header(1, 0, 0, 0) == bytes([0b0001_0000, 0b0000_0000])
+    assert ic.codec.write_header(7, 1, 1, 1) == bytes([0b0111_0001, 0b0001_0001])
+    assert ic.codec.write_header(8, 1, 1, 1) == bytes(
         [0b1000_0000, 0b0001_0001, 0b0001_0000]
     )
-    assert ic.codec.write_header(8, 8, 1, 64) == bytes(
+    assert ic.codec.write_header(8, 8, 1, 1) == bytes(
         [0b1000_0000, 0b1000_0000, 0b0001_0001]
     )
 
 
 def test_read_header():
     rh = ic.codec.read_header
-    assert rh(bytes([0b0000_0000, 0b0000_0000])) == (0, 0, 0, 32, b"")
-    assert rh(bytes([0b0000_0000, 0b0000_0000, 0b0000_0000])) == (0, 0, 0, 32, b"\x00")
-    assert rh(bytes([0b0001_0000, 0b0000_0000])) == (1, 0, 0, 32, b"")
-    assert rh(bytes([0b0111_0001, 0b0001_0001])) == (7, 1, 1, 64, b"")
-    assert rh(bytes([0b1000_0000, 0b0001_0001, 0b0001_0000])) == (8, 1, 1, 64, b"")
-    assert rh(bytes([0b1000_0000, 0b1000_0000, 0b0001_0001])) == (8, 8, 1, 64, b"")
+    assert rh(bytes([0b0000_0000, 0b0000_0000])) == (0, 0, 0, 0, b"")
+    assert rh(bytes([0b0000_0000, 0b0000_0000, 0b0000_0000])) == (0, 0, 0, 0, b"\x00")
+    assert rh(bytes([0b0001_0000, 0b0000_0000])) == (1, 0, 0, 0, b"")
+    assert rh(bytes([0b0111_0001, 0b0001_0001])) == (7, 1, 1, 1, b"")
+    assert rh(bytes([0b1000_0000, 0b0001_0001, 0b0001_0000])) == (8, 1, 1, 1, b"")
+    assert rh(bytes([0b1000_0000, 0b1000_0000, 0b0001_0001])) == (8, 8, 1, 1, b"")
 
 
 def test_encode_base32():
@@ -173,7 +173,7 @@ def test_code_properties():
 
 
 def test_code_hashable():
-    code = ic.codec.Code.rnd()
+    code = ic.codec.Code.rnd(ic.MT.META)
     assert code in {code}
 
 
@@ -248,8 +248,8 @@ def test_decompose_data_instance():
     inst = "IAB3GN6WUSNSX3MJBT6PBTVFAQZ7G"
     di = [data, inst]
     code = ic.iscc_code.gen_iscc_code_v0([data, inst]).iscc
-    assert code == "KUDTMCHNLCHTI2NHZFXOLEB53KSPVMZX22SJWK7NREGPZ4GOUUCDH4Y"
-    assert ic.decompose(code) == di
+    assert code == "KUADMCHNLCHTI2NHWM35NJE3FPWYS"
+    assert ic.decompose(code) == ["GAATMCHNLCHTI2NH", "IAA3GN6WUSNSX3MJ"]
 
 
 def test_decompose_content_data_instance():
@@ -258,7 +258,7 @@ def test_decompose_content_data_instance():
     inst = "IAAX3C2BUFV6XPQV"
     di = [cont, data, inst]
     code = ic.iscc_code.gen_iscc_code_v0([cont, data, inst]).iscc
-    assert code == "KMCRIURG4CVZ3M7N6JD7UWYB4Q4Q47MLIGQWX256CU"
+    assert code == "KMARIURG4CVZ3M7N6JD7UWYB4Q4Q47MLIGQWX256CU"
     assert ic.decompose(code) == di
 
 
@@ -269,15 +269,14 @@ def test_decompose_meta_content_data_instance():
     inst = "IAA4FWMY2ANPAYWJ"
     di = [meta, cont, data, inst]
     code = ic.iscc_code.gen_iscc_code_v0([meta, cont, data, inst]).iscc
-    assert code == "KED4CPEJKZZ7A4HZMZUFTZYEOHCPLIXPTTCOIKFIEPBNTGGQDLYGFSI"
+    assert code == "KEC4CPEJKZZ7A4HZMZUFTZYEOHCPLIXPTTCOIKFIEPBNTGGQDLYGFSI"
     assert ic.decompose(code) == di
 
 
 def test_decompose_invalid():
     body = os.urandom(16)
-    code = ic.encode_component(ic.MT.ISCC, ic.ST_ISCC.TEXT, 0, 128, body)
     with pytest.raises(ValueError):
-        ic.decompose(code)
+        ic.encode_component(ic.MT.ISCC, ic.ST_ISCC.TEXT, 0, 128, body)
 
 
 def test_decompose_str_of_codes():
@@ -321,12 +320,12 @@ def test_normalize_single_mixed_case():
 
 def test_normalize_dual():
     n = ic.normalize("GAAW2PRCRS5LNVZVIAAUVACQKXE3V44W")
-    assert n == "ISCC:KUBW2PRCRS5LNVZVJKAFAVOJXLZZM"
+    assert n == "ISCC:KUAG2PRCRS5LNVZVJKAFAVOJXLZZM"
 
 
 def test_normalize_dual_dash():
     n = ic.normalize("GAAW2PRCRS5LNVZV-IAAUVACQKXE3V44W")
-    assert n == "ISCC:KUBW2PRCRS5LNVZVJKAFAVOJXLZZM"
+    assert n == "ISCC:KUAG2PRCRS5LNVZVJKAFAVOJXLZZM"
 
 
 def test_clean_dual_dash():
@@ -338,52 +337,52 @@ def test_clean_dual_dash():
 
 def test_normalize_dual_scheme():
     n = ic.normalize("ISCC:GAAW2PRCRS5LNVZVIAAUVACQKXE3V44W")
-    assert n == "ISCC:KUBW2PRCRS5LNVZVJKAFAVOJXLZZM"
+    assert n == "ISCC:KUAG2PRCRS5LNVZVJKAFAVOJXLZZM"
 
 
 def test_normalize_dual_scheme_dash():
     n = ic.normalize("ISCC:GAAW2PRCRS5LNVZV-IAAUVACQKXE3V44W")
-    assert n == "ISCC:KUBW2PRCRS5LNVZVJKAFAVOJXLZZM"
+    assert n == "ISCC:KUAG2PRCRS5LNVZVJKAFAVOJXLZZM"
 
 
 def test_normalize_triple():
     n = ic.normalize("EMAZQGH26X5XQ5HAGAA5U77EOAU2NU4YIAAU4SKRQCZZEYQD")
-    assert n == "ISCC:KMCZQGH26X5XQ5HA3J76I4BJU3JZQTSJKGALHETCAM"
+    assert n == "ISCC:KMAZQGH26X5XQ5HA3J76I4BJU3JZQTSJKGALHETCAM"
 
 
 def test_normalize_triple_dash():
     n = ic.normalize("EMAZQGH26X5XQ5HA-GAA5U77EOAU2NU4Y-IAAU4SKRQCZZEYQD")
-    assert n == "ISCC:KMCZQGH26X5XQ5HA3J76I4BJU3JZQTSJKGALHETCAM"
+    assert n == "ISCC:KMAZQGH26X5XQ5HA3J76I4BJU3JZQTSJKGALHETCAM"
 
 
 def test_normalize_triple_scheme():
     n = ic.normalize("ISCC:EMAZQGH26X5XQ5HAGAA5U77EOAU2NU4YIAAU4SKRQCZZEYQD")
-    assert n == "ISCC:KMCZQGH26X5XQ5HA3J76I4BJU3JZQTSJKGALHETCAM"
+    assert n == "ISCC:KMAZQGH26X5XQ5HA3J76I4BJU3JZQTSJKGALHETCAM"
 
 
 def test_normalize_triple_scheme_dash():
     n = ic.normalize("ISCC:EMAZQGH26X5XQ5HA-GAA5U77EOAU2NU4Y-IAAU4SKRQCZZEYQD")
-    assert n == "ISCC:KMCZQGH26X5XQ5HA3J76I4BJU3JZQTSJKGALHETCAM"
+    assert n == "ISCC:KMAZQGH26X5XQ5HA3J76I4BJU3JZQTSJKGALHETCAM"
 
 
 def test_normalize_full_scheme():
-    n = ic.normalize("ISCC:KED4CPEJKZZ7A4HZMZUFTZYEOHCPLIXPTTCOIKFIEPBNTGGQDLYGFSI")
-    assert n == "ISCC:KED4CPEJKZZ7A4HZMZUFTZYEOHCPLIXPTTCOIKFIEPBNTGGQDLYGFSI"
+    n = ic.normalize("ISCC:KACQMIRUW6L64O2CAZCVE2HHXGBO7EFCF3C4GRFCDPD2NM53NKUCXUY")
+    assert n == "ISCC:KACQMIRUW6L64O2CAZCVE2HHXGBO7EFCF3C4GRFCDPD2NM53NKUCXUY"
 
 
 def test_normalize_full_scheme_lower():
-    n = ic.normalize("iscc:ked4cpejkzz7a4hzmzuftzyeohcplixpttcoikfiepbntggqdlygfsi")
-    assert n == "ISCC:KED4CPEJKZZ7A4HZMZUFTZYEOHCPLIXPTTCOIKFIEPBNTGGQDLYGFSI"
+    n = ic.normalize("iscc:kacqmiruw6l64o2cazcve2hhxgbo7efcf3c4grfcdpd2nm53nkucxuy")
+    assert n == "ISCC:KACQMIRUW6L64O2CAZCVE2HHXGBO7EFCF3C4GRFCDPD2NM53NKUCXUY"
 
 
 def test_normalize_full_no_scheme():
-    n = ic.normalize("KED4CPEJKZZ7A4HZMZUFTZYEOHCPLIXPTTCOIKFIEPBNTGGQDLYGFSI")
-    assert n == "ISCC:KED4CPEJKZZ7A4HZMZUFTZYEOHCPLIXPTTCOIKFIEPBNTGGQDLYGFSI"
+    n = ic.normalize("KACQMIRUW6L64O2CAZCVE2HHXGBO7EFCF3C4GRFCDPD2NM53NKUCXUY")
+    assert n == "ISCC:KACQMIRUW6L64O2CAZCVE2HHXGBO7EFCF3C4GRFCDPD2NM53NKUCXUY"
 
 
 def test_normalize_full_lower_no_scheme():
-    n = ic.normalize("ked4cpejkzz7a4hzmzuftzyeohcplixpttcoikfiepbntggqdlygfsi")
-    assert n == "ISCC:KED4CPEJKZZ7A4HZMZUFTZYEOHCPLIXPTTCOIKFIEPBNTGGQDLYGFSI"
+    n = ic.normalize("kacqmiruw6l64o2cazcve2hhxgbo7efcf3c4grfcdpd2nm53nkucxuy")
+    assert n == "ISCC:KACQMIRUW6L64O2CAZCVE2HHXGBO7EFCF3C4GRFCDPD2NM53NKUCXUY"
 
 
 def test_normalize_iscc_id():
@@ -411,19 +410,19 @@ def test_normalize_iscc_id_scheme_mixed():
 
 
 def test_normalize_mf_base16_single():
-    assert ic.normalize("fcc010001657fe7cafe9791bb") == "ISCC:AAAWK77HZL7JPEN3"
+    assert ic.normalize("fcc0120016c017dac75fe4613") == "ISCC:EAAWYAL5VR274RQT"
 
 
 def test_normalize_mf_base32_single():
-    assert ic.normalize("bzqaqaai35i25crx2mvpa") == "ISCC:AAARX2RV2FDPUZK6"
+    assert ic.normalize("bzqasaalmaf62y5p6iyjq") == "ISCC:EAAWYAL5VR274RQT"
 
 
 def test_normalize_mf_base58btc_single():
-    assert ic.normalize("z4rHVQUUrBJhyW2Hqs") == "ISCC:AAASO77HR4FFOEOK"
+    assert ic.normalize("z4rHXCkYCB2k4V7uuk") == "ISCC:EAAWYAL5VR274RQT"
 
 
 def test_normalize_mf_base64_url_single():
-    assert ic.normalize("uzAEAARvqNdFG-mVe") == "ISCC:AAARX2RV2FDPUZK6"
+    assert ic.normalize("uzAEgAWwBfax1_kYT") == "ISCC:EAAWYAL5VR274RQT"
 
 
 def test_codec_normalize_raises():
@@ -431,3 +430,53 @@ def test_codec_normalize_raises():
     bad = "f" + (b"\xcc\xff" + code.code_obj.bytes).hex()
     with pytest.raises(ValueError):
         ic.normalize(bad)
+
+
+def test_codec_encode_length_std_type():
+    assert ic.encode_length(ic.MT.META, 64) == 1
+
+
+def test_codec_encode_length_std_type_raises():
+    with pytest.raises(ValueError):
+        ic.encode_length(ic.MT.META, 63)
+
+
+def test_codec_encode_length_iscc_type():
+    assert ic.encode_length(ic.MT.ISCC, 1) == 1
+
+
+def test_codec_encode_length_iscc_type_raises():
+    with pytest.raises(ValueError):
+        ic.encode_length(ic.MT.ISCC, 8)
+
+
+def test_codec_encode_length_iscc_id():
+    assert ic.encode_length(ic.MT.ID, 64) == 0
+
+
+def test_codec_encode_length_iscc_id_raises():
+    with pytest.raises(ValueError):
+        ic.encode_length(ic.MT.ID, 32)
+
+
+def test_codec_encode_length_unknown_type_raises():
+    with pytest.raises(ValueError):
+        ic.encode_length(7, 64)
+
+
+def test_codec_encode_component_invalid_type_raises():
+    with pytest.raises(ValueError):
+        ic.encode_component(7, 0, 0, 64, os.urandom(8))
+
+
+def test_codec_decode_length_mt_iscc():
+    assert ic.decode_length(ic.MT.ISCC, 3) == 256
+
+
+def test_codec_decode_length_invaid_type_raises():
+    with pytest.raises(ValueError):
+        ic.decode_length(7, 3)
+
+
+def test_codec_Code_rnd_mt_iscc():
+    assert ic.Code.rnd(ic.MT.ISCC).maintype == ic.MT.ISCC

@@ -37,7 +37,8 @@ def gen_mixed_code_v0(codes, bits=core_opts.mixed_bits):
     """
     Create an ISCC Content-Code-Mixed with algorithm v0.
 
-    If the provided codes are of mixed length they are stripped to `bits` length.
+    If the provided codes are of mixed length they are stripped to `bits` length for
+    calculation.
 
     :param Iterable[str] codes: a list of Content-Codes.
     :param int bits: Target bit-length of generated Content-Code-Mixed.
@@ -53,11 +54,7 @@ def gen_mixed_code_v0(codes, bits=core_opts.mixed_bits):
         length=bits,
         digest=digest,
     )
-    stripped_codes = []
-    for digest in digests:
-        mt, st, vs, _, body = codec.read_header(digest)
-        stripped_codes.append(codec.encode_component(mt, st, vs, bits, body))
-    return ISCC(iscc=mixed_code, parts=stripped_codes)
+    return ISCC(iscc=mixed_code, parts=codes)
 
 
 def soft_hash_codes_v0(cc_digests, bits=core_opts.mixed_bits):
@@ -82,8 +79,9 @@ def soft_hash_codes_v0(cc_digests, bits=core_opts.mixed_bits):
         [ct[0] == codec.MT.CONTENT for ct in code_tuples]
     ), "Only codes with main-type CONTENT allowed as input for Content-Code-Mixed"
 
+    unit_lengths = [codec.decode_length(t[0], t[3]) for t in code_tuples]
     assert all(
-        ct[-2] >= bits for ct in code_tuples
+        ul >= bits for ul in unit_lengths
     ), "Code to short for {}-bit length".format(bits)
 
     hash_bytes = []

@@ -443,7 +443,7 @@
         "@context": "https://purl.org/iscc/context/0.2.0.json",
         "type": "https://purl.org/iscc/schema/0.2.0.json",
         "iscc": "EQBSBXXOMP6SZ2VX6DXG332JFUX76",
-        "parts": ["EQBR2VTB6AUI2J6A5AOYMRA2BNPNS", "EAB7ULQD5WEKFMNQUZWWYK5NHTATG", "EABQRBYECQSWFDC5JYDLCCJNF72Q4", "EEB453X23MWGUEZQC3SG7UJMY65HQ"]
+        "parts": ["EQCR2VTB6AUI2J6A5AOYMRA2BNPNTBQS2GGNFQ2DUU", "EAC7ULQD5WEKFMNQUZWWYK5NHTATG4OV62AMIUWLYI", "EACQRBYECQSWFDC5JYDLCCJNF72Q4IYOXV3POUHRNI", "EEC453X23MWGUEZQC3SG7UJMY65HQYFQDJMO4CAL5A"]
       }
     }
   },
@@ -542,7 +542,7 @@
       "outputs": {
         "@context": "https://purl.org/iscc/context/0.2.0.json",
         "type": "https://purl.org/iscc/schema/0.2.0.json",
-        "iscc": "KADYPXW445FTYNJ3CYSXHAFJMA2HUWULUNRFE3BLHRSCXYH2M5AEGQY"
+        "iscc": "KACYPXW445FTYNJ3CYSXHAFJMA2HUWULUNRFE3BLHRSCXYH2M5AEGQY"
       }
     },
     "test_0001_no_meta": {
@@ -552,7 +552,7 @@
       "outputs": {
         "@context": "https://purl.org/iscc/context/0.2.0.json",
         "type": "https://purl.org/iscc/schema/0.2.0.json",
-        "iscc": "KACRMJLTQCUWAND2LKF2GYSSNQVTYZBL4D5GOQCDIM"
+        "iscc": "KAARMJLTQCUWAND2LKF2GYSSNQVTYZBL4D5GOQCDIM"
       }
     },
     "test_0002_no_meta_content_256": {
@@ -562,7 +562,7 @@
       "outputs": {
         "@context": "https://purl.org/iscc/context/0.2.0.json",
         "type": "https://purl.org/iscc/schema/0.2.0.json",
-        "iscc": "KUDVVC5DMJJGYKZ4ZBYVNYABFFYXGZBL4D5GOQCDIP2ACG75YERBLNY"
+        "iscc": "KUAFVC5DMJJGYKZ4MQV6B6THIBBUG"
       }
     },
     "test_0003_no_meta_content_128": {
@@ -572,7 +572,7 @@
       "outputs": {
         "@context": "https://purl.org/iscc/context/0.2.0.json",
         "type": "https://purl.org/iscc/schema/0.2.0.json",
-        "iscc": "KUBQQICFKJYKY4KUMQV6B6THIBBUG"
+        "iscc": "KUAAQICFKJYKY4KUMQV6B6THIBBUG"
       }
     },
     "test_0004_ordering": {
@@ -582,7 +582,7 @@
       "outputs": {
         "@context": "https://purl.org/iscc/context/0.2.0.json",
         "type": "https://purl.org/iscc/schema/0.2.0.json",
-        "iscc": "KADYPXW445FTYNJ3CYSXHAFJMA2HUWULUNRFE3BLHRSCXYH2M5AEGQY"
+        "iscc": "KACYPXW445FTYNJ3CYSXHAFJMA2HUWULUNRFE3BLHRSCXYH2M5AEGQY"
       }
     }
   },
@@ -674,8 +674,11 @@
         "KUDTMCHNLCHTI2NHZFXOLEB53KSPVMZX22SJWK7NREGPZ4GOUUCDH4Y"
       ],
       "outputs": [
-        "GABTMCHNLCHTI2NHZFXOLEB53KSPU",
-        "IAB3GN6WUSNSX3MJBT6PBTVFAQZ7G"
+        "AAATMCHNLCHTI2NH",
+        "CUA4S3XFSA65VJH2",
+        "EUA3GN6WUSNSX3MJ",
+        "GAA3GN6WUSNSX3MJ",
+        "IAAQZ7HQZ2SQIM7T"
       ]
     },
     "test_decompose_cont_data_inst": {
@@ -683,7 +686,8 @@
         "KMCRIURG4CVZ3M7N6JD7UWYB4Q4Q47MLIGQWX256CU"
       ],
       "outputs": [
-        "EMARIURG4CVZ3M7N",
+        "AAARIURG4CVZ3M7N",
+        "EMA7ER72LMA6IOIO",
         "GAA7ER72LMA6IOIO",
         "IAAX3C2BUFV6XPQV"
       ]
@@ -694,7 +698,8 @@
       ],
       "outputs": [
         "AAA4CPEJKZZ7A4HZ",
-        "EEAWM2CZ44CHDRHV",
+        "CEAWM2CZ44CHDRHV",
+        "EEA2F344YTSCRKBD",
         "GAA2F344YTSCRKBD",
         "IAA4FWMY2ANPAYWJ"
       ]
@@ -727,7 +732,8 @@
       ],
       "outputs": [
         "AAARS67E5BGP2MUT",
-        "EEA2TP65D54KZZH7",
+        "CEA2TP65D54KZZH7",
+        "EEA34ZX6EPOUZPLT",
         "GAA34ZX6EPOUZPLT",
         "IAA7IV54BH4JI2SB"
       ]
@@ -784,73 +790,73 @@
       "inputs": [
         "GAAW2PRCRS5LNVZVIAAUVACQKXE3V44W"
       ],
-      "outputs": "ISCC:KUBW2PRCRS5LNVZVJKAFAVOJXLZZM"
+      "outputs": "ISCC:KUAG2PRCRS5LNVZVJKAFAVOJXLZZM"
     },
     "test_normalize_dual_dash": {
       "inputs": [
         "GAAW2PRCRS5LNVZV-IAAUVACQKXE3V44W"
       ],
-      "outputs": "ISCC:KUBW2PRCRS5LNVZVJKAFAVOJXLZZM"
+      "outputs": "ISCC:KUAG2PRCRS5LNVZVJKAFAVOJXLZZM"
     },
     "test_normalize_dual_scheme": {
       "inputs": [
         "ISCC:GAAW2PRCRS5LNVZVIAAUVACQKXE3V44W"
       ],
-      "outputs": "ISCC:KUBW2PRCRS5LNVZVJKAFAVOJXLZZM"
+      "outputs": "ISCC:KUAG2PRCRS5LNVZVJKAFAVOJXLZZM"
     },
     "test_normalize_dual_scheme_dash": {
       "inputs": [
         "ISCC:GAAW2PRCRS5LNVZV-IAAUVACQKXE3V44W"
       ],
-      "outputs": "ISCC:KUBW2PRCRS5LNVZVJKAFAVOJXLZZM"
+      "outputs": "ISCC:KUAG2PRCRS5LNVZVJKAFAVOJXLZZM"
     },
     "test_normalize_triple": {
       "inputs": [
         "EMAZQGH26X5XQ5HAGAA5U77EOAU2NU4YIAAU4SKRQCZZEYQD"
       ],
-      "outputs": "ISCC:KMCZQGH26X5XQ5HA3J76I4BJU3JZQTSJKGALHETCAM"
+      "outputs": "ISCC:KMAZQGH26X5XQ5HA3J76I4BJU3JZQTSJKGALHETCAM"
     },
     "test_normalize_triple_dash": {
       "inputs": [
-        "EMAZQGH26X5XQ5HA-GAA5U77EOAU2NU4Y-IAAU4SKRQCZZEYQ"
+        "EAAQMRKSNDT3TAXP-GAAZBIROYXBUJIQ3-IAA4PJVTXNVKQK6T"
       ],
-      "outputs": "ISCC:KMCZQGH26X5XQ5HA3J76I4BJU3JZQTSJKGALHETC"
+      "outputs": "ISCC:KAAQMRKSNDT3TAXPSCRC5RODISRBXR5GWO5WVKBL2M"
     },
     "test_normalize_triple_scheme": {
       "inputs": [
         "ISCC:EMAZQGH26X5XQ5HAGAA5U77EOAU2NU4YIAAU4SKRQCZZEYQD"
       ],
-      "outputs": "ISCC:KMCZQGH26X5XQ5HA3J76I4BJU3JZQTSJKGALHETCAM"
+      "outputs": "ISCC:KMAZQGH26X5XQ5HA3J76I4BJU3JZQTSJKGALHETCAM"
     },
     "test_normalize_triple_scheme_dash": {
       "inputs": [
         "ISCC:EMAZQGH26X5XQ5HA-GAA5U77EOAU2NU4Y-IAAU4SKRQCZZEYQD"
       ],
-      "outputs": "ISCC:KMCZQGH26X5XQ5HA3J76I4BJU3JZQTSJKGALHETCAM"
+      "outputs": "ISCC:KMAZQGH26X5XQ5HA3J76I4BJU3JZQTSJKGALHETCAM"
     },
     "test_normalize_full_scheme": {
       "inputs": [
         "ISCC:KED4CPEJKZZ7A4HZMZUFTZYEOHCPLIXPTTCOIKFIEPBNTGGQDLYGFSI"
       ],
-      "outputs": "ISCC:KED4CPEJKZZ7A4HZMZUFTZYEOHCPLIXPTTCOIKFIEPBNTGGQDLYGFSI"
+      "outputs": "ISCC:KED4CPEJKZZ7A4HZMZUFTZYEOHCPLIXPTTCOIKFIEORO7HGE4QUKQI6C3GMNAGXQMLEQ"
     },
     "test_normalize_full_scheme_lower": {
       "inputs": [
         "iscc:ked4cpejkzz7a4hzmzuftzyeohcplixpttcoikfiepbntggqdlygfsi"
       ],
-      "outputs": "ISCC:KED4CPEJKZZ7A4HZMZUFTZYEOHCPLIXPTTCOIKFIEPBNTGGQDLYGFSI"
+      "outputs": "ISCC:KED4CPEJKZZ7A4HZMZUFTZYEOHCPLIXPTTCOIKFIEORO7HGE4QUKQI6C3GMNAGXQMLEQ"
     },
     "test_normalize_full_no_scheme": {
       "inputs": [
         "KED4CPEJKZZ7A4HZMZUFTZYEOHCPLIXPTTCOIKFIEPBNTGGQDLYGFSI"
       ],
-      "outputs": "ISCC:KED4CPEJKZZ7A4HZMZUFTZYEOHCPLIXPTTCOIKFIEPBNTGGQDLYGFSI"
+      "outputs": "ISCC:KED4CPEJKZZ7A4HZMZUFTZYEOHCPLIXPTTCOIKFIEORO7HGE4QUKQI6C3GMNAGXQMLEQ"
     },
     "test_normalize_full_lower_no_scheme": {
       "inputs": [
         "ked4cpejkzz7a4hzmzuftzyeohcplixpttcoikfiepbntggqdlygfsi"
       ],
-      "outputs": "ISCC:KED4CPEJKZZ7A4HZMZUFTZYEOHCPLIXPTTCOIKFIEPBNTGGQDLYGFSI"
+      "outputs": "ISCC:KED4CPEJKZZ7A4HZMZUFTZYEOHCPLIXPTTCOIKFIEORO7HGE4QUKQI6C3GMNAGXQMLEQ"
     },
     "test_normalize_iscc_id": {
       "inputs": [

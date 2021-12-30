@@ -163,6 +163,8 @@ class LN(enum.IntEnum):
 
     L32 = 32
     L64 = 64
+    L72 = 72
+    L80 = 80
     L96 = 96
     L128 = 128
     L160 = 160
@@ -193,6 +195,9 @@ def encode_component(mtype, stype, version, length, digest):
     Encode an ISCC component inlcuding header and body with standard base32 encoding.
 
     !!! note
+        The `length` value must be the **length in number of bits** for the component.
+
+    !!! note
         If `digest` has more bits than specified by `length` it wil be truncated.
 
     :param MainType mtype: Maintype of component (0-6)
@@ -203,8 +208,15 @@ def encode_component(mtype, stype, version, length, digest):
     :return: Base32 encoded component code.
     :rtype: str
     """
+    if mtype in (MT.META, MT.SEMANTIC, MT.CONTENT, MT.DATA, MT.INSTANCE, MT.ID):
+        encoded_length = encode_length(mtype, length)
+    elif mtype == MT.ISCC:
+        raise ValueError(f"{mtype} is not a unit")
+    else:
+        raise ValueError(f"Illegal MainType {mtype}")
+
     nbytes = length // 8
-    header = write_header(mtype, stype, version, length)
+    header = write_header(mtype, stype, version, encoded_length)
     body = digest[:nbytes]
     component_code = encode_base32(header + body)
     return component_code
@@ -300,18 +312,17 @@ def encode_length(mtype, length):
 
 
 def decode_length(mtype, length):
-    # type: (MainType, Length) -> Union[LN, Tuple[MT, ...]]
+    # type: (MainType, Length) -> LN
     """
-    Dedoce raw length value from ISCC header to length in number of bits.
+    Dedoce raw length value from ISCC header to length of digest in number of bits.
 
     Decodes a raw header integer value in to its semantically meaningfull value (eg.
-    number of bits, combination of units.
-    For MT.ISCC it will return the unit composition of the ISCC (tuple of MainTypes).
+    number of bits)
     """
     if mtype in (MT.META, MT.SEMANTIC, MT.CONTENT, MT.DATA, MT.INSTANCE):
         return LN((length + 1) * 32)
     elif mtype == MT.ISCC:
-        return decode_units(length)
+        return LN(len(decode_units(length)) * 64 + 128)
     elif mtype == MT.ID:
         return LN(length * 8 + 64)
     else:
@@ -325,24 +336,21 @@ def write_header(mtype, stype, version=0, length=1):
     The result is minimum 2 and maximum 8 bytes long. If the final count of nibbles
     is uneven it is padded with 4-bit `0000` at the end.
 
+    !!! warning
+        The length value must be encoded beforhand because its semantics depend on
+        the MainType (see `encode_length` function).
+
     :param MainType mtype: MainType of component.
     :param SubType stype: SubType of component.
     :param Version version: Version of component algorithm.
-    :param Length length: Length of component (default 1 means 64-bits)
+    :param Length length: length value of component (1 means 64-bits for standard units)
     :return: Varnibble stream encoded ISCC header as bytes.
     :rtype: bytes
 
     """
     # TODO verify that all header params and there combination is valid
-    if mtype == MT.ID:
-        # ISCC-ID length denotes the number of bytes of the trailing counter
-        assert length >= 64, f"ISCC-ID minimum length 64-bits but got {length}"
-        length_code = (length - 64) // 8
-    else:
-        assert length >= 32 and not length % 32, "Length must be a multiple of 32"
-        length_code = (length // 32) - 1
     header = bitarray()
-    for n in (mtype, stype, version, length_code):
+    for n in (mtype, stype, version, length):
         header += write_varnibble(n)
     # Append zero-padding if required (right side, least significant bits).
     header.fill()
@@ -383,31 +391,25 @@ def write_varnibble(n):
 def read_header(data):
     # type: (bytes) -> IsccTuple
     """
-    Decodes varnibble encoded header and returns it together with hash bytes.
+    Decodes varnibble encoded header and returns it together with `tail data`.
+
+    Tail data is included to enable decoding of sequential ISCCs. The returned tail
+    data must be truncated to decode_length(r[0], r[3]) bits to recover the actual
+    hash-bytes.
 
     :param bytes data: ISCC bytes
-    :return: (MainType, SubType, Version, length, HashDigest)
+    :return: (MainType, SubType, Version, length, TailData)
     :rtype: IsccTuple
     """
     result = []
     ba = bitarray()
     ba.frombytes(data)
     data = ba
-    for _ in range(3):
+    for _ in range(4):
         value, data = read_varnibble(data)
         result.append(value)
 
-    # interpret length value
-    length, data = read_varnibble(data)
-
-    # TODO: verify correctness of decoded data.
-
-    if result[0] == MT.ID:
-        bit_length = 64 + (length * 8)
-    else:
-        bit_length = (length + 1) * 32
-
-    result.append(bit_length)
+    # TODO: validate correctness of decoded data.
 
     # Strip 4-bit padding if required
     if len(data) % 8 and data[:4] == bitarray("0000"):
@@ -476,49 +478,41 @@ def decode_base64(code: str) -> bytes:
 def decompose(iscc_code):
     # type: (str) -> List[str]
     """
-    Decompose a multi-component ISCC into a list of singular componet codes.
+    Decompose an ISCC-CODE or any valid ISCC sequence into a list of ISCC-UNITS.
+
+    A valid ISCC sequence is a string concatenation of ISCC-UNITS optionally seperated
+    by a hyphen.
     """
 
     iscc_code = clean(iscc_code)
     components = []
+
     raw_code = decode_base32(iscc_code)
     while raw_code:
         mt, st, vs, ln, body = read_header(raw_code)
-        if mt == MT.ISCC:
-            if st == ST_ISCC.SUM:
-                # Body is Data + Instance Code
-                cl = ln // 2
-                assert cl in (64, 128), "ISCC-SUM compontents must be 64 or 128 bits"
-                data_code = encode_component(MT.DATA, ST.NONE, vs, cl, body[: cl // 8])
-                instance_code = encode_component(
-                    MT.INSTANCE, ST.NONE, vs, cl, body[cl // 8 :]
-                )
-                components.extend([data_code, instance_code])
-            elif ln == 192:
-                # Body is Content + Data + Instance Code
-                content_code = encode_component(MT.CONTENT, st, vs, 64, body[:8])
-                data_code = encode_component(MT.DATA, ST.NONE, vs, 64, body[8:16])
-                instance_code = encode_component(
-                    MT.INSTANCE, ST.NONE, vs, 64, body[16:24]
-                )
-                components.extend([content_code, data_code, instance_code])
-            elif ln == 256:
-                # Body is Meta + Content + Data + Instance Code
-                meta_code = encode_component(MT.META, ST.NONE, vs, 64, body[:8])
-                content_code = encode_component(MT.CONTENT, st, vs, 64, body[8:16])
-                data_code = encode_component(MT.DATA, ST.NONE, vs, 64, body[16:24])
-                instance_code = encode_component(
-                    MT.INSTANCE, ST.NONE, vs, 64, body[24:32]
-                )
-                components.extend([meta_code, content_code, data_code, instance_code])
-            else:
-                raise ValueError(f"Invalid ISCC: {iscc_code}")
-            raw_code = body[ln // 8 :]
-        else:
-            nbytes = ln // 8
-            body, raw_code = body[:nbytes], body[nbytes:]
-            component = encode_component(mt, st, vs, ln, body)
-            components.append(component)
+        # standard ISCC-UNIT with tail continuation
+        if mt != MT.ISCC:
+            ln_bits = decode_length(mt, ln)
+            code = encode_component(mt, st, vs, ln_bits, body[: ln_bits // 8])
+            components.append(code)
+            raw_code = body[ln_bits // 8 :]
+            continue
+
+        # ISCC-CODE
+        main_types = decode_units(ln)
+
+        # rebuild dynamic units (META, SEMANTIC, CONTENT)
+        for idx, mtype in enumerate(main_types):
+            stype = ST.NONE if mtype == MT.META else st
+            code = encode_component(mtype, stype, vs, 64, body[idx * 8 :])
+            components.append(code)
+
+        # rebuild static units (DATA, INSTANCE)
+        data_code = encode_component(MT.DATA, ST.NONE, vs, 64, body[-16:-8])
+        instance_code = encode_component(MT.INSTANCE, ST.NONE, vs, 64, body[-8:])
+        components.extend([data_code, instance_code])
+        break
+
     return components
 
 
@@ -688,11 +682,16 @@ class Code:
     @property
     def type_id(self) -> str:
         """A unique composite type-id (use as name to index codes seperately)."""
+        if self.maintype == MT.ISCC:
+            mtypes = decode_units(self._head[3])
+            length = "".join([t.name[0] for t in mtypes]) + "DI"
+        else:
+            length = self.length
         return (
             f"{self.maintype.name}-"
             f"{self.subtype.name}-"
             f"{self.version.name}-"
-            f"{self.length}"
+            f"{length}"
         )
 
     @property
@@ -764,7 +763,7 @@ class Code:
     @property
     def length(self) -> int:
         """Length of code hash in number of bits (without header)."""
-        return self._head[3]
+        return decode_length(self._head[0], self._head[3])
 
     @classmethod
     def rnd(cls, mt=None, st=None, bits=64, data=None):
@@ -778,7 +777,12 @@ class Code:
             if mt == MT.CONTENT:
                 st = choice(list(ST_CC))
             elif mt == MT.ISCC:
+                units = choice(UNITS)
                 st = choice(list(ST_ISCC))
+                st = (
+                    st if (MT.SEMANTIC in units or MT.CONTENT in units) else ST_ISCC.SUM
+                )
+                bits = len(units) * 64 + 128
             elif mt == MT.ID:
                 st = choice(list(ST_ID))
             else:
@@ -788,12 +792,16 @@ class Code:
         vs = VS.V0
 
         # Length
-        ln = bits or choice(list(LN)).value
+        ln_bits = bits or choice(list(LN)).value
+        if mt == MT.ISCC:
+            ln_code = encode_units(units)
+        else:
+            ln_code = encode_length(mt, bits)
 
         # Body
-        data = urandom(ln // 8) if data is None else data
+        data = urandom(ln_bits // 8) if data is None else data
 
-        return cls((mt, st, vs, ln, data))
+        return cls((mt, st, vs, ln_code, data))
 
     @property
     def mc_bytes(self):
