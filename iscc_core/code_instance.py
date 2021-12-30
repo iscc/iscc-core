@@ -36,8 +36,10 @@ def gen_instance_code_v0(stream, bits=core_opts.instance_bits):
         hasher.push(data)
         data = stream.read(core_opts.io_read_size)
 
+    instance_code = hasher.code(bits=bits)
+    iscc = "ISCC:" + instance_code
     instance_code_obj = ISCC(
-        iscc=hasher.code(bits=bits),
+        iscc=iscc,
         datahash=hasher.digest().hex(),
         filesize=hasher.filesize,
     )

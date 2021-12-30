@@ -50,7 +50,8 @@ def gen_audio_code_v0(cv, bits=core_opts.audio_bits):
         bit_length=bits,
         digest=digest,
     )
-    return ISCC(iscc=audio_code)
+    iscc = "ISCC:" + audio_code
+    return ISCC(iscc=iscc)
 
 
 def soft_hash_audio_v0(cv):

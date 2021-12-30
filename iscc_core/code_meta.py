@@ -96,6 +96,7 @@ def gen_meta_code_v0(name, description=None, bits=core_opts.meta_bits):
         digest=digest,
     )
 
+    iscc = "ISCC:" + meta_code
     metahash = blake3(metahash_payload).hexdigest()
 
     if isinstance(description, bytes):
@@ -106,7 +107,7 @@ def gen_meta_code_v0(name, description=None, bits=core_opts.meta_bits):
 
     if not name:
         name = None
-    mc_obj = ISCC(iscc=meta_code, name=name, description=description, metahash=metahash)
+    mc_obj = ISCC(iscc=iscc, name=name, description=description, metahash=metahash)
     return mc_obj
 
 

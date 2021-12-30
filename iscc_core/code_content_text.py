@@ -57,7 +57,8 @@ def gen_text_code_v0(text, bits=core_opts.text_bits):
         bit_length=bits,
         digest=digest,
     )
-    return ISCC(iscc=text_code, characters=characters)
+    iscc = "ISCC:" + text_code
+    return ISCC(iscc=iscc, characters=characters)
 
 
 def normalize_text(text):

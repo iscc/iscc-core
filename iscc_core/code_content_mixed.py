@@ -14,6 +14,7 @@ assets and create individual Content-Codes per asset.
 """
 from typing import Iterable, Sequence
 
+import iscc_core
 from iscc_core import codec, core_opts
 from iscc_core.schema import ISCC
 from iscc_core.simhash import similarity_hash
@@ -45,7 +46,7 @@ def gen_mixed_code_v0(codes, bits=core_opts.mixed_bits):
     :return: ISCC object with Content-Code Mixed.
     :rtype: ISCC
     """
-    digests = [codec.decode_base32(code) for code in codes]
+    digests = [codec.decode_base32(iscc_core.clean(code)) for code in codes]
     digest = soft_hash_codes_v0(digests, bits=bits)
     mixed_code = codec.encode_component(
         mtype=codec.MT.CONTENT,
@@ -54,7 +55,8 @@ def gen_mixed_code_v0(codes, bits=core_opts.mixed_bits):
         bit_length=bits,
         digest=digest,
     )
-    return ISCC(iscc=mixed_code, parts=codes)
+    iscc = "ISCC:" + mixed_code
+    return ISCC(iscc=iscc, parts=codes)
 
 
 def soft_hash_codes_v0(cc_digests, bits=core_opts.mixed_bits):

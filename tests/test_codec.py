@@ -248,7 +248,7 @@ def test_decompose_data_instance():
     inst = "IAB3GN6WUSNSX3MJBT6PBTVFAQZ7G"
     di = [data, inst]
     code = ic.iscc_code.gen_iscc_code_v0([data, inst]).iscc
-    assert code == "KUADMCHNLCHTI2NHWM35NJE3FPWYS"
+    assert code == "ISCC:KUADMCHNLCHTI2NHWM35NJE3FPWYS"
     assert ic.decompose(code) == ["GAATMCHNLCHTI2NH", "IAA3GN6WUSNSX3MJ"]
 
 
@@ -258,7 +258,7 @@ def test_decompose_content_data_instance():
     inst = "IAAX3C2BUFV6XPQV"
     di = [cont, data, inst]
     code = ic.iscc_code.gen_iscc_code_v0([cont, data, inst]).iscc
-    assert code == "KMARIURG4CVZ3M7N6JD7UWYB4Q4Q47MLIGQWX256CU"
+    assert code == "ISCC:KMARIURG4CVZ3M7N6JD7UWYB4Q4Q47MLIGQWX256CU"
     assert ic.decompose(code) == di
 
 
@@ -269,7 +269,7 @@ def test_decompose_meta_content_data_instance():
     inst = "IAA4FWMY2ANPAYWJ"
     di = [meta, cont, data, inst]
     code = ic.iscc_code.gen_iscc_code_v0([meta, cont, data, inst]).iscc
-    assert code == "KEC4CPEJKZZ7A4HZMZUFTZYEOHCPLIXPTTCOIKFIEPBNTGGQDLYGFSI"
+    assert code == "ISCC:KEC4CPEJKZZ7A4HZMZUFTZYEOHCPLIXPTTCOIKFIEPBNTGGQDLYGFSI"
     assert ic.decompose(code) == di
 
 

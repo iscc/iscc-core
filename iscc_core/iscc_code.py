@@ -78,4 +78,5 @@ def gen_iscc_code_v0(codes):
     header = ic.write_header(ic.MT.ISCC, st, ic.VS.V0, encoded_length)
 
     code = ic.encode_base32(header + digest)
-    return ISCC(iscc=code)
+    iscc = "ISCC:" + code
+    return ISCC(iscc=iscc)

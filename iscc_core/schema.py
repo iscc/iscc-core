@@ -191,12 +191,12 @@ class ISCC(BaseModel):
 
         Used for cryptographically binding assertions from metadata
         """
+        # TODO implement a document loader that can load context from local storage.
         from pyld import jsonld
 
         jsonld.set_document_loader(jsonld.requests_document_loader(timeout=10))
 
         data = self.dict()
-        data["iscc"] = "ISCC:" + data["iscc"]
 
         return jsonld.normalize(
             data, {"algorithm": "URDNA2015", "format": "application/n-quads"}

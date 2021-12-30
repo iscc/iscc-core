@@ -557,7 +557,7 @@ def normalize(iscc_code):
     recomposed = (
         gen_iscc_code_v0(decomposed).iscc if len(decomposed) >= 2 else decomposed[0]
     )
-    return f"ISCC:{recomposed}"
+    return f"ISCC:{recomposed}" if not recomposed.startswith("ISCC:") else recomposed
 
 
 ########################################################################################
@@ -613,7 +613,7 @@ class Code:
         if isinstance(code, Code):
             code_fields = code._head + (code.hash_bytes,)
         elif isinstance(code, str):
-            # code = clean(code)
+            code = clean(code)
             code_fields = read_header(decode_base32(code))
         elif isinstance(code, tuple):
             code_fields = code

@@ -9,7 +9,7 @@
       "outputs": {
         "@context": "https://purl.org/iscc/context/0.2.0.json",
         "type": "https://purl.org/iscc/schema/0.2.0.json",
-        "iscc": "AAA26E2JXH27TING",
+        "iscc": "ISCC:AAA26E2JXH27TING",
         "metahash": "af1349b9f5f9a1a6a0404dea36dcc9499bcb25c9adc112b7cc9a93cae41f3262"
       }
     },
@@ -22,7 +22,7 @@
       "outputs": {
         "@context": "https://purl.org/iscc/context/0.2.0.json",
         "type": "https://purl.org/iscc/schema/0.2.0.json",
-        "iscc": "AAA26E2JXH27TING",
+        "iscc": "ISCC:AAA26E2JXH27TING",
         "metahash": "af1349b9f5f9a1a6a0404dea36dcc9499bcb25c9adc112b7cc9a93cae41f3262"
       }
     },
@@ -35,7 +35,7 @@
       "outputs": {
         "@context": "https://purl.org/iscc/context/0.2.0.json",
         "type": "https://purl.org/iscc/schema/0.2.0.json",
-        "iscc": "AAA3DZ6UG5MYA7MF",
+        "iscc": "ISCC:AAA3DZ6UG5MYA7MF",
         "name": "Die Unendliche Geschichte",
         "metahash": "0d890ec03394de69d28750ccc89510afaa0b405eec4efbfd79df19d2d5764c83"
       }
@@ -49,7 +49,7 @@
       "outputs": {
         "@context": "https://purl.org/iscc/context/0.2.0.json",
         "type": "https://purl.org/iscc/schema/0.2.0.json",
-        "iscc": "AAA26E2JXEEO5DB2",
+        "iscc": "ISCC:AAA26E2JXEEO5DB2",
         "description": "von Michael Ende",
         "metahash": "924ac457a87303b3dc46427e84815134fed74a0aa2c7a46becc3ce80f5b99efb"
       }
@@ -63,7 +63,7 @@
       "outputs": {
         "@context": "https://purl.org/iscc/context/0.2.0.json",
         "type": "https://purl.org/iscc/schema/0.2.0.json",
-        "iscc": "AAA3DZ6UG4EO5DB2",
+        "iscc": "ISCC:AAA3DZ6UG4EO5DB2",
         "name": "Die Unendliche Geschichte",
         "description": "Von Michael Ende",
         "metahash": "2f34b6a1d6cea2bcf8d918f8df7f43e579fb0b1e9101bfd36fb6c9a3cb40d5d8"
@@ -78,7 +78,7 @@
       "outputs": {
         "@context": "https://purl.org/iscc/context/0.2.0.json",
         "type": "https://purl.org/iscc/schema/0.2.0.json",
-        "iscc": "AABLDZ6UG4EO5DB2LGAH3BI",
+        "iscc": "ISCC:AABLDZ6UG4EO5DB2LGAH3BI",
         "name": "Die Unendliche Geschichte",
         "description": "Von Michael Ende",
         "metahash": "2f34b6a1d6cea2bcf8d918f8df7f43e579fb0b1e9101bfd36fb6c9a3cb40d5d8"
@@ -93,7 +93,7 @@
       "outputs": {
         "@context": "https://purl.org/iscc/context/0.2.0.json",
         "type": "https://purl.org/iscc/schema/0.2.0.json",
-        "iscc": "AAB3DZ6UG4EO5DB2LGAH3BMWZO264",
+        "iscc": "ISCC:AAB3DZ6UG4EO5DB2LGAH3BMWZO264",
         "name": "Die Unendliche Geschichte",
         "description": "Von Michael Ende",
         "metahash": "2f34b6a1d6cea2bcf8d918f8df7f43e579fb0b1e9101bfd36fb6c9a3cb40d5d8"
@@ -108,7 +108,7 @@
       "outputs": {
         "@context": "https://purl.org/iscc/context/0.2.0.json",
         "type": "https://purl.org/iscc/schema/0.2.0.json",
-        "iscc": "AACLDZ6UG4EO5DB2LGAH3BMWZO2652RHKAQA",
+        "iscc": "ISCC:AACLDZ6UG4EO5DB2LGAH3BMWZO2652RHKAQA",
         "name": "Die Unendliche Geschichte",
         "description": "Von Michael Ende",
         "metahash": "2f34b6a1d6cea2bcf8d918f8df7f43e579fb0b1e9101bfd36fb6c9a3cb40d5d8"
@@ -123,7 +123,7 @@
       "outputs": {
         "@context": "https://purl.org/iscc/context/0.2.0.json",
         "type": "https://purl.org/iscc/schema/0.2.0.json",
-        "iscc": "AAC3DZ6UG4EO5DB2LGAH3BMWZO2652RHKAQMXY6FUQ",
+        "iscc": "ISCC:AAC3DZ6UG4EO5DB2LGAH3BMWZO2652RHKAQMXY6FUQ",
         "name": "Die Unendliche Geschichte",
         "description": "Von Michael Ende",
         "metahash": "2f34b6a1d6cea2bcf8d918f8df7f43e579fb0b1e9101bfd36fb6c9a3cb40d5d8"
@@ -138,7 +138,7 @@
       "outputs": {
         "@context": "https://purl.org/iscc/context/0.2.0.json",
         "type": "https://purl.org/iscc/schema/0.2.0.json",
-        "iscc": "AADLDZ6UG4EO5DB2LGAH3BMWZO2652RHKAQMXY6FUTRSDDCS",
+        "iscc": "ISCC:AADLDZ6UG4EO5DB2LGAH3BMWZO2652RHKAQMXY6FUTRSDDCS",
         "name": "Die Unendliche Geschichte",
         "description": "Von Michael Ende",
         "metahash": "2f34b6a1d6cea2bcf8d918f8df7f43e579fb0b1e9101bfd36fb6c9a3cb40d5d8"
@@ -153,7 +153,7 @@
       "outputs": {
         "@context": "https://purl.org/iscc/context/0.2.0.json",
         "type": "https://purl.org/iscc/schema/0.2.0.json",
-        "iscc": "AAD3DZ6UG4EO5DB2LGAH3BMWZO2652RHKAQMXY6FUTRSDDCSP5R5BVQ",
+        "iscc": "ISCC:AAD3DZ6UG4EO5DB2LGAH3BMWZO2652RHKAQMXY6FUTRSDDCSP5R5BVQ",
         "name": "Die Unendliche Geschichte",
         "description": "Von Michael Ende",
         "metahash": "2f34b6a1d6cea2bcf8d918f8df7f43e579fb0b1e9101bfd36fb6c9a3cb40d5d8"
@@ -168,7 +168,7 @@
       "outputs": {
         "@context": "https://purl.org/iscc/context/0.2.0.json",
         "type": "https://purl.org/iscc/schema/0.2.0.json",
-        "iscc": "AADQPPCUKAD34VAQOCRWHDLQUNBZYLMRHPGS3GJ35UEPHQ3CBLZ4GQQ",
+        "iscc": "ISCC:AADQPPCUKAD34VAQOCRWHDLQUNBZYLMRHPGS3GJ35UEPHQ3CBLZ4GQQ",
         "name": "Internationalizætiøn☃",
         "description": "Internationalizætiøn☃ Internationalizætiøn☃",
         "metahash": "053fe08f9768713de7db5fc27d5ba1ad724c7723808070bd4ecbdf7662f1e2c5"
@@ -183,7 +183,7 @@
       "outputs": {
         "@context": "https://purl.org/iscc/context/0.2.0.json",
         "type": "https://purl.org/iscc/schema/0.2.0.json",
-        "iscc": "AAA3TZ6GX7NYB34F",
+        "iscc": "ISCC:AAA3TZ6GX7NYB34F",
         "name": "Die unendliche, Geschichte",
         "metahash": "997cff962fc703b403d3e4b592b8a3c3f66e40a681a6680e8766140a56979f58"
       }
@@ -197,7 +197,7 @@
       "outputs": {
         "@context": "https://purl.org/iscc/context/0.2.0.json",
         "type": "https://purl.org/iscc/schema/0.2.0.json",
-        "iscc": "AAAS72V6FCYNQOJ7",
+        "iscc": "ISCC:AAAS72V6FCYNQOJ7",
         "name": "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquy",
         "metahash": "ccde66af338a44fd50f36fbf51a2c4ed5f2b0da54059e7eb758ddcffb4f67f5e"
       }
@@ -211,7 +211,7 @@
       "outputs": {
         "@context": "https://purl.org/iscc/context/0.2.0.json",
         "type": "https://purl.org/iscc/schema/0.2.0.json",
-        "iscc": "AAAQPPSUCDYKOQ64",
+        "iscc": "ISCC:AAAQPPSUCDYKOQ64",
         "name": "Internationalizætiøn☃ Internationalizætiøn☃ Internationalizætiøn☃ Internationalizætiøn☃ Internationalizætiøn",
         "metahash": "c8cddbf4e62739d4c38e63b8e22e2032aea3eb57f6eb5962fc3e622b1fc9217b"
       }
@@ -225,7 +225,7 @@
       "outputs": {
         "@context": "https://purl.org/iscc/context/0.2.0.json",
         "type": "https://purl.org/iscc/schema/0.2.0.json",
-        "iscc": "AADTEDE6QMZKQ5ZQ5GBN76SVW4ZI5RTWOYPFQ6H3A355XT2QTXY4VIQ",
+        "iscc": "ISCC:AADTEDE6QMZKQ5ZQ5GBN76SVW4ZI5RTWOYPFQ6H3A355XT2QTXY4VIQ",
         "name": "C 가 Ω H 1 i9 1⁄4 dž ⫝ ȴ ȷ ɂ c",
         "description": "Internation alizætiøn☃💩 is a tric ky thing!",
         "metahash": "9827ee90d8b655d828333c536358efe46a8890764a64556fb99a15f0cc2bb786"
@@ -241,7 +241,7 @@
       "outputs": {
         "@context": "https://purl.org/iscc/context/0.2.0.json",
         "type": "https://purl.org/iscc/schema/0.2.0.json",
-        "iscc": "EAASL4F2WZY7KBXB",
+        "iscc": "ISCC:EAASL4F2WZY7KBXB",
         "characters": 0
       }
     },
@@ -253,7 +253,7 @@
       "outputs": {
         "@context": "https://purl.org/iscc/context/0.2.0.json",
         "type": "https://purl.org/iscc/schema/0.2.0.json",
-        "iscc": "EAA75Q74YXNZC4EK",
+        "iscc": "ISCC:EAA75Q74YXNZC4EK",
         "characters": 11
       }
     },
@@ -265,7 +265,7 @@
       "outputs": {
         "@context": "https://purl.org/iscc/context/0.2.0.json",
         "type": "https://purl.org/iscc/schema/0.2.0.json",
-        "iscc": "EAD75Q74YXNZC4EKRCQEKOXKMYHCJIUHQNZ3P5FGVJRE4IBHR3F7HRY",
+        "iscc": "ISCC:EAD75Q74YXNZC4EKRCQEKOXKMYHCJIUHQNZ3P5FGVJRE4IBHR3F7HRY",
         "characters": 11
       }
     },
@@ -277,7 +277,7 @@
       "outputs": {
         "@context": "https://purl.org/iscc/context/0.2.0.json",
         "type": "https://purl.org/iscc/schema/0.2.0.json",
-        "iscc": "EADQK3O2BVVRMYT6FSEIQGH4R7R2DO7NOA5UWIFF5644ACC7Z67P7QI",
+        "iscc": "ISCC:EADQK3O2BVVRMYT6FSEIQGH4R7R2DO7NOA5UWIFF5644ACC7Z67P7QI",
         "characters": 43
       }
     },
@@ -289,7 +289,7 @@
       "outputs": {
         "@context": "https://purl.org/iscc/context/0.2.0.json",
         "type": "https://purl.org/iscc/schema/0.2.0.json",
-        "iscc": "EABR7BVKOFMBVNE4GINEXNCRLYINE",
+        "iscc": "ISCC:EABR7BVKOFMBVNE4GINEXNCRLYINE",
         "characters": 291
       }
     }
@@ -303,7 +303,7 @@
       "outputs": {
         "@context": "https://purl.org/iscc/context/0.2.0.json",
         "type": "https://purl.org/iscc/schema/0.2.0.json",
-        "iscc": "EEAQAAAAAAAAAAAA"
+        "iscc": "ISCC:EEAQAAAAAAAAAAAA"
       }
     },
     "test_0001_all_white_128": {
@@ -314,7 +314,7 @@
       "outputs": {
         "@context": "https://purl.org/iscc/context/0.2.0.json",
         "type": "https://purl.org/iscc/schema/0.2.0.json",
-        "iscc": "EEBYAAAAAAAAAAAAAAAAAAAAAAAAA"
+        "iscc": "ISCC:EEBYAAAAAAAAAAAAAAAAAAAAAAAAA"
       }
     },
     "test_0003_img_256": {
@@ -325,7 +325,7 @@
       "outputs": {
         "@context": "https://purl.org/iscc/context/0.2.0.json",
         "type": "https://purl.org/iscc/schema/0.2.0.json",
-        "iscc": "EED4GQZQTY6J5DTHQ2DWCPDZHQOM6QZQTY6J5DTFZ2DWCPDZHQOMXDI"
+        "iscc": "ISCC:EED4GQZQTY6J5DTHQ2DWCPDZHQOM6QZQTY6J5DTFZ2DWCPDZHQOMXDI"
       }
     }
   },
@@ -338,7 +338,7 @@
       "outputs": {
         "@context": "https://purl.org/iscc/context/0.2.0.json",
         "type": "https://purl.org/iscc/schema/0.2.0.json",
-        "iscc": "EIAQAAAAAAAAAAAA"
+        "iscc": "ISCC:EIAQAAAAAAAAAAAA"
       }
     },
     "test_0001_one_128": {
@@ -349,7 +349,7 @@
       "outputs": {
         "@context": "https://purl.org/iscc/context/0.2.0.json",
         "type": "https://purl.org/iscc/schema/0.2.0.json",
-        "iscc": "EIBQAAAAAEAAAAABAAAAAAAAAAAAA"
+        "iscc": "ISCC:EIBQAAAAAEAAAAABAAAAAAAAAAAAA"
       }
     },
     "test_0002_two_256": {
@@ -360,7 +360,7 @@
       "outputs": {
         "@context": "https://purl.org/iscc/context/0.2.0.json",
         "type": "https://purl.org/iscc/schema/0.2.0.json",
-        "iscc": "EIDQAAAAAMAAAAABAAAAAAQAAAAAAAAAAAAAAAAAAEAAAAACAAAAAAA"
+        "iscc": "ISCC:EIDQAAAAAMAAAAABAAAAAAQAAAAAAAAAAAAAAAAAAEAAAAACAAAAAAA"
       }
     },
     "test_0003_test_neg_256": {
@@ -371,7 +371,7 @@
       "outputs": {
         "@context": "https://purl.org/iscc/context/0.2.0.json",
         "type": "https://purl.org/iscc/schema/0.2.0.json",
-        "iscc": "EIDQAAAAAH777777AAAAAAAAAAAACAAAAAAP777774AAAAAAAAAAAAI"
+        "iscc": "ISCC:EIDQAAAAAH777777AAAAAAAAAAAACAAAAAAP777774AAAAAAAAAAAAI"
       }
     },
     "test_0004_cv_256": {
@@ -382,7 +382,7 @@
       "outputs": {
         "@context": "https://purl.org/iscc/context/0.2.0.json",
         "type": "https://purl.org/iscc/schema/0.2.0.json",
-        "iscc": "EIDWUJFCEZZOJYVDHJHIRB3KQSQCM2REUITDUTVAQNRGJIRENCCCULY"
+        "iscc": "ISCC:EIDWUJFCEZZOJYVDHJHIRB3KQSQCM2REUITDUTVAQNRGJIRENCCCULY"
       }
     }
   },
@@ -395,7 +395,7 @@
       "outputs": {
         "@context": "https://purl.org/iscc/context/0.2.0.json",
         "type": "https://purl.org/iscc/schema/0.2.0.json",
-        "iscc": "EMAQAAAAAAAAAAAA"
+        "iscc": "ISCC:EMAQAAAAAAAAAAAA"
       }
     },
     "test_0001_multiple_frames_128": {
@@ -406,7 +406,7 @@
       "outputs": {
         "@context": "https://purl.org/iscc/context/0.2.0.json",
         "type": "https://purl.org/iscc/schema/0.2.0.json",
-        "iscc": "EMBZEMGSDFIB4AHUEZSLJPJANMAAY"
+        "iscc": "ISCC:EMBZEMGSDFIB4AHUEZSLJPJANMAAY"
       }
     },
     "test_0003_range_256": {
@@ -417,7 +417,7 @@
       "outputs": {
         "@context": "https://purl.org/iscc/context/0.2.0.json",
         "type": "https://purl.org/iscc/schema/0.2.0.json",
-        "iscc": "EMDVFD4RIMPXYSWSNEZPYBZ2FDFMSPZBUMDRUFJPYKJFXWXNDUMQAYI"
+        "iscc": "ISCC:EMDVFD4RIMPXYSWSNEZPYBZ2FDFMSPZBUMDRUFJPYKJFXWXNDUMQAYI"
       }
     }
   },
@@ -430,7 +430,7 @@
       "outputs": {
         "@context": "https://purl.org/iscc/context/0.2.0.json",
         "type": "https://purl.org/iscc/schema/0.2.0.json",
-        "iscc": "EQASNZJ36ZT33AL7",
+        "iscc": "ISCC:EQASNZJ36ZT33AL7",
         "parts": ["EUA6GIKXN42IQV3S", "EIAUKMOUIOYZCKA5", "EQA6JK5IEKO6E732", "EIAU2XRWOT4AKMTZ"]
       }
     },
@@ -442,7 +442,7 @@
       "outputs": {
         "@context": "https://purl.org/iscc/context/0.2.0.json",
         "type": "https://purl.org/iscc/schema/0.2.0.json",
-        "iscc": "EQBSBXXOMP6SZ2VX6DXG332JFUX76",
+        "iscc": "ISCC:EQBSBXXOMP6SZ2VX6DXG332JFUX76",
         "parts": ["EQCR2VTB6AUI2J6A5AOYMRA2BNPNTBQS2GGNFQ2DUU", "EAC7ULQD5WEKFMNQUZWWYK5NHTATG4OV62AMIUWLYI", "EACQRBYECQSWFDC5JYDLCCJNF72Q4IYOXV3POUHRNI", "EEC453X23MWGUEZQC3SG7UJMY65HQYFQDJMO4CAL5A"]
       }
     }
@@ -456,7 +456,7 @@
       "outputs": {
         "@context": "https://purl.org/iscc/context/0.2.0.json",
         "type": "https://purl.org/iscc/schema/0.2.0.json",
-        "iscc": "GAAXL2XYM5BQIAZ3"
+        "iscc": "ISCC:GAAXL2XYM5BQIAZ3"
       }
     },
     "test_0001_empty_64": {
@@ -467,7 +467,7 @@
       "outputs": {
         "@context": "https://purl.org/iscc/context/0.2.0.json",
         "type": "https://purl.org/iscc/schema/0.2.0.json",
-        "iscc": "GAASL4F2WZY7KBXB"
+        "iscc": "ISCC:GAASL4F2WZY7KBXB"
       }
     },
     "test_0002_zero_128": {
@@ -478,7 +478,7 @@
       "outputs": {
         "@context": "https://purl.org/iscc/context/0.2.0.json",
         "type": "https://purl.org/iscc/schema/0.2.0.json",
-        "iscc": "GABXOD4P2IS6YHS2XOK6IBVPVXPPG"
+        "iscc": "ISCC:GABXOD4P2IS6YHS2XOK6IBVPVXPPG"
       }
     },
     "test_0003_static_256": {
@@ -489,7 +489,7 @@
       "outputs": {
         "@context": "https://purl.org/iscc/context/0.2.0.json",
         "type": "https://purl.org/iscc/schema/0.2.0.json",
-        "iscc": "GAD2FL7K437RJZK2MMLL4C2672JVQTMGJYYZ3KAINZRWETNWFES3KYA"
+        "iscc": "ISCC:GAD2FL7K437RJZK2MMLL4C2672JVQTMGJYYZ3KAINZRWETNWFES3KYA"
       }
     }
   },
@@ -502,7 +502,7 @@
       "outputs": {
         "@context": "https://purl.org/iscc/context/0.2.0.json",
         "type": "https://purl.org/iscc/schema/0.2.0.json",
-        "iscc": "IAA26E2JXH27TING",
+        "iscc": "ISCC:IAA26E2JXH27TING",
         "filesize": 0,
         "datahash": "af1349b9f5f9a1a6a0404dea36dcc9499bcb25c9adc112b7cc9a93cae41f3262"
       }
@@ -515,7 +515,7 @@
       "outputs": {
         "@context": "https://purl.org/iscc/context/0.2.0.json",
         "type": "https://purl.org/iscc/schema/0.2.0.json",
-        "iscc": "IABS2OW637YRWYPRJSEG4NNPUA3HG",
+        "iscc": "ISCC:IABS2OW637YRWYPRJSEG4NNPUA3HG",
         "filesize": 1,
         "datahash": "2d3adedff11b61f14c886e35afa036736dcd87a74d27b5c1510225d0f592e213"
       }
@@ -528,7 +528,7 @@
       "outputs": {
         "@context": "https://purl.org/iscc/context/0.2.0.json",
         "type": "https://purl.org/iscc/schema/0.2.0.json",
-        "iscc": "IAD66JNRTSKU5FLU2L7POWZNQTYKDOYQRGQJLJ24E5DWM7MPWYAPH7Q",
+        "iscc": "ISCC:IAD66JNRTSKU5FLU2L7POWZNQTYKDOYQRGQJLJ24E5DWM7MPWYAPH7Q",
         "filesize": 8192,
         "datahash": "ef25b19c954e9574d2fef75b2d84f0a1bb1089a095a75c2747667d8fb600f3fe"
       }
@@ -542,7 +542,7 @@
       "outputs": {
         "@context": "https://purl.org/iscc/context/0.2.0.json",
         "type": "https://purl.org/iscc/schema/0.2.0.json",
-        "iscc": "KACYPXW445FTYNJ3CYSXHAFJMA2HUWULUNRFE3BLHRSCXYH2M5AEGQY"
+        "iscc": "ISCC:KACYPXW445FTYNJ3CYSXHAFJMA2HUWULUNRFE3BLHRSCXYH2M5AEGQY"
       }
     },
     "test_0001_no_meta": {
@@ -552,7 +552,7 @@
       "outputs": {
         "@context": "https://purl.org/iscc/context/0.2.0.json",
         "type": "https://purl.org/iscc/schema/0.2.0.json",
-        "iscc": "KAARMJLTQCUWAND2LKF2GYSSNQVTYZBL4D5GOQCDIM"
+        "iscc": "ISCC:KAARMJLTQCUWAND2LKF2GYSSNQVTYZBL4D5GOQCDIM"
       }
     },
     "test_0002_no_meta_content_256": {
@@ -562,7 +562,7 @@
       "outputs": {
         "@context": "https://purl.org/iscc/context/0.2.0.json",
         "type": "https://purl.org/iscc/schema/0.2.0.json",
-        "iscc": "KUAFVC5DMJJGYKZ4MQV6B6THIBBUG"
+        "iscc": "ISCC:KUAFVC5DMJJGYKZ4MQV6B6THIBBUG"
       }
     },
     "test_0003_no_meta_content_128": {
@@ -572,7 +572,7 @@
       "outputs": {
         "@context": "https://purl.org/iscc/context/0.2.0.json",
         "type": "https://purl.org/iscc/schema/0.2.0.json",
-        "iscc": "KUAAQICFKJYKY4KUMQV6B6THIBBUG"
+        "iscc": "ISCC:KUAAQICFKJYKY4KUMQV6B6THIBBUG"
       }
     },
     "test_0004_ordering": {
@@ -582,7 +582,7 @@
       "outputs": {
         "@context": "https://purl.org/iscc/context/0.2.0.json",
         "type": "https://purl.org/iscc/schema/0.2.0.json",
-        "iscc": "KACYPXW445FTYNJ3CYSXHAFJMA2HUWULUNRFE3BLHRSCXYH2M5AEGQY"
+        "iscc": "ISCC:KACYPXW445FTYNJ3CYSXHAFJMA2HUWULUNRFE3BLHRSCXYH2M5AEGQY"
       }
     }
   },
@@ -596,7 +596,7 @@
       "outputs": {
         "@context": "https://purl.org/iscc/context/0.2.0.json",
         "type": "https://purl.org/iscc/schema/0.2.0.json",
-        "iscc": "MAACB7WD7TC5XELQ"
+        "iscc": "ISCC:MAACB7WD7TC5XELQ"
       }
     },
     "test_0001_single_component_uc1": {
@@ -608,7 +608,7 @@
       "outputs": {
         "@context": "https://purl.org/iscc/context/0.2.0.json",
         "type": "https://purl.org/iscc/schema/0.2.0.json",
-        "iscc": "MAASB7WD7TC5XELQAE"
+        "iscc": "ISCC:MAASB7WD7TC5XELQAE"
       }
     },
     "test_0002_single_component": {
@@ -620,7 +620,7 @@
       "outputs": {
         "@context": "https://purl.org/iscc/context/0.2.0.json",
         "type": "https://purl.org/iscc/schema/0.2.0.json",
-        "iscc": "MAACB7WD7TC5XELQ"
+        "iscc": "ISCC:MAACB7WD7TC5XELQ"
       }
     },
     "test_0003_single_component_uc_2byte": {
@@ -632,7 +632,7 @@
       "outputs": {
         "@context": "https://purl.org/iscc/context/0.2.0.json",
         "type": "https://purl.org/iscc/schema/0.2.0.json",
-        "iscc": "MABCB7WD7TC5XELQQEBA"
+        "iscc": "ISCC:MABCB7WD7TC5XELQQEBA"
       }
     },
     "test_0004_multi_component": {
@@ -644,7 +644,7 @@
       "outputs": {
         "@context": "https://purl.org/iscc/context/0.2.0.json",
         "type": "https://purl.org/iscc/schema/0.2.0.json",
-        "iscc": "MEACB7X7777574L6"
+        "iscc": "ISCC:MEACB7X7777574L6"
       }
     },
     "test_0005_single_instance_code": {
@@ -656,7 +656,7 @@
       "outputs": {
         "@context": "https://purl.org/iscc/context/0.2.0.json",
         "type": "https://purl.org/iscc/schema/0.2.0.json",
-        "iscc": "MAAEBV2JQHX2OCQM"
+        "iscc": "ISCC:MAAEBV2JQHX2OCQM"
       }
     }
   },

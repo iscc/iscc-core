@@ -51,7 +51,8 @@ def gen_iscc_id_v0(chain_id, iscc_code, uc=0):
         bit_length=iscc_id_len,
         digest=iscc_id_digest,
     )
-    return ISCC(iscc=iscc_id)
+    iscc = "ISCC:" + iscc_id
+    return ISCC(iscc=iscc)
 
 
 def soft_hash_iscc_id_v0(iscc_code, uc=0):

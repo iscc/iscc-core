@@ -53,7 +53,8 @@ def gen_image_code_v0(pixels, bits=core_opts.image_bits):
         bit_length=bits,
         digest=digest,
     )
-    return ISCC(iscc=image_code)
+    iscc = "ISCC:" + image_code
+    return ISCC(iscc=iscc)
 
 
 def soft_hash_image_v0(pixels, bits=core_opts.image_bits):

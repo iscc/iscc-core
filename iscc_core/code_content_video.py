@@ -55,8 +55,8 @@ def gen_video_code_v0(frame_sigs, bits=core_opts.video_bits):
         bit_length=bits,
         digest=digest,
     )
-    video_code_obj = ISCC(iscc=video_code)
-    return video_code_obj
+    iscc = "ISCC:" + video_code
+    return ISCC(iscc=iscc)
 
 
 def soft_hash_video_v0(frame_sigs, bits=core_opts.video_bits):

@@ -15,7 +15,7 @@ DID_64 = "GAAQQICFKJYKY4KU"
 def test_gen_iscc_code_full():
     icode = iscc_core.gen_iscc_code([MID_64, CID_64, DID_128, IID_256])
     assert icode.dict_raw() == {
-        "iscc": "KACYPXW445FTYNJ3CYSXHAFJMA2HUWULUNRFE3BLHRSCXYH2M5AEGQY"
+        "iscc": "ISCC:KACYPXW445FTYNJ3CYSXHAFJMA2HUWULUNRFE3BLHRSCXYH2M5AEGQY"
     }
     assert (
         icode.code_obj.explain
@@ -26,7 +26,7 @@ def test_gen_iscc_code_full():
 def test_gen_iscc_code_v0_full():
     icode = iscc_core.gen_iscc_code_v0([MID_64, CID_64, DID_128, IID_256])
     assert icode.dict_raw() == {
-        "iscc": "KACYPXW445FTYNJ3CYSXHAFJMA2HUWULUNRFE3BLHRSCXYH2M5AEGQY"
+        "iscc": "ISCC:KACYPXW445FTYNJ3CYSXHAFJMA2HUWULUNRFE3BLHRSCXYH2M5AEGQY"
     }
     assert (
         icode.code_obj.explain
@@ -36,7 +36,9 @@ def test_gen_iscc_code_v0_full():
 
 def test_gen_iscc_code_v0_no_meta():
     icode = iscc_core.gen_iscc_code_v0([CID_64, DID_128, IID_256])
-    assert icode.dict_raw() == {"iscc": "KAARMJLTQCUWAND2LKF2GYSSNQVTYZBL4D5GOQCDIM"}
+    assert icode.dict_raw() == {
+        "iscc": "ISCC:KAARMJLTQCUWAND2LKF2GYSSNQVTYZBL4D5GOQCDIM"
+    }
     assert (
         icode.code_obj.explain
         == "ISCC-TEXT-V0-CDI-16257380a960347a5a8ba362526c2b3c642be0fa67404343"
@@ -45,7 +47,7 @@ def test_gen_iscc_code_v0_no_meta():
 
 def test_gen_iscc_code_v0_no_meta_content():
     icode = iscc_core.gen_iscc_code_v0([DID_128, IID_256])
-    assert icode.dict_raw() == {"iscc": "KUAFVC5DMJJGYKZ4MQV6B6THIBBUG"}
+    assert icode.dict_raw() == {"iscc": "ISCC:KUAFVC5DMJJGYKZ4MQV6B6THIBBUG"}
     # TODO mabye show length for SubType SUM as we now the unit composition.
     # we may also get a ISCC-SUM-V0-256 version
     assert icode.code_obj.explain == "ISCC-SUM-V0-DI-5a8ba362526c2b3c642be0fa67404343"
@@ -53,14 +55,14 @@ def test_gen_iscc_code_v0_no_meta_content():
 
 def test_gen_iscc_code_v0_no_meta_content_128():
     icode = iscc_core.gen_iscc_code_v0([DID_64, IID_256])
-    assert icode.dict_raw() == {"iscc": "KUAAQICFKJYKY4KUMQV6B6THIBBUG"}
+    assert icode.dict_raw() == {"iscc": "ISCC:KUAAQICFKJYKY4KUMQV6B6THIBBUG"}
     assert icode.code_obj.explain == "ISCC-SUM-V0-DI-0820455270ac7154642be0fa67404343"
 
 
 def test_gen_iscc_code_v0_ordering():
     icode = iscc_core.gen_iscc_code_v0([CID_64, MID_64, IID_256, DID_128])
     assert icode.dict_raw() == {
-        "iscc": "KACYPXW445FTYNJ3CYSXHAFJMA2HUWULUNRFE3BLHRSCXYH2M5AEGQY"
+        "iscc": "ISCC:KACYPXW445FTYNJ3CYSXHAFJMA2HUWULUNRFE3BLHRSCXYH2M5AEGQY"
     }
     assert (
         icode.code_obj.explain

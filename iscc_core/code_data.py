@@ -41,9 +41,8 @@ def gen_data_code_v0(stream, bits=core_opts.data_bits):
         data = stream.read(core_opts.io_read_size)
 
     data_code = hasher.code(bits=bits)
-    data_code_obj = ISCC(iscc=data_code)
-
-    return data_code_obj
+    iscc = "ISCC:" + data_code
+    return ISCC(iscc=iscc)
 
 
 def soft_hash_data_v0(stream):

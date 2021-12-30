@@ -22,10 +22,10 @@ def test_gen_mixed_code_v0_codes_mixed_length():
     tc_short = iscc_core.gen_text_code_v0("Short Text-Code", bits=64)
     codes = tc_long.iscc, tc_short.iscc
     assert iscc_core.gen_mixed_code_v0(codes=codes, bits=64).dict_raw() == dict(
-        iscc="EQASB7WL7325X5PW",
+        iscc="ISCC:EQASB7WL7325X5PW",
         parts=[
-            "EAD75Q74YXNZC4EKRCQEKOXKMYHCJIUHQNZ3P5FGVJRE4IBHR3F7HRY",
-            "EAAVUCMGOTFWLZU6",
+            "ISCC:EAD75Q74YXNZC4EKRCQEKOXKMYHCJIUHQNZ3P5FGVJRE4IBHR3F7HRY",
+            "ISCC:EAAVUCMGOTFWLZU6",
         ],
     )
 
