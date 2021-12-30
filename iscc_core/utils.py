@@ -6,6 +6,7 @@ from bitarray import bitarray
 from bitarray.util import count_xor
 import iscc_core as ic
 import jcs
+from iscc_core.codec import Stream
 
 
 def canonicalize(obj):

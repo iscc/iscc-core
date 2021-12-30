@@ -534,7 +534,6 @@ def normalize(iscc_code):
     :param str iscc_code: Any valid ISCC string
     :return: Normalized ISCC
     :rtype: str
-    :raise: ValueError on malformed ISCC string
     """
     from iscc_core.iscc_code import gen_iscc_code_v0
 

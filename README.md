@@ -104,18 +104,18 @@ Structure:     DATA-NONE-V0-64-9eca1cfe61be0375
 Instance-Code: ISCC:IAASQF7FY2TLVFRC
 Structure:     INSTANCE-NONE-V0-64-2817e5c6a6ba9622
 
-ISCC-CODE:     ISCC:KAD3MGR7CSJ3O3D3FFU64K5NP4UGTHWKDT7GDPQDOUUBPZOGU25JMIQ
-Structure:     ISCC-TEXT-V0-256-b61a3f1493b76c7b2969ee2bad7f28699eca1cfe61be03752817e5c6a6ba9622
-Multiformat:   bzqavab5wdi7rje5xnr5ss2pofowx6kdjt3fbz7tbxybxkkax4xdknouwei
+ISCC-CODE:     ISCC:KAC3MGR7CSJ3O3D3FFU64K5NP4UGTHWKDT7GDPQDOUUBPZOGU25JMIQ
+Structure:     ISCC-TEXT-V0-MCDI-b61a3f1493b76c7b2969ee2bad7f28699eca1cfe61be03752817e5c6a6ba9622
+Multiformat:   bzqavabnwdi7rje5xnr5ss2pofowx6kdjt3fbz7tbxybxkkax4xdknouwei
 
 ISCC-ID:       ISCC:MEASBPSKHY7KDPZIA4
 Structure:     ID-BITCOIN-V0-72-20be4a3e3ea1bf28-7
-Multiformat:   bzqavab5wdi7rje5xnr5ss2pofowx6kdjt3fbz7tbxybxkkax4xdknouwei
+Multiformat:   bzqavabnwdi7rje5xnr5ss2pofowx6kdjt3fbz7tbxybxkkax4xdknouwei
 ```
 
 ## Documentation
 
-https://iscc-core.iscc.codes
+<https://iscc-core.iscc.codes>
 
 ## Project Status
 
