@@ -147,18 +147,7 @@ class LN(enum.IntEnum):
     """
     ## LN - Length
 
-    length of hash digest
-
-    | Uint | Symbol   | Bits | Purpose             |
-    |----- |:---------|------|---------------------|
-    | 0    | LN32     | 0000 |  32-bit hash digest |
-    | 1    | LM64     | 0001 |  64-bit hash digest |
-    | 2    | LN96     | 0010 |  96-bit hash digest |
-    | 3    | LN128    | 0011 | 128-bit hash digest |
-    | 4    | LN160    | 0100 | 160-bit hash digest |
-    | 5    | LN192    | 0101 | 192-bit hash digest |
-    | 6    | LN224    | 0110 | 224-bit hash digest |
-    | 7    | LN256    | 0111 | 256-bit hash digest |
+    Valid lengths for hash-digests.
     """
 
     L32 = 32
@@ -175,51 +164,13 @@ class LN(enum.IntEnum):
 
 class MULTIBASE(str, enum.Enum):
     """
-    Supported Multibase encodings
+    Supported Multibase encodings.
     """
 
     base16 = "f"
     base32 = "b"
     base58btc = "z"
     base64url = "u"
-
-
-########################################################################################
-# Core codec functions                                                                 #
-########################################################################################
-
-
-def encode_component(mtype, stype, version, length, digest):
-    # type: (MainType, SubType, Version, Length, bytes) -> str
-    """
-    Encode an ISCC component inlcuding header and body with standard base32 encoding.
-
-    !!! note
-        The `length` value must be the **length in number of bits** for the component.
-
-    !!! note
-        If `digest` has more bits than specified by `length` it wil be truncated.
-
-    :param MainType mtype: Maintype of component (0-6)
-    :param SubType stype: SubType of component depending on MainType (0-5)
-    :param Version version: Version of component algorithm (0).
-    :param length length: Length of component in number of bits (multiple of 32)
-    :param bytes digest: The hash digest of the component.
-    :return: Base32 encoded component code.
-    :rtype: str
-    """
-    if mtype in (MT.META, MT.SEMANTIC, MT.CONTENT, MT.DATA, MT.INSTANCE, MT.ID):
-        encoded_length = encode_length(mtype, length)
-    elif mtype == MT.ISCC:
-        raise ValueError(f"{mtype} is not a unit")
-    else:
-        raise ValueError(f"Illegal MainType {mtype}")
-
-    nbytes = length // 8
-    header = write_header(mtype, stype, version, encoded_length)
-    body = digest[:nbytes]
-    component_code = encode_base32(header + body)
-    return component_code
 
 
 # Possible combinations of ISCC units for the first 3 components of MT.ISCC
@@ -235,98 +186,41 @@ UNITS = (
 )
 
 
-def encode_units(units):
-    # type: (Tuple) -> int
+########################################################################################
+# Core codec functions                                                                 #
+########################################################################################
+
+
+def encode_component(mtype, stype, version, bit_length, digest):
+    # type: (MainType, SubType, Version, Length, bytes) -> str
     """
-    Encodes a combination of ISCC units to an integer between 0-7 to be used as length
-    value for the final encoding of MT.ISCC
+    Encode an ISCC component inlcuding header and body with standard base32 encoding.
+
+    !!! note
+        The `length` value must be the **length in number of bits** for the component.
+        If `digest` has more bits than specified by `length` it wil be truncated.
+
+
+    :param MainType mtype: Maintype of component (0-6)
+    :param SubType stype: SubType of component depending on MainType (0-5)
+    :param Version version: Version of component algorithm (0).
+    :param length bit_length: Length of component in number of bits (multiple of 32)
+    :param bytes digest: The hash digest of the component.
+    :return: Base32 encoded component code.
+    :rtype: str
     """
-    return UNITS.index(units)
-
-
-def decode_units(unit_id):
-    # type: (int) -> Tuple[MT, ...]
-    """
-    Decodes an ISCC header length value that has been encoded with a unit_id to an
-    ordered tuple of MainTypes.
-    """
-    units = sorted(UNITS[unit_id])
-    return tuple(MT(u) for u in units)
-
-
-def encode_length(mtype, length):
-    # type: (MainType, Length) -> int
-    """
-    Encode length to integer value for header encoding.
-
-    The `length` value has MainType-specific semantics:
-
-    MainTypes `META`, `SEMANTIC`, `CONTENT`, `DATA`, `INSTANCE`:
-        Length means number of bits for the body.
-        Length is encoded as number of 32-bit chunks (0 being 32bits)
-        Examples: 32 -> 0, 64 -> 1, 96 -> 2 ...
-
-    MainType `ID`:
-        Lengths means number the number of bits for the body including the counter
-        Length is encoded as number of bytes of the counter (64-bit body is implicit)
-        Examples:
-            64 -> 0 (No counter)
-            72 -> 1 (One byte counter)
-            80 -> 2 (Two byte counter)
-            ...
-
-    MainType `ISCC`:
-        Length means the composition of optional 64-bit components included in the ISCC
-        Examples:
-            No optional components -> 0000 -> 0
-            CONTENT                -> 0001 -> 1
-            SEMANTIC               -> 0010 -> 2
-            SEMANTIC, CONTENT      -> 0011 -> 3
-            META                   -> 0100 -> 4
-            META, CONTENT          -> 0101 -> 5
-            ...
-
-    :param MainType mtype: The MainType for which to encode the length value.
-    :param Length length: The length expressed according to the semantics of the type
-    :return: The length value encoded as integer for use with write_header.
-    """
-
-    error = f"Invalid length {length} for MainType {mtype}"
-    # standard case (length field denotes number of 32-bit chunks, 0 being 32-bits)
-    if mtype in (MT.META, MT.SEMANTIC, MT.CONTENT, MT.DATA, MT.INSTANCE):
-        if length >= 32 and not length % 32:
-            return (length // 32) - 1
-        raise ValueError(error)
-    # flag type encoding of included components (pass through as encoded out-of-band)
+    if mtype in (MT.META, MT.SEMANTIC, MT.CONTENT, MT.DATA, MT.INSTANCE, MT.ID):
+        encoded_length = encode_length(mtype, bit_length)
     elif mtype == MT.ISCC:
-        if 0 <= length <= 7:
-            return length
-        raise ValueError(error)
-    # counter byte lenght encoding
-    elif mtype == MT.ID:
-        if 64 <= length <= 96:
-            return (length - 64) // 8
-        raise ValueError(error)
+        raise ValueError(f"{mtype} is not a unit")
     else:
-        raise ValueError(error)
+        raise ValueError(f"Illegal MainType {mtype}")
 
-
-def decode_length(mtype, length):
-    # type: (MainType, Length) -> LN
-    """
-    Dedoce raw length value from ISCC header to length of digest in number of bits.
-
-    Decodes a raw header integer value in to its semantically meaningfull value (eg.
-    number of bits)
-    """
-    if mtype in (MT.META, MT.SEMANTIC, MT.CONTENT, MT.DATA, MT.INSTANCE):
-        return LN((length + 1) * 32)
-    elif mtype == MT.ISCC:
-        return LN(len(decode_units(length)) * 64 + 128)
-    elif mtype == MT.ID:
-        return LN(length * 8 + 64)
-    else:
-        raise ValueError(f"Invalid length {length} for MainType {mtype}")
+    nbytes = bit_length // 8
+    header = write_header(mtype, stype, version, encoded_length)
+    body = digest[:nbytes]
+    component_code = encode_base32(header + body)
+    return component_code
 
 
 def write_header(mtype, stype, version=0, length=1):
@@ -436,6 +330,100 @@ def read_varnibble(b):
         return ba2int(b[4:16]) + 584, b[16:]
 
     raise ValueError("Invalid bitarray")
+
+
+def encode_units(units):
+    # type: (Tuple) -> int
+    """
+    Encodes a combination of ISCC units to an integer between 0-7 to be used as length
+    value for the final encoding of MT.ISCC
+    """
+    return UNITS.index(units)
+
+
+def decode_units(unit_id):
+    # type: (int) -> Tuple[MT, ...]
+    """
+    Decodes an ISCC header length value that has been encoded with a unit_id to an
+    ordered tuple of MainTypes.
+    """
+    units = sorted(UNITS[unit_id])
+    return tuple(MT(u) for u in units)
+
+
+def encode_length(mtype, length):
+    # type: (MainType, Length) -> int
+    """
+    Encode length to integer value for header encoding.
+
+    The `length` value has MainType-specific semantics:
+
+    MainTypes `META`, `SEMANTIC`, `CONTENT`, `DATA`, `INSTANCE`:
+        Length means number of bits for the body.
+        Length is encoded as number of 32-bit chunks (0 being 32bits)
+        Examples: 32 -> 0, 64 -> 1, 96 -> 2 ...
+
+    MainType `ID`:
+        Lengths means number the number of bits for the body including the counter
+        Length is encoded as number of bytes of the counter (64-bit body is implicit)
+        Examples:
+            64 -> 0 (No counter)
+            72 -> 1 (One byte counter)
+            80 -> 2 (Two byte counter)
+            ...
+
+    MainType `ISCC`:
+        Length means the composition of optional 64-bit components included in the ISCC
+        Examples:
+            No optional components -> 0000 -> 0
+            CONTENT                -> 0001 -> 1
+            SEMANTIC               -> 0010 -> 2
+            SEMANTIC, CONTENT      -> 0011 -> 3
+            META                   -> 0100 -> 4
+            META, CONTENT          -> 0101 -> 5
+            ...
+
+    :param MainType mtype: The MainType for which to encode the length value.
+    :param Length length: The length expressed according to the semantics of the type
+    :return: The length value encoded as integer for use with write_header.
+    """
+
+    error = f"Invalid length {length} for MainType {mtype}"
+    # standard case (length field denotes number of 32-bit chunks, 0 being 32-bits)
+    if mtype in (MT.META, MT.SEMANTIC, MT.CONTENT, MT.DATA, MT.INSTANCE):
+        if length >= 32 and not length % 32:
+            return (length // 32) - 1
+        raise ValueError(error)
+    # flag type encoding of included components (pass through as encoded out-of-band)
+    elif mtype == MT.ISCC:
+        if 0 <= length <= 7:
+            return length
+        raise ValueError(error)
+    # counter byte lenght encoding
+    elif mtype == MT.ID:
+        if 64 <= length <= 96:
+            return (length - 64) // 8
+        raise ValueError(error)
+    else:
+        raise ValueError(error)
+
+
+def decode_length(mtype, length):
+    # type: (MainType, Length) -> LN
+    """
+    Dedoce raw length value from ISCC header to length of digest in number of bits.
+
+    Decodes a raw header integer value in to its semantically meaningfull value (eg.
+    number of bits)
+    """
+    if mtype in (MT.META, MT.SEMANTIC, MT.CONTENT, MT.DATA, MT.INSTANCE):
+        return LN((length + 1) * 32)
+    elif mtype == MT.ISCC:
+        return LN(len(decode_units(length)) * 64 + 128)
+    elif mtype == MT.ID:
+        return LN(length * 8 + 64)
+    else:
+        raise ValueError(f"Invalid length {length} for MainType {mtype}")
 
 
 def encode_base32(data):

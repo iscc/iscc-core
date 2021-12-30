@@ -105,7 +105,7 @@ class InstanceHasherV0:
             mtype=codec.MT.INSTANCE,
             stype=codec.ST.NONE,
             version=codec.VS.V0,
-            length=bits,
+            bit_length=bits,
             digest=self.digest(),
         )
         return instance_code

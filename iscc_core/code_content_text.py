@@ -54,7 +54,7 @@ def gen_text_code_v0(text, bits=core_opts.text_bits):
         mtype=codec.MT.CONTENT,
         stype=codec.ST_CC.TEXT,
         version=codec.VS.V0,
-        length=bits,
+        bit_length=bits,
         digest=digest,
     )
     return ISCC(iscc=text_code, characters=characters)

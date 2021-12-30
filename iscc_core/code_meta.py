@@ -92,7 +92,7 @@ def gen_meta_code_v0(name, description=None, bits=core_opts.meta_bits):
         mtype=MT.META,
         stype=ST.NONE,
         version=VS.V0,
-        length=bits,
+        bit_length=bits,
         digest=digest,
     )
 

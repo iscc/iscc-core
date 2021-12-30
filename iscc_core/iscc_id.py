@@ -48,7 +48,7 @@ def gen_iscc_id_v0(chain_id, iscc_code, uc=0):
         mtype=codec.MT.ID,
         stype=chain_id,
         version=codec.VS.V0,
-        length=iscc_id_len,
+        bit_length=iscc_id_len,
         digest=iscc_id_digest,
     )
     return ISCC(iscc=iscc_id)

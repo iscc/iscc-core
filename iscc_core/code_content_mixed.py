@@ -51,7 +51,7 @@ def gen_mixed_code_v0(codes, bits=core_opts.mixed_bits):
         mtype=codec.MT.CONTENT,
         stype=codec.ST_CC.MIXED,
         version=codec.VS.V0,
-        length=bits,
+        bit_length=bits,
         digest=digest,
     )
     return ISCC(iscc=mixed_code, parts=codes)

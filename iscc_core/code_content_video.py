@@ -52,7 +52,7 @@ def gen_video_code_v0(frame_sigs, bits=core_opts.video_bits):
         mtype=codec.MT.CONTENT,
         stype=codec.ST_CC.VIDEO,
         version=codec.VS.V0,
-        length=bits,
+        bit_length=bits,
         digest=digest,
     )
     video_code_obj = ISCC(iscc=video_code)

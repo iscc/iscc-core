@@ -47,7 +47,7 @@ def gen_audio_code_v0(cv, bits=core_opts.audio_bits):
         mtype=codec.MT.CONTENT,
         stype=codec.ST_CC.AUDIO,
         version=codec.VS.V0,
-        length=bits,
+        bit_length=bits,
         digest=digest,
     )
     return ISCC(iscc=audio_code)

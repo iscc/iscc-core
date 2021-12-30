@@ -50,7 +50,7 @@ def gen_image_code_v0(pixels, bits=core_opts.image_bits):
         mtype=codec.MT.CONTENT,
         stype=codec.ST_CC.IMAGE,
         version=codec.VS.V0,
-        length=bits,
+        bit_length=bits,
         digest=digest,
     )
     return ISCC(iscc=image_code)
