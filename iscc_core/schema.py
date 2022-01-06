@@ -185,22 +185,22 @@ class ISCC(BaseModel):
         obj = self.dict(by_alias=True, exclude_none=True)
         return canonicalize(obj)
 
-    def jsonld_norm(self):
-        """
-        Returns `URDNA2015` normalized JSON-LD in `application/n-quads` format.
-
-        Used for cryptographically binding assertions from metadata
-        """
-        # TODO implement a document loader that can load context from local storage.
-        from pyld import jsonld
-
-        jsonld.set_document_loader(jsonld.requests_document_loader(timeout=10))
-
-        data = self.dict()
-
-        return jsonld.normalize(
-            data, {"algorithm": "URDNA2015", "format": "application/n-quads"}
-        )
+    # def jsonld_norm(self):
+    #     """
+    #     Returns `URDNA2015` normalized JSON-LD in `application/n-quads` format.
+    #
+    #     Used for cryptographically binding assertions from metadata
+    #     """
+    #     # TODO implement a document loader that can load context from local storage.
+    #     from pyld import jsonld
+    #
+    #     jsonld.set_document_loader(jsonld.requests_document_loader(timeout=10))
+    #
+    #     data = self.dict()
+    #
+    #     return jsonld.normalize(
+    #         data, {"algorithm": "URDNA2015", "format": "application/n-quads"}
+    #     )
 
     def ipfs_hash(self):
         # type: () -> str

@@ -40,6 +40,6 @@ def test_ISCC_jsonld_context():
     assert "@context" in iscc_core.ISCC.jsonld_context()
 
 
-def test_ISCC_jsonld_norm():
-    mc = iscc_core.gen_meta_code("Hello", "World")
-    assert mc.jsonld_norm().startswith("<ISCC:AAAWKLHFXNSF7NNE>")
+# def test_ISCC_jsonld_norm():
+#     mc = iscc_core.gen_meta_code("Hello", "World")
+#     assert mc.jsonld_norm().startswith("<ISCC:AAAWKLHFXNSF7NNE>")
