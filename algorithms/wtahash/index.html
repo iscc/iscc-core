@@ -12,10 +12,10 @@
         <meta name="author" content="Titusz Pan">
       
       
-        <link rel="canonical" href="https://iscc.codes/algorithms/wtahash/">
+        <link rel="canonical" href="https://core.iscc.codes/algorithms/wtahash/">
       
       <link rel="icon" href="../../images/iscc-logo-icon-black.svg">
-      <meta name="generator" content="mkdocs-1.2.3, mkdocs-material-8.1.3">
+      <meta name="generator" content="mkdocs-1.2.3, mkdocs-material-8.1.4">
     
     
       
@@ -23,7 +23,7 @@
       
     
     
-      <link rel="stylesheet" href="../../assets/stylesheets/main.edf004c2.min.css">
+      <link rel="stylesheet" href="../../assets/stylesheets/main.bb3983ee.min.css">
       
         
         <link rel="stylesheet" href="../../assets/stylesheets/palette.e6a45f82.min.css">
@@ -928,16 +928,16 @@
 
         <details class="quote">
           <summary>Source code in <code>iscc_core\wtahash.py</code></summary>
-          <div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="__codelineno-0-1"></a><span class="k">def</span> <span class="nf">wtahash</span><span class="p">(</span><span class="n">vec</span><span class="p">:</span> <span class="n">Sequence</span><span class="p">[</span><span class="nb">float</span><span class="p">],</span> <span class="n">bits</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bytes</span><span class="p">:</span>
-<a id="__codelineno-0-2" name="__codelineno-0-2" href="__codelineno-0-2"></a>    <span class="sd">&quot;&quot;&quot;Calculate WTA Hash for vector with 380 values (MP7 frame signature).&quot;&quot;&quot;</span>
-<a id="__codelineno-0-3" name="__codelineno-0-3" href="__codelineno-0-3"></a>    <span class="n">h</span> <span class="o">=</span> <span class="p">[]</span>
-<a id="__codelineno-0-4" name="__codelineno-0-4" href="__codelineno-0-4"></a>    <span class="k">for</span> <span class="n">perm</span> <span class="ow">in</span> <span class="n">WTA_VIDEO_ID_PERMUTATIONS</span><span class="p">:</span>
-<a id="__codelineno-0-5" name="__codelineno-0-5" href="__codelineno-0-5"></a>        <span class="n">v</span> <span class="o">=</span> <span class="n">vec</span><span class="p">[</span><span class="n">perm</span><span class="p">[</span><span class="mi">0</span><span class="p">]],</span> <span class="n">vec</span><span class="p">[</span><span class="n">perm</span><span class="p">[</span><span class="mi">1</span><span class="p">]]</span>
-<a id="__codelineno-0-6" name="__codelineno-0-6" href="__codelineno-0-6"></a>        <span class="n">h</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">v</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="nb">max</span><span class="p">(</span><span class="n">v</span><span class="p">)))</span>
-<a id="__codelineno-0-7" name="__codelineno-0-7" href="__codelineno-0-7"></a>        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">h</span><span class="p">)</span> <span class="o">==</span> <span class="n">bits</span><span class="p">:</span>
-<a id="__codelineno-0-8" name="__codelineno-0-8" href="__codelineno-0-8"></a>            <span class="k">break</span>
-<a id="__codelineno-0-9" name="__codelineno-0-9" href="__codelineno-0-9"></a>    <span class="n">h</span> <span class="o">=</span> <span class="n">bitarray</span><span class="p">(</span><span class="n">h</span><span class="p">)</span><span class="o">.</span><span class="n">tobytes</span><span class="p">()</span>
-<a id="__codelineno-0-10" name="__codelineno-0-10" href="__codelineno-0-10"></a>    <span class="k">return</span> <span class="n">h</span>
+          <div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="k">def</span> <span class="nf">wtahash</span><span class="p">(</span><span class="n">vec</span><span class="p">:</span> <span class="n">Sequence</span><span class="p">[</span><span class="nb">float</span><span class="p">],</span> <span class="n">bits</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bytes</span><span class="p">:</span>
+<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>    <span class="sd">&quot;&quot;&quot;Calculate WTA Hash for vector with 380 values (MP7 frame signature).&quot;&quot;&quot;</span>
+<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>    <span class="n">h</span> <span class="o">=</span> <span class="p">[]</span>
+<a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a>    <span class="k">for</span> <span class="n">perm</span> <span class="ow">in</span> <span class="n">WTA_VIDEO_ID_PERMUTATIONS</span><span class="p">:</span>
+<a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a>        <span class="n">v</span> <span class="o">=</span> <span class="n">vec</span><span class="p">[</span><span class="n">perm</span><span class="p">[</span><span class="mi">0</span><span class="p">]],</span> <span class="n">vec</span><span class="p">[</span><span class="n">perm</span><span class="p">[</span><span class="mi">1</span><span class="p">]]</span>
+<a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a>        <span class="n">h</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">v</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="nb">max</span><span class="p">(</span><span class="n">v</span><span class="p">)))</span>
+<a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a>        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">h</span><span class="p">)</span> <span class="o">==</span> <span class="n">bits</span><span class="p">:</span>
+<a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a>            <span class="k">break</span>
+<a id="__codelineno-0-9" name="__codelineno-0-9" href="#__codelineno-0-9"></a>    <span class="n">h</span> <span class="o">=</span> <span class="n">bitarray</span><span class="p">(</span><span class="n">h</span><span class="p">)</span><span class="o">.</span><span class="n">tobytes</span><span class="p">()</span>
+<a id="__codelineno-0-10" name="__codelineno-0-10" href="#__codelineno-0-10"></a>    <span class="k">return</span> <span class="n">h</span>
 </code></pre></div>
         </details>
     </div>
@@ -1022,10 +1022,10 @@
     <div class="md-dialog" data-md-component="dialog">
       <div class="md-dialog__inner md-typeset"></div>
     </div>
-    <script id="__config" type="application/json">{"base": "../..", "features": ["toc.integrate", "navigation.indexes", "navigation.tracking", "navigation.tabs", "navigation.tabs.sticky", "navigation.expand"], "translations": {"clipboard.copy": "Copy to clipboard", "clipboard.copied": "Copied to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.placeholder": "Type to start searching", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.term.missing": "Missing", "select.version.title": "Select version"}, "search": "../../assets/javascripts/workers/search.0bbba5b5.min.js"}</script>
+    <script id="__config" type="application/json">{"base": "../..", "features": ["toc.integrate", "navigation.indexes", "navigation.tracking", "navigation.tabs", "navigation.tabs.sticky", "navigation.expand"], "translations": {"clipboard.copy": "Copy to clipboard", "clipboard.copied": "Copied to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.placeholder": "Type to start searching", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.term.missing": "Missing", "select.version.title": "Select version"}, "search": "../../assets/javascripts/workers/search.361d90f1.min.js"}</script>
     
     
-      <script src="../../assets/javascripts/bundle.e1a181d9.min.js"></script>
+      <script src="../../assets/javascripts/bundle.289a2a4b.min.js"></script>
       
         <script src="https://unpkg.com/mermaid/dist/mermaid.min.js"></script>
       
