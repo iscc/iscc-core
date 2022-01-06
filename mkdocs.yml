@@ -1,7 +1,7 @@
 site_name: "ISCC - Codec & Algorithms"
 site_description: 'International Standard Content Code - Core algorithms python implementation.'
 site_author: 'Titusz Pan'
-site_url: 'https://iscc.codes'
+site_url: 'https://core.iscc.codes'
 
 # Repository
 repo_name: 'iscc/iscc-core'
