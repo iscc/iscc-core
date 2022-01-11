@@ -1,2 +1,2 @@
-# **ISCC** - Conformance Testing
+# ISCC - Conformance Testing
 ::: iscc_core.conformance

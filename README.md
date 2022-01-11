@@ -1,4 +1,4 @@
-# **ISCC** - Codec & Algorithms
+# ISCC - Codec & Algorithms
 
 [![Build](https://github.com/iscc/iscc-core/actions/workflows/tests.yml/badge.svg)](https://github.com/iscc/iscc-core/actions/workflows/tests.yml)
 [![Version](https://img.shields.io/pypi/v/iscc-core.svg)](https://pypi.python.org/pypi/iscc-core/)
@@ -6,22 +6,22 @@
 [![Quality](https://app.codacy.com/project/badge/Grade/ad1cc48ac0c0413ea2373a938148f019)](https://www.codacy.com/gh/iscc/iscc-core/dashboard)
 [![Downloads](https://pepy.tech/badge/iscc-core)](https://pepy.tech/project/iscc-core)
 
-> `iscc-core` is a Python library that implements the core algorithms of the [**ISCC**](https://core.iscc.codes) (*International Standard Content Code*)
+> `iscc-core` is a Python library that implements the core algorithms of the [ISCC](https://core.iscc.codes) (*International Standard Content Code*)
 
 | NOTE: This is a low level reference implementation. `iscc-core` does not support content/metadata detection, extraction or preprocessing. For easy generation of ISCC codes see: [iscc-cli](https://github.com/iscc/iscc-cli/releases) |
 |------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 
 ## What is an ISCC
 
-The **ISCC** is a similarity preserving identifier for digital media assets.
+The ISCC is a similarity preserving identifier for digital media assets.
 
-**ISCCs** are generated algorithmically from digital content, just like cryptographic hashes. However, instead of using a single cryptographic hash function to identify data only, the **ISCC** uses various algorithms to create a composite identifier that exhibits similarity-preserving properties (soft hash).
+ISCCs are generated algorithmically from digital content, just like cryptographic hashes. However, instead of using a single cryptographic hash function to identify data only, the ISCC uses various algorithms to create a composite identifier that exhibits similarity-preserving properties (soft hash).
 
-The component-based structure of the **ISCC** identifies content at multiple levels of abstraction. Each component is self-describing, modular, and can be used separately or with others to aid in various content identification tasks. The algorithmic design supports content deduplication, database synchronization, indexing, integrity verification, timestamping, versioning, data provenance, similarity clustering, anomaly detection, usage tracking, allocation of royalties, fact-checking and general digital asset management use-cases.
+The component-based structure of the ISCC identifies content at multiple levels of abstraction. Each component is self-describing, modular, and can be used separately or with others to aid in various content identification tasks. The algorithmic design supports content deduplication, database synchronization, indexing, integrity verification, timestamping, versioning, data provenance, similarity clustering, anomaly detection, usage tracking, allocation of royalties, fact-checking and general digital asset management use-cases.
 
 ## What is `iscc-core`
 
-`iscc-core` is the python based library of the core algorithms to create standard-compliant **ISCC** codes. It also serves as a reference for porting **ISCC** to other programming languages.
+`iscc-core` is the python based library of the core algorithms to create standard-compliant ISCC codes. It also serves as a reference for porting ISCC to other programming languages.
 
 ## ISCC Architecture
 

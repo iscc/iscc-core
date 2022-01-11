@@ -1,4 +1,4 @@
-# **ISCC** - Codec
+# ISCC - Codec
 
 This module implements encoding, decoding and transcoding functions of ISCC
 

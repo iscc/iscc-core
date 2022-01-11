@@ -1,1 +1,1 @@
-# **ISCC** - Content-Codes
+# ISCC - Content-Codes

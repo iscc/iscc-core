@@ -3,7 +3,7 @@ hide:
   - navigation
 ---
 
-# **ISCC** - Metadata Vocabulary (v0.2.0)
+# ISCC - Metadata Vocabulary (v0.2.0)
 
 ## @context
 
@@ -28,7 +28,7 @@ hide:
 ## description
 
 !!! term ""
-    Description of the digital asset identified by the ISCC (used as input for Meta-Code generation). Any user presentable text string (including Markdown text) indicative of the identity of the referent may be used. 
+    Description of the digital asset identified by the ISCC (used as input for Meta-Code generation). Any user presentable text string (including Markdown text) indicative of the identity of the referent may be used.
 
 ## image
 

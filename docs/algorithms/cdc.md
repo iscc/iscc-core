@@ -1,4 +1,4 @@
-# **ISCC** - Content Defined Chunking
+# ISCC - Content Defined Chunking
 
 ::: iscc_core.cdc
     rendering:

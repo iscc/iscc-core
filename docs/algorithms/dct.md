@@ -1,4 +1,4 @@
-# **ISCC** - Discrete Cosine Transform
+# ISCC - Discrete Cosine Transform
 
 ::: iscc_core.dct
     rendering:

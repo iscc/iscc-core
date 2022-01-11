@@ -1,3 +1,3 @@
-# **ISCC** - Utilities
+# ISCC - Utilities
 
 ::: iscc_core.utils
