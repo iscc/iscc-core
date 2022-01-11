@@ -91,7 +91,7 @@ uvloop = ["uvloop (>=0.15.2)"]
 
 [[package]]
 name = "blake3"
-version = "0.2.1"
+version = "0.3.0"
 description = "Python bindings for the Rust blake3 crate"
 category = "main"
 optional = false
@@ -381,7 +381,7 @@ mkdocs = ">=1.1,<2.0"
 
 [[package]]
 name = "mkdocs-material"
-version = "8.1.4"
+version = "8.1.6"
 description = "A Material Design theme for MkDocs"
 category = "dev"
 optional = false
@@ -879,25 +879,30 @@ black = [
     {file = "black-21.12b0.tar.gz", hash = "sha256:77b80f693a569e2e527958459634f18df9b0ba2625ba4e0c2d5da5be42e6f2b3"},
 ]
 blake3 = [
-    {file = "blake3-0.2.1-cp36-cp36m-macosx_10_7_x86_64.whl", hash = "sha256:de1c8eaa0f17628869e4fa3a2fdd119845950d6c786c67b723267c1988d6b25c"},
-    {file = "blake3-0.2.1-cp36-cp36m-manylinux_2_5_x86_64.manylinux1_x86_64.whl", hash = "sha256:868bff669115ffbeec6e759a89c228648aa58a6fcef8589342de6cb6b9ed8ca9"},
-    {file = "blake3-0.2.1-cp36-none-win32.whl", hash = "sha256:6ea193219f38a37e838a61485df5f549ac151d3a8dbd41d9e3ebd894f5296b19"},
-    {file = "blake3-0.2.1-cp36-none-win_amd64.whl", hash = "sha256:1311f0091cb152c9ec1c2273d64b1c3d166bb0b513734ebcb24329370c4fc08a"},
-    {file = "blake3-0.2.1-cp37-cp37m-macosx_10_7_x86_64.whl", hash = "sha256:abab5b261f32b02a0b42bb5474a7268fe199391961952c38195fd4f357a6e8b0"},
-    {file = "blake3-0.2.1-cp37-cp37m-manylinux_2_5_x86_64.manylinux1_x86_64.whl", hash = "sha256:34b04ef213b78014cef91d9360e29fcaab130dee7fc1e5450add2e4a1fd3e907"},
-    {file = "blake3-0.2.1-cp37-none-win32.whl", hash = "sha256:233eb4125a17908e6d0c733f76c0e4b6cf01ec59aaa1d7810853173749fa9d33"},
-    {file = "blake3-0.2.1-cp37-none-win_amd64.whl", hash = "sha256:136d02fa9c8a14e1894cc4e0865bd98d9f5a41baf2b9b500b3d6690134f951fc"},
-    {file = "blake3-0.2.1-cp38-cp38-macosx_10_7_x86_64.whl", hash = "sha256:41789806873d196be059ace27ab0f5565db20dc74c6da53d29fbd424b87ee271"},
-    {file = "blake3-0.2.1-cp38-cp38-macosx_11_0_arm64.whl", hash = "sha256:3715da23b9555429e15f6b26718a70456f089456e6e1929949808caa383d0cb4"},
-    {file = "blake3-0.2.1-cp38-cp38-manylinux_2_5_x86_64.manylinux1_x86_64.whl", hash = "sha256:16352ab67bdf9da2ba1c92232aabc56a9fd7bfc06ae2ad4d550c777400cfdbc0"},
-    {file = "blake3-0.2.1-cp38-none-win32.whl", hash = "sha256:990631b705a069e485409cc6376495893786b202e80c8bd5e75a936445106654"},
-    {file = "blake3-0.2.1-cp38-none-win_amd64.whl", hash = "sha256:ac01bd4541df763fce1ba3ffa1af1a0fdb39eba73cfbbff02a4108736a7fbc27"},
-    {file = "blake3-0.2.1-cp39-cp39-macosx_10_7_x86_64.whl", hash = "sha256:ebb98db430271fa9814063636f3cbcaf964223d05a1134da8eb8d0af8868ff16"},
-    {file = "blake3-0.2.1-cp39-cp39-macosx_11_0_arm64.whl", hash = "sha256:19f4e5c8eb0660c48b3f0dc70138ab26a7373d083dbdf27e701b81e2096d0cb4"},
-    {file = "blake3-0.2.1-cp39-cp39-manylinux_2_5_x86_64.manylinux1_x86_64.whl", hash = "sha256:5dd0bff49a63839dc649872368b93a51d09098efc9485c84ae910d74058a5dc4"},
-    {file = "blake3-0.2.1-cp39-none-win32.whl", hash = "sha256:381e8ea6403f4c300abb19a009ca643016f57951cc72ec2f74be49642b209a1b"},
-    {file = "blake3-0.2.1-cp39-none-win_amd64.whl", hash = "sha256:355e0a89a569d7f2148a421117a2fb611f3c2e977a9772d46f56ed8e0b75ca84"},
-    {file = "blake3-0.2.1.tar.gz", hash = "sha256:e298e7c8e56ab37a1942b9c595f15f72695b5a31c4e8ac9957fc8e4df14a3109"},
+    {file = "blake3-0.3.0-cp310-cp310-macosx_10_7_x86_64.whl", hash = "sha256:036a99adf6935dd9d1931085f71d6e1e548bbdd12da41432ad87d9fb6a75989d"},
+    {file = "blake3-0.3.0-cp310-cp310-macosx_11_0_arm64.whl", hash = "sha256:dcd21e88d724506ed05788a8f4adc56142e4bc6331dc895514fdd611955354d9"},
+    {file = "blake3-0.3.0-cp310-cp310-manylinux_2_5_x86_64.manylinux1_x86_64.whl", hash = "sha256:cf23225bddc5560ab7aa6a5142c6f7b8a6d63fae587893a984e26cfe8ee5f585"},
+    {file = "blake3-0.3.0-cp310-none-win32.whl", hash = "sha256:d6d082cc650f22241eabaa3b2c81c896ba35fc11e0b5f7e8be497bd8a0336115"},
+    {file = "blake3-0.3.0-cp310-none-win_amd64.whl", hash = "sha256:5a8998b25aeb02251a993b600846d81d72ebce46b1765c46fc19441216b0dc64"},
+    {file = "blake3-0.3.0-cp36-cp36m-macosx_10_7_x86_64.whl", hash = "sha256:ab576e8afadf526b0e86c8e6451a2aa65be8d71f5c111dcf52cc7a2a94947afe"},
+    {file = "blake3-0.3.0-cp36-cp36m-manylinux_2_5_x86_64.manylinux1_x86_64.whl", hash = "sha256:745a52293f3c8107d27c4f04b96893b5e529fd49c06042971625e2656e084fc7"},
+    {file = "blake3-0.3.0-cp36-none-win32.whl", hash = "sha256:09eaea7f995adf135f784bf698cce19b8346de4db870174a36856680ad55bbef"},
+    {file = "blake3-0.3.0-cp36-none-win_amd64.whl", hash = "sha256:4ef884b36eb500c11e00745584256ae486fae4bdc58b0a52c5eb4a04e8f71c0e"},
+    {file = "blake3-0.3.0-cp37-cp37m-macosx_10_7_x86_64.whl", hash = "sha256:b9bb9ab823a90a61ea836f0fab500941a3e259f3de0867614a0df04df21e2a83"},
+    {file = "blake3-0.3.0-cp37-cp37m-manylinux_2_5_x86_64.manylinux1_x86_64.whl", hash = "sha256:f2182ecda1f45449f1f31b85e22aecc62bde5d4baa8fc009cd92d65c1b92c099"},
+    {file = "blake3-0.3.0-cp37-none-win32.whl", hash = "sha256:061ad34772e61396a4c88cf04b4a29f4036fe6e02b983c89f1474771c6f06866"},
+    {file = "blake3-0.3.0-cp37-none-win_amd64.whl", hash = "sha256:28ebba2efc3d9671166ecfbffb3c04d6a634a3d866fb3012970ad5092334a1d3"},
+    {file = "blake3-0.3.0-cp38-cp38-macosx_10_7_x86_64.whl", hash = "sha256:aab6bd8b47be60efbccdec906bf4fe91593e0058309834649f86311c0a0039bf"},
+    {file = "blake3-0.3.0-cp38-cp38-macosx_11_0_arm64.whl", hash = "sha256:8cd74632b2c21c7511ecbb011de579c1d05c22633724654cb742b8a754af9b0b"},
+    {file = "blake3-0.3.0-cp38-cp38-manylinux_2_5_x86_64.manylinux1_x86_64.whl", hash = "sha256:1437511be5c63bd51ee6367c4175018d9b5af25675aa04e4932c5b749b32fa91"},
+    {file = "blake3-0.3.0-cp38-none-win32.whl", hash = "sha256:8b4b0cac5ff999128bad0e81c3656171e3126b59246afe3d8c7f1306c73612f1"},
+    {file = "blake3-0.3.0-cp38-none-win_amd64.whl", hash = "sha256:2d05bd525dd69dfffb082a9b55deec03e71c99594773d73cc857ec5e7c7180e9"},
+    {file = "blake3-0.3.0-cp39-cp39-macosx_10_7_x86_64.whl", hash = "sha256:7de2dcb79cbded4e066e4152a9c4774ca5c729570f346e62eed1f207531ad935"},
+    {file = "blake3-0.3.0-cp39-cp39-macosx_11_0_arm64.whl", hash = "sha256:3b9b3d17d6f5ae82adfb9c7a90bf18b3055be86aded7bf37bf722a734afd2fa6"},
+    {file = "blake3-0.3.0-cp39-cp39-manylinux_2_5_x86_64.manylinux1_x86_64.whl", hash = "sha256:63a181dba9247c76b173cbdc99949059f3a02c7ff0e458d3452d052357054360"},
+    {file = "blake3-0.3.0-cp39-none-win32.whl", hash = "sha256:eeb617771d0d06c4a104b6e5d1319ca9b44e93fd26f490c175c8f4654e3045eb"},
+    {file = "blake3-0.3.0-cp39-none-win_amd64.whl", hash = "sha256:d886ee57659404476f74dcbd9bbf5ba74dd8c74939e3e906a1f1ca678c2cc112"},
+    {file = "blake3-0.3.0.tar.gz", hash = "sha256:ed64e35778208c6d2ad7d6066450c5c649ea6632b8994a771889fd59594fa2f8"},
 ]
 cached-property = [
     {file = "cached-property-1.5.2.tar.gz", hash = "sha256:9fa5755838eecbb2d234c3aa390bd80fbd3ac6b6869109bfc1b499f7bd89a130"},
@@ -1237,8 +1242,8 @@ mkdocs-autorefs = [
     {file = "mkdocs_autorefs-0.3.1-py3-none-any.whl", hash = "sha256:f0fd7c115eaafda7fb16bf5ff5d70eda55d7c0599eac64f8b25eacf864312a85"},
 ]
 mkdocs-material = [
-    {file = "mkdocs-material-8.1.4.tar.gz", hash = "sha256:b310be0f69503214406afe2e0495449f135503fe084467b607f860f4ed01f09e"},
-    {file = "mkdocs_material-8.1.4-py2.py3-none-any.whl", hash = "sha256:6d615457ae18fd6e6a890a6f70d5681f3a6b931da67c2de7df1b273f8f702b4d"},
+    {file = "mkdocs-material-8.1.6.tar.gz", hash = "sha256:12eb74faf018950f51261a773f9bea12cc296ec4bdbb2c8cf74102ee35b6df79"},
+    {file = "mkdocs_material-8.1.6-py2.py3-none-any.whl", hash = "sha256:b2303413e3154502759f90ee2720b451be8855f769c385d8fb06a93ce54aafe2"},
 ]
 mkdocs-material-extensions = [
     {file = "mkdocs-material-extensions-1.0.3.tar.gz", hash = "sha256:bfd24dfdef7b41c312ede42648f9eb83476ea168ec163b613f9abd12bbfddba2"},
