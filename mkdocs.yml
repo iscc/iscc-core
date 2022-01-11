@@ -27,8 +27,8 @@ theme:
   favicon: images/iscc-logo-icon-black.svg
   language: en
   font:
-    text: Quicksand
-    code: Inconsolata
+    text: Readex Pro
+    code: JetBrains Mono
   palette:
     - scheme: default
       toggle:

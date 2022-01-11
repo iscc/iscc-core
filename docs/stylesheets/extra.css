@@ -17,3 +17,12 @@
   --md-accent-fg-color:                #f56169;
   --md-accent-bg-color:                #a6db50;
 }
+
+
+.md-typeset {
+    font-weight: 200;
+}
+
+.md-typeset code {
+    font-size:.6rem;
+}
