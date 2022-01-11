@@ -25,7 +25,7 @@ The component-based structure of the ISCC identifies content at multiple levels 
 
 ## ISCC Architecture
 
-![ISCC Architecure](https://raw.githubusercontent.com/iscc/iscc-core/master/docs/images/iscc-codec-format.png)
+![ISCC Architecture](https://raw.githubusercontent.com/iscc/iscc-core/master/docs/images/iscc-codec-light.png)
 
 ## ISCC MainTypes
 

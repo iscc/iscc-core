@@ -10,10 +10,14 @@ DST = join(HERE, "../docs/index.md")
 
 def main():
     """Copy README.md to documentation index.md"""
-    shutil.copyfile(
-        SRC,
-        DST,
-    )
+    with open(SRC, "rt", encoding="utf-8") as infile:
+        text = infile.read()
+    m = "![ISCC Architecure](https://raw.githubusercontent.com/iscc/iscc-core/master/docs/images/iscc-codec-light.png)\n"
+    r1 = "![ISCC Architecure](https://raw.githubusercontent.com/iscc/iscc-core/master/docs/images/iscc-codec-light.png#only-light)\n"
+    r2 = "![ISCC Architecure](https://raw.githubusercontent.com/iscc/iscc-core/master/docs/images/iscc-codec-dark.png#only-dark)\n"
+    text = text.replace(m, r1 + r2)
+    with open(DST, "wt", encoding="utf-8") as outf:
+        outf.write(text)
 
 
 if __name__ == "__main__":
