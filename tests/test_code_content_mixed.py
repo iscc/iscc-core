@@ -10,37 +10,37 @@ def test_gen_mixed_code_v0_single_raises():
 
 
 def test_gen_mixed_code_v0_non_cc_raises():
-    tc = iscc_core.gen_text_code_v0("Hello World", bits=64)
-    mc = iscc_core.gen_meta_code_v0("Meta Code Title", bits=64)
-    codes = tc.iscc, mc.iscc
+    tc = iscc_core.gen_text_code_v0("Hello World", bits=64).iscc
+    mc = iscc_core.gen_meta_code_v0("Meta Code Title", bits=64).iscc
+    codes = tc, mc
     with pytest.raises(AssertionError):
         iscc_core.gen_mixed_code_v0(codes, bits=64)
 
 
 def test_gen_mixed_code_v0_codes_mixed_length():
-    tc_long = iscc_core.gen_text_code_v0("Hello World", bits=256)
-    tc_short = iscc_core.gen_text_code_v0("Short Text-Code", bits=64)
-    codes = tc_long.iscc, tc_short.iscc
-    assert iscc_core.gen_mixed_code_v0(codes=codes, bits=64).dict_raw() == dict(
-        iscc="ISCC:EQASB7WL7325X5PW",
-        parts=[
-            "ISCC:EAD75Q74YXNZC4EKRCQEKOXKMYHCJIUHQNZ3P5FGVJRE4IBHR3F7HRY",
-            "ISCC:EAAVUCMGOTFWLZU6",
+    tc_long = iscc_core.gen_text_code_v0("Hello World", bits=256).iscc
+    tc_short = iscc_core.gen_text_code_v0("Short Text-Code", bits=64).iscc
+    codes = tc_long, tc_short
+    assert iscc_core.gen_mixed_code_v0(codes=codes, bits=64).dict_raw() == {
+        "iscc": "ISCC:EQASBPL7XH763357",
+        "parts": [
+            "ISCC:EADSKDNZNYGUUF5AMFEJLZ5P66CP5YKCOA3X7F36RWE4CIRCBTUWXYY",
+            "ISCC:EAA3265Q67Q27P7F",
         ],
-    )
+    }
 
 
 def test_gen_mixed_code_v0_codes_to_short_raises():
-    tc_long = iscc_core.gen_text_code_v0("Hello World", bits=256)
-    tc_short = iscc_core.gen_text_code_v0("Short Text-Code", bits=64)
-    codes = tc_long.iscc, tc_short.iscc
+    tc_long = iscc_core.gen_text_code_v0("Hello World", bits=256).iscc
+    tc_short = iscc_core.gen_text_code_v0("Short Text-Code", bits=64).iscc
+    codes = tc_long, tc_short
     with pytest.raises(AssertionError):
         iscc_core.gen_mixed_code_v0(codes=codes, bits=128)
 
 
 def test_gen_mixed_code_codes_to_short_raises():
-    tc_long = iscc_core.gen_text_code_v0("Hello World", bits=256)
-    tc_short = iscc_core.gen_text_code_v0("Short Text-Code", bits=64)
-    codes = tc_long.iscc, tc_short.iscc
+    tc_long = iscc_core.gen_text_code_v0("Hello World", bits=256).iscc
+    tc_short = iscc_core.gen_text_code_v0("Short Text-Code", bits=64).iscc
+    codes = tc_long, tc_short
     with pytest.raises(AssertionError):
         iscc_core.gen_mixed_code(codes=codes, bits=128)

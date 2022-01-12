@@ -253,7 +253,7 @@
       "outputs": {
         "@context": "https://purl.org/iscc/context/0.2.0.json",
         "type": "https://purl.org/iscc/schema/0.2.0.json",
-        "iscc": "ISCC:EAA75Q74YXNZC4EK",
+        "iscc": "ISCC:EAASKDNZNYGUUF5A",
         "characters": 11
       }
     },
@@ -265,7 +265,7 @@
       "outputs": {
         "@context": "https://purl.org/iscc/context/0.2.0.json",
         "type": "https://purl.org/iscc/schema/0.2.0.json",
-        "iscc": "ISCC:EAD75Q74YXNZC4EKRCQEKOXKMYHCJIUHQNZ3P5FGVJRE4IBHR3F7HRY",
+        "iscc": "ISCC:EADSKDNZNYGUUF5AMFEJLZ5P66CP5YKCOA3X7F36RWE4CIRCBTUWXYY",
         "characters": 11
       }
     },
@@ -277,7 +277,7 @@
       "outputs": {
         "@context": "https://purl.org/iscc/context/0.2.0.json",
         "type": "https://purl.org/iscc/schema/0.2.0.json",
-        "iscc": "ISCC:EADQK3O2BVVRMYT6FSEIQGH4R7R2DO7NOA5UWIFF5644ACC7Z67P7QI",
+        "iscc": "ISCC:EADTJCW2DT555KK6DEQAR5DQT7VYJGZM6CXHG3BM56WOMQDDVS7754I",
         "characters": 43
       }
     },
@@ -289,7 +289,7 @@
       "outputs": {
         "@context": "https://purl.org/iscc/context/0.2.0.json",
         "type": "https://purl.org/iscc/schema/0.2.0.json",
-        "iscc": "ISCC:EABR7BVKOFMBVNE4GINEXNCRLYINE",
+        "iscc": "ISCC:EABRHV2U6PNK7WFXIEEYQLOQPYCX6",
         "characters": 291
       }
     }

@@ -6,22 +6,22 @@ import iscc_core
 def test_gen_iscc_id_v0_single_component():
     tc = iscc_core.gen_text_code_v0("Hello World")
     iscc_id = iscc_core.gen_iscc_id(0, tc.iscc)
-    assert iscc_id.iscc == "ISCC:MAACB7WD7TC5XELQ"
-    assert iscc_id.code_obj.explain == "ID-PRIVATE-V0-64-20fec3fcc5db9170"
+    assert iscc_id.iscc == "ISCC:MAACAJINXFXA2SQX"
+    assert iscc_id.code_obj.explain == "ID-PRIVATE-V0-64-20250db96e0d4a17"
 
 
 def test_gen_iscc_id_v0_single_component_uc():
     tc = iscc_core.gen_text_code_v0("Hello World")
     iscc_id = iscc_core.gen_iscc_id(0, tc.iscc, uc=1)
-    assert iscc_id.iscc == "ISCC:MAASB7WD7TC5XELQAE"
-    assert iscc_id.code_obj.explain == "ID-PRIVATE-V0-72-20fec3fcc5db9170-1"
+    assert iscc_id.iscc == "ISCC:MAASAJINXFXA2SQXAE"
+    assert iscc_id.code_obj.explain == "ID-PRIVATE-V0-72-20250db96e0d4a17-1"
 
 
 def test_gen_iscc_id_v0_single_component_uc_2byte():
     tc = iscc_core.gen_text_code_v0("Hello World")
     iscc_id = iscc_core.gen_iscc_id(0, tc.iscc, uc=257)
-    assert iscc_id.iscc == "ISCC:MABCB7WD7TC5XELQQEBA"
-    assert iscc_id.code_obj.explain == "ID-PRIVATE-V0-80-20fec3fcc5db9170-257"
+    assert iscc_id.iscc == "ISCC:MABCAJINXFXA2SQXQEBA"
+    assert iscc_id.code_obj.explain == "ID-PRIVATE-V0-80-20250db96e0d4a17-257"
 
 
 def test_gen_iscc_id_v0_multiple_components():
@@ -29,8 +29,8 @@ def test_gen_iscc_id_v0_multiple_components():
     tc = iscc_core.gen_text_code_v0("Hello World")
     code = mc.code + tc.code
     iscc_id = iscc_core.gen_iscc_id(1, code)
-    assert iscc_id.iscc == "ISCC:MEACB7X7777574L6"
-    assert iscc_id.code_obj.explain == "ID-BITCOIN-V0-64-20feffffffdff17e"
+    assert iscc_id.iscc == "ISCC:MEACAJJ5757U72R7"
+    assert iscc_id.code_obj.explain == "ID-BITCOIN-V0-64-20253dff7f4fea3f"
 
 
 def test_gen_iscc_id_v0_instance_only():
