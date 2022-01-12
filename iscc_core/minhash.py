@@ -12,8 +12,7 @@ def minhash(features):
     :rtype: List[int]
     """
     return [
-        min([(((a * f + b) & MAXI64) % MPRIME) & MAXH for f in features])
-        for a, b in zip(MPA, MPB)
+        min([(((a * f + b) & MAXI64) % MPRIME) & MAXH for f in features]) for a, b in zip(MPA, MPB)
     ]
 
 

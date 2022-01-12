@@ -151,19 +151,13 @@ def soft_hash_meta_v0(title, extra=None):
         # Augment with interleaved hash for extra metadata
         if isinstance(extra, bytes):
             # Raw bytes are handled per byte
-            extra_n_grams = sliding_window(
-                extra, width=core_opts.meta_ngram_size_extra_binary
-            )
+            extra_n_grams = sliding_window(extra, width=core_opts.meta_ngram_size_extra_binary)
             extra_hash_digests = [blake3(ngram).digest() for ngram in extra_n_grams]
         elif isinstance(extra, str):
             # Text is lower cased and handled per character (multibyte)
             extra = extra.lower()
-            extra_n_grams = sliding_window(
-                extra, width=core_opts.meta_ngram_size_extra_text
-            )
-            extra_hash_digests = [
-                blake3(s.encode("utf-8")).digest() for s in extra_n_grams
-            ]
+            extra_n_grams = sliding_window(extra, width=core_opts.meta_ngram_size_extra_text)
+            extra_hash_digests = [blake3(s.encode("utf-8")).digest() for s in extra_n_grams]
         else:
             raise ValueError("parameter `extra` must be of type str or bytes!")
 

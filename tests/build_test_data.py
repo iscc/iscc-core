@@ -48,9 +48,7 @@ def dump_compact(data):
         d = json.dumps(json.loads(" ".join(_lines)), ensure_ascii=False)
         return lines[line_index][:-1] + d + ("," if has_trailing_comma else "")
 
-    s = "\n".join(
-        [shorten_line(i) for i in range(N) if not is_odl(i) and not is_cbl(i)]
-    )
+    s = "\n".join([shorten_line(i) for i in range(N) if not is_odl(i) and not is_cbl(i)])
 
     return s
 

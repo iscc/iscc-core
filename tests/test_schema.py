@@ -30,10 +30,7 @@ def test_ISCC_jcs():
 
 def test_ISCC_ipfs_hash():
     mc = iscc_core.gen_meta_code("Hello", "World")
-    assert (
-        mc.ipfs_hash()
-        == "f0155171c861d106408775a367684cc82f80a19f57857499c32130879fab51404"
-    )
+    assert mc.ipfs_hash() == "f0155171c861d106408775a367684cc82f80a19f57857499c32130879fab51404"
 
 
 def test_ISCC_jsonld_context():

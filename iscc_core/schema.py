@@ -108,8 +108,7 @@ class ISCC(BaseModel):
     width: Optional[int] = Field(description="Width of visual media in pixels.")
     height: Optional[int] = Field(description="Height of visual media in pixels.")
     characters: Optional[int] = Field(
-        description="Number of text characters (code points after Unicode "
-        "normalization)"
+        description="Number of text characters (code points after Unicode " "normalization)"
     )
     language: Optional[Union[str, List[str]]] = Field(
         description="Language(s) of content (BCP-47) in weighted order.",

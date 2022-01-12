@@ -12,12 +12,8 @@ class CoreOptions(BaseSettings):
         env_file = "iscc-core.env"
         env_file_encoding = "utf-8"
 
-    meta_bits: int = Field(
-        64, description="Default length of generated Meta-Code in bits"
-    )
-    meta_trim_title: int = Field(
-        128, description="Trim title length to this mumber of bytes"
-    )
+    meta_bits: int = Field(64, description="Default length of generated Meta-Code in bits")
+    meta_trim_title: int = Field(128, description="Trim title length to this mumber of bytes")
     meta_trim_extra: int = Field(4096, description="Trim extra to this number of bytes")
     meta_ngram_size_title: int = Field(
         3, description="Sliding window width (characters) for title metadata"
@@ -31,9 +27,7 @@ class CoreOptions(BaseSettings):
         description="Sliding window width (bytes) for binary extra metadata",
     )
 
-    text_bits: int = Field(
-        64, description="Default length of generated Content-Code Text in bits"
-    )
+    text_bits: int = Field(64, description="Default length of generated Content-Code Text in bits")
 
     text_ngram_size: int = Field(
         13, description="Number of characters per feature hash (size of sliding window)"
@@ -84,21 +78,15 @@ class CoreOptions(BaseSettings):
         64, description="Default length of generated Content-Code Video in bits"
     )
 
-    data_bits: int = Field(
-        64, description="Default length of generated Data-Code in bits"
-    )
+    data_bits: int = Field(64, description="Default length of generated Data-Code in bits")
 
     data_avg_chunk_size: int = Field(
         1024, description="Target chunk size for data chunking in number of bytes."
     )
 
-    instance_bits: int = Field(
-        64, description="Default length of generated Instance-Code in bits"
-    )
+    instance_bits: int = Field(64, description="Default length of generated Instance-Code in bits")
 
-    mixed_bits: int = Field(
-        64, description="Default length of generated Mixed-Code in bits"
-    )
+    mixed_bits: int = Field(64, description="Default length of generated Mixed-Code in bits")
 
     io_read_size: int = Field(
         2097152, description="File read buffer size in bytes for hashing operations"

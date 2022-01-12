@@ -85,9 +85,7 @@ class DataHasherV0:
         if self.tail:
             data = self.tail + data
 
-        for chunk in data_chunks(
-            data, utf32=False, avg_chunk_size=core_opts.data_avg_chunk_size
-        ):
+        for chunk in data_chunks(data, utf32=False, avg_chunk_size=core_opts.data_avg_chunk_size):
             self.chunk_sizes.append(len(chunk))
             self.chunk_features.append(xxhash.xxh32_intdigest(chunk))
             self.tail = chunk  # Last chunk may not be final

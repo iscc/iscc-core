@@ -61,9 +61,9 @@ def generate_tests():
         for test_name, test_values in tests.items():
 
             # create byte-stream from first argument strings that start with `stream:`:
-            if isinstance(test_values["inputs"][0], str) and test_values["inputs"][
-                0
-            ].startswith("stream:"):
+            if isinstance(test_values["inputs"][0], str) and test_values["inputs"][0].startswith(
+                "stream:"
+            ):
                 test_values["inputs"][0] = io.BytesIO(
                     bytes.fromhex(test_values["inputs"][0].lstrip("stream:"))
                 )

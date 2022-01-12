@@ -5,9 +5,9 @@ Creates an ISCC object that provides a `iscc`-field a Mixed-Code and a `parts`-f
 that lists the input codes.
 
 Many digital assets embed multiple assets of different mediatypes in a single file.
-Text documents may including images, video includes audio in most cases. The ISCC
+Text documents may include images, video includes audio in most cases. The ISCC
 Content-Code-Mixed encodes the similarity of a collection of assets of the same or
-different mediatypes that may occur in a multi-media asset.
+different mediatypes that may occur in a multimedia asset.
 
 Applications that create mixed Content-Codes must be capable to extract embedded
 assets and create individual Content-Codes per asset.
@@ -82,9 +82,7 @@ def soft_hash_codes_v0(cc_digests, bits=core_opts.mixed_bits):
     ), "Only codes with main-type CONTENT allowed as input for Content-Code-Mixed"
 
     unit_lengths = [codec.decode_length(t[0], t[3]) for t in code_tuples]
-    assert all(
-        ul >= bits for ul in unit_lengths
-    ), "Code to short for {}-bit length".format(bits)
+    assert all(ul >= bits for ul in unit_lengths), "Code to short for {}-bit length".format(bits)
 
     hash_bytes = []
     # Retain the first byte of the header and strip body to mixed_bits length

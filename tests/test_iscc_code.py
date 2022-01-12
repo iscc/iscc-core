@@ -36,9 +36,7 @@ def test_gen_iscc_code_v0_full():
 
 def test_gen_iscc_code_v0_no_meta():
     icode = iscc_core.gen_iscc_code_v0([CID_64, DID_128, IID_256])
-    assert icode.dict_raw() == {
-        "iscc": "ISCC:KAARMJLTQCUWAND2LKF2GYSSNQVTYZBL4D5GOQCDIM"
-    }
+    assert icode.dict_raw() == {"iscc": "ISCC:KAARMJLTQCUWAND2LKF2GYSSNQVTYZBL4D5GOQCDIM"}
     assert (
         icode.code_obj.explain
         == "ISCC-TEXT-V0-CDI-16257380a960347a5a8ba362526c2b3c642be0fa67404343"

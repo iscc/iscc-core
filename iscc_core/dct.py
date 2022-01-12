@@ -24,8 +24,7 @@ def dct(v):
         half = n // 2
         alpha = [(v[i] + v[-(i + 1)]) for i in range(half)]
         beta = [
-            (v[i] - v[-(i + 1)]) / (math.cos((i + 0.5) * math.pi / n) * 2.0)
-            for i in range(half)
+            (v[i] - v[-(i + 1)]) / (math.cos((i + 0.5) * math.pi / n) * 2.0) for i in range(half)
         ]
         alpha = dct(alpha)
         beta = dct(beta)

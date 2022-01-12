@@ -35,12 +35,8 @@ def test_similarity_hash():
 
 
 def test_similarity_hash_256_bit():
-    a = bytes.fromhex(
-        "84f6a7413bb26202c515fccedfaabfa2f2fc46a69a28a08f7c2a1a12a390ca50"
-    )
-    b = bytes.fromhex(
-        "dc0edccb8e7bff663699f89139af1ff99c276275c4dabd775311bde43c13b34d"
-    )
+    a = bytes.fromhex("84f6a7413bb26202c515fccedfaabfa2f2fc46a69a28a08f7c2a1a12a390ca50")
+    b = bytes.fromhex("dc0edccb8e7bff663699f89139af1ff99c276275c4dabd775311bde43c13b34d")
     assert (
         iscc_core.simhash.similarity_hash([a, b]).hex()
         == "dcfeffcbbffbff66f79dfcdfffafbffbfeff66f7defabdff7f3bbff6bf93fb5d"

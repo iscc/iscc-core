@@ -4,18 +4,12 @@ import iscc_core
 
 def test_hash_instance_v0_empty():
     digest = iscc_core.code_instance.hash_instance_v0(BytesIO(b""))
-    assert (
-        digest.hex()
-        == "af1349b9f5f9a1a6a0404dea36dcc9499bcb25c9adc112b7cc9a93cae41f3262"
-    )
+    assert digest.hex() == "af1349b9f5f9a1a6a0404dea36dcc9499bcb25c9adc112b7cc9a93cae41f3262"
 
 
 def test_hash_instance_v0_zero():
     digest = iscc_core.code_instance.hash_instance_v0(BytesIO(b"\x00"))
-    assert (
-        digest.hex()
-        == "2d3adedff11b61f14c886e35afa036736dcd87a74d27b5c1510225d0f592e213"
-    )
+    assert digest.hex() == "2d3adedff11b61f14c886e35afa036736dcd87a74d27b5c1510225d0f592e213"
 
 
 def test_gen_instance_code_v0_empty_default():

@@ -61,9 +61,6 @@ def test_incr_iscc_id_explain():
 def test_incr_iscc_id_v0():
     assert iscc_core.iscc_id.incr_iscc_id_v0("MAADB7WD7TC5XELQ") == "MAADB7WD7TC5XELQAE"
     assert (
-        iscc_core.codec.Code("MAADB7WD7TC5XELQAE").explain
-        == "ID-PRIVATE-V0-64-30fec3fcc5db9170-1"
+        iscc_core.codec.Code("MAADB7WD7TC5XELQAE").explain == "ID-PRIVATE-V0-64-30fec3fcc5db9170-1"
     )
-    assert (
-        iscc_core.iscc_id.incr_iscc_id_v0("MAADB7WD7TC5XELQAE") == "MAADB7WD7TC5XELQAI"
-    )
+    assert iscc_core.iscc_id.incr_iscc_id_v0("MAADB7WD7TC5XELQAE") == "MAADB7WD7TC5XELQAI"

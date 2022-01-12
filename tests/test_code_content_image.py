@@ -24,9 +24,7 @@ def test_hash_image_v0_white():
         == "8000000000000000"
     )
     assert (
-        iscc_core.code_content_image.soft_hash_image_v0(
-            IMG_WHITE_PIXELS, bits=256
-        ).hex()
+        iscc_core.code_content_image.soft_hash_image_v0(IMG_WHITE_PIXELS, bits=256).hex()
         == "8000000000000000000000000000000000000000000000000000000000000000"
     )
 
@@ -37,9 +35,7 @@ def test_hash_image_v0_black():
         == "0000000000000000"
     )
     assert (
-        iscc_core.code_content_image.soft_hash_image_v0(
-            IMG_BLACK_PIXELS, bits=256
-        ).hex()
+        iscc_core.code_content_image.soft_hash_image_v0(IMG_BLACK_PIXELS, bits=256).hex()
         == "0000000000000000000000000000000000000000000000000000000000000000"
     )
 

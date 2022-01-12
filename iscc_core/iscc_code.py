@@ -52,14 +52,10 @@ def gen_iscc_code_v0(codes):
         raise ValueError("Minimum two ISCC units required to generate valid ISCC-CODE")
     for code in codes:
         if len(code) < 16:
-            raise ValueError(
-                f"Cannot build ISCC-CODE from units shorter than 64-bits: {code}"
-            )
+            raise ValueError(f"Cannot build ISCC-CODE from units shorter than 64-bits: {code}")
 
     # Decode units and sort by MainType
-    decoded = sorted(
-        [ic.read_header(ic.decode_base32(code)) for code in codes], key=itemgetter(0)
-    )
+    decoded = sorted([ic.read_header(ic.decode_base32(code)) for code in codes], key=itemgetter(0))
     main_types = tuple(d[0] for d in decoded)
     if main_types[-2:] != (ic.MT.DATA, ic.MT.INSTANCE):
         raise ValueError(f"ISCC-CODE requires at least MT.DATA and MT.INSTANCE units.")

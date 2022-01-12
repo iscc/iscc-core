@@ -5,26 +5,17 @@ import iscc_core
 
 def test_hash_data_v0(static_bytes):
     digest = iscc_core.code_data.soft_hash_data_v0(BytesIO(static_bytes))
-    assert (
-        digest.hex()
-        == "e5b3daf1118cf09cb5c5ac323a9f68ca04465f9e3942297ebd1e6360f5bb98df"
-    )
+    assert digest.hex() == "e5b3daf1118cf09cb5c5ac323a9f68ca04465f9e3942297ebd1e6360f5bb98df"
 
 
 def test_hash_data_v0_empty():
     digest = iscc_core.code_data.soft_hash_data_v0(BytesIO(b""))
-    assert (
-        digest.hex()
-        == "25f0bab671f506e1c532f892d9d7917a252e7a520832f5963a8cd4e9a7e312b5"
-    )
+    assert digest.hex() == "25f0bab671f506e1c532f892d9d7917a252e7a520832f5963a8cd4e9a7e312b5"
 
 
 def test_hash_data_v0_zero():
     digest = iscc_core.code_data.soft_hash_data_v0(BytesIO(b"\x00"))
-    assert (
-        digest.hex()
-        == "770f8fd225ec1e5abb95e406afaddef303defe2f0d03b74c388f7b42ef96c7af"
-    )
+    assert digest.hex() == "770f8fd225ec1e5abb95e406afaddef303defe2f0d03b74c388f7b42ef96c7af"
 
 
 def test_gen_code_data_v0_default(static_bytes):
@@ -40,8 +31,7 @@ def test_gen_code_data_default(static_bytes):
 def test_DataHasherV0_single_shot(static_bytes):
     hasher = iscc_core.code_data.DataHasherV0(static_bytes)
     assert (
-        hasher.digest().hex()
-        == "e5b3daf1118cf09cb5c5ac323a9f68ca04465f9e3942297ebd1e6360f5bb98df"
+        hasher.digest().hex() == "e5b3daf1118cf09cb5c5ac323a9f68ca04465f9e3942297ebd1e6360f5bb98df"
     )
 
 
@@ -53,8 +43,7 @@ def test_DataHasherV0_stream_push(static_bytes):
         hasher.push(chunk)
         chunk = stream.read(2048)
     assert (
-        hasher.digest().hex()
-        == "e5b3daf1118cf09cb5c5ac323a9f68ca04465f9e3942297ebd1e6360f5bb98df"
+        hasher.digest().hex() == "e5b3daf1118cf09cb5c5ac323a9f68ca04465f9e3942297ebd1e6360f5bb98df"
     )
 
 
@@ -67,8 +56,7 @@ def test_DataHasherV0_mixed(static_bytes):
         hasher.push(chunk)
         chunk = stream.read(2048)
     assert (
-        hasher.digest().hex()
-        == "e5b3daf1118cf09cb5c5ac323a9f68ca04465f9e3942297ebd1e6360f5bb98df"
+        hasher.digest().hex() == "e5b3daf1118cf09cb5c5ac323a9f68ca04465f9e3942297ebd1e6360f5bb98df"
     )
 
 
