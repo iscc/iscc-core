@@ -26,3 +26,8 @@
 .md-typeset code {
     font-size:.6rem;
 }
+
+.doc-heading code {
+    font-weight: bold;
+    font-size: 0.9rem;
+}
