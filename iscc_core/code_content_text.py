@@ -6,7 +6,7 @@ from a media assets.
 
 !!! tip
 
-    Plain-text extraction from documents in various formats (especially pdf) may
+    Plain-text extraction from documents in various formats (especially PDF) may
     yield very diffent results depending on the extraction tools being used.
     For **reproducible Text-Code generation** use
     [Apache Tika v2.2.1](https://tika.apache.org/2.2.1/index.html) to extract text
