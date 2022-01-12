@@ -17,12 +17,8 @@ def test_write_header():
     assert ic.codec.write_header(0, 0, 0, 0) == bytes([0b0000_0000, 0b0000_0000])
     assert ic.codec.write_header(1, 0, 0, 0) == bytes([0b0001_0000, 0b0000_0000])
     assert ic.codec.write_header(7, 1, 1, 1) == bytes([0b0111_0001, 0b0001_0001])
-    assert ic.codec.write_header(8, 1, 1, 1) == bytes(
-        [0b1000_0000, 0b0001_0001, 0b0001_0000]
-    )
-    assert ic.codec.write_header(8, 8, 1, 1) == bytes(
-        [0b1000_0000, 0b1000_0000, 0b0001_0001]
-    )
+    assert ic.codec.write_header(8, 1, 1, 1) == bytes([0b1000_0000, 0b0001_0001, 0b0001_0000])
+    assert ic.codec.write_header(8, 8, 1, 1) == bytes([0b1000_0000, 0b1000_0000, 0b0001_0001])
 
 
 def test_read_header():
@@ -226,9 +222,7 @@ def test_Code_str_repr():
     assert mco.code_obj.code == "AAAWOMHEVMWZ2EYF"
     assert str(mco.code_obj) == "AAAWOMHEVMWZ2EYF"
     assert repr(mco.code_obj) == 'Code("AAAWOMHEVMWZ2EYF")'
-    assert (
-        bytes(mco.code_obj).hex() == "00016730e4ab2d9d1305" == mco.code_obj.bytes.hex()
-    )
+    assert bytes(mco.code_obj).hex() == "00016730e4ab2d9d1305" == mco.code_obj.bytes.hex()
 
 
 def test_decompose_single_component():
@@ -329,10 +323,7 @@ def test_normalize_dual_dash():
 
 
 def test_clean_dual_dash():
-    assert (
-        ic.clean("GAAW2PRCRS5LNVZV-IAAUVACQKXE3V44W")
-        == "GAAW2PRCRS5LNVZVIAAUVACQKXE3V44W"
-    )
+    assert ic.clean("GAAW2PRCRS5LNVZV-IAAUVACQKXE3V44W") == "GAAW2PRCRS5LNVZVIAAUVACQKXE3V44W"
 
 
 def test_normalize_dual_scheme():
@@ -480,3 +471,20 @@ def test_codec_decode_length_invaid_type_raises():
 
 def test_codec_Code_rnd_mt_iscc():
     assert ic.Code.rnd(ic.MT.ISCC).maintype == ic.MT.ISCC
+
+
+def test_codec_validate_regex():
+    valid = ic.gen_meta_code("Hello World", bits=32).iscc
+    assert ic.validate(valid) is True
+    invalid = valid[:-1]
+    assert ic.validate(invalid, strict=False) is False
+    with pytest.raises(ValueError):
+        ic.validate(invalid, strict=True)
+
+
+def test_codec_validate_header_prefix():
+    valid = ic.gen_meta_code("Hello World", bits=32).iscc
+    invalid = "ISCC:AE" + valid[7:]
+    assert ic.validate(invalid, strict=False) is False
+    with pytest.raises(ValueError):
+        ic.validate(invalid)

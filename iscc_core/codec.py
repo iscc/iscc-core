@@ -1,6 +1,8 @@
 # -*- coding: utf-8 -*-
 import enum
 import math
+import re
+
 import uvarint
 from os import urandom
 from random import choice
@@ -182,7 +184,7 @@ UNITS = (
     (MT.META,),
     (MT.META, MT.CONTENT),
     (MT.META, MT.SEMANTIC),
-    (MT.META, MT.SEMANTIC, MT.META.CONTENT),
+    (MT.META, MT.SEMANTIC, MT.CONTENT),
 )
 
 
@@ -316,7 +318,12 @@ def read_header(data):
 
 def read_varnibble(b):
     # type: (bitarray) -> Tuple[int, bitarray]
-    """Reads first varnibble, returns its integer value and remaining bits."""
+    """Reads first varnibble, returns its integer value and remaining bits.
+
+    :param bitarray b: Array of header bits
+    :return: A tuple of the integer value of first varnible and the remaining bits.
+    :rtype: Tuple[int, bitarray]
+    """
 
     bits = len(b)
 
@@ -333,10 +340,14 @@ def read_varnibble(b):
 
 
 def encode_units(units):
-    # type: (Tuple) -> int
+    # type: (Tuple[MT, ...]) -> int
     """
     Encodes a combination of ISCC units to an integer between 0-7 to be used as length
     value for the final encoding of MT.ISCC
+
+    :param Tuple[MT, ...] units: A tuple of a MainType combination (can be empty)
+    :return: Integer value to be used as length-value for header encoding
+    :rtype: int
     """
     return UNITS.index(units)
 
@@ -358,22 +369,18 @@ def encode_length(mtype, length):
 
     The `length` value has MainType-specific semantics:
 
-    MainTypes `META`, `SEMANTIC`, `CONTENT`, `DATA`, `INSTANCE`:
+    For MainTypes `META`, `SEMANTIC`, `CONTENT`, `DATA`, `INSTANCE`:
+
         Length means number of bits for the body.
-        Length is encoded as number of 32-bit chunks (0 being 32bits)
+        Length is encoded as the multiple of 32-bit chunks (0 being 32bits)
         Examples: 32 -> 0, 64 -> 1, 96 -> 2 ...
 
-    MainType `ID`:
-        Lengths means number the number of bits for the body including the counter
-        Length is encoded as number of bytes of the counter (64-bit body is implicit)
-        Examples:
-            64 -> 0 (No counter)
-            72 -> 1 (One byte counter)
-            80 -> 2 (Two byte counter)
-            ...
+    For MainType `ISCC`:
 
-    MainType `ISCC`:
-        Length means the composition of optional 64-bit components included in the ISCC
+        MainTypes `DATA` and `INSTANCE` are mandatory for ISCC-CODEs, all others are
+        optional. Length means the composition of optional 64-bit components included
+        in the ISCC composite.
+
         Examples:
             No optional components -> 0000 -> 0
             CONTENT                -> 0001 -> 1
@@ -383,9 +390,20 @@ def encode_length(mtype, length):
             META, CONTENT          -> 0101 -> 5
             ...
 
+    For MainType `ID`:
+
+        Lengths means number the number of bits for the body including the counter
+        Length is encoded as number of bytes of the counter (64-bit body is implicit)
+        Examples:
+            64 -> 0 (No counter)
+            72 -> 1 (One byte counter)
+            80 -> 2 (Two byte counter)
+            ...
+
     :param MainType mtype: The MainType for which to encode the length value.
     :param Length length: The length expressed according to the semantics of the type
     :return: The length value encoded as integer for use with write_header.
+    :rtype: int
     """
 
     error = f"Invalid length {length} for MainType {mtype}"
@@ -513,6 +531,7 @@ def normalize(iscc_code):
     prefixed with the string `ISCC:`.
 
     Possible valid inputs:
+
         MEACB7X7777574L6
         ISCC:MEACB7X7777574L6
         fcc010001657fe7cafe9791bb
@@ -554,15 +573,75 @@ def normalize(iscc_code):
         iscc_code = encode_base32(decoded[2:])
 
     decomposed = decompose(iscc_code)
-    recomposed = (
-        gen_iscc_code_v0(decomposed).iscc if len(decomposed) >= 2 else decomposed[0]
-    )
+    recomposed = gen_iscc_code_v0(decomposed).iscc if len(decomposed) >= 2 else decomposed[0]
     return f"ISCC:{recomposed}" if not recomposed.startswith("ISCC:") else recomposed
 
 
 ########################################################################################
 # Convenience functions and classes                                                    #
 ########################################################################################
+
+
+def validate(iscc, strict=True):
+    # type: (str) -> bool
+    """
+    Validate that a given string is a *strictly well-formed* ISCC.
+
+    A *strictly well-formed* ISCC is:
+
+    - an ISCC-CODE or ISCC-UNIT
+    - encoded with base32 upper without padding
+    - has a valid combination of header values
+    - is represented in its canonical URI form
+
+    :param str iscc: ISCC string
+    :param bool strict: Raise an exeption if validation fails (default True)
+    :return: True if sting is valid else false. (raises ValueError in strict mode)
+    :rtype: bool
+    """
+
+    # Basic regex validation
+    match = re.match("^ISCC:[A-Z2-7]{10,60}$", iscc)
+    if not match:
+        if strict:
+            raise ValueError("ISCC string does not match ^ISCC:[A-Z2-7]{10,60}$")
+        else:
+            return False
+
+    # Header valid
+    valid_prefixes = {
+        "CQ",
+        "EQ",
+        "MA",
+        "EE",
+        "KA",
+        "CI",
+        "KU",
+        "CE",
+        "ME",
+        "IA",
+        "MI",
+        "KM",
+        "EI",
+        "KE",
+        "EM",
+        "CM",
+        "KI",
+        "EA",
+        "GA",
+        "AA",
+        "CA",
+        "KQ",
+    }
+    cleaned = clean(iscc)
+    prefix = cleaned[:2]
+    if prefix not in valid_prefixes:
+        if strict:
+            raise ValueError(f"Header starts with invalid sequence {prefix}")
+        else:
+            return False
+
+    return True
 
 
 def clean(iscc):
@@ -674,12 +753,7 @@ class Code:
             length = "".join([t.name[0] for t in mtypes]) + "DI"
         else:
             length = self.length
-        return (
-            f"{self.maintype.name}-"
-            f"{self.subtype.name}-"
-            f"{self.version.name}-"
-            f"{length}"
-        )
+        return f"{self.maintype.name}-" f"{self.subtype.name}-" f"{self.version.name}-" f"{length}"
 
     @property
     def explain(self) -> str:
@@ -766,9 +840,7 @@ class Code:
             elif mt == MT.ISCC:
                 units = choice(UNITS)
                 st = choice(list(ST_ISCC))
-                st = (
-                    st if (MT.SEMANTIC in units or MT.CONTENT in units) else ST_ISCC.SUM
-                )
+                st = st if (MT.SEMANTIC in units or MT.CONTENT in units) else ST_ISCC.SUM
                 bits = len(units) * 64 + 128
             elif mt == MT.ID:
                 st = choice(list(ST_ID))

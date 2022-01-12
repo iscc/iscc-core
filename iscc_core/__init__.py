@@ -70,6 +70,7 @@ from iscc_core.codec import (
     decompose,
     normalize,
     clean,
+    validate,
     read_header,
     write_header,
 )
@@ -125,6 +126,7 @@ __all__ = [
     "decompose",
     "normalize",
     "clean",
+    "validate",
     "read_header",
     "write_header",
     "canonicalize",
