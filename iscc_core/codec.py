@@ -345,7 +345,7 @@ def encode_units(units):
     Encodes a combination of ISCC units to an integer between 0-7 to be used as length
     value for the final encoding of MT.ISCC
 
-    :param Tuple[MT, ...] units: A tuple of a MainType combination (can be empty)
+    :param Tuple units: A tuple of a MainType combination (can be empty)
     :return: Integer value to be used as length-value for header encoding
     :rtype: int
     """

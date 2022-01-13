@@ -86,7 +86,7 @@ print(f"Multiformat:   {iscc_code.code_obj.mf_base32}\n")
 iscc_id = iscc_core.gen_iscc_id(chain=1, iscc_code=iscc_code.iscc, uc=7)
 print(f"ISCC-ID:       {iscc_id.iscc}")
 print(f"Structure:     {iscc_id.code_obj.explain}")
-print(f"Multiformat:   {iscc_code.code_obj.mf_base32}")
+print(f"Multiformat:   {iscc_id.code_obj.mf_base32}")
 ```
 
 The output of this example is as follows:
@@ -95,8 +95,8 @@ The output of this example is as follows:
 Meta-Code:     ISCC:AAA3MGR7CSJ3O3D3
 Structure:     META-NONE-V0-64-b61a3f1493b76c7b
 
-Text-Code:     ISCC:EAASS2POFOWX6KDJ
-Structure:     CONTENT-TEXT-V0-64-2969ee2bad7f2869
+Text-Code:     ISCC:EAAUIQCMQJO757BF
+Structure:     CONTENT-TEXT-V0-64-44404c825dfefc25
 
 Data-Code:     ISCC:GAAZ5SQ47ZQ34A3V
 Structure:     DATA-NONE-V0-64-9eca1cfe61be0375
@@ -104,13 +104,13 @@ Structure:     DATA-NONE-V0-64-9eca1cfe61be0375
 Instance-Code: ISCC:IAASQF7FY2TLVFRC
 Structure:     INSTANCE-NONE-V0-64-2817e5c6a6ba9622
 
-ISCC-CODE:     ISCC:KAC3MGR7CSJ3O3D3FFU64K5NP4UGTHWKDT7GDPQDOUUBPZOGU25JMIQ
-Structure:     ISCC-TEXT-V0-MCDI-b61a3f1493b76c7b2969ee2bad7f28699eca1cfe61be03752817e5c6a6ba9622
-Multiformat:   bzqavabnwdi7rje5xnr5ss2pofowx6kdjt3fbz7tbxybxkkax4xdknouwei
+ISCC-CODE:     ISCC:KAC3MGR7CSJ3O3D3IRAEZAS5736CLHWKDT7GDPQDOUUBPZOGU25JMIQ
+Structure:     ISCC-TEXT-V0-MCDI-b61a3f1493b76c7b44404c825dfefc259eca1cfe61be03752817e5c6a6ba9622
+Multiformat:   bzqavabnwdi7rje5xnr5uiqcmqjo757bft3fbz7tbxybxkkax4xdknouwei
 
-ISCC-ID:       ISCC:MEASBPSKHY7KDPZIA4
-Structure:     ID-BITCOIN-V0-72-20be4a3e3ea1bf28-7
-Multiformat:   bzqavabnwdi7rje5xnr5ss2pofowx6kdjt3fbz7tbxybxkkax4xdknouwei
+ISCC-ID:       ISCC:MEASBFSKDSLFDPTMA4
+Structure:     ID-BITCOIN-V0-72-20964a1c9651be6c-7
+Multiformat:   bzqawcajaszfbzfsrxzwao
 ```
 
 ## Documentation
