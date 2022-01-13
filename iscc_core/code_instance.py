@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 """*A data checksum.*"""
-import blake3
+from blake3 import blake3
 from typing import Optional, Tuple
 from iscc_core import codec, core_opts
 from iscc_core.codec import Data, Stream
@@ -69,7 +69,7 @@ class InstanceHasherV0:
 
     def __init__(self, data=None):
         # type: (Optional[Data]) -> None
-        self.hasher = blake3.blake3()
+        self.hasher = blake3(max_threads=blake3.AUTO)
         self.filesize = 0
         data = data or b""
         self.push(data)
