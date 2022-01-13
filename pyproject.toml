@@ -40,13 +40,13 @@ xxhash = "*"
 more-itertools = "*"
 bitarray-hardbyte = "*"
 pybase64 = "*"
-pydantic = {extras = ["dotenv"], version = "^1.8.2"}
-uvarint = "^1.2.0"
-loguru = "^0.5.3"
-base58 = "^2.1.1"
-jcs = "^0.1.0"
-PyLD = "^2.0.3"
-requests = "^2.26.0"
+pydantic = {extras = ["dotenv"], version = "^1.8"}
+uvarint = "^1.2"
+loguru = "^0.5"
+base58 = "^2.1"
+jcs = "^0.1"
+PyLD = "^2.0"
+requests = "^2.26"
 
 [tool.poetry.extras]
 turbo = ["cython"]
@@ -57,10 +57,10 @@ black = { version = "*", allow-prereleases = true }
 mkdocs-material = "*"
 mkdocstrings = "*"
 toml = "*"
-PyYAML = "^6.0"
-coverage = "^6.2"
-pytest-cov = "^3.0.0"
-poethepoet = "^0.12.0"
+PyYAML = "*"
+coverage = "*"
+pytest-cov = "*"
+poethepoet = "*"
 
 [tool.black]
 skip-string-normalization = false

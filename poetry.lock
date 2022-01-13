@@ -812,7 +812,7 @@ turbo = ["cython"]
 [metadata]
 lock-version = "1.1"
 python-versions = ">=3.6.2,<4.0"
-content-hash = "ed9097e8451dc857cfd66a4785fb3d008dfc555e0af6f7669fd2c90ff8d0a5f8"
+content-hash = "8a34661d10a75d4ab497d7238c10ae38c524f1a95ede0f2d1297b4c596b3fbb2"
 
 [metadata.files]
 aiocontextvars = [
@@ -1085,7 +1085,6 @@ iniconfig = [
     {file = "iniconfig-1.1.1.tar.gz", hash = "sha256:bc3af051d7d14b2ee5ef9969666def0cd1a000e121eaea580d4a313df4b37f32"},
 ]
 jcs = [
-    {file = "jcs-0.1.0-py3-none-any.whl", hash = "sha256:0cc02f6383321afb8a7b65fdb4c2b6b2c19e9c187ed49f5636acebd3ca8bba9f"},
     {file = "jcs-0.1.0.tar.gz", hash = "sha256:d6a5f57062abf0c30abdf5428d2376f3391d19c6951dc118b69cd09bf63daa17"},
 ]
 jinja2 = [
