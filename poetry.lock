@@ -492,7 +492,7 @@ testing = ["pytest", "pytest-benchmark"]
 
 [[package]]
 name = "poethepoet"
-version = "0.11.0"
+version = "0.12.0"
 description = "A task runner that works well with poetry."
 category = "dev"
 optional = false
@@ -501,6 +501,9 @@ python-versions = ">=3.6.2,<4.0.0"
 [package.dependencies]
 pastel = ">=0.2.1,<0.3.0"
 tomli = ">=1.2.2,<2.0.0"
+
+[package.extras]
+poetry_plugin = ["poetry (>=1.0,<2.0)"]
 
 [[package]]
 name = "py"
@@ -809,7 +812,7 @@ turbo = ["cython"]
 [metadata]
 lock-version = "1.1"
 python-versions = ">=3.6.2,<4.0"
-content-hash = "ecc565c15d31ae6a64a35f88a5f6481c9c97103af7d0e595bf4588bc7f861ac8"
+content-hash = "ed9097e8451dc857cfd66a4785fb3d008dfc555e0af6f7669fd2c90ff8d0a5f8"
 
 [metadata.files]
 aiocontextvars = [
@@ -1082,6 +1085,7 @@ iniconfig = [
     {file = "iniconfig-1.1.1.tar.gz", hash = "sha256:bc3af051d7d14b2ee5ef9969666def0cd1a000e121eaea580d4a313df4b37f32"},
 ]
 jcs = [
+    {file = "jcs-0.1.0-py3-none-any.whl", hash = "sha256:0cc02f6383321afb8a7b65fdb4c2b6b2c19e9c187ed49f5636acebd3ca8bba9f"},
     {file = "jcs-0.1.0.tar.gz", hash = "sha256:d6a5f57062abf0c30abdf5428d2376f3391d19c6951dc118b69cd09bf63daa17"},
 ]
 jinja2 = [
@@ -1282,8 +1286,8 @@ pluggy = [
     {file = "pluggy-1.0.0.tar.gz", hash = "sha256:4224373bacce55f955a878bf9cfa763c1e360858e330072059e10bad68531159"},
 ]
 poethepoet = [
-    {file = "poethepoet-0.11.0-py3-none-any.whl", hash = "sha256:4aac200f52e0faa309a655c064f2a522d9d18b64f717de9805151421166ba4d8"},
-    {file = "poethepoet-0.11.0.tar.gz", hash = "sha256:a0618e198600db801588bae627982682f8bd5304a49a75c6dbc430feade5a8a9"},
+    {file = "poethepoet-0.12.0-py3-none-any.whl", hash = "sha256:59215a7b0828295a499fa28a5e2c6d0202520a290cd0a74d59f54c1c74cbd2c7"},
+    {file = "poethepoet-0.12.0.tar.gz", hash = "sha256:d86a29707c24d964bbee15750d07dc763a9ca48265e1cd64dab15647f173bab7"},
 ]
 py = [
     {file = "py-1.11.0-py2.py3-none-any.whl", hash = "sha256:607c53218732647dff4acdfcd50cb62615cedf612e72d1724fb1a0cc6405b378"},
