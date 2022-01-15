@@ -6,10 +6,7 @@
 [![Quality](https://app.codacy.com/project/badge/Grade/ad1cc48ac0c0413ea2373a938148f019)](https://www.codacy.com/gh/iscc/iscc-core/dashboard)
 [![Downloads](https://pepy.tech/badge/iscc-core)](https://pepy.tech/project/iscc-core)
 
-> `iscc-core` is a Python library that implements the core algorithms of the [ISCC](https://core.iscc.codes) (*International Standard Content Code*)
-
-| NOTE: This is a low level reference implementation. `iscc-core` does not support content/metadata detection, extraction or preprocessing. For easy generation of ISCC codes see: [iscc-cli](https://github.com/iscc/iscc-cli/releases) |
-|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+`iscc-core` is a Python library that implements the core algorithms of the [ISCC](https://core.iscc.codes) (*International Standard Content Code*)
 
 ## What is an ISCC
 
@@ -22,6 +19,9 @@ The component-based structure of the ISCC identifies content at multiple levels 
 ## What is `iscc-core`
 
 `iscc-core` is the python based library of the core algorithms to create standard-compliant ISCC codes. It also serves as a reference for porting ISCC to other programming languages.
+
+!!! tip
+    This is a low level reference implementation. `iscc-core` does not support content/metadata detection, extraction or preprocessing. For easy generation of ISCC codes see: [iscc-cli](https://github.com/iscc/iscc-cli/releases) |
 
 ## ISCC Architecture
 
