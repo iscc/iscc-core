@@ -40,7 +40,7 @@ def gen_instance_code_v0(stream, bits=core_opts.instance_bits):
     iscc = "ISCC:" + instance_code
     instance_code_obj = ISCC(
         iscc=iscc,
-        datahash=hasher.digest().hex(),
+        datahash=hasher.multihash(),
         filesize=hasher.filesize,
     )
 
@@ -66,6 +66,9 @@ def hash_instance_v0(stream):
 
 class InstanceHasherV0:
     """Incremental Instance-Hash generator."""
+
+    #: Multihash prefix
+    mh_prefix: bytes = b"\x1e\x20"
 
     def __init__(self, data=None):
         # type: (Optional[Data]) -> None
@@ -93,6 +96,16 @@ class InstanceHasherV0:
         :rtype: bytes
         """
         return self.hasher.digest()
+
+    def multihash(self):
+        # type: () -> str
+        """
+        Retrun blake3 multihash
+
+        :return: Blake3 hash as base32 endoded 256-bit multihash
+        :rtype: str
+        """
+        return "b" + codec.encode_base32(self.mh_prefix + self.digest()).lower()
 
     def code(self, bits=core_opts.instance_bits):
         # type: (int) -> str
