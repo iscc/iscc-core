@@ -12,15 +12,11 @@ from a media assets.
     [Apache Tika v2.2.1](https://tika.apache.org/2.2.1/index.html) to extract text
     from your documents.
 
-**Algorithm overview**:
+**Algorithm overview**
 
-- Normalize text using [`normalize_text`][iscc_core.code_content_text.normalize_text]
-  function
-- Count characters of normalized text
-- Remove all whitespace
-- Lowercase text
-- Apply function [`soft_hash_text_v0`][iscc_core.code_content_text.soft_hash_text_v0]
-  to text
+- Apply [`collapse_text`][iscc_core.code_content_text.collapse_text] function to text input
+- Count characters of collapsed text
+- Apply [`soft_hash_text_v0`][iscc_core.code_content_text.soft_hash_text_v0] to collapsed text
 """
 import unicodedata
 from typing import Union
@@ -62,7 +58,7 @@ def gen_text_code_v0(text, bits=core_opts.text_bits):
     :rtype: ISCC
     """
 
-    text = normalize_text(text)
+    text = collapse_text(text)
     characters = len(text)
     text = "".join(text.split())
     text = text.lower()
@@ -81,7 +77,7 @@ def gen_text_code_v0(text, bits=core_opts.text_bits):
     return ISCC(iscc=iscc, characters=characters)
 
 
-def normalize_text(text):
+def collapse_text(text):
     # type: (Text) -> str
     """
     [Unicode normalization](https://unicode.org/reports/tr15/) and character filtering.

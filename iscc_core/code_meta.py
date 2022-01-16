@@ -12,7 +12,7 @@ contains descriptive, industry-sector or use-case specific metadata in textual o
 binary form (e.g. file headers). We do not prescribe a particular schema.
 """
 from more_itertools import interleave, sliced
-from iscc_core.code_content_text import normalize_text
+from iscc_core.code_content_text import collapse_text
 from iscc_core.codec import MT, ST, VS, encode_base64, encode_component
 from iscc_core.schema import ISCC
 from iscc_core.utils import sliding_window
@@ -70,7 +70,7 @@ def gen_meta_code_v0(name, description=None, bits=core_opts.meta_bits):
 
     # 1. Normalize title
     name = "" if name is None else name
-    name = normalize_text(name)
+    name = collapse_text(name)
     name = trim_text(name, core_opts.meta_trim_title)
 
     # 2. Normalize extra
@@ -79,7 +79,7 @@ def gen_meta_code_v0(name, description=None, bits=core_opts.meta_bits):
         metahash_payload = name.encode("utf-8")
     elif isinstance(description, str):
         metahash_payload = description.encode("utf-8")  # assumed JCS normalized if JSON
-        description = normalize_text(description)
+        description = collapse_text(description)
         description = trim_text(description, core_opts.meta_trim_extra)
     elif isinstance(description, bytes):
         metahash_payload = description

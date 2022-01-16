@@ -68,12 +68,12 @@ def test_code_text_c_256_bits():
 def test_normalize_text():
     txt = "  Iñtërnâtiôn\nàlizætiøn☃💩 –  is a tric\t ky \u00A0 thing!\r"
 
-    normalized = iscc_core.code_content_text.normalize_text(txt)
+    normalized = iscc_core.code_content_text.collapse_text(txt)
     assert normalized == "Internation alizætiøn☃💩 is a tric ky thing!"
 
-    assert iscc_core.code_content_text.normalize_text(" ") == ""
-    assert iscc_core.code_content_text.normalize_text("  Hello  World ? ") == "Hello World ?"
-    assert iscc_core.code_content_text.normalize_text("Hello\nWorld") == "Hello World"
+    assert iscc_core.code_content_text.collapse_text(" ") == ""
+    assert iscc_core.code_content_text.collapse_text("  Hello  World ? ") == "Hello World ?"
+    assert iscc_core.code_content_text.collapse_text("Hello\nWorld") == "Hello World"
 
 
 def test_code_text_empty():
