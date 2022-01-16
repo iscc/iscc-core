@@ -41,27 +41,27 @@ def test_hash_text_c():
 
 def test_gen_text_code_a_default():
     a = iscc_core.code_content_text.gen_text_code_v0(TEXT_A)
-    assert a.dict_raw() == {"iscc": "ISCC:EAARHV2U6PNK7WFX", "characters": 291}
+    assert a.dict_raw() == {"iscc": "ISCC:EAAZHFKU6PNI7UVW", "characters": 249}
 
 
 def test_gen_text_code_a_32bits():
     a = iscc_core.code_content_text.gen_text_code_v0(TEXT_A, bits=32)
-    assert a.dict_raw() == {"iscc": "ISCC:EAABHV2U6M", "characters": 291}
+    assert a.dict_raw() == {"iscc": "ISCC:EAAJHFKU6M", "characters": 249}
 
 
 def test_code_text_b_128_bits():
     b = iscc_core.code_content_text.gen_text_code_v0(TEXT_B, 128)
     assert b.dict_raw() == {
-        "iscc": "ISCC:EABRHV2U6PNKXWFXIEEYQLOQPICX6",
-        "characters": 289,
+        "iscc": "ISCC:EABZHFKU6PNIXUVWYEEIQLOYHILX6",
+        "characters": 247,
     }
 
 
 def test_code_text_c_256_bits():
     c = iscc_core.code_content_text.gen_text_code_v0(TEXT_C, 256)
     assert c.dict_raw() == {
-        "iscc": "ISCC:EADWW36SS55HKIHAC3R3G2NDB3EGV7VCEA4CDPQH2NNRLSNJGPSDK4I",
-        "characters": 129,
+        "iscc": "ISCC:EADQE77SQ5NHKYPCDXT3E2NTB2EGV7VSKEUJDNXG2MICLCFZOPSDI4I",
+        "characters": 108,
     }
 
 
@@ -69,16 +69,19 @@ def test_normalize_text():
     txt = "  Iñtërnâtiôn\nàlizætiøn☃💩 –  is a tric\t ky \u00A0 thing!\r"
 
     normalized = iscc_core.code_content_text.collapse_text(txt)
-    assert normalized == "Internation alizætiøn☃💩 is a tric ky thing!"
+    assert normalized == "internationalizætiøn☃💩isatrickything"
 
     assert iscc_core.code_content_text.collapse_text(" ") == ""
-    assert iscc_core.code_content_text.collapse_text("  Hello  World ? ") == "Hello World ?"
-    assert iscc_core.code_content_text.collapse_text("Hello\nWorld") == "Hello World"
+    assert iscc_core.code_content_text.collapse_text("  Hello  World ? ") == "helloworld"
+    assert iscc_core.code_content_text.collapse_text("Hello\nWorld") == "helloworld"
+
+
+def test_code_text_bytes_raises():
+    with pytest.raises(TypeError):
+        iscc_core.code_content_text.gen_text_code(b"", bits=64)
 
 
 def test_code_text_empty():
-    r64 = iscc_core.code_content_text.gen_text_code(b"", bits=64)
-    assert r64.dict_raw() == {"iscc": "ISCC:EAASL4F2WZY7KBXB", "characters": 0}
     r128 = iscc_core.code_content_text.gen_text_code("", bits=128)
     assert r128.dict_raw() == {
         "iscc": "ISCC:EABSL4F2WZY7KBXBYUZPREWZ26IXU",
@@ -86,6 +89,6 @@ def test_code_text_empty():
     }
 
 
-def test_code_text_non_utf8_raises():
-    with pytest.raises(UnicodeDecodeError):
-        iscc_core.code_content_text.gen_text_code(b"\x80", bits=64)
+# def test_code_text_non_utf8_raises():
+#     with pytest.raises(UnicodeDecodeError):
+#         iscc_core.code_content_text.gen_text_code(b"\x80", bits=64)

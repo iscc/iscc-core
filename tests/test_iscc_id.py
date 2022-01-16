@@ -29,8 +29,8 @@ def test_gen_iscc_id_v0_multiple_components():
     tc = iscc_core.gen_text_code_v0("Hello World")
     code = mc.code + tc.code
     iscc_id = iscc_core.gen_iscc_id(1, code)
-    assert iscc_id.iscc == "ISCC:MEACAJJ5757U72R7"
-    assert iscc_id.code_obj.explain == "ID-BITCOIN-V0-64-20253dff7f4fea3f"
+    assert iscc_id.iscc == "ISCC:MEACANI57VXZ67R7"
+    assert iscc_id.code_obj.explain == "ID-BITCOIN-V0-64-20351dfd6f9f7e3f"
 
 
 def test_gen_iscc_id_v0_instance_only():

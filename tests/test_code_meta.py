@@ -28,7 +28,7 @@ def test_gen_meta_code_title_with_extra():
 
 def test_gen_meta_code_text_vs_bytes():
     m = iscc_core.code_meta.gen_meta_code("", "hello world")
-    assert m.iscc == "ISCC:AAA26E2JXH733ZNM"
+    assert m.iscc == "ISCC:AAA26E2JXFTP7ZP6"
     m = iscc_core.code_meta.gen_meta_code("", b"hello world")
     assert m.iscc == "ISCC:AAA26E2JXH733ZNM"
     m = iscc_core.code_meta.gen_meta_code("", b"\x80")  # not utf-8 decodable
@@ -42,7 +42,7 @@ def test_gen_meta_code_text_vs_bytes():
 
 def test_gen_meta_code_title_only():
     m = iscc_core.code_meta.gen_meta_code("Hello World")
-    assert m.iscc == "ISCC:AAA77PPFVS6JDUQB"
+    assert m.iscc == "ISCC:AAAWN77F727NXSUS"
 
 
 def test_gen_meta_code_v0_raises():
@@ -92,7 +92,7 @@ def test_gen_meta_code_v0_extra_only_128_bits():
     m = iscc_core.code_meta.gen_meta_code_v0("", "Hello", 128)
     assert m.dict_raw() == dict(
         iscc="ISCC:AAB26E2JXFSSZZN36X42DJR724AYU",
-        description="Hello",
+        description="hello",
         metahash="fbc2b0516ee8744d293b980779178a3508850fdcfe965985782c39601b65794f",
     )
 

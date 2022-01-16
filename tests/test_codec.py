@@ -139,18 +139,18 @@ def test_codec_clean_raises_multiple_colom():
 def test_code_properties():
     c64 = ic.codec.Code(ic.gen_meta_code("Hello World").iscc)
     c256 = ic.codec.Code(ic.gen_meta_code("Hello World", bits=256).iscc)
-    assert c64.code == "AAA77PPFVS6JDUQB"
-    assert c256.code == "AAD77PPFVS6JDUQBWZDBIUGOUNAGIZYGCQ75ICNLH5QV73OXGWZV5CQ"
+    assert c64.code == "AAAWN77F727NXSUS"
+    assert c256.code == "AADWN77F727NXSUSUVDFOUS64JFPMZ4GAR5NJ3O5P563LTMXWS5XNSQ"
     assert c64.bytes == unhexlify(c64.hex)
     assert c64.type_id == "META-NONE-V0-64"
     assert c64.explain == "META-NONE-V0-64-" + c64.hash_hex
     assert isinstance(c64.hash_ints[0], int)
     assert c64.hash_bits == "".join(str(i) for i in c64.hash_ints)
     assert c256.hash_bits == "".join(str(i) for i in c256.hash_ints)
-    assert c64.hash_uint == 18428137780330746369
+    assert c64.hash_uint == 7421903593216395922
     assert (
         c256.hash_uint
-        == 115675295640858983304133651543519403601786105490037992581561449255353963470474
+        == 46588043924851280427026156359332814243502099936826263036193519252570625504970
     )
     assert c64.maintype == ic.codec.MT.META
     assert c64.maintype == 0
@@ -175,36 +175,36 @@ def test_code_hashable():
 
 def test_Code_uri():
     mco = ic.gen_meta_code("This is an URI representation of a Meta-Code")
-    assert mco.code_obj.code == "AAARFRYHMQI6KPP6"
-    assert mco.code_obj.uri == "iscc:aaarfryhmqi6kpp6"
+    assert mco.code_obj.code == "AAAX334V4AMT2PP4"
+    assert mco.code_obj.uri == "iscc:aaax334v4amt2pp4"
 
 
 def test_Code_mf_base16():
     mco = ic.gen_meta_code("Hello base16")
-    assert mco.code_obj.code == "AAAWK77HZL7JPEN3"
-    assert mco.code_obj.mf_base16 == "fcc010001657fe7cafe9791bb"
-    assert ic.normalize("fcc010001657fe7cafe9791bb") == "ISCC:AAAWK77HZL7JPEN3"
+    assert mco.code_obj.code == "AAATKVHH3C7FOAAZ"
+    assert mco.code_obj.mf_base16 == "fcc0100013554e7d8be570019"
+    assert ic.normalize("fcc0100013554e7d8be570019") == "ISCC:AAATKVHH3C7FOAAZ"
 
 
 def test_Code_mf_base32():
     mco = ic.gen_meta_code("Hello base32")
-    assert mco.code_obj.code == "AAAW277H32PJOVML"
-    assert mco.code_obj.mf_base32 == "bzqaqaalnp7t55huxkwfq"
-    assert ic.normalize("bzqaqaalnp7t55huxkwfq") == "ISCC:AAAW277H32PJOVML"
+    assert mco.code_obj.code == "AAAQKV7H7K7VMAEL"
+    assert mco.code_obj.mf_base32 == "bzqaqaaifk7t7vp2wacfq"
+    assert ic.normalize("bzqaqaaifk7t7vp2wacfq") == "ISCC:AAAQKV7H7K7VMAEL"
 
 
 def test_Code_mf_base58btc():
     mco = ic.gen_meta_code("Hello base58btc")
-    assert mco.code_obj.code == "AAASO77HR4FFOEOK"
-    assert mco.code_obj.mf_base58btc == "z4rHVQUUrBJhyW2Hqs"
-    assert ic.normalize("z4rHVQUUrBJhyW2Hqs") == "ISCC:AAASO77HR4FFOEOK"
+    assert mco.code_obj.code == "AAA2O57HTG7HMCO3"
+    assert mco.code_obj.mf_base58btc == "z4rHVQUrFdpfYWuGLa"
+    assert ic.normalize("z4rHVQUrFdpfYWuGLa") == "ISCC:AAA2O57HTG7HMCO3"
 
 
 def test_Code_mf_base64url():
     mco = ic.gen_meta_code("This is a base64url encoded Meta-Code")
-    assert mco.code_obj.code == "AAARQFT7MCK4LPO7"
-    assert mco.code_obj.mf_base64url == "uzAEAARgWf2CVxb3f"
-    assert ic.normalize("uzAEAARgWf2CVxb3f") == "ISCC:AAARQFT7MCK4LPO7"
+    assert mco.code_obj.code == "AAAYSN37BCO2L3O7"
+    assert mco.code_obj.mf_base64url == "uzAEAAYk3fwidpe3f"
+    assert ic.normalize("uzAEAAYk3fwidpe3f") == "ISCC:AAAYSN37BCO2L3O7"
 
 
 def test_Code_raises():
@@ -219,10 +219,10 @@ def test_Code_Code():
 
 def test_Code_str_repr():
     mco = ic.gen_meta_code("Hello str")
-    assert mco.code_obj.code == "AAAWOMHEVMWZ2EYF"
-    assert str(mco.code_obj) == "AAAWOMHEVMWZ2EYF"
-    assert repr(mco.code_obj) == 'Code("AAAWOMHEVMWZ2EYF")'
-    assert bytes(mco.code_obj).hex() == "00016730e4ab2d9d1305" == mco.code_obj.bytes.hex()
+    assert mco.code_obj.code == "AAAWH7PF7473PQ57"
+    assert str(mco.code_obj) == "AAAWH7PF7473PQ57"
+    assert repr(mco.code_obj) == 'Code("AAAWH7PF7473PQ57")'
+    assert bytes(mco.code_obj).hex() == "000163fde5ff3fb7c3bf" == mco.code_obj.bytes.hex()
 
 
 def test_decompose_single_component():

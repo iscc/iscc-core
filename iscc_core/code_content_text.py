@@ -60,8 +60,6 @@ def gen_text_code_v0(text, bits=core_opts.text_bits):
 
     text = collapse_text(text)
     characters = len(text)
-    text = "".join(text.split())
-    text = text.lower()
     digest = soft_hash_text_v0(text)
 
     text_code = codec.encode_component(
@@ -80,47 +78,37 @@ def gen_text_code_v0(text, bits=core_opts.text_bits):
 def collapse_text(text):
     # type: (Text) -> str
     """
-    [Unicode normalization](https://unicode.org/reports/tr15/) and character filtering.
+    Normalize and simplify text for similarity hashing.
 
-    - Decode to Unicode.
-    - Remove leading/trailing whitespace.
     - Decompose with NFD normalization.
-    - Filter special characters and whitespace.
-    - Remove duplicate whitespace.
+    - Remove all whitespace characters and convert text to lower case
+    - Filter control characters, marks (diacritics), and punctuation
     - Recombine with NFKC normalization.
 
-    :param Text text: Plain text to be normalized.
-    :return: Normalized plain text.
+    !!! note
+
+        See: [Unicode normalization](https://unicode.org/reports/tr15/).
+
+    :param Text text: Plain text to be collapsed.
+    :return: Collapsed plain text.
     :rtype: str
     """
 
-    # 1. Convert bytes to str
-    if isinstance(text, bytes):
-        text = text.decode("utf-8")
+    # Decompose with NFD
+    text = unicodedata.normalize("NFD", text)
 
-    # 2. Remove leading/trailing whitespace
-    text_stripped = text.strip()
+    # Remove all whitespace and convert text to lower case
+    text = "".join(text.split()).lower()
 
-    # 3. Decompose with NFD
-    text_decomposed = unicodedata.normalize("NFD", text_stripped)
+    # Filter control characters, marks (diacritics), and punctuation
+    text = "".join(
+        ch for ch in text if unicodedata.category(ch)[0] not in core_opts.text_unicode_filter
+    )
 
-    # 4. Filter
-    chars = []
-    for c in text_decomposed:
-        cat = unicodedata.category(c)
-        if cat not in core_opts.text_unicode_filter:
-            chars.append(c)
-        elif c in core_opts.text_whitespace:
-            chars.append(c)
-    text_filtered = "".join(chars)
+    # Recombine
+    text = unicodedata.normalize("NFKC", text)
 
-    # 5. Collapse consecutive whitespace
-    wsproc_text = " ".join(text_filtered.split())
-
-    # 6. Recombine
-    recombined = unicodedata.normalize("NFKC", wsproc_text)
-
-    return recombined
+    return text
 
 
 def soft_hash_text_v0(text):

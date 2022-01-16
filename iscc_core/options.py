@@ -36,20 +36,9 @@ class CoreOptions(BaseSettings):
     text_unicode_filter: frozenset = Field(
         frozenset(
             {
-                "Cc",
-                "Cf",
-                "Cn",
-                "Co",
-                "Cs",
-                "Mc",
-                "Me",
-                "Mn",
-                "Pc",
-                "Pd",
-                "Pe",
-                "Pf",
-                "Pi",
-                "Ps",
+                "C",
+                "M",
+                "P",
             }
         ),
         description="Unicode categories to remove during text normalization",
