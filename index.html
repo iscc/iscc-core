@@ -60,7 +60,7 @@
     
     
     
-    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="" data-md-color-accent="">
+    <body dir="ltr" data-md-color-scheme="slate" data-md-color-primary="" data-md-color-accent="">
   
     
     
@@ -117,19 +117,19 @@
         
           
           
-          <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="" data-md-color-accent=""  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_1">
+          <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="" data-md-color-accent=""  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_1">
           
-            <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_2" hidden>
-              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M17 6H7c-3.31 0-6 2.69-6 6s2.69 6 6 6h10c3.31 0 6-2.69 6-6s-2.69-6-6-6zm0 10H7c-2.21 0-4-1.79-4-4s1.79-4 4-4h10c2.21 0 4 1.79 4 4s-1.79 4-4 4zM7 9c-1.66 0-3 1.34-3 3s1.34 3 3 3 3-1.34 3-3-1.34-3-3-3z"/></svg>
+            <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_2" hidden>
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M17 7H7a5 5 0 0 0-5 5 5 5 0 0 0 5 5h10a5 5 0 0 0 5-5 5 5 0 0 0-5-5m0 8a3 3 0 0 1-3-3 3 3 0 0 1 3-3 3 3 0 0 1 3 3 3 3 0 0 1-3 3z"/></svg>
             </label>
           
         
           
           
-          <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="" data-md-color-accent=""  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_2">
+          <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="" data-md-color-accent=""  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_2">
           
-            <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_1" hidden>
-              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M17 7H7a5 5 0 0 0-5 5 5 5 0 0 0 5 5h10a5 5 0 0 0 5-5 5 5 0 0 0-5-5m0 8a3 3 0 0 1-3-3 3 3 0 0 1 3-3 3 3 0 0 1 3 3 3 3 0 0 1-3 3z"/></svg>
+            <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_1" hidden>
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M17 6H7c-3.31 0-6 2.69-6 6s2.69 6 6 6h10c3.31 0 6-2.69 6-6s-2.69-6-6-6zm0 10H7c-2.21 0-4-1.79-4-4s1.79-4 4-4h10c2.21 0 4 1.79 4 4s-1.79 4-4 4zM7 9c-1.66 0-3 1.34-3 3s1.34 3 3 3 3-1.34 3-3-1.34-3-3-3z"/></svg>
             </label>
           
         
@@ -1050,27 +1050,17 @@
 <a href="https://codecov.io/gh/iscc/iscc-core"><img alt="Coverage" src="https://codecov.io/gh/iscc/iscc-core/branch/main/graph/badge.svg?token=7BJ7HJU815" /></a>
 <a href="https://www.codacy.com/gh/iscc/iscc-core/dashboard"><img alt="Quality" src="https://app.codacy.com/project/badge/Grade/ad1cc48ac0c0413ea2373a938148f019" /></a>
 <a href="https://pepy.tech/project/iscc-core"><img alt="Downloads" src="https://pepy.tech/badge/iscc-core" /></a></p>
-<blockquote>
 <p><code>iscc-core</code> is a Python library that implements the core algorithms of the <a href="https://core.iscc.codes">ISCC</a> (<em>International Standard Content Code</em>)</p>
-</blockquote>
-<table>
-<thead>
-<tr>
-<th>NOTE: This is a low level reference implementation. <code>iscc-core</code> does not support content/metadata detection, extraction or preprocessing. For easy generation of ISCC codes see: <a href="https://github.com/iscc/iscc-cli/releases">iscc-cli</a></th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td></td>
-</tr>
-</tbody>
-</table>
 <h2 id="what-is-an-iscc">What is an ISCC<a class="headerlink" href="#what-is-an-iscc" title="Permanent link">#</a></h2>
 <p>The ISCC is a similarity preserving identifier for digital media assets.</p>
 <p>ISCCs are generated algorithmically from digital content, just like cryptographic hashes. However, instead of using a single cryptographic hash function to identify data only, the ISCC uses various algorithms to create a composite identifier that exhibits similarity-preserving properties (soft hash).</p>
 <p>The component-based structure of the ISCC identifies content at multiple levels of abstraction. Each component is self-describing, modular, and can be used separately or with others to aid in various content identification tasks. The algorithmic design supports content deduplication, database synchronization, indexing, integrity verification, timestamping, versioning, data provenance, similarity clustering, anomaly detection, usage tracking, allocation of royalties, fact-checking and general digital asset management use-cases.</p>
 <h2 id="what-is-iscc-core">What is <code>iscc-core</code><a class="headerlink" href="#what-is-iscc-core" title="Permanent link">#</a></h2>
 <p><code>iscc-core</code> is the python based library of the core algorithms to create standard-compliant ISCC codes. It also serves as a reference for porting ISCC to other programming languages.</p>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>This is a low level reference implementation. <code>iscc-core</code> does not support content/metadata detection, extraction or preprocessing. For easy generation of ISCC codes see: <a href="https://github.com/iscc/iscc-cli/releases">iscc-cli</a> |</p>
+</div>
 <h2 id="iscc-architecture">ISCC Architecture<a class="headerlink" href="#iscc-architecture" title="Permanent link">#</a></h2>
 <p><img alt="ISCC Architecture" src="https://raw.githubusercontent.com/iscc/iscc-core/master/docs/images/iscc-codec-light.png#only-light" />
 <img alt="ISCC Architecture" src="https://raw.githubusercontent.com/iscc/iscc-core/master/docs/images/iscc-codec-dark.png#only-dark" /></p>

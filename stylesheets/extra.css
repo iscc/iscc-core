@@ -13,9 +13,11 @@
   --md-primary-fg-color:               #0054b2;
   --md-primary-fg-color--light:        #7ac2f7;
   --md-primary-fg-color--dark:         #123663;
-
   --md-accent-fg-color:                #f56169;
   --md-accent-bg-color:                #a6db50;
+
+  --md-typeset-a-color:                #a6db50;
+  --md-default-fg-color--light:        #a6db50;
 }
 
 
