@@ -597,8 +597,8 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#iscc_core.code_content_text.normalize_text" class="md-nav__link">
-    normalize_text()
+  <a href="#iscc_core.code_content_text.collapse_text" class="md-nav__link">
+    collapse_text()
   </a>
   
 </li>
@@ -928,15 +928,11 @@ For <strong>reproducible Text-Code generation</strong> use
 <a href="https://tika.apache.org/2.2.1/index.html">Apache Tika v2.2.1</a> to extract text
 from your documents.</p>
 </div>
-<p><strong>Algorithm overview</strong>:</p>
+<p><strong>Algorithm overview</strong></p>
 <ul>
-<li>Normalize text using <a href="#iscc_core.code_content_text.normalize_text"><code>normalize_text</code></a>
-  function</li>
-<li>Count characters of normalized text</li>
-<li>Remove all whitespace</li>
-<li>Lowercase text</li>
-<li>Apply function <a href="#iscc_core.code_content_text.soft_hash_text_v0"><code>soft_hash_text_v0</code></a>
-  to text</li>
+<li>Apply <a href="#iscc_core.code_content_text.collapse_text"><code>collapse_text</code></a> function to text input</li>
+<li>Count characters of collapsed text</li>
+<li>Apply <a href="#iscc_core.code_content_text.soft_hash_text_v0"><code>soft_hash_text_v0</code></a> to collapsed text</li>
 </ul>
 
 
@@ -1022,23 +1018,21 @@ before passing it to this function.</p>
 <a id="__codelineno-0-13" name="__codelineno-0-13" href="#__codelineno-0-13"></a><span class="sd">    :rtype: ISCC</span>
 <a id="__codelineno-0-14" name="__codelineno-0-14" href="#__codelineno-0-14"></a><span class="sd">    &quot;&quot;&quot;</span>
 <a id="__codelineno-0-15" name="__codelineno-0-15" href="#__codelineno-0-15"></a>
-<a id="__codelineno-0-16" name="__codelineno-0-16" href="#__codelineno-0-16"></a>    <span class="n">text</span> <span class="o">=</span> <span class="n">normalize_text</span><span class="p">(</span><span class="n">text</span><span class="p">)</span>
+<a id="__codelineno-0-16" name="__codelineno-0-16" href="#__codelineno-0-16"></a>    <span class="n">text</span> <span class="o">=</span> <span class="n">collapse_text</span><span class="p">(</span><span class="n">text</span><span class="p">)</span>
 <a id="__codelineno-0-17" name="__codelineno-0-17" href="#__codelineno-0-17"></a>    <span class="n">characters</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">text</span><span class="p">)</span>
-<a id="__codelineno-0-18" name="__codelineno-0-18" href="#__codelineno-0-18"></a>    <span class="n">text</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">text</span><span class="o">.</span><span class="n">split</span><span class="p">())</span>
-<a id="__codelineno-0-19" name="__codelineno-0-19" href="#__codelineno-0-19"></a>    <span class="n">text</span> <span class="o">=</span> <span class="n">text</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span>
-<a id="__codelineno-0-20" name="__codelineno-0-20" href="#__codelineno-0-20"></a>    <span class="n">digest</span> <span class="o">=</span> <span class="n">soft_hash_text_v0</span><span class="p">(</span><span class="n">text</span><span class="p">)</span>
-<a id="__codelineno-0-21" name="__codelineno-0-21" href="#__codelineno-0-21"></a>
-<a id="__codelineno-0-22" name="__codelineno-0-22" href="#__codelineno-0-22"></a>    <span class="n">text_code</span> <span class="o">=</span> <span class="n">codec</span><span class="o">.</span><span class="n">encode_component</span><span class="p">(</span>
-<a id="__codelineno-0-23" name="__codelineno-0-23" href="#__codelineno-0-23"></a>        <span class="n">mtype</span><span class="o">=</span><span class="n">codec</span><span class="o">.</span><span class="n">MT</span><span class="o">.</span><span class="n">CONTENT</span><span class="p">,</span>
-<a id="__codelineno-0-24" name="__codelineno-0-24" href="#__codelineno-0-24"></a>        <span class="n">stype</span><span class="o">=</span><span class="n">codec</span><span class="o">.</span><span class="n">ST_CC</span><span class="o">.</span><span class="n">TEXT</span><span class="p">,</span>
-<a id="__codelineno-0-25" name="__codelineno-0-25" href="#__codelineno-0-25"></a>        <span class="n">version</span><span class="o">=</span><span class="n">codec</span><span class="o">.</span><span class="n">VS</span><span class="o">.</span><span class="n">V0</span><span class="p">,</span>
-<a id="__codelineno-0-26" name="__codelineno-0-26" href="#__codelineno-0-26"></a>        <span class="n">bit_length</span><span class="o">=</span><span class="n">bits</span><span class="p">,</span>
-<a id="__codelineno-0-27" name="__codelineno-0-27" href="#__codelineno-0-27"></a>        <span class="n">digest</span><span class="o">=</span><span class="n">digest</span><span class="p">,</span>
-<a id="__codelineno-0-28" name="__codelineno-0-28" href="#__codelineno-0-28"></a>    <span class="p">)</span>
+<a id="__codelineno-0-18" name="__codelineno-0-18" href="#__codelineno-0-18"></a>    <span class="n">digest</span> <span class="o">=</span> <span class="n">soft_hash_text_v0</span><span class="p">(</span><span class="n">text</span><span class="p">)</span>
+<a id="__codelineno-0-19" name="__codelineno-0-19" href="#__codelineno-0-19"></a>
+<a id="__codelineno-0-20" name="__codelineno-0-20" href="#__codelineno-0-20"></a>    <span class="n">text_code</span> <span class="o">=</span> <span class="n">codec</span><span class="o">.</span><span class="n">encode_component</span><span class="p">(</span>
+<a id="__codelineno-0-21" name="__codelineno-0-21" href="#__codelineno-0-21"></a>        <span class="n">mtype</span><span class="o">=</span><span class="n">codec</span><span class="o">.</span><span class="n">MT</span><span class="o">.</span><span class="n">CONTENT</span><span class="p">,</span>
+<a id="__codelineno-0-22" name="__codelineno-0-22" href="#__codelineno-0-22"></a>        <span class="n">stype</span><span class="o">=</span><span class="n">codec</span><span class="o">.</span><span class="n">ST_CC</span><span class="o">.</span><span class="n">TEXT</span><span class="p">,</span>
+<a id="__codelineno-0-23" name="__codelineno-0-23" href="#__codelineno-0-23"></a>        <span class="n">version</span><span class="o">=</span><span class="n">codec</span><span class="o">.</span><span class="n">VS</span><span class="o">.</span><span class="n">V0</span><span class="p">,</span>
+<a id="__codelineno-0-24" name="__codelineno-0-24" href="#__codelineno-0-24"></a>        <span class="n">bit_length</span><span class="o">=</span><span class="n">bits</span><span class="p">,</span>
+<a id="__codelineno-0-25" name="__codelineno-0-25" href="#__codelineno-0-25"></a>        <span class="n">digest</span><span class="o">=</span><span class="n">digest</span><span class="p">,</span>
+<a id="__codelineno-0-26" name="__codelineno-0-26" href="#__codelineno-0-26"></a>    <span class="p">)</span>
+<a id="__codelineno-0-27" name="__codelineno-0-27" href="#__codelineno-0-27"></a>
+<a id="__codelineno-0-28" name="__codelineno-0-28" href="#__codelineno-0-28"></a>    <span class="n">iscc</span> <span class="o">=</span> <span class="s2">&quot;ISCC:&quot;</span> <span class="o">+</span> <span class="n">text_code</span>
 <a id="__codelineno-0-29" name="__codelineno-0-29" href="#__codelineno-0-29"></a>
-<a id="__codelineno-0-30" name="__codelineno-0-30" href="#__codelineno-0-30"></a>    <span class="n">iscc</span> <span class="o">=</span> <span class="s2">&quot;ISCC:&quot;</span> <span class="o">+</span> <span class="n">text_code</span>
-<a id="__codelineno-0-31" name="__codelineno-0-31" href="#__codelineno-0-31"></a>
-<a id="__codelineno-0-32" name="__codelineno-0-32" href="#__codelineno-0-32"></a>    <span class="k">return</span> <span class="n">ISCC</span><span class="p">(</span><span class="n">iscc</span><span class="o">=</span><span class="n">iscc</span><span class="p">,</span> <span class="n">characters</span><span class="o">=</span><span class="n">characters</span><span class="p">)</span>
+<a id="__codelineno-0-30" name="__codelineno-0-30" href="#__codelineno-0-30"></a>    <span class="k">return</span> <span class="n">ISCC</span><span class="p">(</span><span class="n">iscc</span><span class="o">=</span><span class="n">iscc</span><span class="p">,</span> <span class="n">characters</span><span class="o">=</span><span class="n">characters</span><span class="p">)</span>
 </code></pre></div>
         </details>
     </div>
@@ -1053,23 +1047,25 @@ before passing it to this function.</p>
 
 
 
-<h2 id="iscc_core.code_content_text.normalize_text" class="doc doc-heading">
-<code class="highlight language-python"><span class="n">normalize_text</span><span class="p">(</span><span class="n">text</span><span class="p">)</span></code>
+<h2 id="iscc_core.code_content_text.collapse_text" class="doc doc-heading">
+<code class="highlight language-python"><span class="n">collapse_text</span><span class="p">(</span><span class="n">text</span><span class="p">)</span></code>
 
 
-<a href="#iscc_core.code_content_text.normalize_text" class="headerlink" title="Permanent link">#</a></h2>
+<a href="#iscc_core.code_content_text.collapse_text" class="headerlink" title="Permanent link">#</a></h2>
 
     <div class="doc doc-contents ">
 
-      <p><a href="https://unicode.org/reports/tr15/">Unicode normalization</a> and character filtering.</p>
+      <p>Normalize and simplify text for similarity hashing.</p>
 <ul>
-<li>Decode to Unicode.</li>
-<li>Remove leading/trailing whitespace.</li>
 <li>Decompose with NFD normalization.</li>
-<li>Filter special characters and whitespace.</li>
-<li>Remove duplicate whitespace.</li>
+<li>Remove all whitespace characters and convert text to lower case</li>
+<li>Filter control characters, marks (diacritics), and punctuation</li>
 <li>Recombine with NFKC normalization.</li>
 </ul>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>See: <a href="https://unicode.org/reports/tr15/">Unicode normalization</a>.</p>
+</div>
 
 <p><strong>Parameters:</strong></p>
 <table>
@@ -1085,7 +1081,7 @@ before passing it to this function.</p>
       <tr>
         <td><code>text</code></td>
         <td><code>Text</code></td>
-        <td><p>Plain text to be normalized.</p></td>
+        <td><p>Plain text to be collapsed.</p></td>
         <td><em>required</em></td>
       </tr>
   </tbody>
@@ -1101,56 +1097,46 @@ before passing it to this function.</p>
   <tbody>
     <tr>
       <td><code>str</code></td>
-      <td><p>Normalized plain text.</p></td>
+      <td><p>Collapsed plain text.</p></td>
     </tr>
   </tbody>
 </table>
         <details class="quote">
           <summary>Source code in <code>iscc_core\code_content_text.py</code></summary>
-          <div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="k">def</span> <span class="nf">normalize_text</span><span class="p">(</span><span class="n">text</span><span class="p">):</span>
+          <div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="k">def</span> <span class="nf">collapse_text</span><span class="p">(</span><span class="n">text</span><span class="p">):</span>
 <a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>    <span class="c1"># type: (Text) -&gt; str</span>
 <a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>    <span class="sd">&quot;&quot;&quot;</span>
-<a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a><span class="sd">    [Unicode normalization](https://unicode.org/reports/tr15/) and character filtering.</span>
+<a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a><span class="sd">    Normalize and simplify text for similarity hashing.</span>
 <a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a>
-<a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a><span class="sd">    - Decode to Unicode.</span>
-<a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a><span class="sd">    - Remove leading/trailing whitespace.</span>
-<a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a><span class="sd">    - Decompose with NFD normalization.</span>
-<a id="__codelineno-0-9" name="__codelineno-0-9" href="#__codelineno-0-9"></a><span class="sd">    - Filter special characters and whitespace.</span>
-<a id="__codelineno-0-10" name="__codelineno-0-10" href="#__codelineno-0-10"></a><span class="sd">    - Remove duplicate whitespace.</span>
-<a id="__codelineno-0-11" name="__codelineno-0-11" href="#__codelineno-0-11"></a><span class="sd">    - Recombine with NFKC normalization.</span>
+<a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a><span class="sd">    - Decompose with NFD normalization.</span>
+<a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a><span class="sd">    - Remove all whitespace characters and convert text to lower case</span>
+<a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a><span class="sd">    - Filter control characters, marks (diacritics), and punctuation</span>
+<a id="__codelineno-0-9" name="__codelineno-0-9" href="#__codelineno-0-9"></a><span class="sd">    - Recombine with NFKC normalization.</span>
+<a id="__codelineno-0-10" name="__codelineno-0-10" href="#__codelineno-0-10"></a>
+<a id="__codelineno-0-11" name="__codelineno-0-11" href="#__codelineno-0-11"></a><span class="sd">    !!! note</span>
 <a id="__codelineno-0-12" name="__codelineno-0-12" href="#__codelineno-0-12"></a>
-<a id="__codelineno-0-13" name="__codelineno-0-13" href="#__codelineno-0-13"></a><span class="sd">    :param Text text: Plain text to be normalized.</span>
-<a id="__codelineno-0-14" name="__codelineno-0-14" href="#__codelineno-0-14"></a><span class="sd">    :return: Normalized plain text.</span>
-<a id="__codelineno-0-15" name="__codelineno-0-15" href="#__codelineno-0-15"></a><span class="sd">    :rtype: str</span>
-<a id="__codelineno-0-16" name="__codelineno-0-16" href="#__codelineno-0-16"></a><span class="sd">    &quot;&quot;&quot;</span>
-<a id="__codelineno-0-17" name="__codelineno-0-17" href="#__codelineno-0-17"></a>
-<a id="__codelineno-0-18" name="__codelineno-0-18" href="#__codelineno-0-18"></a>    <span class="c1"># 1. Convert bytes to str</span>
-<a id="__codelineno-0-19" name="__codelineno-0-19" href="#__codelineno-0-19"></a>    <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">text</span><span class="p">,</span> <span class="nb">bytes</span><span class="p">):</span>
-<a id="__codelineno-0-20" name="__codelineno-0-20" href="#__codelineno-0-20"></a>        <span class="n">text</span> <span class="o">=</span> <span class="n">text</span><span class="o">.</span><span class="n">decode</span><span class="p">(</span><span class="s2">&quot;utf-8&quot;</span><span class="p">)</span>
-<a id="__codelineno-0-21" name="__codelineno-0-21" href="#__codelineno-0-21"></a>
-<a id="__codelineno-0-22" name="__codelineno-0-22" href="#__codelineno-0-22"></a>    <span class="c1"># 2. Remove leading/trailing whitespace</span>
-<a id="__codelineno-0-23" name="__codelineno-0-23" href="#__codelineno-0-23"></a>    <span class="n">text_stripped</span> <span class="o">=</span> <span class="n">text</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span>
-<a id="__codelineno-0-24" name="__codelineno-0-24" href="#__codelineno-0-24"></a>
-<a id="__codelineno-0-25" name="__codelineno-0-25" href="#__codelineno-0-25"></a>    <span class="c1"># 3. Decompose with NFD</span>
-<a id="__codelineno-0-26" name="__codelineno-0-26" href="#__codelineno-0-26"></a>    <span class="n">text_decomposed</span> <span class="o">=</span> <span class="n">unicodedata</span><span class="o">.</span><span class="n">normalize</span><span class="p">(</span><span class="s2">&quot;NFD&quot;</span><span class="p">,</span> <span class="n">text_stripped</span><span class="p">)</span>
-<a id="__codelineno-0-27" name="__codelineno-0-27" href="#__codelineno-0-27"></a>
-<a id="__codelineno-0-28" name="__codelineno-0-28" href="#__codelineno-0-28"></a>    <span class="c1"># 4. Filter</span>
-<a id="__codelineno-0-29" name="__codelineno-0-29" href="#__codelineno-0-29"></a>    <span class="n">chars</span> <span class="o">=</span> <span class="p">[]</span>
-<a id="__codelineno-0-30" name="__codelineno-0-30" href="#__codelineno-0-30"></a>    <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="n">text_decomposed</span><span class="p">:</span>
-<a id="__codelineno-0-31" name="__codelineno-0-31" href="#__codelineno-0-31"></a>        <span class="n">cat</span> <span class="o">=</span> <span class="n">unicodedata</span><span class="o">.</span><span class="n">category</span><span class="p">(</span><span class="n">c</span><span class="p">)</span>
-<a id="__codelineno-0-32" name="__codelineno-0-32" href="#__codelineno-0-32"></a>        <span class="k">if</span> <span class="n">cat</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">core_opts</span><span class="o">.</span><span class="n">text_unicode_filter</span><span class="p">:</span>
-<a id="__codelineno-0-33" name="__codelineno-0-33" href="#__codelineno-0-33"></a>            <span class="n">chars</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">c</span><span class="p">)</span>
-<a id="__codelineno-0-34" name="__codelineno-0-34" href="#__codelineno-0-34"></a>        <span class="k">elif</span> <span class="n">c</span> <span class="ow">in</span> <span class="n">core_opts</span><span class="o">.</span><span class="n">text_whitespace</span><span class="p">:</span>
-<a id="__codelineno-0-35" name="__codelineno-0-35" href="#__codelineno-0-35"></a>            <span class="n">chars</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">c</span><span class="p">)</span>
-<a id="__codelineno-0-36" name="__codelineno-0-36" href="#__codelineno-0-36"></a>    <span class="n">text_filtered</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">chars</span><span class="p">)</span>
-<a id="__codelineno-0-37" name="__codelineno-0-37" href="#__codelineno-0-37"></a>
-<a id="__codelineno-0-38" name="__codelineno-0-38" href="#__codelineno-0-38"></a>    <span class="c1"># 5. Collapse consecutive whitespace</span>
-<a id="__codelineno-0-39" name="__codelineno-0-39" href="#__codelineno-0-39"></a>    <span class="n">wsproc_text</span> <span class="o">=</span> <span class="s2">&quot; &quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">text_filtered</span><span class="o">.</span><span class="n">split</span><span class="p">())</span>
-<a id="__codelineno-0-40" name="__codelineno-0-40" href="#__codelineno-0-40"></a>
-<a id="__codelineno-0-41" name="__codelineno-0-41" href="#__codelineno-0-41"></a>    <span class="c1"># 6. Recombine</span>
-<a id="__codelineno-0-42" name="__codelineno-0-42" href="#__codelineno-0-42"></a>    <span class="n">recombined</span> <span class="o">=</span> <span class="n">unicodedata</span><span class="o">.</span><span class="n">normalize</span><span class="p">(</span><span class="s2">&quot;NFKC&quot;</span><span class="p">,</span> <span class="n">wsproc_text</span><span class="p">)</span>
-<a id="__codelineno-0-43" name="__codelineno-0-43" href="#__codelineno-0-43"></a>
-<a id="__codelineno-0-44" name="__codelineno-0-44" href="#__codelineno-0-44"></a>    <span class="k">return</span> <span class="n">recombined</span>
+<a id="__codelineno-0-13" name="__codelineno-0-13" href="#__codelineno-0-13"></a><span class="sd">        See: [Unicode normalization](https://unicode.org/reports/tr15/).</span>
+<a id="__codelineno-0-14" name="__codelineno-0-14" href="#__codelineno-0-14"></a>
+<a id="__codelineno-0-15" name="__codelineno-0-15" href="#__codelineno-0-15"></a><span class="sd">    :param Text text: Plain text to be collapsed.</span>
+<a id="__codelineno-0-16" name="__codelineno-0-16" href="#__codelineno-0-16"></a><span class="sd">    :return: Collapsed plain text.</span>
+<a id="__codelineno-0-17" name="__codelineno-0-17" href="#__codelineno-0-17"></a><span class="sd">    :rtype: str</span>
+<a id="__codelineno-0-18" name="__codelineno-0-18" href="#__codelineno-0-18"></a><span class="sd">    &quot;&quot;&quot;</span>
+<a id="__codelineno-0-19" name="__codelineno-0-19" href="#__codelineno-0-19"></a>
+<a id="__codelineno-0-20" name="__codelineno-0-20" href="#__codelineno-0-20"></a>    <span class="c1"># Decompose with NFD</span>
+<a id="__codelineno-0-21" name="__codelineno-0-21" href="#__codelineno-0-21"></a>    <span class="n">text</span> <span class="o">=</span> <span class="n">unicodedata</span><span class="o">.</span><span class="n">normalize</span><span class="p">(</span><span class="s2">&quot;NFD&quot;</span><span class="p">,</span> <span class="n">text</span><span class="p">)</span>
+<a id="__codelineno-0-22" name="__codelineno-0-22" href="#__codelineno-0-22"></a>
+<a id="__codelineno-0-23" name="__codelineno-0-23" href="#__codelineno-0-23"></a>    <span class="c1"># Remove all whitespace and convert text to lower case</span>
+<a id="__codelineno-0-24" name="__codelineno-0-24" href="#__codelineno-0-24"></a>    <span class="n">text</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">text</span><span class="o">.</span><span class="n">split</span><span class="p">())</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span>
+<a id="__codelineno-0-25" name="__codelineno-0-25" href="#__codelineno-0-25"></a>
+<a id="__codelineno-0-26" name="__codelineno-0-26" href="#__codelineno-0-26"></a>    <span class="c1"># Filter control characters, marks (diacritics), and punctuation</span>
+<a id="__codelineno-0-27" name="__codelineno-0-27" href="#__codelineno-0-27"></a>    <span class="n">text</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span>
+<a id="__codelineno-0-28" name="__codelineno-0-28" href="#__codelineno-0-28"></a>        <span class="n">ch</span> <span class="k">for</span> <span class="n">ch</span> <span class="ow">in</span> <span class="n">text</span> <span class="k">if</span> <span class="n">unicodedata</span><span class="o">.</span><span class="n">category</span><span class="p">(</span><span class="n">ch</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">core_opts</span><span class="o">.</span><span class="n">text_unicode_filter</span>
+<a id="__codelineno-0-29" name="__codelineno-0-29" href="#__codelineno-0-29"></a>    <span class="p">)</span>
+<a id="__codelineno-0-30" name="__codelineno-0-30" href="#__codelineno-0-30"></a>
+<a id="__codelineno-0-31" name="__codelineno-0-31" href="#__codelineno-0-31"></a>    <span class="c1"># Recombine</span>
+<a id="__codelineno-0-32" name="__codelineno-0-32" href="#__codelineno-0-32"></a>    <span class="n">text</span> <span class="o">=</span> <span class="n">unicodedata</span><span class="o">.</span><span class="n">normalize</span><span class="p">(</span><span class="s2">&quot;NFKC&quot;</span><span class="p">,</span> <span class="n">text</span><span class="p">)</span>
+<a id="__codelineno-0-33" name="__codelineno-0-33" href="#__codelineno-0-33"></a>
+<a id="__codelineno-0-34" name="__codelineno-0-34" href="#__codelineno-0-34"></a>    <span class="k">return</span> <span class="n">text</span>
 </code></pre></div>
         </details>
     </div>
