@@ -4,6 +4,7 @@ from binascii import unhexlify
 import pytest
 from bitarray import bitarray as ba, frozenbitarray
 import iscc_core as ic
+from .conftest import static_bytes
 
 
 def test_main_type():
@@ -488,3 +489,43 @@ def test_codec_validate_header_prefix():
     assert ic.validate(invalid, strict=False) is False
     with pytest.raises(ValueError):
         ic.validate(invalid)
+
+
+def test_decode_iscc():
+    assert ic.decode_iscc("AAAQCAAAAABAAAAA") == (0, 0, 0, 1, b"\x01\x00\x00\x00\x02\x00\x00\x00")
+
+
+def test_type_id_maintype_meta():
+    assert ic.type_id("AAAQCAAAAABAAAAA") == "META-NONE-V0-64"
+
+
+def test_type_id_maintype_iscc_code():
+    iscc = "KICQOCPJM46YUUCBMWS6FFXRGM3LJOU5MZOVPOUHIJOHPI324GKN67Q"
+    assert ic.type_id(iscc) == "ISCC-AUDIO-V0-MCDI"
+
+
+def test_type_id_maintype_iscc_id():
+    iscc = "MEAAO5JRN22FN2M2"
+    assert ic.type_id(iscc) == "ID-BITCOIN-V0-64"
+
+
+def test_explain_maintype_meta():
+    assert ic.explain("AAAQCAAAAABAAAAA") == "META-NONE-V0-64-0100000002000000"
+
+
+def test_explain_maintype_iscc_code():
+    iscc = "KICQOCPJM46YUUCBMWS6FFXRGM3LJOU5MZOVPOUHIJOHPI324GKN67Q"
+    assert (
+        ic.explain(iscc)
+        == "ISCC-AUDIO-V0-MCDI-0709e9673d8a504165a5e296f13336b4ba9d665d57ba87425c77a37ae194df7e"
+    )
+
+
+def test_explain_maintype_iscc_id_no_counter():
+    iscc = "MEAAO5JRN22FN2M2"
+    assert ic.explain(iscc) == "ID-BITCOIN-V0-64-0775316eb456e99a"
+
+
+def test_explain_maintype_iscc_id_counter():
+    iscc = "ISCC:MAASAJINXFXA2SQXAE"
+    assert ic.explain(iscc) == "ID-PRIVATE-V0-72-20250db96e0d4a17-1"

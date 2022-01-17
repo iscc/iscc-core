@@ -187,6 +187,17 @@ UNITS = (
     (MT.META, MT.SEMANTIC, MT.CONTENT),
 )
 
+# Map MainTypes to SubTypes
+SUBTYPE_MAP = {
+    MT.META: ST,
+    MT.SEMANTIC: ST_CC,
+    MT.CONTENT: ST_CC,
+    MT.DATA: ST,
+    MT.INSTANCE: ST,
+    MT.ISCC: ST_ISCC,
+    MT.ID: ST_ID,
+}
+
 
 ########################################################################################
 # Core codec functions                                                                 #
@@ -582,6 +593,67 @@ def normalize(iscc_code):
 ########################################################################################
 
 
+def decode_iscc(iscc):
+    # type (str) -> IsccTuple
+    """
+    Decode ISCC to an IsccTuple
+
+    :param str iscc: ISCC string
+    :return: ISCC decoded to an IsccTuple
+    :rtype: IsccTuple
+    """
+    iscc = clean(normalize(iscc))
+    data = decode_base32(iscc)
+    return read_header(data)
+
+
+def explain(iscc):
+    # type (str) -> str:
+    """
+    Convert ISCC to a human-readable representation
+
+    :param str iscc: ISCC string
+    :return: Human-readable representation of ISCC
+    :rtype: str
+    """
+    tid = type_id(iscc)
+    fields = decode_iscc(iscc)
+    if fields[0] == MT.ID:
+        counter_bytes = fields[-1][8:]
+        if counter_bytes:
+            counter = uvarint.decode(counter_bytes)
+            hex_hash = fields[-1][:8].hex()
+            return f"{tid}-{hex_hash}-{counter.integer}"
+    hex_hash = fields[-1].hex()
+    return f"{tid}-{hex_hash}"
+
+
+def type_id(iscc):
+    # type (str) - str:
+    """
+    Extract and convert ISCC HEADER to a readable Type-ID string.
+
+    Type-ids can be used as names in databases to index ISCC-UNITs seperatly.
+
+    :param str iscc: ISCC string
+    :return: Unique Type-ID string
+    :rtype: str
+    """
+    fields = decode_iscc(iscc)
+    mtype = MT(fields[0])
+    stype = SUBTYPE_MAP[fields[0]](fields[1])
+
+    if mtype == MT.ISCC:
+        mtypes = decode_units(fields[3])
+        length = "".join([t.name[0] for t in mtypes]) + "DI"
+    else:
+        length = decode_length(fields[0], fields[3])
+
+    version = VS(fields[2])
+
+    return f"{mtype.name}-{stype.name}-{version.name}-{length}"
+
+
 def validate(iscc, strict=True):
     # type: (str) -> bool
     """
@@ -853,6 +925,7 @@ class Code:
         # Length
         ln_bits = bits or choice(list(LN)).value
         if mt == MT.ISCC:
+            # TODO fix ramdom ISCC with custom SubType generation
             ln_code = encode_units(units)
         else:
             ln_code = encode_length(mt, bits)

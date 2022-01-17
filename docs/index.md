@@ -57,47 +57,48 @@ import iscc_core
 meta_code = iscc_core.gen_meta_code(name="ISCC Test Document!")
 
 print(f"Meta-Code:     {meta_code.iscc}")
-print(f"Structure:     {meta_code.code_obj.explain}\n")
+print(f"Structure:     {iscc_core.explain(meta_code.iscc)}\n")
 
 # Extract text from file
 with open("demo.txt", "rt", encoding="utf-8") as stream:
     text = stream.read()
     text_code = iscc_core.gen_text_code_v0(text)
     print(f"Text-Code:     {text_code.iscc}")
-    print(f"Structure:     {text_code.code_obj.explain}\n")
+    print(f"Structure:     {iscc_core.explain(text_code.iscc)}\n")
 
 # Process raw bytes of textfile
 with open("demo.txt", "rb") as stream:
     data_code = iscc_core.gen_data_code(stream)
     print(f"Data-Code:     {data_code.iscc}")
-    print(f"Structure:     {data_code.code_obj.explain}\n")
+    print(f"Structure:     {iscc_core.explain(data_code.iscc)}\n")
 
     stream.seek(0)
     instance_code = iscc_core.gen_instance_code(stream)
     print(f"Instance-Code: {instance_code.iscc}")
-    print(f"Structure:     {instance_code.code_obj.explain}\n")
+    print(f"Structure:     {iscc_core.explain(instance_code.iscc)}\n")
 
 iscc_code = iscc_core.gen_iscc_code(
     (meta_code.iscc, text_code.iscc, data_code.iscc, instance_code.iscc)
 )
 print(f"ISCC-CODE:     {iscc_code.iscc}")
-print(f"Structure:     {iscc_code.code_obj.explain}")
+print(f"Structure:     {iscc_core.explain(iscc_code.iscc)}")
 print(f"Multiformat:   {iscc_code.code_obj.mf_base32}\n")
 
 iscc_id = iscc_core.gen_iscc_id(chain=1, iscc_code=iscc_code.iscc, uc=7)
 print(f"ISCC-ID:       {iscc_id.iscc}")
-print(f"Structure:     {iscc_id.code_obj.explain}")
+print(f"Structure:     {iscc_core.explain(iscc_id.iscc)}")
 print(f"Multiformat:   {iscc_id.code_obj.mf_base32}")
+
 ```
 
 The output of this example is as follows:
 
 ```
-Meta-Code:     ISCC:AAA3MGR7CSJ3O3D3
-Structure:     META-NONE-V0-64-b61a3f1493b76c7b
+Meta-Code:     ISCC:AAAT4EBWK27737D2
+Structure:     META-NONE-V0-64-3e103656bffdfc7a
 
-Text-Code:     ISCC:EAAUIQCMQJO757BF
-Structure:     CONTENT-TEXT-V0-64-44404c825dfefc25
+Text-Code:     ISCC:EAAQMBEYQF6457DP
+Structure:     CONTENT-TEXT-V0-64-060498817dcefc6f
 
 Data-Code:     ISCC:GAAZ5SQ47ZQ34A3V
 Structure:     DATA-NONE-V0-64-9eca1cfe61be0375
@@ -105,13 +106,13 @@ Structure:     DATA-NONE-V0-64-9eca1cfe61be0375
 Instance-Code: ISCC:IAASQF7FY2TLVFRC
 Structure:     INSTANCE-NONE-V0-64-2817e5c6a6ba9622
 
-ISCC-CODE:     ISCC:KAC3MGR7CSJ3O3D3IRAEZAS5736CLHWKDT7GDPQDOUUBPZOGU25JMIQ
-Structure:     ISCC-TEXT-V0-MCDI-b61a3f1493b76c7b44404c825dfefc259eca1cfe61be03752817e5c6a6ba9622
-Multiformat:   bzqavabnwdi7rje5xnr5uiqcmqjo757bft3fbz7tbxybxkkax4xdknouwei
+ISCC-CODE:     ISCC:KACT4EBWK27737D2AYCJRAL5Z36G7HWKDT7GDPQDOUUBPZOGU25JMIQ
+Structure:     ISCC-TEXT-V0-MCDI-3e103656bffdfc7a060498817dcefc6f9eca1cfe61be03752817e5c6a6ba9622
+Multiformat:   bzqavabj6ca3fnp757r5ambeyqf6457dpt3fbz7tbxybxkkax4xdknouwei
 
-ISCC-ID:       ISCC:MEASBFSKDSLFDPTMA4
-Structure:     ID-BITCOIN-V0-72-20964a1c9651be6c-7
-Multiformat:   bzqawcajaszfbzfsrxzwao
+ISCC-ID:       ISCC:MEASAHQADTLH37X4A4
+Structure:     ID-BITCOIN-V0-72-201e001cd67dfefc-7
+Multiformat:   bzqawcajadyabzvt5736ao
 ```
 
 ## Documentation
