@@ -18,11 +18,13 @@ copyright: 'Copyright © 2016-2021 The Authors
 extra_css:
   - stylesheets/extra.css
 
-extra_javascript:
-    - https://unpkg.com/mermaid/dist/mermaid.min.js
+extra:
+  analytics:
+    provider: custom
 
 theme:
   name: material
+  custom_dir: overrides
   logo: images/iscc-logo-icon-white.svg
   favicon: images/iscc-logo-icon-black.svg
   language: en
