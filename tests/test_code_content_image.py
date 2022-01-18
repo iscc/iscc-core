@@ -5,17 +5,17 @@ import iscc_core
 
 def test_gen_image_code_v0_default():
     ic_obj = iscc_core.gen_image_code_v0(IMG_SAMPLE_PIXELS)
-    assert ic_obj.iscc == "ISCC:EEA4GQZQTY6J5DTH"
+    assert ic_obj == {"iscc": "ISCC:EEA4GQZQTY6J5DTH"}
 
 
 def test_gen_image_code_v0_32bit():
     ic_obj = iscc_core.gen_image_code_v0(IMG_SAMPLE_PIXELS, bits=32)
-    assert ic_obj.iscc == "ISCC:EEAMGQZQTY"
+    assert ic_obj == {"iscc": "ISCC:EEAMGQZQTY"}
 
 
 def test_gen_image_code_v0_256bit():
     ic_obj = iscc_core.gen_image_code_v0(IMG_SAMPLE_PIXELS, bits=256)
-    assert ic_obj.iscc == "ISCC:EED4GQZQTY6J5DTHQ2DWCPDZHQOM6QZQTY6J5DTFZ2DWCPDZHQOMXDI"
+    assert ic_obj == {"iscc": "ISCC:EED4GQZQTY6J5DTHQ2DWCPDZHQOM6QZQTY6J5DTFZ2DWCPDZHQOMXDI"}
 
 
 def test_hash_image_v0_white():
@@ -53,36 +53,30 @@ def test_hash_image_v0_sample():
 
 
 def test_gen_code_image_v0_white():
-    assert (
-        iscc_core.code_content_image.gen_image_code_v0(IMG_WHITE_PIXELS, bits=64).iscc
-        == "ISCC:EEAYAAAAAAAAAAAA"
-    )
-    assert (
-        iscc_core.code_content_image.gen_image_code_v0(IMG_WHITE_PIXELS, bits=96).iscc
-        == "ISCC:EEBIAAAAAAAAAAAAAAAAAAA"
-    )
-    assert (
-        iscc_core.code_content_image.gen_image_code_v0(IMG_WHITE_PIXELS, bits=128).iscc
-        == "ISCC:EEBYAAAAAAAAAAAAAAAAAAAAAAAAA"
-    )
-    assert (
-        iscc_core.code_content_image.gen_image_code_v0(IMG_WHITE_PIXELS, bits=256).iscc
-        == "ISCC:EEDYAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
-    )
+    assert iscc_core.code_content_image.gen_image_code_v0(IMG_WHITE_PIXELS, bits=64) == {
+        "iscc": "ISCC:EEAYAAAAAAAAAAAA"
+    }
+    assert iscc_core.code_content_image.gen_image_code_v0(IMG_WHITE_PIXELS, bits=96) == {
+        "iscc": "ISCC:EEBIAAAAAAAAAAAAAAAAAAA"
+    }
+    assert iscc_core.code_content_image.gen_image_code_v0(IMG_WHITE_PIXELS, bits=128) == {
+        "iscc": "ISCC:EEBYAAAAAAAAAAAAAAAAAAAAAAAAA"
+    }
+    assert iscc_core.code_content_image.gen_image_code_v0(IMG_WHITE_PIXELS, bits=256) == {
+        "iscc": "ISCC:EEDYAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+    }
 
 
 def test_get_code_image_v0():
-    assert (
-        iscc_core.code_content_image.gen_image_code_v0(IMG_SAMPLE_PIXELS, bits=256).iscc
-        == "ISCC:EED4GQZQTY6J5DTHQ2DWCPDZHQOM6QZQTY6J5DTFZ2DWCPDZHQOMXDI"
-    )
+    assert iscc_core.code_content_image.gen_image_code_v0(IMG_SAMPLE_PIXELS, bits=256) == {
+        "iscc": "ISCC:EED4GQZQTY6J5DTHQ2DWCPDZHQOM6QZQTY6J5DTFZ2DWCPDZHQOMXDI"
+    }
 
 
 def test_get_code_image():
-    assert (
-        iscc_core.code_content_image.gen_image_code(IMG_SAMPLE_PIXELS, bits=256).iscc
-        == "ISCC:EED4GQZQTY6J5DTHQ2DWCPDZHQOM6QZQTY6J5DTFZ2DWCPDZHQOMXDI"
-    )
+    assert iscc_core.code_content_image.gen_image_code(IMG_SAMPLE_PIXELS, bits=256) == {
+        "iscc": "ISCC:EED4GQZQTY6J5DTHQ2DWCPDZHQOM6QZQTY6J5DTFZ2DWCPDZHQOMXDI"
+    }
 
 
 def test_dct_empty():

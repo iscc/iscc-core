@@ -18,12 +18,11 @@ from statistics import median
 from typing import Sequence
 from more_itertools import chunked
 from iscc_core import codec, core_opts
-from iscc_core.schema import ISCC
 from iscc_core.dct import dct
 
 
 def gen_image_code(pixels, bits=core_opts.image_bits):
-    # type: (Sequence[int], int) -> ISCC
+    # type: (Sequence[int], int) -> dict
     """
     Create an ISCC Content-Code Image with the latest standard algorithm.
 
@@ -36,7 +35,7 @@ def gen_image_code(pixels, bits=core_opts.image_bits):
 
 
 def gen_image_code_v0(pixels, bits=core_opts.image_bits):
-    # type: (Sequence[int], int) -> ISCC
+    # type: (Sequence[int], int) -> dict
     """
     Create an ISCC Content-Code Image with algorithm v0.
 
@@ -54,7 +53,7 @@ def gen_image_code_v0(pixels, bits=core_opts.image_bits):
         digest=digest,
     )
     iscc = "ISCC:" + image_code
-    return ISCC(iscc=iscc)
+    return {"iscc": iscc}
 
 
 def soft_hash_image_v0(pixels, bits=core_opts.image_bits):
