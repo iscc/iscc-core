@@ -116,11 +116,6 @@
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>https://core.iscc.codes/schema/schema/</loc>
-         <lastmod>2022-01-18</lastmod>
-         <changefreq>daily</changefreq>
-    </url>
-    <url>
          <loc>https://core.iscc.codes/utilities/utils/</loc>
          <lastmod>2022-01-18</lastmod>
          <changefreq>daily</changefreq>
