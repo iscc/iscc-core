@@ -11,12 +11,11 @@ different **ISCC-CODE** or from an identical **ISCC-CODE** registered by a diffe
 signatory.
 """
 from iscc_core import simhash, codec
-from iscc_core.schema import ISCC
 import uvarint
 
 
 def gen_iscc_id(chain, iscc_code, uc=0):
-    # type: (int, str, int) -> ISCC
+    # type: (int, str, int) -> dict
     """
     Generate  ISCC-ID from ISCC-CODE with the latest standard algorithm.
 
@@ -24,13 +23,13 @@ def gen_iscc_id(chain, iscc_code, uc=0):
     :param str iscc_code: The ISCC-CODE from which to mint the ISCC-ID.
     :param int uc: Uniqueness counter of ISCC-ID.
     :return: ISCC object with an ISCC-ID
-    :rtype: ISCC
+    :rtype: dict
     """
     return gen_iscc_id_v0(chain, iscc_code, uc)
 
 
 def gen_iscc_id_v0(chain_id, iscc_code, uc=0):
-    # type: (int, str, int) -> ISCC
+    # type: (int, str, int) -> dict
     """
     Generate an ISCC-ID from an ISCC-CODE with uniqueness counter 'uc' with
     algorithm v0.
@@ -39,7 +38,7 @@ def gen_iscc_id_v0(chain_id, iscc_code, uc=0):
     :param str iscc_code: The ISCC-CODE from which to mint the ISCC-ID.
     :param int uc: Uniqueness counter for ISCC-ID.
     :return: ISCC object with an ISCC-ID
-    :rtype: ISCC
+    :rtype: dict
     """
     assert chain_id in list(codec.ST_ID), "Unregistered Chain-ID {}".format(chain_id)
     iscc_id_digest = soft_hash_iscc_id_v0(iscc_code, uc)
@@ -52,7 +51,7 @@ def gen_iscc_id_v0(chain_id, iscc_code, uc=0):
         digest=iscc_id_digest,
     )
     iscc = "ISCC:" + iscc_id
-    return ISCC(iscc=iscc)
+    return dict(iscc=iscc)
 
 
 def soft_hash_iscc_id_v0(iscc_code, uc=0):
