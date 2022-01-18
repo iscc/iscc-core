@@ -380,8 +380,6 @@
         64
       ],
       "outputs": {
-        "@context": "https://purl.org/iscc/context/0.2.0.json",
-        "type": "https://purl.org/iscc/schema/0.2.0.json",
         "iscc": "ISCC:EIAQAAAAAAAAAAAA"
       }
     },
@@ -391,8 +389,6 @@
         128
       ],
       "outputs": {
-        "@context": "https://purl.org/iscc/context/0.2.0.json",
-        "type": "https://purl.org/iscc/schema/0.2.0.json",
         "iscc": "ISCC:EIBQAAAAAEAAAAABAAAAAAAAAAAAA"
       }
     },
@@ -402,8 +398,6 @@
         256
       ],
       "outputs": {
-        "@context": "https://purl.org/iscc/context/0.2.0.json",
-        "type": "https://purl.org/iscc/schema/0.2.0.json",
         "iscc": "ISCC:EIDQAAAAAMAAAAABAAAAAAQAAAAAAAAAAAAAAAAAAEAAAAACAAAAAAA"
       }
     },
@@ -413,8 +407,6 @@
         256
       ],
       "outputs": {
-        "@context": "https://purl.org/iscc/context/0.2.0.json",
-        "type": "https://purl.org/iscc/schema/0.2.0.json",
         "iscc": "ISCC:EIDQAAAAAH777777AAAAAAAAAAAACAAAAAAP777774AAAAAAAAAAAAI"
       }
     },
@@ -424,8 +416,6 @@
         256
       ],
       "outputs": {
-        "@context": "https://purl.org/iscc/context/0.2.0.json",
-        "type": "https://purl.org/iscc/schema/0.2.0.json",
         "iscc": "ISCC:EIDWUJFCEZZOJYVDHJHIRB3KQSQCM2REUITDUTVAQNRGJIRENCCCULY"
       }
     }

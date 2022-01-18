@@ -42,45 +42,39 @@ def test_soft_hash_audio_v0_005_sample():
 
 
 def test_gen_audio_code_v0_default():
-    assert (
-        iscc_core.code_content_audio.gen_audio_code_v0(CHROMA_VECTOR).iscc
-        == "ISCC:EIAWUJFCEZZOJYVD"
-    )
+    assert iscc_core.code_content_audio.gen_audio_code_v0(CHROMA_VECTOR) == {
+        "iscc": "ISCC:EIAWUJFCEZZOJYVD"
+    }
 
 
 def test_gen_audio_code_v0_32bits():
-    assert (
-        iscc_core.code_content_audio.gen_audio_code_v0(CHROMA_VECTOR, bits=32).iscc
-        == "ISCC:EIAGUJFCEY"
-    )
+    assert iscc_core.code_content_audio.gen_audio_code_v0(CHROMA_VECTOR, bits=32) == {
+        "iscc": "ISCC:EIAGUJFCEY"
+    }
 
 
 def test_gen_audio_code_v0_64bits():
-    assert (
-        iscc_core.code_content_audio.gen_audio_code_v0(CHROMA_VECTOR, bits=64).iscc
-        == "ISCC:EIAWUJFCEZZOJYVD"
-    )
+    assert iscc_core.code_content_audio.gen_audio_code_v0(CHROMA_VECTOR, bits=64) == {
+        "iscc": "ISCC:EIAWUJFCEZZOJYVD"
+    }
 
 
 def test_gen_audio_code_v0_128bits():
-    assert (
-        iscc_core.code_content_audio.gen_audio_code_v0(CHROMA_VECTOR, bits=128).iscc
-        == "ISCC:EIBWUJFCEZZOJYVDHJHIRB3KQSQCM"
-    )
+    assert iscc_core.code_content_audio.gen_audio_code_v0(CHROMA_VECTOR, bits=128) == {
+        "iscc": "ISCC:EIBWUJFCEZZOJYVDHJHIRB3KQSQCM"
+    }
 
 
 def test_gen_audio_code_v0_256bits():
-    assert (
-        iscc_core.code_content_audio.gen_audio_code_v0(CHROMA_VECTOR, bits=256).iscc
-        == "ISCC:EIDWUJFCEZZOJYVDHJHIRB3KQSQCM2REUITDUTVAQNRGJIRENCCCULY"
-    )
+    assert iscc_core.code_content_audio.gen_audio_code_v0(CHROMA_VECTOR, bits=256) == {
+        "iscc": "ISCC:EIDWUJFCEZZOJYVDHJHIRB3KQSQCM2REUITDUTVAQNRGJIRENCCCULY"
+    }
 
 
 def test_gen_audio_code():
-    assert (
-        iscc_core.code_content_audio.gen_audio_code(CHROMA_VECTOR, bits=256).iscc
-        == "ISCC:EIDWUJFCEZZOJYVDHJHIRB3KQSQCM2REUITDUTVAQNRGJIRENCCCULY"
-    )
+    assert iscc_core.code_content_audio.gen_audio_code(CHROMA_VECTOR, bits=256) == {
+        "iscc": "ISCC:EIDWUJFCEZZOJYVDHJHIRB3KQSQCM2REUITDUTVAQNRGJIRENCCCULY"
+    }
 
 
 CHROMA_VECTOR = [

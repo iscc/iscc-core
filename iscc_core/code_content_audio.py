@@ -13,34 +13,32 @@ using the following command line parameters:
 """
 from typing import Iterable
 from more_itertools import divide
-
-from iscc_core.schema import ISCC
 from iscc_core.simhash import similarity_hash
 from iscc_core import codec, core_opts
 
 
 def gen_audio_code(cv, bits=core_opts.audio_bits):
-    # type: (Iterable[int], int) -> ISCC
+    # type: (Iterable[int], int) -> dict
     """
     Create an ISCC Content-Code Audio with the latest standard algorithm.
 
     :param Iterable[int] cv: Chromaprint vector
     :param int bits: Bit-length resulting Content-Code Audio (multiple of 64)
     :return: ISCC object with Content-Code Audio
-    :rtype: ISCC
+    :rtype: dict
     """
     return gen_audio_code_v0(cv, bits)
 
 
 def gen_audio_code_v0(cv, bits=core_opts.audio_bits):
-    # type: (Iterable[int], int) -> ISCC
+    # type: (Iterable[int], int) -> dict
     """
     Create an ISCC Content-Code Audio with algorithm v0.
 
     :param Iterable[int] cv: Chromaprint vector
     :param int bits: Bit-length resulting Content-Code Audio (multiple of 64)
     :return: ISCC object with Content-Code Audio
-    :rtype: ISCC
+    :rtype: dict
     """
     digest = soft_hash_audio_v0(cv)
     audio_code = codec.encode_component(
@@ -51,7 +49,7 @@ def gen_audio_code_v0(cv, bits=core_opts.audio_bits):
         digest=digest,
     )
     iscc = "ISCC:" + audio_code
-    return ISCC(iscc=iscc)
+    return {"iscc": iscc}
 
 
 def soft_hash_audio_v0(cv):
