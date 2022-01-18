@@ -41,17 +41,17 @@ def test_hash_text_c():
 
 def test_gen_text_code_a_default():
     a = iscc_core.code_content_text.gen_text_code_v0(TEXT_A)
-    assert a.dict_raw() == {"iscc": "ISCC:EAAZHFKU6PNI7UVW", "characters": 249}
+    assert a == {"iscc": "ISCC:EAAZHFKU6PNI7UVW", "characters": 249}
 
 
 def test_gen_text_code_a_32bits():
     a = iscc_core.code_content_text.gen_text_code_v0(TEXT_A, bits=32)
-    assert a.dict_raw() == {"iscc": "ISCC:EAAJHFKU6M", "characters": 249}
+    assert a == {"iscc": "ISCC:EAAJHFKU6M", "characters": 249}
 
 
 def test_code_text_b_128_bits():
     b = iscc_core.code_content_text.gen_text_code_v0(TEXT_B, 128)
-    assert b.dict_raw() == {
+    assert b == {
         "iscc": "ISCC:EABZHFKU6PNIXUVWYEEIQLOYHILX6",
         "characters": 247,
     }
@@ -59,7 +59,7 @@ def test_code_text_b_128_bits():
 
 def test_code_text_c_256_bits():
     c = iscc_core.code_content_text.gen_text_code_v0(TEXT_C, 256)
-    assert c.dict_raw() == {
+    assert c == {
         "iscc": "ISCC:EADQE77SQ5NHKYPCDXT3E2NTB2EGV7VSKEUJDNXG2MICLCFZOPSDI4I",
         "characters": 108,
     }
@@ -83,12 +83,7 @@ def test_code_text_bytes_raises():
 
 def test_code_text_empty():
     r128 = iscc_core.code_content_text.gen_text_code("", bits=128)
-    assert r128.dict_raw() == {
+    assert r128 == {
         "iscc": "ISCC:EABSL4F2WZY7KBXBYUZPREWZ26IXU",
         "characters": 0,
     }
-
-
-# def test_code_text_non_utf8_raises():
-#     with pytest.raises(UnicodeDecodeError):
-#         iscc_core.code_content_text.gen_text_code(b"\x80", bits=64)

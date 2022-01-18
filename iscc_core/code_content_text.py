@@ -22,7 +22,6 @@ import unicodedata
 from typing import Union
 import xxhash
 from iscc_core.minhash import minhash_256
-from iscc_core.schema import ISCC
 from iscc_core.utils import sliding_window
 from iscc_core import codec, core_opts
 
@@ -31,7 +30,7 @@ Text = Union[str, bytes]
 
 
 def gen_text_code(text, bits=core_opts.text_bits):
-    # type: (Text, int) -> ISCC
+    # type: (Text, int) -> dict
     """
     Create an ISCC Text-Code with the latest standard algorithm.
 
@@ -44,7 +43,7 @@ def gen_text_code(text, bits=core_opts.text_bits):
 
 
 def gen_text_code_v0(text, bits=core_opts.text_bits):
-    # type: (Text, int) -> ISCC
+    # type: (Text, int) -> dict
     """
     Create an ISCC Text-Code with algorithm v0.
 
@@ -72,7 +71,7 @@ def gen_text_code_v0(text, bits=core_opts.text_bits):
 
     iscc = "ISCC:" + text_code
 
-    return ISCC(iscc=iscc, characters=characters)
+    return dict(iscc=iscc, characters=characters)
 
 
 def collapse_text(text):
