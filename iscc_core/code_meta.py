@@ -50,7 +50,6 @@ from more_itertools import interleave, sliced
 from iscc_core.code_instance import InstanceHasherV0
 from iscc_core.code_content_text import collapse_text
 from iscc_core.codec import MT, ST, VS, encode_base64, encode_component, Properties
-from iscc_core.schema import ISCC
 from iscc_core.utils import sliding_window
 from iscc_core.simhash import similarity_hash
 from iscc_core import core_opts
@@ -59,21 +58,21 @@ from typing import Optional, Union
 
 
 def gen_meta_code(name, description=None, properties=None, bits=core_opts.meta_bits):
-    # type: (str, Optional[str], Optional[Properties], int) -> ISCC
+    # type: (str, Optional[str], Optional[Properties], int) -> dict
     """
     Create an ISCC Meta-Code using the latest standard algorithm.
 
     :param str name: Name or title of the work manifested by the digital asset
     :param Union[str,bytes,None] description: Optional description for disambiguation
     :param int bits: Bit-length of resulting Meta-Code (multiple of 64)
-    :return: ISCC object with Meta-Code and properties name, description, metahash
-    :rtype: ISCC
+    :return: ISCC object with Meta-Code and properties name, description, properties, metahash
+    :rtype: dict
     """
     return gen_meta_code_v0(name, description=description, properties=properties, bits=bits)
 
 
 def gen_meta_code_v0(name, description=None, properties=None, bits=core_opts.meta_bits):
-    # type: (str, Optional[str], Optional[Properties], int) -> ISCC
+    # type: (str, Optional[str], Optional[Properties], int) -> dict
     """
     Create an ISCC Meta-Code with the algorithm version 0.
 
@@ -92,7 +91,7 @@ def gen_meta_code_v0(name, description=None, properties=None, bits=core_opts.met
         Either JSON serializable structured data or a binary blob.
     :param int bits: Bit-length of resulting Meta-Code (multiple of 64)
     :return: ISCC object with possible fields: iscc, name, description, properties, metahash
-    :rtype: ISCC
+    :rtype: dict
     """
 
     # 1. Normalize `name`
@@ -145,7 +144,7 @@ def gen_meta_code_v0(name, description=None, properties=None, bits=core_opts.met
 
     result["metahash"] = metahash
 
-    return ISCC(**result)
+    return result
 
 
 def soft_hash_meta_v0(name, extra=None):
