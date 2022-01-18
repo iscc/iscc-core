@@ -17,32 +17,31 @@ The following combinations of components are possible:
 """
 from typing import Sequence
 from operator import itemgetter
-from iscc_core.schema import ISCC
 import iscc_core as ic
 
 
 def gen_iscc_code(codes):
-    # type: (Sequence[str]) -> ISCC
+    # type: (Sequence[str]) -> dict
     """
     Combine multiple ISCC components to a composite ISCC-CODE with a common header using
     the latest standard algorithm.
 
     :param Sequence[str] codes: A valid sequence of singluar ISCC codes.
     :return: An ISCC object with ISCC-CODE
-    :rtype: ISCC
+    :rtype: dict
     """
     return gen_iscc_code_v0(codes)
 
 
 def gen_iscc_code_v0(codes):
-    # type: (Sequence[str]) -> ISCC
+    # type: (Sequence[str]) -> dict
     """
     Combine multiple ISCC-UNITS to an ISCC-CODE with a common header using
     algorithm v0.
 
     :param Sequence[str] codes: A valid sequence of singluar ISCC-UNITS.
     :return: An ISCC object with ISCC-CODE
-    :rtype: ISCC
+    :rtype: dict
     """
 
     codes = [ic.clean(code) for code in codes]
@@ -75,4 +74,4 @@ def gen_iscc_code_v0(codes):
 
     code = ic.encode_base32(header + digest)
     iscc = "ISCC:" + code
-    return ISCC(iscc=iscc)
+    return dict(iscc=iscc)
