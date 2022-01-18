@@ -1,4 +1,6 @@
 # -*- coding: utf-8 -*-
+from textwrap import dedent
+
 import pytest
 
 import iscc_core
@@ -128,3 +130,52 @@ def test_trim_text():
     trimmed = iscc_core.code_meta.trim_text(mixed, 128)
     assert 85 == len(trimmed)
     assert 128 == len(trimmed.encode("utf-8"))
+
+
+def test_clean_text_lead_trail():
+    assert iscc_core.code_meta.clean_text(" Hello World! ") == "Hello World!"
+
+
+def test_clean_text_markdowsn():
+    text = """
+
+# Document
+
+*Subtitle*
+
+
+Some Text **text**! Also Iñtërnâtiôn\nàlizætiøn☃💩.
+
+## Subheader
+
+- Maybe even a list
+- Item 2
+    - Nested
+- Unnested
+
+More Text
+"""
+
+    assert iscc_core.code_meta.clean_text(text) == (
+        "# Document\n"
+        "\n"
+        "*Subtitle*\n"
+        "\n"
+        "Some Text **text**! Also Iñtërnâtiôn\n"
+        "àlizætiøn☃💩.\n"
+        "\n"
+        "## Subheader\n"
+        "\n"
+        "- Maybe even a list\n"
+        "- Item 2\n"
+        "    - Nested\n"
+        "- Unnested\n"
+        "\n"
+        "More Text"
+    )
+
+
+def test_remove_newlines():
+    txt = "   Hello\nWorld!  - How Are you   "
+    exp = "Hello World! - How Are you"
+    assert iscc_core.code_meta.remove_newlines(txt) == exp

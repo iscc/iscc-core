@@ -44,15 +44,45 @@ class CoreOptions(BaseSettings):
         description="Unicode categories to remove during text normalization",
     )
 
-    text_whitespace: frozenset = Field(
+    text_newlines: frozenset = Field(
         frozenset(
             {
-                "\u0009",  # Horizontal Tab (TAB)
-                "\u000A",  # Linefeed (LF)
-                "\u000D",  # Carriage Return (CR)
+                "\u000a",  # Line Feed
+                "\u000b",  # Vertical Tab
+                "\u000c",  # Form Feed
+                "\u000d",  # Carriage Return
+                "\u0085",  # Next Line
+                "\u2028",  # Line Separator
+                "\u2029",  # Paragraph Separator
             }
         ),
-        description="Common control characters considered whitespace",
+        description="Characters regarded as newline characters for normalization purposes",
+    )
+
+    text_spaces: frozenset = Field(
+        frozenset(
+            {
+                "\u0009",  # Character Tabulation
+                "\u0020",  # Space
+                "\u00A0",  # No-Break Space
+                "\u1680",  # Ogham Space Mark
+                "\u2000",  # EN Quad
+                "\u2001",  # EM Quad
+                "\u2002",  # EN Space
+                "\u2003",  # EM Space
+                "\u2004",  # Three-per-EM Space
+                "\u2005",  # Four-per-EM Space
+                "\u2006",  # Six-per-EM Space
+                "\u2007",  # Figure Space
+                "\u2008",  # Punctuation Space
+                "\u2009",  # Thin Space
+                "\u200A",  # Hair Space
+                "\u202F",  # Narrow No-Break Space
+                "\u205F",  # Medium Mathematical Space
+                "\u3000",  # Ideographic Space
+            }
+        ),
+        description="Characters regarded as space characters for normalization purposes",
     )
 
     image_bits: int = Field(

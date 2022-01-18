@@ -11,6 +11,7 @@ The metadata supplied to the algorithm is called *seed metadata*.
 contains descriptive, industry-sector or use-case specific metadata in textual or
 binary form (e.g. file headers). We do not prescribe a particular schema.
 """
+import unicodedata
 from more_itertools import interleave, sliced
 from iscc_core.code_content_text import collapse_text
 from iscc_core.codec import MT, ST, VS, encode_base64, encode_component
@@ -180,3 +181,54 @@ def trim_text(text, nbytes):
     # type: (str, int) -> str
     """Trim text such that its utf-8 encoded size does not exceed `nbytes`."""
     return text.encode("utf-8")[:nbytes].decode("utf-8", "ignore").strip()
+
+
+def remove_newlines(text):
+    # type: (str) -> str
+    """
+    Remove newlines.
+
+    The `name` field serves as a displayable title. We remove newlines and leading and trailing
+    whitespace. We also collapse consecutive spaces to single spaces.
+
+    :param text: Text for newline removal
+    :return: Single line of text
+    :rtype: str
+    """
+    return " ".join(text.split())
+
+
+def clean_text(text):
+    # type: (str) -> str
+    """
+    Clean text for display.
+
+    - Normalize with NFKC normalization.
+    - Remove Control Characters (except newlines)
+    - Reduce multiple consecutive newlines to a maximum of two newlines
+    - Strip leading and trailing whitespace
+    """
+
+    # Unicode normalize
+    text = unicodedata.normalize("NFKC", text)
+
+    # Remove control characters
+    text = "".join(
+        ch for ch in text if unicodedata.category(ch)[0] != "C" or ch in core_opts.text_newlines
+    )
+
+    # Collapse more than two consecutive newlines
+    chars = []
+    newline_count = 0
+    for c in text:
+        if c in core_opts.text_newlines:
+            if newline_count < 2:
+                chars.append("\n")
+                newline_count += 1
+            continue
+        else:
+            newline_count = 0
+        chars.append(c)
+    text = "".join(chars)
+
+    return text.strip()
