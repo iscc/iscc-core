@@ -1,5 +1,7 @@
 # -*- coding: utf-8 -*-
 import pytest
+from iscc_schema import ISCC
+
 import iscc_core
 
 
@@ -44,3 +46,11 @@ def test_gen_mixed_code_codes_to_short_raises():
     codes = tc_long, tc_short
     with pytest.raises(AssertionError):
         iscc_core.gen_mixed_code(codes=codes, bits=128)
+
+
+def test_gen_mixed_code_schema_conformance():
+    tc_long = iscc_core.gen_text_code_v0("Hello World", bits=256)["iscc"]
+    tc_short = iscc_core.gen_text_code_v0("Short Text-Code", bits=64)["iscc"]
+    codes = tc_long, tc_short
+    iscc_obj = ISCC(**iscc_core.gen_mixed_code_v0(codes=codes))
+    assert iscc_obj.iscc == "ISCC:EQASBPL7XH763357"

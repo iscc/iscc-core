@@ -1,5 +1,7 @@
 # -*- coding: utf-8 -*-
 import pytest
+from iscc_schema import ISCC
+
 import iscc_core
 
 
@@ -94,6 +96,11 @@ def test_dct_ones():
 
 def test_dct_range():
     assert iscc_core.code_content_image.dct(range(64))[0] == 2016
+
+
+def test_gen_image_code_schema_conformance():
+    iscc_obj = ISCC(**iscc_core.gen_image_code_v0(IMG_SAMPLE_PIXELS))
+    assert iscc_obj.iscc == "ISCC:EEA4GQZQTY6J5DTH"
 
 
 IMG_WHITE_PIXELS = [255] * 1024

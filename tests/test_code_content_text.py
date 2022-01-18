@@ -1,5 +1,7 @@
 # -*- coding: utf-8 -*-
 import pytest
+from iscc_schema import ISCC
+
 import iscc_core
 
 TEXT_A = """
@@ -87,3 +89,8 @@ def test_code_text_empty():
         "iscc": "ISCC:EABSL4F2WZY7KBXBYUZPREWZ26IXU",
         "characters": 0,
     }
+
+
+def test_gen_text_code_schema_conformance():
+    iscc_obj = ISCC(**iscc_core.gen_text_code_v0("Hello World"))
+    assert iscc_obj.iscc == "ISCC:EAASKDNZNYGUUF5A"

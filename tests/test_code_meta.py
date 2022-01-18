@@ -2,6 +2,7 @@
 from textwrap import dedent
 
 import pytest
+from iscc_schema import ISCC
 
 import iscc_core
 
@@ -12,6 +13,7 @@ def test_gen_meta_code_title_none():
         "iscc": "ISCC:AAA26E2JXH27TING",
         "metahash": "bdyqk6e2jxh27tingubae32rw3teutg6lexe23qisw7gjve6k4qpteyq",
     }
+    assert ISCC(**m).iscc == "ISCC:AAA26E2JXH27TING"
 
 
 def test_gen_meta_code_title_empty_str():
@@ -20,6 +22,7 @@ def test_gen_meta_code_title_empty_str():
         "iscc": "ISCC:AAA26E2JXH27TING",
         "metahash": "bdyqk6e2jxh27tingubae32rw3teutg6lexe23qisw7gjve6k4qpteyq",
     }
+    assert ISCC(**m).iscc == "ISCC:AAA26E2JXH27TING"
 
 
 def test_gen_meta_code_title_with_extra():
@@ -35,6 +38,7 @@ def test_gen_meta_code_title_with_extra():
     assert m == empty
     m = iscc_core.code_meta.gen_meta_code("", "")
     assert m == empty
+    assert ISCC(**m).iscc == "ISCC:AAA26E2JXH27TING"
 
 
 def test_gen_meta_code_description():
@@ -45,6 +49,7 @@ def test_gen_meta_code_description():
         "description": "world",
         "metahash": "bdyqnosmb56tqudeibogyygmf2b25xs7wpg4zux4zcts2v6llqmnj4ja",
     }
+    assert ISCC(**m).iscc == "ISCC:AAAWKLHFXNSF7NNE"
 
 
 def test_gen_meta_code_properties_dict():
@@ -56,6 +61,7 @@ def test_gen_meta_code_properties_dict():
         "name": "hello",
         "properties": {"hello": "metadata"},
     }
+    assert ISCC(**m).iscc == "ISCC:AAAWKLHFXMFCA2OC"
 
 
 def test_gen_meta_code_properties_bytes():
@@ -63,8 +69,9 @@ def test_gen_meta_code_properties_bytes():
     assert m == {
         "iscc": "ISCC:AAA26E2JXGPXE7WZ",
         "metahash": "bdyqnosmb56tqudeibogyygmf2b25xs7wpg4zux4zcts2v6llqmnj4ja",
-        "properties": "aGVsbG8gd29ybGQ",
+        "properties": "aGVsbG8gd29ybGQ=",
     }
+    assert ISCC(**m).iscc == "ISCC:AAA26E2JXGPXE7WZ"
 
 
 def test_gen_meta_code_title_only():
@@ -74,6 +81,7 @@ def test_gen_meta_code_title_only():
         "name": "Hello World",
         "metahash": "bdyqed6bziei6w4j2eilfyrwjbk4pb7mtthesakh5nuuisrfsh72365q",
     }
+    assert ISCC(**m).iscc == "ISCC:AAAWN77F727NXSUS"
 
 
 def test_gen_meta_code_v0_raises():
@@ -149,6 +157,8 @@ def test_gen_meta_code_v0_interleaved():
         description="hello",
         metahash="bdyqovdywhwzynauslzcjdrpfrvf3gudo7dau5n4kq3uqrrlcjjtsady",
     )
+    assert ISCC(**ma).iscc == "ISCC:AAA26E2JXH27TING"
+    assert ISCC(**mb).iscc == "ISCC:AAA26E2JXFSSZZN3"
 
 
 def test_gen_meta_code_v0_properties_raises():
