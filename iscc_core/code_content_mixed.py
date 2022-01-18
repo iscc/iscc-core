@@ -16,12 +16,11 @@ from typing import Iterable, Sequence
 
 import iscc_core
 from iscc_core import codec, core_opts
-from iscc_core.schema import ISCC
 from iscc_core.simhash import similarity_hash
 
 
 def gen_mixed_code(codes, bits=core_opts.mixed_bits):
-    # type: (Sequence[str], int) -> ISCC
+    # type: (Sequence[str], int) -> dict
     """
     Create an ISCC Content-Code Mixed with the latest standard algorithm.
 
@@ -34,7 +33,7 @@ def gen_mixed_code(codes, bits=core_opts.mixed_bits):
 
 
 def gen_mixed_code_v0(codes, bits=core_opts.mixed_bits):
-    # type: (Sequence[str], int) -> ISCC
+    # type: (Sequence[str], int) -> dict
     """
     Create an ISCC Content-Code-Mixed with algorithm v0.
 
@@ -56,7 +55,7 @@ def gen_mixed_code_v0(codes, bits=core_opts.mixed_bits):
         digest=digest,
     )
     iscc = "ISCC:" + mixed_code
-    return ISCC(iscc=iscc, parts=codes)
+    return dict(iscc=iscc, parts=list(codes))
 
 
 def soft_hash_codes_v0(cc_digests, bits=core_opts.mixed_bits):

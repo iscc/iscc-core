@@ -456,8 +456,6 @@
         64
       ],
       "outputs": {
-        "@context": "https://purl.org/iscc/context/0.2.0.json",
-        "type": "https://purl.org/iscc/schema/0.2.0.json",
         "iscc": "ISCC:EQASNZJ36ZT33AL7",
         "parts": ["EUA6GIKXN42IQV3S", "EIAUKMOUIOYZCKA5", "EQA6JK5IEKO6E732", "EIAU2XRWOT4AKMTZ"]
       }
@@ -468,8 +466,6 @@
         128
       ],
       "outputs": {
-        "@context": "https://purl.org/iscc/context/0.2.0.json",
-        "type": "https://purl.org/iscc/schema/0.2.0.json",
         "iscc": "ISCC:EQBSBXXOMP6SZ2VX6DXG332JFUX76",
         "parts": ["EQCR2VTB6AUI2J6A5AOYMRA2BNPNTBQS2GGNFQ2DUU", "EAC7ULQD5WEKFMNQUZWWYK5NHTATG4OV62AMIUWLYI", "EACQRBYECQSWFDC5JYDLCCJNF72Q4IYOXV3POUHRNI", "EEC453X23MWGUEZQC3SG7UJMY65HQYFQDJMO4CAL5A"]
       }
