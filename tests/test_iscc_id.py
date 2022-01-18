@@ -43,7 +43,7 @@ def test_gen_iscc_id_v0_instance_only():
 def test_gen_iscc_id_v0_data_instance():
     ic = iscc_core.gen_instance_code_v0(io.BytesIO(b"hello world"))
     dc = iscc_core.gen_data_code_v0(io.BytesIO(b"hello world"))
-    iscc_sum = iscc_core.gen_iscc_code_v0([ic.iscc, dc.iscc])
+    iscc_sum = iscc_core.gen_iscc_code_v0([ic.iscc, dc["iscc"]])
     iscc_id = iscc_core.gen_iscc_id(0, iscc_sum.iscc)
     assert iscc_id.iscc == "ISCC:MAADB7WD7TC5XELQ"
     assert iscc_id.code_obj.explain == "ID-PRIVATE-V0-64-30fec3fcc5db9170"

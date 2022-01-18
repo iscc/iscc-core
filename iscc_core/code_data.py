@@ -5,32 +5,31 @@ from iscc_core.cdc import data_chunks
 from iscc_core.minhash import minhash_256
 from iscc_core import codec, core_opts
 from iscc_core.codec import Data, Stream
-from iscc_core.schema import ISCC
 import xxhash
 
 
 def gen_data_code(stream, bits=core_opts.data_bits):
-    # type: (Stream, int) -> ISCC
+    # type: (Stream, int) -> dict
     """
     Create a similarity preserving ISCC Data-Code with the latest standard algorithm.
 
     :param Stream stream: Input data stream.
     :param int bits: Bit-length of ISCC Data-Code (default 64).
     :return: ISCC Data-Code
-    :rtype: ISCC
+    :rtype: dict
     """
     return gen_data_code_v0(stream, bits)
 
 
 def gen_data_code_v0(stream, bits=core_opts.data_bits):
-    # type: (Stream, int) -> ISCC
+    # type: (Stream, int) -> dict
     """
     Create an ISCC Data-Code with algorithm v0.
 
     :param Stream stream: Input data stream.
     :param int bits: Bit-length of ISCC Data-Code (default 64).
     :return: ISCC object with Data-Code
-    :rtype: ISCC
+    :rtype: dict
     """
 
     hasher = DataHasherV0()
@@ -42,7 +41,7 @@ def gen_data_code_v0(stream, bits=core_opts.data_bits):
 
     data_code = hasher.code(bits=bits)
     iscc = "ISCC:" + data_code
-    return ISCC(iscc=iscc)
+    return dict(iscc=iscc)
 
 
 def soft_hash_data_v0(stream):
