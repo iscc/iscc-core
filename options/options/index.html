@@ -845,36 +845,29 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#iscc_core.options.CoreOptions.meta_trim_title" class="md-nav__link">
-    meta_trim_title
+  <a href="#iscc_core.options.CoreOptions.meta_trim_name" class="md-nav__link">
+    meta_trim_name
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#iscc_core.options.CoreOptions.meta_trim_extra" class="md-nav__link">
-    meta_trim_extra
+  <a href="#iscc_core.options.CoreOptions.meta_trim_description" class="md-nav__link">
+    meta_trim_description
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#iscc_core.options.CoreOptions.meta_ngram_size_title" class="md-nav__link">
-    meta_ngram_size_title
+  <a href="#iscc_core.options.CoreOptions.meta_ngram_size_text" class="md-nav__link">
+    meta_ngram_size_text
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#iscc_core.options.CoreOptions.meta_ngram_size_extra_text" class="md-nav__link">
-    meta_ngram_size_extra_text
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#iscc_core.options.CoreOptions.meta_ngram_size_extra_binary" class="md-nav__link">
-    meta_ngram_size_extra_binary
+  <a href="#iscc_core.options.CoreOptions.meta_ngram_size_bytes" class="md-nav__link">
+    meta_ngram_size_bytes
   </a>
   
 </li>
@@ -901,8 +894,8 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#iscc_core.options.CoreOptions.text_whitespace" class="md-nav__link">
-    text_whitespace
+  <a href="#iscc_core.options.CoreOptions.text_newlines" class="md-nav__link">
+    text_newlines
   </a>
   
 </li>
@@ -1119,18 +1112,18 @@ CoreOptions        </code>
 
 
 
-<h3 id="iscc_core.options.CoreOptions.meta_trim_title" class="doc doc-heading">
-<code class="highlight language-python"><span class="n">meta_trim_title</span><span class="p">:</span> <span class="nb">int</span></code>
+<h3 id="iscc_core.options.CoreOptions.meta_trim_name" class="doc doc-heading">
+<code class="highlight language-python"><span class="n">meta_trim_name</span><span class="p">:</span> <span class="nb">int</span></code>
 
   <span class="doc doc-properties">
       <small class="doc doc-property doc-property-pydantic-field"><code>pydantic-field</code></small>
   </span>
 
-<a href="#iscc_core.options.CoreOptions.meta_trim_title" class="headerlink" title="Permanent link">#</a></h3>
+<a href="#iscc_core.options.CoreOptions.meta_trim_name" class="headerlink" title="Permanent link">#</a></h3>
 
     <div class="doc doc-contents ">
 
-      <p>Trim title length to this mumber of bytes</p>
+      <p>Trim <code>name</code> to this mumber of bytes</p>
     </div>
 
   </div>
@@ -1143,18 +1136,18 @@ CoreOptions        </code>
 
 
 
-<h3 id="iscc_core.options.CoreOptions.meta_trim_extra" class="doc doc-heading">
-<code class="highlight language-python"><span class="n">meta_trim_extra</span><span class="p">:</span> <span class="nb">int</span></code>
+<h3 id="iscc_core.options.CoreOptions.meta_trim_description" class="doc doc-heading">
+<code class="highlight language-python"><span class="n">meta_trim_description</span><span class="p">:</span> <span class="nb">int</span></code>
 
   <span class="doc doc-properties">
       <small class="doc doc-property doc-property-pydantic-field"><code>pydantic-field</code></small>
   </span>
 
-<a href="#iscc_core.options.CoreOptions.meta_trim_extra" class="headerlink" title="Permanent link">#</a></h3>
+<a href="#iscc_core.options.CoreOptions.meta_trim_description" class="headerlink" title="Permanent link">#</a></h3>
 
     <div class="doc doc-contents ">
 
-      <p>Trim extra to this number of bytes</p>
+      <p>Trim <code>description</code> to this number of bytes</p>
     </div>
 
   </div>
@@ -1167,18 +1160,18 @@ CoreOptions        </code>
 
 
 
-<h3 id="iscc_core.options.CoreOptions.meta_ngram_size_title" class="doc doc-heading">
-<code class="highlight language-python"><span class="n">meta_ngram_size_title</span><span class="p">:</span> <span class="nb">int</span></code>
+<h3 id="iscc_core.options.CoreOptions.meta_ngram_size_text" class="doc doc-heading">
+<code class="highlight language-python"><span class="n">meta_ngram_size_text</span><span class="p">:</span> <span class="nb">int</span></code>
 
   <span class="doc doc-properties">
       <small class="doc doc-property doc-property-pydantic-field"><code>pydantic-field</code></small>
   </span>
 
-<a href="#iscc_core.options.CoreOptions.meta_ngram_size_title" class="headerlink" title="Permanent link">#</a></h3>
+<a href="#iscc_core.options.CoreOptions.meta_ngram_size_text" class="headerlink" title="Permanent link">#</a></h3>
 
     <div class="doc doc-contents ">
 
-      <p>Sliding window width (characters) for title metadata</p>
+      <p>Sliding window width (characters) for metadata</p>
     </div>
 
   </div>
@@ -1191,42 +1184,18 @@ CoreOptions        </code>
 
 
 
-<h3 id="iscc_core.options.CoreOptions.meta_ngram_size_extra_text" class="doc doc-heading">
-<code class="highlight language-python"><span class="n">meta_ngram_size_extra_text</span><span class="p">:</span> <span class="nb">int</span></code>
+<h3 id="iscc_core.options.CoreOptions.meta_ngram_size_bytes" class="doc doc-heading">
+<code class="highlight language-python"><span class="n">meta_ngram_size_bytes</span><span class="p">:</span> <span class="nb">int</span></code>
 
   <span class="doc doc-properties">
       <small class="doc doc-property doc-property-pydantic-field"><code>pydantic-field</code></small>
   </span>
 
-<a href="#iscc_core.options.CoreOptions.meta_ngram_size_extra_text" class="headerlink" title="Permanent link">#</a></h3>
+<a href="#iscc_core.options.CoreOptions.meta_ngram_size_bytes" class="headerlink" title="Permanent link">#</a></h3>
 
     <div class="doc doc-contents ">
 
-      <p>Sliding window width (characters) for textural extra metadata</p>
-    </div>
-
-  </div>
-
-
-
-
-
-  <div class="doc doc-object doc-attribute">
-
-
-
-<h3 id="iscc_core.options.CoreOptions.meta_ngram_size_extra_binary" class="doc doc-heading">
-<code class="highlight language-python"><span class="n">meta_ngram_size_extra_binary</span><span class="p">:</span> <span class="nb">int</span></code>
-
-  <span class="doc doc-properties">
-      <small class="doc doc-property doc-property-pydantic-field"><code>pydantic-field</code></small>
-  </span>
-
-<a href="#iscc_core.options.CoreOptions.meta_ngram_size_extra_binary" class="headerlink" title="Permanent link">#</a></h3>
-
-    <div class="doc doc-contents ">
-
-      <p>Sliding window width (bytes) for binary extra metadata</p>
+      <p>Sliding window width (bytes) for metadata</p>
     </div>
 
   </div>
@@ -1311,18 +1280,18 @@ CoreOptions        </code>
 
 
 
-<h3 id="iscc_core.options.CoreOptions.text_whitespace" class="doc doc-heading">
-<code class="highlight language-python"><span class="n">text_whitespace</span><span class="p">:</span> <span class="nb">frozenset</span></code>
+<h3 id="iscc_core.options.CoreOptions.text_newlines" class="doc doc-heading">
+<code class="highlight language-python"><span class="n">text_newlines</span><span class="p">:</span> <span class="nb">frozenset</span></code>
 
   <span class="doc doc-properties">
       <small class="doc doc-property doc-property-pydantic-field"><code>pydantic-field</code></small>
   </span>
 
-<a href="#iscc_core.options.CoreOptions.text_whitespace" class="headerlink" title="Permanent link">#</a></h3>
+<a href="#iscc_core.options.CoreOptions.text_newlines" class="headerlink" title="Permanent link">#</a></h3>
 
     <div class="doc doc-contents ">
 
-      <p>Common control characters considered whitespace</p>
+      <p>Characters regarded as newline characters for normalization purposes</p>
     </div>
 
   </div>
