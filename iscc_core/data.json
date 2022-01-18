@@ -4,231 +4,275 @@
       "inputs": [
         null,
         null,
+        null,
         64
       ],
       "outputs": {
         "@context": "https://purl.org/iscc/context/0.2.0.json",
         "type": "https://purl.org/iscc/schema/0.2.0.json",
         "iscc": "ISCC:AAA26E2JXH27TING",
-        "metahash": "af1349b9f5f9a1a6a0404dea36dcc9499bcb25c9adc112b7cc9a93cae41f3262"
+        "metahash": "bdyqk6e2jxh27tingubae32rw3teutg6lexe23qisw7gjve6k4qpteyq"
       }
     },
     "test_0001_empty_str": {
       "inputs": [
         "",
         "",
+        null,
         64
       ],
       "outputs": {
         "@context": "https://purl.org/iscc/context/0.2.0.json",
         "type": "https://purl.org/iscc/schema/0.2.0.json",
         "iscc": "ISCC:AAA26E2JXH27TING",
-        "metahash": "af1349b9f5f9a1a6a0404dea36dcc9499bcb25c9adc112b7cc9a93cae41f3262"
+        "metahash": "bdyqk6e2jxh27tingubae32rw3teutg6lexe23qisw7gjve6k4qpteyq"
       }
     },
     "test_0002_title_only": {
       "inputs": [
         "Die Unendliche Geschichte",
         "",
+        null,
         64
       ],
       "outputs": {
         "@context": "https://purl.org/iscc/context/0.2.0.json",
         "type": "https://purl.org/iscc/schema/0.2.0.json",
         "iscc": "ISCC:AAAZXZ6OU74YAZIM",
-        "name": "dieunendlichegeschichte",
-        "metahash": "3498a3407f795d537b4f83729a28e9a1ec0d25e65d68022615c0c19f5b36c671"
+        "name": "Die Unendliche Geschichte",
+        "metahash": "bdyqa3cioyazzjxtj2kdvbtgisuik7kqlibpoytx37v456gos2v3ezay"
       }
     },
     "test_0003_extra_only": {
       "inputs": [
         "",
         "von Michael Ende",
+        null,
         64
       ],
       "outputs": {
         "@context": "https://purl.org/iscc/context/0.2.0.json",
         "type": "https://purl.org/iscc/schema/0.2.0.json",
         "iscc": "ISCC:AAA26E2JXEE45RB5",
-        "description": "vonmichaelende",
-        "metahash": "924ac457a87303b3dc46427e84815134fed74a0aa2c7a46becc3ce80f5b99efb"
+        "description": "von Michael Ende",
+        "metahash": "bdyqjeswek6uhga5t3rdee7ueqfitj7wxjifkfr5enpwmhtua6w4z56y"
       }
     },
     "test_0004_title_extra": {
       "inputs": [
         "Die Unendliche Geschichte",
         "Von Michael Ende",
+        null,
         64
       ],
       "outputs": {
         "@context": "https://purl.org/iscc/context/0.2.0.json",
         "type": "https://purl.org/iscc/schema/0.2.0.json",
         "iscc": "ISCC:AAAZXZ6OU4E45RB5",
-        "name": "dieunendlichegeschichte",
-        "description": "vonmichaelende",
-        "metahash": "2f34b6a1d6cea2bcf8d918f8df7f43e579fb0b1e9101bfd36fb6c9a3cb40d5d8"
+        "name": "Die Unendliche Geschichte",
+        "description": "Von Michael Ende",
+        "metahash": "bdyqjxedxvx3cmbq2wvwceioujgekvbof4etamyzeaafztle4roxucui"
       }
     },
     "test_0005_96_bits": {
       "inputs": [
         "Die Unendliche Geschichte",
         "Von Michael Ende",
+        null,
         96
       ],
       "outputs": {
         "@context": "https://purl.org/iscc/context/0.2.0.json",
         "type": "https://purl.org/iscc/schema/0.2.0.json",
         "iscc": "ISCC:AABJXZ6OU4E45RB57GAGKDA",
-        "name": "dieunendlichegeschichte",
-        "description": "vonmichaelende",
-        "metahash": "2f34b6a1d6cea2bcf8d918f8df7f43e579fb0b1e9101bfd36fb6c9a3cb40d5d8"
+        "name": "Die Unendliche Geschichte",
+        "description": "Von Michael Ende",
+        "metahash": "bdyqjxedxvx3cmbq2wvwceioujgekvbof4etamyzeaafztle4roxucui"
       }
     },
     "test_0006_128_bits": {
       "inputs": [
         "Die Unendliche Geschichte",
         "Von Michael Ende",
+        null,
         128
       ],
       "outputs": {
         "@context": "https://purl.org/iscc/context/0.2.0.json",
         "type": "https://purl.org/iscc/schema/0.2.0.json",
         "iscc": "ISCC:AABZXZ6OU4E45RB57GAGKDGHZXV74",
-        "name": "dieunendlichegeschichte",
-        "description": "vonmichaelende",
-        "metahash": "2f34b6a1d6cea2bcf8d918f8df7f43e579fb0b1e9101bfd36fb6c9a3cb40d5d8"
+        "name": "Die Unendliche Geschichte",
+        "description": "Von Michael Ende",
+        "metahash": "bdyqjxedxvx3cmbq2wvwceioujgekvbof4etamyzeaafztle4roxucui"
       }
     },
     "test_0007_160_bits": {
       "inputs": [
         "Die Unendliche Geschichte",
         "Von Michael Ende",
+        null,
         160
       ],
       "outputs": {
         "@context": "https://purl.org/iscc/context/0.2.0.json",
         "type": "https://purl.org/iscc/schema/0.2.0.json",
         "iscc": "ISCC:AACJXZ6OU4E45RB57GAGKDGHZXV752RFK42Q",
-        "name": "dieunendlichegeschichte",
-        "description": "vonmichaelende",
-        "metahash": "2f34b6a1d6cea2bcf8d918f8df7f43e579fb0b1e9101bfd36fb6c9a3cb40d5d8"
+        "name": "Die Unendliche Geschichte",
+        "description": "Von Michael Ende",
+        "metahash": "bdyqjxedxvx3cmbq2wvwceioujgekvbof4etamyzeaafztle4roxucui"
       }
     },
     "test_0008_192_bits": {
       "inputs": [
         "Die Unendliche Geschichte",
         "Von Michael Ende",
+        null,
         192
       ],
       "outputs": {
         "@context": "https://purl.org/iscc/context/0.2.0.json",
         "type": "https://purl.org/iscc/schema/0.2.0.json",
         "iscc": "ISCC:AACZXZ6OU4E45RB57GAGKDGHZXV752RFK424V76TRU",
-        "name": "dieunendlichegeschichte",
-        "description": "vonmichaelende",
-        "metahash": "2f34b6a1d6cea2bcf8d918f8df7f43e579fb0b1e9101bfd36fb6c9a3cb40d5d8"
+        "name": "Die Unendliche Geschichte",
+        "description": "Von Michael Ende",
+        "metahash": "bdyqjxedxvx3cmbq2wvwceioujgekvbof4etamyzeaafztle4roxucui"
       }
     },
     "test_0009_224_bits": {
       "inputs": [
         "Die Unendliche Geschichte",
         "Von Michael Ende",
+        null,
         224
       ],
       "outputs": {
         "@context": "https://purl.org/iscc/context/0.2.0.json",
         "type": "https://purl.org/iscc/schema/0.2.0.json",
         "iscc": "ISCC:AADJXZ6OU4E45RB57GAGKDGHZXV752RFK424V76TRVZ2TKS2",
-        "name": "dieunendlichegeschichte",
-        "description": "vonmichaelende",
-        "metahash": "2f34b6a1d6cea2bcf8d918f8df7f43e579fb0b1e9101bfd36fb6c9a3cb40d5d8"
+        "name": "Die Unendliche Geschichte",
+        "description": "Von Michael Ende",
+        "metahash": "bdyqjxedxvx3cmbq2wvwceioujgekvbof4etamyzeaafztle4roxucui"
       }
     },
     "test_0010_256_bits": {
       "inputs": [
         "Die Unendliche Geschichte",
         "Von Michael Ende",
+        null,
         256
       ],
       "outputs": {
         "@context": "https://purl.org/iscc/context/0.2.0.json",
         "type": "https://purl.org/iscc/schema/0.2.0.json",
         "iscc": "ISCC:AADZXZ6OU4E45RB57GAGKDGHZXV752RFK424V76TRVZ2TKS2K6X5VVA",
-        "name": "dieunendlichegeschichte",
-        "description": "vonmichaelende",
-        "metahash": "2f34b6a1d6cea2bcf8d918f8df7f43e579fb0b1e9101bfd36fb6c9a3cb40d5d8"
+        "name": "Die Unendliche Geschichte",
+        "description": "Von Michael Ende",
+        "metahash": "bdyqjxedxvx3cmbq2wvwceioujgekvbof4etamyzeaafztle4roxucui"
       }
     },
     "test_0011_i18n": {
       "inputs": [
         "Iñtërnâtiônàlizætiøn☃",
         "Iñtërnâtiônàlizætiøn☃ Iñtërnâtiônàlizætiøn☃",
+        null,
         256
       ],
       "outputs": {
         "@context": "https://purl.org/iscc/context/0.2.0.json",
         "type": "https://purl.org/iscc/schema/0.2.0.json",
         "iscc": "ISCC:AADQPPCUKAL34VCQOCRWHDPQU5RY2LMRHPGS3HL35UEPHQ3CDDZ6GYQ",
-        "name": "internationalizætiøn☃",
-        "description": "internationalizætiøn☃internationalizætiøn☃",
-        "metahash": "053fe08f9768713de7db5fc27d5ba1ad724c7723808070bd4ecbdf7662f1e2c5"
+        "name": "Iñtërnâtiônàlizætiøn☃",
+        "description": "Iñtërnâtiônàlizætiøn☃ Iñtërnâtiônàlizætiøn☃",
+        "metahash": "bdyqcswvgcqg6bzjtxqnzglk324h5udjdcwx4rcrjxs2xfi4iuze3vbi"
       }
     },
     "test_0012_normalizeation": {
       "inputs": [
         "Die unéndlíche,  Geschichte",
         "",
+        null,
         64
       ],
       "outputs": {
         "@context": "https://purl.org/iscc/context/0.2.0.json",
         "type": "https://purl.org/iscc/schema/0.2.0.json",
         "iscc": "ISCC:AAAZXZ6OU74YAZIM",
-        "name": "dieunendlichegeschichte",
-        "metahash": "3498a3407f795d537b4f83729a28e9a1ec0d25e65d68022615c0c19f5b36c671"
+        "name": "Die unéndlíche, Geschichte",
+        "metahash": "bdyqn66u277vjmd63yteq7f4zao42o4juc2k2pl4l3ltpjkk6wur3jja"
       }
     },
     "test_0013_trim": {
       "inputs": [
         "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed",
         "",
+        null,
         64
       ],
       "outputs": {
         "@context": "https://purl.org/iscc/context/0.2.0.json",
         "type": "https://purl.org/iscc/schema/0.2.0.json",
-        "iscc": "ISCC:AAA3WOFOHGPPT47M",
-        "name": "loremipsumdolorsitametconsetetursadipscingelitrseddiamnonumyeirmodtemporinviduntutlaboreetdoloremagnaaliquyameratsed",
-        "metahash": "8cf478f0068dc9d7c33d6e4a568a71c1577477ce81a488aba7a4080fa547a58f"
+        "iscc": "ISCC:AAA76GFOHGPPBMPM",
+        "name": "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquy",
+        "metahash": "bdyqmzxtgv4zyurh5kdzw7p2rulco2xzlbwsuawph5n2y3xh7wt3h6xq"
       }
     },
     "test_0014_trim_i18n": {
       "inputs": [
         "Iñtërnâtiônàlizætiøn☃ Iñtërnâtiônàlizætiøn☃ Iñtërnâtiônàlizætiøn☃ Iñtërnâtiônàlizætiøn☃ Iñtërnâtiônàlizætiøn☃ Iñtërnâtiônàlizætiøn☃",
         "",
+        null,
         64
       ],
       "outputs": {
         "@context": "https://purl.org/iscc/context/0.2.0.json",
         "type": "https://purl.org/iscc/schema/0.2.0.json",
         "iscc": "ISCC:AAARPPSUKDYKOY4N",
-        "name": "internationalizætiøn☃internationalizætiøn☃internationalizætiøn☃internationalizætiøn☃internationalizætiøn☃int",
-        "metahash": "38d3f12631d34ea0f742cbf02fa6b5089edf0b7c3085b1e7e3141649c75cdfd2"
+        "name": "Iñtërnâtiônàlizætiøn☃ Iñtërnâtiônàlizætiøn☃ Iñtërnâtiônàlizætiøn☃ Iñtërnâtiônàlizætiøn☃ Iñt",
+        "metahash": "bdyqicrdrojedloqkbdym7xtlnqsak377ea3x6pamc5m6uuq266elw6i"
       }
     },
     "test_0015_norm_i18n_256": {
       "inputs": [
         "Ç 가 Ω ℍ ① ︷ i⁹ ¼ ǆ ⫝̸ ȴ ȷ ɂ ć",
         "  Iñtërnâtiôn\nàlizætiøn☃💩 –  is a tric\t ky   thing!\r",
+        null,
         256
       ],
       "outputs": {
         "@context": "https://purl.org/iscc/context/0.2.0.json",
         "type": "https://purl.org/iscc/schema/0.2.0.json",
-        "iscc": "ISCC:AAD2I4SYON334VRANCVXBZPZWMVZZJZEEHGC3ON7O6UBTBJ3TXJ5XYQ",
-        "name": "c가ωH1i91⁄4dž⫝ȴȷɂc",
-        "description": "internationalizætiøn☃💩isatrickything",
-        "metahash": "9827ee90d8b655d828333c536358efe46a8890764a64556fb99a15f0cc2bb786"
+        "iscc": "ISCC:AAD6KOWKOF334VRANKFXRZXZWMVZZDZZAGHC3ON7O5ENTBJ3TXJ5XYQ",
+        "name": "Ç 가 Ω H 1 { i9 1⁄4 dž ⫝̸ ȴ ȷ ɂ ć",
+        "description": "Iñtërnâtiôn\nàlizætiøn☃💩 –  is a tric ky   thing!",
+        "metahash": "bdyqolmha2lxajz3ann64w33jah2l66hyxbiksflgha5ynmrmketxndi"
+      }
+    },
+    "test_0016_properties_object": {
+      "inputs": [
+        "",
+        "",
+        {"some": "object"},
+        64
+      ],
+      "outputs": {
+        "@context": "https://purl.org/iscc/context/0.2.0.json",
+        "type": "https://purl.org/iscc/schema/0.2.0.json",
+        "iscc": "ISCC:AAA26E2JXF63LHL2",
+        "metahash": "bdyqbchjtakygaxwfldbzb3qbhluj5rxou2fneml2rmw6h5awtl7lfsq"
+      }
+    },
+    "test_0016_properties_stream": {
+      "inputs": [
+        "",
+        "",
+        "bytes:00ff",
+        64
+      ],
+      "outputs": {
+        "@context": "https://purl.org/iscc/context/0.2.0.json",
+        "type": "https://purl.org/iscc/schema/0.2.0.json",
+        "iscc": "ISCC:AAA26E2JXEMHRZ3H",
+        "metahash": "bdyqbq6hhm7y2bhdevhr3op74dlzqmsbas43h4oajxpeaaninfmsv3qa"
       }
     }
   },

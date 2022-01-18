@@ -1,52 +1,67 @@
 # -*- coding: utf-8 -*-
-"""*A sililarity preserving hash for digital asset metadata*.
+"""*A similarity preserving hash for digital asset metadata*.
 
-The Meta-Code is the first component of a canonical ISCC. It is calculated as a
-similarity preserving hash from the metadata of a digital asset. The purpose of the
-Meta-Code is the discovery of digital assets with similar metadata or spelling mistakes.
+The Meta-Code is the first unit of a canonical ISCC. It is calculated from the metadata of a
+digital asset. The purpose of the Meta-Code is to aid the discovery of digital assets with similar
+metadata and the detection of metadata anomalies.
 
-The metadata supplied to the algorithm is called *seed metadata*.
+Because of its special role we call the metadata supplied to the algorithm SEED-METADATA.
+SEED-METADATA has 3 possible inputs:
 
-*Seed metadata* is composed of a `title` and an optional generic `extra`-field that
-contains descriptive, industry-sector or use-case specific metadata in textual or
-binary form (e.g. file headers). We do not prescribe a particular schema.
+- **name** (required): The name or title of the work manifested by the digital asset.
+- **description** (optional): A user-presentable textual description of the digital asset.
+- **properties** (optional): Industry-sector or use-case specific structured metadata or a raw file
+   header (binary blob).
+
+The first 32-bits of a Meta-Code are calculated as a simliarity hash from the `name` field.
+The second 32-bits are also calculated from the `name` field if no other input was supplied.
+If a `description` is suplied but no `properties`, the description will be used for the second
+32-bits. If `properties` are supplied it will be used in favour of `description` for the second
+32-bits.
+
+Due to the broad applicability of the ISCC we do not prescribe a particular schema for the metadata
+supplied to the `properties`-field. However, structured metadata should be supplied as an object
+that is JSON/JCS serializable - preferably JSON-LD to support interoperability and machine
+interpretation.
+
+In addition to the Meta-Code we also create a cryptographic hash (the metahash) of the supplied
+SEED-METADATA. It is used to bind metadata to the digital asset. We use a blake-3 multihash with
+base32-encoding as cryptographic hash. If properties are supplied, their raw bytes payload or their
+JCS serialized JSON data will be the sole input to the cryptographic hash. Else we use a space
+seperated concatenation of the cleaned `name` and `description` fields as inputs.
+
+
+!!! tip
+    For reasons of reproducibility, applications that generate ISCCs, should
+    prioritize metadata that is automatically extracted from the digital asset.
+
+    If embedded metadata is not available or known to be unreliable an application should rely on
+    external metadata or explicitly ask users to supply at least the `name`-field. Applications
+    should then **first embed the user supplied metadata** into the asset **before calculating
+    the ISCC-CODE**.
+
+    If neither embedded  nor external metadata is available, the application may resort to use the
+    normalized filename of the digital asset as value for the `name`-field. An application may also
+    skip generation of a Meta-Code entirely and create an ISCC-CODE without a Meta-Code.
 """
 import unicodedata
+import jcs
 from more_itertools import interleave, sliced
+from iscc_core.code_instance import InstanceHasherV0
 from iscc_core.code_content_text import collapse_text
-from iscc_core.codec import MT, ST, VS, encode_base64, encode_component
+from iscc_core.codec import MT, ST, VS, encode_base64, encode_component, Properties
 from iscc_core.schema import ISCC
 from iscc_core.utils import sliding_window
 from iscc_core.simhash import similarity_hash
 from iscc_core import core_opts
 from blake3 import blake3
-from typing import Union
+from typing import Optional, Union
 
 
-def gen_meta_code(name, description=None, bits=core_opts.meta_bits):
-    # type: (str, Union[str,bytes,None], int) -> ISCC
+def gen_meta_code(name, description=None, properties=None, bits=core_opts.meta_bits):
+    # type: (str, Optional[str], Optional[Properties], int) -> ISCC
     """
     Create an ISCC Meta-Code using the latest standard algorithm.
-
-    Applications that generate ISCCs should prioritize explicitly passed `name`
-    information. If not available they should try to extract a `name` form the digital
-    asset itself. If extraction fails, the application should resort to a normalized
-    filename before falling back to an empty string.
-
-    And optional additional user presentable `description` may be supplied via the
-    `description`-field. Markdown will be preserved for presenting the description
-    publicly.
-
-    The input can be:
-
-    - A textual description of the identified work for disambiguation purposes
-    - Structured (JSON) metadata conforming to an industry specific metadata schema
-    - Raw bitstream file headers automatically extracted binary file headers
-    - A pre-existing industry-specific identifier string
-
-    !!! note
-        It is recommended to use the minimal metadata required to disambiguate the work
-        manifested by the digital asset.
 
     :param str name: Name or title of the work manifested by the digital asset
     :param Union[str,bytes,None] description: Optional description for disambiguation
@@ -54,65 +69,86 @@ def gen_meta_code(name, description=None, bits=core_opts.meta_bits):
     :return: ISCC object with Meta-Code and properties name, description, metahash
     :rtype: ISCC
     """
-    return gen_meta_code_v0(name, description=description, bits=bits)
+    return gen_meta_code_v0(name, description=description, properties=properties, bits=bits)
 
 
-def gen_meta_code_v0(name, description=None, bits=core_opts.meta_bits):
-    # type: (str, Union[str,bytes,None], int) -> ISCC
+def gen_meta_code_v0(name, description=None, properties=None, bits=core_opts.meta_bits):
+    # type: (str, Optional[str], Optional[Properties], int) -> ISCC
     """
     Create an ISCC Meta-Code with the algorithm version 0.
 
-    :param str name: Title of the work manifested by the digital asset
-    :param Union[str,bytes,None] description: Optional metadata for disambiguation
+    !!! note
+
+        The input for the `properties` field can be:
+
+        - Structured (JSON/JCS serializable) metadata
+        - Raw bytes from a file header
+
+    :param str name: Name or title of the work manifested by the digital asset
+    :param Optional[str] description:
+        A User presentable textual description of the digital asset for disambiguation purposes
+        (may include markdown).
+    :param Optional[Properties] properties: Use-Case or industry-specific metadata.
+        Either JSON serializable structured data or a binary blob.
     :param int bits: Bit-length of resulting Meta-Code (multiple of 64)
-    :return: ISCC Meta-Code
-    :rtype: MetaCode
+    :return: ISCC object with possible fields: iscc, name, description, properties, metahash
+    :rtype: ISCC
     """
 
-    # 1. Normalize title
+    # 1. Normalize `name`
     name = "" if name is None else name
-    name = collapse_text(name)
-    name = trim_text(name, core_opts.meta_trim_title)
+    name = clean_text(name)
+    name = remove_newlines(name)
+    name = trim_text(name, core_opts.meta_trim_name)
 
-    # 2. Normalize extra
-    if description in (None, ""):
-        description = None
-        metahash_payload = name.encode("utf-8")
-    elif isinstance(description, str):
-        metahash_payload = description.encode("utf-8")  # assumed JCS normalized if JSON
-        description = collapse_text(description)
-        description = trim_text(description, core_opts.meta_trim_extra)
-    elif isinstance(description, bytes):
-        metahash_payload = description
-        description = description[: core_opts.meta_trim_extra]
+    # 2. Normalize `description`
+    description = "" if description is None else description
+    description = clean_text(description)
+    description = trim_text(description, core_opts.meta_trim_description)
+
+    # Calculate meta_code, metahash, and properties value for the different input cases
+    if properties:
+        if isinstance(properties, bytes):
+            meta_code_digest = soft_hash_meta_v0(name, properties)
+            metahash = InstanceHasherV0(properties).multihash()
+            properties_value = encode_base64(properties)
+        elif isinstance(properties, dict):
+            payload = jcs.canonicalize(properties)
+            meta_code_digest = soft_hash_meta_v0(name, payload)
+            metahash = InstanceHasherV0(payload).multihash()
+            properties_value = properties
+        else:
+            raise TypeError(f"properties must be bytes or dict not {type(properties)}")
     else:
-        raise ValueError("parameter `extra` must be of type str or bytes!")
+        payload = " ".join((name, description)).strip().encode("utf-8")
+        meta_code_digest = soft_hash_meta_v0(name, description)
+        metahash = InstanceHasherV0(payload).multihash()
+        properties_value = None
 
-    digest = soft_hash_meta_v0(name, description)
     meta_code = encode_component(
         mtype=MT.META,
         stype=ST.NONE,
         version=VS.V0,
         bit_length=bits,
-        digest=digest,
+        digest=meta_code_digest,
     )
-
     iscc = "ISCC:" + meta_code
-    metahash = blake3(metahash_payload).hexdigest()
 
-    if isinstance(description, bytes):
-        description = encode_base64(description)
-        binary = True
-    else:
-        binary = False
+    # Build result
+    result = {"iscc": iscc}
+    if name:
+        result["name"] = name
+    if description:
+        result["description"] = description
+    if properties_value:
+        result["properties"] = properties_value
 
-    if not name:
-        name = None
-    mc_obj = ISCC(iscc=iscc, name=name, description=description, metahash=metahash)
-    return mc_obj
+    result["metahash"] = metahash
+
+    return ISCC(**result)
 
 
-def soft_hash_meta_v0(title, extra=None):
+def soft_hash_meta_v0(name, extra=None):
     # type: (str, Union[str,bytes,None]) -> bytes
     """
     Calculate simmilarity preserving 256-bit hash digest from asset metadata.
@@ -136,15 +172,15 @@ def soft_hash_meta_v0(title, extra=None):
         - If the `extra`-input is a non-empty **bytes** object the processing is done
         bytewise and the resulting hash is interleaved with the `title`-hash.
 
-    :param str title: Title of the work manifested in the digital asset
+    :param str name: Title of the work manifested in the digital asset
     :param Union[str,bytes,None] extra: Additional metadata for disambiguation
     :return: 256-bit simhash digest for Meta-Code
     :rtype: bytes
     """
-    title = title.lower()
-    title_n_grams = sliding_window(title, width=core_opts.meta_ngram_size_title)
-    title_hash_digests = [blake3(s.encode("utf-8")).digest() for s in title_n_grams]
-    simhash_digest = similarity_hash(title_hash_digests)
+    name = collapse_text(name)
+    name_n_grams = sliding_window(name, width=core_opts.meta_ngram_size_text)
+    name_hash_digests = [blake3(s.encode("utf-8")).digest() for s in name_n_grams]
+    simhash_digest = similarity_hash(name_hash_digests)
 
     if extra in {None, "", b""}:
         return simhash_digest
@@ -152,19 +188,19 @@ def soft_hash_meta_v0(title, extra=None):
         # Augment with interleaved hash for extra metadata
         if isinstance(extra, bytes):
             # Raw bytes are handled per byte
-            extra_n_grams = sliding_window(extra, width=core_opts.meta_ngram_size_extra_binary)
+            extra_n_grams = sliding_window(extra, width=core_opts.meta_ngram_size_bytes)
             extra_hash_digests = [blake3(ngram).digest() for ngram in extra_n_grams]
         elif isinstance(extra, str):
-            # Text is lower cased and handled per character (multibyte)
-            extra = extra.lower()
-            extra_n_grams = sliding_window(extra, width=core_opts.meta_ngram_size_extra_text)
+            # Text is collapsed and handled per character (multibyte)
+            extra = collapse_text(extra)
+            extra_n_grams = sliding_window(extra, width=core_opts.meta_ngram_size_text)
             extra_hash_digests = [blake3(s.encode("utf-8")).digest() for s in extra_n_grams]
         else:
             raise ValueError("parameter `extra` must be of type str or bytes!")
 
         extra_simhash_digest = similarity_hash(extra_hash_digests)
 
-        # Interleave first half of title and extra simhashes in 32-bit chunks
+        # Interleave first half of name and extra simhashes in 32-bit chunks
         chunks_simhash_digest = sliced(simhash_digest[:16], 4)
         chunks_extra_simhash_digest = sliced(extra_simhash_digest[:16], 4)
         interleaved = interleave(chunks_simhash_digest, chunks_extra_simhash_digest)

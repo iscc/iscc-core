@@ -4,82 +4,110 @@ gen_meta_code_v0:
         inputs:
             - null
             - null
+            - null
             - 64
     test_0001_empty_str:
         inputs:
             - ""
             - ""
+            - null
             - 64
     test_0002_title_only:
         inputs:
             - "Die Unendliche Geschichte"
             - ""
+            - null
             - 64
     test_0003_extra_only:
         inputs:
             - ""
             - "von Michael Ende"
+            - null
             - 64
     test_0004_title_extra:
         inputs:
             - "Die Unendliche Geschichte"
             - "Von Michael Ende"
+            - null
             - 64
     test_0005_96_bits:
         inputs:
             - "Die Unendliche Geschichte"
             - "Von Michael Ende"
+            - null
             - 96
     test_0006_128_bits:
         inputs:
             - "Die Unendliche Geschichte"
             - "Von Michael Ende"
+            - null
             - 128
     test_0007_160_bits:
         inputs:
             - "Die Unendliche Geschichte"
             - "Von Michael Ende"
+            - null
             - 160
     test_0008_192_bits:
         inputs:
             - "Die Unendliche Geschichte"
             - "Von Michael Ende"
+            - null
             - 192
     test_0009_224_bits:
         inputs:
             - "Die Unendliche Geschichte"
             - "Von Michael Ende"
+            - null
             - 224
     test_0010_256_bits:
         inputs:
             - "Die Unendliche Geschichte"
             - "Von Michael Ende"
+            - null
             - 256
     test_0011_i18n:
         inputs:
             - "Iñtërnâtiônàlizætiøn☃"
             - "Iñtërnâtiônàlizætiøn☃ Iñtërnâtiônàlizætiøn☃"
+            - null
             - 256
     test_0012_normalizeation:
         inputs:
             - "Die unéndlíche,  Geschichte"
             - ""
+            - null
             - 64
     test_0013_trim:
         inputs:
             - "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed"
             - ""
+            - null
             - 64
     test_0014_trim_i18n:
         inputs:
             - "Iñtërnâtiônàlizætiøn☃ Iñtërnâtiônàlizætiøn☃ Iñtërnâtiônàlizætiøn☃ Iñtërnâtiônàlizætiøn☃ Iñtërnâtiônàlizætiøn☃ Iñtërnâtiônàlizætiøn☃"
             - ""
+            - null
             - 64
     test_0015_norm_i18n_256:
         inputs:
             - "Ç 가 Ω ℍ ① ︷ i⁹ ¼ ǆ ⫝̸ ȴ ȷ ɂ ć"
             - "  Iñtërnâtiôn\nàlizætiøn☃💩 –  is a tric\t ky   thing!\r"
+            - null
             - 256
+    test_0016_properties_object:
+        inputs:
+            - ""
+            - ""
+            - {"some": "object"}
+            - 64
+    test_0016_properties_stream:
+        inputs:
+            - ""
+            - ""
+            - "bytes:00ff"
+            - 64
 gen_text_code_v0:
     test_0000_empty_str:
         inputs:

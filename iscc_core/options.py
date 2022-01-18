@@ -13,19 +13,14 @@ class CoreOptions(BaseSettings):
         env_file_encoding = "utf-8"
 
     meta_bits: int = Field(64, description="Default length of generated Meta-Code in bits")
-    meta_trim_title: int = Field(128, description="Trim title length to this mumber of bytes")
-    meta_trim_extra: int = Field(4096, description="Trim extra to this number of bytes")
-    meta_ngram_size_title: int = Field(
-        3, description="Sliding window width (characters) for title metadata"
+    meta_trim_name: int = Field(128, description="Trim `name` to this mumber of bytes")
+    meta_trim_description: int = Field(
+        4096, description="Trim `description` to this number of bytes"
     )
-    meta_ngram_size_extra_text: int = Field(
-        3,
-        description="Sliding window width (characters) for textural extra metadata",
+    meta_ngram_size_text: int = Field(
+        3, description="Sliding window width (characters) for metadata"
     )
-    meta_ngram_size_extra_binary: int = Field(
-        3,
-        description="Sliding window width (bytes) for binary extra metadata",
-    )
+    meta_ngram_size_bytes: int = Field(4, description="Sliding window width (bytes) for metadata")
 
     text_bits: int = Field(64, description="Default length of generated Content-Code Text in bits")
 
@@ -57,32 +52,6 @@ class CoreOptions(BaseSettings):
             }
         ),
         description="Characters regarded as newline characters for normalization purposes",
-    )
-
-    text_spaces: frozenset = Field(
-        frozenset(
-            {
-                "\u0009",  # Character Tabulation
-                "\u0020",  # Space
-                "\u00A0",  # No-Break Space
-                "\u1680",  # Ogham Space Mark
-                "\u2000",  # EN Quad
-                "\u2001",  # EM Quad
-                "\u2002",  # EN Space
-                "\u2003",  # EM Space
-                "\u2004",  # Three-per-EM Space
-                "\u2005",  # Four-per-EM Space
-                "\u2006",  # Six-per-EM Space
-                "\u2007",  # Figure Space
-                "\u2008",  # Punctuation Space
-                "\u2009",  # Thin Space
-                "\u200A",  # Hair Space
-                "\u202F",  # Narrow No-Break Space
-                "\u205F",  # Medium Mathematical Space
-                "\u3000",  # Ideographic Space
-            }
-        ),
-        description="Characters regarded as space characters for normalization purposes",
     )
 
     image_bits: int = Field(
@@ -376,14 +345,13 @@ class CoreOptions(BaseSettings):
 
 # Conformance critical options that produce non-interoperable codes if changed
 conformanc_critical = {
-    "meta_trim_title",
-    "meta_trim_extra",
-    "meta_ngram_size_title",
-    "meta_ngram_size_extra_text",
-    "meta_ngram_size_extra_binary",
+    "meta_trim_name",
+    "meta_trim_description",
+    "meta_ngram_size_text",
+    "meta_ngram_size_bytes",
     "text_ngram_size",
     "text_unicode_filter",
-    "text_whitespace",
+    "text_newlines",
     "data_avg_chunk_size",
     "cdc_gear",
 }
