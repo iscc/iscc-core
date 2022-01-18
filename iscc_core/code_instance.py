@@ -8,27 +8,27 @@ from iscc_core.schema import ISCC
 
 
 def gen_instance_code(stream, bits=core_opts.instance_bits):
-    # type: (Stream, int) -> ISCC
+    # type: (Stream, int) -> dict
     """
     Create an ISCC Instance-Code with the latest standard algorithm.
 
     :param Stream stream: Binary data stream for Instance-Code generation
     :param int bits: Bit-length resulting Instance-Code (multiple of 64)
-    :return: ISCC object with Instance-Code and properties: datahash, filesize
-    :rtype: ISCC
+    :return: ISCC object with properties: iscc, datahash, filesize
+    :rtype: dict
     """
     return gen_instance_code_v0(stream, bits)
 
 
 def gen_instance_code_v0(stream, bits=core_opts.instance_bits):
-    # type: (Stream, int) -> ISCC
+    # type: (Stream, int) -> dict
     """
     Create an ISCC Instance-Code with algorithm v0.
 
     :param Stream stream: Binary data stream for Instance-Code generation
     :param int bits: Bit-length of resulting Instance-Code (multiple of 64)
     :return: ISCC object with Instance-Code and properties: datahash, filesize
-    :rtype: InstanceCode
+    :rtype: dict
     """
     hasher = InstanceHasherV0()
     data = stream.read(core_opts.io_read_size)
@@ -38,7 +38,7 @@ def gen_instance_code_v0(stream, bits=core_opts.instance_bits):
 
     instance_code = hasher.code(bits=bits)
     iscc = "ISCC:" + instance_code
-    instance_code_obj = ISCC(
+    instance_code_obj = dict(
         iscc=iscc,
         datahash=hasher.multihash(),
         filesize=hasher.filesize,
