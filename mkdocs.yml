@@ -114,7 +114,6 @@ nav:
     - Simhash: algorithms/simhash.md
     - Minhash: algorithms/minhash.md
     - WTAHash: algorithms/wtahash.md
-  - Schema: schema/schema.md
   - Options: options/options.md
   - Utilities: utilities/utils.md
   - Conformance: conformance.md

@@ -1,10 +1,9 @@
 # -*- coding: utf-8 -*-
 """*A data checksum.*"""
 from blake3 import blake3
-from typing import Optional, Tuple
+from typing import Optional
 from iscc_core import codec, core_opts
 from iscc_core.codec import Data, Stream
-from iscc_core.schema import ISCC
 
 
 def gen_instance_code(stream, bits=core_opts.instance_bits):

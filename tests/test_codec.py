@@ -138,8 +138,8 @@ def test_codec_clean_raises_multiple_colom():
 
 
 def test_code_properties():
-    c64 = ic.codec.Code(ic.gen_meta_code("Hello World").iscc)
-    c256 = ic.codec.Code(ic.gen_meta_code("Hello World", bits=256).iscc)
+    c64 = ic.codec.Code(ic.gen_meta_code("Hello World")["iscc"])
+    c256 = ic.codec.Code(ic.gen_meta_code("Hello World", bits=256)["iscc"])
     assert c64.code == "AAAWN77F727NXSUS"
     assert c256.code == "AADWN77F727NXSUSUVDFOUS64JFPMZ4GAR5NJ3O5P563LTMXWS5XNSQ"
     assert c64.bytes == unhexlify(c64.hex)
@@ -167,6 +167,8 @@ def test_code_properties():
     assert c64 == ic.codec.Code(c64.code)
     assert c64 == ic.codec.Code(tuple(c64))
     assert isinstance(c64.hash_ba, frozenbitarray)
+    icode = ic.Code("KACYPXW445FTYNJ3CYSXHAFJMA2HUWULUNRFE3BLHRSCXYH2M5AEGQY")
+    assert icode.type_id == "ISCC-TEXT-V0-MCDI"
 
 
 def test_code_hashable():
@@ -175,42 +177,42 @@ def test_code_hashable():
 
 
 def test_Code_uri():
-    mco = ic.gen_meta_code("This is an URI representation of a Meta-Code")
-    assert mco.code_obj.code == "AAAX334V4AMT2PP4"
-    assert mco.code_obj.uri == "iscc:aaax334v4amt2pp4"
+    mco = ic.Code(ic.gen_meta_code("This is an URI representation of a Meta-Code")["iscc"])
+    assert mco.code == "AAAX334V4AMT2PP4"
+    assert mco.uri == "iscc:aaax334v4amt2pp4"
 
 
 def test_Code_mf_base16():
-    mco = ic.gen_meta_code("Hello base16")
-    assert mco.code_obj.code == "AAATKVHH3C7FOAAZ"
-    assert mco.code_obj.mf_base16 == "fcc0100013554e7d8be570019"
+    mco = ic.Code(ic.gen_meta_code("Hello base16")["iscc"])
+    assert mco.code == "AAATKVHH3C7FOAAZ"
+    assert mco.mf_base16 == "fcc0100013554e7d8be570019"
     assert ic.normalize("fcc0100013554e7d8be570019") == "ISCC:AAATKVHH3C7FOAAZ"
 
 
 def test_Code_mf_base32():
-    mco = ic.gen_meta_code("Hello base32")
-    assert mco.code_obj.code == "AAAQKV7H7K7VMAEL"
-    assert mco.code_obj.mf_base32 == "bzqaqaaifk7t7vp2wacfq"
+    mco = ic.Code(ic.gen_meta_code("Hello base32")["iscc"])
+    assert mco.code == "AAAQKV7H7K7VMAEL"
+    assert mco.mf_base32 == "bzqaqaaifk7t7vp2wacfq"
     assert ic.normalize("bzqaqaaifk7t7vp2wacfq") == "ISCC:AAAQKV7H7K7VMAEL"
 
 
 def test_Code_mf_base58btc():
-    mco = ic.gen_meta_code("Hello base58btc")
-    assert mco.code_obj.code == "AAA2O57HTG7HMCO3"
-    assert mco.code_obj.mf_base58btc == "z4rHVQUrFdpfYWuGLa"
+    mco = ic.Code(ic.gen_meta_code("Hello base58btc")["iscc"])
+    assert mco.code == "AAA2O57HTG7HMCO3"
+    assert mco.mf_base58btc == "z4rHVQUrFdpfYWuGLa"
     assert ic.normalize("z4rHVQUrFdpfYWuGLa") == "ISCC:AAA2O57HTG7HMCO3"
 
 
 def test_Code_mf_base64url():
-    mco = ic.gen_meta_code("This is a base64url encoded Meta-Code")
-    assert mco.code_obj.code == "AAAYSN37BCO2L3O7"
-    assert mco.code_obj.mf_base64url == "uzAEAAYk3fwidpe3f"
+    mco = ic.Code(ic.gen_meta_code("This is a base64url encoded Meta-Code")["iscc"])
+    assert mco.code == "AAAYSN37BCO2L3O7"
+    assert mco.mf_base64url == "uzAEAAYk3fwidpe3f"
     assert ic.normalize("uzAEAAYk3fwidpe3f") == "ISCC:AAAYSN37BCO2L3O7"
 
 
 def test_Code_raises():
     with pytest.raises(ValueError):
-        ic.codec.Code(13)
+        ic.Code(13)
 
 
 def test_Code_Code():
@@ -219,11 +221,11 @@ def test_Code_Code():
 
 
 def test_Code_str_repr():
-    mco = ic.gen_meta_code("Hello str")
-    assert mco.code_obj.code == "AAAWH7PF7473PQ57"
-    assert str(mco.code_obj) == "AAAWH7PF7473PQ57"
-    assert repr(mco.code_obj) == 'Code("AAAWH7PF7473PQ57")'
-    assert bytes(mco.code_obj).hex() == "000163fde5ff3fb7c3bf" == mco.code_obj.bytes.hex()
+    mco = ic.Code(ic.gen_meta_code("Hello str")["iscc"])
+    assert mco.code == "AAAWH7PF7473PQ57"
+    assert str(mco) == "AAAWH7PF7473PQ57"
+    assert repr(mco) == 'Code("AAAWH7PF7473PQ57")'
+    assert bytes(mco).hex() == "000163fde5ff3fb7c3bf" == mco.bytes.hex()
 
 
 def test_decompose_single_component():
@@ -242,7 +244,7 @@ def test_decompose_data_instance():
     data = "GABTMCHNLCHTI2NHZFXOLEB53KSPU"
     inst = "IAB3GN6WUSNSX3MJBT6PBTVFAQZ7G"
     di = [data, inst]
-    code = ic.iscc_code.gen_iscc_code_v0([data, inst]).iscc
+    code = ic.iscc_code.gen_iscc_code_v0([data, inst])["iscc"]
     assert code == "ISCC:KUADMCHNLCHTI2NHWM35NJE3FPWYS"
     assert ic.decompose(code) == ["GAATMCHNLCHTI2NH", "IAA3GN6WUSNSX3MJ"]
 
@@ -252,7 +254,7 @@ def test_decompose_content_data_instance():
     data = "GAA7ER72LMA6IOIO"
     inst = "IAAX3C2BUFV6XPQV"
     di = [cont, data, inst]
-    code = ic.iscc_code.gen_iscc_code_v0([cont, data, inst]).iscc
+    code = ic.iscc_code.gen_iscc_code_v0([cont, data, inst])["iscc"]
     assert code == "ISCC:KMARIURG4CVZ3M7N6JD7UWYB4Q4Q47MLIGQWX256CU"
     assert ic.decompose(code) == di
 
@@ -263,7 +265,7 @@ def test_decompose_meta_content_data_instance():
     data = "GAA2F344YTSCRKBD"
     inst = "IAA4FWMY2ANPAYWJ"
     di = [meta, cont, data, inst]
-    code = ic.iscc_code.gen_iscc_code_v0([meta, cont, data, inst]).iscc
+    code = ic.iscc_code.gen_iscc_code_v0([meta, cont, data, inst])["iscc"]
     assert code == "ISCC:KEC4CPEJKZZ7A4HZMZUFTZYEOHCPLIXPTTCOIKFIEPBNTGGQDLYGFSI"
     assert ic.decompose(code) == di
 
@@ -418,8 +420,8 @@ def test_normalize_mf_base64_url_single():
 
 
 def test_codec_normalize_raises():
-    code = ic.gen_meta_code("Hello", "World")
-    bad = "f" + (b"\xcc\xff" + code.code_obj.bytes).hex()
+    code = ic.Code(ic.gen_meta_code("Hello", "World")["iscc"])
+    bad = "f" + (b"\xcc\xff" + code.bytes).hex()
     with pytest.raises(ValueError):
         ic.normalize(bad)
 
@@ -475,7 +477,7 @@ def test_codec_Code_rnd_mt_iscc():
 
 
 def test_codec_validate_regex():
-    valid = ic.gen_meta_code("Hello World", bits=32).iscc
+    valid = ic.gen_meta_code("Hello World", bits=32)["iscc"]
     assert ic.validate(valid) is True
     invalid = valid[:-1]
     assert ic.validate(invalid, strict=False) is False
@@ -484,7 +486,7 @@ def test_codec_validate_regex():
 
 
 def test_codec_validate_header_prefix():
-    valid = ic.gen_meta_code("Hello World", bits=32).iscc
+    valid = ic.gen_meta_code("Hello World", bits=32)["iscc"]
     invalid = "ISCC:AE" + valid[7:]
     assert ic.validate(invalid, strict=False) is False
     with pytest.raises(ValueError):

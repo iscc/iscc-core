@@ -11,7 +11,7 @@ def test_gen_mixed_code_v0_single_raises():
 
 def test_gen_mixed_code_v0_non_cc_raises():
     tc = iscc_core.gen_text_code_v0("Hello World", bits=64)["iscc"]
-    mc = iscc_core.gen_meta_code_v0("Meta Code Title", bits=64).iscc
+    mc = iscc_core.gen_meta_code_v0("Meta Code Title", bits=64)["iscc"]
     codes = tc, mc
     with pytest.raises(AssertionError):
         iscc_core.gen_mixed_code_v0(codes, bits=64)

@@ -48,7 +48,6 @@ from iscc_core.code_instance import (
     gen_instance_code,
     gen_instance_code_v0,
 )
-from iscc_core.schema import ISCC
 from iscc_core.codec import (
     Code,
     MT,
@@ -108,7 +107,6 @@ __all__ = [
     "gen_data_code_v0",
     "gen_instance_code",
     "gen_instance_code_v0",
-    "ISCC",
     "Code",
     "MT",
     "ST",

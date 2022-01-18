@@ -7,7 +7,6 @@ import yaml
 import json
 import pathlib
 import iscc_core
-from iscc_core.schema import ISCC
 from loguru import logger as log
 
 HERE = pathlib.Path(__file__).parent.absolute()
@@ -78,10 +77,8 @@ def main():
             except Exception as e:
                 log.error(f"{testname}.{funcname} called with {nargs} raised {e}")
                 raise
-            if isinstance(result, ISCC):
-                testdata["outputs"] = result.dict()
-            else:
-                testdata["outputs"] = result
+
+            testdata["outputs"] = result
     with open(TEST_DATA, "w", encoding="utf-8") as outf:
         out_data = dump_compact(data)
         outf.write(out_data)

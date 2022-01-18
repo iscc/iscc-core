@@ -8,29 +8,38 @@ import iscc_core
 
 def test_gen_meta_code_title_none():
     m = iscc_core.code_meta.gen_meta_code(None)
-    assert m.iscc == "ISCC:AAA26E2JXH27TING"
+    assert m == {
+        "iscc": "ISCC:AAA26E2JXH27TING",
+        "metahash": "bdyqk6e2jxh27tingubae32rw3teutg6lexe23qisw7gjve6k4qpteyq",
+    }
 
 
 def test_gen_meta_code_title_empty_str():
     m = iscc_core.code_meta.gen_meta_code("")
-    assert m.iscc == "ISCC:AAA26E2JXH27TING"
+    assert m == {
+        "iscc": "ISCC:AAA26E2JXH27TING",
+        "metahash": "bdyqk6e2jxh27tingubae32rw3teutg6lexe23qisw7gjve6k4qpteyq",
+    }
 
 
 def test_gen_meta_code_title_with_extra():
-    empty = "ISCC:AAA26E2JXH27TING"
+    empty = {
+        "iscc": "ISCC:AAA26E2JXH27TING",
+        "metahash": "bdyqk6e2jxh27tingubae32rw3teutg6lexe23qisw7gjve6k4qpteyq",
+    }
     m = iscc_core.code_meta.gen_meta_code(None, None)
-    assert m.iscc == empty
+    assert m == empty
     m = iscc_core.code_meta.gen_meta_code(None, "")
-    assert m.iscc == empty
+    assert m == empty
     m = iscc_core.code_meta.gen_meta_code("", None)
-    assert m.iscc == empty
+    assert m == empty
     m = iscc_core.code_meta.gen_meta_code("", "")
-    assert m.iscc == empty
+    assert m == empty
 
 
 def test_gen_meta_code_description():
     m = iscc_core.code_meta.gen_meta_code("hello", "world")
-    assert m.dict_raw() == {
+    assert m == {
         "iscc": "ISCC:AAAWKLHFXNSF7NNE",
         "name": "hello",
         "description": "world",
@@ -41,26 +50,30 @@ def test_gen_meta_code_description():
 def test_gen_meta_code_properties_dict():
 
     m = iscc_core.code_meta.gen_meta_code("hello", None, {"hello": "metadata"})
-    # TODO should include properties
-    assert m.dict_raw() == {
+    assert m == {
         "iscc": "ISCC:AAAWKLHFXMFCA2OC",
-        "name": "hello",
         "metahash": "bdyqay342stvqra22sv77zgt4qdht7nkndrvi6e5edjsxhjl3ufdlbuq",
+        "name": "hello",
+        "properties": {"hello": "metadata"},
     }
 
 
 def test_gen_meta_code_properties_bytes():
     m = iscc_core.code_meta.gen_meta_code("", "", b"hello world")
-    # TODO should include properties
-    assert m.dict_raw() == {
+    assert m == {
         "iscc": "ISCC:AAA26E2JXGPXE7WZ",
         "metahash": "bdyqnosmb56tqudeibogyygmf2b25xs7wpg4zux4zcts2v6llqmnj4ja",
+        "properties": "aGVsbG8gd29ybGQ",
     }
 
 
 def test_gen_meta_code_title_only():
     m = iscc_core.code_meta.gen_meta_code("Hello World")
-    assert m.iscc == "ISCC:AAAWN77F727NXSUS"
+    assert m == {
+        "iscc": "ISCC:AAAWN77F727NXSUS",
+        "name": "Hello World",
+        "metahash": "bdyqed6bziei6w4j2eilfyrwjbk4pb7mtthesakh5nuuisrfsh72365q",
+    }
 
 
 def test_gen_meta_code_v0_raises():
@@ -100,7 +113,7 @@ def test_hash_meta_v0_interleaved():
 
 def test_gen_meta_code_v0_empty_default():
     m = iscc_core.code_meta.gen_meta_code_v0("")
-    assert m.dict_raw() == dict(
+    assert m == dict(
         iscc="ISCC:AAA26E2JXH27TING",
         metahash="bdyqk6e2jxh27tingubae32rw3teutg6lexe23qisw7gjve6k4qpteyq",
     )
@@ -108,7 +121,7 @@ def test_gen_meta_code_v0_empty_default():
 
 def test_gen_meta_code_v0_extra_only_128_bits():
     m = iscc_core.code_meta.gen_meta_code_v0("", "Hello", None, 128)
-    assert m.dict_raw() == dict(
+    assert m == dict(
         iscc="ISCC:AAB26E2JXFSSZZN36X42DJR724AYU",
         description="Hello",
         metahash="bdyqpxqvqkfxoq5cnfe5zqb3zc6fdkcefb7op5fszqv4cyoladnsxsty",
@@ -118,13 +131,20 @@ def test_gen_meta_code_v0_extra_only_128_bits():
 def test_gen_meta_code_v0_interleaved():
     ma = iscc_core.code_meta.gen_meta_code_v0("")
     mb = iscc_core.code_meta.gen_meta_code_v0("", "hello")
-    assert ma.iscc == "ISCC:AAA26E2JXH27TING"
-    assert mb.iscc == "ISCC:AAA26E2JXFSSZZN3"
-    assert ma.dict_raw() == dict(
+    assert ma == {
+        "iscc": "ISCC:AAA26E2JXH27TING",
+        "metahash": "bdyqk6e2jxh27tingubae32rw3teutg6lexe23qisw7gjve6k4qpteyq",
+    }
+    assert mb == {
+        "iscc": "ISCC:AAA26E2JXFSSZZN3",
+        "description": "hello",
+        "metahash": "bdyqovdywhwzynauslzcjdrpfrvf3gudo7dau5n4kq3uqrrlcjjtsady",
+    }
+    assert ma == dict(
         iscc="ISCC:AAA26E2JXH27TING",
         metahash="bdyqk6e2jxh27tingubae32rw3teutg6lexe23qisw7gjve6k4qpteyq",
     )
-    assert mb.dict_raw() == dict(
+    assert mb == dict(
         iscc="ISCC:AAA26E2JXFSSZZN3",
         description="hello",
         metahash="bdyqovdywhwzynauslzcjdrpfrvf3gudo7dau5n4kq3uqrrlcjjtsady",
