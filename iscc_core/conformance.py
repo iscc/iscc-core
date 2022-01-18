@@ -15,12 +15,12 @@ Test data is structured as follows:
 }
 ```
 
-Inputs that are expected to be `raw byte streams` are embedded as HEX encoded strings
-in JSON and prefixed with  `stream:` to support automated decoding during
+Inputs that are expected to be `raw bytes or byte-streams` are embedded as HEX encoded strings
+in JSON and prefixed with `stream:` or `bytes` to support automated decoding during
 implementation testing.
 
 !!! example
-    Byte outputs in JSON test data:
+    Byte-stream outputs in JSON test data:
     ```json
     "gen_data_code_v0": {
       "test_0000_two_bytes_64": {
@@ -60,13 +60,17 @@ def generate_tests():
         func_obj = getattr(iscc_core, func_name)
         for test_name, test_values in tests.items():
 
-            # create byte-stream from first argument strings that start with `stream:`:
-            if isinstance(test_values["inputs"][0], str) and test_values["inputs"][0].startswith(
-                "stream:"
-            ):
-                test_values["inputs"][0] = io.BytesIO(
-                    bytes.fromhex(test_values["inputs"][0].lstrip("stream:"))
-                )
+            # Convert stream and bytes test values
+            ntv = []
+            for tv in test_values["inputs"]:
+                if isinstance(tv, str) and tv.startswith("stream:"):
+                    ntv.append(io.BytesIO(bytes.fromhex(tv.lstrip("stream:"))))
+                elif isinstance(tv, str) and tv.startswith("bytes:"):
+                    ntv.append(bytes.fromhex(tv.lstrip("bytes:")))
+                else:
+                    ntv.append(tv)
+            test_values["inputs"] = ntv
+
             yield test_name, func_obj, test_values["inputs"], test_values["outputs"]
 
 

@@ -61,13 +61,22 @@ def main():
         for testname, testdata in tests.items():
             func = getattr(iscc_core, funcname)
             args = testdata["inputs"]
+
+            # Convert stream and bytes inputs
             dargs = copy(args)
-            if isinstance(dargs[0], str) and dargs[0].startswith("stream:"):
-                dargs[0] = io.BytesIO(bytes.fromhex(dargs[0].lstrip("stream:")))
+            nargs = []
+            for darg in dargs:
+                if isinstance(darg, str) and darg.startswith("stream:"):
+                    nargs.append(io.BytesIO(bytes.fromhex(darg.lstrip("stream:"))))
+                elif isinstance(darg, str) and darg.startswith("bytes:"):
+                    nargs.append(bytes.fromhex(darg.lstrip("bytes:")))
+                else:
+                    nargs.append(darg)
+
             try:
-                result = func(*dargs)
+                result = func(*nargs)
             except Exception as e:
-                log.error(f"{testname}.{funcname} called with {dargs} raised {e}")
+                log.error(f"{testname}.{funcname} called with {nargs} raised {e}")
                 raise
             if isinstance(result, ISCC):
                 testdata["outputs"] = result.dict()
