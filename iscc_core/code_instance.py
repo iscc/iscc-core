@@ -100,7 +100,7 @@ class InstanceHasherV0:
     def multihash(self):
         # type: () -> str
         """
-        Retrun blake3 multihash
+        Return blake3 multihash
 
         :return: Blake3 hash as base32 endoded 256-bit multihash
         :rtype: str
