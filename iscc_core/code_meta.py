@@ -44,6 +44,7 @@ seperated concatenation of the cleaned `name` and `description` fields as inputs
     normalized filename of the digital asset as value for the `name`-field. An application may also
     skip generation of a Meta-Code entirely and create an ISCC-CODE without a Meta-Code.
 """
+import base64
 import unicodedata
 import jcs
 from more_itertools import interleave, sliced
@@ -110,7 +111,7 @@ def gen_meta_code_v0(name, description=None, properties=None, bits=core_opts.met
         if isinstance(properties, bytes):
             meta_code_digest = soft_hash_meta_v0(name, properties)
             metahash = InstanceHasherV0(properties).multihash()
-            properties_value = encode_base64(properties)
+            properties_value = base64.b64encode(properties).decode("ascii")
         elif isinstance(properties, dict):
             payload = jcs.canonicalize(properties)
             meta_code_digest = soft_hash_meta_v0(name, payload)
