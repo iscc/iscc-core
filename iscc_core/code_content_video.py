@@ -18,34 +18,33 @@ The relevant frame signatures can be parsed from the following elements in sig.x
 from typing import Sequence, Tuple
 from iscc_core.wtahash import wtahash
 from iscc_core import codec, core_opts
-from iscc_core.schema import ISCC
 
 
 FrameSig = Tuple[int]
 
 
 def gen_video_code(frame_sigs, bits=core_opts.video_bits):
-    # type: (Sequence[FrameSig], int) -> ISCC
+    # type: (Sequence[FrameSig], int) -> dict
     """
     Create an ISCC Video-Code with the latest standard algorithm.
 
     :param FrameSig frame_sigs: Sequence of MP7 frame signatures
     :param int bits: Bit-length resulting Instance-Code (multiple of 64)
     :return: ISCC object with Video-Code
-    :rtype: ISCC
+    :rtype: dict
     """
     return gen_video_code_v0(frame_sigs, bits)
 
 
 def gen_video_code_v0(frame_sigs, bits=core_opts.video_bits):
-    # type: (Sequence[FrameSig], int) -> ISCC
+    # type: (Sequence[FrameSig], int) -> dict
     """
     Create an ISCC Video-Code with algorithm v0.
 
     :param FrameSig frame_sigs: Sequence of MP7 frame signatures
     :param int bits: Bit-length resulting Video-Code (multiple of 64)
     :return: ISCC object with Video-Code
-    :rtype: ISCC
+    :rtype: dict
     """
     digest = soft_hash_video_v0(frame_sigs, bits=bits)
     video_code = codec.encode_component(
@@ -56,7 +55,7 @@ def gen_video_code_v0(frame_sigs, bits=core_opts.video_bits):
         digest=digest,
     )
     iscc = "ISCC:" + video_code
-    return ISCC(iscc=iscc)
+    return dict(iscc=iscc)
 
 
 def soft_hash_video_v0(frame_sigs, bits=core_opts.video_bits):
