@@ -1,15 +1,12 @@
 # -*- coding: utf-8 -*-
 """*A similarity perserving hash for binary data (soft hash).*"""
 from typing import Optional
-from iscc_core.cdc import data_chunks
-from iscc_core.minhash import minhash_256
-from iscc_core import codec, core_opts
-from iscc_core.codec import Data, Stream
 import xxhash
+import iscc_core as ic
 
 
-def gen_data_code(stream, bits=core_opts.data_bits):
-    # type: (Stream, int) -> dict
+def gen_data_code(stream, bits=ic.core_opts.data_bits):
+    # type: (ic.Stream, int) -> dict
     """
     Create a similarity preserving ISCC Data-Code with the latest standard algorithm.
 
@@ -21,8 +18,8 @@ def gen_data_code(stream, bits=core_opts.data_bits):
     return gen_data_code_v0(stream, bits)
 
 
-def gen_data_code_v0(stream, bits=core_opts.data_bits):
-    # type: (Stream, int) -> dict
+def gen_data_code_v0(stream, bits=ic.core_opts.data_bits):
+    # type: (ic.Stream, int) -> dict
     """
     Create an ISCC Data-Code with algorithm v0.
 
@@ -33,11 +30,11 @@ def gen_data_code_v0(stream, bits=core_opts.data_bits):
     """
 
     hasher = DataHasherV0()
-    data = stream.read(core_opts.io_read_size)
+    data = stream.read(ic.core_opts.io_read_size)
 
     while data:
         hasher.push(data)
-        data = stream.read(core_opts.io_read_size)
+        data = stream.read(ic.core_opts.io_read_size)
 
     data_code = hasher.code(bits=bits)
     iscc = "ISCC:" + data_code
@@ -45,7 +42,7 @@ def gen_data_code_v0(stream, bits=core_opts.data_bits):
 
 
 def soft_hash_data_v0(stream):
-    # type: (Stream) -> bytes
+    # type: (ic.Stream) -> bytes
     """
     Create a similarity preserving Data-Hash digest
 
@@ -54,11 +51,11 @@ def soft_hash_data_v0(stream):
     :rtype: bytes
     """
     hasher = DataHasherV0()
-    data = stream.read(core_opts.io_read_size)
+    data = stream.read(ic.core_opts.io_read_size)
 
     while data:
         hasher.push(data)
-        data = stream.read(core_opts.io_read_size)
+        data = stream.read(ic.core_opts.io_read_size)
     return hasher.digest()
 
 
@@ -66,7 +63,7 @@ class DataHasherV0:
     """Incremental Data-Hash generator."""
 
     def __init__(self, data=None):
-        # type: (Optional[Data]) -> None
+        # type: (Optional[ic.Data]) -> None
         """
         Create a DataHasher
 
@@ -79,12 +76,14 @@ class DataHasherV0:
         self.push(data)
 
     def push(self, data):
-        # type: (Data) -> None
+        # type: (ic.Data) -> None
         """Push data to the Data-Hash generator."""
         if self.tail:
             data = self.tail + data
 
-        for chunk in data_chunks(data, utf32=False, avg_chunk_size=core_opts.data_avg_chunk_size):
+        for chunk in ic.data_chunks(
+            data, utf32=False, avg_chunk_size=ic.core_opts.data_avg_chunk_size
+        ):
             self.chunk_sizes.append(len(chunk))
             self.chunk_features.append(xxhash.xxh32_intdigest(chunk))
             self.tail = chunk  # Last chunk may not be final
@@ -96,9 +95,9 @@ class DataHasherV0:
         # type: () -> bytes
         """Calculate 256-bit minhash digest from feature hashes."""
         self._finalize()
-        return minhash_256(self.chunk_features)
+        return ic.minhash_256(self.chunk_features)
 
-    def code(self, bits=core_opts.data_bits):
+    def code(self, bits=ic.core_opts.data_bits):
         # type: (int) -> str
         """
         Encode digest as an ISCC Data-Code component.
@@ -107,10 +106,10 @@ class DataHasherV0:
         :return: ISCC Data-Code
         :rtype: str
         """
-        data_code = codec.encode_component(
-            mtype=codec.MT.DATA,
-            stype=codec.ST.NONE,
-            version=codec.VS.V0,
+        data_code = ic.encode_component(
+            mtype=ic.MT.DATA,
+            stype=ic.ST.NONE,
+            version=ic.VS.V0,
             bit_length=bits,
             digest=self.digest(),
         )

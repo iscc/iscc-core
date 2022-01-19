@@ -16,14 +16,13 @@ The relevant frame signatures can be parsed from the following elements in sig.x
     but it requires a custom binary parser to decode the frame signaturs.
 """
 from typing import Sequence, Tuple
-from iscc_core.wtahash import wtahash
-from iscc_core import codec, core_opts
+import iscc_core as ic
 
 
 FrameSig = Tuple[int]
 
 
-def gen_video_code(frame_sigs, bits=core_opts.video_bits):
+def gen_video_code(frame_sigs, bits=ic.core_opts.video_bits):
     # type: (Sequence[FrameSig], int) -> dict
     """
     Create an ISCC Video-Code with the latest standard algorithm.
@@ -36,7 +35,7 @@ def gen_video_code(frame_sigs, bits=core_opts.video_bits):
     return gen_video_code_v0(frame_sigs, bits)
 
 
-def gen_video_code_v0(frame_sigs, bits=core_opts.video_bits):
+def gen_video_code_v0(frame_sigs, bits=ic.core_opts.video_bits):
     # type: (Sequence[FrameSig], int) -> dict
     """
     Create an ISCC Video-Code with algorithm v0.
@@ -47,10 +46,10 @@ def gen_video_code_v0(frame_sigs, bits=core_opts.video_bits):
     :rtype: dict
     """
     digest = soft_hash_video_v0(frame_sigs, bits=bits)
-    video_code = codec.encode_component(
-        mtype=codec.MT.CONTENT,
-        stype=codec.ST_CC.VIDEO,
-        version=codec.VS.V0,
+    video_code = ic.encode_component(
+        mtype=ic.MT.CONTENT,
+        stype=ic.ST_CC.VIDEO,
+        version=ic.VS.V0,
         bit_length=bits,
         digest=digest,
     )
@@ -58,7 +57,7 @@ def gen_video_code_v0(frame_sigs, bits=core_opts.video_bits):
     return dict(iscc=iscc)
 
 
-def soft_hash_video_v0(frame_sigs, bits=core_opts.video_bits):
+def soft_hash_video_v0(frame_sigs, bits=ic.core_opts.video_bits):
     # type: (Sequence[Sequence[int]], int) -> bytes
     """
     Compute video hash v0 from MP7 frame signatures.
@@ -71,5 +70,5 @@ def soft_hash_video_v0(frame_sigs, bits=core_opts.video_bits):
         frame_sigs = [tuple(sig) for sig in frame_sigs]
     sigs = set(frame_sigs)
     vecsum = [sum(col) for col in zip(*sigs)]
-    video_hash_digest = wtahash(vecsum, bits)
+    video_hash_digest = ic.wtahash(vecsum, bits)
     return video_hash_digest

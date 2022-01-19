@@ -13,11 +13,10 @@ using the following command line parameters:
 """
 from typing import Iterable
 from more_itertools import divide
-from iscc_core.simhash import similarity_hash
-from iscc_core import codec, core_opts
+import iscc_core as ic
 
 
-def gen_audio_code(cv, bits=core_opts.audio_bits):
+def gen_audio_code(cv, bits=ic.core_opts.audio_bits):
     # type: (Iterable[int], int) -> dict
     """
     Create an ISCC Content-Code Audio with the latest standard algorithm.
@@ -30,7 +29,7 @@ def gen_audio_code(cv, bits=core_opts.audio_bits):
     return gen_audio_code_v0(cv, bits)
 
 
-def gen_audio_code_v0(cv, bits=core_opts.audio_bits):
+def gen_audio_code_v0(cv, bits=ic.core_opts.audio_bits):
     # type: (Iterable[int], int) -> dict
     """
     Create an ISCC Content-Code Audio with algorithm v0.
@@ -41,10 +40,10 @@ def gen_audio_code_v0(cv, bits=core_opts.audio_bits):
     :rtype: dict
     """
     digest = soft_hash_audio_v0(cv)
-    audio_code = codec.encode_component(
-        mtype=codec.MT.CONTENT,
-        stype=codec.ST_CC.AUDIO,
-        version=codec.VS.V0,
+    audio_code = ic.encode_component(
+        mtype=ic.MT.CONTENT,
+        stype=ic.ST_CC.AUDIO,
+        version=ic.VS.V0,
         bit_length=bits,
         digest=digest,
     )
@@ -70,13 +69,13 @@ def soft_hash_audio_v0(cv):
         return b"\x00" * 32
 
     # Calculate simhash of digests as first 32-bit chunk of the hash
-    parts = [similarity_hash(digests)]
+    parts = [ic.similarity_hash(digests)]
 
     # Calculate separate 32-bit simhashes for each quarter of features (original order)
     for bucket in divide(4, digests):
         features = list(bucket)
         if features:
-            parts.append(similarity_hash(features))
+            parts.append(ic.similarity_hash(features))
         else:
             parts.append(b"\x00\x00\x00\x00")
 
@@ -86,7 +85,7 @@ def soft_hash_audio_v0(cv):
     for bucket in divide(3, digests):
         features = list(bucket)
         if features:
-            parts.append(similarity_hash(features))
+            parts.append(ic.similarity_hash(features))
         else:
             parts.append(b"\x00\x00\x00\x00")
     return b"".join(parts)

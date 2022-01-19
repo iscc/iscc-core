@@ -2,11 +2,10 @@
 """*A data checksum.*"""
 from blake3 import blake3
 from typing import Optional
-from iscc_core import codec, core_opts
-from iscc_core.codec import Data, Stream
+import iscc_core as ic
 
 
-def gen_instance_code(stream, bits=core_opts.instance_bits):
+def gen_instance_code(stream, bits=ic.core_opts.instance_bits):
     # type: (Stream, int) -> dict
     """
     Create an ISCC Instance-Code with the latest standard algorithm.
@@ -19,7 +18,7 @@ def gen_instance_code(stream, bits=core_opts.instance_bits):
     return gen_instance_code_v0(stream, bits)
 
 
-def gen_instance_code_v0(stream, bits=core_opts.instance_bits):
+def gen_instance_code_v0(stream, bits=ic.core_opts.instance_bits):
     # type: (Stream, int) -> dict
     """
     Create an ISCC Instance-Code with algorithm v0.
@@ -30,10 +29,10 @@ def gen_instance_code_v0(stream, bits=core_opts.instance_bits):
     :rtype: dict
     """
     hasher = InstanceHasherV0()
-    data = stream.read(core_opts.io_read_size)
+    data = stream.read(ic.core_opts.io_read_size)
     while data:
         hasher.push(data)
-        data = stream.read(core_opts.io_read_size)
+        data = stream.read(ic.core_opts.io_read_size)
 
     instance_code = hasher.code(bits=bits)
     iscc = "ISCC:" + instance_code
@@ -47,7 +46,7 @@ def gen_instance_code_v0(stream, bits=core_opts.instance_bits):
 
 
 def hash_instance_v0(stream):
-    # type: (Stream) -> bytes
+    # type: (ic.Stream) -> bytes
     """
     Create 256-bit hash digest for the Instance-Code body
 
@@ -56,10 +55,10 @@ def hash_instance_v0(stream):
     :rtype: bytes
     """
     hasher = InstanceHasherV0()
-    data = stream.read(core_opts.io_read_size)
+    data = stream.read(ic.core_opts.io_read_size)
     while data:
         hasher.push(data)
-        data = stream.read(core_opts.io_read_size)
+        data = stream.read(ic.core_opts.io_read_size)
     return hasher.digest()
 
 
@@ -70,14 +69,14 @@ class InstanceHasherV0:
     mh_prefix: bytes = b"\x1e\x20"
 
     def __init__(self, data=None):
-        # type: (Optional[Data]) -> None
+        # type: (Optional[ic.Data]) -> None
         self.hasher = blake3(max_threads=blake3.AUTO)
         self.filesize = 0
         data = data or b""
         self.push(data)
 
     def push(self, data):
-        # type: (Data) -> None
+        # type: (ic.Data) -> None
         """
         Push data to the Instance-Hash generator.
 
@@ -104,9 +103,9 @@ class InstanceHasherV0:
         :return: Blake3 hash as base32 endoded 256-bit multihash
         :rtype: str
         """
-        return "b" + codec.encode_base32(self.mh_prefix + self.digest()).lower()
+        return "b" + ic.encode_base32(self.mh_prefix + self.digest()).lower()
 
-    def code(self, bits=core_opts.instance_bits):
+    def code(self, bits=ic.core_opts.instance_bits):
         # type: (int) -> str
         """
         Encode digest as an ISCC Instance-Code component.
@@ -115,10 +114,10 @@ class InstanceHasherV0:
         :return: ISCC Instance-Code
         :rtype: str
         """
-        instance_code = codec.encode_component(
-            mtype=codec.MT.INSTANCE,
-            stype=codec.ST.NONE,
-            version=codec.VS.V0,
+        instance_code = ic.encode_component(
+            mtype=ic.MT.INSTANCE,
+            stype=ic.ST.NONE,
+            version=ic.VS.V0,
             bit_length=bits,
             digest=self.digest(),
         )

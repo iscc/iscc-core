@@ -38,9 +38,10 @@ implementation testing.
 from loguru import logger as log
 import pathlib
 import json
-import iscc_core
 import io
 from typing import Generator, Tuple, Callable, Any, List
+import iscc_core as ic
+
 
 HERE = pathlib.Path(__file__).parent.absolute()
 TEST_DATA = HERE / "data.json"
@@ -57,7 +58,7 @@ def generate_tests():
     with open(TEST_DATA, "rb") as stream:
         data = json.load(stream)
     for func_name, tests in data.items():
-        func_obj = getattr(iscc_core, func_name)
+        func_obj = getattr(ic, func_name)
         for test_name, test_values in tests.items():
 
             # Convert stream and bytes test values

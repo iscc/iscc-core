@@ -48,17 +48,12 @@ import base64
 import unicodedata
 import jcs
 from more_itertools import interleave, sliced
-from iscc_core.code_instance import InstanceHasherV0
-from iscc_core.code_content_text import collapse_text
-from iscc_core.codec import MT, ST, VS, encode_base64, encode_component, Properties
-from iscc_core.utils import sliding_window
-from iscc_core.simhash import similarity_hash
-from iscc_core import core_opts
 from blake3 import blake3
 from typing import Optional, Union
+import iscc_core as ic
 
 
-def gen_meta_code(name, description=None, properties=None, bits=core_opts.meta_bits):
+def gen_meta_code(name, description=None, properties=None, bits=ic.core_opts.meta_bits):
     # type: (str, Optional[str], Optional[Properties], int) -> dict
     """
     Create an ISCC Meta-Code using the latest standard algorithm.
@@ -72,8 +67,8 @@ def gen_meta_code(name, description=None, properties=None, bits=core_opts.meta_b
     return gen_meta_code_v0(name, description=description, properties=properties, bits=bits)
 
 
-def gen_meta_code_v0(name, description=None, properties=None, bits=core_opts.meta_bits):
-    # type: (str, Optional[str], Optional[Properties], int) -> dict
+def gen_meta_code_v0(name, description=None, properties=None, bits=ic.core_opts.meta_bits):
+    # type: (str, Optional[str], Optional[ic.Properties], int) -> dict
     """
     Create an ISCC Meta-Code with the algorithm version 0.
 
@@ -99,36 +94,36 @@ def gen_meta_code_v0(name, description=None, properties=None, bits=core_opts.met
     name = "" if name is None else name
     name = clean_text(name)
     name = remove_newlines(name)
-    name = trim_text(name, core_opts.meta_trim_name)
+    name = trim_text(name, ic.core_opts.meta_trim_name)
 
     # 2. Normalize `description`
     description = "" if description is None else description
     description = clean_text(description)
-    description = trim_text(description, core_opts.meta_trim_description)
+    description = trim_text(description, ic.core_opts.meta_trim_description)
 
     # Calculate meta_code, metahash, and properties value for the different input cases
     if properties:
         if isinstance(properties, bytes):
             meta_code_digest = soft_hash_meta_v0(name, properties)
-            metahash = InstanceHasherV0(properties).multihash()
+            metahash = ic.InstanceHasherV0(properties).multihash()
             properties_value = base64.b64encode(properties).decode("ascii")
         elif isinstance(properties, dict):
             payload = jcs.canonicalize(properties)
             meta_code_digest = soft_hash_meta_v0(name, payload)
-            metahash = InstanceHasherV0(payload).multihash()
+            metahash = ic.InstanceHasherV0(payload).multihash()
             properties_value = properties
         else:
             raise TypeError(f"properties must be bytes or dict not {type(properties)}")
     else:
         payload = " ".join((name, description)).strip().encode("utf-8")
         meta_code_digest = soft_hash_meta_v0(name, description)
-        metahash = InstanceHasherV0(payload).multihash()
+        metahash = ic.InstanceHasherV0(payload).multihash()
         properties_value = None
 
-    meta_code = encode_component(
-        mtype=MT.META,
-        stype=ST.NONE,
-        version=VS.V0,
+    meta_code = ic.encode_component(
+        mtype=ic.MT.META,
+        stype=ic.ST.NONE,
+        version=ic.VS.V0,
         bit_length=bits,
         digest=meta_code_digest,
     )
@@ -177,10 +172,10 @@ def soft_hash_meta_v0(name, extra=None):
     :return: 256-bit simhash digest for Meta-Code
     :rtype: bytes
     """
-    name = collapse_text(name)
-    name_n_grams = sliding_window(name, width=core_opts.meta_ngram_size_text)
+    name = ic.collapse_text(name)
+    name_n_grams = ic.sliding_window(name, width=ic.core_opts.meta_ngram_size_text)
     name_hash_digests = [blake3(s.encode("utf-8")).digest() for s in name_n_grams]
-    simhash_digest = similarity_hash(name_hash_digests)
+    simhash_digest = ic.similarity_hash(name_hash_digests)
 
     if extra in {None, "", b""}:
         return simhash_digest
@@ -188,17 +183,17 @@ def soft_hash_meta_v0(name, extra=None):
         # Augment with interleaved hash for extra metadata
         if isinstance(extra, bytes):
             # Raw bytes are handled per byte
-            extra_n_grams = sliding_window(extra, width=core_opts.meta_ngram_size_bytes)
+            extra_n_grams = ic.sliding_window(extra, width=ic.core_opts.meta_ngram_size_bytes)
             extra_hash_digests = [blake3(ngram).digest() for ngram in extra_n_grams]
         elif isinstance(extra, str):
             # Text is collapsed and handled per character (multibyte)
-            extra = collapse_text(extra)
-            extra_n_grams = sliding_window(extra, width=core_opts.meta_ngram_size_text)
+            extra = ic.collapse_text(extra)
+            extra_n_grams = ic.sliding_window(extra, width=ic.core_opts.meta_ngram_size_text)
             extra_hash_digests = [blake3(s.encode("utf-8")).digest() for s in extra_n_grams]
         else:
             raise ValueError("parameter `extra` must be of type str or bytes!")
 
-        extra_simhash_digest = similarity_hash(extra_hash_digests)
+        extra_simhash_digest = ic.similarity_hash(extra_hash_digests)
 
         # Interleave first half of name and extra simhashes in 32-bit chunks
         chunks_simhash_digest = sliced(simhash_digest[:16], 4)
@@ -250,14 +245,14 @@ def clean_text(text):
 
     # Remove control characters
     text = "".join(
-        ch for ch in text if unicodedata.category(ch)[0] != "C" or ch in core_opts.text_newlines
+        ch for ch in text if unicodedata.category(ch)[0] != "C" or ch in ic.core_opts.text_newlines
     )
 
     # Collapse more than two consecutive newlines
     chars = []
     newline_count = 0
     for c in text:
-        if c in core_opts.text_newlines:
+        if c in ic.core_opts.text_newlines:
             if newline_count < 2:
                 chars.append("\n")
                 newline_count += 1

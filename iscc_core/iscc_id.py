@@ -10,8 +10,8 @@ mint colides with a pre-existing **ISCC-ID** minted from the same blockchain fro
 different **ISCC-CODE** or from an identical **ISCC-CODE** registered by a different
 signatory.
 """
-from iscc_core import simhash, codec
 import uvarint
+import iscc_core as ic
 
 
 def gen_iscc_id(chain, iscc_code, uc=0):
@@ -40,13 +40,13 @@ def gen_iscc_id_v0(chain_id, iscc_code, uc=0):
     :return: ISCC object with an ISCC-ID
     :rtype: dict
     """
-    assert chain_id in list(codec.ST_ID), "Unregistered Chain-ID {}".format(chain_id)
+    assert chain_id in list(ic.ST_ID), "Unregistered Chain-ID {}".format(chain_id)
     iscc_id_digest = soft_hash_iscc_id_v0(iscc_code, uc)
     iscc_id_len = len(iscc_id_digest) * 8
-    iscc_id = codec.encode_component(
-        mtype=codec.MT.ID,
+    iscc_id = ic.encode_component(
+        mtype=ic.MT.ID,
         stype=chain_id,
-        version=codec.VS.V0,
+        version=ic.VS.V0,
         bit_length=iscc_id_len,
         digest=iscc_id_digest,
     )
@@ -64,24 +64,24 @@ def soft_hash_iscc_id_v0(iscc_code, uc=0):
     :return: Digest for ISCC-ID without header but including uniqueness counter.
     :rtype: bytes
     """
-    components = codec.decompose(iscc_code)
-    decoded = [codec.decode_base32(c) for c in components]
-    unpacked = [codec.read_header(d) for d in decoded]
+    components = ic.decompose(iscc_code)
+    decoded = [ic.decode_base32(c) for c in components]
+    unpacked = [ic.read_header(d) for d in decoded]
 
     digests = []
 
-    if len(unpacked) == 1 and unpacked[0][0] == codec.MT.INSTANCE:
+    if len(unpacked) == 1 and unpacked[0][0] == ic.MT.INSTANCE:
         # Special case if iscc_code is a singular Instance-Code
         digests.append(decoded[0][:1] + unpacked[0][-1][:7])
     else:
         digests = []
         for dec, unp in zip(decoded, unpacked):
-            if unp[0] == codec.MT.INSTANCE:
+            if unp[0] == ic.MT.INSTANCE:
                 continue
             # first byte of header + first 7 bytes of body
             digests.append(dec[:1] + unp[-1][:7])
 
-    iscc_id_digest = simhash.similarity_hash(digests)
+    iscc_id_digest = ic.similarity_hash(digests)
 
     if uc:
         iscc_id_digest += uvarint.encode(uc)
@@ -109,13 +109,13 @@ def incr_iscc_id_v0(iscc_id):
     :return: Base32-encoded ISCC-ID with counter incremented by one.
     :rtype: str
     """
-    code_digest = codec.decode_base32(iscc_id)
-    mt, _, vs, _, _ = codec.read_header(code_digest)
-    assert mt == codec.MT.ID, "MainType {} is not ISCC-ID".format(mt)
-    assert vs == codec.VS.V0, "Version {} is not v0".format(vs)
+    code_digest = ic.decode_base32(iscc_id)
+    mt, _, vs, _, _ = ic.read_header(code_digest)
+    assert mt == ic.MT.ID, "MainType {} is not ISCC-ID".format(mt)
+    assert vs == ic.VS.V0, "Version {} is not v0".format(vs)
     if len(code_digest) == 10:
         code_digest += uvarint.encode(1)
     else:
         decoded = uvarint.decode(code_digest[10:])
         code_digest = code_digest[:10] + uvarint.encode(decoded.integer + 1)
-    return codec.encode_base32(code_digest)
+    return ic.encode_base32(code_digest)

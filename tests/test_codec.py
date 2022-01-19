@@ -4,22 +4,21 @@ from binascii import unhexlify
 import pytest
 from bitarray import bitarray as ba, frozenbitarray
 import iscc_core as ic
-from .conftest import static_bytes
 
 
 def test_main_type():
-    assert isinstance(ic.codec.MT.META, int)
-    assert ic.codec.MT.META == 0
+    assert isinstance(ic.MT.META, int)
+    assert ic.MT.META == 0
 
 
 def test_write_header():
     # with pytest.raises(AssertionError):
     #     ic.codec.write_header(0, 0, 0, 0)
-    assert ic.codec.write_header(0, 0, 0, 0) == bytes([0b0000_0000, 0b0000_0000])
-    assert ic.codec.write_header(1, 0, 0, 0) == bytes([0b0001_0000, 0b0000_0000])
-    assert ic.codec.write_header(7, 1, 1, 1) == bytes([0b0111_0001, 0b0001_0001])
-    assert ic.codec.write_header(8, 1, 1, 1) == bytes([0b1000_0000, 0b0001_0001, 0b0001_0000])
-    assert ic.codec.write_header(8, 8, 1, 1) == bytes([0b1000_0000, 0b1000_0000, 0b0001_0001])
+    assert ic.write_header(0, 0, 0, 0) == bytes([0b0000_0000, 0b0000_0000])
+    assert ic.write_header(1, 0, 0, 0) == bytes([0b0001_0000, 0b0000_0000])
+    assert ic.write_header(7, 1, 1, 1) == bytes([0b0111_0001, 0b0001_0001])
+    assert ic.write_header(8, 1, 1, 1) == bytes([0b1000_0000, 0b0001_0001, 0b0001_0000])
+    assert ic.write_header(8, 8, 1, 1) == bytes([0b1000_0000, 0b1000_0000, 0b0001_0001])
 
 
 def test_read_header():
@@ -33,25 +32,25 @@ def test_read_header():
 
 
 def test_encode_base32():
-    assert ic.codec.encode_base32(b"") == ""
-    assert ic.codec.encode_base32(b"f") == "MY"
-    assert ic.codec.encode_base32(b"fo") == "MZXQ"
-    assert ic.codec.encode_base32(b"foo") == "MZXW6"
-    assert ic.codec.encode_base32(b"foob") == "MZXW6YQ"
-    assert ic.codec.encode_base32(b"fooba") == "MZXW6YTB"
-    assert ic.codec.encode_base32(b"foobar") == "MZXW6YTBOI"
+    assert ic.encode_base32(b"") == ""
+    assert ic.encode_base32(b"f") == "MY"
+    assert ic.encode_base32(b"fo") == "MZXQ"
+    assert ic.encode_base32(b"foo") == "MZXW6"
+    assert ic.encode_base32(b"foob") == "MZXW6YQ"
+    assert ic.encode_base32(b"fooba") == "MZXW6YTB"
+    assert ic.encode_base32(b"foobar") == "MZXW6YTBOI"
 
 
 def test_decode_base32():
-    assert ic.codec.decode_base32("") == b""
-    assert ic.codec.decode_base32("MY") == b"f"
-    assert ic.codec.decode_base32("My") == b"f"
-    assert ic.codec.decode_base32("my") == b"f"
-    assert ic.codec.decode_base32("MZXQ") == b"fo"
-    assert ic.codec.decode_base32("MZXW6") == b"foo"
-    assert ic.codec.decode_base32("MZXW6YQ") == b"foob"
-    assert ic.codec.decode_base32("MZXW6YTB") == b"fooba"
-    assert ic.codec.decode_base32("MZXW6YTBOI") == b"foobar"
+    assert ic.decode_base32("") == b""
+    assert ic.decode_base32("MY") == b"f"
+    assert ic.decode_base32("My") == b"f"
+    assert ic.decode_base32("my") == b"f"
+    assert ic.decode_base32("MZXQ") == b"fo"
+    assert ic.decode_base32("MZXW6") == b"foo"
+    assert ic.decode_base32("MZXW6YQ") == b"foob"
+    assert ic.decode_base32("MZXW6YTB") == b"fooba"
+    assert ic.decode_base32("MZXW6YTBOI") == b"foobar"
 
 
 def test_decode_base32_casefold():
@@ -60,71 +59,71 @@ def test_decode_base32_casefold():
 
 def test_decode_base_64():
     data = os.urandom(8)
-    enc = ic.codec.encode_base64(data)
-    assert ic.codec.decode_base64(enc) == data
+    enc = ic.encode_base64(data)
+    assert ic.decode_base64(enc) == data
 
 
 def test_write_varnibble():
     with pytest.raises(ValueError):
-        ic.codec.write_varnibble(-1)
-    assert ic.codec.write_varnibble(0) == ba("0000")
-    assert ic.codec.write_varnibble(7) == ba("0111")
-    assert ic.codec.write_varnibble(8) == ba("10000000")
-    assert ic.codec.write_varnibble(9) == ba("10000001")
-    assert ic.codec.write_varnibble(71) == ba("10111111")
-    assert ic.codec.write_varnibble(72) == ba("110000000000")
-    assert ic.codec.write_varnibble(73) == ba("110000000001")
-    assert ic.codec.write_varnibble(583) == ba("110111111111")
-    assert ic.codec.write_varnibble(584) == ba("1110000000000000")
-    assert ic.codec.write_varnibble(4679) == ba("1110111111111111")
+        ic.write_varnibble(-1)
+    assert ic.write_varnibble(0) == ba("0000")
+    assert ic.write_varnibble(7) == ba("0111")
+    assert ic.write_varnibble(8) == ba("10000000")
+    assert ic.write_varnibble(9) == ba("10000001")
+    assert ic.write_varnibble(71) == ba("10111111")
+    assert ic.write_varnibble(72) == ba("110000000000")
+    assert ic.write_varnibble(73) == ba("110000000001")
+    assert ic.write_varnibble(583) == ba("110111111111")
+    assert ic.write_varnibble(584) == ba("1110000000000000")
+    assert ic.write_varnibble(4679) == ba("1110111111111111")
     with pytest.raises(ValueError):
-        ic.codec.write_varnibble(4680)
+        ic.write_varnibble(4680)
     with pytest.raises(TypeError):
-        ic.codec.write_varnibble(1.0)
+        ic.write_varnibble(1.0)
 
 
 def test_read_varnibble():
     with pytest.raises(ValueError):
-        ic.codec.read_varnibble(ba("0"))
+        ic.read_varnibble(ba("0"))
     with pytest.raises(ValueError):
-        ic.codec.read_varnibble(ba("1"))
+        ic.read_varnibble(ba("1"))
     with pytest.raises(ValueError):
-        ic.codec.read_varnibble(ba("011"))
+        ic.read_varnibble(ba("011"))
     with pytest.raises(ValueError):
-        ic.codec.read_varnibble(ba("100"))
-    assert ic.codec.read_varnibble(ba("0000")) == (0, ba())
-    assert ic.codec.read_varnibble(ba("000000")) == (0, ba("00"))
-    assert ic.codec.read_varnibble(ba("0111")) == (7, ba())
-    assert ic.codec.read_varnibble(ba("01110")) == (7, ba("0"))
-    assert ic.codec.read_varnibble(ba("01111")) == (7, ba("1"))
-    assert ic.codec.read_varnibble(ba("10000000")) == (8, ba())
-    assert ic.codec.read_varnibble(ba("10000001")) == (9, ba())
-    assert ic.codec.read_varnibble(ba("10000001110")) == (9, ba("110"))
-    assert ic.codec.read_varnibble(ba("10111111")) == (71, ba())
-    assert ic.codec.read_varnibble(ba("101111110")) == (71, ba("0"))
-    assert ic.codec.read_varnibble(ba("110000000000")) == (72, ba())
-    assert ic.codec.read_varnibble(ba("11000000000010")) == (72, ba("10"))
-    assert ic.codec.read_varnibble(ba("110000000001")) == (73, ba())
-    assert ic.codec.read_varnibble(ba("110000000001010")) == (73, ba("010"))
-    assert ic.codec.read_varnibble(ba("110111111111")) == (583, ba())
-    assert ic.codec.read_varnibble(ba("1101111111111010")) == (583, ba("1010"))
-    assert ic.codec.read_varnibble(ba("1110000000000000")) == (584, ba())
-    assert ic.codec.read_varnibble(ba("111000000000000001010")) == (
+        ic.read_varnibble(ba("100"))
+    assert ic.read_varnibble(ba("0000")) == (0, ba())
+    assert ic.read_varnibble(ba("000000")) == (0, ba("00"))
+    assert ic.read_varnibble(ba("0111")) == (7, ba())
+    assert ic.read_varnibble(ba("01110")) == (7, ba("0"))
+    assert ic.read_varnibble(ba("01111")) == (7, ba("1"))
+    assert ic.read_varnibble(ba("10000000")) == (8, ba())
+    assert ic.read_varnibble(ba("10000001")) == (9, ba())
+    assert ic.read_varnibble(ba("10000001110")) == (9, ba("110"))
+    assert ic.read_varnibble(ba("10111111")) == (71, ba())
+    assert ic.read_varnibble(ba("101111110")) == (71, ba("0"))
+    assert ic.read_varnibble(ba("110000000000")) == (72, ba())
+    assert ic.read_varnibble(ba("11000000000010")) == (72, ba("10"))
+    assert ic.read_varnibble(ba("110000000001")) == (73, ba())
+    assert ic.read_varnibble(ba("110000000001010")) == (73, ba("010"))
+    assert ic.read_varnibble(ba("110111111111")) == (583, ba())
+    assert ic.read_varnibble(ba("1101111111111010")) == (583, ba("1010"))
+    assert ic.read_varnibble(ba("1110000000000000")) == (584, ba())
+    assert ic.read_varnibble(ba("111000000000000001010")) == (
         584,
         ba("01010"),
     )
-    assert ic.codec.read_varnibble(ba("1110111111111111")) == (4679, ba())
-    assert ic.codec.read_varnibble(ba("1110111111111111101010")) == (
+    assert ic.read_varnibble(ba("1110111111111111")) == (4679, ba())
+    assert ic.read_varnibble(ba("1110111111111111101010")) == (
         4679,
         ba("101010"),
     )
 
 
 def test_codec_clean():
-    assert ic.codec.clean("somecode") == "somecode"
-    assert ic.codec.clean("ISCC: SOME-CODE") == "SOMECODE"
-    assert ic.codec.clean(" SOMECODE ") == "SOMECODE"
-    assert ic.codec.clean("ISCC:") == ""
+    assert ic.clean("somecode") == "somecode"
+    assert ic.clean("ISCC: SOME-CODE") == "SOMECODE"
+    assert ic.clean(" SOMECODE ") == "SOMECODE"
+    assert ic.clean("ISCC:") == ""
 
 
 def test_codec_clean_raises_bad_scheme():
@@ -138,8 +137,8 @@ def test_codec_clean_raises_multiple_colom():
 
 
 def test_code_properties():
-    c64 = ic.codec.Code(ic.gen_meta_code("Hello World")["iscc"])
-    c256 = ic.codec.Code(ic.gen_meta_code("Hello World", bits=256)["iscc"])
+    c64 = ic.Code(ic.gen_meta_code("Hello World")["iscc"])
+    c256 = ic.Code(ic.gen_meta_code("Hello World", bits=256)["iscc"])
     assert c64.code == "AAAWN77F727NXSUS"
     assert c256.code == "AADWN77F727NXSUSUVDFOUS64JFPMZ4GAR5NJ3O5P563LTMXWS5XNSQ"
     assert c64.bytes == unhexlify(c64.hex)
@@ -153,26 +152,26 @@ def test_code_properties():
         c256.hash_uint
         == 46588043924851280427026156359332814243502099936826263036193519252570625504970
     )
-    assert c64.maintype == ic.codec.MT.META
+    assert c64.maintype == ic.MT.META
     assert c64.maintype == 0
-    assert c64.subtype == ic.codec.ST.NONE
+    assert c64.subtype == ic.ST.NONE
     assert c64.subtype == 0
-    assert c64.version == ic.codec.VS.V0
+    assert c64.version == ic.VS.V0
     assert c64.length == 64
     assert c256.length == 256
     assert c64 ^ c64 == 0
     with pytest.raises(ValueError):
         _ = c64 ^ c256
-    assert c64 == ic.codec.Code(c64.bytes)
-    assert c64 == ic.codec.Code(c64.code)
-    assert c64 == ic.codec.Code(tuple(c64))
+    assert c64 == ic.Code(c64.bytes)
+    assert c64 == ic.Code(c64.code)
+    assert c64 == ic.Code(tuple(c64))
     assert isinstance(c64.hash_ba, frozenbitarray)
     icode = ic.Code("KACYPXW445FTYNJ3CYSXHAFJMA2HUWULUNRFE3BLHRSCXYH2M5AEGQY")
     assert icode.type_id == "ISCC-TEXT-V0-MCDI"
 
 
 def test_code_hashable():
-    code = ic.codec.Code.rnd(ic.MT.META)
+    code = ic.Code.rnd(ic.MT.META)
     assert code in {code}
 
 
@@ -216,8 +215,8 @@ def test_Code_raises():
 
 
 def test_Code_Code():
-    code = ic.codec.Code.rnd(ic.codec.MT.META)
-    assert ic.codec.Code(code) == code
+    code = ic.Code.rnd(ic.MT.META)
+    assert ic.Code(code) == code
 
 
 def test_Code_str_repr():
@@ -236,15 +235,15 @@ def test_decompose_single_component():
         ic.MT.INSTANCE,
     )
     for mt in mts:
-        code = ic.codec.Code.rnd(mt=mt)
-        assert ic.codec.decompose(code.code)[0] == code.code
+        code = ic.Code.rnd(mt=mt)
+        assert ic.decompose(code.code)[0] == code.code
 
 
 def test_decompose_data_instance():
     data = "GABTMCHNLCHTI2NHZFXOLEB53KSPU"
     inst = "IAB3GN6WUSNSX3MJBT6PBTVFAQZ7G"
     di = [data, inst]
-    code = ic.iscc_code.gen_iscc_code_v0([data, inst])["iscc"]
+    code = ic.gen_iscc_code_v0([data, inst])["iscc"]
     assert code == "ISCC:KUADMCHNLCHTI2NHWM35NJE3FPWYS"
     assert ic.decompose(code) == ["GAATMCHNLCHTI2NH", "IAA3GN6WUSNSX3MJ"]
 
@@ -254,7 +253,7 @@ def test_decompose_content_data_instance():
     data = "GAA7ER72LMA6IOIO"
     inst = "IAAX3C2BUFV6XPQV"
     di = [cont, data, inst]
-    code = ic.iscc_code.gen_iscc_code_v0([cont, data, inst])["iscc"]
+    code = ic.gen_iscc_code_v0([cont, data, inst])["iscc"]
     assert code == "ISCC:KMARIURG4CVZ3M7N6JD7UWYB4Q4Q47MLIGQWX256CU"
     assert ic.decompose(code) == di
 
@@ -265,7 +264,7 @@ def test_decompose_meta_content_data_instance():
     data = "GAA2F344YTSCRKBD"
     inst = "IAA4FWMY2ANPAYWJ"
     di = [meta, cont, data, inst]
-    code = ic.iscc_code.gen_iscc_code_v0([meta, cont, data, inst])["iscc"]
+    code = ic.gen_iscc_code_v0([meta, cont, data, inst])["iscc"]
     assert code == "ISCC:KEC4CPEJKZZ7A4HZMZUFTZYEOHCPLIXPTTCOIKFIEPBNTGGQDLYGFSI"
     assert ic.decompose(code) == di
 
@@ -277,10 +276,10 @@ def test_decompose_invalid():
 
 
 def test_decompose_str_of_codes():
-    mco = ic.codec.Code.rnd(ic.codec.MT.META)
-    cco = ic.codec.Code.rnd(ic.codec.MT.CONTENT)
-    dco = ic.codec.Code.rnd(ic.codec.MT.DATA)
-    ico = ic.codec.Code.rnd(ic.codec.MT.INSTANCE)
+    mco = ic.Code.rnd(ic.MT.META)
+    cco = ic.Code.rnd(ic.MT.CONTENT)
+    dco = ic.Code.rnd(ic.MT.DATA)
+    ico = ic.Code.rnd(ic.MT.INSTANCE)
     iscc = f"ISCC:{mco.code}-{cco.code}-{dco.code}-{ico.code}"
     codes = ic.codec.decompose(iscc)
     assert codes == [mco.code, cco.code, dco.code, ico.code]

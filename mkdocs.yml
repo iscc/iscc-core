@@ -93,6 +93,7 @@ markdown_extensions:
 
 nav:
   - Overview: index.md
+  - Types: constants.md
   - Codec: codec/codec.md
   - ISCC-CODE: iscc_code.md
   - ISCC-ID: iscc_id.md

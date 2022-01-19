@@ -1,105 +1,93 @@
 # -*- coding: utf-8 -*-
 import pytest
 from iscc_schema import ISCC
-
-import iscc_core
+import iscc_core as ic
 
 
 def test_gen_image_code_v0_default():
-    ic_obj = iscc_core.gen_image_code_v0(IMG_SAMPLE_PIXELS)
+    ic_obj = ic.gen_image_code_v0(IMG_SAMPLE_PIXELS)
     assert ic_obj == {"iscc": "ISCC:EEA4GQZQTY6J5DTH"}
 
 
 def test_gen_image_code_v0_32bit():
-    ic_obj = iscc_core.gen_image_code_v0(IMG_SAMPLE_PIXELS, bits=32)
+    ic_obj = ic.gen_image_code_v0(IMG_SAMPLE_PIXELS, bits=32)
     assert ic_obj == {"iscc": "ISCC:EEAMGQZQTY"}
 
 
 def test_gen_image_code_v0_256bit():
-    ic_obj = iscc_core.gen_image_code_v0(IMG_SAMPLE_PIXELS, bits=256)
+    ic_obj = ic.gen_image_code_v0(IMG_SAMPLE_PIXELS, bits=256)
     assert ic_obj == {"iscc": "ISCC:EED4GQZQTY6J5DTHQ2DWCPDZHQOM6QZQTY6J5DTFZ2DWCPDZHQOMXDI"}
 
 
 def test_hash_image_v0_white():
+    assert ic.soft_hash_image_v0(IMG_WHITE_PIXELS, bits=64).hex() == "8000000000000000"
     assert (
-        iscc_core.code_content_image.soft_hash_image_v0(IMG_WHITE_PIXELS, bits=64).hex()
-        == "8000000000000000"
-    )
-    assert (
-        iscc_core.code_content_image.soft_hash_image_v0(IMG_WHITE_PIXELS, bits=256).hex()
+        ic.soft_hash_image_v0(IMG_WHITE_PIXELS, bits=256).hex()
         == "8000000000000000000000000000000000000000000000000000000000000000"
     )
 
 
 def test_hash_image_v0_black():
+    assert ic.soft_hash_image_v0(IMG_BLACK_PIXELS, bits=64).hex() == "0000000000000000"
     assert (
-        iscc_core.code_content_image.soft_hash_image_v0(IMG_BLACK_PIXELS, bits=64).hex()
-        == "0000000000000000"
-    )
-    assert (
-        iscc_core.code_content_image.soft_hash_image_v0(IMG_BLACK_PIXELS, bits=256).hex()
+        ic.soft_hash_image_v0(IMG_BLACK_PIXELS, bits=256).hex()
         == "0000000000000000000000000000000000000000000000000000000000000000"
     )
 
 
 def test_hash_image_v0_sample():
-    assert (
-        iscc_core.code_content_image.soft_hash_image_v0(IMG_SAMPLE_PIXELS, 64).hex()
-        == "c343309e3c9e8e67"
-    )
+    assert ic.soft_hash_image_v0(IMG_SAMPLE_PIXELS, 64).hex() == "c343309e3c9e8e67"
 
     assert (
-        iscc_core.code_content_image.soft_hash_image_v0(IMG_SAMPLE_PIXELS, 256).hex()
+        ic.soft_hash_image_v0(IMG_SAMPLE_PIXELS, 256).hex()
         == "c343309e3c9e8e678687613c793c1ccf43309e3c9e8e65ce87613c793c1ccb8d"
     )
 
 
 def test_gen_code_image_v0_white():
-    assert iscc_core.code_content_image.gen_image_code_v0(IMG_WHITE_PIXELS, bits=64) == {
-        "iscc": "ISCC:EEAYAAAAAAAAAAAA"
-    }
-    assert iscc_core.code_content_image.gen_image_code_v0(IMG_WHITE_PIXELS, bits=96) == {
+    assert ic.gen_image_code_v0(IMG_WHITE_PIXELS, bits=64) == {"iscc": "ISCC:EEAYAAAAAAAAAAAA"}
+    assert ic.gen_image_code_v0(IMG_WHITE_PIXELS, bits=96) == {
         "iscc": "ISCC:EEBIAAAAAAAAAAAAAAAAAAA"
     }
-    assert iscc_core.code_content_image.gen_image_code_v0(IMG_WHITE_PIXELS, bits=128) == {
+    assert ic.gen_image_code_v0(IMG_WHITE_PIXELS, bits=128) == {
         "iscc": "ISCC:EEBYAAAAAAAAAAAAAAAAAAAAAAAAA"
     }
-    assert iscc_core.code_content_image.gen_image_code_v0(IMG_WHITE_PIXELS, bits=256) == {
+    assert ic.gen_image_code_v0(IMG_WHITE_PIXELS, bits=256) == {
         "iscc": "ISCC:EEDYAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
     }
 
 
 def test_get_code_image_v0():
-    assert iscc_core.code_content_image.gen_image_code_v0(IMG_SAMPLE_PIXELS, bits=256) == {
+    assert ic.gen_image_code_v0(IMG_SAMPLE_PIXELS, bits=256) == {
         "iscc": "ISCC:EED4GQZQTY6J5DTHQ2DWCPDZHQOM6QZQTY6J5DTFZ2DWCPDZHQOMXDI"
     }
 
 
 def test_get_code_image():
-    assert iscc_core.code_content_image.gen_image_code(IMG_SAMPLE_PIXELS, bits=256) == {
+    assert ic.gen_image_code(IMG_SAMPLE_PIXELS, bits=256) == {
         "iscc": "ISCC:EED4GQZQTY6J5DTHQ2DWCPDZHQOM6QZQTY6J5DTFZ2DWCPDZHQOMXDI"
     }
 
 
 def test_dct_empty():
     with pytest.raises(ValueError):
-        iscc_core.code_content_image.dct([])
+        ic.dct([])
 
 
 def test_dct_zeros():
-    assert iscc_core.code_content_image.dct([0] * 64) == [0] * 64
+    assert ic.dct([0] * 64) == [0] * 64
 
 
 def test_dct_ones():
-    assert iscc_core.code_content_image.dct([1] * 64) == [64] + [0] * 63
+    assert ic.dct([1] * 64) == [64] + [0] * 63
 
 
 def test_dct_range():
-    assert iscc_core.code_content_image.dct(range(64))[0] == 2016
+    assert ic.dct(range(64))[0] == 2016
 
 
 def test_gen_image_code_schema_conformance():
-    iscc_obj = ISCC(**iscc_core.gen_image_code_v0(IMG_SAMPLE_PIXELS))
+    iscc_obj = ISCC(**ic.gen_image_code_v0(IMG_SAMPLE_PIXELS))
     assert iscc_obj.iscc == "ISCC:EEA4GQZQTY6J5DTH"
 
 

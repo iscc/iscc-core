@@ -21,15 +21,13 @@ from a media assets.
 import unicodedata
 from typing import Union
 import xxhash
-from iscc_core.minhash import minhash_256
-from iscc_core.utils import sliding_window
-from iscc_core import codec, core_opts
+import iscc_core as ic
 
 
 Text = Union[str, bytes]
 
 
-def gen_text_code(text, bits=core_opts.text_bits):
+def gen_text_code(text, bits=ic.core_opts.text_bits):
     # type: (Text, int) -> dict
     """
     Create an ISCC Text-Code with the latest standard algorithm.
@@ -42,7 +40,7 @@ def gen_text_code(text, bits=core_opts.text_bits):
     return gen_text_code_v0(text, bits)
 
 
-def gen_text_code_v0(text, bits=core_opts.text_bits):
+def gen_text_code_v0(text, bits=ic.core_opts.text_bits):
     # type: (Text, int) -> dict
     """
     Create an ISCC Text-Code with algorithm v0.
@@ -61,10 +59,10 @@ def gen_text_code_v0(text, bits=core_opts.text_bits):
     characters = len(text)
     digest = soft_hash_text_v0(text)
 
-    text_code = codec.encode_component(
-        mtype=codec.MT.CONTENT,
-        stype=codec.ST_CC.TEXT,
-        version=codec.VS.V0,
+    text_code = ic.encode_component(
+        mtype=ic.MT.CONTENT,
+        stype=ic.ST_CC.TEXT,
+        version=ic.VS.V0,
         bit_length=bits,
         digest=digest,
     )
@@ -101,7 +99,7 @@ def collapse_text(text):
 
     # Filter control characters, marks (diacritics), and punctuation
     text = "".join(
-        ch for ch in text if unicodedata.category(ch)[0] not in core_opts.text_unicode_filter
+        ch for ch in text if unicodedata.category(ch)[0] not in ic.core_opts.text_unicode_filter
     )
 
     # Recombine
@@ -134,7 +132,7 @@ def soft_hash_text_v0(text):
     :return: 256-bit similarity preserving byte hash.
     :rtype: bytes
     """
-    ngrams = sliding_window(text, core_opts.text_ngram_size)
+    ngrams = ic.sliding_window(text, ic.core_opts.text_ngram_size)
     features = [xxhash.xxh32_intdigest(s.encode("utf-8")) for s in ngrams]
-    hash_digest = minhash_256(features)
+    hash_digest = ic.minhash_256(features)
     return hash_digest

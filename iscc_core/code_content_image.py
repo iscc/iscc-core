@@ -17,11 +17,10 @@ Images must be normalized before using gen_image_code. Prepare images as follows
 from statistics import median
 from typing import Sequence
 from more_itertools import chunked
-from iscc_core import codec, core_opts
-from iscc_core.dct import dct
+import iscc_core as ic
 
 
-def gen_image_code(pixels, bits=core_opts.image_bits):
+def gen_image_code(pixels, bits=ic.core_opts.image_bits):
     # type: (Sequence[int], int) -> dict
     """
     Create an ISCC Content-Code Image with the latest standard algorithm.
@@ -34,7 +33,7 @@ def gen_image_code(pixels, bits=core_opts.image_bits):
     return gen_image_code_v0(pixels, bits)
 
 
-def gen_image_code_v0(pixels, bits=core_opts.image_bits):
+def gen_image_code_v0(pixels, bits=ic.core_opts.image_bits):
     # type: (Sequence[int], int) -> dict
     """
     Create an ISCC Content-Code Image with algorithm v0.
@@ -45,10 +44,10 @@ def gen_image_code_v0(pixels, bits=core_opts.image_bits):
     :rtype: ISCC
     """
     digest = soft_hash_image_v0(pixels, bits=bits)
-    image_code = codec.encode_component(
-        mtype=codec.MT.CONTENT,
-        stype=codec.ST_CC.IMAGE,
-        version=codec.VS.V0,
+    image_code = ic.encode_component(
+        mtype=ic.MT.CONTENT,
+        stype=ic.ST_CC.IMAGE,
+        version=ic.VS.V0,
         bit_length=bits,
         digest=digest,
     )
@@ -56,7 +55,7 @@ def gen_image_code_v0(pixels, bits=core_opts.image_bits):
     return {"iscc": iscc}
 
 
-def soft_hash_image_v0(pixels, bits=core_opts.image_bits):
+def soft_hash_image_v0(pixels, bits=ic.core_opts.image_bits):
     # type: (Sequence[int], int) -> bytes
     """
     Calculate image hash from normalized grayscale pixel sequence of length 1024.
@@ -72,13 +71,13 @@ def soft_hash_image_v0(pixels, bits=core_opts.image_bits):
     # DCT per row
     dct_row_lists = []
     for pixel_list in chunked(pixels, 32):
-        dct_row_lists.append(dct(pixel_list))
+        dct_row_lists.append(ic.dct(pixel_list))
 
     # DCT per col
     dct_row_lists_t = list(map(list, zip(*dct_row_lists)))
     dct_col_lists_t = []
     for dct_list in dct_row_lists_t:
-        dct_col_lists_t.append(dct(dct_list))
+        dct_col_lists_t.append(ic.dct(dct_list))
 
     dct_matrix = list(map(list, zip(*dct_col_lists_t)))
 

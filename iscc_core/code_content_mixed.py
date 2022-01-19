@@ -13,13 +13,10 @@ Applications that create mixed Content-Codes must be capable to extract embedded
 assets and create individual Content-Codes per asset.
 """
 from typing import Iterable, Sequence
-
-import iscc_core
-from iscc_core import codec, core_opts
-from iscc_core.simhash import similarity_hash
+import iscc_core as ic
 
 
-def gen_mixed_code(codes, bits=core_opts.mixed_bits):
+def gen_mixed_code(codes, bits=ic.core_opts.mixed_bits):
     # type: (Sequence[str], int) -> dict
     """
     Create an ISCC Content-Code Mixed with the latest standard algorithm.
@@ -32,7 +29,7 @@ def gen_mixed_code(codes, bits=core_opts.mixed_bits):
     return gen_mixed_code_v0(codes, bits=bits)
 
 
-def gen_mixed_code_v0(codes, bits=core_opts.mixed_bits):
+def gen_mixed_code_v0(codes, bits=ic.core_opts.mixed_bits):
     # type: (Sequence[str], int) -> dict
     """
     Create an ISCC Content-Code-Mixed with algorithm v0.
@@ -45,12 +42,12 @@ def gen_mixed_code_v0(codes, bits=core_opts.mixed_bits):
     :return: ISCC object with Content-Code Mixed.
     :rtype: ISCC
     """
-    digests = [codec.decode_base32(iscc_core.clean(code)) for code in codes]
+    digests = [ic.decode_base32(ic.clean(code)) for code in codes]
     digest = soft_hash_codes_v0(digests, bits=bits)
-    mixed_code = codec.encode_component(
-        mtype=codec.MT.CONTENT,
-        stype=codec.ST_CC.MIXED,
-        version=codec.VS.V0,
+    mixed_code = ic.encode_component(
+        mtype=ic.MT.CONTENT,
+        stype=ic.ST_CC.MIXED,
+        version=ic.VS.V0,
         bit_length=bits,
         digest=digest,
     )
@@ -58,7 +55,7 @@ def gen_mixed_code_v0(codes, bits=core_opts.mixed_bits):
     return dict(iscc=iscc, parts=list(codes))
 
 
-def soft_hash_codes_v0(cc_digests, bits=core_opts.mixed_bits):
+def soft_hash_codes_v0(cc_digests, bits=ic.core_opts.mixed_bits):
     # type: (Sequence[bytes], int) -> bytes
     """
     Create a similarity hash from multiple Content-Code digests.
@@ -75,16 +72,16 @@ def soft_hash_codes_v0(cc_digests, bits=core_opts.mixed_bits):
     """
     assert len(cc_digests) > 1, "Minimum of 2 codes needed for Content-Code-Mixed."
     nbytes = bits // 8
-    code_tuples = [codec.read_header(code) for code in cc_digests]
+    code_tuples = [ic.read_header(code) for code in cc_digests]
     assert all(
-        [ct[0] == codec.MT.CONTENT for ct in code_tuples]
+        [ct[0] == ic.MT.CONTENT for ct in code_tuples]
     ), "Only codes with main-type CONTENT allowed as input for Content-Code-Mixed"
 
-    unit_lengths = [codec.decode_length(t[0], t[3]) for t in code_tuples]
+    unit_lengths = [ic.decode_length(t[0], t[3]) for t in code_tuples]
     assert all(ul >= bits for ul in unit_lengths), "Code to short for {}-bit length".format(bits)
 
     hash_bytes = []
     # Retain the first byte of the header and strip body to mixed_bits length
     for full, code_tuple in zip(cc_digests, code_tuples):
         hash_bytes.append(full[:1] + code_tuple[-1][: nbytes - 1])
-    return similarity_hash(hash_bytes)
+    return ic.similarity_hash(hash_bytes)
