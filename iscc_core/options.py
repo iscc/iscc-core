@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 from typing import Tuple
 from pydantic import BaseSettings, Field
-from loguru import logger
+from loguru import logger as log
 
 
 class CoreOptions(BaseSettings):
@@ -366,7 +366,7 @@ def check_options(opts):
     for key, value in opts.dict(exclude_defaults=True).items():
         if key in conformanc_critical:
             if not has_logged_confromance:
-                logger.warning(f"Non-interoperable custom option {key}={value}")
+                log.warning(f"Non-interoperable custom option {key}={value}")
                 result = False
     has_logged_confromance = True
     return result
