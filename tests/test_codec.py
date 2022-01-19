@@ -242,7 +242,6 @@ def test_decompose_single_component():
 def test_decompose_data_instance():
     data = "GABTMCHNLCHTI2NHZFXOLEB53KSPU"
     inst = "IAB3GN6WUSNSX3MJBT6PBTVFAQZ7G"
-    di = [data, inst]
     code = ic.gen_iscc_code_v0([data, inst])["iscc"]
     assert code == "ISCC:KUADMCHNLCHTI2NHWM35NJE3FPWYS"
     assert ic.decompose(code) == ["GAATMCHNLCHTI2NH", "IAA3GN6WUSNSX3MJ"]
