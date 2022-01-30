@@ -19,7 +19,6 @@ from a media assets.
 - Apply [`soft_hash_text_v0`][iscc_core.code_content_text.soft_hash_text_v0] to collapsed text
 """
 import unicodedata
-from typing import Union
 import xxhash
 import iscc_core as ic
 
@@ -33,20 +32,20 @@ __all__ = [
 
 
 def gen_text_code(text, bits=ic.core_opts.text_bits):
-    # type: (Text, int) -> dict
+    # type: (str, int) -> dict
     """
     Create an ISCC Text-Code with the latest standard algorithm.
 
-    :param Text text: Plain text for Text-Code creation.
+    :param str text: Plain text for Text-Code creation.
     :param int bits: Bit-length (multiple of 32) for ISCC Code Hash (default 64).
     :return: ISCC schema instance with Text-Code and an aditional property `characters`
-    :rtype: ISCC
+    :rtype: dict
     """
     return gen_text_code_v0(text, bits)
 
 
 def gen_text_code_v0(text, bits=ic.core_opts.text_bits):
-    # type: (Text, int) -> dict
+    # type: (str, int) -> dict
     """
     Create an ISCC Text-Code with algorithm v0.
 
@@ -54,10 +53,10 @@ def gen_text_code_v0(text, bits=ic.core_opts.text_bits):
         Any markup (like HTML tags or markdown) should be removed from the plain-text
         before passing it to this function.
 
-    :param Text text: Text for Text-Code creation
+    :param str text: Text for Text-Code creation
     :param int bits: Bit-length of ISCC Code Hash (default 64)
     :return: ISCC schema instance with Text-Code and an aditional property `characters`
-    :rtype: ISCC
+    :rtype: dict
     """
 
     text = collapse_text(text)
@@ -78,7 +77,7 @@ def gen_text_code_v0(text, bits=ic.core_opts.text_bits):
 
 
 def collapse_text(text):
-    # type: (Text) -> str
+    # type: (str) -> str
     """
     Normalize and simplify text for similarity hashing.
 
@@ -91,7 +90,7 @@ def collapse_text(text):
 
         See: [Unicode normalization](https://unicode.org/reports/tr15/).
 
-    :param Text text: Plain text to be collapsed.
+    :param str text: Plain text to be collapsed.
     :return: Collapsed plain text.
     :rtype: str
     """
