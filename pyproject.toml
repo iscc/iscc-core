@@ -41,7 +41,7 @@ bitarray-hardbyte = "*"
 pybase64 = "*"
 pydantic = {extras = ["dotenv"], version = "*"}
 uvarint = "^1.2"
-loguru = "^0.5"
+loguru = "^0.6"
 base58 = "^2.1"
 
 [tool.poetry.extras]
