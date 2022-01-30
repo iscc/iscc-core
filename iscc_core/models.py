@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 from os import urandom
-from random import choice
+from secrets import choice
 from typing import List, Union
 import base58
 import uvarint
