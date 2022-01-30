@@ -15,7 +15,7 @@
         <link rel="canonical" href="https://core.iscc.codes/components/content/code_content_video/">
       
       <link rel="icon" href="../../../images/iscc-logo-icon-black.svg">
-      <meta name="generator" content="mkdocs-1.2.3, mkdocs-material-8.1.7">
+      <meta name="generator" content="mkdocs-1.2.3, mkdocs-material-8.1.9">
     
     
       
@@ -23,7 +23,7 @@
       
     
     
-      <link rel="stylesheet" href="../../../assets/stylesheets/main.cd566b2a.min.css">
+      <link rel="stylesheet" href="../../../assets/stylesheets/main.2b4465f4.min.css">
       
         
         <link rel="stylesheet" href="../../../assets/stylesheets/palette.e6a45f82.min.css">
@@ -928,18 +928,15 @@ following command line parameters:</p>
 <p><code>$ ffmpeg -i video.mpg -vf fps=fps=5,signature=format=xml:filename=sig.xml -f null -</code></p>
 <p>The relevant frame signatures can be parsed from the following elements in sig.xml:</p>
 <p><code>&lt;FrameSignature&gt;0  0  0  1  0  0  1  0  1  1  0  0  1  1 ...&lt;/FrameSignature&gt;</code></p>
-<div class="admonition note">
-<p class="admonition-title">Note</p>
-<p>it is also possible to extract the signatures in a more compact binary format
-but it requires a custom binary parser to decode the frame signaturs.</p>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>It is also possible to extract the signatures in a more compact binary format.
+But the format requires a custom binary parser to decode the frame signaturs.</p>
 </div>
 
 
 
   <div class="doc doc-children">
-
-
-
 
 
 
@@ -971,7 +968,7 @@ but it requires a custom binary parser to decode the frame signaturs.</p>
   <tbody>
       <tr>
         <td><code>frame_sigs</code></td>
-        <td><code>FrameSig</code></td>
+        <td><code>ic.FrameSig</code></td>
         <td><p>Sequence of MP7 frame signatures</p></td>
         <td><em>required</em></td>
       </tr>
@@ -1033,7 +1030,7 @@ but it requires a custom binary parser to decode the frame signaturs.</p>
   <tbody>
       <tr>
         <td><code>frame_sigs</code></td>
-        <td><code>FrameSig</code></td>
+        <td><code>ic.FrameSig</code></td>
         <td><p>Sequence of MP7 frame signatures</p></td>
         <td><em>required</em></td>
       </tr>
@@ -1095,14 +1092,14 @@ but it requires a custom binary parser to decode the frame signaturs.</p>
   <tbody>
       <tr>
         <td><code>frame_sigs</code></td>
-        <td><code>Sequence[Sequence[int]]</code></td>
+        <td><code>ic.FrameSig</code></td>
         <td><p>2D matrix of MP7 frame signatures</p></td>
         <td><em>required</em></td>
       </tr>
       <tr>
         <td><code>bits</code></td>
         <td><code>int</code></td>
-        <td><p>Bit-length resulting Instance-Code (multiple of 64)</p></td>
+        <td><p>Bit-length of resulting Video-Code (multiple of 64)</p></td>
         <td><code>64</code></td>
       </tr>
   </tbody>
@@ -1192,7 +1189,7 @@ but it requires a custom binary parser to decode the frame signaturs.</p>
     <script id="__config" type="application/json">{"base": "../../..", "features": ["toc.integrate", "navigation.indexes", "navigation.tracking", "navigation.tabs", "navigation.tabs.sticky", "navigation.expand"], "translations": {"clipboard.copy": "Copy to clipboard", "clipboard.copied": "Copied to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.placeholder": "Type to start searching", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.term.missing": "Missing", "select.version.title": "Select version"}, "search": "../../../assets/javascripts/workers/search.22074ed6.min.js"}</script>
     
     
-      <script src="../../../assets/javascripts/bundle.01de222e.min.js"></script>
+      <script src="../../../assets/javascripts/bundle.960e086b.min.js"></script>
       
     
   </body>
