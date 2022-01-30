@@ -6,6 +6,9 @@ from typing import Generator
 import iscc_core as ic
 
 
+__all__ = ["data_chunks"]
+
+
 def data_chunks(data, utf32, avg_chunk_size=ic.core_opts.data_avg_chunk_size):
     # type: (Data, bool, int) -> Generator[bytes, None, None]
     """

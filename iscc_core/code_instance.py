@@ -5,6 +5,15 @@ from typing import Optional
 import iscc_core as ic
 
 
+__all__ = [
+    "gen_instance_code",
+    "gen_instance_code_v0",
+    "hash_instance_v0",
+    "InstanceHasher",
+    "InstanceHasherV0",
+]
+
+
 def gen_instance_code(stream, bits=ic.core_opts.instance_bits):
     # type: (Stream, int) -> dict
     """

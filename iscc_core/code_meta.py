@@ -53,6 +53,16 @@ from typing import Optional, Union
 import iscc_core as ic
 
 
+__all__ = [
+    "gen_meta_code",
+    "gen_meta_code_v0",
+    "soft_hash_meta_v0",
+    "trim_text",
+    "remove_newlines",
+    "clean_text",
+]
+
+
 def gen_meta_code(name, description=None, properties=None, bits=ic.core_opts.meta_bits):
     # type: (str, Optional[str], Optional[Properties], int) -> dict
     """

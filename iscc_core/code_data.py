@@ -4,6 +4,14 @@ from typing import Optional
 import xxhash
 import iscc_core as ic
 
+__all__ = [
+    "gen_data_code",
+    "gen_data_code_v0",
+    "soft_hash_data_v0",
+    "DataHasher",
+    "DataHasherV0",
+]
+
 
 def gen_data_code(stream, bits=ic.core_opts.data_bits):
     # type: (ic.Stream, int) -> dict

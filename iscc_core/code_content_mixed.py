@@ -16,6 +16,13 @@ from typing import Iterable, Sequence
 import iscc_core as ic
 
 
+__all__ = [
+    "gen_mixed_code",
+    "gen_mixed_code_v0",
+    "soft_hash_codes_v0",
+]
+
+
 def gen_mixed_code(codes, bits=ic.core_opts.mixed_bits):
     # type: (Sequence[str], int) -> dict
     """

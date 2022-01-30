@@ -16,6 +16,12 @@ from more_itertools import divide
 import iscc_core as ic
 
 
+__all__ = [
+    "gen_audio_code",
+    "gen_audio_code_v0",
+]
+
+
 def gen_audio_code(cv, bits=ic.core_opts.audio_bits):
     # type: (Iterable[int], int) -> dict
     """

@@ -9,6 +9,16 @@ import jcs
 from iscc_core.constants import Stream
 
 
+__all__ = [
+    "canonicalize",
+    "ipfs_hash",
+    "sliding_window",
+    "similarity",
+    "distance",
+    "hamming_distance",
+]
+
+
 def canonicalize(obj):
     # type: (Dict) -> bytes
     """

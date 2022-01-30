@@ -24,7 +24,12 @@ import xxhash
 import iscc_core as ic
 
 
-Text = Union[str, bytes]
+__all__ = [
+    "gen_text_code",
+    "gen_text_code_v0",
+    "soft_hash_text_v0",
+    "collapse_text",
+]
 
 
 def gen_text_code(text, bits=ic.core_opts.text_bits):

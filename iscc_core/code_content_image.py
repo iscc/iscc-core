@@ -20,6 +20,13 @@ from more_itertools import chunked
 import iscc_core as ic
 
 
+__all__ = [
+    "gen_image_code",
+    "gen_image_code_v0",
+    "soft_hash_image_v0",
+]
+
+
 def gen_image_code(pixels, bits=ic.core_opts.image_bits):
     # type: (Sequence[int], int) -> dict
     """
