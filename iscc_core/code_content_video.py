@@ -11,23 +11,20 @@ The relevant frame signatures can be parsed from the following elements in sig.x
 
 `<FrameSignature>0  0  0  1  0  0  1  0  1  1  0  0  1  1 ...</FrameSignature>`
 
-!!! note
-    it is also possible to extract the signatures in a more compact binary format
-    but it requires a custom binary parser to decode the frame signaturs.
+!!! tip
+    It is also possible to extract the signatures in a more compact binary format.
+    But the format requires a custom binary parser to decode the frame signaturs.
 """
 from typing import Sequence, Tuple
 import iscc_core as ic
 
 
-FrameSig = Tuple[int]
-
-
 def gen_video_code(frame_sigs, bits=ic.core_opts.video_bits):
-    # type: (Sequence[FrameSig], int) -> dict
+    # type: (Sequence[ic.FrameSig], int) -> dict
     """
     Create an ISCC Video-Code with the latest standard algorithm.
 
-    :param FrameSig frame_sigs: Sequence of MP7 frame signatures
+    :param ic.FrameSig frame_sigs: Sequence of MP7 frame signatures
     :param int bits: Bit-length resulting Instance-Code (multiple of 64)
     :return: ISCC object with Video-Code
     :rtype: dict
@@ -36,11 +33,11 @@ def gen_video_code(frame_sigs, bits=ic.core_opts.video_bits):
 
 
 def gen_video_code_v0(frame_sigs, bits=ic.core_opts.video_bits):
-    # type: (Sequence[FrameSig], int) -> dict
+    # type: (Sequence[ic.FrameSig], int) -> dict
     """
     Create an ISCC Video-Code with algorithm v0.
 
-    :param FrameSig frame_sigs: Sequence of MP7 frame signatures
+    :param ic.FrameSig frame_sigs: Sequence of MP7 frame signatures
     :param int bits: Bit-length resulting Video-Code (multiple of 64)
     :return: ISCC object with Video-Code
     :rtype: dict
@@ -58,12 +55,12 @@ def gen_video_code_v0(frame_sigs, bits=ic.core_opts.video_bits):
 
 
 def soft_hash_video_v0(frame_sigs, bits=ic.core_opts.video_bits):
-    # type: (Sequence[Sequence[int]], int) -> bytes
+    # type: (Sequence[ic.FrameSig], int) -> bytes
     """
     Compute video hash v0 from MP7 frame signatures.
 
-    :param Sequence[Sequence[int]] frame_sigs: 2D matrix of MP7 frame signatures
-    :param int bits: Bit-length resulting Instance-Code (multiple of 64)
+    :param ic.FrameSig frame_sigs: 2D matrix of MP7 frame signatures
+    :param int bits: Bit-length of resulting Video-Code (multiple of 64)
     """
 
     if not isinstance(frame_sigs[0], tuple):
