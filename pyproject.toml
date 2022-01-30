@@ -58,6 +58,7 @@ coverage = "*"
 pytest-cov = "*"
 poethepoet = "*"
 iscc-schema = "^0.2.1"
+bandit = "^1.7.2"
 
 [tool.black]
 skip-string-normalization = false
@@ -66,11 +67,12 @@ target-version = ['py37']
 
 [tool.poe.tasks]
 update = { cmd = "poetry update", help = "Update project dependencies"}
-format = { cmd = "black .", help = "Code style formating with black" }
 gentests = { script = "tests.build_test_data:main", help = "Generate conformance test data" }
+format = { cmd = "black .", help = "Code style formating with black" }
 docs = { script = "tests.build_docs:main", help = "Copy README.md to /docs" }
 test = { cmd = "pytest --cov=iscc_core --cov-fail-under=100", help = "Run tests with coverage" }
-all = ["update", "gentests", "format", "docs", "test"]
+sec = { cmd = "bandit -r iscc_core -q", help = "Security check with bandit" }
+all = ["update", "gentests", "format", "docs", "test", "sec"]
 
 [build-system]
 requires = ["poetry-core>=1.0.0", "setuptools", "wheel", "cython"]
