@@ -90,7 +90,7 @@ def get_params(avg_size: int) -> tuple:
     :returns: Tuple of (min_size, max_size, center_size, mask_s, mask_l).
     """
     ceil_div = lambda x, y: (x + y - 1) // y
-    mask = lambda b: 2 ** b - 1
+    mask = lambda b: 2**b - 1
     min_size = avg_size // 4
     max_size = avg_size * 8
     offset = min_size + ceil_div(min_size, 2)
