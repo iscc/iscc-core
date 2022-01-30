@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 import io
+import os
 
 import pytest
 import iscc_core as ic
@@ -110,3 +111,14 @@ def test_ipfs_hash_raises(static_bytes):
 
 def test_canonicalize():
     assert ic.canonicalize({"hello": "wörld"}) == b'{"hello":"w\xc3\xb6rld"}'
+
+
+def test_sliding_window_raises():
+    with pytest.raises(AssertionError):
+        ic.sliding_window([1, 2, 3, 4, 5], 1)
+
+
+def test_hamming_distance_raises():
+    a, b = os.urandom(8), os.urandom(9)
+    with pytest.raises(AssertionError):
+        ic.hamming_distance(a, b)

@@ -91,6 +91,11 @@ def test_gen_image_code_schema_conformance():
     assert iscc_obj.iscc == "ISCC:EEA4GQZQTY6J5DTH"
 
 
+def test_soft_hash_image_v0_larger_256_raises():
+    with pytest.raises(AssertionError):
+        ic.soft_hash_image_v0(IMG_SAMPLE_PIXELS, bits=288)
+
+
 IMG_WHITE_PIXELS = [255] * 1024
 IMG_BLACK_PIXELS = [0] * 1024
 IMG_SAMPLE_PIXELS = [

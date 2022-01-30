@@ -1,5 +1,8 @@
 # -*- coding: utf-8 -*-
 import io
+
+import pytest
+
 import iscc_core as ic
 
 
@@ -62,3 +65,24 @@ def test_incr_iscc_id_v0():
     assert ic.iscc_id.incr_iscc_id_v0("MAADB7WD7TC5XELQ") == "MAADB7WD7TC5XELQAE"
     assert ic.Code("MAADB7WD7TC5XELQAE").explain == "ID-PRIVATE-V0-64-30fec3fcc5db9170-1"
     assert ic.iscc_id.incr_iscc_id_v0("MAADB7WD7TC5XELQAE") == "MAADB7WD7TC5XELQAI"
+
+
+def test_incr_iscc_id_v0_raises_wrong_mt():
+    mc = ic.Code.rnd(ic.MT.META).code
+    with pytest.raises(AssertionError):
+        ic.incr_iscc_id_v0(mc)
+
+
+def test_incr_iscc_id_v0_raises_wrong_vs():
+    mc = ic.Code.rnd(ic.MT.ID)
+    head = list(mc._head)
+    head[2] = 1
+    mc._head = tuple(head)
+    with pytest.raises(AssertionError):
+        ic.incr_iscc_id_v0(mc.code)
+
+
+def test_gen_iscc_id_v0_raises_chain_id():
+    code = ic.Code.rnd(ic.MT.ISCC, bits=256)
+    with pytest.raises(AssertionError):
+        ic.gen_iscc_id_v0(5, code.code)
