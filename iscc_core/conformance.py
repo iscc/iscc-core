@@ -86,7 +86,8 @@ def selftest():  # pragma: no cover
     passed = True
     for test_name, func, inputs, outputs in generate_tests():
         try:
-            assert func(*inputs) == outputs
+            if func(*inputs) != outputs:
+                raise AssertionError(f"FAILED: {func.__name__}.{test_name}")
             log.info(f"PASSED: {func.__name__}.{test_name}")
         except Exception as e:
             log.error(f"FAILED: {func.__name__}.{test_name} with {e}")

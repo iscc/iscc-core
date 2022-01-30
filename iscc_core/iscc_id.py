@@ -40,7 +40,8 @@ def gen_iscc_id_v0(chain_id, iscc_code, uc=0):
     :return: ISCC object with an ISCC-ID
     :rtype: dict
     """
-    assert chain_id in list(ic.ST_ID), "Unregistered Chain-ID {}".format(chain_id)
+    if chain_id not in list(ic.ST_ID):
+        raise AssertionError("Unregistered Chain-ID {}".format(chain_id))
     iscc_id_digest = soft_hash_iscc_id_v0(iscc_code, uc)
     iscc_id_len = len(iscc_id_digest) * 8
     iscc_id = ic.encode_component(
@@ -111,8 +112,10 @@ def incr_iscc_id_v0(iscc_id):
     """
     code_digest = ic.decode_base32(iscc_id)
     mt, _, vs, _, _ = ic.read_header(code_digest)
-    assert mt == ic.MT.ID, "MainType {} is not ISCC-ID".format(mt)
-    assert vs == ic.VS.V0, "Version {} is not v0".format(vs)
+    if mt != ic.MT.ID:
+        raise AssertionError("MainType {} is not ISCC-ID".format(mt))
+    if vs != ic.VS.V0:
+        raise AssertionError("Version {} is not v0".format(vs))
     if len(code_digest) == 10:
         code_digest += uvarint.encode(1)
     else:

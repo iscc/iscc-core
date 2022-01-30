@@ -72,8 +72,8 @@ def soft_hash_image_v0(pixels, bits=ic.core_opts.image_bits):
     :return: Similarity preserving Image-Hash digest.
     :rtype: bytes
     """
-
-    assert bits <= 256
+    if not bits <= 256:
+        raise AssertionError(f"{bits} bits exeeds max lenght 256 for soft_hash_image")
 
     # DCT per row
     dct_row_lists = []

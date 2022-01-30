@@ -105,7 +105,8 @@ def sliding_window(seq, width):
     :returns: A generator of window sized items
     :rtype: Generator
     """
-    assert width >= 2, "Sliding window width must be 2 or bigger."
+    if width < 2:
+        raise AssertionError("Sliding window width must be 2 or bigger.")
     idx = range(max(len(seq) - width + 1, 1))
     return (seq[i : i + width] for i in idx)
 
@@ -155,7 +156,8 @@ def hamming_distance(a, b):
     :return: Hamming distance in number of bits.
     :rtype: int
     """
-    assert len(a) == len(b), f"Hash diggest of unequal length: {len(a)} vs {len(b)}"
+    if len(a) != len(b):
+        raise AssertionError(f"Hash diggest of unequal length: {len(a)} vs {len(b)}")
     ba, bb = bitarray(), bitarray()
     ba.frombytes(a)
     bb.frombytes(b)

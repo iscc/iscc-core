@@ -77,15 +77,18 @@ def soft_hash_codes_v0(cc_digests, bits=ic.core_opts.mixed_bits):
     :return: Similarity preserving byte hash.
     :rtype: bytes
     """
-    assert len(cc_digests) > 1, "Minimum of 2 codes needed for Content-Code-Mixed."
+    if not len(cc_digests) > 1:
+        raise AssertionError("Minimum of 2 codes needed for Content-Code-Mixed.")
     nbytes = bits // 8
     code_tuples = [ic.read_header(code) for code in cc_digests]
-    assert all(
-        [ct[0] == ic.MT.CONTENT for ct in code_tuples]
-    ), "Only codes with main-type CONTENT allowed as input for Content-Code-Mixed"
+    if not all([ct[0] == ic.MT.CONTENT for ct in code_tuples]):
+        raise AssertionError(
+            "Only codes with main-type CONTENT allowed as input for Content-Code-Mixed"
+        )
 
     unit_lengths = [ic.decode_length(t[0], t[3]) for t in code_tuples]
-    assert all(ul >= bits for ul in unit_lengths), "Code to short for {}-bit length".format(bits)
+    if not all(ul >= bits for ul in unit_lengths):
+        raise AssertionError(f"Code to short for {bits}-bit length")
 
     hash_bytes = []
     # Retain the first byte of the header and strip body to mixed_bits length
