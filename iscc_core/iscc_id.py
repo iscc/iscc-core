@@ -65,7 +65,7 @@ def soft_hash_iscc_id_v0(iscc_code, uc=0):
     :return: Digest for ISCC-ID without header but including uniqueness counter.
     :rtype: bytes
     """
-    components = ic.decompose(iscc_code)
+    components = ic.iscc_decompose(iscc_code)
     decoded = [ic.decode_base32(c) for c in components]
     unpacked = [ic.read_header(d) for d in decoded]
 

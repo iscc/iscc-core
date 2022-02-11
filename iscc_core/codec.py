@@ -304,7 +304,7 @@ def decode_base64(code: str) -> bytes:
     return urlsafe_b64decode(string)
 
 
-def decompose(iscc_code):
+def iscc_decompose(iscc_code):
     # type: (str) -> List[str]
     """
     Decompose an ISCC-CODE or any valid ISCC sequence into a list of ISCC-UNITS.
@@ -345,7 +345,7 @@ def decompose(iscc_code):
     return components
 
 
-def normalize(iscc_code):
+def iscc_normalize(iscc_code):
     # type: (str) -> str
     """
     Normalize an ISCC to its canonical URI form.
@@ -369,7 +369,7 @@ def normalize(iscc_code):
     !!! example
         ``` py
         >>> import iscc_core
-        >>> iscc_core.normalize("GAAW2PRCRS5LNVZV-IAAUVACQKXE3V44W")
+        >>> iscc_core.iscc_normalize("GAAW2PRCRS5LNVZV-IAAUVACQKXE3V44W")
         ISCC:KUBW2PRCRS5LNVZVJKAFAVOJXLZZM
         ```
 
@@ -395,7 +395,7 @@ def normalize(iscc_code):
             raise ValueError(f"Malformed multiformat codec: {decoded[:2]}")
         iscc_code = encode_base32(decoded[2:])
 
-    decomposed = decompose(iscc_code)
+    decomposed = iscc_decompose(iscc_code)
     recomposed = gen_iscc_code_v0(decomposed)["iscc"] if len(decomposed) >= 2 else decomposed[0]
     return f"ISCC:{recomposed}" if not recomposed.startswith("ISCC:") else recomposed
 
@@ -414,7 +414,7 @@ def iscc_decode(iscc):
     :return: ISCC decoded to an IsccTuple
     :rtype: IsccTuple
     """
-    iscc = iscc_clean(normalize(iscc))
+    iscc = iscc_clean(iscc_normalize(iscc))
     data = decode_base32(iscc)
     return read_header(data)
 
