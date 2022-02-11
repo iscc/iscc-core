@@ -36,6 +36,12 @@ def test_gen_iscc_id_v0_multiple_components():
     assert ic.explain(iscc_id["iscc"]) == "ID-BITCOIN-V0-64-20351dfd6f9f7e3f"
 
 
+def test_gen_iscc_id_v0_full_code():
+    iscc_code = "ISCC:KQDZJFP6WBM3IIFZ7CRXCNDCNUU3ZEWGL5HAKHNMYHLN2WULPN3ZFHJO7AUS6VQQVM7Q"
+    iscc_id = ic.gen_iscc_id(1, iscc_code=iscc_code)
+    assert iscc_id["iscc"] == "ISCC:MEADJVWXP67HW7NI"
+
+
 def test_gen_iscc_id_v0_instance_only():
     icode = ic.gen_instance_code_v0(io.BytesIO(b"hello world"))
     iscc_id = ic.gen_iscc_id(0, icode["iscc"])
