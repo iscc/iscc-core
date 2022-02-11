@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 from hashlib import sha3_224
-from typing import Dict, Generator, Sequence, Tuple
+from typing import Union, Dict, List, Generator, Sequence, Tuple
 import uvarint
 from bitarray import bitarray
 from bitarray.util import count_xor
@@ -10,7 +10,7 @@ from iscc_core.constants import Stream
 
 
 __all__ = [
-    "canonicalize",
+    "json_canonical",
     "ipfs_hash",
     "sliding_window",
     "similarity",
@@ -19,8 +19,8 @@ __all__ = [
 ]
 
 
-def canonicalize(obj):
-    # type: (Dict) -> bytes
+def json_canonical(obj):
+    # type: (Union[Dict, List]) -> bytes
     """
     Canonical, deterministic serialization of ISCC metadata.
 

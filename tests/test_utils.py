@@ -110,7 +110,7 @@ def test_ipfs_hash_raises(static_bytes):
 
 
 def test_canonicalize():
-    assert ic.canonicalize({"hello": "wörld"}) == b'{"hello":"w\xc3\xb6rld"}'
+    assert ic.json_canonical({"hello": "wörld"}) == b'{"hello":"w\xc3\xb6rld"}'
 
 
 def test_sliding_window_raises():
