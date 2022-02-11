@@ -4,7 +4,7 @@
     selection:
         members:
             - gen_text_code_v0
-            - collapse_text
+            - text_collapse
             - soft_hash_text_v0
     rendering:
         show_source: true
