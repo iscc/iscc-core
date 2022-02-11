@@ -89,7 +89,7 @@ class DataHasherV0:
         if self.tail:
             data = self.tail + data
 
-        for chunk in ic.data_chunks(
+        for chunk in ic.cdc_data_chunks(
             data, utf32=False, avg_chunk_size=ic.core_opts.data_avg_chunk_size
         ):
             self.chunk_sizes.append(len(chunk))

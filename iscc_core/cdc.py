@@ -6,10 +6,10 @@ from typing import Generator
 import iscc_core as ic
 
 
-__all__ = ["data_chunks"]
+__all__ = ["cdc_data_chunks"]
 
 
-def data_chunks(data, utf32, avg_chunk_size=ic.core_opts.data_avg_chunk_size):
+def cdc_data_chunks(data, utf32, avg_chunk_size=ic.core_opts.data_avg_chunk_size):
     # type: (Data, bool, int) -> Generator[bytes, None, None]
     """
     A generator that yields data-dependent chunks for `data`.
@@ -17,7 +17,7 @@ def data_chunks(data, utf32, avg_chunk_size=ic.core_opts.data_avg_chunk_size):
     Usage Example:
 
     ```python
-    for chunk in data_chunks(data):
+    for chunk in cdc_data_chunks(data):
         hash(chunk)
     ```
 
@@ -33,7 +33,7 @@ def data_chunks(data, utf32, avg_chunk_size=ic.core_opts.data_avg_chunk_size):
     if not buffer:
         yield b""
 
-    mi, ma, cs, mask_s, mask_l = get_params(avg_chunk_size)
+    mi, ma, cs, mask_s, mask_l = cdc_params(avg_chunk_size)
 
     buffer = memoryview(buffer)
     while buffer:
@@ -82,7 +82,7 @@ def cdc_offset(buffer, mi, ma, cs, mask_s, mask_l):
     return i
 
 
-def get_params(avg_size: int) -> tuple:
+def cdc_params(avg_size: int) -> tuple:
     """
     Calculate CDC parameters
 

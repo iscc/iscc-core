@@ -5,46 +5,46 @@ import iscc_core.cdc
 
 
 def test_get_params():
-    assert iscc_core.cdc.get_params(1024) == (256, 8192, 640, 2047, 511)
-    assert iscc_core.cdc.get_params(8192) == (2048, 65536, 5120, 16383, 4095)
+    assert iscc_core.cdc.cdc_params(1024) == (256, 8192, 640, 2047, 511)
+    assert iscc_core.cdc.cdc_params(8192) == (2048, 65536, 5120, 16383, 4095)
 
 
 def test_data_chunks_empty():
-    assert list(iscc_core.cdc.data_chunks(b"", False)) == [b""]
+    assert list(iscc_core.cdc.cdc_data_chunks(b"", False)) == [b""]
 
 
 def test_data_chunks_1byte():
-    assert list(iscc_core.cdc.data_chunks(b"\x00", False)) == [b"\x00"]
+    assert list(iscc_core.cdc.cdc_data_chunks(b"\x00", False)) == [b"\x00"]
 
 
 def test_data_chunks_below_min():
     data = static_bytes(256 - 1)
-    assert list(iscc_core.cdc.data_chunks(data, False)) == [data]
+    assert list(iscc_core.cdc.cdc_data_chunks(data, False)) == [data]
 
 
 def test_data_chunks_min():
     data = static_bytes(256)
-    assert list(iscc_core.cdc.data_chunks(data, False)) == [data]
+    assert list(iscc_core.cdc.cdc_data_chunks(data, False)) == [data]
 
 
 def test_data_chunks_above_min():
     data = static_bytes(256 + 1)
-    assert list(iscc_core.cdc.data_chunks(data, False)) == [data]
+    assert list(iscc_core.cdc.cdc_data_chunks(data, False)) == [data]
 
 
 def test_data_chunks_avg():
     data = static_bytes(1024)
-    assert list(iscc_core.cdc.data_chunks(data, False)) == [data]
+    assert list(iscc_core.cdc.cdc_data_chunks(data, False)) == [data]
 
 
 def test_data_chunks_avg_above():
     data = static_bytes(1024 + 1)
-    assert list(iscc_core.cdc.data_chunks(data, False)) == [data]
+    assert list(iscc_core.cdc.cdc_data_chunks(data, False)) == [data]
 
 
 def test_data_chunks_two_chunks():
     data = static_bytes(1024 + 309)
-    assert list(iscc_core.cdc.data_chunks(data, False)) == [data[:-1], data[-1:]]
+    assert list(iscc_core.cdc.cdc_data_chunks(data, False)) == [data[:-1], data[-1:]]
 
 
 def test_data_chunks_max_odd():
@@ -58,7 +58,7 @@ def test_data_chunks_max_odd():
         "5fae55e1aee84705fc3dc6e831d4f7981677e03338343bd6a783c45e333a55fe",
     ]
     data = static_bytes(8192)
-    hashes = [blake3(c).hexdigest() for c in iscc_core.cdc.data_chunks(data, False)]
+    hashes = [blake3(c).hexdigest() for c in iscc_core.cdc.cdc_data_chunks(data, False)]
     assert len(hashes) == 7
     assert hashes == expected
 
@@ -75,7 +75,7 @@ def test_data_chunks_max_even():
         "2032f28cfcdad86090b60fa5cfd8cc44b972df47d5f7e3637001d8e03b8fbc07",
     ]
     data = static_bytes(8192 + 1000)
-    hashes = [blake3(c).hexdigest() for c in iscc_core.cdc.data_chunks(data, False)]
+    hashes = [blake3(c).hexdigest() for c in iscc_core.cdc.cdc_data_chunks(data, False)]
     assert len(hashes) == 8
     assert hashes == expected
 
@@ -93,6 +93,6 @@ def test_data_chunks_utf32():
         "f249cbe070bba6b689251074ddb75aa3ddfc02caa357f2f8f714cfeb39523d96",
     ]
     data = static_bytes(8192 + 1000)
-    hashes = [blake3(c).hexdigest() for c in iscc_core.cdc.data_chunks(data, True)]
+    hashes = [blake3(c).hexdigest() for c in iscc_core.cdc.cdc_data_chunks(data, True)]
     assert len(hashes) == 9
     assert hashes == expected
