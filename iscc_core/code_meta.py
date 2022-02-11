@@ -57,9 +57,9 @@ __all__ = [
     "gen_meta_code",
     "gen_meta_code_v0",
     "soft_hash_meta_v0",
-    "trim_text",
-    "remove_newlines",
-    "clean_text",
+    "text_trim",
+    "text_remove_newlines",
+    "text_clean",
 ]
 
 
@@ -102,14 +102,14 @@ def gen_meta_code_v0(name, description=None, properties=None, bits=ic.core_opts.
 
     # 1. Normalize `name`
     name = "" if name is None else name
-    name = clean_text(name)
-    name = remove_newlines(name)
-    name = trim_text(name, ic.core_opts.meta_trim_name)
+    name = text_clean(name)
+    name = text_remove_newlines(name)
+    name = text_trim(name, ic.core_opts.meta_trim_name)
 
     # 2. Normalize `description`
     description = "" if description is None else description
-    description = clean_text(description)
-    description = trim_text(description, ic.core_opts.meta_trim_description)
+    description = text_clean(description)
+    description = text_trim(description, ic.core_opts.meta_trim_description)
 
     # Calculate meta_code, metahash, and properties value for the different input cases
     if properties:
@@ -182,7 +182,7 @@ def soft_hash_meta_v0(name, extra=None):
     :return: 256-bit simhash digest for Meta-Code
     :rtype: bytes
     """
-    name = ic.collapse_text(name)
+    name = ic.text_collapse(name)
     name_n_grams = ic.sliding_window(name, width=ic.core_opts.meta_ngram_size_text)
     name_hash_digests = [blake3(s.encode("utf-8")).digest() for s in name_n_grams]
     simhash_digest = ic.similarity_hash(name_hash_digests)
@@ -197,7 +197,7 @@ def soft_hash_meta_v0(name, extra=None):
             extra_hash_digests = [blake3(ngram).digest() for ngram in extra_n_grams]
         elif isinstance(extra, str):
             # Text is collapsed and handled per character (multibyte)
-            extra = ic.collapse_text(extra)
+            extra = ic.text_collapse(extra)
             extra_n_grams = ic.sliding_window(extra, width=ic.core_opts.meta_ngram_size_text)
             extra_hash_digests = [blake3(s.encode("utf-8")).digest() for s in extra_n_grams]
         else:
@@ -218,13 +218,13 @@ def soft_hash_meta_v0(name, extra=None):
         return simhash_digest
 
 
-def trim_text(text, nbytes):
+def text_trim(text, nbytes):
     # type: (str, int) -> str
     """Trim text such that its utf-8 encoded size does not exceed `nbytes`."""
     return text.encode("utf-8")[:nbytes].decode("utf-8", "ignore").strip()
 
 
-def remove_newlines(text):
+def text_remove_newlines(text):
     # type: (str) -> str
     """
     Remove newlines.
@@ -239,7 +239,7 @@ def remove_newlines(text):
     return " ".join(text.split())
 
 
-def clean_text(text):
+def text_clean(text):
     # type: (str) -> str
     """
     Clean text for display.

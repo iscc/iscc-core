@@ -70,12 +70,12 @@ def test_code_text_c_256_bits():
 def test_normalize_text():
     txt = "  Iñtërnâtiôn\nàlizætiøn☃💩 –  is a tric\t ky \u00A0 thing!\r"
 
-    normalized = iscc_core.code_content_text.collapse_text(txt)
+    normalized = iscc_core.code_content_text.text_collapse(txt)
     assert normalized == "internationalizætiøn☃💩isatrickything"
 
-    assert iscc_core.code_content_text.collapse_text(" ") == ""
-    assert iscc_core.code_content_text.collapse_text("  Hello  World ? ") == "helloworld"
-    assert iscc_core.code_content_text.collapse_text("Hello\nWorld") == "helloworld"
+    assert iscc_core.code_content_text.text_collapse(" ") == ""
+    assert iscc_core.code_content_text.text_collapse("  Hello  World ? ") == "helloworld"
+    assert iscc_core.code_content_text.text_collapse("Hello\nWorld") == "helloworld"
 
 
 def test_code_text_bytes_raises():

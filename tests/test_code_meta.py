@@ -168,23 +168,23 @@ def test_gen_meta_code_v0_properties_raises():
 
 def test_trim_text():
     multibyte_2 = "ü" * 128
-    trimmed = iscc_core.code_meta.trim_text(multibyte_2, 128)
+    trimmed = iscc_core.code_meta.text_trim(multibyte_2, 128)
     assert 64 == len(trimmed)
     assert 128 == len(trimmed.encode("utf-8"))
 
     multibyte_3 = "驩" * 128
-    trimmed = iscc_core.code_meta.trim_text(multibyte_3, 128)
+    trimmed = iscc_core.code_meta.text_trim(multibyte_3, 128)
     assert 42 == len(trimmed)
     assert 126 == len(trimmed.encode("utf-8"))
 
     mixed = "Iñtërnâtiônàlizætiøn☃💩" * 6
-    trimmed = iscc_core.code_meta.trim_text(mixed, 128)
+    trimmed = iscc_core.code_meta.text_trim(mixed, 128)
     assert 85 == len(trimmed)
     assert 128 == len(trimmed.encode("utf-8"))
 
 
 def test_clean_text_lead_trail():
-    assert iscc_core.code_meta.clean_text(" Hello World! ") == "Hello World!"
+    assert iscc_core.code_meta.text_clean(" Hello World! ") == "Hello World!"
 
 
 def test_clean_text_markdowsn():
@@ -207,7 +207,7 @@ Some Text **text**! Also Iñtërnâtiôn\nàlizætiøn☃💩.
 More Text
 """
 
-    assert iscc_core.code_meta.clean_text(text) == (
+    assert iscc_core.code_meta.text_clean(text) == (
         "# Document\n"
         "\n"
         "*Subtitle*\n"
@@ -229,4 +229,4 @@ More Text
 def test_remove_newlines():
     txt = "   Hello\nWorld!  - How Are you   "
     exp = "Hello World! - How Are you"
-    assert iscc_core.code_meta.remove_newlines(txt) == exp
+    assert iscc_core.code_meta.text_remove_newlines(txt) == exp

@@ -14,7 +14,7 @@ from a media assets.
 
 **Algorithm overview**
 
-- Apply [`collapse_text`][iscc_core.code_content_text.collapse_text] function to text input
+- Apply [`text_collapse`][iscc_core.code_content_text.text_collapse] function to text input
 - Count characters of collapsed text
 - Apply [`soft_hash_text_v0`][iscc_core.code_content_text.soft_hash_text_v0] to collapsed text
 """
@@ -27,7 +27,7 @@ __all__ = [
     "gen_text_code",
     "gen_text_code_v0",
     "soft_hash_text_v0",
-    "collapse_text",
+    "text_collapse",
 ]
 
 
@@ -59,7 +59,7 @@ def gen_text_code_v0(text, bits=ic.core_opts.text_bits):
     :rtype: dict
     """
 
-    text = collapse_text(text)
+    text = text_collapse(text)
     characters = len(text)
     digest = soft_hash_text_v0(text)
 
@@ -76,7 +76,37 @@ def gen_text_code_v0(text, bits=ic.core_opts.text_bits):
     return dict(iscc=iscc, characters=characters)
 
 
-def collapse_text(text):
+def soft_hash_text_v0(text):
+    # type: (str) -> bytes
+    """
+    Creates a 256-bit similarity preserving hash for text input with algorithm v0.
+
+    - Slide over text with a
+      [`text_ngram_size`][iscc_core.options.CoreOptions.text_ngram_size] wide window
+      and create [`xxh32`](https://cyan4973.github.io/xxHash/) hashes
+    - Create a [`minhash_256`][iscc_core.minhash.minhash_256] from the hashes generated
+      in the previous step.
+
+    !!! note
+
+        Before passing text to this function it must be:
+
+        - stripped of markup
+        - normalized
+        - stripped of whitespace
+        - lowercased
+
+    :param str text: Plain text to be hashed.
+    :return: 256-bit similarity preserving byte hash.
+    :rtype: bytes
+    """
+    ngrams = ic.sliding_window(text, ic.core_opts.text_ngram_size)
+    features = [xxhash.xxh32_intdigest(s.encode("utf-8")) for s in ngrams]
+    hash_digest = ic.minhash_256(features)
+    return hash_digest
+
+
+def text_collapse(text):
     # type: (str) -> str
     """
     Normalize and simplify text for similarity hashing.
@@ -110,33 +140,3 @@ def collapse_text(text):
     text = unicodedata.normalize("NFKC", text)
 
     return text
-
-
-def soft_hash_text_v0(text):
-    # type: (str) -> bytes
-    """
-    Creates a 256-bit similarity preserving hash for text input with algorithm v0.
-
-    - Slide over text with a
-      [`text_ngram_size`][iscc_core.options.CoreOptions.text_ngram_size] wide window
-      and create [`xxh32`](https://cyan4973.github.io/xxHash/) hashes
-    - Create a [`minhash_256`][iscc_core.minhash.minhash_256] from the hashes generated
-      in the previous step.
-
-    !!! note
-
-        Before passing text to this function it must be:
-
-        - stripped of markup
-        - normalized
-        - stripped of whitespace
-        - lowercased
-
-    :param str text: Plain text to be hashed.
-    :return: 256-bit similarity preserving byte hash.
-    :rtype: bytes
-    """
-    ngrams = ic.sliding_window(text, ic.core_opts.text_ngram_size)
-    features = [xxhash.xxh32_intdigest(s.encode("utf-8")) for s in ngrams]
-    hash_digest = ic.minhash_256(features)
-    return hash_digest
