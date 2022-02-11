@@ -52,7 +52,7 @@ turbo = ["cython"]
 pytest = "*"
 black = { version = "*", allow-prereleases = true }
 mkdocs-material = "*"
-mkdocstrings = "0.17"
+mkdocstrings = {extras = ["python-legacy"], version = "^0.18.0"}
 toml = "*"
 PyYAML = "*"
 coverage = "*"
