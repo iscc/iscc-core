@@ -370,3 +370,7 @@ def check_options(opts):
                 result = False
     has_logged_confromance = True
     return result
+
+
+core_opts = CoreOptions()
+options_conformant = check_options(core_opts)

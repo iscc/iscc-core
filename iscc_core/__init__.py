@@ -1,12 +1,9 @@
 __version__ = "0.2.0"
-from iscc_core import options
-
-
-core_opts = options.CoreOptions()
-options_conformant = options.check_options(core_opts)
-
+from iscc_core.options import core_opts, options_conformant
+from iscc_core import v0
 
 # Import full api to toplevel
+
 from iscc_core.conformance import *
 from iscc_core.constants import *
 
