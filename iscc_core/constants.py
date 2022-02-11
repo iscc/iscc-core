@@ -166,7 +166,7 @@ class MULTIBASE(str, enum.Enum):
     base64url = "u"
 
 
-"""Possible combinations of ISCC units for the first 3 components of MT.ISCC"""
+#: Possible combinations of ISCC units for the first 3 components of MT.ISCC
 UNITS = (
     tuple(),
     (MT.CONTENT,),
