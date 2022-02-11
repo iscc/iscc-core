@@ -215,7 +215,7 @@
         "metahash": "bdyqolmha2lxajz3ann64w33jah2l66hyxbiksflgha5ynmrmketxndi"
       }
     },
-    "test_0016_properties_object": {
+    "test_0016_metadata_object": {
       "inputs": [
         "",
         "",
@@ -224,11 +224,11 @@
       ],
       "outputs": {
         "iscc": "ISCC:AAA26E2JXF63LHL2",
-        "properties": {"some": "object"},
+        "metadata": {"some": "object"},
         "metahash": "bdyqbchjtakygaxwfldbzb3qbhluj5rxou2fneml2rmw6h5awtl7lfsq"
       }
     },
-    "test_0016_properties_stream": {
+    "test_0016_metadata_stream": {
       "inputs": [
         "",
         "",
@@ -237,7 +237,7 @@
       ],
       "outputs": {
         "iscc": "ISCC:AAA26E2JXEMHRZ3H",
-        "properties": "AP8=",
+        "metadata": "AP8=",
         "metahash": "bdyqbq6hhm7y2bhdevhr3op74dlzqmsbas43h4oajxpeaaninfmsv3qa"
       }
     }

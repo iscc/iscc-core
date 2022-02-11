@@ -15,18 +15,18 @@ SEED-METADATA has 3 possible inputs:
 
 The first 32-bits of a Meta-Code are calculated as a simliarity hash from the `name` field.
 The second 32-bits are also calculated from the `name` field if no other input was supplied.
-If a `description` is suplied but no `properties`, the description will be used for the second
-32-bits. If `properties` are supplied it will be used in favour of `description` for the second
+If a `description` is suplied but no `metadata`, the description will be used for the second
+32-bits. If `metadata` is supplied it will be used in favour of `description` for the second
 32-bits.
 
 Due to the broad applicability of the ISCC we do not prescribe a particular schema for the metadata
-supplied to the `properties`-field. However, structured metadata should be supplied as an object
+supplied to the `metadata`-field. However, structured metadata should be supplied as an object
 that is JSON/JCS serializable - preferably JSON-LD to support interoperability and machine
 interpretation.
 
 In addition to the Meta-Code we also create a cryptographic hash (the metahash) of the supplied
 SEED-METADATA. It is used to bind metadata to the digital asset. We use a blake-3 multihash with
-base32-encoding as cryptographic hash. If properties are supplied, their raw bytes payload or their
+base32-encoding as cryptographic hash. If `metadata` is supplied, their raw bytes payload or their
 JCS serialized JSON data will be the sole input to the cryptographic hash. Else we use a space
 seperated concatenation of the cleaned `name` and `description` fields as inputs.
 
@@ -63,28 +63,29 @@ __all__ = [
 ]
 
 
-def gen_meta_code(name, description=None, properties=None, bits=ic.core_opts.meta_bits):
-    # type: (str, Optional[str], Optional[Properties], int) -> dict
+def gen_meta_code(name, description=None, metadata=None, bits=ic.core_opts.meta_bits):
+    # type: (str, Optional[str], Optional[ic.Metadata], int) -> dict
     """
     Create an ISCC Meta-Code using the latest standard algorithm.
 
     :param str name: Name or title of the work manifested by the digital asset
-    :param Union[str,bytes,None] description: Optional description for disambiguation
+    :param Optional[str] description: Optional description for disambiguation
+    :param Optional[ic.Metadata] metadata: Optional structured or raw metadata
     :param int bits: Bit-length of resulting Meta-Code (multiple of 64)
     :return: ISCC object with Meta-Code and properties name, description, properties, metahash
     :rtype: dict
     """
-    return gen_meta_code_v0(name, description=description, properties=properties, bits=bits)
+    return gen_meta_code_v0(name, description=description, metadata=metadata, bits=bits)
 
 
-def gen_meta_code_v0(name, description=None, properties=None, bits=ic.core_opts.meta_bits):
-    # type: (str, Optional[str], Optional[ic.Properties], int) -> dict
+def gen_meta_code_v0(name, description=None, metadata=None, bits=ic.core_opts.meta_bits):
+    # type: (str, Optional[str], Optional[ic.Metadata], int) -> dict
     """
     Create an ISCC Meta-Code with the algorithm version 0.
 
     !!! note
 
-        The input for the `properties` field can be:
+        The input for the `metadata` field can be:
 
         - Structured (JSON/JCS serializable) metadata
         - Raw bytes from a file header
@@ -93,10 +94,10 @@ def gen_meta_code_v0(name, description=None, properties=None, bits=ic.core_opts.
     :param Optional[str] description:
         A User presentable textual description of the digital asset for disambiguation purposes
         (may include markdown).
-    :param Optional[Properties] properties: Use-Case or industry-specific metadata.
+    :param Optional[ic.Metadata] metadata: Use-Case or industry-specific metadata.
         Either JSON serializable structured data or a binary blob.
     :param int bits: Bit-length of resulting Meta-Code (multiple of 64)
-    :return: ISCC object with possible fields: iscc, name, description, properties, metahash
+    :return: ISCC object with possible fields: iscc, name, description, metadata, metahash
     :rtype: dict
     """
 
@@ -111,24 +112,24 @@ def gen_meta_code_v0(name, description=None, properties=None, bits=ic.core_opts.
     description = text_clean(description)
     description = text_trim(description, ic.core_opts.meta_trim_description)
 
-    # Calculate meta_code, metahash, and properties value for the different input cases
-    if properties:
-        if isinstance(properties, bytes):
-            meta_code_digest = soft_hash_meta_v0(name, properties)
-            metahash = ic.InstanceHasherV0(properties).multihash()
-            properties_value = base64.b64encode(properties).decode("ascii")
-        elif isinstance(properties, dict):
-            payload = jcs.canonicalize(properties)
+    # Calculate meta_code, metahash, and metadata value for the different input cases
+    if metadata:
+        if isinstance(metadata, bytes):
+            meta_code_digest = soft_hash_meta_v0(name, metadata)
+            metahash = ic.InstanceHasherV0(metadata).multihash()
+            metadata_value = base64.b64encode(metadata).decode("ascii")
+        elif isinstance(metadata, dict):
+            payload = jcs.canonicalize(metadata)
             meta_code_digest = soft_hash_meta_v0(name, payload)
             metahash = ic.InstanceHasherV0(payload).multihash()
-            properties_value = properties
+            metadata_value = metadata
         else:
-            raise TypeError(f"properties must be bytes or dict not {type(properties)}")
+            raise TypeError(f"metadata must be bytes or dict not {type(metadata)}")
     else:
         payload = " ".join((name, description)).strip().encode("utf-8")
         meta_code_digest = soft_hash_meta_v0(name, description)
         metahash = ic.InstanceHasherV0(payload).multihash()
-        properties_value = None
+        metadata_value = None
 
     meta_code = ic.encode_component(
         mtype=ic.MT.META,
@@ -145,8 +146,8 @@ def gen_meta_code_v0(name, description=None, properties=None, bits=ic.core_opts.
         result["name"] = name
     if description:
         result["description"] = description
-    if properties_value:
-        result["properties"] = properties_value
+    if metadata_value:
+        result["metadata"] = metadata_value
 
     result["metahash"] = metahash
 

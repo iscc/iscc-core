@@ -96,13 +96,13 @@ gen_meta_code_v0:
             - "  Iñtërnâtiôn\nàlizætiøn☃💩 –  is a tric\t ky   thing!\r"
             - null
             - 256
-    test_0016_properties_object:
+    test_0016_metadata_object:
         inputs:
             - ""
             - ""
             - {"some": "object"}
             - 64
-    test_0016_properties_stream:
+    test_0016_metadata_stream:
         inputs:
             - ""
             - ""
