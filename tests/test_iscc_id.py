@@ -30,7 +30,7 @@ def test_gen_iscc_id_v0_single_component_uc_2byte():
 def test_gen_iscc_id_v0_multiple_components():
     mc = ic.gen_meta_code_v0("Some Title")["iscc"]
     tc = ic.gen_text_code_v0("Hello World")["iscc"]
-    code = ic.clean(mc) + ic.clean(tc)
+    code = ic.iscc_clean(mc) + ic.iscc_clean(tc)
     iscc_id = ic.gen_iscc_id(1, code)
     assert iscc_id["iscc"] == "ISCC:MEACANI57VXZ67R7"
     assert ic.explain(iscc_id["iscc"]) == "ID-BITCOIN-V0-64-20351dfd6f9f7e3f"

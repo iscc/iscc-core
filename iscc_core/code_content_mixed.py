@@ -49,7 +49,7 @@ def gen_mixed_code_v0(codes, bits=ic.core_opts.mixed_bits):
     :return: ISCC object with Content-Code Mixed.
     :rtype: ISCC
     """
-    digests = [ic.decode_base32(ic.clean(code)) for code in codes]
+    digests = [ic.decode_base32(ic.iscc_clean(code)) for code in codes]
     digest = soft_hash_codes_v0(digests, bits=bits)
     mixed_code = ic.encode_component(
         mtype=ic.MT.CONTENT,

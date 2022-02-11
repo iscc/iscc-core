@@ -120,20 +120,20 @@ def test_read_varnibble():
 
 
 def test_codec_clean():
-    assert ic.clean("somecode") == "somecode"
-    assert ic.clean("ISCC: SOME-CODE") == "SOMECODE"
-    assert ic.clean(" SOMECODE ") == "SOMECODE"
-    assert ic.clean("ISCC:") == ""
+    assert ic.iscc_clean("somecode") == "somecode"
+    assert ic.iscc_clean("ISCC: SOME-CODE") == "SOMECODE"
+    assert ic.iscc_clean(" SOMECODE ") == "SOMECODE"
+    assert ic.iscc_clean("ISCC:") == ""
 
 
 def test_codec_clean_raises_bad_scheme():
     with pytest.raises(ValueError):
-        ic.clean("http://whatever")
+        ic.iscc_clean("http://whatever")
 
 
 def test_codec_clean_raises_multiple_colom():
     with pytest.raises(ValueError):
-        ic.clean("ISCC:something:something")
+        ic.iscc_clean("ISCC:something:something")
 
 
 def test_code_properties():
@@ -324,7 +324,7 @@ def test_normalize_dual_dash():
 
 
 def test_clean_dual_dash():
-    assert ic.clean("GAAW2PRCRS5LNVZV-IAAUVACQKXE3V44W") == "GAAW2PRCRS5LNVZVIAAUVACQKXE3V44W"
+    assert ic.iscc_clean("GAAW2PRCRS5LNVZV-IAAUVACQKXE3V44W") == "GAAW2PRCRS5LNVZVIAAUVACQKXE3V44W"
 
 
 def test_normalize_dual_scheme():

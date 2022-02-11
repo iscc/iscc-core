@@ -175,7 +175,7 @@ def _safe_unpack(a, b):
     :rtype: Tuple[bytes, bytes]
     :raise ValueError: If ISCC headers don´t match
     """
-    a, b = ic.clean(ic.normalize(a)), ic.clean(ic.normalize(b))
+    a, b = ic.iscc_clean(ic.normalize(a)), ic.iscc_clean(ic.normalize(b))
     a, b = ic.decode_base32(a), ic.decode_base32(b)
     a, b = ic.read_header(a), ic.read_header(b)
     if not a[:-1] == b[:-1]:

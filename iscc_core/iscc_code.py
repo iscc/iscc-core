@@ -44,7 +44,7 @@ def gen_iscc_code_v0(codes):
     :rtype: dict
     """
 
-    codes = [ic.clean(code) for code in codes]
+    codes = [ic.iscc_clean(code) for code in codes]
 
     # Check basic constraints
     if len(codes) < 2:

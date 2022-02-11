@@ -8,7 +8,7 @@ from bitarray import bitarray, frozenbitarray
 from bitarray.util import ba2hex, ba2int, count_xor
 from iscc_core.constants import IsccAny, UNITS, LN, MT, ST, ST_CC, ST_ID, ST_ISCC, VS, MC_PREFIX
 from iscc_core.codec import (
-    clean,
+    iscc_clean,
     decode_base32,
     decode_length,
     decode_units,
@@ -39,7 +39,7 @@ class Code:
         if isinstance(code, Code):
             code_fields = code._head + (code.hash_bytes,)
         elif isinstance(code, str):
-            code = clean(code)
+            code = iscc_clean(code)
             code_fields = read_header(decode_base32(code))
         elif isinstance(code, tuple):
             code_fields = code

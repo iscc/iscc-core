@@ -313,7 +313,7 @@ def decompose(iscc_code):
     by a hyphen.
     """
 
-    iscc_code = clean(iscc_code)
+    iscc_code = iscc_clean(iscc_code)
     components = []
 
     raw_code = decode_base32(iscc_code)
@@ -414,7 +414,7 @@ def decode_iscc(iscc):
     :return: ISCC decoded to an IsccTuple
     :rtype: IsccTuple
     """
-    iscc = clean(normalize(iscc))
+    iscc = iscc_clean(normalize(iscc))
     data = decode_base32(iscc)
     return read_header(data)
 
@@ -517,7 +517,7 @@ def validate(iscc, strict=True):
         "CA",
         "KQ",
     }
-    cleaned = clean(iscc)
+    cleaned = iscc_clean(iscc)
     prefix = cleaned[:2]
     if prefix not in valid_prefixes:
         if strict:
@@ -528,7 +528,7 @@ def validate(iscc, strict=True):
     return True
 
 
-def clean(iscc):
+def iscc_clean(iscc):
     # type: (str) -> str
     """
     Cleanup ISCC string.
