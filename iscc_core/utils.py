@@ -15,7 +15,7 @@ __all__ = [
     "sliding_window",
     "iscc_similarity",
     "iscc_distance",
-    "hamming_distance_bytes",
+    "iscc_distance_bytes",
 ]
 
 
@@ -124,7 +124,7 @@ def iscc_similarity(a, b):
     :rtype: int
     """
     a, b = iscc_pair_unpack(a, b)
-    hdist = hamming_distance_bytes(a, b)
+    hdist = iscc_distance_bytes(a, b)
     nbits = len(a) * 8
     sim = int(((nbits - hdist) / nbits) * 100)
     return sim
@@ -143,10 +143,10 @@ def iscc_distance(a, b):
     :rtype: int
     """
     a, b = iscc_pair_unpack(a, b)
-    return hamming_distance_bytes(a, b)
+    return iscc_distance_bytes(a, b)
 
 
-def hamming_distance_bytes(a, b):
+def iscc_distance_bytes(a, b):
     # type: (bytes, bytes) -> int
     """
     Calculate hamming distance for binary hash digests of equal length.

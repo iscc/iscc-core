@@ -13,7 +13,7 @@ B_BYT = B_INT.to_bytes(length=8, byteorder="big", signed=False)
 
 
 def test_hamming_distance():
-    assert ic.hamming_distance_bytes(A_BYT, B_BYT) == 4
+    assert ic.iscc_distance_bytes(A_BYT, B_BYT) == 4
 
 
 def test_similarity_single_64():
@@ -121,4 +121,4 @@ def test_sliding_window_raises():
 def test_hamming_distance_raises():
     a, b = os.urandom(8), os.urandom(9)
     with pytest.raises(AssertionError):
-        ic.hamming_distance_bytes(a, b)
+        ic.iscc_distance_bytes(a, b)
