@@ -78,13 +78,13 @@ def soft_hash_image_v0(pixels, bits=ic.core_opts.image_bits):
     # DCT per row
     dct_row_lists = []
     for pixel_list in chunked(pixels, 32):
-        dct_row_lists.append(ic.dct(pixel_list))
+        dct_row_lists.append(ic.alg_dct(pixel_list))
 
     # DCT per col
     dct_row_lists_t = list(map(list, zip(*dct_row_lists)))
     dct_col_lists_t = []
     for dct_list in dct_row_lists_t:
-        dct_col_lists_t.append(ic.dct(dct_list))
+        dct_col_lists_t.append(ic.alg_dct(dct_list))
 
     dct_matrix = list(map(list, zip(*dct_col_lists_t)))
 

@@ -75,13 +75,13 @@ def soft_hash_audio_v0(cv):
         return b"\x00" * 32
 
     # Calculate simhash of digests as first 32-bit chunk of the hash
-    parts = [ic.similarity_hash(digests)]
+    parts = [ic.alg_simhash(digests)]
 
     # Calculate separate 32-bit simhashes for each quarter of features (original order)
     for bucket in divide(4, digests):
         features = list(bucket)
         if features:
-            parts.append(ic.similarity_hash(features))
+            parts.append(ic.alg_simhash(features))
         else:
             parts.append(b"\x00\x00\x00\x00")
 
@@ -91,7 +91,7 @@ def soft_hash_audio_v0(cv):
     for bucket in divide(3, digests):
         features = list(bucket)
         if features:
-            parts.append(ic.similarity_hash(features))
+            parts.append(ic.alg_simhash(features))
         else:
             parts.append(b"\x00\x00\x00\x00")
     return b"".join(parts)

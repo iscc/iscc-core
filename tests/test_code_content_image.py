@@ -71,19 +71,19 @@ def test_get_code_image():
 
 def test_dct_empty():
     with pytest.raises(ValueError):
-        ic.dct([])
+        ic.alg_dct([])
 
 
 def test_dct_zeros():
-    assert ic.dct([0] * 64) == [0] * 64
+    assert ic.alg_dct([0] * 64) == [0] * 64
 
 
 def test_dct_ones():
-    assert ic.dct([1] * 64) == [64] + [0] * 63
+    assert ic.alg_dct([1] * 64) == [64] + [0] * 63
 
 
 def test_dct_range():
-    assert ic.dct(range(64))[0] == 2016
+    assert ic.alg_dct(range(64))[0] == 2016
 
 
 def test_gen_image_code_schema_conformance():

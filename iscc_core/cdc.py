@@ -6,10 +6,10 @@ from typing import Generator
 import iscc_core as ic
 
 
-__all__ = ["cdc_data_chunks"]
+__all__ = ["alg_cdc_chunks"]
 
 
-def cdc_data_chunks(data, utf32, avg_chunk_size=ic.core_opts.data_avg_chunk_size):
+def alg_cdc_chunks(data, utf32, avg_chunk_size=ic.core_opts.data_avg_chunk_size):
     # type: (Data, bool, int) -> Generator[bytes, None, None]
     """
     A generator that yields data-dependent chunks for `data`.
@@ -33,13 +33,13 @@ def cdc_data_chunks(data, utf32, avg_chunk_size=ic.core_opts.data_avg_chunk_size
     if not buffer:
         yield b""
 
-    mi, ma, cs, mask_s, mask_l = cdc_params(avg_chunk_size)
+    mi, ma, cs, mask_s, mask_l = alg_cdc_params(avg_chunk_size)
 
     buffer = memoryview(buffer)
     while buffer:
         if len(buffer) <= ma:
             buffer = memoryview(bytes(buffer) + stream.read(ic.core_opts.io_read_size))
-        cut_point = cdc_offset(buffer, mi, ma, cs, mask_s, mask_l)
+        cut_point = alg_cdc_offset(buffer, mi, ma, cs, mask_s, mask_l)
 
         # Make sure cut points are at 4-byte aligned for utf32 encoded text
         if utf32:
@@ -49,7 +49,7 @@ def cdc_data_chunks(data, utf32, avg_chunk_size=ic.core_opts.data_avg_chunk_size
         buffer = buffer[cut_point:]
 
 
-def cdc_offset(buffer, mi, ma, cs, mask_s, mask_l):
+def alg_cdc_offset(buffer, mi, ma, cs, mask_s, mask_l):
     # type: (ic.Data, int, int, int, int, int) -> int
     """
     Find breakpoint offset for a given buffer.
@@ -82,7 +82,7 @@ def cdc_offset(buffer, mi, ma, cs, mask_s, mask_l):
     return i
 
 
-def cdc_params(avg_size: int) -> tuple:
+def alg_cdc_params(avg_size: int) -> tuple:
     """
     Calculate CDC parameters
 

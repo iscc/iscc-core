@@ -3,7 +3,7 @@ from typing import Sequence
 from bitarray import bitarray
 
 
-def wtahash(vec: Sequence[float], bits) -> bytes:
+def alg_wtahash(vec: Sequence[float], bits) -> bytes:
     """Calculate WTA Hash for vector with 380 values (MP7 frame signature)."""
     h = []
     for perm in WTA_VIDEO_ID_PERMUTATIONS:

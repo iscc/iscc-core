@@ -1,1 +1,1 @@
-cpdef bytes similarity_hash(list hash_digests)
+cpdef bytes alg_simhash(list hash_digests)

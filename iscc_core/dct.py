@@ -3,7 +3,7 @@ import math
 from typing import List, Sequence
 
 
-def dct(v):
+def alg_dct(v):
     # type: (Sequence[float]) -> List
     """
     Discrete cosine transform.
@@ -26,8 +26,8 @@ def dct(v):
         beta = [
             (v[i] - v[-(i + 1)]) / (math.cos((i + 0.5) * math.pi / n) * 2.0) for i in range(half)
         ]
-        alpha = dct(alpha)
-        beta = dct(beta)
+        alpha = alg_dct(alpha)
+        beta = alg_dct(beta)
         result = []
         for i in range(half - 1):
             result.append(alpha[i])

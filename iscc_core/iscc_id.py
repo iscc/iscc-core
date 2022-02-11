@@ -82,7 +82,7 @@ def soft_hash_iscc_id_v0(iscc_code, uc=0):
             # first byte of header + first 7 bytes of body
             digests.append(dec[:1] + unp[-1][:7])
 
-    iscc_id_digest = ic.similarity_hash(digests)
+    iscc_id_digest = ic.alg_simhash(digests)
 
     if uc:
         iscc_id_digest += uvarint.encode(uc)

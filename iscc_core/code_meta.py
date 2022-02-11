@@ -185,7 +185,7 @@ def soft_hash_meta_v0(name, extra=None):
     name = ic.text_collapse(name)
     name_n_grams = ic.sliding_window(name, width=ic.core_opts.meta_ngram_size_text)
     name_hash_digests = [blake3(s.encode("utf-8")).digest() for s in name_n_grams]
-    simhash_digest = ic.similarity_hash(name_hash_digests)
+    simhash_digest = ic.alg_simhash(name_hash_digests)
 
     if extra in {None, "", b""}:
         return simhash_digest
@@ -203,7 +203,7 @@ def soft_hash_meta_v0(name, extra=None):
         else:
             raise ValueError("parameter `extra` must be of type str or bytes!")
 
-        extra_simhash_digest = ic.similarity_hash(extra_hash_digests)
+        extra_simhash_digest = ic.alg_simhash(extra_hash_digests)
 
         # Interleave first half of name and extra simhashes in 32-bit chunks
         chunks_simhash_digest = sliced(simhash_digest[:16], 4)

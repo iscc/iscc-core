@@ -94,4 +94,4 @@ def soft_hash_codes_v0(cc_digests, bits=ic.core_opts.mixed_bits):
     # Retain the first byte of the header and strip body to mixed_bits length
     for full, code_tuple in zip(cc_digests, code_tuples):
         hash_bytes.append(full[:1] + code_tuple[-1][: nbytes - 1])
-    return ic.similarity_hash(hash_bytes)
+    return ic.alg_simhash(hash_bytes)

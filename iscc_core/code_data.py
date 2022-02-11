@@ -89,7 +89,7 @@ class DataHasherV0:
         if self.tail:
             data = self.tail + data
 
-        for chunk in ic.cdc_data_chunks(
+        for chunk in ic.alg_cdc_chunks(
             data, utf32=False, avg_chunk_size=ic.core_opts.data_avg_chunk_size
         ):
             self.chunk_sizes.append(len(chunk))
@@ -103,7 +103,7 @@ class DataHasherV0:
         # type: () -> bytes
         """Calculate 256-bit minhash digest from feature hashes."""
         self._finalize()
-        return ic.minhash_256(self.chunk_features)
+        return ic.alg_minhash_256(self.chunk_features)
 
     def code(self, bits=ic.core_opts.data_bits):
         # type: (int) -> str

@@ -84,7 +84,7 @@ def soft_hash_text_v0(text):
     - Slide over text with a
       [`text_ngram_size`][iscc_core.options.CoreOptions.text_ngram_size] wide window
       and create [`xxh32`](https://cyan4973.github.io/xxHash/) hashes
-    - Create a [`minhash_256`][iscc_core.minhash.minhash_256] from the hashes generated
+    - Create a [`minhash_256`][iscc_core.minhash.alg_minhash_256] from the hashes generated
       in the previous step.
 
     !!! note
@@ -102,7 +102,7 @@ def soft_hash_text_v0(text):
     """
     ngrams = ic.sliding_window(text, ic.core_opts.text_ngram_size)
     features = [xxhash.xxh32_intdigest(s.encode("utf-8")) for s in ngrams]
-    hash_digest = ic.minhash_256(features)
+    hash_digest = ic.alg_minhash_256(features)
     return hash_digest
 
 

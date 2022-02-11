@@ -67,5 +67,5 @@ def soft_hash_video_v0(frame_sigs, bits=ic.core_opts.video_bits):
         frame_sigs = [tuple(sig) for sig in frame_sigs]
     sigs = set(frame_sigs)
     vecsum = [sum(col) for col in zip(*sigs)]
-    video_hash_digest = ic.wtahash(vecsum, bits)
+    video_hash_digest = ic.alg_wtahash(vecsum, bits)
     return video_hash_digest

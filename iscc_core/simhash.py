@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 
-def similarity_hash(hash_digests):
+def alg_simhash(hash_digests):
     # type: (list[bytes]) -> bytes
     """
     Creates a similarity preserving hash from a sequence of equal sized hash digests.

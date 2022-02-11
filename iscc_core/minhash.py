@@ -2,7 +2,7 @@
 from typing import List
 
 
-def minhash(features):
+def alg_minhash(features):
     # type: (List[int]) -> List[int]
     """
     Calculate a 64 dimensional minhash integer vector.
@@ -16,7 +16,7 @@ def minhash(features):
     ]
 
 
-def minhash_64(features):
+def alg_minhash_64(features):
     # type: (List[int]) -> bytes
     """
     Create 64-bit minimum hash digest.
@@ -25,10 +25,10 @@ def minhash_64(features):
     :return: 64-bit binary from the least significant bits of the minhash values
     :rtype: bytes
     """
-    return minhash_compress(minhash(features), 1)
+    return alg_minhash_compress(alg_minhash(features), 1)
 
 
-def minhash_256(features):
+def alg_minhash_256(features):
     # type: (List[int]) -> bytes
     """
     Create 256-bit minimum hash digest.
@@ -37,15 +37,15 @@ def minhash_256(features):
     :return: 256-bit binary from the least significant bits of the minhash values
     :rtype: bytes
     """
-    return minhash_compress(minhash(features), 4)
+    return alg_minhash_compress(alg_minhash(features), 4)
 
 
-def minhash_compress(mhash, lsb=4):
+def alg_minhash_compress(mhash, lsb=4):
     # type: (List[int], int) -> bytes
     """
     Compress minhash vector to byte hash-digest.
 
-    Concatenates `lsb` number of  least significant bits from each integer in `mhash`.
+    Concatenates `lsb` number of least-significant bits from each integer in `mhash`.
     For example an `mhash` with 64 integers and `lsb=4` will produce a 256-bit summary
     of the minhash vector.
 
