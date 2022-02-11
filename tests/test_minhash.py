@@ -25,11 +25,11 @@ def test_minhash_32bit_features():
 
 def test_minhash_compress():
     mh = ic.minhash([2**16])
-    digest = ic.compress(mh)
+    digest = ic.minhash_compress(mh)
     assert len(digest) == 32
     assert digest.hex() == "a18e2fb2bd663d21db9c7dcc9ae78380253cae5bf089766d87a6b51fcb3f8f8e"
     mh = [0b10100001, 0b11000010, 0b10110100, 0b10011000]
-    compressed = ic.compress(mh)
+    compressed = ic.minhash_compress(mh)
     as_int = int.from_bytes(compressed, "big", signed=False)
     assert as_int == 0b1000_0100_0010_0001
 

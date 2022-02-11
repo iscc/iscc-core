@@ -25,7 +25,7 @@ def minhash_64(features):
     :return: 64-bit binary from the least significant bits of the minhash values
     :rtype: bytes
     """
-    return compress(minhash(features), 1)
+    return minhash_compress(minhash(features), 1)
 
 
 def minhash_256(features):
@@ -37,10 +37,10 @@ def minhash_256(features):
     :return: 256-bit binary from the least significant bits of the minhash values
     :rtype: bytes
     """
-    return compress(minhash(features), 4)
+    return minhash_compress(minhash(features), 4)
 
 
-def compress(mhash, lsb=4):
+def minhash_compress(mhash, lsb=4):
     # type: (List[int], int) -> bytes
     """
     Compress minhash vector to byte hash-digest.
