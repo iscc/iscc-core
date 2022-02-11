@@ -13,9 +13,9 @@ __all__ = [
     "json_canonical",
     "ipfs_hash",
     "sliding_window",
-    "similarity",
-    "distance",
-    "hamming_distance",
+    "iscc_similarity",
+    "iscc_distance",
+    "hamming_distance_bytes",
 ]
 
 
@@ -111,7 +111,7 @@ def sliding_window(seq, width):
     return (seq[i : i + width] for i in idx)
 
 
-def similarity(a, b):
+def iscc_similarity(a, b):
     # type: (str, str) -> int
     """
     Calculate similarity of ISCC codes as a percentage value (0-100).
@@ -123,14 +123,14 @@ def similarity(a, b):
     :return: Similarity of ISCC a and b in percent (based on hamming distance)
     :rtype: int
     """
-    a, b = _safe_unpack(a, b)
-    hdist = hamming_distance(a, b)
+    a, b = iscc_pair_unpack(a, b)
+    hdist = hamming_distance_bytes(a, b)
     nbits = len(a) * 8
     sim = int(((nbits - hdist) / nbits) * 100)
     return sim
 
 
-def distance(a, b):
+def iscc_distance(a, b):
     # type: (str, str) -> int
     """
     Calculate hamming distance of ISCC codes.
@@ -142,11 +142,11 @@ def distance(a, b):
     :return: Hamming distanced in number of bits.
     :rtype: int
     """
-    a, b = _safe_unpack(a, b)
-    return hamming_distance(a, b)
+    a, b = iscc_pair_unpack(a, b)
+    return hamming_distance_bytes(a, b)
 
 
-def hamming_distance(a, b):
+def hamming_distance_bytes(a, b):
     # type: (bytes, bytes) -> int
     """
     Calculate hamming distance for binary hash digests of equal length.
@@ -164,10 +164,12 @@ def hamming_distance(a, b):
     return count_xor(ba, bb)
 
 
-def _safe_unpack(a, b):
+def iscc_pair_unpack(a, b):
     # type: (str, str) -> Tuple[bytes, bytes]
     """
-    Unpack two ISCC codes and return their hash digests if their headers match.
+    Unpack two ISCC codes and return their body hash digests if their headers match.
+
+    Headers match if their MainType, SubType, and Version are identical.
 
     :param a: ISCC a
     :param b: ISCC b

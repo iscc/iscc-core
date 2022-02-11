@@ -13,43 +13,43 @@ B_BYT = B_INT.to_bytes(length=8, byteorder="big", signed=False)
 
 
 def test_hamming_distance():
-    assert ic.hamming_distance(A_BYT, B_BYT) == 4
+    assert ic.hamming_distance_bytes(A_BYT, B_BYT) == 4
 
 
 def test_similarity_single_64():
     ia = ic.Code.rnd(mt=ic.MT.CONTENT, st=ic.ST_ISCC.IMAGE, bits=64, data=A_BYT).code
     ib = ic.Code.rnd(mt=ic.MT.CONTENT, st=ic.ST_ISCC.IMAGE, bits=64, data=B_BYT).code
-    assert ic.similarity(ia, ib) == 93
+    assert ic.iscc_similarity(ia, ib) == 93
 
 
 def test_similarity_single_256():
     a = "AAD7SATLZUS57KXZZL2HXAD7HT6264AHEIRZQ4QTLB6LHVRXNTLE7MA"
     b = "AAD7CATK5QX46LX5YL2HXIH7FT626UAHE4RYC4QTDB6LXVRXNDJE7MA"
-    assert ic.similarity(a, b) == 90
+    assert ic.iscc_similarity(a, b) == 90
 
 
 def test_similarity_composite():
     a = "KQD7SATLZUS57KXZN2N6SA6A3THBJRQW4B5CZPGWU2PR566ZQNLM2AA"
     b = "KQD7CATK5QX46LX5N2N6SA6A3THBJRQW4B5CZPGWU2PR566ZQNLM2AA"
-    assert ic.similarity(a, b) == 96
+    assert ic.iscc_similarity(a, b) == 96
 
 
 def test_distance_single_64():
     ia = ic.Code.rnd(mt=ic.MT.CONTENT, st=ic.ST_ISCC.IMAGE, bits=64, data=A_BYT).code
     ib = ic.Code.rnd(mt=ic.MT.CONTENT, st=ic.ST_ISCC.IMAGE, bits=64, data=B_BYT).code
-    assert ic.distance(ia, ib) == 4
+    assert ic.iscc_distance(ia, ib) == 4
 
 
 def test_distance_single_256():
     a = "AAD7SATLZUS57KXZZL2HXAD7HT6264AHEIRZQ4QTLB6LHVRXNTLE7MA"
     b = "AAD7CATK5QX46LX5YL2HXIH7FT626UAHE4RYC4QTDB6LXVRXNDJE7MA"
-    assert ic.distance(a, b) == 24
+    assert ic.iscc_distance(a, b) == 24
 
 
 def test_distance_composite():
     a = "KQD7SATLZUS57KXZN2N6SA6A3THBJRQW4B5CZPGWU2PR566ZQNLM2AA"
     b = "KQD7CATK5QX46LX5N2N6SA6A3THBJRQW4B5CZPGWU2PR566ZQNLM2AA"
-    assert ic.distance(a, b) == 10
+    assert ic.iscc_distance(a, b) == 10
 
 
 def test_sliding_window():
@@ -93,7 +93,7 @@ def test__safe_unpack():
     a = ic.Code.rnd(ic.MT.META, bits=64).code
     b = ic.Code.rnd(ic.MT.DATA, bits=64).code
     with pytest.raises(ValueError):
-        ic.utils._safe_unpack(a, b)
+        ic.utils.iscc_pair_unpack(a, b)
 
 
 def test_ipfs_hash(static_bytes):
@@ -121,4 +121,4 @@ def test_sliding_window_raises():
 def test_hamming_distance_raises():
     a, b = os.urandom(8), os.urandom(9)
     with pytest.raises(AssertionError):
-        ic.hamming_distance(a, b)
+        ic.hamming_distance_bytes(a, b)

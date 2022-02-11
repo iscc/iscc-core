@@ -476,56 +476,56 @@ def test_codec_Code_rnd_mt_iscc():
 
 def test_codec_validate_regex():
     valid = ic.gen_meta_code("Hello World", bits=32)["iscc"]
-    assert ic.validate(valid) is True
+    assert ic.iscc_validate(valid) is True
     invalid = valid[:-1]
-    assert ic.validate(invalid, strict=False) is False
+    assert ic.iscc_validate(invalid, strict=False) is False
     with pytest.raises(ValueError):
-        ic.validate(invalid, strict=True)
+        ic.iscc_validate(invalid, strict=True)
 
 
 def test_codec_validate_header_prefix():
     valid = ic.gen_meta_code("Hello World", bits=32)["iscc"]
     invalid = "ISCC:AE" + valid[7:]
-    assert ic.validate(invalid, strict=False) is False
+    assert ic.iscc_validate(invalid, strict=False) is False
     with pytest.raises(ValueError):
-        ic.validate(invalid)
+        ic.iscc_validate(invalid)
 
 
 def test_decode_iscc():
-    assert ic.decode_iscc("AAAQCAAAAABAAAAA") == (0, 0, 0, 1, b"\x01\x00\x00\x00\x02\x00\x00\x00")
+    assert ic.iscc_decode("AAAQCAAAAABAAAAA") == (0, 0, 0, 1, b"\x01\x00\x00\x00\x02\x00\x00\x00")
 
 
 def test_type_id_maintype_meta():
-    assert ic.type_id("AAAQCAAAAABAAAAA") == "META-NONE-V0-64"
+    assert ic.iscc_type_id("AAAQCAAAAABAAAAA") == "META-NONE-V0-64"
 
 
 def test_type_id_maintype_iscc_code():
     iscc = "KICQOCPJM46YUUCBMWS6FFXRGM3LJOU5MZOVPOUHIJOHPI324GKN67Q"
-    assert ic.type_id(iscc) == "ISCC-AUDIO-V0-MCDI"
+    assert ic.iscc_type_id(iscc) == "ISCC-AUDIO-V0-MCDI"
 
 
 def test_type_id_maintype_iscc_id():
     iscc = "MEAAO5JRN22FN2M2"
-    assert ic.type_id(iscc) == "ID-BITCOIN-V0-64"
+    assert ic.iscc_type_id(iscc) == "ID-BITCOIN-V0-64"
 
 
 def test_explain_maintype_meta():
-    assert ic.explain("AAAQCAAAAABAAAAA") == "META-NONE-V0-64-0100000002000000"
+    assert ic.iscc_explain("AAAQCAAAAABAAAAA") == "META-NONE-V0-64-0100000002000000"
 
 
 def test_explain_maintype_iscc_code():
     iscc = "KICQOCPJM46YUUCBMWS6FFXRGM3LJOU5MZOVPOUHIJOHPI324GKN67Q"
     assert (
-        ic.explain(iscc)
+        ic.iscc_explain(iscc)
         == "ISCC-AUDIO-V0-MCDI-0709e9673d8a504165a5e296f13336b4ba9d665d57ba87425c77a37ae194df7e"
     )
 
 
 def test_explain_maintype_iscc_id_no_counter():
     iscc = "MEAAO5JRN22FN2M2"
-    assert ic.explain(iscc) == "ID-BITCOIN-V0-64-0775316eb456e99a"
+    assert ic.iscc_explain(iscc) == "ID-BITCOIN-V0-64-0775316eb456e99a"
 
 
 def test_explain_maintype_iscc_id_counter():
     iscc = "ISCC:MAASAJINXFXA2SQXAE"
-    assert ic.explain(iscc) == "ID-PRIVATE-V0-72-20250db96e0d4a17-1"
+    assert ic.iscc_explain(iscc) == "ID-PRIVATE-V0-72-20250db96e0d4a17-1"

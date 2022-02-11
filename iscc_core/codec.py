@@ -405,7 +405,7 @@ def normalize(iscc_code):
 ########################################################################################
 
 
-def decode_iscc(iscc):
+def iscc_decode(iscc):
     # type (str) -> IsccTuple
     """
     Decode ISCC to an IsccTuple
@@ -419,7 +419,7 @@ def decode_iscc(iscc):
     return read_header(data)
 
 
-def explain(iscc):
+def iscc_explain(iscc):
     # type (str) -> str:
     """
     Convert ISCC to a human-readable representation
@@ -428,8 +428,8 @@ def explain(iscc):
     :return: Human-readable representation of ISCC
     :rtype: str
     """
-    tid = type_id(iscc)
-    fields = decode_iscc(iscc)
+    tid = iscc_type_id(iscc)
+    fields = iscc_decode(iscc)
     if fields[0] == MT.ID:
         counter_bytes = fields[-1][8:]
         if counter_bytes:
@@ -440,7 +440,7 @@ def explain(iscc):
     return f"{tid}-{hex_hash}"
 
 
-def type_id(iscc):
+def iscc_type_id(iscc):
     # type (str) - str:
     """
     Extract and convert ISCC HEADER to a readable Type-ID string.
@@ -451,7 +451,7 @@ def type_id(iscc):
     :return: Unique Type-ID string
     :rtype: str
     """
-    fields = decode_iscc(iscc)
+    fields = iscc_decode(iscc)
     mtype = MT(fields[0])
     stype = SUBTYPE_MAP[fields[0]](fields[1])
 
@@ -466,8 +466,8 @@ def type_id(iscc):
     return f"{mtype.name}-{stype.name}-{version.name}-{length}"
 
 
-def validate(iscc, strict=True):
-    # type: (str) -> bool
+def iscc_validate(iscc, strict=True):
+    # type: (str, bool) -> bool
     """
     Validate that a given string is a *strictly well-formed* ISCC.
 
