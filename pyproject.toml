@@ -58,7 +58,7 @@ PyYAML = "*"
 coverage = "*"
 pytest-cov = "*"
 poethepoet = "*"
-iscc-schema = "^0.2.1"
+iscc-schema = "^0.3"
 bandit = "^1.7.2"
 
 [tool.black]

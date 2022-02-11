@@ -1,8 +1,6 @@
 # -*- coding: utf-8 -*-
-from textwrap import dedent
-
 import pytest
-from iscc_schema import ISCC
+from iscc_schema.schema import ISCC
 
 import iscc_core
 

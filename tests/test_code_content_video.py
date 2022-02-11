@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-from iscc_schema import ISCC
+from iscc_schema.schema import ISCC
 
 import iscc_core
 

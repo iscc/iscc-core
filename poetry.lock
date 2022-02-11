@@ -229,11 +229,11 @@ python-versions = "*"
 
 [[package]]
 name = "iscc-schema"
-version = "0.2.1"
+version = "0.3.1"
 description = "OpenAPI representation of the ISCC data model"
 category = "dev"
 optional = false
-python-versions = ">=3.6.1,<4.0.0"
+python-versions = ">=3.7,<4.0.0"
 
 [package.dependencies]
 jcs = ">=0.2,<0.3"
@@ -789,7 +789,7 @@ turbo = ["cython"]
 [metadata]
 lock-version = "1.1"
 python-versions = ">=3.7,<4.0"
-content-hash = "42973d2751ac78464a99cecc598726aeea289e29800a0c36c44273aa589443cf"
+content-hash = "63f33f8bb9ab34a6e5e2bd621b867d4b19a533a8e612d892d62a3526b9ae77cf"
 
 [metadata.files]
 astunparse = [
@@ -1023,8 +1023,7 @@ iniconfig = [
     {file = "iniconfig-1.1.1.tar.gz", hash = "sha256:bc3af051d7d14b2ee5ef9969666def0cd1a000e121eaea580d4a313df4b37f32"},
 ]
 iscc-schema = [
-    {file = "iscc-schema-0.2.1.tar.gz", hash = "sha256:15f945247144e46a132b7a74df62699f343a8c1c3f1c91bd8225cc5229bf1896"},
-    {file = "iscc_schema-0.2.1-py3-none-any.whl", hash = "sha256:9ea31ad99001d3fe746770894c16d33ccaf70031ebfe278f722073b6dc604267"},
+    {file = "iscc-schema-0.3.1.tar.gz", hash = "sha256:571d919fb8b54dd77742e3b958f221c599f31f2a58c333d37feebfed8386f0dd"},
 ]
 jcs = [
     {file = "jcs-0.2.0-py3-none-any.whl", hash = "sha256:e5720fdc96ed811d9824faddd0d8a56e8676c8e1a43d150be43d36b0f805fdbf"},
