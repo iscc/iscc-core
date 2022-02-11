@@ -79,7 +79,7 @@ def main():
                 raise
 
             testdata["outputs"] = result
-    with open(TEST_DATA, "w", encoding="utf-8") as outf:
+    with open(TEST_DATA, "w", encoding="utf-8", newline="\n") as outf:
         out_data = dump_compact(data)
         outf.write(out_data)
 

@@ -16,7 +16,7 @@ def main():
     r1 = "![ISCC Architecture](https://raw.githubusercontent.com/iscc/iscc-core/master/docs/images/iscc-codec-light.png#only-light)\n"
     r2 = "![ISCC Architecture](https://raw.githubusercontent.com/iscc/iscc-core/master/docs/images/iscc-codec-dark.png#only-dark)\n"
     text = text.replace(m, r1 + r2)
-    with open(DST, "wt", encoding="utf-8") as outf:
+    with open(DST, "wt", encoding="utf-8", newline="\n") as outf:
         outf.write(text)
 
 
