@@ -51,44 +51,46 @@ pip install iscc-core
 ## Quick Start
 
 ```python
-import iscc_core
+import iscc_core as ic
 
 
-meta_code = iscc_core.gen_meta_code(name="ISCC Test Document!")
+meta_code = ic.gen_meta_code(name="ISCC Test Document!")
 
-print(f"Meta-Code:     {meta_code.iscc}")
-print(f"Structure:     {iscc_core.explain(meta_code.iscc)}\n")
+print(f"Meta-Code:     {meta_code['iscc']}")
+print(f"Structure:     {ic.iscc_explain(meta_code['iscc'])}\n")
 
 # Extract text from file
 with open("demo.txt", "rt", encoding="utf-8") as stream:
     text = stream.read()
-    text_code = iscc_core.gen_text_code_v0(text)
-    print(f"Text-Code:     {text_code.iscc}")
-    print(f"Structure:     {iscc_core.explain(text_code.iscc)}\n")
+    text_code = ic.gen_text_code_v0(text)
+    print(f"Text-Code:     {text_code['iscc']}")
+    print(f"Structure:     {ic.iscc_explain(text_code['iscc'])}\n")
 
 # Process raw bytes of textfile
 with open("demo.txt", "rb") as stream:
-    data_code = iscc_core.gen_data_code(stream)
-    print(f"Data-Code:     {data_code.iscc}")
-    print(f"Structure:     {iscc_core.explain(data_code.iscc)}\n")
+    data_code = ic.gen_data_code(stream)
+    print(f"Data-Code:     {data_code['iscc']}")
+    print(f"Structure:     {ic.iscc_explain(data_code['iscc'])}\n")
 
     stream.seek(0)
-    instance_code = iscc_core.gen_instance_code(stream)
-    print(f"Instance-Code: {instance_code.iscc}")
-    print(f"Structure:     {iscc_core.explain(instance_code.iscc)}\n")
+    instance_code = ic.gen_instance_code(stream)
+    print(f"Instance-Code: {instance_code['iscc']}")
+    print(f"Structure:     {ic.iscc_explain(instance_code['iscc'])}\n")
 
-iscc_code = iscc_core.gen_iscc_code(
-    (meta_code.iscc, text_code.iscc, data_code.iscc, instance_code.iscc)
+iscc_code = ic.gen_iscc_code(
+    (meta_code['iscc'], text_code['iscc'], data_code['iscc'], instance_code['iscc'])
 )
-print(f"ISCC-CODE:     {iscc_code.iscc}")
-print(f"Structure:     {iscc_core.explain(iscc_code.iscc)}")
-print(f"Multiformat:   {iscc_code.code_obj.mf_base32}\n")
 
-iscc_id = iscc_core.gen_iscc_id(chain=1, iscc_code=iscc_code.iscc, uc=7)
-print(f"ISCC-ID:       {iscc_id.iscc}")
-print(f"Structure:     {iscc_core.explain(iscc_id.iscc)}")
-print(f"Multiformat:   {iscc_id.code_obj.mf_base32}")
+iscc_obj = ic.Code(iscc_code['iscc'])
+print(f"ISCC-CODE:     {iscc_obj.code}")
+print(f"Structure:     {iscc_obj.explain}")
+print(f"Multiformat:   {iscc_obj.mf_base32}\n")
 
+iscc_id = ic.gen_iscc_id(chain=1, iscc_code=iscc_code['iscc'], uc=7)
+iscc_id_obj = ic.Code(iscc_id["iscc"])
+print(f"ISCC-ID:       {iscc_id_obj.code}")
+print(f"Structure:     {iscc_id_obj.explain}")
+print(f"Multiformat:   {iscc_id_obj.mf_base32}")
 ```
 
 The output of this example is as follows:
@@ -100,19 +102,19 @@ Structure:     META-NONE-V0-64-3e103656bffdfc7a
 Text-Code:     ISCC:EAAQMBEYQF6457DP
 Structure:     CONTENT-TEXT-V0-64-060498817dcefc6f
 
-Data-Code:     ISCC:GAAZ5SQ47ZQ34A3V
-Structure:     DATA-NONE-V0-64-9eca1cfe61be0375
+Data-Code:     ISCC:GAA7UJMLDXHPPENG
+Structure:     DATA-NONE-V0-64-fa258b1dcef791a6
 
-Instance-Code: ISCC:IAASQF7FY2TLVFRC
-Structure:     INSTANCE-NONE-V0-64-2817e5c6a6ba9622
+Instance-Code: ISCC:IAA3Y7HR2FEZCU4N
+Structure:     INSTANCE-NONE-V0-64-bc7cf1d14991538d
 
-ISCC-CODE:     ISCC:KACT4EBWK27737D2AYCJRAL5Z36G7HWKDT7GDPQDOUUBPZOGU25JMIQ
-Structure:     ISCC-TEXT-V0-MCDI-3e103656bffdfc7a060498817dcefc6f9eca1cfe61be03752817e5c6a6ba9622
-Multiformat:   bzqavabj6ca3fnp757r5ambeyqf6457dpt3fbz7tbxybxkkax4xdknouwei
+ISCC-CODE:     KACT4EBWK27737D2AYCJRAL5Z36G76RFRMO4554RU26HZ4ORJGIVHDI
+Structure:     ISCC-TEXT-V0-MCDI-3e103656bffdfc7a060498817dcefc6ffa258b1dcef791a6bc7cf1d14991538d
+Multiformat:   bzqavabj6ca3fnp757r5ambeyqf6457dp7isywhoo66i2npd46hiutektru
 
-ISCC-ID:       ISCC:MEASAHQADTLH37X4A4
-Structure:     ID-BITCOIN-V0-72-201e001cd67dfefc-7
-Multiformat:   bzqawcajadyabzvt5736ao
+ISCC-ID:       MEASAPQETIK77774A4
+Structure:     ID-BITCOIN-V0-72-203e049a15fffffc-7
+Multiformat:   bzqawcajahycjufp7776ao
 ```
 
 ## Documentation
