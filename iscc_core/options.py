@@ -358,7 +358,7 @@ conformanc_critical = {
 has_logged_confromance = False
 
 
-def check_options(opts):
+def conformance_check_options(opts):
     # type: (CoreOptions) -> bool
     """Check and log if options have non-default conformance critical values"""
     global has_logged_confromance
@@ -373,4 +373,4 @@ def check_options(opts):
 
 
 core_opts = CoreOptions()
-options_conformant = check_options(core_opts)
+conformant_options = conformance_check_options(core_opts)

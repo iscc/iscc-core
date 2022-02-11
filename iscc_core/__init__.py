@@ -1,5 +1,5 @@
 __version__ = "0.2.0"
-from iscc_core.options import core_opts, options_conformant
+from iscc_core.options import core_opts, conformant_options
 from iscc_core import v0
 
 # Import full api to toplevel

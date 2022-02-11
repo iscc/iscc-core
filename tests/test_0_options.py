@@ -9,7 +9,7 @@ def test_options_nonstandard():
     import iscc_core
 
     assert iscc_core.core_opts.meta_trim_name == 666
-    assert iscc_core.options_conformant is False
+    assert iscc_core.conformant_options is False
     iscc_core.core_opts.meta_trim_name = 128
 
 

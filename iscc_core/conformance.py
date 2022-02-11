@@ -47,7 +47,7 @@ HERE = pathlib.Path(__file__).parent.absolute()
 TEST_DATA = HERE / "data.json"
 
 
-def generate_tests():
+def conformance_testdata():
     # type: () -> Generator[Tuple[str, Callable, List[Any], List[Any]]]
     """
     Yield tuples of test data.
@@ -75,7 +75,7 @@ def generate_tests():
             yield test_name, func_obj, test_values["inputs"], test_values["outputs"]
 
 
-def selftest():  # pragma: no cover
+def conformance_selftest():  # pragma: no cover
     # type: () -> bool
     """
     Run conformance tests.
@@ -84,7 +84,7 @@ def selftest():  # pragma: no cover
     :rtype: bool
     """
     passed = True
-    for test_name, func, inputs, outputs in generate_tests():
+    for test_name, func, inputs, outputs in conformance_testdata():
         try:
             if func(*inputs) != outputs:
                 raise AssertionError(f"FAILED: {func.__name__}.{test_name}")
