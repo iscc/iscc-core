@@ -809,7 +809,7 @@ turbo = ["cython"]
 [metadata]
 lock-version = "1.1"
 python-versions = ">=3.7,<4.0"
-content-hash = "66e3a9862c22f2ea24484c96952be00bb28825f79ce2cf05c82109a1a5a2ef79"
+content-hash = "c28b051f297b2c498271958ea3117c2fe71925fe4845e1579da1b072744606c8"
 
 [metadata.files]
 astunparse = [

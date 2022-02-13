@@ -34,6 +34,7 @@ class MT(enum.IntEnum):
     | 4    | INSTANCE | 0100 | Match on data identity                                  |
     | 5    | ISCC     | 0101 | Composite of two or more components with common header  |
     | 6    | ID       | 0110 | Short unique identifier bound to ISCC, timestamp, pubkey|
+    | 7    | FLAKE    | 0111 | Unique time, randomness and counter based distributed ID|
     """
 
     META = 0
@@ -43,6 +44,7 @@ class MT(enum.IntEnum):
     INSTANCE = 4
     ISCC = 5
     ID = 6
+    FLAKE = 7
 
 
 class ST(enum.IntEnum):
@@ -162,6 +164,7 @@ class MULTIBASE(str, enum.Enum):
 
     base16 = "f"
     base32 = "b"
+    base32hex = "v"
     base58btc = "z"
     base64url = "u"
 
@@ -187,6 +190,7 @@ SUBTYPE_MAP = {
     MT.INSTANCE: ST,
     MT.ISCC: ST_ISCC,
     MT.ID: ST_ID,
+    MT.FLAKE: ST,
 }
 
 #: Multicodec prefix code

@@ -21,7 +21,7 @@ The component-based structure of the ISCC identifies content at multiple levels 
 `iscc-core` is the python based library of the core algorithms to create standard-compliant ISCC codes. It also serves as a reference for porting ISCC to other programming languages.
 
 !!! tip
-    This is a low level reference implementation. `iscc-core` does not support mediatype detection, metadata extraction or file format specific content extraction. For easy generation of ISCC codes see: [iscc-cli](https://github.com/iscc/iscc-cli/releases) |
+    This is a low level reference implementation. `iscc-core` does not support mediatype detection, metadata extraction or file format specific content extraction. For easy generation of ISCC codes see: [iscc-cli](https://github.com/iscc/iscc-cli/releases)
 
 ## ISCC Architecture
 
@@ -39,6 +39,7 @@ The component-based structure of the ISCC identifies content at multiple levels 
 | 4   | INSTANCE | 0100 | Match on data identity                                   |
 | 5   | ISCC     | 0101 | Composite of two or more components with common header   |
 | 6   | ID       | 0110 | Short unique identifier bound to ISCC, timestamp, pubkey |
+| 7   | FLAKE    | 0111 | Unique time, randomness and counter based distributed ID |
 
 ## Installation
 

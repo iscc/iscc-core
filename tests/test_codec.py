@@ -152,6 +152,11 @@ def test_code_properties():
         c256.hash_uint
         == 46588043924851280427026156359332814243502099936826263036193519252570625504970
     )
+
+    assert c64.hash_base32 == "M376L7V63PFJE"
+    assert c64.base32hex == "000MDVV5VQVDNIKI"
+    assert c64.hash_base32 == "M376L7V63PFJE"
+    assert c64.mf_base32hex == "vpg0g00b6vvivtfmrpa90"
     assert c64.maintype == ic.MT.META
     assert c64.maintype == 0
     assert c64.subtype == ic.ST.NONE
@@ -453,12 +458,12 @@ def test_codec_encode_length_iscc_id_raises():
 
 def test_codec_encode_length_unknown_type_raises():
     with pytest.raises(ValueError):
-        ic.encode_length(7, 64)
+        ic.encode_length(8, 64)
 
 
 def test_codec_encode_component_invalid_type_raises():
     with pytest.raises(ValueError):
-        ic.encode_component(7, 0, 0, 64, os.urandom(8))
+        ic.encode_component(8, 0, 0, 64, os.urandom(8))
 
 
 def test_codec_decode_length_mt_iscc():
@@ -467,7 +472,7 @@ def test_codec_decode_length_mt_iscc():
 
 def test_codec_decode_length_invaid_type_raises():
     with pytest.raises(ValueError):
-        ic.decode_length(7, 3)
+        ic.decode_length(8, 3)
 
 
 def test_codec_Code_rnd_mt_iscc():
@@ -529,3 +534,17 @@ def test_explain_maintype_iscc_id_no_counter():
 def test_explain_maintype_iscc_id_counter():
     iscc = "ISCC:MAASAJINXFXA2SQXAE"
     assert ic.iscc_explain(iscc) == "ID-PRIVATE-V0-72-20250db96e0d4a17-1"
+
+
+def test_encode_base32hex():
+    assert ic.encode_base32hex(b"hello world") == "D1IMOR3F41RMUSJCCG"
+
+
+def test_decode_base32hex():
+    assert ic.decode_base32hex("D1IMOR3F41RMUSJCCG") == b"hello world"
+
+
+def test_Code_hash_base32hex():
+    iscc = "KICQOCPJM46YUUCBMWS6FFXRGM3LJOU5MZOVPOUHIJOHPI324GKN67Q"
+    code = ic.Code(iscc)
+    assert code.hash_base32hex == "0S4UIPPTH9842PD5SABF2CPMMIT9QPITAUT8EGISEUHNLOCKRTV0"

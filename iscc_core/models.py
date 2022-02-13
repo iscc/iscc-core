@@ -7,6 +7,8 @@ import uvarint
 from bitarray import bitarray, frozenbitarray
 from bitarray.util import ba2hex, ba2int, count_xor
 from iscc_core.constants import IsccAny, UNITS, LN, MT, ST, ST_CC, ST_ID, ST_ISCC, VS, MC_PREFIX
+
+
 from iscc_core.codec import (
     iscc_clean,
     decode_base32,
@@ -18,6 +20,7 @@ from iscc_core.codec import (
     encode_units,
     read_header,
     write_header,
+    encode_base32hex,
 )
 
 
@@ -88,6 +91,11 @@ class Code:
         return self.bytes.hex()
 
     @property
+    def base32hex(self) -> str:
+        """Base32hex representation of code (including header)"""
+        return encode_base32hex(self.bytes)
+
+    @property
     def uint(self) -> int:
         """Integer representation of code (including header)"""
         return int.from_bytes(self.bytes, "big", signed=False)
@@ -121,6 +129,16 @@ class Code:
     def hash_hex(self) -> str:
         """Hex string representation of code (without header)."""
         return ba2hex(self._body)
+
+    @property
+    def hash_base32(self) -> str:
+        """Base32 representation of code (without header)"""
+        return encode_base32(self.hash_bytes)
+
+    @property
+    def hash_base32hex(self) -> str:
+        """Base32hex representation of code (without header)"""
+        return encode_base32hex(self.hash_bytes)
 
     @property
     def hash_bits(self) -> str:
@@ -224,6 +242,11 @@ class Code:
     def mf_base32(self) -> str:
         """Multiformats base32 encoded."""
         return "b" + encode_base32(self.mc_bytes).lower()
+
+    @property
+    def mf_base32hex(self) -> str:
+        """Multiformats base32 encoded."""
+        return "v" + encode_base32hex(self.mc_bytes).lower()
 
     @property
     def mf_base58btc(self) -> str:

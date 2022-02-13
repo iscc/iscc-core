@@ -14,6 +14,7 @@ def build_valid_prefixes():
         ic.MT.INSTANCE: ic.ST,
         ic.MT.ISCC: ic.ST_ISCC,
         ic.MT.ID: ic.ST_ID,
+        ic.MT.FLAKE: ic.ST,
     }
 
     for mtype in ic.MT:
@@ -22,7 +23,7 @@ def build_valid_prefixes():
             base = ic.encode_base32(digest)
             prefixes.add(base[:2])
 
-    return prefixes
+    return sorted(list(prefixes))
 
 
 if __name__ == "__main__":

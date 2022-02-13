@@ -8,7 +8,11 @@ from bitarray import bitarray
 from bitarray.util import int2ba, ba2int
 from base64 import b32encode, b32decode
 from pybase64 import urlsafe_b64encode, urlsafe_b64decode
+from bases import base32hex
 from iscc_core.constants import MULTIBASE, SUBTYPE_MAP, UNITS, LN, MT, ST, VS, MC_PREFIX
+
+
+base32hexnopad = base32hex.nopad()
 
 
 ########################################################################################
@@ -34,7 +38,7 @@ def encode_component(mtype, stype, version, bit_length, digest):
     :return: Base32 encoded component code.
     :rtype: str
     """
-    if mtype in (MT.META, MT.SEMANTIC, MT.CONTENT, MT.DATA, MT.INSTANCE, MT.ID):
+    if mtype in (MT.META, MT.SEMANTIC, MT.CONTENT, MT.DATA, MT.INSTANCE, MT.ID, MT.FLAKE):
         encoded_length = encode_length(mtype, bit_length)
     elif mtype == MT.ISCC:
         raise ValueError(f"{mtype} is not a unit")
@@ -231,7 +235,7 @@ def encode_length(mtype, length):
 
     error = f"Invalid length {length} for MainType {mtype}"
     # standard case (length field denotes number of 32-bit chunks, 0 being 32-bits)
-    if mtype in (MT.META, MT.SEMANTIC, MT.CONTENT, MT.DATA, MT.INSTANCE):
+    if mtype in (MT.META, MT.SEMANTIC, MT.CONTENT, MT.DATA, MT.INSTANCE, MT.FLAKE):
         if length >= 32 and not length % 32:
             return (length // 32) - 1
         raise ValueError(error)
@@ -257,7 +261,7 @@ def decode_length(mtype, length):
     Decodes a raw header integer value in to its semantically meaningfull value (eg.
     number of bits)
     """
-    if mtype in (MT.META, MT.SEMANTIC, MT.CONTENT, MT.DATA, MT.INSTANCE):
+    if mtype in (MT.META, MT.SEMANTIC, MT.CONTENT, MT.DATA, MT.INSTANCE, MT.FLAKE):
         return LN((length + 1) * 32)
     elif mtype == MT.ISCC:
         return LN(len(decode_units(length)) * 64 + 128)
@@ -304,15 +308,32 @@ def decode_base64(code: str) -> bytes:
     return urlsafe_b64decode(string)
 
 
+def encode_base32hex(data):
+    """
+    RFC4648 Base32hex encoding without padding
+
+    see: https://tools.ietf.org/html/rfc4648#page-10
+    """
+    return base32hexnopad.encode(data)
+
+
+def decode_base32hex(data):
+    """
+    RFC4648 Base32hex decoding without padding
+
+    see: https://tools.ietf.org/html/rfc4648#page-10
+    """
+    return base32hexnopad.decode(data)
+
+
 def iscc_decompose(iscc_code):
     # type: (str) -> List[str]
     """
-    Decompose an ISCC-CODE or any valid ISCC sequence into a list of ISCC-UNITS.
+    Decompose a normalized ISCC-CODE or any valid ISCC sequence into a list of ISCC-UNITS.
 
     A valid ISCC sequence is a string concatenation of ISCC-UNITS optionally seperated
     by a hyphen.
     """
-
     iscc_code = iscc_clean(iscc_code)
     components = []
 
@@ -382,6 +403,7 @@ def iscc_normalize(iscc_code):
     decoders = {
         MULTIBASE.base16: bytes.fromhex,  # f
         MULTIBASE.base32: decode_base32,  # b
+        MULTIBASE.base32hex: decode_base32hex,  # v
         MULTIBASE.base58btc: base58.b58decode,  # z
         MULTIBASE.base64url: decode_base64,  # u
     }
@@ -494,28 +516,29 @@ def iscc_validate(iscc, strict=True):
 
     # Header valid
     valid_prefixes = {
-        "CQ",
-        "EQ",
-        "MA",
-        "EE",
-        "KA",
-        "CI",
-        "KU",
-        "CE",
-        "ME",
-        "IA",
-        "MI",
-        "KM",
-        "EI",
-        "KE",
-        "EM",
-        "CM",
-        "KI",
-        "EA",
-        "GA",
         "AA",
         "CA",
+        "CE",
+        "CI",
+        "CM",
+        "CQ",
+        "EA",
+        "EE",
+        "EI",
+        "EM",
+        "EQ",
+        "GA",
+        "IA",
+        "KA",
+        "KE",
+        "KI",
+        "KM",
         "KQ",
+        "KU",
+        "MA",
+        "ME",
+        "MI",
+        "OA",
     }
     cleaned = iscc_clean(iscc)
     prefix = cleaned[:2]

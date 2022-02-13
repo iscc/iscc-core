@@ -31,7 +31,7 @@ def gen_mixed_code(codes, bits=ic.core_opts.mixed_bits):
     :param Iterable[str] codes: a list of Content-Codes.
     :param int bits: Target bit-length of generated Content-Code-Mixed.
     :return: ISCC object with Content-Code Mixed.
-    :rtype: ISCC
+    :rtype: dict
     """
     return gen_mixed_code_v0(codes, bits=bits)
 
@@ -47,7 +47,7 @@ def gen_mixed_code_v0(codes, bits=ic.core_opts.mixed_bits):
     :param Iterable[str] codes: a list of Content-Codes.
     :param int bits: Target bit-length of generated Content-Code-Mixed.
     :return: ISCC object with Content-Code Mixed.
-    :rtype: ISCC
+    :rtype: dict
     """
     digests = [ic.decode_base32(ic.iscc_clean(code)) for code in codes]
     digest = soft_hash_codes_v0(digests, bits=bits)
