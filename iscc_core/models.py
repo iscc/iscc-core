@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+from datetime import datetime
 from os import urandom
 from secrets import choice
 from typing import List, Union
@@ -6,8 +7,10 @@ import base58
 import uvarint
 from bitarray import bitarray, frozenbitarray
 from bitarray.util import ba2hex, ba2int, count_xor
-from iscc_core.constants import IsccAny, UNITS, LN, MT, ST, ST_CC, ST_ID, ST_ISCC, VS, MC_PREFIX
 
+from iscc_core import core_opts
+from iscc_core.constants import IsccAny, UNITS, LN, MT, ST, ST_CC, ST_ID, ST_ISCC, VS, MC_PREFIX
+from iscc_core.code_flake import uid_flake_v0
 
 from iscc_core.codec import (
     iscc_clean,
@@ -21,7 +24,13 @@ from iscc_core.codec import (
     read_header,
     write_header,
     encode_base32hex,
+    encode_component,
 )
+
+__all__ = [
+    "Code",
+    "Flake",
+]
 
 
 class Code:
@@ -277,3 +286,47 @@ class Code:
 
     def __hash__(self):
         return self.uint
+
+
+class Flake:
+    """Unique lexicographically k-sortable identifier"""
+
+    def __init__(self, ts=None, bits=core_opts.flake_bits):
+        self._flake = uid_flake_v0(ts, bits=bits)
+        self._bits = bits
+
+    def __repr__(self):
+        return f'Flake("{self}")'
+
+    def __str__(self):
+        return encode_base32hex(self._flake)
+
+    def __int__(self):
+        return int.from_bytes(self._flake, "big", signed=False)
+
+    @property
+    def iscc(self):
+        """ISCC Flake-Code in canonical ISCC string representation (self-descriptive)"""
+        return "ISCC:" + encode_component(
+            mtype=MT.FLAKE,
+            stype=ST.NONE,
+            version=VS.V0,
+            bit_length=self._bits,
+            digest=self._flake,
+        )
+
+    @property
+    def time(self):
+        """Time component as string in ISO 8601 format"""
+        ts = int.from_bytes(self._flake[0:6], "big", signed=False) / 1000
+        return datetime.utcfromtimestamp(ts).isoformat(timespec="milliseconds")
+
+    @property
+    def int(self):
+        """Flake-Code as time-sortable integer (non self-descriptive)"""
+        return int(self)
+
+    @property
+    def string(self):
+        """Flake-Code as short time-sortable base32hex string (non self-descriptive)"""
+        return str(self)
