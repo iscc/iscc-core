@@ -38,6 +38,7 @@ The component-based structure of the ISCC identifies content at multiple levels 
 | 4   | INSTANCE | 0100 | Match on data identity                                   |
 | 5   | ISCC     | 0101 | Composite of two or more components with common header   |
 | 6   | ID       | 0110 | Short unique identifier bound to ISCC, timestamp, pubkey |
+| 7   | FLAKE    | 0111 | Unique time, randomness and counter based distributed ID |
 
 ## Installation
 

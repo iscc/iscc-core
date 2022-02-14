@@ -68,6 +68,8 @@ class CoreOptions(BaseSettings):
 
     data_bits: int = Field(64, description="Default length of generated Data-Code in bits")
 
+    flake_bits: int = Field(64, description="Default length of generated Flake-Code in bits")
+
     data_avg_chunk_size: int = Field(
         1024, description="Target chunk size for data chunking in number of bytes."
     )

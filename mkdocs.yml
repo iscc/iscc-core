@@ -109,6 +109,7 @@ nav:
       - Mixed-Code: components/content/code_content_mixed.md
     - Data-Code: components/code_data.md
     - Instance-Code: components/code_instance.md
+    - Flake-Code: components/code_flake.md
   - Algorithms:
     - CDC: algorithms/cdc.md
     - DCT: algorithms/dct.md

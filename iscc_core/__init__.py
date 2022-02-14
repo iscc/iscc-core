@@ -23,6 +23,7 @@ from iscc_core.code_content_video import *
 from iscc_core.code_content_mixed import *
 from iscc_core.code_data import *
 from iscc_core.code_instance import *
+from iscc_core.code_flake import *
 
 from iscc_core.codec import *
 from iscc_core.utils import *

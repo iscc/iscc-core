@@ -8,5 +8,6 @@ from iscc_core.code_content_video import gen_video_code_v0, soft_hash_video_v0
 from iscc_core.code_content_mixed import gen_mixed_code_v0, soft_hash_codes_v0
 from iscc_core.code_data import gen_data_code_v0, soft_hash_data_v0, DataHasherV0
 from iscc_core.code_instance import gen_instance_code_v0, hash_instance_v0, InstanceHasherV0
+from iscc_core.code_flake import gen_flake_code_v0, uid_flake_v0
 from iscc_core.iscc_code import gen_iscc_code_v0
 from iscc_core.iscc_id import gen_iscc_id_v0
