@@ -30,5 +30,5 @@ def test_hash_flake_v0_raises():
 
 
 def test_flake_to_iso8601():
-    assert ic.flake_to_iso8601("ISCC:OAAQC7XVGJIIJU4C") == "2022-02-13T23:27:02.404000"
-    assert ic.flake_to_iso8601("OAAQC7XVGJIIJU4C") == "2022-02-13T23:27:02.404000"
+    assert ic.flake_to_iso8601("ISCC:OAAQC7XVGJIIJU4C") == "2022-02-13T22:27:02.404"
+    assert ic.flake_to_iso8601("OAAQC7XVGJIIJU4C") == "2022-02-13T22:27:02.404"

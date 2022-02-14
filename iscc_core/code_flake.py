@@ -76,7 +76,7 @@ def hash_flake_v0(ts=None, bits=ic.core_opts.flake_bits):
     nbytes_rnd = (bits // 8) - 6
 
     ts = time.time() if ts is None else ts
-    milliseconds = round(ts * 1000)
+    milliseconds = int(ts * 1000)
     timedata = milliseconds.to_bytes(6, "big", signed=False)
     counter = _COUNTER[timedata]
     if counter == 0:
@@ -99,8 +99,8 @@ def flake_to_iso8601(flake_code):
     !!! Example
         ```python
         >>> import iscc_code as ic
-        >>> ic.flake_to_iso8601("ISCC:OAAQC7XVNNC5FM4U")
-        "2022-02-14T00:29:15.218000"
+        >>> ic.flake_to_iso8601("ISCC:OAAQC7XVGJIIJU4C")
+        '2022-02-13T22:27:02.404'
         ```
     """
     flake_code = ic.iscc_normalize(flake_code)
@@ -108,4 +108,4 @@ def flake_to_iso8601(flake_code):
     flake = ic.iscc_clean(flake_code)
     raw = ic.decode_base32(flake)
     ts = int.from_bytes(raw[2:8], "big", signed=False) / 1000
-    return datetime.fromtimestamp(ts).isoformat()
+    return datetime.utcfromtimestamp(ts).isoformat(timespec='milliseconds')
