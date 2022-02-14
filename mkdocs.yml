@@ -9,7 +9,7 @@ repo_url: 'https://github.com/iscc/iscc-core'
 edit_uri: 'edit/main/docs/'
 
 # Copyright
-copyright: 'Copyright © 2016-2021 The Authors
+copyright: 'Copyright © 2016-2022 The Authors
 | <a href="https://iscc.foundation/privacy">Privacy Policy</a>
 | <a href="https://iscc.foundation/cookies">Cookie Policy</a>
 | <a href="https://iscc.foundation/imprint">Imprint</a>
@@ -24,7 +24,7 @@ extra:
 
 theme:
   name: material
-  custom_dir: overrides
+  custom_dir: docs/overrides
   logo: images/iscc-logo-icon-white.svg
   favicon: images/iscc-logo-icon-black.svg
   language: en
