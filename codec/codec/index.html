@@ -554,6 +554,20 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#iscc_core.codec.encode_base32hex" class="md-nav__link">
+    encode_base32hex()
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#iscc_core.codec.decode_base32hex" class="md-nav__link">
+    decode_base32hex()
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#iscc_core.codec.iscc_decompose" class="md-nav__link">
     iscc_decompose()
   </a>
@@ -663,6 +677,8 @@
         
           
             
+          
+        
           
         
           
@@ -858,6 +874,20 @@
     <li class="md-nav__item">
       <a href="../../components/code_instance/" class="md-nav__link">
         Instance-Code
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../components/code_flake/" class="md-nav__link">
+        Flake-Code
       </a>
     </li>
   
@@ -1068,6 +1098,9 @@
 
 
 
+
+
+
   <div class="doc doc-object doc-function">
 
 
@@ -1165,7 +1198,7 @@ If <code>digest</code> has more bits than specified by <code>length</code> it wi
 <a id="__codelineno-0-16" name="__codelineno-0-16" href="#__codelineno-0-16"></a><span class="sd">    :return: Base32 encoded component code.</span>
 <a id="__codelineno-0-17" name="__codelineno-0-17" href="#__codelineno-0-17"></a><span class="sd">    :rtype: str</span>
 <a id="__codelineno-0-18" name="__codelineno-0-18" href="#__codelineno-0-18"></a><span class="sd">    &quot;&quot;&quot;</span>
-<a id="__codelineno-0-19" name="__codelineno-0-19" href="#__codelineno-0-19"></a>    <span class="k">if</span> <span class="n">mtype</span> <span class="ow">in</span> <span class="p">(</span><span class="n">MT</span><span class="o">.</span><span class="n">META</span><span class="p">,</span> <span class="n">MT</span><span class="o">.</span><span class="n">SEMANTIC</span><span class="p">,</span> <span class="n">MT</span><span class="o">.</span><span class="n">CONTENT</span><span class="p">,</span> <span class="n">MT</span><span class="o">.</span><span class="n">DATA</span><span class="p">,</span> <span class="n">MT</span><span class="o">.</span><span class="n">INSTANCE</span><span class="p">,</span> <span class="n">MT</span><span class="o">.</span><span class="n">ID</span><span class="p">):</span>
+<a id="__codelineno-0-19" name="__codelineno-0-19" href="#__codelineno-0-19"></a>    <span class="k">if</span> <span class="n">mtype</span> <span class="ow">in</span> <span class="p">(</span><span class="n">MT</span><span class="o">.</span><span class="n">META</span><span class="p">,</span> <span class="n">MT</span><span class="o">.</span><span class="n">SEMANTIC</span><span class="p">,</span> <span class="n">MT</span><span class="o">.</span><span class="n">CONTENT</span><span class="p">,</span> <span class="n">MT</span><span class="o">.</span><span class="n">DATA</span><span class="p">,</span> <span class="n">MT</span><span class="o">.</span><span class="n">INSTANCE</span><span class="p">,</span> <span class="n">MT</span><span class="o">.</span><span class="n">ID</span><span class="p">,</span> <span class="n">MT</span><span class="o">.</span><span class="n">FLAKE</span><span class="p">):</span>
 <a id="__codelineno-0-20" name="__codelineno-0-20" href="#__codelineno-0-20"></a>        <span class="n">encoded_length</span> <span class="o">=</span> <span class="n">encode_length</span><span class="p">(</span><span class="n">mtype</span><span class="p">,</span> <span class="n">bit_length</span><span class="p">)</span>
 <a id="__codelineno-0-21" name="__codelineno-0-21" href="#__codelineno-0-21"></a>    <span class="k">elif</span> <span class="n">mtype</span> <span class="o">==</span> <span class="n">MT</span><span class="o">.</span><span class="n">ISCC</span><span class="p">:</span>
 <a id="__codelineno-0-22" name="__codelineno-0-22" href="#__codelineno-0-22"></a>        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">mtype</span><span class="si">}</span><span class="s2"> is not a unit&quot;</span><span class="p">)</span>
@@ -1837,7 +1870,7 @@ Examples:
 <a id="__codelineno-0-44" name="__codelineno-0-44" href="#__codelineno-0-44"></a>
 <a id="__codelineno-0-45" name="__codelineno-0-45" href="#__codelineno-0-45"></a>    <span class="n">error</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;Invalid length </span><span class="si">{</span><span class="n">length</span><span class="si">}</span><span class="s2"> for MainType </span><span class="si">{</span><span class="n">mtype</span><span class="si">}</span><span class="s2">&quot;</span>
 <a id="__codelineno-0-46" name="__codelineno-0-46" href="#__codelineno-0-46"></a>    <span class="c1"># standard case (length field denotes number of 32-bit chunks, 0 being 32-bits)</span>
-<a id="__codelineno-0-47" name="__codelineno-0-47" href="#__codelineno-0-47"></a>    <span class="k">if</span> <span class="n">mtype</span> <span class="ow">in</span> <span class="p">(</span><span class="n">MT</span><span class="o">.</span><span class="n">META</span><span class="p">,</span> <span class="n">MT</span><span class="o">.</span><span class="n">SEMANTIC</span><span class="p">,</span> <span class="n">MT</span><span class="o">.</span><span class="n">CONTENT</span><span class="p">,</span> <span class="n">MT</span><span class="o">.</span><span class="n">DATA</span><span class="p">,</span> <span class="n">MT</span><span class="o">.</span><span class="n">INSTANCE</span><span class="p">):</span>
+<a id="__codelineno-0-47" name="__codelineno-0-47" href="#__codelineno-0-47"></a>    <span class="k">if</span> <span class="n">mtype</span> <span class="ow">in</span> <span class="p">(</span><span class="n">MT</span><span class="o">.</span><span class="n">META</span><span class="p">,</span> <span class="n">MT</span><span class="o">.</span><span class="n">SEMANTIC</span><span class="p">,</span> <span class="n">MT</span><span class="o">.</span><span class="n">CONTENT</span><span class="p">,</span> <span class="n">MT</span><span class="o">.</span><span class="n">DATA</span><span class="p">,</span> <span class="n">MT</span><span class="o">.</span><span class="n">INSTANCE</span><span class="p">,</span> <span class="n">MT</span><span class="o">.</span><span class="n">FLAKE</span><span class="p">):</span>
 <a id="__codelineno-0-48" name="__codelineno-0-48" href="#__codelineno-0-48"></a>        <span class="k">if</span> <span class="n">length</span> <span class="o">&gt;=</span> <span class="mi">32</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">length</span> <span class="o">%</span> <span class="mi">32</span><span class="p">:</span>
 <a id="__codelineno-0-49" name="__codelineno-0-49" href="#__codelineno-0-49"></a>            <span class="k">return</span> <span class="p">(</span><span class="n">length</span> <span class="o">//</span> <span class="mi">32</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span>
 <a id="__codelineno-0-50" name="__codelineno-0-50" href="#__codelineno-0-50"></a>        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="n">error</span><span class="p">)</span>
@@ -1889,7 +1922,7 @@ number of bits)</p>
 <a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a><span class="sd">    Decodes a raw header integer value in to its semantically meaningfull value (eg.</span>
 <a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a><span class="sd">    number of bits)</span>
 <a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a><span class="sd">    &quot;&quot;&quot;</span>
-<a id="__codelineno-0-9" name="__codelineno-0-9" href="#__codelineno-0-9"></a>    <span class="k">if</span> <span class="n">mtype</span> <span class="ow">in</span> <span class="p">(</span><span class="n">MT</span><span class="o">.</span><span class="n">META</span><span class="p">,</span> <span class="n">MT</span><span class="o">.</span><span class="n">SEMANTIC</span><span class="p">,</span> <span class="n">MT</span><span class="o">.</span><span class="n">CONTENT</span><span class="p">,</span> <span class="n">MT</span><span class="o">.</span><span class="n">DATA</span><span class="p">,</span> <span class="n">MT</span><span class="o">.</span><span class="n">INSTANCE</span><span class="p">):</span>
+<a id="__codelineno-0-9" name="__codelineno-0-9" href="#__codelineno-0-9"></a>    <span class="k">if</span> <span class="n">mtype</span> <span class="ow">in</span> <span class="p">(</span><span class="n">MT</span><span class="o">.</span><span class="n">META</span><span class="p">,</span> <span class="n">MT</span><span class="o">.</span><span class="n">SEMANTIC</span><span class="p">,</span> <span class="n">MT</span><span class="o">.</span><span class="n">CONTENT</span><span class="p">,</span> <span class="n">MT</span><span class="o">.</span><span class="n">DATA</span><span class="p">,</span> <span class="n">MT</span><span class="o">.</span><span class="n">INSTANCE</span><span class="p">,</span> <span class="n">MT</span><span class="o">.</span><span class="n">FLAKE</span><span class="p">):</span>
 <a id="__codelineno-0-10" name="__codelineno-0-10" href="#__codelineno-0-10"></a>        <span class="k">return</span> <span class="n">LN</span><span class="p">((</span><span class="n">length</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span> <span class="o">*</span> <span class="mi">32</span><span class="p">)</span>
 <a id="__codelineno-0-11" name="__codelineno-0-11" href="#__codelineno-0-11"></a>    <span class="k">elif</span> <span class="n">mtype</span> <span class="o">==</span> <span class="n">MT</span><span class="o">.</span><span class="n">ISCC</span><span class="p">:</span>
 <a id="__codelineno-0-12" name="__codelineno-0-12" href="#__codelineno-0-12"></a>        <span class="k">return</span> <span class="n">LN</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">decode_units</span><span class="p">(</span><span class="n">length</span><span class="p">))</span> <span class="o">*</span> <span class="mi">64</span> <span class="o">+</span> <span class="mi">128</span><span class="p">)</span>
@@ -2044,6 +2077,74 @@ number of bits)</p>
 
 
 
+<h3 id="iscc_core.codec.encode_base32hex" class="doc doc-heading">
+<code class="highlight language-python"><span class="n">encode_base32hex</span><span class="p">(</span><span class="n">data</span><span class="p">)</span></code>
+
+
+<a href="#iscc_core.codec.encode_base32hex" class="headerlink" title="Permanent link">#</a></h3>
+
+    <div class="doc doc-contents ">
+
+      <p>RFC4648 Base32hex encoding without padding</p>
+<p>see: <a href="https://tools.ietf.org/html/rfc4648#page-10">https://tools.ietf.org/html/rfc4648#page-10</a></p>
+
+        <details class="quote">
+          <summary>Source code in <code>iscc_core\codec.py</code></summary>
+          <div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="k">def</span> <span class="nf">encode_base32hex</span><span class="p">(</span><span class="n">data</span><span class="p">):</span>
+<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>    <span class="sd">&quot;&quot;&quot;</span>
+<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="sd">    RFC4648 Base32hex encoding without padding</span>
+<a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a>
+<a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a><span class="sd">    see: https://tools.ietf.org/html/rfc4648#page-10</span>
+<a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a><span class="sd">    &quot;&quot;&quot;</span>
+<a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a>    <span class="k">return</span> <span class="n">base32hexnopad</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+</code></pre></div>
+        </details>
+    </div>
+
+  </div>
+
+
+
+
+
+  <div class="doc doc-object doc-function">
+
+
+
+<h3 id="iscc_core.codec.decode_base32hex" class="doc doc-heading">
+<code class="highlight language-python"><span class="n">decode_base32hex</span><span class="p">(</span><span class="n">data</span><span class="p">)</span></code>
+
+
+<a href="#iscc_core.codec.decode_base32hex" class="headerlink" title="Permanent link">#</a></h3>
+
+    <div class="doc doc-contents ">
+
+      <p>RFC4648 Base32hex decoding without padding</p>
+<p>see: <a href="https://tools.ietf.org/html/rfc4648#page-10">https://tools.ietf.org/html/rfc4648#page-10</a></p>
+
+        <details class="quote">
+          <summary>Source code in <code>iscc_core\codec.py</code></summary>
+          <div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="k">def</span> <span class="nf">decode_base32hex</span><span class="p">(</span><span class="n">data</span><span class="p">):</span>
+<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>    <span class="sd">&quot;&quot;&quot;</span>
+<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="sd">    RFC4648 Base32hex decoding without padding</span>
+<a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a>
+<a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a><span class="sd">    see: https://tools.ietf.org/html/rfc4648#page-10</span>
+<a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a><span class="sd">    &quot;&quot;&quot;</span>
+<a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a>    <span class="k">return</span> <span class="n">base32hexnopad</span><span class="o">.</span><span class="n">decode</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+</code></pre></div>
+        </details>
+    </div>
+
+  </div>
+
+
+
+
+
+  <div class="doc doc-object doc-function">
+
+
+
 <h3 id="iscc_core.codec.iscc_decompose" class="doc doc-heading">
 <code class="highlight language-python"><span class="n">iscc_decompose</span><span class="p">(</span><span class="n">iscc_code</span><span class="p">)</span></code>
 
@@ -2052,7 +2153,7 @@ number of bits)</p>
 
     <div class="doc doc-contents ">
 
-      <p>Decompose an ISCC-CODE or any valid ISCC sequence into a list of ISCC-UNITS.</p>
+      <p>Decompose a normalized ISCC-CODE or any valid ISCC sequence into a list of ISCC-UNITS.</p>
 <p>A valid ISCC sequence is a string concatenation of ISCC-UNITS optionally seperated
 by a hyphen.</p>
 
@@ -2061,42 +2162,41 @@ by a hyphen.</p>
           <div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="k">def</span> <span class="nf">iscc_decompose</span><span class="p">(</span><span class="n">iscc_code</span><span class="p">):</span>
 <a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>    <span class="c1"># type: (str) -&gt; List[str]</span>
 <a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>    <span class="sd">&quot;&quot;&quot;</span>
-<a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a><span class="sd">    Decompose an ISCC-CODE or any valid ISCC sequence into a list of ISCC-UNITS.</span>
+<a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a><span class="sd">    Decompose a normalized ISCC-CODE or any valid ISCC sequence into a list of ISCC-UNITS.</span>
 <a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a>
 <a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a><span class="sd">    A valid ISCC sequence is a string concatenation of ISCC-UNITS optionally seperated</span>
 <a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a><span class="sd">    by a hyphen.</span>
 <a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a><span class="sd">    &quot;&quot;&quot;</span>
-<a id="__codelineno-0-9" name="__codelineno-0-9" href="#__codelineno-0-9"></a>
-<a id="__codelineno-0-10" name="__codelineno-0-10" href="#__codelineno-0-10"></a>    <span class="n">iscc_code</span> <span class="o">=</span> <span class="n">iscc_clean</span><span class="p">(</span><span class="n">iscc_code</span><span class="p">)</span>
-<a id="__codelineno-0-11" name="__codelineno-0-11" href="#__codelineno-0-11"></a>    <span class="n">components</span> <span class="o">=</span> <span class="p">[]</span>
-<a id="__codelineno-0-12" name="__codelineno-0-12" href="#__codelineno-0-12"></a>
-<a id="__codelineno-0-13" name="__codelineno-0-13" href="#__codelineno-0-13"></a>    <span class="n">raw_code</span> <span class="o">=</span> <span class="n">decode_base32</span><span class="p">(</span><span class="n">iscc_code</span><span class="p">)</span>
-<a id="__codelineno-0-14" name="__codelineno-0-14" href="#__codelineno-0-14"></a>    <span class="k">while</span> <span class="n">raw_code</span><span class="p">:</span>
-<a id="__codelineno-0-15" name="__codelineno-0-15" href="#__codelineno-0-15"></a>        <span class="n">mt</span><span class="p">,</span> <span class="n">st</span><span class="p">,</span> <span class="n">vs</span><span class="p">,</span> <span class="n">ln</span><span class="p">,</span> <span class="n">body</span> <span class="o">=</span> <span class="n">read_header</span><span class="p">(</span><span class="n">raw_code</span><span class="p">)</span>
-<a id="__codelineno-0-16" name="__codelineno-0-16" href="#__codelineno-0-16"></a>        <span class="c1"># standard ISCC-UNIT with tail continuation</span>
-<a id="__codelineno-0-17" name="__codelineno-0-17" href="#__codelineno-0-17"></a>        <span class="k">if</span> <span class="n">mt</span> <span class="o">!=</span> <span class="n">MT</span><span class="o">.</span><span class="n">ISCC</span><span class="p">:</span>
-<a id="__codelineno-0-18" name="__codelineno-0-18" href="#__codelineno-0-18"></a>            <span class="n">ln_bits</span> <span class="o">=</span> <span class="n">decode_length</span><span class="p">(</span><span class="n">mt</span><span class="p">,</span> <span class="n">ln</span><span class="p">)</span>
-<a id="__codelineno-0-19" name="__codelineno-0-19" href="#__codelineno-0-19"></a>            <span class="n">code</span> <span class="o">=</span> <span class="n">encode_component</span><span class="p">(</span><span class="n">mt</span><span class="p">,</span> <span class="n">st</span><span class="p">,</span> <span class="n">vs</span><span class="p">,</span> <span class="n">ln_bits</span><span class="p">,</span> <span class="n">body</span><span class="p">[:</span> <span class="n">ln_bits</span> <span class="o">//</span> <span class="mi">8</span><span class="p">])</span>
-<a id="__codelineno-0-20" name="__codelineno-0-20" href="#__codelineno-0-20"></a>            <span class="n">components</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">code</span><span class="p">)</span>
-<a id="__codelineno-0-21" name="__codelineno-0-21" href="#__codelineno-0-21"></a>            <span class="n">raw_code</span> <span class="o">=</span> <span class="n">body</span><span class="p">[</span><span class="n">ln_bits</span> <span class="o">//</span> <span class="mi">8</span> <span class="p">:]</span>
-<a id="__codelineno-0-22" name="__codelineno-0-22" href="#__codelineno-0-22"></a>            <span class="k">continue</span>
-<a id="__codelineno-0-23" name="__codelineno-0-23" href="#__codelineno-0-23"></a>
-<a id="__codelineno-0-24" name="__codelineno-0-24" href="#__codelineno-0-24"></a>        <span class="c1"># ISCC-CODE</span>
-<a id="__codelineno-0-25" name="__codelineno-0-25" href="#__codelineno-0-25"></a>        <span class="n">main_types</span> <span class="o">=</span> <span class="n">decode_units</span><span class="p">(</span><span class="n">ln</span><span class="p">)</span>
-<a id="__codelineno-0-26" name="__codelineno-0-26" href="#__codelineno-0-26"></a>
-<a id="__codelineno-0-27" name="__codelineno-0-27" href="#__codelineno-0-27"></a>        <span class="c1"># rebuild dynamic units (META, SEMANTIC, CONTENT)</span>
-<a id="__codelineno-0-28" name="__codelineno-0-28" href="#__codelineno-0-28"></a>        <span class="k">for</span> <span class="n">idx</span><span class="p">,</span> <span class="n">mtype</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">main_types</span><span class="p">):</span>
-<a id="__codelineno-0-29" name="__codelineno-0-29" href="#__codelineno-0-29"></a>            <span class="n">stype</span> <span class="o">=</span> <span class="n">ST</span><span class="o">.</span><span class="n">NONE</span> <span class="k">if</span> <span class="n">mtype</span> <span class="o">==</span> <span class="n">MT</span><span class="o">.</span><span class="n">META</span> <span class="k">else</span> <span class="n">st</span>
-<a id="__codelineno-0-30" name="__codelineno-0-30" href="#__codelineno-0-30"></a>            <span class="n">code</span> <span class="o">=</span> <span class="n">encode_component</span><span class="p">(</span><span class="n">mtype</span><span class="p">,</span> <span class="n">stype</span><span class="p">,</span> <span class="n">vs</span><span class="p">,</span> <span class="mi">64</span><span class="p">,</span> <span class="n">body</span><span class="p">[</span><span class="n">idx</span> <span class="o">*</span> <span class="mi">8</span> <span class="p">:])</span>
-<a id="__codelineno-0-31" name="__codelineno-0-31" href="#__codelineno-0-31"></a>            <span class="n">components</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">code</span><span class="p">)</span>
-<a id="__codelineno-0-32" name="__codelineno-0-32" href="#__codelineno-0-32"></a>
-<a id="__codelineno-0-33" name="__codelineno-0-33" href="#__codelineno-0-33"></a>        <span class="c1"># rebuild static units (DATA, INSTANCE)</span>
-<a id="__codelineno-0-34" name="__codelineno-0-34" href="#__codelineno-0-34"></a>        <span class="n">data_code</span> <span class="o">=</span> <span class="n">encode_component</span><span class="p">(</span><span class="n">MT</span><span class="o">.</span><span class="n">DATA</span><span class="p">,</span> <span class="n">ST</span><span class="o">.</span><span class="n">NONE</span><span class="p">,</span> <span class="n">vs</span><span class="p">,</span> <span class="mi">64</span><span class="p">,</span> <span class="n">body</span><span class="p">[</span><span class="o">-</span><span class="mi">16</span><span class="p">:</span><span class="o">-</span><span class="mi">8</span><span class="p">])</span>
-<a id="__codelineno-0-35" name="__codelineno-0-35" href="#__codelineno-0-35"></a>        <span class="n">instance_code</span> <span class="o">=</span> <span class="n">encode_component</span><span class="p">(</span><span class="n">MT</span><span class="o">.</span><span class="n">INSTANCE</span><span class="p">,</span> <span class="n">ST</span><span class="o">.</span><span class="n">NONE</span><span class="p">,</span> <span class="n">vs</span><span class="p">,</span> <span class="mi">64</span><span class="p">,</span> <span class="n">body</span><span class="p">[</span><span class="o">-</span><span class="mi">8</span><span class="p">:])</span>
-<a id="__codelineno-0-36" name="__codelineno-0-36" href="#__codelineno-0-36"></a>        <span class="n">components</span><span class="o">.</span><span class="n">extend</span><span class="p">([</span><span class="n">data_code</span><span class="p">,</span> <span class="n">instance_code</span><span class="p">])</span>
-<a id="__codelineno-0-37" name="__codelineno-0-37" href="#__codelineno-0-37"></a>        <span class="k">break</span>
-<a id="__codelineno-0-38" name="__codelineno-0-38" href="#__codelineno-0-38"></a>
-<a id="__codelineno-0-39" name="__codelineno-0-39" href="#__codelineno-0-39"></a>    <span class="k">return</span> <span class="n">components</span>
+<a id="__codelineno-0-9" name="__codelineno-0-9" href="#__codelineno-0-9"></a>    <span class="n">iscc_code</span> <span class="o">=</span> <span class="n">iscc_clean</span><span class="p">(</span><span class="n">iscc_code</span><span class="p">)</span>
+<a id="__codelineno-0-10" name="__codelineno-0-10" href="#__codelineno-0-10"></a>    <span class="n">components</span> <span class="o">=</span> <span class="p">[]</span>
+<a id="__codelineno-0-11" name="__codelineno-0-11" href="#__codelineno-0-11"></a>
+<a id="__codelineno-0-12" name="__codelineno-0-12" href="#__codelineno-0-12"></a>    <span class="n">raw_code</span> <span class="o">=</span> <span class="n">decode_base32</span><span class="p">(</span><span class="n">iscc_code</span><span class="p">)</span>
+<a id="__codelineno-0-13" name="__codelineno-0-13" href="#__codelineno-0-13"></a>    <span class="k">while</span> <span class="n">raw_code</span><span class="p">:</span>
+<a id="__codelineno-0-14" name="__codelineno-0-14" href="#__codelineno-0-14"></a>        <span class="n">mt</span><span class="p">,</span> <span class="n">st</span><span class="p">,</span> <span class="n">vs</span><span class="p">,</span> <span class="n">ln</span><span class="p">,</span> <span class="n">body</span> <span class="o">=</span> <span class="n">read_header</span><span class="p">(</span><span class="n">raw_code</span><span class="p">)</span>
+<a id="__codelineno-0-15" name="__codelineno-0-15" href="#__codelineno-0-15"></a>        <span class="c1"># standard ISCC-UNIT with tail continuation</span>
+<a id="__codelineno-0-16" name="__codelineno-0-16" href="#__codelineno-0-16"></a>        <span class="k">if</span> <span class="n">mt</span> <span class="o">!=</span> <span class="n">MT</span><span class="o">.</span><span class="n">ISCC</span><span class="p">:</span>
+<a id="__codelineno-0-17" name="__codelineno-0-17" href="#__codelineno-0-17"></a>            <span class="n">ln_bits</span> <span class="o">=</span> <span class="n">decode_length</span><span class="p">(</span><span class="n">mt</span><span class="p">,</span> <span class="n">ln</span><span class="p">)</span>
+<a id="__codelineno-0-18" name="__codelineno-0-18" href="#__codelineno-0-18"></a>            <span class="n">code</span> <span class="o">=</span> <span class="n">encode_component</span><span class="p">(</span><span class="n">mt</span><span class="p">,</span> <span class="n">st</span><span class="p">,</span> <span class="n">vs</span><span class="p">,</span> <span class="n">ln_bits</span><span class="p">,</span> <span class="n">body</span><span class="p">[:</span> <span class="n">ln_bits</span> <span class="o">//</span> <span class="mi">8</span><span class="p">])</span>
+<a id="__codelineno-0-19" name="__codelineno-0-19" href="#__codelineno-0-19"></a>            <span class="n">components</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">code</span><span class="p">)</span>
+<a id="__codelineno-0-20" name="__codelineno-0-20" href="#__codelineno-0-20"></a>            <span class="n">raw_code</span> <span class="o">=</span> <span class="n">body</span><span class="p">[</span><span class="n">ln_bits</span> <span class="o">//</span> <span class="mi">8</span> <span class="p">:]</span>
+<a id="__codelineno-0-21" name="__codelineno-0-21" href="#__codelineno-0-21"></a>            <span class="k">continue</span>
+<a id="__codelineno-0-22" name="__codelineno-0-22" href="#__codelineno-0-22"></a>
+<a id="__codelineno-0-23" name="__codelineno-0-23" href="#__codelineno-0-23"></a>        <span class="c1"># ISCC-CODE</span>
+<a id="__codelineno-0-24" name="__codelineno-0-24" href="#__codelineno-0-24"></a>        <span class="n">main_types</span> <span class="o">=</span> <span class="n">decode_units</span><span class="p">(</span><span class="n">ln</span><span class="p">)</span>
+<a id="__codelineno-0-25" name="__codelineno-0-25" href="#__codelineno-0-25"></a>
+<a id="__codelineno-0-26" name="__codelineno-0-26" href="#__codelineno-0-26"></a>        <span class="c1"># rebuild dynamic units (META, SEMANTIC, CONTENT)</span>
+<a id="__codelineno-0-27" name="__codelineno-0-27" href="#__codelineno-0-27"></a>        <span class="k">for</span> <span class="n">idx</span><span class="p">,</span> <span class="n">mtype</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">main_types</span><span class="p">):</span>
+<a id="__codelineno-0-28" name="__codelineno-0-28" href="#__codelineno-0-28"></a>            <span class="n">stype</span> <span class="o">=</span> <span class="n">ST</span><span class="o">.</span><span class="n">NONE</span> <span class="k">if</span> <span class="n">mtype</span> <span class="o">==</span> <span class="n">MT</span><span class="o">.</span><span class="n">META</span> <span class="k">else</span> <span class="n">st</span>
+<a id="__codelineno-0-29" name="__codelineno-0-29" href="#__codelineno-0-29"></a>            <span class="n">code</span> <span class="o">=</span> <span class="n">encode_component</span><span class="p">(</span><span class="n">mtype</span><span class="p">,</span> <span class="n">stype</span><span class="p">,</span> <span class="n">vs</span><span class="p">,</span> <span class="mi">64</span><span class="p">,</span> <span class="n">body</span><span class="p">[</span><span class="n">idx</span> <span class="o">*</span> <span class="mi">8</span> <span class="p">:])</span>
+<a id="__codelineno-0-30" name="__codelineno-0-30" href="#__codelineno-0-30"></a>            <span class="n">components</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">code</span><span class="p">)</span>
+<a id="__codelineno-0-31" name="__codelineno-0-31" href="#__codelineno-0-31"></a>
+<a id="__codelineno-0-32" name="__codelineno-0-32" href="#__codelineno-0-32"></a>        <span class="c1"># rebuild static units (DATA, INSTANCE)</span>
+<a id="__codelineno-0-33" name="__codelineno-0-33" href="#__codelineno-0-33"></a>        <span class="n">data_code</span> <span class="o">=</span> <span class="n">encode_component</span><span class="p">(</span><span class="n">MT</span><span class="o">.</span><span class="n">DATA</span><span class="p">,</span> <span class="n">ST</span><span class="o">.</span><span class="n">NONE</span><span class="p">,</span> <span class="n">vs</span><span class="p">,</span> <span class="mi">64</span><span class="p">,</span> <span class="n">body</span><span class="p">[</span><span class="o">-</span><span class="mi">16</span><span class="p">:</span><span class="o">-</span><span class="mi">8</span><span class="p">])</span>
+<a id="__codelineno-0-34" name="__codelineno-0-34" href="#__codelineno-0-34"></a>        <span class="n">instance_code</span> <span class="o">=</span> <span class="n">encode_component</span><span class="p">(</span><span class="n">MT</span><span class="o">.</span><span class="n">INSTANCE</span><span class="p">,</span> <span class="n">ST</span><span class="o">.</span><span class="n">NONE</span><span class="p">,</span> <span class="n">vs</span><span class="p">,</span> <span class="mi">64</span><span class="p">,</span> <span class="n">body</span><span class="p">[</span><span class="o">-</span><span class="mi">8</span><span class="p">:])</span>
+<a id="__codelineno-0-35" name="__codelineno-0-35" href="#__codelineno-0-35"></a>        <span class="n">components</span><span class="o">.</span><span class="n">extend</span><span class="p">([</span><span class="n">data_code</span><span class="p">,</span> <span class="n">instance_code</span><span class="p">])</span>
+<a id="__codelineno-0-36" name="__codelineno-0-36" href="#__codelineno-0-36"></a>        <span class="k">break</span>
+<a id="__codelineno-0-37" name="__codelineno-0-37" href="#__codelineno-0-37"></a>
+<a id="__codelineno-0-38" name="__codelineno-0-38" href="#__codelineno-0-38"></a>    <span class="k">return</span> <span class="n">components</span>
 </code></pre></div>
         </details>
     </div>
@@ -2215,22 +2315,23 @@ Iscc:Maagztfqttvizpjr
 <a id="__codelineno-0-35" name="__codelineno-0-35" href="#__codelineno-0-35"></a>    <span class="n">decoders</span> <span class="o">=</span> <span class="p">{</span>
 <a id="__codelineno-0-36" name="__codelineno-0-36" href="#__codelineno-0-36"></a>        <span class="n">MULTIBASE</span><span class="o">.</span><span class="n">base16</span><span class="p">:</span> <span class="nb">bytes</span><span class="o">.</span><span class="n">fromhex</span><span class="p">,</span>  <span class="c1"># f</span>
 <a id="__codelineno-0-37" name="__codelineno-0-37" href="#__codelineno-0-37"></a>        <span class="n">MULTIBASE</span><span class="o">.</span><span class="n">base32</span><span class="p">:</span> <span class="n">decode_base32</span><span class="p">,</span>  <span class="c1"># b</span>
-<a id="__codelineno-0-38" name="__codelineno-0-38" href="#__codelineno-0-38"></a>        <span class="n">MULTIBASE</span><span class="o">.</span><span class="n">base58btc</span><span class="p">:</span> <span class="n">base58</span><span class="o">.</span><span class="n">b58decode</span><span class="p">,</span>  <span class="c1"># z</span>
-<a id="__codelineno-0-39" name="__codelineno-0-39" href="#__codelineno-0-39"></a>        <span class="n">MULTIBASE</span><span class="o">.</span><span class="n">base64url</span><span class="p">:</span> <span class="n">decode_base64</span><span class="p">,</span>  <span class="c1"># u</span>
-<a id="__codelineno-0-40" name="__codelineno-0-40" href="#__codelineno-0-40"></a>    <span class="p">}</span>
-<a id="__codelineno-0-41" name="__codelineno-0-41" href="#__codelineno-0-41"></a>
-<a id="__codelineno-0-42" name="__codelineno-0-42" href="#__codelineno-0-42"></a>    <span class="c1"># Transcode to base32 if &lt;multibase&gt;&lt;multicodec&gt; encoded</span>
-<a id="__codelineno-0-43" name="__codelineno-0-43" href="#__codelineno-0-43"></a>    <span class="n">multibase_prefix</span> <span class="o">=</span> <span class="n">iscc_code</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
-<a id="__codelineno-0-44" name="__codelineno-0-44" href="#__codelineno-0-44"></a>    <span class="k">if</span> <span class="n">multibase_prefix</span> <span class="ow">in</span> <span class="n">decoders</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
-<a id="__codelineno-0-45" name="__codelineno-0-45" href="#__codelineno-0-45"></a>        <span class="n">decoder</span> <span class="o">=</span> <span class="n">decoders</span><span class="p">[</span><span class="n">multibase_prefix</span><span class="p">]</span>
-<a id="__codelineno-0-46" name="__codelineno-0-46" href="#__codelineno-0-46"></a>        <span class="n">decoded</span> <span class="o">=</span> <span class="n">decoder</span><span class="p">(</span><span class="n">iscc_code</span><span class="p">[</span><span class="mi">1</span><span class="p">:])</span>
-<a id="__codelineno-0-47" name="__codelineno-0-47" href="#__codelineno-0-47"></a>        <span class="k">if</span> <span class="ow">not</span> <span class="n">decoded</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="n">MC_PREFIX</span><span class="p">):</span>
-<a id="__codelineno-0-48" name="__codelineno-0-48" href="#__codelineno-0-48"></a>            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Malformed multiformat codec: </span><span class="si">{</span><span class="n">decoded</span><span class="p">[:</span><span class="mi">2</span><span class="p">]</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
-<a id="__codelineno-0-49" name="__codelineno-0-49" href="#__codelineno-0-49"></a>        <span class="n">iscc_code</span> <span class="o">=</span> <span class="n">encode_base32</span><span class="p">(</span><span class="n">decoded</span><span class="p">[</span><span class="mi">2</span><span class="p">:])</span>
-<a id="__codelineno-0-50" name="__codelineno-0-50" href="#__codelineno-0-50"></a>
-<a id="__codelineno-0-51" name="__codelineno-0-51" href="#__codelineno-0-51"></a>    <span class="n">decomposed</span> <span class="o">=</span> <span class="n">iscc_decompose</span><span class="p">(</span><span class="n">iscc_code</span><span class="p">)</span>
-<a id="__codelineno-0-52" name="__codelineno-0-52" href="#__codelineno-0-52"></a>    <span class="n">recomposed</span> <span class="o">=</span> <span class="n">gen_iscc_code_v0</span><span class="p">(</span><span class="n">decomposed</span><span class="p">)[</span><span class="s2">&quot;iscc&quot;</span><span class="p">]</span> <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">decomposed</span><span class="p">)</span> <span class="o">&gt;=</span> <span class="mi">2</span> <span class="k">else</span> <span class="n">decomposed</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
-<a id="__codelineno-0-53" name="__codelineno-0-53" href="#__codelineno-0-53"></a>    <span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;ISCC:</span><span class="si">{</span><span class="n">recomposed</span><span class="si">}</span><span class="s2">&quot;</span> <span class="k">if</span> <span class="ow">not</span> <span class="n">recomposed</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s2">&quot;ISCC:&quot;</span><span class="p">)</span> <span class="k">else</span> <span class="n">recomposed</span>
+<a id="__codelineno-0-38" name="__codelineno-0-38" href="#__codelineno-0-38"></a>        <span class="n">MULTIBASE</span><span class="o">.</span><span class="n">base32hex</span><span class="p">:</span> <span class="n">decode_base32hex</span><span class="p">,</span>  <span class="c1"># v</span>
+<a id="__codelineno-0-39" name="__codelineno-0-39" href="#__codelineno-0-39"></a>        <span class="n">MULTIBASE</span><span class="o">.</span><span class="n">base58btc</span><span class="p">:</span> <span class="n">base58</span><span class="o">.</span><span class="n">b58decode</span><span class="p">,</span>  <span class="c1"># z</span>
+<a id="__codelineno-0-40" name="__codelineno-0-40" href="#__codelineno-0-40"></a>        <span class="n">MULTIBASE</span><span class="o">.</span><span class="n">base64url</span><span class="p">:</span> <span class="n">decode_base64</span><span class="p">,</span>  <span class="c1"># u</span>
+<a id="__codelineno-0-41" name="__codelineno-0-41" href="#__codelineno-0-41"></a>    <span class="p">}</span>
+<a id="__codelineno-0-42" name="__codelineno-0-42" href="#__codelineno-0-42"></a>
+<a id="__codelineno-0-43" name="__codelineno-0-43" href="#__codelineno-0-43"></a>    <span class="c1"># Transcode to base32 if &lt;multibase&gt;&lt;multicodec&gt; encoded</span>
+<a id="__codelineno-0-44" name="__codelineno-0-44" href="#__codelineno-0-44"></a>    <span class="n">multibase_prefix</span> <span class="o">=</span> <span class="n">iscc_code</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+<a id="__codelineno-0-45" name="__codelineno-0-45" href="#__codelineno-0-45"></a>    <span class="k">if</span> <span class="n">multibase_prefix</span> <span class="ow">in</span> <span class="n">decoders</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
+<a id="__codelineno-0-46" name="__codelineno-0-46" href="#__codelineno-0-46"></a>        <span class="n">decoder</span> <span class="o">=</span> <span class="n">decoders</span><span class="p">[</span><span class="n">multibase_prefix</span><span class="p">]</span>
+<a id="__codelineno-0-47" name="__codelineno-0-47" href="#__codelineno-0-47"></a>        <span class="n">decoded</span> <span class="o">=</span> <span class="n">decoder</span><span class="p">(</span><span class="n">iscc_code</span><span class="p">[</span><span class="mi">1</span><span class="p">:])</span>
+<a id="__codelineno-0-48" name="__codelineno-0-48" href="#__codelineno-0-48"></a>        <span class="k">if</span> <span class="ow">not</span> <span class="n">decoded</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="n">MC_PREFIX</span><span class="p">):</span>
+<a id="__codelineno-0-49" name="__codelineno-0-49" href="#__codelineno-0-49"></a>            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Malformed multiformat codec: </span><span class="si">{</span><span class="n">decoded</span><span class="p">[:</span><span class="mi">2</span><span class="p">]</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<a id="__codelineno-0-50" name="__codelineno-0-50" href="#__codelineno-0-50"></a>        <span class="n">iscc_code</span> <span class="o">=</span> <span class="n">encode_base32</span><span class="p">(</span><span class="n">decoded</span><span class="p">[</span><span class="mi">2</span><span class="p">:])</span>
+<a id="__codelineno-0-51" name="__codelineno-0-51" href="#__codelineno-0-51"></a>
+<a id="__codelineno-0-52" name="__codelineno-0-52" href="#__codelineno-0-52"></a>    <span class="n">decomposed</span> <span class="o">=</span> <span class="n">iscc_decompose</span><span class="p">(</span><span class="n">iscc_code</span><span class="p">)</span>
+<a id="__codelineno-0-53" name="__codelineno-0-53" href="#__codelineno-0-53"></a>    <span class="n">recomposed</span> <span class="o">=</span> <span class="n">gen_iscc_code_v0</span><span class="p">(</span><span class="n">decomposed</span><span class="p">)[</span><span class="s2">&quot;iscc&quot;</span><span class="p">]</span> <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">decomposed</span><span class="p">)</span> <span class="o">&gt;=</span> <span class="mi">2</span> <span class="k">else</span> <span class="n">decomposed</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+<a id="__codelineno-0-54" name="__codelineno-0-54" href="#__codelineno-0-54"></a>    <span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;ISCC:</span><span class="si">{</span><span class="n">recomposed</span><span class="si">}</span><span class="s2">&quot;</span> <span class="k">if</span> <span class="ow">not</span> <span class="n">recomposed</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s2">&quot;ISCC:&quot;</span><span class="p">)</span> <span class="k">else</span> <span class="n">recomposed</span>
 </code></pre></div>
         </details>
     </div>
@@ -2568,38 +2669,39 @@ Iscc:Maagztfqttvizpjr
 <a id="__codelineno-0-26" name="__codelineno-0-26" href="#__codelineno-0-26"></a>
 <a id="__codelineno-0-27" name="__codelineno-0-27" href="#__codelineno-0-27"></a>    <span class="c1"># Header valid</span>
 <a id="__codelineno-0-28" name="__codelineno-0-28" href="#__codelineno-0-28"></a>    <span class="n">valid_prefixes</span> <span class="o">=</span> <span class="p">{</span>
-<a id="__codelineno-0-29" name="__codelineno-0-29" href="#__codelineno-0-29"></a>        <span class="s2">&quot;CQ&quot;</span><span class="p">,</span>
-<a id="__codelineno-0-30" name="__codelineno-0-30" href="#__codelineno-0-30"></a>        <span class="s2">&quot;EQ&quot;</span><span class="p">,</span>
-<a id="__codelineno-0-31" name="__codelineno-0-31" href="#__codelineno-0-31"></a>        <span class="s2">&quot;MA&quot;</span><span class="p">,</span>
-<a id="__codelineno-0-32" name="__codelineno-0-32" href="#__codelineno-0-32"></a>        <span class="s2">&quot;EE&quot;</span><span class="p">,</span>
-<a id="__codelineno-0-33" name="__codelineno-0-33" href="#__codelineno-0-33"></a>        <span class="s2">&quot;KA&quot;</span><span class="p">,</span>
-<a id="__codelineno-0-34" name="__codelineno-0-34" href="#__codelineno-0-34"></a>        <span class="s2">&quot;CI&quot;</span><span class="p">,</span>
-<a id="__codelineno-0-35" name="__codelineno-0-35" href="#__codelineno-0-35"></a>        <span class="s2">&quot;KU&quot;</span><span class="p">,</span>
-<a id="__codelineno-0-36" name="__codelineno-0-36" href="#__codelineno-0-36"></a>        <span class="s2">&quot;CE&quot;</span><span class="p">,</span>
-<a id="__codelineno-0-37" name="__codelineno-0-37" href="#__codelineno-0-37"></a>        <span class="s2">&quot;ME&quot;</span><span class="p">,</span>
-<a id="__codelineno-0-38" name="__codelineno-0-38" href="#__codelineno-0-38"></a>        <span class="s2">&quot;IA&quot;</span><span class="p">,</span>
-<a id="__codelineno-0-39" name="__codelineno-0-39" href="#__codelineno-0-39"></a>        <span class="s2">&quot;MI&quot;</span><span class="p">,</span>
-<a id="__codelineno-0-40" name="__codelineno-0-40" href="#__codelineno-0-40"></a>        <span class="s2">&quot;KM&quot;</span><span class="p">,</span>
-<a id="__codelineno-0-41" name="__codelineno-0-41" href="#__codelineno-0-41"></a>        <span class="s2">&quot;EI&quot;</span><span class="p">,</span>
-<a id="__codelineno-0-42" name="__codelineno-0-42" href="#__codelineno-0-42"></a>        <span class="s2">&quot;KE&quot;</span><span class="p">,</span>
-<a id="__codelineno-0-43" name="__codelineno-0-43" href="#__codelineno-0-43"></a>        <span class="s2">&quot;EM&quot;</span><span class="p">,</span>
-<a id="__codelineno-0-44" name="__codelineno-0-44" href="#__codelineno-0-44"></a>        <span class="s2">&quot;CM&quot;</span><span class="p">,</span>
-<a id="__codelineno-0-45" name="__codelineno-0-45" href="#__codelineno-0-45"></a>        <span class="s2">&quot;KI&quot;</span><span class="p">,</span>
-<a id="__codelineno-0-46" name="__codelineno-0-46" href="#__codelineno-0-46"></a>        <span class="s2">&quot;EA&quot;</span><span class="p">,</span>
-<a id="__codelineno-0-47" name="__codelineno-0-47" href="#__codelineno-0-47"></a>        <span class="s2">&quot;GA&quot;</span><span class="p">,</span>
-<a id="__codelineno-0-48" name="__codelineno-0-48" href="#__codelineno-0-48"></a>        <span class="s2">&quot;AA&quot;</span><span class="p">,</span>
-<a id="__codelineno-0-49" name="__codelineno-0-49" href="#__codelineno-0-49"></a>        <span class="s2">&quot;CA&quot;</span><span class="p">,</span>
-<a id="__codelineno-0-50" name="__codelineno-0-50" href="#__codelineno-0-50"></a>        <span class="s2">&quot;KQ&quot;</span><span class="p">,</span>
-<a id="__codelineno-0-51" name="__codelineno-0-51" href="#__codelineno-0-51"></a>    <span class="p">}</span>
-<a id="__codelineno-0-52" name="__codelineno-0-52" href="#__codelineno-0-52"></a>    <span class="n">cleaned</span> <span class="o">=</span> <span class="n">iscc_clean</span><span class="p">(</span><span class="n">iscc</span><span class="p">)</span>
-<a id="__codelineno-0-53" name="__codelineno-0-53" href="#__codelineno-0-53"></a>    <span class="n">prefix</span> <span class="o">=</span> <span class="n">cleaned</span><span class="p">[:</span><span class="mi">2</span><span class="p">]</span>
-<a id="__codelineno-0-54" name="__codelineno-0-54" href="#__codelineno-0-54"></a>    <span class="k">if</span> <span class="n">prefix</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">valid_prefixes</span><span class="p">:</span>
-<a id="__codelineno-0-55" name="__codelineno-0-55" href="#__codelineno-0-55"></a>        <span class="k">if</span> <span class="n">strict</span><span class="p">:</span>
-<a id="__codelineno-0-56" name="__codelineno-0-56" href="#__codelineno-0-56"></a>            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Header starts with invalid sequence </span><span class="si">{</span><span class="n">prefix</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
-<a id="__codelineno-0-57" name="__codelineno-0-57" href="#__codelineno-0-57"></a>        <span class="k">else</span><span class="p">:</span>
-<a id="__codelineno-0-58" name="__codelineno-0-58" href="#__codelineno-0-58"></a>            <span class="k">return</span> <span class="kc">False</span>
-<a id="__codelineno-0-59" name="__codelineno-0-59" href="#__codelineno-0-59"></a>
-<a id="__codelineno-0-60" name="__codelineno-0-60" href="#__codelineno-0-60"></a>    <span class="k">return</span> <span class="kc">True</span>
+<a id="__codelineno-0-29" name="__codelineno-0-29" href="#__codelineno-0-29"></a>        <span class="s2">&quot;AA&quot;</span><span class="p">,</span>
+<a id="__codelineno-0-30" name="__codelineno-0-30" href="#__codelineno-0-30"></a>        <span class="s2">&quot;CA&quot;</span><span class="p">,</span>
+<a id="__codelineno-0-31" name="__codelineno-0-31" href="#__codelineno-0-31"></a>        <span class="s2">&quot;CE&quot;</span><span class="p">,</span>
+<a id="__codelineno-0-32" name="__codelineno-0-32" href="#__codelineno-0-32"></a>        <span class="s2">&quot;CI&quot;</span><span class="p">,</span>
+<a id="__codelineno-0-33" name="__codelineno-0-33" href="#__codelineno-0-33"></a>        <span class="s2">&quot;CM&quot;</span><span class="p">,</span>
+<a id="__codelineno-0-34" name="__codelineno-0-34" href="#__codelineno-0-34"></a>        <span class="s2">&quot;CQ&quot;</span><span class="p">,</span>
+<a id="__codelineno-0-35" name="__codelineno-0-35" href="#__codelineno-0-35"></a>        <span class="s2">&quot;EA&quot;</span><span class="p">,</span>
+<a id="__codelineno-0-36" name="__codelineno-0-36" href="#__codelineno-0-36"></a>        <span class="s2">&quot;EE&quot;</span><span class="p">,</span>
+<a id="__codelineno-0-37" name="__codelineno-0-37" href="#__codelineno-0-37"></a>        <span class="s2">&quot;EI&quot;</span><span class="p">,</span>
+<a id="__codelineno-0-38" name="__codelineno-0-38" href="#__codelineno-0-38"></a>        <span class="s2">&quot;EM&quot;</span><span class="p">,</span>
+<a id="__codelineno-0-39" name="__codelineno-0-39" href="#__codelineno-0-39"></a>        <span class="s2">&quot;EQ&quot;</span><span class="p">,</span>
+<a id="__codelineno-0-40" name="__codelineno-0-40" href="#__codelineno-0-40"></a>        <span class="s2">&quot;GA&quot;</span><span class="p">,</span>
+<a id="__codelineno-0-41" name="__codelineno-0-41" href="#__codelineno-0-41"></a>        <span class="s2">&quot;IA&quot;</span><span class="p">,</span>
+<a id="__codelineno-0-42" name="__codelineno-0-42" href="#__codelineno-0-42"></a>        <span class="s2">&quot;KA&quot;</span><span class="p">,</span>
+<a id="__codelineno-0-43" name="__codelineno-0-43" href="#__codelineno-0-43"></a>        <span class="s2">&quot;KE&quot;</span><span class="p">,</span>
+<a id="__codelineno-0-44" name="__codelineno-0-44" href="#__codelineno-0-44"></a>        <span class="s2">&quot;KI&quot;</span><span class="p">,</span>
+<a id="__codelineno-0-45" name="__codelineno-0-45" href="#__codelineno-0-45"></a>        <span class="s2">&quot;KM&quot;</span><span class="p">,</span>
+<a id="__codelineno-0-46" name="__codelineno-0-46" href="#__codelineno-0-46"></a>        <span class="s2">&quot;KQ&quot;</span><span class="p">,</span>
+<a id="__codelineno-0-47" name="__codelineno-0-47" href="#__codelineno-0-47"></a>        <span class="s2">&quot;KU&quot;</span><span class="p">,</span>
+<a id="__codelineno-0-48" name="__codelineno-0-48" href="#__codelineno-0-48"></a>        <span class="s2">&quot;MA&quot;</span><span class="p">,</span>
+<a id="__codelineno-0-49" name="__codelineno-0-49" href="#__codelineno-0-49"></a>        <span class="s2">&quot;ME&quot;</span><span class="p">,</span>
+<a id="__codelineno-0-50" name="__codelineno-0-50" href="#__codelineno-0-50"></a>        <span class="s2">&quot;MI&quot;</span><span class="p">,</span>
+<a id="__codelineno-0-51" name="__codelineno-0-51" href="#__codelineno-0-51"></a>        <span class="s2">&quot;OA&quot;</span><span class="p">,</span>
+<a id="__codelineno-0-52" name="__codelineno-0-52" href="#__codelineno-0-52"></a>    <span class="p">}</span>
+<a id="__codelineno-0-53" name="__codelineno-0-53" href="#__codelineno-0-53"></a>    <span class="n">cleaned</span> <span class="o">=</span> <span class="n">iscc_clean</span><span class="p">(</span><span class="n">iscc</span><span class="p">)</span>
+<a id="__codelineno-0-54" name="__codelineno-0-54" href="#__codelineno-0-54"></a>    <span class="n">prefix</span> <span class="o">=</span> <span class="n">cleaned</span><span class="p">[:</span><span class="mi">2</span><span class="p">]</span>
+<a id="__codelineno-0-55" name="__codelineno-0-55" href="#__codelineno-0-55"></a>    <span class="k">if</span> <span class="n">prefix</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">valid_prefixes</span><span class="p">:</span>
+<a id="__codelineno-0-56" name="__codelineno-0-56" href="#__codelineno-0-56"></a>        <span class="k">if</span> <span class="n">strict</span><span class="p">:</span>
+<a id="__codelineno-0-57" name="__codelineno-0-57" href="#__codelineno-0-57"></a>            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Header starts with invalid sequence </span><span class="si">{</span><span class="n">prefix</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<a id="__codelineno-0-58" name="__codelineno-0-58" href="#__codelineno-0-58"></a>        <span class="k">else</span><span class="p">:</span>
+<a id="__codelineno-0-59" name="__codelineno-0-59" href="#__codelineno-0-59"></a>            <span class="k">return</span> <span class="kc">False</span>
+<a id="__codelineno-0-60" name="__codelineno-0-60" href="#__codelineno-0-60"></a>
+<a id="__codelineno-0-61" name="__codelineno-0-61" href="#__codelineno-0-61"></a>    <span class="k">return</span> <span class="kc">True</span>
 </code></pre></div>
         </details>
     </div>
@@ -2751,7 +2853,7 @@ Iscc:Maagztfqttvizpjr
       <div class="md-copyright">
   
     <div class="md-copyright__highlight">
-      Copyright © 2016-2021 The Authors | <a href="https://iscc.foundation/privacy">Privacy Policy</a> | <a href="https://iscc.foundation/cookies">Cookie Policy</a> | <a href="https://iscc.foundation/imprint">Imprint</a> | <a href="https://iscc.foundation/disclaimer">Disclaimer</a>
+      Copyright © 2016-2022 The Authors | <a href="https://iscc.foundation/privacy">Privacy Policy</a> | <a href="https://iscc.foundation/cookies">Cookie Policy</a> | <a href="https://iscc.foundation/imprint">Imprint</a> | <a href="https://iscc.foundation/disclaimer">Disclaimer</a>
     </div>
   
   
