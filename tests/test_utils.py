@@ -110,7 +110,26 @@ def test_ipfs_hash_raises(static_bytes):
 
 
 def test_canonicalize():
-    assert ic.json_canonical({"hello": "wörld"}) == b'{"hello":"w\xc3\xb6rld"}'
+    value = {"hello": "world"}
+    assert ic.json_canonical(value) == b'{"hello":"world"}'
+
+
+def test_canonicalize_non_ascii():
+    value = {"hello": "wörld"}
+    assert ic.json_canonical(value) == b'{"hello":"w\xc3\xb6rld"}'
+
+
+def test_canonicalize_small_int():
+    value = {"num": 2**52}
+    assert ic.json_canonical(value) == b'{"num":4503599627370496}'
+
+
+def test_canonicalize_large_int():
+    value = {"num": 2**53}
+    assert ic.json_canonical(value) == b'{"num":9007199254740992}'
+    with pytest.raises(ValueError):
+        value = {"num": 2**53 + 1}
+        ic.json_canonical(value)
 
 
 def test_sliding_window_raises():
