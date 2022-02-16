@@ -90,6 +90,7 @@ markdown_extensions:
   - pymdownx.inlinehilite
   - pymdownx.snippets
   - pymdownx.superfences
+  - pymdownx.magiclink
 
 nav:
   - Overview: index.md
