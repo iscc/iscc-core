@@ -1,15 +1,37 @@
 # -*- coding: utf-8 -*-
-"""*A unique identifier composed of an 48-bit timestamp and 16 to 208 bit randomness.*
+"""*A unique, time-sorted identifier composed of an 48-bit timestamp and 16 to 208 bit randomness.*
+
+The ISCC Flake-Code is a unique identifier for distributed ID generation. The 64-bit version
+can be used as efficient surrogate key in database systems. It has guaranteed uniqueness if
+generated from a singele process and is time sortable in integer and base32hex representation.
+The 128-bit version is a K-sortable, globally unique identifier for use in distributed systems and
+is compatible with UUID.
 
 !!! example
-    ```ISCC:OAAQC7XVNNC5FM4U```
 
+    ```python
+    >>> import iscc_code as ic
+    >>> ic.gen_flake_code(bits=64)
+    {'iscc': 'ISCC:OAAQC7YN7PG2XOR4'}
 
-The ISCC Flake-Code is a surogate identifier for distributes ID generation. The 64-bit version
-can be used as efficient suragate key in database systems. It has guaranteed uniqueness if
-generated from a singele process and is time sortable in integer and base32hex representation.
-The 128-bit version is a K-sortable globally unique identifier for use in distributed systems and
-isc compatible with UUID.
+    >>> ic.gen_flake_code(bits=128)
+    {'iscc': 'ISCC:OABQC7YN7RJGUUTLKDSKBXO25MA5E'}
+
+    # Or use the convenience Flake class for easy access to different representations
+
+    >>> flake = ic.Flake(bits=64)
+    >>> flake.iscc
+    'ISCC:OAAQC7YOADBZYNF7'
+
+    >>> flake.time
+    '2022-02-18T18:03:25.468'
+
+    >>> flake.int
+    107820312524764351
+
+    >>> flake.string
+    '05VGS063JGQBU'
+    ```
 """
 import os
 import time
