@@ -54,7 +54,9 @@ def gen_iscc_code_v0(codes):
             raise ValueError(f"Cannot build ISCC-CODE from units shorter than 64-bits: {code}")
 
     # Decode units and sort by MainType
-    decoded = sorted([ic.read_header(ic.decode_base32(code)) for code in codes], key=itemgetter(0))
+    decoded = sorted(
+        [ic.decode_header(ic.decode_base32(code)) for code in codes], key=itemgetter(0)
+    )
     main_types = tuple(d[0] for d in decoded)
     if main_types[-2:] != (ic.MT.DATA, ic.MT.INSTANCE):
         raise ValueError(f"ISCC-CODE requires at least MT.DATA and MT.INSTANCE units.")
@@ -70,7 +72,7 @@ def gen_iscc_code_v0(codes):
 
     # Collect and truncate unit digests to 64-bit
     digest = b"".join([t[-1][:8] for t in decoded])
-    header = ic.write_header(ic.MT.ISCC, st, ic.VS.V0, encoded_length)
+    header = ic.encode_header(ic.MT.ISCC, st, ic.VS.V0, encoded_length)
 
     code = ic.encode_base32(header + digest)
     iscc = "ISCC:" + code

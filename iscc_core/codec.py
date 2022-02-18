@@ -9,7 +9,7 @@ from bitarray.util import int2ba, ba2int
 from base64 import b32encode, b32decode
 from pybase64 import urlsafe_b64encode, urlsafe_b64decode
 from bases import base32hex
-from iscc_core.constants import MULTIBASE, SUBTYPE_MAP, UNITS, LN, MT, ST, VS, MC_PREFIX
+from iscc_core.constants import *
 
 
 base32hexnopad = base32hex.nopad()
@@ -46,13 +46,13 @@ def encode_component(mtype, stype, version, bit_length, digest):
         raise ValueError(f"Illegal MainType {mtype}")
 
     nbytes = bit_length // 8
-    header = write_header(mtype, stype, version, encoded_length)
+    header = encode_header(mtype, stype, version, encoded_length)
     body = digest[:nbytes]
     component_code = encode_base32(header + body)
     return component_code
 
 
-def write_header(mtype, stype, version=0, length=1):
+def encode_header(mtype, stype, version=0, length=1):
     # type: (MainType, SubType, Version, Length) -> bytes
     """
     Encodes header values with nibble-sized (4-bit) variable-length encoding.
@@ -74,13 +74,13 @@ def write_header(mtype, stype, version=0, length=1):
     # TODO verify that all header params and there combination is valid
     header = bitarray()
     for n in (mtype, stype, version, length):
-        header += write_varnibble(n)
+        header += encode_varnibble(n)
     # Append zero-padding if required (right side, least significant bits).
     header.fill()
     return header.tobytes()
 
 
-def write_varnibble(n):
+def encode_varnibble(n):
     # type: (int) -> bitarray
     """
     Writes integer to variable length sequence of 4-bit chunks.
@@ -111,7 +111,7 @@ def write_varnibble(n):
         raise ValueError("Value must be between 0 and 4679")
 
 
-def read_header(data):
+def decode_header(data):
     # type: (bytes) -> IsccTuple
     """
     Decodes varnibble encoded header and returns it together with `tail data`.
@@ -129,7 +129,7 @@ def read_header(data):
     ba.frombytes(data)
     data = ba
     for _ in range(4):
-        value, data = read_varnibble(data)
+        value, data = decode_varnibble(data)
         result.append(value)
 
     # TODO: validate correctness of decoded data.
@@ -143,7 +143,7 @@ def read_header(data):
     return tuple(result)
 
 
-def read_varnibble(b):
+def decode_varnibble(b):
     # type: (bitarray) -> Tuple[int, bitarray]
     """Reads first varnibble, returns its integer value and remaining bits.
 
@@ -339,7 +339,7 @@ def iscc_decompose(iscc_code):
 
     raw_code = decode_base32(iscc_code)
     while raw_code:
-        mt, st, vs, ln, body = read_header(raw_code)
+        mt, st, vs, ln, body = decode_header(raw_code)
         # standard ISCC-UNIT with tail continuation
         if mt != MT.ISCC:
             ln_bits = decode_length(mt, ln)
@@ -438,7 +438,7 @@ def iscc_decode(iscc):
     """
     iscc = iscc_clean(iscc_normalize(iscc))
     data = decode_base32(iscc)
-    return read_header(data)
+    return decode_header(data)
 
 
 def iscc_explain(iscc):

@@ -19,7 +19,7 @@ def build_valid_prefixes():
 
     for mtype in ic.MT:
         for stype in stype_for_mtype[mtype]:
-            digest = ic.write_header(mtype, stype, 0, 0)
+            digest = ic.encode_header(mtype, stype, 0, 0)
             base = ic.encode_base32(digest)
             prefixes.add(base[:2])
 

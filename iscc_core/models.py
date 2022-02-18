@@ -21,8 +21,8 @@ from iscc_core.codec import (
     encode_base64,
     encode_length,
     encode_units,
-    read_header,
-    write_header,
+    decode_header,
+    encode_header,
     encode_base32hex,
     encode_component,
 )
@@ -52,11 +52,11 @@ class Code:
             code_fields = code._head + (code.hash_bytes,)
         elif isinstance(code, str):
             code = iscc_clean(code)
-            code_fields = read_header(decode_base32(code))
+            code_fields = decode_header(decode_base32(code))
         elif isinstance(code, tuple):
             code_fields = code
         elif isinstance(code, bytes):
-            code_fields = read_header(code)
+            code_fields = decode_header(code)
         else:
             raise ValueError(f"Code must be str, bytes, tuple or Code not {type(code)}")
 
@@ -172,7 +172,7 @@ class Code:
     @property
     def header_bytes(self) -> bytes:
         """Byte representation of header prefix of the code"""
-        return write_header(*self._head)
+        return encode_header(*self._head)
 
     @property
     def maintype(self) -> MT:

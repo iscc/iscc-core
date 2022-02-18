@@ -80,7 +80,7 @@ def soft_hash_codes_v0(cc_digests, bits=ic.core_opts.mixed_bits):
     if not len(cc_digests) > 1:
         raise AssertionError("Minimum of 2 codes needed for Content-Code-Mixed.")
     nbytes = bits // 8
-    code_tuples = [ic.read_header(code) for code in cc_digests]
+    code_tuples = [ic.decode_header(code) for code in cc_digests]
     if not all([ct[0] == ic.MT.CONTENT for ct in code_tuples]):
         raise AssertionError(
             "Only codes with main-type CONTENT allowed as input for Content-Code-Mixed"

@@ -257,7 +257,7 @@ def iscc_pair_unpack(a, b):
     """
     a, b = ic.iscc_clean(ic.iscc_normalize(a)), ic.iscc_clean(ic.iscc_normalize(b))
     a, b = ic.decode_base32(a), ic.decode_base32(b)
-    a, b = ic.read_header(a), ic.read_header(b)
+    a, b = ic.decode_header(a), ic.decode_header(b)
     if not a[:-1] == b[:-1]:
         raise ValueError(f"ISCC headers don´t match: {a}, {b}")
     return a[-1], b[-1]

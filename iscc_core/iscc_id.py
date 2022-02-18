@@ -81,7 +81,7 @@ def soft_hash_iscc_id_v0(iscc_code, wallet, uc=0):
     """
     components = ic.iscc_decompose(iscc_code)
     decoded = [ic.decode_base32(c) for c in components]
-    unpacked = [ic.read_header(d) for d in decoded]
+    unpacked = [ic.decode_header(d) for d in decoded]
 
     digests = []
 
@@ -129,7 +129,7 @@ def iscc_id_incr_v0(iscc_id):
     :rtype: str
     """
     code_digest = ic.decode_base32(iscc_id)
-    mt, _, vs, _, _ = ic.read_header(code_digest)
+    mt, _, vs, _, _ = ic.decode_header(code_digest)
     if mt != ic.MT.ID:
         raise AssertionError("MainType {} is not ISCC-ID".format(mt))
     if vs != ic.VS.V0:
