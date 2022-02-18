@@ -15,7 +15,7 @@
         <link rel="canonical" href="https://core.iscc.codes/utilities/utils/">
       
       <link rel="icon" href="../../images/iscc-logo-icon-black.svg">
-      <meta name="generator" content="mkdocs-1.2.3, mkdocs-material-8.1.11">
+      <meta name="generator" content="mkdocs-1.2.3, mkdocs-material-8.2.1">
     
     
       
@@ -23,7 +23,7 @@
       
     
     
-      <link rel="stylesheet" href="../../assets/stylesheets/main.50e68009.min.css">
+      <link rel="stylesheet" href="../../assets/stylesheets/main.e8d9bf0c.min.css">
       
         
         <link rel="stylesheet" href="../../assets/stylesheets/palette.e6a45f82.min.css">
@@ -872,8 +872,22 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#iscc_core.utils.ipfs_hash" class="md-nav__link">
-    ipfs_hash()
+  <a href="#iscc_core.utils.cidv1_hex" class="md-nav__link">
+    cidv1_hex()
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#iscc_core.utils.cidv1_to_token_id" class="md-nav__link">
+    cidv1_to_token_id()
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#iscc_core.utils.cidv1_from_token_id" class="md-nav__link">
+    cidv1_from_token_id()
   </a>
   
 </li>
@@ -953,7 +967,8 @@
 </a>
 
 
-<h1 id="iscc-utilities">ISCC - Utilities<a class="headerlink" href="#iscc-utilities" title="Permanent link">#</a></h1>
+
+<h1 id="iscc-utilities"><strong>ISCC</strong> - Utilities<a class="headerlink" href="#iscc-utilities" title="Permanent link">#</a></h1>
 
 
   <div class="doc doc-object doc-module">
@@ -1000,33 +1015,46 @@
 
 
 
-<h2 id="iscc_core.utils.ipfs_hash" class="doc doc-heading">
-<code class="highlight language-python"><span class="n">ipfs_hash</span><span class="p">(</span><span class="n">stream</span><span class="p">)</span></code>
+<h2 id="iscc_core.utils.cidv1_hex" class="doc doc-heading">
+<code class="highlight language-python"><span class="n">cidv1_hex</span><span class="p">(</span><span class="n">stream</span><span class="p">)</span></code>
 
 
-<a href="#iscc_core.utils.ipfs_hash" class="headerlink" title="Permanent link">#</a></h2>
+<a href="#iscc_core.utils.cidv1_hex" class="headerlink" title="Permanent link">#</a></h2>
 
     <div class="doc doc-contents ">
 
-      <p>Create an <a href="https://ipfs.io">IPFS</a> hash for ISCC metadata.</p>
-<p>We use a specialized <code>base16</code> encoded <code>CIDv1</code> with <code>sha3-224</code> and chunksize
-<code>1048576</code> as hashing algorithm for ISCC metadata.</p>
-<div class="admonition example">
-<p class="admonition-title">Example</p>
-<p>With IPFS v0.11.0 this equals to:
-<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="nv">$ipfs</span> add --cid-version<span class="o">=</span><span class="m">1</span> --chunker<span class="o">=</span>size-1048576 --hash<span class="o">=</span>sha3-224 &lt;myfile&gt;
-<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>&lt;my-cid&gt;
-<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="nv">$ipfs</span> cid format -b<span class="o">=</span>base16 &lt;my-cid&gt;
-</code></pre></div></p>
-</div>
-<div class="admonition note">
-<p class="admonition-title">Note</p>
-<p>The rationale for this trickery is that we want to be able to use an IPFS hash as an
-<a href="https://eips.ethereum.org/EIPS/eip-721">ERC-721</a>/<a href="https://eips.ethereum.org/EIPS/eip-1155">ERC-1155</a> <code>uint256 _tokenID</code> and
-also support ID substitution for the metadata URI. For details see discussion at
+      <p>Create a <a href="https://specs.ipld.io/block-layer/CID.html#cids-version-1">IPFS CIDv1</a> hash for ISCC
+metadata in <code>base16</code> (hexadecimal) representation.</p>
+<p>Learn more about IPFS CIDv1 at <a href="https://proto.school/anatomy-of-a-cid">ProtoSchool</a></p>
+<p>We use the default <code>CIDv1</code> with <code>sha1-256</code> and chunksize <code>262144</code> as hashing
+algorithm for ISCC metadata.</p>
+<div class="admonition attention">
+<p class="admonition-title">Attention</p>
+<p>We use the <code>base16</code> (hexadecimal) representation for the CIDv1. This gives as
+stable, fixed-length CIDv1 header-prefix and allows us to use the CIDv1 as an
+<a href="https://eips.ethereum.org/EIPS/eip-721">ERC-721</a>/<a href="https://eips.ethereum.org/EIPS/eip-1155">ERC-1155</a>
+<code>uint256</code> Token-ID while also supporting ID-substitution for the metadata URI.</p>
+<p>For details see discussion at
 <a href="https://forum.openzeppelin.com/t/how-to-erc-1155-id-substitution-for-token-uri/3312/14">OpenZeppelin Forum</a></p>
 </div>
-<p>Learn more about IPFS CIDv1 at <a href="https://proto.school/anatomy-of-a-cid">ProtoSchool</a></p>
+<div class="admonition example">
+<p class="admonition-title">Example</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="o">&gt;&gt;&gt;</span> <span class="kn">import</span> <span class="nn">io</span>
+<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="o">&gt;&gt;&gt;</span> <span class="kn">import</span> <span class="nn">iscc_core</span> <span class="k">as</span> <span class="nn">ic</span>
+<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="o">&gt;&gt;&gt;</span> <span class="n">ic</span><span class="o">.</span><span class="n">cidv1_hex</span><span class="p">(</span><span class="n">io</span><span class="o">.</span><span class="n">BytesIO</span><span class="p">(</span><span class="sa">b</span><span class="s1">&#39;hello world&#39;</span><span class="p">))</span>
+<a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a><span class="s1">&#39;f01551220b94d27b9934d3e08a52e52d7da7dabfac484efe37a5380ee9088f7ace2efcde9&#39;</span>
+</code></pre></div>
+<p>The result might not look like a valid IPFS CIDv1, but it actually is:
+<a href="https://ipfs.io/ipfs/f01551220b94d27b9934d3e08a52e52d7da7dabfac484efe37a5380ee9088f7ace2efcde9">https://ipfs.io/ipfs/f01551220b94d27b9934d3e08a52e52d7da7dabfac484efe37a5380ee9088f7ace2efcde9</a></p>
+<p>With IPFS v0.11.0 this equals to:
+<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="nv">$ipfs</span> add --cid-version<span class="o">=</span><span class="m">1</span> &lt;myfile&gt;
+<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="nv">$ipfs</span> cid format -b<span class="o">=</span>base16 bafkreifzjut3te2nhyekklss27nh3k72ysco7y32koao5eei66wof36n5e
+<a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a>f01551220b94d27b9934d3e08a52e52d7da7dabfac484efe37a5380ee9088f7ace2efcde9
+</code></pre></div></p>
+<p>When using <code>cidv1_to_token_id</code> for this hash you get an <code>uint256</code> that can be converted
+to a hex representation within a Smart Contract. The hex-representation can then be
+used for ID-Substitution. Use <code>ipfs://f01551220{id}</code> as template for the Metadata-URI.</p>
+</div>
 
 <p><strong>Parameters:</strong></p>
 <table>
@@ -1042,7 +1070,7 @@ also support ID substitution for the metadata URI. For details see discussion at
       <tr>
         <td><code>stream</code></td>
         <td><code>Stream</code></td>
-        <td><p>Data to be hashed (currently max 1048576)</p></td>
+        <td><p>Data to be hashed (currently max 262144 bytes supported)</p></td>
         <td><em>required</em></td>
       </tr>
   </tbody>
@@ -1059,6 +1087,136 @@ also support ID substitution for the metadata URI. For details see discussion at
     <tr>
       <td><code>str</code></td>
       <td><p>A valid IPFS CIDv1 that can be used as token-id and metadata-uri</p></td>
+    </tr>
+  </tbody>
+</table>
+    </div>
+
+  </div>
+
+
+
+
+
+  <div class="doc doc-object doc-function">
+
+
+
+<h2 id="iscc_core.utils.cidv1_to_token_id" class="doc doc-heading">
+<code class="highlight language-python"><span class="n">cidv1_to_token_id</span><span class="p">(</span><span class="n">cidv1</span><span class="p">)</span></code>
+
+
+<a href="#iscc_core.utils.cidv1_to_token_id" class="headerlink" title="Permanent link">#</a></h2>
+
+    <div class="doc doc-contents ">
+
+      <p>Convert default IPFS CIDv1 to an uint256 Token-ID.</p>
+<p>To save storage space in Smart Contracts and to securely link an NFT Token-ID to its associated
+metadata we can convert a CIDv1 to an uint256 Token-ID and vice versa.</p>
+<div class="admonition example">
+<p class="admonition-title">Example</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="o">&gt;&gt;&gt;</span> <span class="kn">import</span> <span class="nn">io</span>
+<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="o">&gt;&gt;&gt;</span> <span class="kn">import</span> <span class="nn">iscc_core</span> <span class="k">as</span> <span class="nn">ic</span>
+<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="o">&gt;&gt;&gt;</span> <span class="n">ic</span><span class="o">.</span><span class="n">cidv1_to_token_id</span><span class="p">(</span><span class="s2">&quot;f01551220b94d27b9934d3e08a52e52d7da7dabfac484efe37a5380ee9088f7ace2efcde9&quot;</span><span class="p">)</span>
+<a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a><span class="mi">83814198383102558219731078260892729932246618004265700685467928187377105751529</span>
+</code></pre></div>
+</div>
+
+<p><strong>Parameters:</strong></p>
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Description</th>
+      <th>Default</th>
+    </tr>
+  </thead>
+  <tbody>
+      <tr>
+        <td><code>cidv1</code></td>
+        <td><code>str</code></td>
+        <td><p>An IPFS CIDv1 string base-16 (hex) encoded representation.</p></td>
+        <td><em>required</em></td>
+      </tr>
+  </tbody>
+</table>
+<p><strong>Returns:</strong></p>
+<table>
+  <thead>
+    <tr>
+      <th>Type</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td></td>
+      <td><p>An uint256 derived from the CIDv1</p></td>
+    </tr>
+  </tbody>
+</table>
+    </div>
+
+  </div>
+
+
+
+
+
+  <div class="doc doc-object doc-function">
+
+
+
+<h2 id="iscc_core.utils.cidv1_from_token_id" class="doc doc-heading">
+<code class="highlight language-python"><span class="n">cidv1_from_token_id</span><span class="p">(</span><span class="n">token_id</span><span class="p">)</span></code>
+
+
+<a href="#iscc_core.utils.cidv1_from_token_id" class="headerlink" title="Permanent link">#</a></h2>
+
+    <div class="doc doc-contents ">
+
+      <p>Convert Token-ID to default IPFS CIDv1 (reverse of <code>cidv1_to_token_id</code>).</p>
+<div class="admonition example">
+<p class="admonition-title">Example</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="o">&gt;&gt;&gt;</span> <span class="kn">import</span> <span class="nn">io</span>
+<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="o">&gt;&gt;&gt;</span> <span class="kn">import</span> <span class="nn">iscc_core</span> <span class="k">as</span> <span class="nn">ic</span>
+<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="o">&gt;&gt;&gt;</span> <span class="n">ic</span><span class="o">.</span><span class="n">cidv1_from_token_id</span><span class="p">(</span><span class="mi">83814198383102558219731078260892729932246618004265700685467928187377105751529</span><span class="p">)</span>
+<a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a><span class="s1">&#39;f01551220b94d27b9934d3e08a52e52d7da7dabfac484efe37a5380ee9088f7ace2efcde9&#39;</span>
+</code></pre></div>
+</div>
+
+<p><strong>Parameters:</strong></p>
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Description</th>
+      <th>Default</th>
+    </tr>
+  </thead>
+  <tbody>
+      <tr>
+        <td><code>token_id</code></td>
+        <td></td>
+        <td><p>An uint256 Token-ID derived from a CIDv1</p></td>
+        <td><em>required</em></td>
+      </tr>
+  </tbody>
+</table>
+<p><strong>Returns:</strong></p>
+<table>
+  <thead>
+    <tr>
+      <th>Type</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td></td>
+      <td><p>An IPFS CIDv1 string with default base32 encoding.</p></td>
     </tr>
   </tbody>
 </table>
@@ -1477,10 +1635,10 @@ is shorter than the requested width.</p>
     <div class="md-dialog" data-md-component="dialog">
       <div class="md-dialog__inner md-typeset"></div>
     </div>
-    <script id="__config" type="application/json">{"base": "../..", "features": ["toc.integrate", "navigation.indexes", "navigation.tracking", "navigation.tabs", "navigation.tabs.sticky", "navigation.expand"], "translations": {"clipboard.copy": "Copy to clipboard", "clipboard.copied": "Copied to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.placeholder": "Type to start searching", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.term.missing": "Missing", "select.version.title": "Select version"}, "search": "../../assets/javascripts/workers/search.092fa1f6.min.js"}</script>
+    <script id="__config" type="application/json">{"base": "../..", "features": ["toc.integrate", "navigation.indexes", "navigation.tracking", "navigation.tabs", "navigation.tabs.sticky", "navigation.expand"], "translations": {"clipboard.copy": "Copy to clipboard", "clipboard.copied": "Copied to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.placeholder": "Type to start searching", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.term.missing": "Missing", "select.version.title": "Select version"}, "search": "../../assets/javascripts/workers/search.bd0b6b67.min.js"}</script>
     
     
-      <script src="../../assets/javascripts/bundle.5a9542cf.min.js"></script>
+      <script src="../../assets/javascripts/bundle.8aa65030.min.js"></script>
       
     
   </body>
