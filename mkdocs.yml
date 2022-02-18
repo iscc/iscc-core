@@ -89,7 +89,11 @@ markdown_extensions:
       anchor_linenums: true
   - pymdownx.inlinehilite
   - pymdownx.snippets
-  - pymdownx.superfences
+  - pymdownx.superfences:
+      custom_fences:
+        - name: mermaid
+          class: mermaid
+          format: !!python/name:pymdownx.superfences.fence_code_format
   - pymdownx.magiclink
 
 nav:
@@ -99,24 +103,24 @@ nav:
   - ISCC-CODE: iscc_code.md
   - ISCC-ID: iscc_id.md
   - Components:
-    - components/index.md
-    - Meta-Code: components/code_meta.md
-    - Content-Codes:
-      - components/content/index.md
-      - Text-Code: components/content/code_content_text.md
-      - Image-Code: components/content/code_content_image.md
-      - Audio-Code: components/content/code_content_audio.md
-      - Video-Code: components/content/code_content_video.md
-      - Mixed-Code: components/content/code_content_mixed.md
-    - Data-Code: components/code_data.md
-    - Instance-Code: components/code_instance.md
-    - Flake-Code: components/code_flake.md
+      - components/index.md
+      - Meta-Code: components/code_meta.md
+      - Content-Codes:
+          - components/content/index.md
+          - Text-Code: components/content/code_content_text.md
+          - Image-Code: components/content/code_content_image.md
+          - Audio-Code: components/content/code_content_audio.md
+          - Video-Code: components/content/code_content_video.md
+          - Mixed-Code: components/content/code_content_mixed.md
+      - Data-Code: components/code_data.md
+      - Instance-Code: components/code_instance.md
+      - Flake-Code: components/code_flake.md
   - Algorithms:
-    - CDC: algorithms/cdc.md
-    - DCT: algorithms/dct.md
-    - Simhash: algorithms/simhash.md
-    - Minhash: algorithms/minhash.md
-    - WTAHash: algorithms/wtahash.md
+      - CDC: algorithms/cdc.md
+      - DCT: algorithms/dct.md
+      - Simhash: algorithms/simhash.md
+      - Minhash: algorithms/minhash.md
+      - WTAHash: algorithms/wtahash.md
   - Options: options/options.md
   - Utilities: utilities/utils.md
   - Conformance: conformance.md
