@@ -96,17 +96,56 @@ def test__safe_unpack():
         ic.utils.iscc_pair_unpack(a, b)
 
 
-def test_ipfs_hash(static_bytes):
+def test_cidv1_hex():
+    data = b"hello world"
     assert (
-        ic.ipfs_hash(io.BytesIO(static_bytes))
-        == "f0155171c4dda3d7c7b4833d2f73890173860f1e6ab3fa19c4e57b854fc7f960b"
+        ic.cidv1_hex(io.BytesIO(data))
+        == "f01551220b94d27b9934d3e08a52e52d7da7dabfac484efe37a5380ee9088f7ace2efcde9"
     )
 
 
-def test_ipfs_hash_raises(static_bytes):
-    MB2 = static_bytes + static_bytes
+def test_hash_ipfs_cidv1_max(static_bytes):
+    data = static_bytes[:262144]
+    assert (
+        ic.cidv1_hex(io.BytesIO(data))
+        == "f01551220dd8186a3d57826d3179717fbcaef8e4c24c5380f0ee7d869f41f727015fe17ab"
+    )
+
+
+def test_cidv1_to_token_id():
+    token_id = ic.cidv1_to_token_id(
+        "f01551220dd8186a3d57826d3179717fbcaef8e4c24c5380f0ee7d869f41f727015fe17ab"
+    )
+    assert token_id <= 2**256 - 1
+    assert (
+        token_id == 100189992059221005740937582782800178391670948768450295424002582041064650971051
+    )
+
+
+def test_cidv1_to_token_id_raises():
     with pytest.raises(ValueError):
-        ic.ipfs_hash(io.BytesIO(MB2))
+        ic.cidv1_to_token_id("bafkrei...")
+    with pytest.raises(ValueError):
+        ic.cidv1_to_token_id(
+            "f02551220b94d27b9934d3e08a52e52d7da7dabfac484efe37a5380ee9088f7ace2efcde9"
+        )
+    with pytest.raises(ValueError):
+        ic.cidv1_to_token_id(
+            "f01551220b94d27b9934d3e08a52e52d7da7dabfac484efe37a5380ee9088f7ace2efcd"
+        )
+
+
+def test_cidv1_from_token_id():
+    cidv1 = ic.cidv1_from_token_id(
+        100189992059221005740937582782800178391670948768450295424002582041064650971051
+    )
+    assert cidv1 == "f01551220dd8186a3d57826d3179717fbcaef8e4c24c5380f0ee7d869f41f727015fe17ab"
+
+
+def test_hash_ipfs_cidv1_raises(static_bytes):
+    data = static_bytes[:262145]
+    with pytest.raises(ValueError):
+        ic.cidv1_hex(io.BytesIO(data))
 
 
 def test_canonicalize():

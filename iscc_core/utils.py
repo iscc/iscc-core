@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 import json
-from hashlib import sha3_224
+from hashlib import sha256
 from typing import Generator, Sequence, Tuple, Any
 import uvarint
 from bitarray import bitarray
@@ -12,7 +12,9 @@ from iscc_core.constants import Stream
 
 __all__ = [
     "json_canonical",
-    "ipfs_hash",
+    "cidv1_hex",
+    "cidv1_to_token_id",
+    "cidv1_from_token_id",
     "sliding_window",
     "iscc_similarity",
     "iscc_distance",
@@ -35,36 +37,55 @@ def json_canonical(obj):
     return ser
 
 
-def ipfs_hash(stream):
+def cidv1_hex(stream):
     # type: (Stream) -> str
     """
-    Create an [IPFS](https://ipfs.io) hash for ISCC metadata.
-
-    We use a specialized `base16` encoded `CIDv1` with `sha3-224` and chunksize
-    `1048576` as hashing algorithm for ISCC metadata.
-
-    !!! example
-        With IPFS v0.11.0 this equals to:
-        ```bash
-        $ipfs add --cid-version=1 --chunker=size-1048576 --hash=sha3-224 <myfile>
-        <my-cid>
-        $ipfs cid format -b=base16 <my-cid>
-        ```
-
-    !!! note
-        The rationale for this trickery is that we want to be able to use an IPFS hash as an
-        [ERC-721](https://eips.ethereum.org/EIPS/eip-721)/[ERC-1155](https://eips.ethereum.org/EIPS/eip-1155) `uint256 _tokenID` and
-        also support ID substitution for the metadata URI. For details see discussion at
-        [OpenZeppelin Forum](https://forum.openzeppelin.com/t/how-to-erc-1155-id-substitution-for-token-uri/3312/14)
+    Create a [IPFS CIDv1](https://specs.ipld.io/block-layer/CID.html#cids-version-1) hash for ISCC
+    metadata in `base16` (hexadecimal) representation.
 
     Learn more about IPFS CIDv1 at [ProtoSchool](https://proto.school/anatomy-of-a-cid)
 
-    :param Stream stream: Data to be hashed (currently max 1048576)
+    We use the default `CIDv1` with `sha1-256` and chunksize `262144` as hashing
+    algorithm for ISCC metadata.
+
+    !!! attention
+        We use the `base16` (hexadecimal) representation for the CIDv1. This gives as
+        stable, fixed-length CIDv1 header-prefix and allows us to use the CIDv1 as an
+        [ERC-721](https://eips.ethereum.org/EIPS/eip-721)/[ERC-1155](https://eips.ethereum.org/EIPS/eip-1155)
+        `uint256` Token-ID while also supporting ID-substitution for the metadata URI.
+
+        For details see discussion at
+        [OpenZeppelin Forum](https://forum.openzeppelin.com/t/how-to-erc-1155-id-substitution-for-token-uri/3312/14)
+
+
+    !!! example
+        ```python
+        >>> import io
+        >>> import iscc_core as ic
+        >>> ic.cidv1_hex(io.BytesIO(b'hello world'))
+        'f01551220b94d27b9934d3e08a52e52d7da7dabfac484efe37a5380ee9088f7ace2efcde9'
+        ```
+
+        The result might not look like a valid IPFS CIDv1, but it actually is:
+        https://ipfs.io/ipfs/f01551220b94d27b9934d3e08a52e52d7da7dabfac484efe37a5380ee9088f7ace2efcde9
+
+        With IPFS v0.11.0 this equals to:
+        ```bash
+        $ipfs add --cid-version=1 <myfile>
+        $ipfs cid format -b=base16 bafkreifzjut3te2nhyekklss27nh3k72ysco7y32koao5eei66wof36n5e
+        f01551220b94d27b9934d3e08a52e52d7da7dabfac484efe37a5380ee9088f7ace2efcde9
+        ```
+
+        When using `cidv1_to_token_id` for this hash you get an `uint256` that can be converted
+        to a hex representation within a Smart Contract. The hex-representation can then be
+        used for ID-Substitution. Use `ipfs://f01551220{id}` as template for the Metadata-URI.
+
+    :param Stream stream: Data to be hashed (currently max 262144 bytes supported)
     :return: A valid IPFS CIDv1 that can be used as token-id and metadata-uri
     :rtype: str
     """
 
-    ipfs_max_size = 1048576
+    ipfs_max_size = 262144
     data = stream.read(ipfs_max_size)
 
     # fail if we have more data than ipfs_max_size
@@ -73,12 +94,12 @@ def ipfs_hash(stream):
             f"Data exceeds current max size {ipfs_max_size} for ipfs_hash: {len(data)}"
         )
 
-    digest = sha3_224(data).digest()
+    digest = sha256(data).digest()
     multibase_prefix = "f"
     multicodec_cidv1 = b"\x01"
     multicodec_content_type = b"\x55"  # raw
-    multicodec_mutihash_type = b"\x17"  # sha3-224
-    multicodec_mutihash_len = uvarint.encode(28)  # 28 byte length (varint encoded 0x1c)
+    multicodec_mutihash_type = b"\x12"  # sha2-256
+    multicodec_mutihash_len = uvarint.encode(32)  # 28 byte length (varint encoded 0x1c)
 
     cid_v1_digest = b"".join(
         (
@@ -92,6 +113,58 @@ def ipfs_hash(stream):
 
     cid_v1 = multibase_prefix + cid_v1_digest.hex()
     return cid_v1
+
+
+def cidv1_to_token_id(cidv1):
+    # type: (str) -> int
+    """
+    Convert default IPFS CIDv1 to an uint256 Token-ID.
+
+    To save storage space in Smart Contracts and to securely link an NFT Token-ID to its associated
+    metadata we can convert a CIDv1 to an uint256 Token-ID and vice versa.
+
+    !!! example
+
+        ```python
+        >>> import io
+        >>> import iscc_core as ic
+        >>> ic.cidv1_to_token_id("f01551220b94d27b9934d3e08a52e52d7da7dabfac484efe37a5380ee9088f7ace2efcde9")
+        83814198383102558219731078260892729932246618004265700685467928187377105751529
+        ```
+
+    :param str cidv1: An IPFS CIDv1 string base-16 (hex) encoded representation.
+    :return int: An uint256 derived from the CIDv1
+    """
+    if not cidv1.startswith("f"):
+        raise ValueError(f"Only base16 encoded CIDv1 supported. Got {cidv1}")
+    nobase = cidv1[1:]
+    decoded = bytes.fromhex(nobase)
+    if not decoded.startswith(b"\x01\x55\x12\x20"):
+        raise ValueError(f"Only sha2-256 with raw leaves supported. Got {decoded.hex()}")
+    digest = decoded[4:]
+    if not len(digest) == 32:
+        raise ValueError(f"Illegal digest size {len(digest)} for sha2-256")
+    return int.from_bytes(digest, "big", signed=False)
+
+
+def cidv1_from_token_id(token_id):
+    # type: (int) -> str
+    """
+    Convert Token-ID to default IPFS CIDv1 (reverse of `cidv1_to_token_id`).
+
+    !!! example
+        ```python
+        >>> import io
+        >>> import iscc_core as ic
+        >>> ic.cidv1_from_token_id(83814198383102558219731078260892729932246618004265700685467928187377105751529)
+        'f01551220b94d27b9934d3e08a52e52d7da7dabfac484efe37a5380ee9088f7ace2efcde9'
+        ```
+
+    :param token_id: An uint256 Token-ID derived from a CIDv1
+    :return str: An IPFS CIDv1 string with default base32 encoding.
+    """
+    digest = b"\x01\x55\x12\x20" + int.to_bytes(token_id, length=32, byteorder="big", signed=False)
+    return "f" + digest.hex()
 
 
 def sliding_window(seq, width):
