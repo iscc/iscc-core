@@ -1,48 +1,61 @@
 # -*- coding: utf-8 -*-
-"""*A decentralized short identifier for digital assets.*
+"""*A decentralized, owned, and short identifier for digital assets.*
 
 The **ISCC-ID** is generated from a similarity-hash of the components of an
-**ISCC-CODE**. Its SubType designates the blockchain from which the **ISCC-ID** was
-minted. The similarity-hash is always at least 64-bits and optionally suffixed with a
-[`uvarint`](https://github.com/multiformats/unsigned-varint) endcoded
+**ISCC-CODE** together with a blockchain wallet address. Its SubType designates the blockchain
+from which the **ISCC-ID** was minted. The similarity-hash is always at least 64-bits and
+optionally suffixed with a [`uvarint`](https://github.com/multiformats/unsigned-varint) endcoded
 `uniqueness counter`. The `uniqueness counter` is added and incremented only if the
 mint colides with a pre-existing **ISCC-ID** minted from the same blockchain from a
 different **ISCC-CODE** or from an identical **ISCC-CODE** registered by a different
 signatory.
 """
+from hashlib import sha256
+from typing import Optional
 import uvarint
 import iscc_core as ic
 
 
-def gen_iscc_id(chain, iscc_code, uc=0):
-    # type: (int, str, int) -> dict
+__all__ = [
+    "gen_iscc_id",
+    "gen_iscc_id_v0",
+    "iscc_id_incr",
+    "iscc_id_incr_v0",
+    "alg_simhash_from_iscc_id",
+]
+
+
+def gen_iscc_id(iscc_code, chain_id, wallet, uc=0):
+    # type: (str, int, str, Optional[int]) -> dict
     """
     Generate  ISCC-ID from ISCC-CODE with the latest standard algorithm.
 
-    :param int chain: Chain-ID of blockchain from which the ISCC-ID is minted.
     :param str iscc_code: The ISCC-CODE from which to mint the ISCC-ID.
+    :param int chain_id: Chain-ID of blockchain from which the ISCC-ID is minted.
+    :param str wallet: The wallet address that signes the ISCC declaration
     :param int uc: Uniqueness counter of ISCC-ID.
     :return: ISCC object with an ISCC-ID
     :rtype: dict
     """
-    return gen_iscc_id_v0(chain, iscc_code, uc)
+    return gen_iscc_id_v0(iscc_code, chain_id, wallet, uc)
 
 
-def gen_iscc_id_v0(chain_id, iscc_code, uc=0):
-    # type: (int, str, int) -> dict
+def gen_iscc_id_v0(iscc_code, chain_id, wallet, uc=0):
+    # type: (str, int, str, Optional[int]) -> dict
     """
     Generate an ISCC-ID from an ISCC-CODE with uniqueness counter 'uc' with
     algorithm v0.
 
-    :param int chain_id: Chain-ID of blockchain from which the ISCC-ID is minted.
     :param str iscc_code: The ISCC-CODE from which to mint the ISCC-ID.
-    :param int uc: Uniqueness counter for ISCC-ID.
+    :param int chain_id: Chain-ID of blockchain from which the ISCC-ID is minted.
+    :param str wallet: The wallet address that signes the ISCC declaration
+    :param int uc: Uniqueness counter of ISCC-ID.
     :return: ISCC object with an ISCC-ID
     :rtype: dict
     """
     if chain_id not in list(ic.ST_ID):
-        raise AssertionError("Unregistered Chain-ID {}".format(chain_id))
-    iscc_id_digest = soft_hash_iscc_id_v0(iscc_code, uc)
+        raise AssertionError("Unknown Chain-ID {}".format(chain_id))
+    iscc_id_digest = soft_hash_iscc_id_v0(iscc_code, wallet, uc)
     iscc_id_len = len(iscc_id_digest) * 8
     iscc_id = ic.encode_component(
         mtype=ic.MT.ID,
@@ -55,12 +68,13 @@ def gen_iscc_id_v0(chain_id, iscc_code, uc=0):
     return dict(iscc=iscc)
 
 
-def soft_hash_iscc_id_v0(iscc_code, uc=0):
-    # type: (str, int) -> bytes
+def soft_hash_iscc_id_v0(iscc_code, wallet, uc=0):
+    # type: (str, str, int) -> bytes
     """
     Calculate ISCC-ID hash digest from ISCC-CODE digest with algorithm v0.
 
     :param str iscc_code: ISCC-CODE
+    :param str wallet: The wallet address that signes the ISCC declaration
     :param int uc: Uniqueness counter for ISCC-ID.
     :return: Digest for ISCC-ID without header but including uniqueness counter.
     :rtype: bytes
@@ -84,12 +98,16 @@ def soft_hash_iscc_id_v0(iscc_code, uc=0):
 
     iscc_id_digest = ic.alg_simhash(digests)
 
+    # XOR with sha2-256 of wallet
+    wallet_hash_digest = sha256(wallet.encode("ascii")).digest()[:8]
+    iscc_id_xor_digest = bytes(a ^ b for (a, b) in zip(iscc_id_digest, wallet_hash_digest))
+
     if uc:
-        iscc_id_digest += uvarint.encode(uc)
-    return iscc_id_digest
+        iscc_id_xor_digest += uvarint.encode(uc)
+    return iscc_id_xor_digest
 
 
-def incr_iscc_id(iscc_id):
+def iscc_id_incr(iscc_id):
     # type: (str) -> str
     """
     Increment uniqueness counter of an ISCC-ID with latest standard algorithm.
@@ -98,10 +116,10 @@ def incr_iscc_id(iscc_id):
     :return: Base32-encoded ISCC-ID with counter incremented by one.
     :rtype: str
     """
-    return incr_iscc_id_v0(iscc_id)
+    return iscc_id_incr_v0(iscc_id)
 
 
-def incr_iscc_id_v0(iscc_id):
+def iscc_id_incr_v0(iscc_id):
     # type: (str) -> str
     """
     Increment uniqueness counter of an ISCC-ID with algorithm v0.
@@ -122,3 +140,19 @@ def incr_iscc_id_v0(iscc_id):
         decoded = uvarint.decode(code_digest[10:])
         code_digest = code_digest[:10] + uvarint.encode(decoded.integer + 1)
     return ic.encode_base32(code_digest)
+
+
+def alg_simhash_from_iscc_id(iscc_id, wallet):
+    # type: (str, str) -> str
+    """
+    Extract similarity preserving hex-encoded hash digest from ISCC-ID
+
+    We need to un-xor the ISCC-ID hash digest with the wallet address hash to obtain the similarity
+    preserving bytestring.
+    """
+    wallet_hash_digest = sha256(wallet.encode("ascii")).digest()[:8]
+    cleaned = ic.iscc_clean(iscc_id)
+    iscc_tuple = ic.iscc_decode(cleaned)
+    iscc_id_xor_digest = iscc_tuple[4][:8]
+    iscc_id_digest = bytes(a ^ b for (a, b) in zip(iscc_id_xor_digest, wallet_hash_digest))
+    return iscc_id_digest.hex()

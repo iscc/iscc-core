@@ -239,31 +239,37 @@ gen_iscc_code_v0:
 gen_iscc_id_v0:
     test_0000_single_component:
         inputs:
+            - EAA75Q74YXNZC4EK
             - 0
-            - "EAA75Q74YXNZC4EK"
+            - 1Bq568oLhi5HvdgC6rcBSGmu4G3FeAntCz
             - 0
     test_0001_single_component_uc1:
         inputs:
+            - EAA75Q74YXNZC4EK
             - 0
-            - "EAA75Q74YXNZC4EK"
+            - 1Bq568oLhi5HvdgC6rcBSGmu4G3FeAntCz
             - 1
     test_0002_single_component:
         inputs:
+            - EAA75Q74YXNZC4EK
             - 0
-            - "EAA75Q74YXNZC4EK"
+            - 1Bq568oLhi5HvdgC6rcBSGmu4G3FeAntCz
             - 0
     test_0003_single_component_uc_2byte:
         inputs:
+            - EAA75Q74YXNZC4EK
             - 0
-            - "EAA75Q74YXNZC4EK"
+            - 1Bq568oLhi5HvdgC6rcBSGmu4G3FeAntCz
             - 257
     test_0004_multi_component:
         inputs:
+            - AAAQIPKHHND6APX6EAA75Q74YXNZC4EK
             - 1
-            - "AAAQIPKHHND6APX6EAA75Q74YXNZC4EK"
+            - 1Bq568oLhi5HvdgC6rcBSGmu4G3FeAntCz
             - 0
     test_0005_single_instance_code:
         inputs:
+            - IAA5OSMB56TQUDEI
             - 0
-            - "IAA5OSMB56TQUDEI"
+            - 1Bq568oLhi5HvdgC6rcBSGmu4G3FeAntCz
             - 0

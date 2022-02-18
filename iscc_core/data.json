@@ -539,62 +539,68 @@
   "gen_iscc_id_v0": {
     "test_0000_single_component": {
       "inputs": [
-        0,
         "EAA75Q74YXNZC4EK",
+        0,
+        "1Bq568oLhi5HvdgC6rcBSGmu4G3FeAntCz",
         0
       ],
       "outputs": {
-        "iscc": "ISCC:MAACB7WD7TC5XELQ"
+        "iscc": "ISCC:MAAJVNGQOUGKGDRH"
       }
     },
     "test_0001_single_component_uc1": {
       "inputs": [
-        0,
         "EAA75Q74YXNZC4EK",
+        0,
+        "1Bq568oLhi5HvdgC6rcBSGmu4G3FeAntCz",
         1
       ],
       "outputs": {
-        "iscc": "ISCC:MAASB7WD7TC5XELQAE"
+        "iscc": "ISCC:MAAZVNGQOUGKGDRHAE"
       }
     },
     "test_0002_single_component": {
       "inputs": [
-        0,
         "EAA75Q74YXNZC4EK",
+        0,
+        "1Bq568oLhi5HvdgC6rcBSGmu4G3FeAntCz",
         0
       ],
       "outputs": {
-        "iscc": "ISCC:MAACB7WD7TC5XELQ"
+        "iscc": "ISCC:MAAJVNGQOUGKGDRH"
       }
     },
     "test_0003_single_component_uc_2byte": {
       "inputs": [
-        0,
         "EAA75Q74YXNZC4EK",
+        0,
+        "1Bq568oLhi5HvdgC6rcBSGmu4G3FeAntCz",
         257
       ],
       "outputs": {
-        "iscc": "ISCC:MABCB7WD7TC5XELQQEBA"
+        "iscc": "ISCC:MABJVNGQOUGKGDRHQEBA"
       }
     },
     "test_0004_multi_component": {
       "inputs": [
-        1,
         "AAAQIPKHHND6APX6EAA75Q74YXNZC4EK",
+        1,
+        "1Bq568oLhi5HvdgC6rcBSGmu4G3FeAntCz",
         0
       ],
       "outputs": {
-        "iscc": "ISCC:MEACB7X7777574L6"
+        "iscc": "ISCC:MEAJVNHMOY3KO3RJ"
       }
     },
     "test_0005_single_instance_code": {
       "inputs": [
-        0,
         "IAA5OSMB56TQUDEI",
+        0,
+        "1Bq568oLhi5HvdgC6rcBSGmu4G3FeAntCz",
         0
       ],
       "outputs": {
-        "iscc": "ISCC:MAAEBV2JQHX2OCQM"
+        "iscc": "ISCC:MAAPVHK2BATN7FK3"
       }
     }
   }
