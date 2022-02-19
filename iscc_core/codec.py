@@ -391,7 +391,8 @@ def iscc_normalize(iscc_code):
         ``` py
         >>> import iscc_core
         >>> iscc_core.iscc_normalize("GAAW2PRCRS5LNVZV-IAAUVACQKXE3V44W")
-        ISCC:KUBW2PRCRS5LNVZVJKAFAVOJXLZZM
+        'ISCC:KUAG2PRCRS5LNVZVJKAFAVOJXLZZM'
+
         ```
 
     :param str iscc_code: Any valid ISCC string

@@ -64,6 +64,7 @@ def cidv1_hex(stream):
         >>> import iscc_core as ic
         >>> ic.cidv1_hex(io.BytesIO(b'hello world'))
         'f01551220b94d27b9934d3e08a52e52d7da7dabfac484efe37a5380ee9088f7ace2efcde9'
+
         ```
 
         The result might not look like a valid IPFS CIDv1, but it actually is:
@@ -130,6 +131,7 @@ def cidv1_to_token_id(cidv1):
         >>> import iscc_core as ic
         >>> ic.cidv1_to_token_id("f01551220b94d27b9934d3e08a52e52d7da7dabfac484efe37a5380ee9088f7ace2efcde9")
         83814198383102558219731078260892729932246618004265700685467928187377105751529
+
         ```
 
     :param str cidv1: An IPFS CIDv1 string base-16 (hex) encoded representation.
@@ -158,6 +160,7 @@ def cidv1_from_token_id(token_id):
         >>> import iscc_core as ic
         >>> ic.cidv1_from_token_id(83814198383102558219731078260892729932246618004265700685467928187377105751529)
         'f01551220b94d27b9934d3e08a52e52d7da7dabfac484efe37a5380ee9088f7ace2efcde9'
+
         ```
 
     :param token_id: An uint256 Token-ID derived from a CIDv1

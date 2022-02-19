@@ -10,7 +10,7 @@ is compatible with UUID.
 !!! example
 
     ```python
-    >>> import iscc_code as ic
+    >>> import iscc_core as ic
     >>> ic.gen_flake_code(bits=64)
     {'iscc': 'ISCC:OAAQC7YN7PG2XOR4'}
 
