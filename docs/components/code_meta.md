@@ -16,7 +16,7 @@ Seed-Metadata has 3 possible elements:
 
 - **name** (required): The name or title of the work manifested by the digital asset.
 - **description** (optional): A disambiguating textual description of the digital asset.
-- **metadata** (optional): Industry-sector or use-case specific metadata, encoded as
+- **meta** (optional): Industry-sector or use-case specific metadata, encoded as
     Data-URL ([RFC-2397](https://datatracker.ietf.org/doc/html/rfc2397)).
 
 !!! note

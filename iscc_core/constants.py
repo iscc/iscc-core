@@ -17,7 +17,7 @@ Length = Union[int, "LN"]
 Header = Tuple[MainType, SubType, Version, Length]
 IsccTuple = Tuple[MainType, SubType, Version, Length, bytes]
 IsccAny = Union[str, IsccTuple, bytes, "Code"]
-Metadata = Union[dict, bytes]
+Meta = Union[dict, str]
 FrameSig = Tuple[int]
 
 

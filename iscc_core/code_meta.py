@@ -17,23 +17,23 @@ __all__ = [
 ]
 
 
-def gen_meta_code(name, description=None, metadata=None, bits=ic.core_opts.meta_bits):
-    # type: (str, Optional[str], Optional[ic.Metadata], int) -> dict
+def gen_meta_code(name, description=None, meta=None, bits=ic.core_opts.meta_bits):
+    # type: (str, Optional[str], Optional[ic.Meta], int) -> dict
     """
     Create an ISCC Meta-Code using the latest standard algorithm.
 
     :param str name: Name or title of the work manifested by the digital asset
     :param Optional[str] description: Optional description for disambiguation
-    :param Optional[ic.Metadata] metadata: Optional structured or raw metadata
+    :param Optional[ic.Meta] meta: Optional structured or raw metadata
     :param int bits: Bit-length of resulting Meta-Code (multiple of 64)
     :return: ISCC object with Meta-Code and properties name, description, properties, metahash
     :rtype: dict
     """
-    return gen_meta_code_v0(name, description=description, metadata=metadata, bits=bits)
+    return gen_meta_code_v0(name, description=description, meta=meta, bits=bits)
 
 
-def gen_meta_code_v0(name, description=None, metadata=None, bits=ic.core_opts.meta_bits):
-    # type: (str, Optional[str], Optional[ic.Metadata], int) -> dict
+def gen_meta_code_v0(name, description=None, meta=None, bits=ic.core_opts.meta_bits):
+    # type: (str, Optional[str], Optional[ic.Meta], int) -> dict
     """
     Create an ISCC Meta-Code with the algorithm version 0.
 
@@ -48,7 +48,7 @@ def gen_meta_code_v0(name, description=None, metadata=None, bits=ic.core_opts.me
     :param Optional[str] description:
         A User presentable textual description of the digital asset for disambiguation purposes
         (may include markdown).
-    :param Optional[ic.Metadata] metadata: Use-Case or industry-specific metadata.
+    :param Optional[ic.Meta] meta: Use-Case or industry-specific metadata.
         Either JSON serializable structured data or a binary blob.
     :param int bits: Bit-length of resulting Meta-Code (multiple of 64)
     :return: ISCC object with possible fields: iscc, name, description, metadata, metahash
@@ -67,18 +67,18 @@ def gen_meta_code_v0(name, description=None, metadata=None, bits=ic.core_opts.me
     description = text_trim(description, ic.core_opts.meta_trim_description)
 
     # Calculate meta_code, metahash, and metadata value for the different input cases
-    if metadata:
-        if isinstance(metadata, bytes):
-            meta_code_digest = soft_hash_meta_v0(name, metadata)
-            metahash = ic.InstanceHasherV0(metadata).multihash()
-            metadata_value = base64.b64encode(metadata).decode("ascii")
-        elif isinstance(metadata, dict):
-            payload = jcs.canonicalize(metadata)
+    if meta:
+        if isinstance(meta, bytes):
+            meta_code_digest = soft_hash_meta_v0(name, meta)
+            metahash = ic.InstanceHasherV0(meta).multihash()
+            metadata_value = base64.b64encode(meta).decode("ascii")
+        elif isinstance(meta, dict):
+            payload = jcs.canonicalize(meta)
             meta_code_digest = soft_hash_meta_v0(name, payload)
             metahash = ic.InstanceHasherV0(payload).multihash()
-            metadata_value = metadata
+            metadata_value = meta
         else:
-            raise TypeError(f"metadata must be bytes or dict not {type(metadata)}")
+            raise TypeError(f"metadata must be bytes or dict not {type(meta)}")
     else:
         payload = " ".join((name, description)).strip().encode("utf-8")
         meta_code_digest = soft_hash_meta_v0(name, description)
