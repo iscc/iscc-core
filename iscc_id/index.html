@@ -499,15 +499,22 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#iscc_core.iscc_id.incr_iscc_id" class="md-nav__link">
-    incr_iscc_id()
+  <a href="#iscc_core.iscc_id.iscc_id_incr" class="md-nav__link">
+    iscc_id_incr()
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#iscc_core.iscc_id.incr_iscc_id_v0" class="md-nav__link">
-    incr_iscc_id_v0()
+  <a href="#iscc_core.iscc_id.iscc_id_incr_v0" class="md-nav__link">
+    iscc_id_incr_v0()
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#iscc_core.iscc_id.alg_simhash_from_iscc_id" class="md-nav__link">
+    alg_simhash_from_iscc_id()
   </a>
   
 </li>
@@ -948,11 +955,11 @@
 
     <div class="doc doc-contents first">
 
-      <p><em>A decentralized short identifier for digital assets.</em></p>
+      <p><em>A decentralized, owned, and short identifier for digital assets.</em></p>
 <p>The <strong>ISCC-ID</strong> is generated from a similarity-hash of the components of an
-<strong>ISCC-CODE</strong>. Its SubType designates the blockchain from which the <strong>ISCC-ID</strong> was
-minted. The similarity-hash is always at least 64-bits and optionally suffixed with a
-<a href="https://github.com/multiformats/unsigned-varint"><code>uvarint</code></a> endcoded
+<strong>ISCC-CODE</strong> together with a blockchain wallet address. Its SubType designates the blockchain
+from which the <strong>ISCC-ID</strong> was minted. The similarity-hash is always at least 64-bits and
+optionally suffixed with a <a href="https://github.com/multiformats/unsigned-varint"><code>uvarint</code></a> endcoded
 <code>uniqueness counter</code>. The <code>uniqueness counter</code> is added and incremented only if the
 mint colides with a pre-existing <strong>ISCC-ID</strong> minted from the same blockchain from a
 different <strong>ISCC-CODE</strong> or from an identical <strong>ISCC-CODE</strong> registered by a different
@@ -965,15 +972,18 @@ signatory.</p>
 
 
 
+
+
+
   <div class="doc doc-object doc-function">
 
 
 
-<h2 id="iscc_core.iscc_id.gen_iscc_id" class="doc doc-heading">
-<code class="highlight language-python"><span class="n">gen_iscc_id</span><span class="p">(</span><span class="n">chain</span><span class="p">,</span> <span class="n">iscc_code</span><span class="p">,</span> <span class="n">uc</span> <span class="o">=</span> <span class="mi">0</span><span class="p">)</span></code>
+<h3 id="iscc_core.iscc_id.gen_iscc_id" class="doc doc-heading">
+<code class="highlight language-python"><span class="n">gen_iscc_id</span><span class="p">(</span><span class="n">iscc_code</span><span class="p">,</span> <span class="n">chain_id</span><span class="p">,</span> <span class="n">wallet</span><span class="p">,</span> <span class="n">uc</span> <span class="o">=</span> <span class="mi">0</span><span class="p">)</span></code>
 
 
-<a href="#iscc_core.iscc_id.gen_iscc_id" class="headerlink" title="Permanent link">#</a></h2>
+<a href="#iscc_core.iscc_id.gen_iscc_id" class="headerlink" title="Permanent link">#</a></h3>
 
     <div class="doc doc-contents ">
 
@@ -991,15 +1001,21 @@ signatory.</p>
   </thead>
   <tbody>
       <tr>
-        <td><code>chain</code></td>
+        <td><code>iscc_code</code></td>
+        <td><code>str</code></td>
+        <td><p>The ISCC-CODE from which to mint the ISCC-ID.</p></td>
+        <td><em>required</em></td>
+      </tr>
+      <tr>
+        <td><code>chain_id</code></td>
         <td><code>int</code></td>
         <td><p>Chain-ID of blockchain from which the ISCC-ID is minted.</p></td>
         <td><em>required</em></td>
       </tr>
       <tr>
-        <td><code>iscc_code</code></td>
+        <td><code>wallet</code></td>
         <td><code>str</code></td>
-        <td><p>The ISCC-CODE from which to mint the ISCC-ID.</p></td>
+        <td><p>The wallet address that signes the ISCC declaration</p></td>
         <td><em>required</em></td>
       </tr>
       <tr>
@@ -1037,11 +1053,11 @@ signatory.</p>
 
 
 
-<h2 id="iscc_core.iscc_id.gen_iscc_id_v0" class="doc doc-heading">
-<code class="highlight language-python"><span class="n">gen_iscc_id_v0</span><span class="p">(</span><span class="n">chain_id</span><span class="p">,</span> <span class="n">iscc_code</span><span class="p">,</span> <span class="n">uc</span> <span class="o">=</span> <span class="mi">0</span><span class="p">)</span></code>
+<h3 id="iscc_core.iscc_id.gen_iscc_id_v0" class="doc doc-heading">
+<code class="highlight language-python"><span class="n">gen_iscc_id_v0</span><span class="p">(</span><span class="n">iscc_code</span><span class="p">,</span> <span class="n">chain_id</span><span class="p">,</span> <span class="n">wallet</span><span class="p">,</span> <span class="n">uc</span> <span class="o">=</span> <span class="mi">0</span><span class="p">)</span></code>
 
 
-<a href="#iscc_core.iscc_id.gen_iscc_id_v0" class="headerlink" title="Permanent link">#</a></h2>
+<a href="#iscc_core.iscc_id.gen_iscc_id_v0" class="headerlink" title="Permanent link">#</a></h3>
 
     <div class="doc doc-contents ">
 
@@ -1060,21 +1076,27 @@ algorithm v0.</p>
   </thead>
   <tbody>
       <tr>
-        <td><code>chain_id</code></td>
-        <td><code>int</code></td>
-        <td><p>Chain-ID of blockchain from which the ISCC-ID is minted.</p></td>
-        <td><em>required</em></td>
-      </tr>
-      <tr>
         <td><code>iscc_code</code></td>
         <td><code>str</code></td>
         <td><p>The ISCC-CODE from which to mint the ISCC-ID.</p></td>
         <td><em>required</em></td>
       </tr>
       <tr>
+        <td><code>chain_id</code></td>
+        <td><code>int</code></td>
+        <td><p>Chain-ID of blockchain from which the ISCC-ID is minted.</p></td>
+        <td><em>required</em></td>
+      </tr>
+      <tr>
+        <td><code>wallet</code></td>
+        <td><code>str</code></td>
+        <td><p>The wallet address that signes the ISCC declaration</p></td>
+        <td><em>required</em></td>
+      </tr>
+      <tr>
         <td><code>uc</code></td>
         <td><code>int</code></td>
-        <td><p>Uniqueness counter for ISCC-ID.</p></td>
+        <td><p>Uniqueness counter of ISCC-ID.</p></td>
         <td><code>0</code></td>
       </tr>
   </tbody>
@@ -1106,11 +1128,11 @@ algorithm v0.</p>
 
 
 
-<h2 id="iscc_core.iscc_id.soft_hash_iscc_id_v0" class="doc doc-heading">
-<code class="highlight language-python"><span class="n">soft_hash_iscc_id_v0</span><span class="p">(</span><span class="n">iscc_code</span><span class="p">,</span> <span class="n">uc</span> <span class="o">=</span> <span class="mi">0</span><span class="p">)</span></code>
+<h3 id="iscc_core.iscc_id.soft_hash_iscc_id_v0" class="doc doc-heading">
+<code class="highlight language-python"><span class="n">soft_hash_iscc_id_v0</span><span class="p">(</span><span class="n">iscc_code</span><span class="p">,</span> <span class="n">wallet</span><span class="p">,</span> <span class="n">uc</span> <span class="o">=</span> <span class="mi">0</span><span class="p">)</span></code>
 
 
-<a href="#iscc_core.iscc_id.soft_hash_iscc_id_v0" class="headerlink" title="Permanent link">#</a></h2>
+<a href="#iscc_core.iscc_id.soft_hash_iscc_id_v0" class="headerlink" title="Permanent link">#</a></h3>
 
     <div class="doc doc-contents ">
 
@@ -1131,6 +1153,12 @@ algorithm v0.</p>
         <td><code>iscc_code</code></td>
         <td><code>str</code></td>
         <td><p>ISCC-CODE</p></td>
+        <td><em>required</em></td>
+      </tr>
+      <tr>
+        <td><code>wallet</code></td>
+        <td><code>str</code></td>
+        <td><p>The wallet address that signes the ISCC declaration</p></td>
         <td><em>required</em></td>
       </tr>
       <tr>
@@ -1168,11 +1196,11 @@ algorithm v0.</p>
 
 
 
-<h2 id="iscc_core.iscc_id.incr_iscc_id" class="doc doc-heading">
-<code class="highlight language-python"><span class="n">incr_iscc_id</span><span class="p">(</span><span class="n">iscc_id</span><span class="p">)</span></code>
+<h3 id="iscc_core.iscc_id.iscc_id_incr" class="doc doc-heading">
+<code class="highlight language-python"><span class="n">iscc_id_incr</span><span class="p">(</span><span class="n">iscc_id</span><span class="p">)</span></code>
 
 
-<a href="#iscc_core.iscc_id.incr_iscc_id" class="headerlink" title="Permanent link">#</a></h2>
+<a href="#iscc_core.iscc_id.iscc_id_incr" class="headerlink" title="Permanent link">#</a></h3>
 
     <div class="doc doc-contents ">
 
@@ -1224,11 +1252,11 @@ algorithm v0.</p>
 
 
 
-<h2 id="iscc_core.iscc_id.incr_iscc_id_v0" class="doc doc-heading">
-<code class="highlight language-python"><span class="n">incr_iscc_id_v0</span><span class="p">(</span><span class="n">iscc_id</span><span class="p">)</span></code>
+<h3 id="iscc_core.iscc_id.iscc_id_incr_v0" class="doc doc-heading">
+<code class="highlight language-python"><span class="n">iscc_id_incr_v0</span><span class="p">(</span><span class="n">iscc_id</span><span class="p">)</span></code>
 
 
-<a href="#iscc_core.iscc_id.incr_iscc_id_v0" class="headerlink" title="Permanent link">#</a></h2>
+<a href="#iscc_core.iscc_id.iscc_id_incr_v0" class="headerlink" title="Permanent link">#</a></h3>
 
     <div class="doc doc-contents ">
 
@@ -1268,6 +1296,30 @@ algorithm v0.</p>
     </tr>
   </tbody>
 </table>
+    </div>
+
+  </div>
+
+
+
+
+
+  <div class="doc doc-object doc-function">
+
+
+
+<h3 id="iscc_core.iscc_id.alg_simhash_from_iscc_id" class="doc doc-heading">
+<code class="highlight language-python"><span class="n">alg_simhash_from_iscc_id</span><span class="p">(</span><span class="n">iscc_id</span><span class="p">,</span> <span class="n">wallet</span><span class="p">)</span></code>
+
+
+<a href="#iscc_core.iscc_id.alg_simhash_from_iscc_id" class="headerlink" title="Permanent link">#</a></h3>
+
+    <div class="doc doc-contents ">
+
+      <p>Extract similarity preserving hex-encoded hash digest from ISCC-ID</p>
+<p>We need to un-xor the ISCC-ID hash digest with the wallet address hash to obtain the similarity
+preserving bytestring.</p>
+
     </div>
 
   </div>

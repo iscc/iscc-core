@@ -936,16 +936,37 @@
 
     <div class="doc doc-contents first">
 
-      <p><em>A unique identifier composed of an 48-bit timestamp and 16 to 208 bit randomness.</em></p>
+      <p><em>A unique, time-sorted identifier composed of an 48-bit timestamp and 16 to 208 bit randomness.</em></p>
+<p>The ISCC Flake-Code is a unique identifier for distributed ID generation. The 64-bit version
+can be used as efficient surrogate key in database systems. It has guaranteed uniqueness if
+generated from a singele process and is time sortable in integer and base32hex representation.
+The 128-bit version is a K-sortable, globally unique identifier for use in distributed systems and
+is compatible with UUID.</p>
 <div class="admonition example">
 <p class="admonition-title">Example</p>
-<p><code>ISCC:OAAQC7XVNNC5FM4U</code></p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="o">&gt;&gt;&gt;</span> <span class="kn">import</span> <span class="nn">iscc_core</span> <span class="k">as</span> <span class="nn">ic</span>
+<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="o">&gt;&gt;&gt;</span> <span class="n">ic</span><span class="o">.</span><span class="n">gen_flake_code</span><span class="p">(</span><span class="n">bits</span><span class="o">=</span><span class="mi">64</span><span class="p">)</span>
+<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="p">{</span><span class="s1">&#39;iscc&#39;</span><span class="p">:</span> <span class="s1">&#39;ISCC:OAAQC7YN7PG2XOR4&#39;</span><span class="p">}</span>
+<a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a>
+<a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a><span class="o">&gt;&gt;&gt;</span> <span class="n">ic</span><span class="o">.</span><span class="n">gen_flake_code</span><span class="p">(</span><span class="n">bits</span><span class="o">=</span><span class="mi">128</span><span class="p">)</span>
+<a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a><span class="p">{</span><span class="s1">&#39;iscc&#39;</span><span class="p">:</span> <span class="s1">&#39;ISCC:OABQC7YN7RJGUUTLKDSKBXO25MA5E&#39;</span><span class="p">}</span>
+<a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a>
+<a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a><span class="c1"># Or use the convenience Flake class for easy access to different representations</span>
+<a id="__codelineno-0-9" name="__codelineno-0-9" href="#__codelineno-0-9"></a>
+<a id="__codelineno-0-10" name="__codelineno-0-10" href="#__codelineno-0-10"></a><span class="o">&gt;&gt;&gt;</span> <span class="n">flake</span> <span class="o">=</span> <span class="n">ic</span><span class="o">.</span><span class="n">Flake</span><span class="p">(</span><span class="n">bits</span><span class="o">=</span><span class="mi">64</span><span class="p">)</span>
+<a id="__codelineno-0-11" name="__codelineno-0-11" href="#__codelineno-0-11"></a><span class="o">&gt;&gt;&gt;</span> <span class="n">flake</span><span class="o">.</span><span class="n">iscc</span>
+<a id="__codelineno-0-12" name="__codelineno-0-12" href="#__codelineno-0-12"></a><span class="s1">&#39;ISCC:OAAQC7YOADBZYNF7&#39;</span>
+<a id="__codelineno-0-13" name="__codelineno-0-13" href="#__codelineno-0-13"></a>
+<a id="__codelineno-0-14" name="__codelineno-0-14" href="#__codelineno-0-14"></a><span class="o">&gt;&gt;&gt;</span> <span class="n">flake</span><span class="o">.</span><span class="n">time</span>
+<a id="__codelineno-0-15" name="__codelineno-0-15" href="#__codelineno-0-15"></a><span class="s1">&#39;2022-02-18T18:03:25.468&#39;</span>
+<a id="__codelineno-0-16" name="__codelineno-0-16" href="#__codelineno-0-16"></a>
+<a id="__codelineno-0-17" name="__codelineno-0-17" href="#__codelineno-0-17"></a><span class="o">&gt;&gt;&gt;</span> <span class="n">flake</span><span class="o">.</span><span class="n">int</span>
+<a id="__codelineno-0-18" name="__codelineno-0-18" href="#__codelineno-0-18"></a><span class="mi">107820312524764351</span>
+<a id="__codelineno-0-19" name="__codelineno-0-19" href="#__codelineno-0-19"></a>
+<a id="__codelineno-0-20" name="__codelineno-0-20" href="#__codelineno-0-20"></a><span class="o">&gt;&gt;&gt;</span> <span class="n">flake</span><span class="o">.</span><span class="n">string</span>
+<a id="__codelineno-0-21" name="__codelineno-0-21" href="#__codelineno-0-21"></a><span class="s1">&#39;05VGS063JGQBU&#39;</span>
+</code></pre></div>
 </div>
-<p>The ISCC Flake-Code is a surogate identifier for distributes ID generation. The 64-bit version
-can be used as efficient suragate key in database systems. It has guaranteed uniqueness if
-generated from a singele process and is time sortable in integer and base32hex representation.
-The 128-bit version is a K-sortable globally unique identifier for use in distributed systems and
-isc compatible with UUID.</p>
 
 
 
@@ -961,11 +982,11 @@ isc compatible with UUID.</p>
 
 
 
-<h2 id="iscc_core.code_flake.gen_flake_code" class="doc doc-heading">
+<h3 id="iscc_core.code_flake.gen_flake_code" class="doc doc-heading">
 <code class="highlight language-python"><span class="n">gen_flake_code</span><span class="p">(</span><span class="n">bits</span> <span class="o">=</span> <span class="mi">64</span><span class="p">)</span></code>
 
 
-<a href="#iscc_core.code_flake.gen_flake_code" class="headerlink" title="Permanent link">#</a></h2>
+<a href="#iscc_core.code_flake.gen_flake_code" class="headerlink" title="Permanent link">#</a></h3>
 
     <div class="doc doc-contents ">
 
@@ -1017,11 +1038,11 @@ isc compatible with UUID.</p>
 
 
 
-<h2 id="iscc_core.code_flake.gen_flake_code_v0" class="doc doc-heading">
+<h3 id="iscc_core.code_flake.gen_flake_code_v0" class="doc doc-heading">
 <code class="highlight language-python"><span class="n">gen_flake_code_v0</span><span class="p">(</span><span class="n">bits</span> <span class="o">=</span> <span class="mi">64</span><span class="p">)</span></code>
 
 
-<a href="#iscc_core.code_flake.gen_flake_code_v0" class="headerlink" title="Permanent link">#</a></h2>
+<a href="#iscc_core.code_flake.gen_flake_code_v0" class="headerlink" title="Permanent link">#</a></h3>
 
     <div class="doc doc-contents ">
 
@@ -1073,11 +1094,11 @@ isc compatible with UUID.</p>
 
 
 
-<h2 id="iscc_core.code_flake.uid_flake_v0" class="doc doc-heading">
+<h3 id="iscc_core.code_flake.uid_flake_v0" class="doc doc-heading">
 <code class="highlight language-python"><span class="n">uid_flake_v0</span><span class="p">(</span><span class="n">ts</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">bits</span> <span class="o">=</span> <span class="mi">64</span><span class="p">)</span></code>
 
 
-<a href="#iscc_core.code_flake.uid_flake_v0" class="headerlink" title="Permanent link">#</a></h2>
+<a href="#iscc_core.code_flake.uid_flake_v0" class="headerlink" title="Permanent link">#</a></h3>
 
     <div class="doc doc-contents ">
 
