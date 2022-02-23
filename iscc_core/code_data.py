@@ -108,7 +108,7 @@ class DataHasherV0:
     def code(self, bits=ic.core_opts.data_bits):
         # type: (int) -> str
         """
-        Encode digest as an ISCC Data-Code component.
+        Encode digest as an ISCC Data-Code unit.
 
         :param int bits: Number of bits for the ISCC Data-Code
         :return: ISCC Data-Code

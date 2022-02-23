@@ -32,7 +32,7 @@ class MT(enum.IntEnum):
     | 2    | CONTENT  | 0010 | Match on perceptual content similarity                  |
     | 3    | DATA     | 0011 | Match on data similarity                                |
     | 4    | INSTANCE | 0100 | Match on data identity                                  |
-    | 5    | ISCC     | 0101 | Composite of two or more components with common header  |
+    | 5    | ISCC     | 0101 | Composite of two or more ISCC-UNITs with common header  |
     | 6    | ID       | 0110 | Short unique identifier bound to ISCC, timestamp, pubkey|
     | 7    | FLAKE    | 0111 | Unique time, randomness and counter based distributed ID|
     """
@@ -169,7 +169,7 @@ class MULTIBASE(str, enum.Enum):
     base64url = "u"
 
 
-#: Possible combinations of ISCC units for the first 3 components of MT.ISCC
+#: Possible combinations of ISCC units for the first 3 units of MT.ISCC
 UNITS = (
     tuple(),
     (MT.CONTENT,),

@@ -117,7 +117,7 @@ class InstanceHasherV0:
     def code(self, bits=ic.core_opts.instance_bits):
         # type: (int) -> str
         """
-        Encode digest as an ISCC Instance-Code component.
+        Encode digest as an ISCC Instance-Code unit.
 
         :param int bits: Number of bits for the ISCC Instance-Code
         :return: ISCC Instance-Code

@@ -4,7 +4,8 @@ This module implements encoding, decoding and transcoding functions of ISCC
 
 ## Codec Overview
 
-![ISCC - data structure](../images/iscc-data-structure.svg)
+![ISCC - data structure](../images/iscc-data-structure-light.svg#only-light)
+![ISCC - data structure](../images/iscc-data-structure-dark.svg#only-dark)
 
 ## Codec Functions
 

@@ -1,19 +1,25 @@
 # -*- coding: utf-8 -*-
 """*A multi-component identifier for digital media assets.*
 
-An **ISCC-CODE** is generated from the concatenation of the digests of the following
-four components together with a single common header:
+An **ISCC-CODE** can be generated from the concatenation of the digests of the following
+five **ISCC-UNITs** together with a single common header:
 
-- [Meta-Code](/components/code_meta/) - Encodes metadata similarity
-- [Content-Code](/components/content/) - Encodes syntactic/perceptual similarity
-- [Data-Code](/components/code_data/) - Encodes raw bitstream similarity
-- [Instance-Code](/components/code_instance/) - Data checksum
+- [Meta-Code](/units/code_meta/) - Encodes metadata similarity
+- Semantic-Code - Encodes semantic content similarity (to be developed)
+- [Content-Code](/units/content/) - Encodes syntactic/perceptual similarity
+- [Data-Code](/units/code_data/) - Encodes raw bitstream similarity
+- [Instance-Code](/units/code_instance/) - Data checksum
 
-The following combinations of components are possible:
+The following sequences of ISCC-UNITs are possible:
 
-- Meta, Content, Data, Instance (256-bit / 64-bit per component)
-- Content, Data, Instance (192-bit / 64-bit per component)
-- Data, Instance (256 or 128 bit / 64 or 128-bit per component)
+- Data, Instance
+- Content, Data, Instance
+- Semantic, Data, Instance
+- Content, Semantic, Data, Instance
+- Meta, Data, Instance
+- Meta, Content, Data, Instance
+- Meta, Semantic, Data, Instance
+- Meta, Semantic, Content, Data, Instance
 """
 from typing import Sequence
 from operator import itemgetter
@@ -23,7 +29,7 @@ import iscc_core as ic
 def gen_iscc_code(codes):
     # type: (Sequence[str]) -> dict
     """
-    Combine multiple ISCC components to a composite ISCC-CODE with a common header using
+    Combine multiple ISCC-UNITs to a composite ISCC-CODE with a common header using
     the latest standard algorithm.
 
     :param Sequence[str] codes: A valid sequence of singluar ISCC codes.

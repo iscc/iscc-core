@@ -99,22 +99,22 @@ markdown_extensions:
 nav:
   - Overview: index.md
   - Types: constants.md
-  - Codec: codec/codec.md
+  - Codec: codec/index.md
+  - ISCC-UNITs:
+      - units/index.md
+      - Meta-Code: units/code_meta.md
+      - Content-Codes:
+          - units/content/index.md
+          - Text-Code: units/content/code_content_text.md
+          - Image-Code: units/content/code_content_image.md
+          - Audio-Code: units/content/code_content_audio.md
+          - Video-Code: units/content/code_content_video.md
+          - Mixed-Code: units/content/code_content_mixed.md
+      - Data-Code: units/code_data.md
+      - Instance-Code: units/code_instance.md
+      - Flake-Code: units/code_flake.md
   - ISCC-CODE: iscc_code.md
   - ISCC-ID: iscc_id.md
-  - Components:
-      - components/index.md
-      - Meta-Code: components/code_meta.md
-      - Content-Codes:
-          - components/content/index.md
-          - Text-Code: components/content/code_content_text.md
-          - Image-Code: components/content/code_content_image.md
-          - Audio-Code: components/content/code_content_audio.md
-          - Video-Code: components/content/code_content_video.md
-          - Mixed-Code: components/content/code_content_mixed.md
-      - Data-Code: components/code_data.md
-      - Instance-Code: components/code_instance.md
-      - Flake-Code: components/code_flake.md
   - Algorithms:
       - CDC: algorithms/cdc.md
       - DCT: algorithms/dct.md

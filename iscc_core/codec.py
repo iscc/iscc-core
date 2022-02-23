@@ -23,19 +23,19 @@ base32hexnopad = base32hex.nopad()
 def encode_component(mtype, stype, version, bit_length, digest):
     # type: (MainType, SubType, Version, Length, bytes) -> str
     """
-    Encode an ISCC component inlcuding header and body with standard base32 encoding.
+    Encode an ISCC unit inlcuding header and body with standard base32 encoding.
 
     !!! note
         The `length` value must be the **length in number of bits** for the component.
         If `digest` has more bits than specified by `length` it wil be truncated.
 
 
-    :param MainType mtype: Maintype of component (0-6)
-    :param SubType stype: SubType of component depending on MainType (0-5)
-    :param Version version: Version of component algorithm (0).
-    :param length bit_length: Length of component in number of bits (multiple of 32)
-    :param bytes digest: The hash digest of the component.
-    :return: Base32 encoded component code.
+    :param MainType mtype: Maintype of unit (0-6)
+    :param SubType stype: SubType of unit depending on MainType (0-5)
+    :param Version version: Version of unit algorithm (0).
+    :param length bit_length: Length of unit, in number of bits (multiple of 32)
+    :param bytes digest: The hash digest of the unit.
+    :return: Base32 encoded ISCC-UNIT.
     :rtype: str
     """
     if mtype in (MT.META, MT.SEMANTIC, MT.CONTENT, MT.DATA, MT.INSTANCE, MT.ID, MT.FLAKE):
@@ -63,10 +63,10 @@ def encode_header(mtype, stype, version=0, length=1):
         The length value must be encoded beforhand because its semantics depend on
         the MainType (see `encode_length` function).
 
-    :param MainType mtype: MainType of component.
-    :param SubType stype: SubType of component.
+    :param MainType mtype: MainType of unit.
+    :param SubType stype: SubType of unit.
     :param Version version: Version of component algorithm.
-    :param Length length: length value of component (1 means 64-bits for standard units)
+    :param Length length: length value of unit (1 means 64-bits for standard units)
     :return: Varnibble stream encoded ISCC header as bytes.
     :rtype: bytes
 
@@ -205,11 +205,11 @@ def encode_length(mtype, length):
     For MainType `ISCC`:
 
         MainTypes `DATA` and `INSTANCE` are mandatory for ISCC-CODEs, all others are
-        optional. Length means the composition of optional 64-bit components included
+        optional. Length means the composition of optional 64-bit units included
         in the ISCC composite.
 
         Examples:
-            No optional components -> 0000 -> 0
+            No optional units      -> 0000 -> 0
             CONTENT                -> 0001 -> 1
             SEMANTIC               -> 0010 -> 2
             SEMANTIC, CONTENT      -> 0011 -> 3

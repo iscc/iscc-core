@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 """*A decentralized, owned, and short identifier for digital assets.*
 
-The **ISCC-ID** is generated from a similarity-hash of the components of an
+The **ISCC-ID** is generated from a similarity-hash of the units of an
 **ISCC-CODE** together with a blockchain wallet address. Its SubType designates the blockchain
 from which the **ISCC-ID** was minted. The similarity-hash is always at least 64-bits and
 optionally suffixed with a [`uvarint`](https://github.com/multiformats/unsigned-varint) endcoded
