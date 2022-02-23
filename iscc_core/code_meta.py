@@ -1,9 +1,9 @@
-import base64
 import unicodedata
 import jcs
 from more_itertools import interleave, sliced
 from blake3 import blake3
 from typing import Optional, Union
+from data_url import DataURL
 import iscc_core as ic
 
 
@@ -24,7 +24,7 @@ def gen_meta_code(name, description=None, meta=None, bits=ic.core_opts.meta_bits
 
     :param str name: Name or title of the work manifested by the digital asset
     :param Optional[str] description: Optional description for disambiguation
-    :param Optional[ic.Meta] meta: Optional structured or raw metadata
+    :param Optional[Union[dict,str] meta: Dict or Data-URL string with extended metadata
     :param int bits: Bit-length of resulting Meta-Code (multiple of 64)
     :return: ISCC object with Meta-Code and properties name, description, properties, metahash
     :rtype: dict
@@ -45,11 +45,8 @@ def gen_meta_code_v0(name, description=None, meta=None, bits=ic.core_opts.meta_b
         - Raw bytes from a file header
 
     :param str name: Name or title of the work manifested by the digital asset
-    :param Optional[str] description:
-        A User presentable textual description of the digital asset for disambiguation purposes
-        (may include markdown).
-    :param Optional[ic.Meta] meta: Use-Case or industry-specific metadata.
-        Either JSON serializable structured data or a binary blob.
+    :param Optional[str] description: Optional description for disambiguation
+    :param Optional[Union[dict,str] meta: Dict or Data-URL string with extended metadata
     :param int bits: Bit-length of resulting Meta-Code (multiple of 64)
     :return: ISCC object with possible fields: iscc, name, description, metadata, metahash
     :rtype: dict
@@ -61,28 +58,36 @@ def gen_meta_code_v0(name, description=None, meta=None, bits=ic.core_opts.meta_b
     name = text_remove_newlines(name)
     name = text_trim(name, ic.core_opts.meta_trim_name)
 
+    if not name:
+        raise ValueError("Meta-Code requires non-empty name element (after normalization)")
+
     # 2. Normalize `description`
     description = "" if description is None else description
     description = text_clean(description)
     description = text_trim(description, ic.core_opts.meta_trim_description)
 
-    # Calculate meta_code, metahash, and metadata value for the different input cases
+    # Calculate meta_code, metahash, and output metadata values for the different input cases
     if meta:
-        if isinstance(meta, bytes):
-            meta_code_digest = soft_hash_meta_v0(name, meta)
-            metahash = ic.InstanceHasherV0(meta).multihash()
-            metadata_value = base64.b64encode(meta).decode("ascii")
+        if isinstance(meta, str):
+            # Data-URL expected
+            durl = meta
+            payload = DataURL.from_url(durl).data
+            meta_code_digest = soft_hash_meta_v0(name, payload)  # TODO only use metadata here
+            metahash = ic.cidv1_hex(payload)
+            metadata_value = durl
         elif isinstance(meta, dict):
             payload = jcs.canonicalize(meta)
             meta_code_digest = soft_hash_meta_v0(name, payload)
-            metahash = ic.InstanceHasherV0(payload).multihash()
-            metadata_value = meta
+            metahash = ic.cidv1_hex(payload)
+            media_type = "application/ld+json" if "@context" in meta else "application/json"
+            durl_obj = DataURL.from_data(media_type, base64_encode=True, data=payload)
+            metadata_value = durl_obj.url
         else:
-            raise TypeError(f"metadata must be bytes or dict not {type(meta)}")
+            raise TypeError(f"metadata must be Data-URL string or dict not {type(meta)}")
     else:
         payload = " ".join((name, description)).strip().encode("utf-8")
         meta_code_digest = soft_hash_meta_v0(name, description)
-        metahash = ic.InstanceHasherV0(payload).multihash()
+        metahash = ic.cidv1_hex(payload)
         metadata_value = None
 
     meta_code = ic.encode_component(
@@ -101,7 +106,7 @@ def gen_meta_code_v0(name, description=None, meta=None, bits=ic.core_opts.meta_b
     if description:
         result["description"] = description
     if metadata_value:
-        result["metadata"] = metadata_value
+        result["meta"] = metadata_value
 
     result["metahash"] = metahash
 
@@ -114,23 +119,23 @@ def soft_hash_meta_v0(name, extra=None):
     Calculate simmilarity preserving 256-bit hash digest from asset metadata.
 
     Textual input should be stripped of markup, normalized and trimmed before hashing.
-    Json metadata should be normalized with
-    [JCS](https://tools.ietf.org/id/draft-rundgren-json-canonicalization-scheme-00.html)
+    Bytes input can be any serialized metadata (JSON, XML, Image...). Metadata should be
+    serialized in a canonical form (for example
+    [JCS](https://tools.ietf.org/id/draft-rundgren-json-canonicalization-scheme-00.html) for JSON)
 
     !!! note
         The processing algorithm depends on the type of the `extra` input.
         If the `extra` field is supplied and non-empty, we create separate hashes for
-        `title` and `extra` and interleave them in 32-bit chunks:
+        `name` and `extra` and interleave them in 32-bit chunks:
 
-        - If the input is `None` or an empty `str`/`bytes` object the Meta-Hash will
-        be generated from the `title`-field only.
+        - If the `extra` input is `None` or an empty `str`/`bytes` object the Meta-Hash will
+        be generated from the `name`-field only.
 
         - If the `extra`-input is a non-empty **text** string (str) the string is
-        lower-cased and the processing unit is an utf-8 endoded character
-        (possibly multibyte). The resulting hash is interleaved with the `title`-hash.
+        lower-cased and the processing units are utf-8 endoded characters (possibly multibyte).
 
-        - If the `extra`-input is a non-empty **bytes** object the processing is done
-        bytewise and the resulting hash is interleaved with the `title`-hash.
+        - If the `extra`-input is a non-empty **bytes** object the processing is done bytewise.
+
 
     :param str name: Title of the work manifested in the digital asset
     :param Union[str,bytes,None] extra: Additional metadata for disambiguation

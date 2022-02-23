@@ -66,8 +66,6 @@ def conformance_testdata():
             for tv in test_values["inputs"]:
                 if isinstance(tv, str) and tv.startswith("stream:"):
                     ntv.append(io.BytesIO(bytes.fromhex(tv.lstrip("stream:"))))
-                elif isinstance(tv, str) and tv.startswith("bytes:"):
-                    ntv.append(bytes.fromhex(tv.lstrip("bytes:")))
                 else:
                     ntv.append(tv)
             test_values["inputs"] = ntv

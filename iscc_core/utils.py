@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+import io
 import json
 from hashlib import sha256
 from typing import Generator, Sequence, Tuple, Any
@@ -38,7 +39,7 @@ def json_canonical(obj):
 
 
 def cidv1_hex(stream):
-    # type: (Stream) -> str
+    # type: (Union[Stream, bytes]) -> str
     """
     Create a [IPFS CIDv1](https://specs.ipld.io/block-layer/CID.html#cids-version-1) hash for ISCC
     metadata in `base16` (hexadecimal) representation.
@@ -85,6 +86,9 @@ def cidv1_hex(stream):
     :return: A valid IPFS CIDv1 that can be used as token-id and metadata-uri
     :rtype: str
     """
+
+    if isinstance(stream, bytes):
+        stream = io.BytesIO(stream)
 
     ipfs_max_size = 262144
     data = stream.read(ipfs_max_size)
