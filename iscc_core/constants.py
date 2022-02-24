@@ -114,13 +114,15 @@ class ST_ID(enum.IntEnum):
     | Uint | Symbol   | Bits | Purpose                                                 |
     |----- |:---------|------|---------------------------------------------------------|
     | 0    | PRIVATE  | 0000 | ISCC-ID minted via private repository (not unique)      |
-    | 1    | BITCOIN  | 0001 | ISCC-ID minted via Bitcoin mainchain                    |
-    | 2    | ETHEREUM | 0010 | ISCC-ID minted via Ethereum mainchain                   |
+    | 1    | BITCOIN  | 0001 | ISCC-ID minted via Bitcoin blockchain                   |
+    | 2    | ETHEREUM | 0010 | ISCC-ID minted via Ethereum blockchain                  |
+    | 3    | ETHEREUM | 0011 | ISCC-ID minted via Polygon blockchain                   |
     """
 
     PRIVATE = 0
     BITCOIN = 1
     ETHEREUM = 2
+    POLYGON = 3
 
 
 class VS(enum.IntEnum):
