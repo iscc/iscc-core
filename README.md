@@ -78,15 +78,15 @@ with open("demo.txt", "rb") as stream:
     print(f"Structure:     {ic.iscc_explain(instance_code['iscc'])}\n")
 
 iscc_code = ic.gen_iscc_code(
-    (meta_code['iscc'], text_code['iscc'], data_code['iscc'], instance_code['iscc'])
+    (meta_code["iscc"], text_code["iscc"], data_code["iscc"], instance_code["iscc"])
 )
 
-iscc_obj = ic.Code(iscc_code['iscc'])
+iscc_obj = ic.Code(iscc_code["iscc"])
 print(f"ISCC-CODE:     {iscc_obj.code}")
 print(f"Structure:     {iscc_obj.explain}")
 print(f"Multiformat:   {iscc_obj.mf_base32}\n")
 
-iscc_id = ic.gen_iscc_id(chain=1, iscc_code=iscc_code['iscc'], uc=7)
+iscc_id = ic.gen_iscc_id(iscc_obj.code, chain_id=1, wallet="1Bq568oLhi5HvdgC6rcBSGmu4G3FeAntCz")
 iscc_id_obj = ic.Code(iscc_id["iscc"])
 print(f"ISCC-ID:       {iscc_id_obj.code}")
 print(f"Structure:     {iscc_id_obj.explain}")
@@ -112,9 +112,9 @@ ISCC-CODE:     KACT4EBWK27737D2AYCJRAL5Z36G76RFRMO4554RU26HZ4ORJGIVHDI
 Structure:     ISCC-TEXT-V0-MCDI-3e103656bffdfc7a060498817dcefc6ffa258b1dcef791a6bc7cf1d14991538d
 Multiformat:   bzqavabj6ca3fnp757r5ambeyqf6457dp7isywhoo66i2npd46hiutektru
 
-ISCC-ID:       MEASAPQETIK77774A4
-Structure:     ID-BITCOIN-V0-72-203e049a15fffffc-7
-Multiformat:   bzqawcajahycjufp7776ao
+ISCC-ID:       MEAJU5AXCPOIOYFL
+Structure:     ID-BITCOIN-V0-64-9a741713dc8760ab
+Multiformat:   bzqawcae2oqlrhxehmcvq
 ```
 
 ## Documentation
