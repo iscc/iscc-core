@@ -143,8 +143,17 @@ You may also want join our developer chat on Telegram at <https://t.me/iscc_dev>
 
 ## Changelog
 
-### 0.2.0 - Unreleased
-- Code cleanup
+### 0.2.0 - 2022-02-24
+- Complete API refactoring
+- Use Data-URL as input for Meta-Code
+- Use wallet address for ISCC-ID creation
+- Added new Flake-Code (distributed time/random ID)
+- Replaced assertions with exeptions
+- Use secure random functions
+- Retired Python 3.6 support (EOL)
+- Return simple `dict` objects from generator functions
+- Added ISCC string validation
+- Added multiple helper functions
 
 ### 0.1.9 - 2021-12-17
 
