@@ -61,7 +61,7 @@ coverage = "*"
 pytest-cov = "*"
 poethepoet = "*"
 iscc-schema = "^0.3"
-bandit = "^1.7.2"
+bandit = "^1.7.3"
 
 [tool.black]
 skip-string-normalization = false
