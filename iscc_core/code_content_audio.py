@@ -19,6 +19,7 @@ import iscc_core as ic
 __all__ = [
     "gen_audio_code",
     "gen_audio_code_v0",
+    "soft_hash_audio_v0",
 ]
 
 
