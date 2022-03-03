@@ -6,7 +6,11 @@ from typing import Generator
 import iscc_core as ic
 
 
-__all__ = ["alg_cdc_chunks"]
+__all__ = [
+    "alg_cdc_chunks",
+    "alg_cdc_offset",
+    "alg_cdc_params",
+]
 
 
 def alg_cdc_chunks(data, utf32, avg_chunk_size=ic.core_opts.data_avg_chunk_size):
