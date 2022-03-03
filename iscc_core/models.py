@@ -157,7 +157,7 @@ class Code:
     @property
     def hash_ints(self) -> List[int]:
         """List of 0,1 integers representing the bits of the code (without header)."""
-        return self._body.tolist(True)
+        return self._body.tolist()
 
     @property
     def hash_uint(self) -> int:

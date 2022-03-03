@@ -143,6 +143,11 @@ You may also want join our developer chat on Telegram at <https://t.me/iscc_dev>
 
 ## Changelog
 
+### 0.2.1 - unreleased
+- Cleanup and update dependencies
+- Fix bitarray api change
+- Fix developer commands
+
 ### 0.2.0 - 2022-02-24
 - Complete API refactoring
 - Use Data-URL as input for Meta-Code

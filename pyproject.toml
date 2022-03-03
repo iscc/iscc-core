@@ -43,9 +43,8 @@ pydantic = {extras = ["dotenv"], version = "*"}
 uvarint = "^1.2"
 loguru = "^0.6"
 base58 = "^2.1"
-multiformats = "^0.1.3"
-bases = "^0.2.1"
-data-url = "^1.0.3"
+bases = "^0.2."
+data-url = "^1.0"
 
 [tool.poetry.extras]
 turbo = ["cython"]
@@ -69,13 +68,12 @@ line-length = 100
 target-version = ['py37']
 
 [tool.poe.tasks]
-update = { cmd = "poetry update", help = "Update project dependencies"}
-gentests = { script = "tests.build_test_data:main", help = "Generate conformance test data" }
+gentests = { cmd = "poetry run python -m tests.build_test_data", help = "Generate conformance test data" }
 format = { cmd = "poetry run black .", help = "Code style formating with black" }
 docs = { script = "tests.build_docs:main", help = "Copy README.md to /docs" }
 test = { cmd = "poetry run pytest --cov=iscc_core --cov-fail-under=100", help = "Run tests with coverage" }
 sec = { cmd = "poetry run bandit -r iscc_core -q", help = "Security check with bandit" }
-all = ["update", "gentests", "format", "docs", "test", "sec"]
+all = ["gentests", "format", "docs", "test", "sec"]
 
 [build-system]
 requires = ["poetry-core>=1.0.0", "setuptools", "wheel", "cython"]
