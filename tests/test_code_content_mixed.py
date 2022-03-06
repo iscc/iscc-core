@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 import pytest
-from iscc_schema.schema import ISCC
+from iscc_schema import IsccMeta
 
 import iscc_core
 
@@ -52,5 +52,5 @@ def test_gen_mixed_code_schema_conformance():
     tc_long = iscc_core.gen_text_code_v0("Hello World", bits=256)["iscc"]
     tc_short = iscc_core.gen_text_code_v0("Short Text-Code", bits=64)["iscc"]
     codes = tc_long, tc_short
-    iscc_obj = ISCC(**iscc_core.gen_mixed_code_v0(codes=codes))
+    iscc_obj = IsccMeta(**iscc_core.gen_mixed_code_v0(codes=codes))
     assert iscc_obj.iscc == "ISCC:EQASBPL7XH763357"

@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 import pytest
-from iscc_schema.schema import ISCC
+from iscc_schema import IsccMeta
 import iscc_core as ic
 
 
@@ -43,7 +43,7 @@ def test_gen_meta_code_meta_dict():
         "meta": "data:application/json;base64,eyJoZWxsbyI6Im1ldGFkYXRhIn0=",
         "metahash": "f01551220cecde2e7b963d3d631a899a666c1fae5a5f0696c2108dfb31a8545a9f9134f9a",
     }
-    assert ISCC(**m).iscc == "ISCC:AAAWKLHFXMFCA2OC"
+    assert IsccMeta(**m).iscc == "ISCC:AAAWKLHFXMFCA2OC"
 
 
 def test_gen_meta_code_meta_bytes():
@@ -105,8 +105,8 @@ def test_gen_meta_code_v0_interleaved():
         "metahash": "f01551220a591a6d40bf420404a011733cfb7b190d62c65bf0bcda32b57b277d9ad9f146e",
         "name": "Hello",
     }
-    assert ISCC(**ma).iscc == "ISCC:AAAWKLHFXM75OAMK"
-    assert ISCC(**mb).iscc == "ISCC:AAAWKLHFXNSF7NNE"
+    assert IsccMeta(**ma).iscc == "ISCC:AAAWKLHFXM75OAMK"
+    assert IsccMeta(**mb).iscc == "ISCC:AAAWKLHFXNSF7NNE"
 
 
 def test_gen_meta_code_v0_metadata_raises():

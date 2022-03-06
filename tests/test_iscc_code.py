@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 import pytest
-from iscc_schema.schema import ISCC
+from iscc_schema import IsccMeta
 import iscc_core as ic
 
 
@@ -51,7 +51,7 @@ def test_gen_iscc_code_v0_no_meta_content_128():
     icode = ic.gen_iscc_code_v0([DID_64, IID_256])
     assert icode == {"iscc": "ISCC:KUAAQICFKJYKY4KUMQV6B6THIBBUG"}
     assert ic.iscc_explain(icode["iscc"]) == "ISCC-SUM-V0-DI-0820455270ac7154642be0fa67404343"
-    assert ISCC(**icode).iscc == "ISCC:KUAAQICFKJYKY4KUMQV6B6THIBBUG"
+    assert IsccMeta(**icode).iscc == "ISCC:KUAAQICFKJYKY4KUMQV6B6THIBBUG"
 
 
 def test_gen_iscc_code_v0_ordering():
@@ -61,7 +61,7 @@ def test_gen_iscc_code_v0_ordering():
         ic.iscc_explain(icode["iscc"])
         == "ISCC-TEXT-V0-MCDI-87dedce74b3c353b16257380a960347a5a8ba362526c2b3c642be0fa67404343"
     )
-    assert ISCC(**icode).iscc == "ISCC:KACYPXW445FTYNJ3CYSXHAFJMA2HUWULUNRFE3BLHRSCXYH2M5AEGQY"
+    assert IsccMeta(**icode).iscc == "ISCC:KACYPXW445FTYNJ3CYSXHAFJMA2HUWULUNRFE3BLHRSCXYH2M5AEGQY"
 
 
 def test_gen_iscc_code_v0_insufficient_codes_raises():

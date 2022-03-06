@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 import pytest
-from iscc_schema.schema import ISCC
+from iscc_schema import IsccMeta
 import iscc_core as ic
 
 
@@ -87,7 +87,7 @@ def test_dct_range():
 
 
 def test_gen_image_code_schema_conformance():
-    iscc_obj = ISCC(**ic.gen_image_code_v0(IMG_SAMPLE_PIXELS))
+    iscc_obj = IsccMeta(**ic.gen_image_code_v0(IMG_SAMPLE_PIXELS))
     assert iscc_obj.iscc == "ISCC:EEA4GQZQTY6J5DTH"
 
 

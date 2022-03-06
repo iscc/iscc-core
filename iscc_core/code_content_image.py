@@ -8,7 +8,7 @@ dct-matrix against their median values to set the hash-bits.
 Images must be normalized before using gen_image_code. Prepare images as follows:
 
 - Transpose image according to EXIF Orientation
-- Add gray background to image if it has alpha transparency (gray value 126)
+- Add white background to image if it has alpha transparency
 - Crop empty borders of image
 - Convert image to grayscale
 - Resize image to 32x32
