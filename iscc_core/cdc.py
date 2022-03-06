@@ -8,8 +8,6 @@ import iscc_core as ic
 
 __all__ = [
     "alg_cdc_chunks",
-    "alg_cdc_offset",
-    "alg_cdc_params",
 ]
 
 
