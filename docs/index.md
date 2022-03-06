@@ -144,9 +144,10 @@ You may also want join our developer chat on Telegram at <https://t.me/iscc_dev>
 
 ## Changelog
 
-### 0.2.2 - 2022-03-06
+### 0.2.3 - 2022-03-06
 - Update to iscc-schema 0.3.3
 - Change image normalization instructions
+- Fix issue with exporting cdc cython only functions
 
 ### 0.2.1 - 2022-03-03
 - Cleanup and update dependencies
