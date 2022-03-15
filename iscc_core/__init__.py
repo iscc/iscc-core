@@ -1,4 +1,4 @@
-__version__ = "0.2.3"
+__version__ = "0.2.4"
 from iscc_core.options import core_opts, conformant_options
 from iscc_core import v0
 
