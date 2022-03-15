@@ -116,7 +116,7 @@ class ST_ID(enum.IntEnum):
     | 0    | PRIVATE  | 0000 | ISCC-ID minted via private repository (not unique)      |
     | 1    | BITCOIN  | 0001 | ISCC-ID minted via Bitcoin blockchain                   |
     | 2    | ETHEREUM | 0010 | ISCC-ID minted via Ethereum blockchain                  |
-    | 3    | ETHEREUM | 0011 | ISCC-ID minted via Polygon blockchain                   |
+    | 3    | POLYGON  | 0011 | ISCC-ID minted via Polygon blockchain                   |
     """
 
     PRIVATE = 0
