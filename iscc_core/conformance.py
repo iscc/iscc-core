@@ -58,7 +58,7 @@ def conformance_testdata():
     with open(TEST_DATA, "rb") as stream:
         data = json.load(stream)
     for func_name, tests in data.items():
-        func_obj = getattr(ic.v0, func_name)
+        func_obj = getattr(ic, func_name)
         for test_name, test_values in tests.items():
 
             # Convert stream and bytes test values
