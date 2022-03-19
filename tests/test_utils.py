@@ -96,10 +96,16 @@ def test__safe_unpack():
         ic.utils.iscc_pair_unpack(a, b)
 
 
-def test_cidv1_hex():
-    data = b"hello world"
+def test_cidv1_hex_stream():
     assert (
-        ic.cidv1_hex(io.BytesIO(data))
+        ic.cidv1_hex(io.BytesIO(b"hello world"))
+        == "f01551220b94d27b9934d3e08a52e52d7da7dabfac484efe37a5380ee9088f7ace2efcde9"
+    )
+
+
+def test_cidv1_hex_bytes():
+    assert (
+        ic.cidv1_hex(b"hello world")
         == "f01551220b94d27b9934d3e08a52e52d7da7dabfac484efe37a5380ee9088f7ace2efcde9"
     )
 
@@ -180,3 +186,12 @@ def test_hamming_distance_raises():
     a, b = os.urandom(8), os.urandom(9)
     with pytest.raises(AssertionError):
         ic.iscc_distance_bytes(a, b)
+
+
+def test_multi_hash_blake3():
+    assert ic.multi_hash_blake3(b"") == (
+        "1e20af1349b9f5f9a1a6a0404dea36dcc9499bcb25c9adc112b7cc9a93cae41f3262"
+    )
+    assert ic.multi_hash_blake3(b"hello world") == (
+        "1e20d74981efa70a0c880b8d8c1985d075dbcbf679b99a5f9914e5aaf96b831a9e24"
+    )

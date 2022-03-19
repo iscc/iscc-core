@@ -10,7 +10,7 @@
       "outputs": {
         "iscc": "ISCC:AAAZXZ6OU74YAZIM",
         "name": "Die Unendliche Geschichte",
-        "metahash": "f01551220c636dd9e3dda9d634f792e031fce8e0e67386d3400fd530b0033859b07ecfbb2"
+        "metahash": "1e200d890ec03394de69d28750ccc89510afaa0b405eec4efbfd79df19d2d5764c83"
       }
     },
     "test_0002_title_extra": {
@@ -24,7 +24,7 @@
         "iscc": "ISCC:AAAZXZ6OU4E45RB5",
         "name": "Die Unendliche Geschichte",
         "description": "Von Michael Ende",
-        "metahash": "f01551220b95a25580b7462bacddd3285c636073073d50d480ee7b9b5fe931a4f0ba8fe0a"
+        "metahash": "1e209b9077adf626061ab56c2221d44988aa85c5e126066324000b99ac9c8baf4151"
       }
     },
     "test_0003_96_bits": {
@@ -38,7 +38,7 @@
         "iscc": "ISCC:AABJXZ6OU4E45RB57GAGKDA",
         "name": "Die Unendliche Geschichte",
         "description": "Von Michael Ende",
-        "metahash": "f01551220b95a25580b7462bacddd3285c636073073d50d480ee7b9b5fe931a4f0ba8fe0a"
+        "metahash": "1e209b9077adf626061ab56c2221d44988aa85c5e126066324000b99ac9c8baf4151"
       }
     },
     "test_0004_128_bits": {
@@ -52,7 +52,7 @@
         "iscc": "ISCC:AABZXZ6OU4E45RB57GAGKDGHZXV74",
         "name": "Die Unendliche Geschichte",
         "description": "Von Michael Ende",
-        "metahash": "f01551220b95a25580b7462bacddd3285c636073073d50d480ee7b9b5fe931a4f0ba8fe0a"
+        "metahash": "1e209b9077adf626061ab56c2221d44988aa85c5e126066324000b99ac9c8baf4151"
       }
     },
     "test_0005_160_bits": {
@@ -66,7 +66,7 @@
         "iscc": "ISCC:AACJXZ6OU4E45RB57GAGKDGHZXV752RFK42Q",
         "name": "Die Unendliche Geschichte",
         "description": "Von Michael Ende",
-        "metahash": "f01551220b95a25580b7462bacddd3285c636073073d50d480ee7b9b5fe931a4f0ba8fe0a"
+        "metahash": "1e209b9077adf626061ab56c2221d44988aa85c5e126066324000b99ac9c8baf4151"
       }
     },
     "test_0006_192_bits": {
@@ -80,7 +80,7 @@
         "iscc": "ISCC:AACZXZ6OU4E45RB57GAGKDGHZXV752RFK424V76TRU",
         "name": "Die Unendliche Geschichte",
         "description": "Von Michael Ende",
-        "metahash": "f01551220b95a25580b7462bacddd3285c636073073d50d480ee7b9b5fe931a4f0ba8fe0a"
+        "metahash": "1e209b9077adf626061ab56c2221d44988aa85c5e126066324000b99ac9c8baf4151"
       }
     },
     "test_0007_224_bits": {
@@ -94,7 +94,7 @@
         "iscc": "ISCC:AADJXZ6OU4E45RB57GAGKDGHZXV752RFK424V76TRVZ2TKS2",
         "name": "Die Unendliche Geschichte",
         "description": "Von Michael Ende",
-        "metahash": "f01551220b95a25580b7462bacddd3285c636073073d50d480ee7b9b5fe931a4f0ba8fe0a"
+        "metahash": "1e209b9077adf626061ab56c2221d44988aa85c5e126066324000b99ac9c8baf4151"
       }
     },
     "test_0008_256_bits": {
@@ -108,7 +108,7 @@
         "iscc": "ISCC:AADZXZ6OU4E45RB57GAGKDGHZXV752RFK424V76TRVZ2TKS2K6X5VVA",
         "name": "Die Unendliche Geschichte",
         "description": "Von Michael Ende",
-        "metahash": "f01551220b95a25580b7462bacddd3285c636073073d50d480ee7b9b5fe931a4f0ba8fe0a"
+        "metahash": "1e209b9077adf626061ab56c2221d44988aa85c5e126066324000b99ac9c8baf4151"
       }
     },
     "test_0009_i18n": {
@@ -122,7 +122,7 @@
         "iscc": "ISCC:AADQPPCUKAL34VCQOCRWHDPQU5RY2LMRHPGS3HL35UEPHQ3CDDZ6GYQ",
         "name": "Iñtërnâtiônàlizætiøn☃",
         "description": "Iñtërnâtiônàlizætiøn☃ Iñtërnâtiônàlizætiøn☃",
-        "metahash": "f01551220c04df469c9722082bcc5532482fac3dd44b00fafe89ee84a93950b17697b608a"
+        "metahash": "1e20295aa6140de0e533bc1b932d5bd70fda0d2315afc88a29bcb572a388a649ba85"
       }
     },
     "test_0010_normalizeation": {
@@ -135,7 +135,7 @@
       "outputs": {
         "iscc": "ISCC:AAAZXZ6OU74YAZIM",
         "name": "Die unéndlíche, Geschichte",
-        "metahash": "f015512202d9e2b5a915881bb54da5f7ee0eee1ddfb91706a94b7dc7aee2ea1354951cc68"
+        "metahash": "1e20df7a9affea960fdbc4c90f979903b9a771341695a7af8bdae6f4a95eb523b4a4"
       }
     },
     "test_0011_trim": {
@@ -148,7 +148,7 @@
       "outputs": {
         "iscc": "ISCC:AAA76GFOHGPPBMPM",
         "name": "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquy",
-        "metahash": "f015512200d3cb4ae57cd709cea8ac8f1b5f0161f580e564c380754c9f9f2be527a46891e"
+        "metahash": "1e20ccde66af338a44fd50f36fbf51a2c4ed5f2b0da54059e7eb758ddcffb4f67f5e"
       }
     },
     "test_0012_trim_i18n": {
@@ -161,7 +161,7 @@
       "outputs": {
         "iscc": "ISCC:AAARPPSUKDYKOY4N",
         "name": "Iñtërnâtiônàlizætiøn☃ Iñtërnâtiônàlizætiøn☃ Iñtërnâtiônàlizætiøn☃ Iñtërnâtiônàlizætiøn☃ Iñt",
-        "metahash": "f0155122086ee57a8e257e9272b4833bc1df9386e81c175553771c0f7a3db13cdfd1666e8"
+        "metahash": "1e20814471724835ba0a08f0cfde6b6c24056fff20377f3c0c1759ea521af788bb79"
       }
     },
     "test_0013_norm_i18n_256": {
@@ -175,7 +175,7 @@
         "iscc": "ISCC:AAD6KOWKOF334VRANKFXRZXZWMVZZDZZAGHC3ON7O5ENTBJ3TXJ5XYQ",
         "name": "Ç 가 Ω H 1 { i9 1⁄4 dž ⫝̸ ȴ ȷ ɂ ć",
         "description": "Iñtërnâtiôn\nàlizætiøn☃💩 –  is a tric ky   thing!",
-        "metahash": "f01551220faa09f440ec99e3d7e3148291de28baab768d38d2fb76ab1fc7c0eebaf84e727"
+        "metahash": "1e20e5b0e0d2ee04e7606b7dcb6f6901f4bf78f8b850a91566383b86b22c5127768d"
       }
     },
     "test_0014_meta_object_json": {
@@ -189,7 +189,7 @@
         "iscc": "ISCC:AAAWKLHFXN63LHL2",
         "name": "Hello",
         "meta": "data:application/json;base64,eyJzb21lIjoib2JqZWN0In0=",
-        "metahash": "f01551220b2753bc1b81ac68ee768ca520a61ad6a753fbb6b48e19db33997e170e187228a"
+        "metahash": "1e20111d3302b0605ec558c390ee013ae89ec6eea68ad2317a8b2de3f4169afeb2ca"
       }
     },
     "test_0015_meta_object_json_ld": {
@@ -203,7 +203,7 @@
         "iscc": "ISCC:AAAWKLHFXN5Z7LLX",
         "name": "Hello",
         "meta": "data:application/ld+json;base64,eyJAY29udGV4dCI6Im9iamVjdCJ9",
-        "metahash": "f01551220024d95ed0f9c238090dc20824448e96eb652f3d209be13e09309b4b6f35adace"
+        "metahash": "1e20ff95f0bf53f725bd8c937e9074580a7b0b90c4b5b436fb129f660badd8f614c7"
       }
     },
     "test_0016_meta_data_url": {
@@ -217,7 +217,7 @@
         "iscc": "ISCC:AAAWKLHFXN43ICP2",
         "name": "Hello",
         "meta": "data:application/json;charset=utf-8;base64,eyJzb21lIjogIm9iamVjdCJ9",
-        "metahash": "f015512208339faf51c0681d6089ff214f1bda44a4e8280954cf796c7f4326bab71efc5eb"
+        "metahash": "1e20796fdfd4ba8db1a63a1ad1377fa735cad99a10ff08bc655a7095d6508e815a0f"
       }
     }
   },

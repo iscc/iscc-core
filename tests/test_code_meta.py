@@ -19,7 +19,7 @@ def test_gen_meta_code_name_only():
     assert result == {
         "iscc": "ISCC:AAAWN77F727NXSUS",
         "name": "Hello World",
-        "metahash": "f01551220a591a6d40bf420404a011733cfb7b190d62c65bf0bcda32b57b277d9ad9f146e",
+        "metahash": "1e2041f8394111eb713a22165c46c90ab8f0fd9399c92028fd6d288944b23ff5bf76",
     }
 
 
@@ -30,7 +30,7 @@ def test_gen_meta_code_name_and_desc():
         "iscc": "ISCC:AAAWN77F72MBZZK3",
         "name": "Hello World",
         "description": "# Some\n\n description",
-        "metahash": "f0155122081fa1c76d239018df8217e5de0205932bee7c399fbc3641c61c0558ec9d745fb",
+        "metahash": "1e20bd06bd79a3df82b163e346e5a477062aed41c2a9cf1e5812cf8947e2e3555a38",
     }
 
 
@@ -41,7 +41,7 @@ def test_gen_meta_code_meta_dict():
         "iscc": "ISCC:AAAWKLHFXMFCA2OC",
         "name": "hello",
         "meta": "data:application/json;base64,eyJoZWxsbyI6Im1ldGFkYXRhIn0=",
-        "metahash": "f01551220cecde2e7b963d3d631a899a666c1fae5a5f0696c2108dfb31a8545a9f9134f9a",
+        "metahash": "1e200c6f9a94eb08835a957ffc9a7c80cf3fb54d1c6a8f13a41a6573a57ba146b0d2",
     }
     assert IsccMeta(**m).iscc == "ISCC:AAAWKLHFXMFCA2OC"
 
@@ -96,13 +96,13 @@ def test_gen_meta_code_v0_interleaved():
     mb = ic.gen_meta_code_v0("Hello", "World")
     assert ma == {
         "iscc": "ISCC:AAAWKLHFXM75OAMK",
-        "metahash": "f01551220185f8db32271fe25f561a6fc938b2e264306ec304eda518007d1764826381969",
+        "metahash": "1e20fbc2b0516ee8744d293b980779178a3508850fdcfe965985782c39601b65794f",
         "name": "Hello",
     }
     assert mb == {
         "description": "World",
         "iscc": "ISCC:AAAWKLHFXNSF7NNE",
-        "metahash": "f01551220a591a6d40bf420404a011733cfb7b190d62c65bf0bcda32b57b277d9ad9f146e",
+        "metahash": "1e2041f8394111eb713a22165c46c90ab8f0fd9399c92028fd6d288944b23ff5bf76",
         "name": "Hello",
     }
     assert IsccMeta(**ma).iscc == "ISCC:AAAWKLHFXM75OAMK"

@@ -73,12 +73,12 @@ def gen_meta_code_v0(name, description=None, meta=None, bits=ic.core_opts.meta_b
             durl = meta
             payload = DataURL.from_url(durl).data
             meta_code_digest = soft_hash_meta_v0(name, payload)  # TODO only use metadata here
-            metahash = ic.cidv1_hex(payload)
+            metahash = ic.multi_hash_blake3(payload)
             metadata_value = durl
         elif isinstance(meta, dict):
             payload = jcs.canonicalize(meta)
             meta_code_digest = soft_hash_meta_v0(name, payload)
-            metahash = ic.cidv1_hex(payload)
+            metahash = ic.multi_hash_blake3(payload)
             media_type = "application/ld+json" if "@context" in meta else "application/json"
             durl_obj = DataURL.from_data(media_type, base64_encode=True, data=payload)
             metadata_value = durl_obj.url
@@ -87,7 +87,7 @@ def gen_meta_code_v0(name, description=None, meta=None, bits=ic.core_opts.meta_b
     else:
         payload = " ".join((name, description)).strip().encode("utf-8")
         meta_code_digest = soft_hash_meta_v0(name, description)
-        metahash = ic.cidv1_hex(payload)
+        metahash = ic.multi_hash_blake3(payload)
         metadata_value = None
 
     meta_code = ic.encode_component(

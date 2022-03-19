@@ -6,6 +6,7 @@ from typing import Generator, Sequence, Tuple, Any
 import uvarint
 from bitarray import bitarray
 from bitarray.util import count_xor
+from blake3 import blake3
 import iscc_core as ic
 import jcs
 from iscc_core.constants import Stream
@@ -20,6 +21,7 @@ __all__ = [
     "iscc_similarity",
     "iscc_distance",
     "iscc_distance_bytes",
+    "multi_hash_blake3",
 ]
 
 
@@ -172,6 +174,18 @@ def cidv1_from_token_id(token_id):
     """
     digest = b"\x01\x55\x12\x20" + int.to_bytes(token_id, length=32, byteorder="big", signed=False)
     return "f" + digest.hex()
+
+
+def multi_hash_blake3(data):
+    # type: (bytes) -> str
+    """
+    Create blake3 hash with multihash prefix.
+
+    :param bytes data: Bytes to be hashed
+    :return: Multihash prefixed 256-bit blake3 hash as hex string
+    :rtype: str
+    """
+    return (b"\x1e\x20" + blake3(data).digest()).hex()
 
 
 def sliding_window(seq, width):
