@@ -38,13 +38,6 @@ jobs:
       - name: Upload coverage to Codecov
         uses: codecov/codecov-action@v2
 
-      - name: Build Linux wheels
-        uses: RalfG/python-wheels-manylinux-build@v0.4.2-manylinux2014_x86_64
-        if: ${{ runner.os == 'Linux' && matrix.python-version == '3.8'}}
-        with:
-          python-versions: 'cp37-cp37m cp38-cp38 cp39-cp39 cp310-cp310'
-          build-requirements: 'cython'
-
       - name: Build MacOS wheels
         if: ${{ runner.os == 'macOS' }}
         run: |
@@ -61,4 +54,25 @@ jobs:
         uses: actions/upload-artifact@v2
         with:
           name: dist
+          path: dist/*.whl
+  build:
+    name: Build Linux wheels
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - name: Set up Python
+        uses: actions/setup-python@v1
+        with:
+          python-version: 3.8
+
+      - name: Build wheels
+        uses: RalfG/python-wheels-manylinux-build@v0.3.2-manylinux2010_x86_64
+        with:
+          python-versions: 'cp36-cp36m cp37-cp37m cp38-cp38 cp39-cp39'
+          build-requirements: 'cython'
+
+      - uses: actions/upload-artifact@v2
+        with:
           path: dist/*.whl
