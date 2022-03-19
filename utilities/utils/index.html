@@ -894,6 +894,13 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#iscc_core.utils.multi_hash_blake3" class="md-nav__link">
+    multi_hash_blake3()
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#iscc_core.utils.sliding_window" class="md-nav__link">
     sliding_window()
   </a>
@@ -1378,6 +1385,76 @@ metadata we can convert a CIDv1 to an uint256 Token-ID and vice versa.</p>
 <a id="__codelineno-0-17" name="__codelineno-0-17" href="#__codelineno-0-17"></a><span class="sd">    &quot;&quot;&quot;</span>
 <a id="__codelineno-0-18" name="__codelineno-0-18" href="#__codelineno-0-18"></a>    <span class="n">digest</span> <span class="o">=</span> <span class="sa">b</span><span class="s2">&quot;</span><span class="se">\x01\x55\x12\x20</span><span class="s2">&quot;</span> <span class="o">+</span> <span class="nb">int</span><span class="o">.</span><span class="n">to_bytes</span><span class="p">(</span><span class="n">token_id</span><span class="p">,</span> <span class="n">length</span><span class="o">=</span><span class="mi">32</span><span class="p">,</span> <span class="n">byteorder</span><span class="o">=</span><span class="s2">&quot;big&quot;</span><span class="p">,</span> <span class="n">signed</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
 <a id="__codelineno-0-19" name="__codelineno-0-19" href="#__codelineno-0-19"></a>    <span class="k">return</span> <span class="s2">&quot;f&quot;</span> <span class="o">+</span> <span class="n">digest</span><span class="o">.</span><span class="n">hex</span><span class="p">()</span>
+</code></pre></div>
+        </details>
+    </div>
+
+  </div>
+
+
+
+
+
+  <div class="doc doc-object doc-function">
+
+
+
+<h3 id="iscc_core.utils.multi_hash_blake3" class="doc doc-heading">
+<code class="highlight language-python"><span class="n">multi_hash_blake3</span><span class="p">(</span><span class="n">data</span><span class="p">)</span></code>
+
+
+<a href="#iscc_core.utils.multi_hash_blake3" class="headerlink" title="Permanent link">#</a></h3>
+
+    <div class="doc doc-contents ">
+
+      <p>Create blake3 hash with multihash prefix.</p>
+
+<p><strong>Parameters:</strong></p>
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Description</th>
+      <th>Default</th>
+    </tr>
+  </thead>
+  <tbody>
+      <tr>
+        <td><code>data</code></td>
+        <td><code>bytes</code></td>
+        <td><p>Bytes to be hashed</p></td>
+        <td><em>required</em></td>
+      </tr>
+  </tbody>
+</table>
+<p><strong>Returns:</strong></p>
+<table>
+  <thead>
+    <tr>
+      <th>Type</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code>str</code></td>
+      <td><p>Multihash prefixed 256-bit blake3 hash as hex string</p></td>
+    </tr>
+  </tbody>
+</table>
+        <details class="quote">
+          <summary>Source code in <code>iscc_core\utils.py</code></summary>
+          <div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="k">def</span> <span class="nf">multi_hash_blake3</span><span class="p">(</span><span class="n">data</span><span class="p">):</span>
+<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>    <span class="c1"># type: (bytes) -&gt; str</span>
+<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>    <span class="sd">&quot;&quot;&quot;</span>
+<a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a><span class="sd">    Create blake3 hash with multihash prefix.</span>
+<a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a>
+<a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a><span class="sd">    :param bytes data: Bytes to be hashed</span>
+<a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a><span class="sd">    :return: Multihash prefixed 256-bit blake3 hash as hex string</span>
+<a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a><span class="sd">    :rtype: str</span>
+<a id="__codelineno-0-9" name="__codelineno-0-9" href="#__codelineno-0-9"></a><span class="sd">    &quot;&quot;&quot;</span>
+<a id="__codelineno-0-10" name="__codelineno-0-10" href="#__codelineno-0-10"></a>    <span class="k">return</span> <span class="p">(</span><span class="sa">b</span><span class="s2">&quot;</span><span class="se">\x1e\x20</span><span class="s2">&quot;</span> <span class="o">+</span> <span class="n">blake3</span><span class="p">(</span><span class="n">data</span><span class="p">)</span><span class="o">.</span><span class="n">digest</span><span class="p">())</span><span class="o">.</span><span class="n">hex</span><span class="p">()</span>
 </code></pre></div>
         </details>
     </div>

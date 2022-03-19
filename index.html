@@ -497,6 +497,13 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
+  <a href="#024-2022-03-19" class="md-nav__link">
+    0.2.4 - 2022-03-19
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#023-2022-03-06" class="md-nav__link">
     0.2.3 - 2022-03-06
   </a>
@@ -1086,7 +1093,7 @@
 <a href="https://codecov.io/gh/iscc/iscc-core"><img alt="Coverage" src="https://codecov.io/gh/iscc/iscc-core/branch/main/graph/badge.svg?token=7BJ7HJU815" /></a>
 <a href="https://www.codacy.com/gh/iscc/iscc-core/dashboard"><img alt="Quality" src="https://app.codacy.com/project/badge/Grade/ad1cc48ac0c0413ea2373a938148f019" /></a>
 <a href="https://pepy.tech/project/iscc-core"><img alt="Downloads" src="https://pepy.tech/badge/iscc-core" /></a></p>
-<p><code>iscc-core</code> is a Python library that implements the core algorithms of the <a href="https://core.iscc.codes">ISCC</a> (<em>International Standard Content Code</em>)</p>
+<p><code>iscc-core</code> is a Python library that implements the core algorithms of the <a href="https://iscc.codes">ISCC</a> (<em>International Standard Content Code</em>)</p>
 <h2 id="what-is-an-iscc">What is an ISCC<a class="headerlink" href="#what-is-an-iscc" title="Permanent link">#</a></h2>
 <p>The ISCC is a similarity preserving identifier for digital media assets.</p>
 <p>ISCCs are generated algorithmically from digital content, just like cryptographic hashes. However, instead of using a single cryptographic hash function to identify data only, the ISCC uses various algorithms to create a composite identifier that exhibits similarity-preserving properties (soft hash).</p>
@@ -1197,13 +1204,13 @@
 <a id="__codelineno-1-29" name="__codelineno-1-29" href="#__codelineno-1-29"></a><span class="p">)</span>
 <a id="__codelineno-1-30" name="__codelineno-1-30" href="#__codelineno-1-30"></a>
 <a id="__codelineno-1-31" name="__codelineno-1-31" href="#__codelineno-1-31"></a><span class="n">iscc_obj</span> <span class="o">=</span> <span class="n">ic</span><span class="o">.</span><span class="n">Code</span><span class="p">(</span><span class="n">iscc_code</span><span class="p">[</span><span class="s2">&quot;iscc&quot;</span><span class="p">])</span>
-<a id="__codelineno-1-32" name="__codelineno-1-32" href="#__codelineno-1-32"></a><span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;ISCC-CODE:     </span><span class="si">{</span><span class="n">iscc_obj</span><span class="o">.</span><span class="n">code</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<a id="__codelineno-1-32" name="__codelineno-1-32" href="#__codelineno-1-32"></a><span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;ISCC-CODE:     </span><span class="si">{</span><span class="n">ic</span><span class="o">.</span><span class="n">iscc_normalize</span><span class="p">(</span><span class="n">iscc_obj</span><span class="o">.</span><span class="n">code</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
 <a id="__codelineno-1-33" name="__codelineno-1-33" href="#__codelineno-1-33"></a><span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Structure:     </span><span class="si">{</span><span class="n">iscc_obj</span><span class="o">.</span><span class="n">explain</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
 <a id="__codelineno-1-34" name="__codelineno-1-34" href="#__codelineno-1-34"></a><span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Multiformat:   </span><span class="si">{</span><span class="n">iscc_obj</span><span class="o">.</span><span class="n">mf_base32</span><span class="si">}</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
 <a id="__codelineno-1-35" name="__codelineno-1-35" href="#__codelineno-1-35"></a>
 <a id="__codelineno-1-36" name="__codelineno-1-36" href="#__codelineno-1-36"></a><span class="n">iscc_id</span> <span class="o">=</span> <span class="n">ic</span><span class="o">.</span><span class="n">gen_iscc_id</span><span class="p">(</span><span class="n">iscc_obj</span><span class="o">.</span><span class="n">code</span><span class="p">,</span> <span class="n">chain_id</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">wallet</span><span class="o">=</span><span class="s2">&quot;1Bq568oLhi5HvdgC6rcBSGmu4G3FeAntCz&quot;</span><span class="p">)</span>
 <a id="__codelineno-1-37" name="__codelineno-1-37" href="#__codelineno-1-37"></a><span class="n">iscc_id_obj</span> <span class="o">=</span> <span class="n">ic</span><span class="o">.</span><span class="n">Code</span><span class="p">(</span><span class="n">iscc_id</span><span class="p">[</span><span class="s2">&quot;iscc&quot;</span><span class="p">])</span>
-<a id="__codelineno-1-38" name="__codelineno-1-38" href="#__codelineno-1-38"></a><span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;ISCC-ID:       </span><span class="si">{</span><span class="n">iscc_id_obj</span><span class="o">.</span><span class="n">code</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<a id="__codelineno-1-38" name="__codelineno-1-38" href="#__codelineno-1-38"></a><span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;ISCC-ID:       </span><span class="si">{</span><span class="n">ic</span><span class="o">.</span><span class="n">iscc_normalize</span><span class="p">(</span><span class="n">iscc_id_obj</span><span class="o">.</span><span class="n">code</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
 <a id="__codelineno-1-39" name="__codelineno-1-39" href="#__codelineno-1-39"></a><span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Structure:     </span><span class="si">{</span><span class="n">iscc_id_obj</span><span class="o">.</span><span class="n">explain</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
 <a id="__codelineno-1-40" name="__codelineno-1-40" href="#__codelineno-1-40"></a><span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Multiformat:   </span><span class="si">{</span><span class="n">iscc_id_obj</span><span class="o">.</span><span class="n">mf_base32</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
 </code></pre></div>
@@ -1220,11 +1227,11 @@
 <a id="__codelineno-2-10" name="__codelineno-2-10" href="#__codelineno-2-10"></a>Instance-Code: ISCC:IAA3Y7HR2FEZCU4N
 <a id="__codelineno-2-11" name="__codelineno-2-11" href="#__codelineno-2-11"></a>Structure:     INSTANCE-NONE-V0-64-bc7cf1d14991538d
 <a id="__codelineno-2-12" name="__codelineno-2-12" href="#__codelineno-2-12"></a>
-<a id="__codelineno-2-13" name="__codelineno-2-13" href="#__codelineno-2-13"></a>ISCC-CODE:     KACT4EBWK27737D2AYCJRAL5Z36G76RFRMO4554RU26HZ4ORJGIVHDI
+<a id="__codelineno-2-13" name="__codelineno-2-13" href="#__codelineno-2-13"></a>ISCC-CODE:     ISCC:KACT4EBWK27737D2AYCJRAL5Z36G76RFRMO4554RU26HZ4ORJGIVHDI
 <a id="__codelineno-2-14" name="__codelineno-2-14" href="#__codelineno-2-14"></a>Structure:     ISCC-TEXT-V0-MCDI-3e103656bffdfc7a060498817dcefc6ffa258b1dcef791a6bc7cf1d14991538d
 <a id="__codelineno-2-15" name="__codelineno-2-15" href="#__codelineno-2-15"></a>Multiformat:   bzqavabj6ca3fnp757r5ambeyqf6457dp7isywhoo66i2npd46hiutektru
 <a id="__codelineno-2-16" name="__codelineno-2-16" href="#__codelineno-2-16"></a>
-<a id="__codelineno-2-17" name="__codelineno-2-17" href="#__codelineno-2-17"></a>ISCC-ID:       MEAJU5AXCPOIOYFL
+<a id="__codelineno-2-17" name="__codelineno-2-17" href="#__codelineno-2-17"></a>ISCC-ID:       ISCC:MEAJU5AXCPOIOYFL
 <a id="__codelineno-2-18" name="__codelineno-2-18" href="#__codelineno-2-18"></a>Structure:     ID-BITCOIN-V0-64-9a741713dc8760ab
 <a id="__codelineno-2-19" name="__codelineno-2-19" href="#__codelineno-2-19"></a>Multiformat:   bzqawcae2oqlrhxehmcvq
 </code></pre></div>
@@ -1244,6 +1251,13 @@ other backward incompatible changes are to be expected until the upcoming v1.5 s
 <p>Pull requests are welcome. For significant changes, please open an issue first to discuss your plans. Please make sure to update tests as appropriate.</p>
 <p>You may also want join our developer chat on Telegram at <a href="https://t.me/iscc_dev">https://t.me/iscc_dev</a>.</p>
 <h2 id="changelog">Changelog<a class="headerlink" href="#changelog" title="Permanent link">#</a></h2>
+<h3 id="024-2022-03-19">0.2.4 - 2022-03-19<a class="headerlink" href="#024-2022-03-19" title="Permanent link">#</a></h3>
+<ul>
+<li>Updated dependencies</li>
+<li>Added Flake.from_int and Flake.from_string</li>
+<li>Made Flake comparable and hashable</li>
+<li>Use standard hex encoded multihash for datahash and metahash</li>
+</ul>
 <h3 id="023-2022-03-06">0.2.3 - 2022-03-06<a class="headerlink" href="#023-2022-03-06" title="Permanent link">#</a></h3>
 <ul>
 <li>Update to iscc-schema 0.3.3</li>
