@@ -148,6 +148,7 @@ You may also want join our developer chat on Telegram at <https://t.me/iscc_dev>
 - Updated dependencies
 - Added Flake.from_int and Flake.from_string
 - Made Flake comparable and hashable
+- Use standard hex encoded multihash for datahash
 
 ### 0.2.3 - 2022-03-06
 - Update to iscc-schema 0.3.3

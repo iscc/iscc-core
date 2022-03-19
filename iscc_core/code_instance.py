@@ -109,10 +109,10 @@ class InstanceHasherV0:
         """
         Return blake3 multihash
 
-        :return: Blake3 hash as base32 endoded 256-bit multihash
+        :return: Blake3 hash as 256-bit multihash
         :rtype: str
         """
-        return "b" + ic.encode_base32(self.mh_prefix + self.digest()).lower()
+        return (self.mh_prefix + self.digest()).hex()
 
     def code(self, bits=ic.core_opts.instance_bits):
         # type: (int) -> str
