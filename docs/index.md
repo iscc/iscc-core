@@ -83,13 +83,13 @@ iscc_code = ic.gen_iscc_code(
 )
 
 iscc_obj = ic.Code(iscc_code["iscc"])
-print(f"ISCC-CODE:     {iscc_obj.code}")
+print(f"ISCC-CODE:     {ic.iscc_normalize(iscc_obj.code)}")
 print(f"Structure:     {iscc_obj.explain}")
 print(f"Multiformat:   {iscc_obj.mf_base32}\n")
 
 iscc_id = ic.gen_iscc_id(iscc_obj.code, chain_id=1, wallet="1Bq568oLhi5HvdgC6rcBSGmu4G3FeAntCz")
 iscc_id_obj = ic.Code(iscc_id["iscc"])
-print(f"ISCC-ID:       {iscc_id_obj.code}")
+print(f"ISCC-ID:       {ic.iscc_normalize(iscc_id_obj.code)}")
 print(f"Structure:     {iscc_id_obj.explain}")
 print(f"Multiformat:   {iscc_id_obj.mf_base32}")
 ```
@@ -109,11 +109,11 @@ Structure:     DATA-NONE-V0-64-fa258b1dcef791a6
 Instance-Code: ISCC:IAA3Y7HR2FEZCU4N
 Structure:     INSTANCE-NONE-V0-64-bc7cf1d14991538d
 
-ISCC-CODE:     KACT4EBWK27737D2AYCJRAL5Z36G76RFRMO4554RU26HZ4ORJGIVHDI
+ISCC-CODE:     ISCC:KACT4EBWK27737D2AYCJRAL5Z36G76RFRMO4554RU26HZ4ORJGIVHDI
 Structure:     ISCC-TEXT-V0-MCDI-3e103656bffdfc7a060498817dcefc6ffa258b1dcef791a6bc7cf1d14991538d
 Multiformat:   bzqavabj6ca3fnp757r5ambeyqf6457dp7isywhoo66i2npd46hiutektru
 
-ISCC-ID:       MEAJU5AXCPOIOYFL
+ISCC-ID:       ISCC:MEAJU5AXCPOIOYFL
 Structure:     ID-BITCOIN-V0-64-9a741713dc8760ab
 Multiformat:   bzqawcae2oqlrhxehmcvq
 ```
@@ -146,6 +146,8 @@ You may also want join our developer chat on Telegram at <https://t.me/iscc_dev>
 
 ### 0.2.4 - Unreleased
 - Updated dependencies
+- Added Flake.from_int and Flake.from_string
+- Made Flake comparable and hashable
 
 ### 0.2.3 - 2022-03-06
 - Update to iscc-schema 0.3.3

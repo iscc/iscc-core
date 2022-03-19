@@ -29,12 +29,12 @@ iscc_code = ic.gen_iscc_code(
 )
 
 iscc_obj = ic.Code(iscc_code["iscc"])
-print(f"ISCC-CODE:     {iscc_obj.code}")
+print(f"ISCC-CODE:     {ic.iscc_normalize(iscc_obj.code)}")
 print(f"Structure:     {iscc_obj.explain}")
 print(f"Multiformat:   {iscc_obj.mf_base32}\n")
 
 iscc_id = ic.gen_iscc_id(iscc_obj.code, chain_id=1, wallet="1Bq568oLhi5HvdgC6rcBSGmu4G3FeAntCz")
 iscc_id_obj = ic.Code(iscc_id["iscc"])
-print(f"ISCC-ID:       {iscc_id_obj.code}")
+print(f"ISCC-ID:       {ic.iscc_normalize(iscc_id_obj.code)}")
 print(f"Structure:     {iscc_id_obj.explain}")
 print(f"Multiformat:   {iscc_id_obj.mf_base32}")
