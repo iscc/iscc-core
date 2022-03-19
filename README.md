@@ -6,7 +6,7 @@
 [![Quality](https://app.codacy.com/project/badge/Grade/ad1cc48ac0c0413ea2373a938148f019)](https://www.codacy.com/gh/iscc/iscc-core/dashboard)
 [![Downloads](https://pepy.tech/badge/iscc-core)](https://pepy.tech/project/iscc-core)
 
-`iscc-core` is a Python library that implements the core algorithms of the [ISCC](https://core.iscc.codes) (*International Standard Content Code*)
+`iscc-core` is a Python library that implements the core algorithms of the [ISCC](https://iscc.codes) (*International Standard Content Code*)
 
 ## What is an ISCC
 
@@ -143,12 +143,11 @@ You may also want join our developer chat on Telegram at <https://t.me/iscc_dev>
 
 ## Changelog
 
-### 0.2.4 - Unreleased
+### 0.2.4 - 2022-03-19
 - Updated dependencies
 - Added Flake.from_int and Flake.from_string
 - Made Flake comparable and hashable
 - Use standard hex encoded multihash for datahash and metahash
-- Added binary wheel distributions
 
 ### 0.2.3 - 2022-03-06
 - Update to iscc-schema 0.3.3
