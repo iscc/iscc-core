@@ -23,6 +23,7 @@ from iscc_core.codec import (
     encode_units,
     decode_header,
     encode_header,
+    decode_base32hex,
     encode_base32hex,
     encode_component,
 )
@@ -304,6 +305,18 @@ class Flake:
     def __int__(self):
         return int.from_bytes(self._flake, "big", signed=False)
 
+    def __eq__(self, other):
+        return self._flake == other._flake
+
+    def __lt__(self, other):
+        return self.int < other.int
+
+    def __gt__(self, other):
+        return self.int > other.int
+
+    def __hash__(self):
+        return self.int
+
     @property
     def iscc(self):
         """ISCC Flake-Code in canonical ISCC string representation (self-descriptive)"""
@@ -330,3 +343,21 @@ class Flake:
     def string(self):
         """Flake-Code as short time-sortable base32hex string (non self-descriptive)"""
         return str(self)
+
+    @classmethod
+    def from_int(cls, num):
+        # type: (int) -> Flake
+        """Instantiate  flake from integer."""
+        flake_obj = cls()
+        flake_obj._flake = num.to_bytes(8, "big", signed=False)
+        flake_obj._bits = 64
+        return flake_obj
+
+    @classmethod
+    def from_string(cls, code):
+        """Instantiate flake from string."""
+        raw = decode_base32hex(code)
+        flake_obj = cls()
+        flake_obj._flake = raw
+        flake_obj._bits = 64
+        return flake_obj

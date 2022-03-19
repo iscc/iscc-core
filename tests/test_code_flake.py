@@ -61,3 +61,24 @@ def test_Flake_int():
 def test_Flake_time():
     flake = ic.Flake(ts=TS)
     assert flake.time == "2022-02-14T09:15:25.189"
+
+
+def test_Flake_from_int():
+    flake = ic.Flake()
+    assert flake == ic.Flake.from_int(flake.int)
+
+
+def test_Flake_from_str():
+    flake = ic.Flake()
+    assert flake == ic.Flake.from_string(flake.string)
+
+
+def test_Flake_hashable():
+    assert {ic.Flake()}
+
+
+def test_Flake_ordered():
+    f1 = ic.Flake()
+    f2 = ic.Flake()
+    assert f1 < f2
+    assert f2 > f1
