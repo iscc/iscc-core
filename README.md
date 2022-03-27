@@ -143,6 +143,8 @@ You may also want join our developer chat on Telegram at <https://t.me/iscc_dev>
 
 ## Changelog
 
+### 0.2.5 - Unreleased
+
 ### 0.2.4 - 2022-03-19
 - Updated dependencies
 - Added Flake.from_int and Flake.from_string
