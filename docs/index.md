@@ -146,6 +146,7 @@ You may also want join our developer chat on Telegram at <https://t.me/iscc_dev>
 
 ### 0.2.5 - Unreleased
 - Added missing `jcs` dependency
+- Updated dependencies
 
 ### 0.2.4 - 2022-03-19
 - Updated dependencies
