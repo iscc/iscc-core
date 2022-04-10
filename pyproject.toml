@@ -6,8 +6,9 @@ description = "ISCC - Core Algorithms"
 authors = ["Titusz <tp@py7.de>"]
 license = "Apache-2.0"
 readme = "README.md"
-homepage = "https://core.iscc.codes"
+homepage = "https://iscc.codes"
 repository = "https://github.com/iscc/iscc-core"
+documentation = "https://core.iscc.codes/"
 keywords=["iscc", "identifier", "media", "content", "hash", "blockchain", "similarity"]
 classifiers=[
     "Development Status :: 4 - Beta",
@@ -30,6 +31,10 @@ classifiers=[
     "Topic :: Software Development :: Libraries :: Python Modules",
     "Topic :: Text Processing :: Indexing",
 ]
+
+[tool.poetry.urls]
+"Changelog" = "https://core.iscc.codes/changelog"
+"Bug Tracker" = "https://github.com/iscc/iscc-core/issues"
 
 [tool.poetry.dependencies]
 python = ">=3.7,<4.0"
