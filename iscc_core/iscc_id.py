@@ -71,7 +71,9 @@ def gen_iscc_id_v0(iscc_code, chain_id, wallet, uc=0):
 def soft_hash_iscc_id_v0(iscc_code, wallet, uc=0):
     # type: (str, str, int) -> bytes
     """
-    Calculate ISCC-ID hash digest from ISCC-CODE digest with algorithm v0.
+    Calculate ISCC-ID hash digest from ISCC-CODE with algorithm v0.
+
+    Accepts an ISCC-CODE or any sequence of ISCC-UNITs.
 
     :param str iscc_code: ISCC-CODE
     :param str wallet: The wallet address that signes the ISCC declaration
@@ -89,7 +91,6 @@ def soft_hash_iscc_id_v0(iscc_code, wallet, uc=0):
         # Special case if iscc_code is a singular Instance-Code
         digests.append(decoded[0][:1] + unpacked[0][-1][:7])
     else:
-        digests = []
         for dec, unp in zip(decoded, unpacked):
             if unp[0] == ic.MT.INSTANCE:
                 continue
