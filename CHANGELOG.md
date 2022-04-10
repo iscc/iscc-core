@@ -1,6 +1,6 @@
 # Changelog
 
-## [0.2.5] - Unreleased
+## [0.2.5] - 2022-04-10
 - Fixed missing `jcs` dependency
 - Added SubType `NONE` to MT.ISCC to distinquish from SUM
 - Added support for deterministic generation of random ISCC-CODEs
