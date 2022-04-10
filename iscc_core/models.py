@@ -1,7 +1,6 @@
 # -*- coding: utf-8 -*-
 from datetime import datetime
-from os import urandom
-from secrets import choice
+import random
 from typing import List, Union
 import base58
 import uvarint
@@ -201,32 +200,34 @@ class Code:
         """Length of code hash in number of bits (without header)."""
         return decode_length(self._head[0], self._head[3])
 
+    rgen = random.Random(0)  # nosec
+
     @classmethod
     def rnd(cls, mt=None, st=None, bits=64, data=None):
         """Returns a syntactically correct random code."""
 
         # MainType
-        mt = choice(list(MT)) if mt is None else mt
+        mt = cls.rgen.choice(list(MT)) if mt is None else mt
 
         # SubType
         if st is None:
             if mt == MT.CONTENT:
-                st = choice(list(ST_CC))
+                st = cls.rgen.choice(list(ST_CC))
             elif mt == MT.ISCC:
-                units = choice(UNITS)
-                st = choice(list(ST_ISCC))
+                units = cls.rgen.choice(UNITS)
+                st = cls.rgen.choice(list(ST_ISCC))
                 st = st if (MT.SEMANTIC in units or MT.CONTENT in units) else ST_ISCC.SUM
                 bits = len(units) * 64 + 128
             elif mt == MT.ID:
-                st = choice(list(ST_ID))
+                st = cls.rgen.choice(list(ST_ID))
             else:
-                st = choice(list(ST))
+                st = cls.rgen.choice(list(ST))
 
         # Version
         vs = VS.V0
 
         # Length
-        ln_bits = bits or choice(list(LN)).value
+        ln_bits = bits or cls.rgen.choice(list(LN)).value
         if mt == MT.ISCC:
             # TODO fix ramdom ISCC with custom SubType generation
             ln_code = encode_units(units)
@@ -234,7 +235,11 @@ class Code:
             ln_code = encode_length(mt, bits)
 
         # Body
-        data = urandom(ln_bits // 8) if data is None else data
+        data = (
+            cls.rgen.getrandbits(ln_bits).to_bytes(length=ln_bits // 8, byteorder="big")
+            if data is None
+            else data
+        )
 
         return cls((mt, st, vs, ln_code, data))
 
