@@ -71,7 +71,7 @@ def gen_iscc_code_v0(codes):
     sub_types = [t[1] for t in decoded if t[0] in {ic.MT.SEMANTIC, ic.MT.CONTENT}]
     if len(set(sub_types)) > 1:
         raise ValueError(f"Semantic-Code and Content-Code must be of same SubType")
-    st = sub_types.pop() if sub_types else ic.ST_ISCC.SUM
+    st = sub_types.pop() if sub_types else ic.ST_ISCC.SUM if len(codes) == 2 else ic.ST_ISCC.NONE
 
     # Encode unit combination
     encoded_length = ic.encode_units(main_types[:-2])

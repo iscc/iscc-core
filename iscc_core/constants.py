@@ -95,6 +95,7 @@ class ST_ISCC(enum.IntEnum):
     | 3    | VIDEO    | 0011 | Composite ISCC inlcuding Video-Code                     |
     | 4    | MIXED    | 0100 | Composite ISCC inlcuding Mixed-Code                     |
     | 5    | SUM      | 0101 | Composite ISCC inlcuding only Data- and Instance-Code   |
+    | 6    | NONE     | 0110 | Composite ISCC including Meta, Data and Instance-Code   |
     """
 
     TEXT = 0
@@ -103,6 +104,7 @@ class ST_ISCC(enum.IntEnum):
     VIDEO = 3
     MIXED = 4
     SUM = 5
+    NONE = 6
 
 
 class ST_ID(enum.IntEnum):

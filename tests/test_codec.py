@@ -290,10 +290,10 @@ def test_decompose_str_of_codes():
 
 
 def test_Code_rnd():
-    cco = ic.Code.rnd(mt=ic.MT.CONTENT, st=ic.ST_CC.TEXT)
+    cco = ic.Code.rnd(mt=ic.MT.CONTENT, st=ic.ST_CC.TEXT, bits=256)
     assert cco.maintype == ic.MT.CONTENT
     assert cco.subtype == ic.ST_CC.TEXT
-    assert ic.Code.rnd(ic.MT.ISCC).maintype == ic.MT.ISCC
+    assert ic.Code.rnd(ic.MT.ISCC, bits=128).maintype == ic.MT.ISCC
     assert ic.Code.rnd(ic.MT.ID).maintype == ic.MT.ID
     assert ic.Code.rnd(ic.MT.DATA).maintype == ic.MT.DATA
 
@@ -476,7 +476,7 @@ def test_codec_decode_length_invaid_type_raises():
 
 
 def test_codec_Code_rnd_mt_iscc():
-    assert ic.Code.rnd(ic.MT.ISCC).maintype == ic.MT.ISCC
+    assert ic.Code.rnd(ic.MT.ISCC, bits=256).maintype == ic.MT.ISCC
 
 
 def test_codec_validate_regex():
@@ -548,3 +548,47 @@ def test_Code_hash_base32hex():
     iscc = "KICQOCPJM46YUUCBMWS6FFXRGM3LJOU5MZOVPOUHIJOHPI324GKN67Q"
     code = ic.Code(iscc)
     assert code.hash_base32hex == "0S4UIPPTH9842PD5SABF2CPMMIT9QPITAUT8EGISEUHNLOCKRTV0"
+
+
+def test_Code_rnd_iscc_320():
+    co = ic.Code.rnd(ic.MT.ISCC, bits=320)
+    assert co.code == "KMD54GZXFLJ7X5D2PZNR4744UVEZ2ACK4VC2AELL4WVQYFUBZD4OHUGTFEFEZNOTFMLA"
+    assert (
+        co.explain
+        == "ISCC-VIDEO-V0-MSCDI-de1b372ad3fbf47a7e5b1e7f9ca5499d004ae545a0116be5ab0c1681c8f8e3d0d3290a4cb5d32b16"
+    )
+
+
+def test_Code_rnd_iscc_256():
+    co = ic.Code.rnd(ic.MT.ISCC, bits=256)
+    assert co.code == "KEDJCSDCJ7VMDQKPGDU4LTAQD66MZXWXGPULIIPK5NJUBF6KXLZYS6Q"
+    assert (
+        co.explain
+        == "ISCC-IMAGE-V0-MSDI-9148624feac1c14f30e9c5cc101fbcccded733e8b421eaeb534097cabaf3897a"
+    )
+
+
+def test_Code_rnd_iscc_192():
+    co = ic.Code.rnd(ic.MT.ISCC, bits=192)
+    assert co.code == "KECHFLRCISFQCY6BZWOSW7JEPKBTH55QW7JM3KAFNQ"
+    assert co.explain == "ISCC-IMAGE-V0-MDI-72ae22448b0163c1cd9d2b7d247a8333f7b0b7d2cda8056c"
+
+
+def test_Code_rnd_iscc_128():
+    co = ic.Code.rnd(ic.MT.ISCC, bits=128)
+    assert co.code == "KUAFD3YZEL7EHRE6CSMBRUIXLHW4G"
+    assert co.explain == "ISCC-SUM-V0-DI-51ef1922fe43c49e149818d11759edc3"
+
+
+def test_Code_rnd_iscc_64_raises():
+    with pytest.raises(ValueError):
+        ic.Code.rnd(ic.MT.ISCC, bits=64)
+
+
+def test_iscc_code_no_content_code():
+    mco = ic.Code.rnd(ic.MT.META, bits=64)
+    dco = ic.Code.rnd(ic.MT.DATA, bits=64)
+    ico = ic.Code.rnd(ic.MT.INSTANCE, bits=64)
+    co = ic.Code(ic.gen_iscc_code_v0((mco.code, dco.code, ico.code))["iscc"])
+    assert co.code == "KYCE2K455MN6WNYRD7ZZQSNU4E2X33AYR355BAHGNY"
+    assert co.explain == "ISCC-NONE-V0-MDI-4d2b9deb1beb37111ff39849b4e1357dec188efbd080e66e"
