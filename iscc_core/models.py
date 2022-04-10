@@ -214,10 +214,25 @@ class Code:
             if mt == MT.CONTENT:
                 st = cls.rgen.choice(list(ST_CC))
             elif mt == MT.ISCC:
-                units = cls.rgen.choice(UNITS)
-                st = cls.rgen.choice(list(ST_ISCC))
-                st = st if (MT.SEMANTIC in units or MT.CONTENT in units) else ST_ISCC.SUM
-                bits = len(units) * 64 + 128
+
+                if bits == 320:
+                    units = (MT.META, MT.SEMANTIC, MT.CONTENT)
+                elif bits == 256:
+                    units = (MT.META, cls.rgen.choice((MT.CONTENT, MT.SEMANTIC)))
+                elif bits == 192:
+                    units = (cls.rgen.choice((MT.META, MT.SEMANTIC, MT.CONTENT)),)
+                elif bits == 128:
+                    units = tuple()
+                else:
+                    raise ValueError(f"Unsupported bit length {bits} for random ISCC-CODE.")
+
+                if bits == 128:
+                    st = ST_ISCC.SUM
+                else:
+
+                    st = cls.rgen.choice((0, 1, 2, 3, 4))
+                    # st = st if (MT.SEMANTIC in units or MT.CONTENT in units) else ST_ISCC.SUM
+                # bits = len(units) * 64 + 128
             elif mt == MT.ID:
                 st = cls.rgen.choice(list(ST_ID))
             else:
