@@ -34,7 +34,11 @@ classifiers=[
 
 [tool.poetry.urls]
 "Changelog" = "https://core.iscc.codes/changelog"
+"Coverage" = "https://app.codecov.io/gh/iscc/iscc-core"
 "Bug Tracker" = "https://github.com/iscc/iscc-core/issues"
+"Twitter" = "https://twitter.com/iscc_foundation"
+"Donate" = "https://iscc.foundation/support"
+
 
 [tool.poetry.dependencies]
 python = ">=3.7,<4.0"
