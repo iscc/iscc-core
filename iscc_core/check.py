@@ -4,6 +4,8 @@ import importlib.machinery
 import inspect
 
 
+__all__ = ["turbo"]
+
 EXTENSION_SUFFIXES = tuple(sf.lstrip(".") for sf in importlib.machinery.EXTENSION_SUFFIXES)
 
 
@@ -36,3 +38,15 @@ def isnativemodule(module):
         return "is a built-in" in str(exc)
 
     return ext in EXTENSION_SUFFIXES
+
+
+def turbo():
+    # type: () -> bool
+    """Check whether all optional cython extensions have been compiled to native modules."""
+    from iscc_core import cdc, minhash, simhash
+
+    modules = (cdc, minhash, simhash)
+    for module in modules:
+        if not isnativemodule(module):
+            return False
+    return True  # pragma: no cover

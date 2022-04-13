@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
-from iscc_core import cdc, minhash, simhash
 from iscc_core import check
+import iscc_core as ic
 import array
 
 
@@ -15,10 +15,6 @@ def test_check_isnativemodule():
 
 def test_check_turbo(turbo):
     if turbo is False:
-        assert check.isnativemodule(cdc) is False
-        assert check.isnativemodule(simhash) is False
-        assert check.isnativemodule(minhash) is False
+        assert ic.turbo() is False
     else:
-        assert check.isnativemodule(cdc) is True
-        assert check.isnativemodule(simhash) is True
-        assert check.isnativemodule(minhash) is True
+        assert ic.turbo() is True
