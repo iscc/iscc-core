@@ -5,6 +5,17 @@ import pytest
 MB1 = 1024 * 1024
 
 
+def pytest_addoption(parser):
+    parser.addoption(
+        "--turbo", action="store_true", default=False, help="run extension module tests"
+    )
+
+
+@pytest.fixture
+def turbo(request):
+    return request.config.getoption("--turbo")
+
+
 @pytest.fixture(scope="module", name="static_bytes")
 def static_bytes_(n: int = MB1, block_size: int = 4) -> bytes:
     """Wraps static_bytes function as a fixture (both can be used)."""

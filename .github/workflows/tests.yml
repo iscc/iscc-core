@@ -30,7 +30,7 @@ jobs:
         run: poetry install --extras turbo
 
       - name: Run Tests (With Extension Modules)
-        run: poetry run pytest -q tests
+        run: poetry run pytest -q tests --turbo=1
 
       - name: Upload coverage to Codecov
         uses: codecov/codecov-action@v2
