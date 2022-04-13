@@ -496,6 +496,10 @@ def test_codec_validate_header_prefix():
         ic.iscc_validate(invalid)
 
 
+def test_codec_validate_iscc_id():
+    assert ic.iscc_validate("ISCC:MMAMRVPW22XVU4FR", strict=False) is True
+
+
 def test_decode_iscc():
     assert ic.iscc_decode("AAAQCAAAAABAAAAA") == (0, 0, 0, 1, b"\x01\x00\x00\x00\x02\x00\x00\x00")
 

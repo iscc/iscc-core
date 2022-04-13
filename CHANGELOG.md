@@ -1,5 +1,8 @@
 # Changelog
 
+## [0.2.6] - Unreleased
+- Added `KY` and `MM` to valid prefixes
+
 ## [0.2.5] - 2022-04-10
 - Fixed missing `jcs` dependency
 - Added SubType `NONE` to MT.ISCC to distinquish from SUM

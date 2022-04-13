@@ -21,7 +21,9 @@ def build_valid_prefixes():
         for stype in stype_for_mtype[mtype]:
             digest = ic.encode_header(mtype, stype, 0, 0)
             base = ic.encode_base32(digest)
-            prefixes.add(base[:2])
+            prefix = base[:2]
+            prefixes.add(prefix)
+            print(f"{prefix} -> {ic.MT(mtype).name}-{stype.name}")
 
     return sorted(list(prefixes))
 

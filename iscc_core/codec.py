@@ -536,9 +536,11 @@ def iscc_validate(iscc, strict=True):
         "KM",
         "KQ",
         "KU",
+        "KY",
         "MA",
         "ME",
         "MI",
+        "MM",
         "OA",
     }
     cleaned = iscc_clean(iscc)
