@@ -1,5 +1,8 @@
 # Changelog
 
+## [0.2.7] - Unreleased
+
+
 ## [0.2.6] - 2022-04-13
 - Added `KY` and `MM` to valid prefixes
 - Added support to check for compiled extension modules
