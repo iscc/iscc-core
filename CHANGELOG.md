@@ -1,6 +1,6 @@
 # Changelog
 
-## [0.2.7] - Unreleased
+## [0.2.7] - 2022-04-16
 - Fixed bug in iscc_id_incr_v0
 - Added support to accept ISCC-ID URI as input for iscc_id_incr_v0
 - Added guard against custom subtype in random ISCC-CODE generation.
