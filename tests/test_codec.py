@@ -596,3 +596,8 @@ def test_iscc_code_no_content_code():
     co = ic.Code(ic.gen_iscc_code_v0((mco.code, dco.code, ico.code))["iscc"])
     assert co.code == "KYCE2K455MN6WNYRD7ZZQSNU4E2X33AYR355BAHGNY"
     assert co.explain == "ISCC-NONE-V0-MDI-4d2b9deb1beb37111ff39849b4e1357dec188efbd080e66e"
+
+
+def test_models_Code_rnd_custom_subtype_raises():
+    with pytest.raises(ValueError):
+        ic.Code.rnd(ic.MT.ISCC, st=ic.ST_ISCC.TEXT)

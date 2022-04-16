@@ -214,7 +214,6 @@ class Code:
             if mt == MT.CONTENT:
                 st = cls.rgen.choice(list(ST_CC))
             elif mt == MT.ISCC:
-
                 if bits == 320:
                     units = (MT.META, MT.SEMANTIC, MT.CONTENT)
                 elif bits == 256:
@@ -229,7 +228,6 @@ class Code:
                 if bits == 128:
                     st = ST_ISCC.SUM
                 else:
-
                     st = cls.rgen.choice((0, 1, 2, 3, 4))
                     # st = st if (MT.SEMANTIC in units or MT.CONTENT in units) else ST_ISCC.SUM
                 # bits = len(units) * 64 + 128
@@ -237,6 +235,9 @@ class Code:
                 st = cls.rgen.choice(list(ST_ID))
             else:
                 st = cls.rgen.choice(list(ST))
+        else:
+            if mt == MT.ISCC:
+                raise ValueError(f"Custom subtype selection not supported for MT.ISCC")
 
         # Version
         vs = VS.V0
