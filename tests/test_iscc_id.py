@@ -1,5 +1,7 @@
 # -*- coding: utf-8 -*-
 import io
+import random
+
 import pytest
 import iscc_core as ic
 
@@ -59,18 +61,21 @@ def test_gen_iscc_id_v0_data_instance():
 
 
 def test_incr_iscc_id():
-    assert ic.iscc_id.iscc_id_incr("MAADB7WD7TC5XELQ") == "MAADB7WD7TC5XELQAE"
+    assert ic.iscc_id.iscc_id_incr("ISCC:MAADB7WD7TC5XELQ") == "MAATB7WD7TC5XELQAE"
 
 
-def test_incr_iscc_id_explain():
+def test_incr_iscc_id_no_prefix_explain():
     incr = ic.iscc_id.iscc_id_incr("MAADB7WD7TC5XELQ")
-    assert ic.Code(incr).explain == "ID-PRIVATE-V0-64-30fec3fcc5db9170-1"
+    assert ic.Code(incr).explain == "ID-PRIVATE-V0-72-30fec3fcc5db9170-1"
 
 
 def test_incr_iscc_id_v0():
-    assert ic.iscc_id.iscc_id_incr_v0("MAADB7WD7TC5XELQ") == "MAADB7WD7TC5XELQAE"
-    assert ic.Code("MAADB7WD7TC5XELQAE").explain == "ID-PRIVATE-V0-64-30fec3fcc5db9170-1"
-    assert ic.iscc_id.iscc_id_incr_v0("MAADB7WD7TC5XELQAE") == "MAADB7WD7TC5XELQAI"
+    assert ic.Code("ISCC:MAADB7WD7TC5XELQ").explain == "ID-PRIVATE-V0-64-30fec3fcc5db9170"
+    assert ic.iscc_id.iscc_id_incr_v0("ISCC:MAADB7WD7TC5XELQ") == "MAATB7WD7TC5XELQAE"
+    assert ic.Code("ISCC:MAATB7WD7TC5XELQAE").explain == "ID-PRIVATE-V0-72-30fec3fcc5db9170-1"
+
+    assert ic.iscc_id.iscc_id_incr_v0("ISCC:MAATB7WD7TC5XELQAE") == "MAATB7WD7TC5XELQAI"
+    assert ic.Code("MAATB7WD7TC5XELQAI").explain == "ID-PRIVATE-V0-72-30fec3fcc5db9170-2"
 
 
 def test_incr_iscc_id_v0_raises_wrong_mt():
@@ -97,3 +102,37 @@ def test_gen_iscc_id_v0_raises_chain_id():
 def test_alg_simhash_from_iscc_id():
     shash = ic.alg_simhash_from_iscc_id("MAAJU3Y6GCTXLVKA", wallet=wallet)
     assert shash == "20250db96e0d4a17"
+
+
+def test_iscc_id_incr_v0_vs_uc():
+    # reset randomness
+    ic.Code.rgen = random.Random(0)
+
+    iscc_code = ic.Code.rnd(ic.MT.ISCC, bits=256)
+    assert (
+        iscc_code.explain
+        == "ISCC-VIDEO-V0-MSDI-c8a70639eb1167b367a9c3787c65c1e582e2e662f728b4fa42485e3a0a5d2f34"
+    )
+    iscc_id_a = ic.gen_iscc_id_v0(iscc_code.code, ic.ST_ID.POLYGON, "testwallet", uc=0).get("iscc")
+    assert iscc_id_a == "ISCC:MMAMJ2RTNK6TRZGB"
+    assert ic.Code(iscc_id_a).explain == "ID-POLYGON-V0-64-c4ea336abd38e4c1"
+
+    # incremennt via uc
+    iscc_id_b = ic.gen_iscc_id_v0(iscc_code.code, ic.ST_ID.POLYGON, "testwallet", uc=1).get("iscc")
+    assert iscc_id_b == "ISCC:MMA4J2RTNK6TRZGBAE"
+    assert ic.Code(iscc_id_b).explain == "ID-POLYGON-V0-72-c4ea336abd38e4c1-1"
+
+    # plain increment
+    iscc_id_c = ic.iscc_id_incr_v0(iscc_id_a)
+    assert iscc_id_c == "MMA4J2RTNK6TRZGBAE"
+    assert ic.Code(iscc_id_c).explain == "ID-POLYGON-V0-72-c4ea336abd38e4c1-1"
+
+    # both increments are identical
+    assert iscc_id_b == "ISCC:" + iscc_id_c
+
+
+def test_iscc_id_incr_v0_raises_bad_chain_id():
+    iscc_id = ic.encode_component(ic.MT.ID, 4, 0, 64, b"\x00" * 8)
+    assert iscc_id == "MQAAAAAAAAAAAAAA"
+    with pytest.raises(AssertionError):
+        ic.iscc_id_incr_v0(iscc_id)

@@ -126,21 +126,35 @@ def iscc_id_incr_v0(iscc_id):
     Increment uniqueness counter of an ISCC-ID with algorithm v0.
 
     :param str iscc_id: Base32-encoded ISCC-ID.
-    :return: Base32-encoded ISCC-ID with counter incremented by one.
+    :return: Base32-encoded ISCC-ID with counter incremented by one (without "ISCC:" prefix).
     :rtype: str
     """
-    code_digest = ic.decode_base32(iscc_id)
-    mt, _, vs, _, _ = ic.decode_header(code_digest)
+    clean = ic.iscc_clean(iscc_id)
+    code_digest = ic.decode_base32(clean)
+    mt, st, vs, ln, data = ic.decode_header(code_digest)
     if mt != ic.MT.ID:
-        raise AssertionError("MainType {} is not ISCC-ID".format(mt))
+        raise AssertionError(f"MainType {mt} is not ISCC-ID")
+    if st not in list(ic.ST_ID):
+        raise AssertionError(f"Unsupported chain-id {st}")
     if vs != ic.VS.V0:
-        raise AssertionError("Version {} is not v0".format(vs))
-    if len(code_digest) == 10:
-        code_digest += uvarint.encode(1)
+        raise AssertionError(f"Version {vs} is not v0")
+    if len(data) == 8:
+        data += uvarint.encode(1)
     else:
-        decoded = uvarint.decode(code_digest[10:])
-        code_digest = code_digest[:10] + uvarint.encode(decoded.integer + 1)
-    return ic.encode_base32(code_digest)
+        counter = uvarint.decode(data[8:])
+        suffix = uvarint.encode(counter.integer + 1)
+        data = data[:8] + suffix
+
+    iscc_id_len = len(data) * 8
+    iscc_id = ic.encode_component(
+        mtype=mt,
+        stype=st,
+        version=vs,
+        bit_length=iscc_id_len,
+        digest=data,
+    )
+
+    return iscc_id
 
 
 def alg_simhash_from_iscc_id(iscc_id, wallet):
