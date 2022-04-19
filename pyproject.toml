@@ -81,9 +81,10 @@ target-version = ['py37']
 gentests = { cmd = "poetry run python -m tests.build_test_data", help = "Generate conformance test data" }
 format = { cmd = "poetry run black .", help = "Code style formating with black" }
 docs = { script = "tests.build_docs:main", help = "Copy README.md to /docs" }
+lf = { cmd = "poetry run python -m tools.lf", help = "Convert line endings to lf" }
 test = { cmd = "poetry run pytest --cov=iscc_core --cov-fail-under=100", help = "Run tests with coverage" }
 sec = { cmd = "poetry run bandit -r iscc_core -q", help = "Security check with bandit" }
-all = ["gentests", "format", "docs", "test", "sec"]
+all = ["gentests", "format", "docs", "lf", "test", "sec"]
 
 [build-system]
 requires = ["poetry-core>=1.0.0", "setuptools", "wheel", "cython"]
