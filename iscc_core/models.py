@@ -182,7 +182,7 @@ class Code:
     @property
     def subtype(self) -> Union[ST, ST_CC, ST_ISCC, ST_ID]:
         """Enum subtype of code."""
-        if self.maintype == MT.CONTENT:
+        if self.maintype in (MT.CONTENT, MT.SEMANTIC):
             return ST_CC(self._head[1])
         elif self.maintype == MT.ISCC:
             return ST_ISCC(self._head[1])
