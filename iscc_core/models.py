@@ -87,7 +87,7 @@ class Code:
     @property
     def uri(self) -> str:
         """Standard uri representation of an ISCC code."""
-        return f"iscc:{self.code.lower()}"
+        return f"ISCC:{self.code.upper()}"
 
     @property
     def bytes(self) -> bytes:

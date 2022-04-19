@@ -2,6 +2,7 @@
 
 ## [0.2.8] - Unreleased
 - Fixed bug with subtype for semantic code
+- Changed URI representation to upper case
 - Added line conversion tool
 - Updated dependencies
 

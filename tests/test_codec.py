@@ -183,7 +183,7 @@ def test_code_hashable():
 def test_Code_uri():
     mco = ic.Code(ic.gen_meta_code("This is an URI representation of a Meta-Code")["iscc"])
     assert mco.code == "AAAX334V4AMT2PP4"
-    assert mco.uri == "iscc:aaax334v4amt2pp4"
+    assert mco.uri == "ISCC:AAAX334V4AMT2PP4"
 
 
 def test_Code_mf_base16():
