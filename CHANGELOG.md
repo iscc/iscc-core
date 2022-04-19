@@ -3,6 +3,7 @@
 ## [0.2.8] - Unreleased
 - Fixed bug with subtype for semantic code
 - Added line conversion tool
+- Updated dependencies
 
 ## [0.2.7] - 2022-04-16
 - Fixed bug in iscc_id_incr_v0
