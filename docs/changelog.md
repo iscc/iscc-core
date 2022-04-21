@@ -1,10 +1,11 @@
 # Changelog
 
-## [0.2.8] - Unreleased
+## [0.2.8] - 2022-04-21
 - Fixed bug with subtype for semantic code
 - Changed URI representation to upper case
 - Changed to disallow ISCC-ID creation from ISCC-IDs
 - Added line conversion tool
+- Removed source wheel distribution
 - Updated dependencies
 
 ## [0.2.7] - 2022-04-16
