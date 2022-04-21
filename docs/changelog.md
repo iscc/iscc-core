@@ -3,6 +3,7 @@
 ## [0.2.8] - Unreleased
 - Fixed bug with subtype for semantic code
 - Changed URI representation to upper case
+- Changed to disallow ISCC-ID creation from ISCC-IDs
 - Added line conversion tool
 - Updated dependencies
 

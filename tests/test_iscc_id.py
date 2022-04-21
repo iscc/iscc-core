@@ -136,3 +136,27 @@ def test_iscc_id_incr_v0_raises_bad_chain_id():
     assert iscc_id == "MQAAAAAAAAAAAAAA"
     with pytest.raises(AssertionError):
         ic.iscc_id_incr_v0(iscc_id)
+
+
+def test_iscc_id_unit_types():
+    # Meta-Code 256-bits only
+    mc = ic.Code.rnd(mt=ic.MT.META, bits=256)
+    assert ic.gen_iscc_id(mc.code, 0, "a") == {"iscc": "ISCC:MAAMUFVSHK6CYVQW"}
+    assert ic.gen_iscc_id(mc.uri, 0, "a") == {"iscc": "ISCC:MAAMUFVSHK6CYVQW"}
+
+    # Meta-Code 64-bit prefix
+    mc2 = ic.encode_component(ic.MT.META, ic.ST.NONE, 0, bit_length=64, digest=mc.hash_bytes[:8])
+    assert ic.gen_iscc_id(mc2, 0, "a") == {"iscc": "ISCC:MAAMUFVSHK6CYVQW"}
+
+    cc = ic.Code.rnd(mt=ic.MT.CONTENT, bits=64)
+    assert ic.gen_iscc_id(cc.code, 0, "a") == {"iscc": "ISCC:MAAOXNCHOPSVHG2M"}
+
+    fc = ic.Code.rnd(mt=ic.MT.FLAKE, bits=64)
+    assert ic.gen_iscc_id(fc.code, 0, "a") == {"iscc": "ISCC:MAALUWZEW5VYL4FE"}
+
+
+def test_iscc_id_from_iscc_id_raises():
+    iid = ic.Code.rnd(mt=ic.MT.ID, bits=64)
+    assert iid.code == "MIAORZJBNL6L2BGD"
+    with pytest.raises(ValueError):
+        ic.gen_iscc_id(iid.code, 0, "a")

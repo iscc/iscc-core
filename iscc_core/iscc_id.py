@@ -92,8 +92,11 @@ def soft_hash_iscc_id_v0(iscc_code, wallet, uc=0):
         digests.append(decoded[0][:1] + unpacked[0][-1][:7])
     else:
         for dec, unp in zip(decoded, unpacked):
-            if unp[0] == ic.MT.INSTANCE:
+            mt = unp[0]
+            if mt == ic.MT.INSTANCE:
                 continue
+            if mt == ic.MT.ID:
+                raise ValueError("Cannot create ISCC-ID from ISCC-ID")
             # first byte of header + first 7 bytes of body
             digests.append(dec[:1] + unp[-1][:7])
 
