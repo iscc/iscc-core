@@ -1,5 +1,8 @@
 # Changelog
 
+## [0.2.9] - Unreleased
+- Updated dependencies
+
 ## [0.2.8] - 2022-04-21
 - Fixed bug with subtype for semantic code
 - Changed URI representation to upper case
