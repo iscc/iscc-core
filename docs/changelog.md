@@ -4,6 +4,7 @@
 - Added iscc_compare function
 - Optimized soft_hash_audio performance
 - Removed Cython from build requirements
+- Fixed api listing tool
 - Updated dependencies
 
 ## [0.2.8] - 2022-04-21
