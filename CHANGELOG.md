@@ -1,5 +1,8 @@
 # Changelog
 
+## [0.2.11] - 2022-07-03
+- Add support for gracefull build failures
+
 ## [0.2.10] - 2022-07-03
 - Fix pip instalation is missing setuptools
 - Update mkdocs
