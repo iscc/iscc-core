@@ -46,7 +46,7 @@ def gen_audio_code_v0(cv, bits=ic.core_opts.audio_bits):
     :return: ISCC object with Content-Code Audio
     :rtype: dict
     """
-    digest = soft_hash_audio_v0(cv)
+    digest = soft_hash_audio_v0(cv, bits=bits)
     audio_code = ic.encode_component(
         mtype=ic.MT.CONTENT,
         stype=ic.ST_CC.AUDIO,
@@ -58,13 +58,14 @@ def gen_audio_code_v0(cv, bits=ic.core_opts.audio_bits):
     return {"iscc": iscc}
 
 
-def soft_hash_audio_v0(cv):
-    # type: (Iterable[int]) -> bytes
+def soft_hash_audio_v0(cv, bits=ic.core_opts.audio_bits):
+    # type: (Iterable[int], int) -> bytes
     """
-    Create 256-bit audio similarity hash from a chromaprint vector.
+    Create audio similarity hash from a chromaprint vector.
 
     :param Iterable[int] cv: Chromaprint vector
-    :return: 256-bit Audio-Hash digest
+    :param int bits: Bit-length resulting similarity hash (multiple of 32)
+    :return: Audio-Hash digest
     :rtype: bytes
     """
 
@@ -78,6 +79,8 @@ def soft_hash_audio_v0(cv):
     # Calculate simhash of digests as first 32-bit chunk of the hash
     parts = [ic.alg_simhash(digests)]
 
+    bit_length = 32
+
     # Calculate separate 32-bit simhashes for each quarter of features (original order)
     for bucket in divide(4, digests):
         features = list(bucket)
@@ -85,6 +88,9 @@ def soft_hash_audio_v0(cv):
             parts.append(ic.alg_simhash(features))
         else:
             parts.append(b"\x00\x00\x00\x00")
+        bit_length += 32
+        if bit_length == bits:
+            return b"".join(parts)
 
     # Calculate separate simhashes for each third of features (ordered by int value)
     cvs = sorted(cv)
@@ -95,4 +101,8 @@ def soft_hash_audio_v0(cv):
             parts.append(ic.alg_simhash(features))
         else:
             parts.append(b"\x00\x00\x00\x00")
+        bit_length += 32
+        if bit_length == bits:
+            return b"".join(parts)
+
     return b"".join(parts)

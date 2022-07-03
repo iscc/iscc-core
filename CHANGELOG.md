@@ -1,8 +1,9 @@
 # Changelog
 
 ## [0.2.9] - Unreleased
-- Updated dependencies
+- Optimized soft_hash_audio performance
 - Removed Cython from build requirements
+- Updated dependencies
 
 ## [0.2.8] - 2022-04-21
 - Fixed bug with subtype for semantic code

@@ -237,7 +237,7 @@ python-versions = "*"
 
 [[package]]
 name = "iscc-schema"
-version = "0.3.8"
+version = "0.3.9"
 description = "ISCC - JSON-LD Metadata and OpenAPI Service Descriptions"
 category = "dev"
 optional = false
@@ -490,7 +490,7 @@ testing = ["pytest", "pytest-benchmark"]
 
 [[package]]
 name = "poethepoet"
-version = "0.14.0"
+version = "0.15.0"
 description = "A task runner that works well with poetry."
 category = "dev"
 optional = false
@@ -716,7 +716,7 @@ python-versions = ">=3.6"
 
 [[package]]
 name = "typing-extensions"
-version = "4.2.0"
+version = "4.3.0"
 description = "Backported and Experimental Type Hints for Python 3.7+"
 category = "main"
 optional = false
@@ -792,7 +792,7 @@ turbo = ["cython"]
 [metadata]
 lock-version = "1.1"
 python-versions = ">=3.7,<4.0"
-content-hash = "7ca37ba80ececb7a184b46c5a1cc5c2273b77e37fd3b1445bbacd58a1247141c"
+content-hash = "e867bf40b1c101c969c5dfc255dcd74ddf57124a42d1e65017fc68892a634d1e"
 
 [metadata.files]
 astunparse = [
@@ -1037,8 +1037,8 @@ iniconfig = [
     {file = "iniconfig-1.1.1.tar.gz", hash = "sha256:bc3af051d7d14b2ee5ef9969666def0cd1a000e121eaea580d4a313df4b37f32"},
 ]
 iscc-schema = [
-    {file = "iscc-schema-0.3.8.tar.gz", hash = "sha256:8596bf5621abf3469164bee21a030581fe539b03a4ded7b00a4a2a6781dec916"},
-    {file = "iscc_schema-0.3.8-py3-none-any.whl", hash = "sha256:efaa685220e01bd00c27c8ef69136c0d409c8861f9cc859f666ef266c4cf528d"},
+    {file = "iscc-schema-0.3.9.tar.gz", hash = "sha256:c4b2f45bdf8f81d2e3d408201e24f42212fd3f8059d5c73f0f24296337b5c04e"},
+    {file = "iscc_schema-0.3.9-py3-none-any.whl", hash = "sha256:1f76d2544296e81bc01ecf61e6ec7c36cefb5a8789a4c93c9b4409df3c7f2c5d"},
 ]
 jcs = [
     {file = "jcs-0.2.1-py3-none-any.whl", hash = "sha256:e23a3e1de60f832d33cd811bb9c3b3be79219cdf95f63b88f0972732c3fa8476"},
@@ -1159,8 +1159,8 @@ pluggy = [
     {file = "pluggy-1.0.0.tar.gz", hash = "sha256:4224373bacce55f955a878bf9cfa763c1e360858e330072059e10bad68531159"},
 ]
 poethepoet = [
-    {file = "poethepoet-0.14.0-py3-none-any.whl", hash = "sha256:e274988b469306c11b634b1c6b1cf1ffc880353afbcff874540090c3c9c50c2c"},
-    {file = "poethepoet-0.14.0.tar.gz", hash = "sha256:1557f324e3ad791d86f515d4138dbfd97ac71c6ff3ec2d308f4d792e3002d1f0"},
+    {file = "poethepoet-0.15.0-py3-none-any.whl", hash = "sha256:8ca49d8a9928a3ce1753315d6df0866888557eccb0fe37a8c88fea47454cfe12"},
+    {file = "poethepoet-0.15.0.tar.gz", hash = "sha256:5843260c9074b6c42bf2e51f21107efe37e230cf75da3dd3f4b43904f365b26c"},
 ]
 py = [
     {file = "py-1.11.0-py2.py3-none-any.whl", hash = "sha256:607c53218732647dff4acdfcd50cb62615cedf612e72d1724fb1a0cc6405b378"},
@@ -1407,8 +1407,8 @@ typed-ast = [
     {file = "typed_ast-1.5.4.tar.gz", hash = "sha256:39e21ceb7388e4bb37f4c679d72707ed46c2fbf2a5609b8b8ebc4b067d977df2"},
 ]
 typing-extensions = [
-    {file = "typing_extensions-4.2.0-py3-none-any.whl", hash = "sha256:6657594ee297170d19f67d55c05852a874e7eb634f4f753dbd667855e07c1708"},
-    {file = "typing_extensions-4.2.0.tar.gz", hash = "sha256:f1c24655a0da0d1b67f07e17a5e6b2a105894e6824b92096378bb3668ef02376"},
+    {file = "typing_extensions-4.3.0-py3-none-any.whl", hash = "sha256:25642c956049920a5aa49edcdd6ab1e06d7e5d467fc00e0506c44ac86fbfca02"},
+    {file = "typing_extensions-4.3.0.tar.gz", hash = "sha256:e6d2677a32f47fc7eb2795db1dd15c1f34eff616bcaf2cfb5e997f854fa1c4a6"},
 ]
 typing-validation = [
     {file = "typing-validation-0.0.1.post7.tar.gz", hash = "sha256:0781b81aa298b0759da122bb9123eb3746b51ae918ee88d12f7f9d99ed48632a"},

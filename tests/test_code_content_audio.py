@@ -15,7 +15,7 @@ def test_soft_hash_audio_v0_001_empty():
 def test_soft_hash_audio_v0_002_single():
     cv = [1]
     assert (
-        iscc_core.code_content_audio.soft_hash_audio_v0(cv).hex()
+        iscc_core.code_content_audio.soft_hash_audio_v0(cv, bits=256).hex()
         == "0000000100000001000000000000000000000000000000010000000000000000"
     )
 
@@ -23,7 +23,7 @@ def test_soft_hash_audio_v0_002_single():
 def test_soft_hash_audio_v0_003_short():
     cv = [1, 2]
     assert (
-        iscc_core.code_content_audio.soft_hash_audio_v0(cv).hex()
+        iscc_core.code_content_audio.soft_hash_audio_v0(cv, bits=256).hex()
         == "0000000300000001000000020000000000000000000000010000000200000000"
     )
 
@@ -31,14 +31,14 @@ def test_soft_hash_audio_v0_003_short():
 def test_soft_hash_audio_v0_004_signed():
     cv = [-1, 0, 1]
     assert (
-        iscc_core.code_content_audio.soft_hash_audio_v0(cv).hex()
+        iscc_core.code_content_audio.soft_hash_audio_v0(cv, bits=256).hex()
         == "00000001ffffffff000000000000000100000000ffffffff0000000000000001"
     )
 
 
 def test_soft_hash_audio_v0_005_sample():
     assert (
-        iscc_core.code_content_audio.soft_hash_audio_v0(CHROMA_VECTOR).hex()
+        iscc_core.code_content_audio.soft_hash_audio_v0(CHROMA_VECTOR, bits=256).hex()
         == "6a24a22672e4e2a33a4e88876a84a0266a24a2263a4ea0836264a22468842a2f"
     )
 
