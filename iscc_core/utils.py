@@ -19,6 +19,7 @@ __all__ = [
     "cidv1_from_token_id",
     "sliding_window",
     "iscc_similarity",
+    "iscc_compare",
     "iscc_distance",
     "iscc_distance_bytes",
     "multi_hash_blake3",
@@ -208,6 +209,31 @@ def sliding_window(seq, width):
         raise AssertionError("Sliding window width must be 2 or bigger.")
     idx = range(max(len(seq) - width + 1, 1))
     return (seq[i : i + width] for i in idx)
+
+
+def iscc_compare(a, b):
+    # type: (str, str) -> dict
+    """
+    Calculate separate hamming distances of compatible components of two ISCCs
+
+    :return: A dict with keys meta_dist, semantic_dist, content_dist, data_dist, instance_match
+    :rtype: dict
+    """
+    ac = [ic.Code(unit) for unit in ic.iscc_decompose(a)]
+    bc = [ic.Code(unit) for unit in ic.iscc_decompose(b)]
+    result = {}
+    for ca in ac:
+        for cb in bc:
+            cat = (ca.maintype, ca.subtype, ca.version)
+            cbt = (cb.maintype, cb.subtype, ca.version)
+            if cat == cbt:
+                if ca.maintype != ic.MT.INSTANCE:
+                    result[ca.maintype.name.lower() + "_dist"] = iscc_distance_bytes(
+                        ca.hash_bytes, cb.hash_bytes
+                    )
+                else:
+                    result["instance_match"] = ca.hash_bytes == cb.hash_bytes
+    return result
 
 
 def iscc_similarity(a, b):

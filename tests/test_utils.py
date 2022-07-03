@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 import io
 import os
+import random
 
 import pytest
 import iscc_core as ic
@@ -195,3 +196,23 @@ def test_multi_hash_blake3():
     assert ic.multi_hash_blake3(b"hello world") == (
         "1e20d74981efa70a0c880b8d8c1985d075dbcbf679b99a5f9914e5aaf96b831a9e24"
     )
+
+
+def test_iscc_compare():
+    # reset randomness
+    ic.Code.rgen = random.Random(0)
+    a = ic.Code.rnd(mt=ic.MT.ISCC, bits=256)
+    assert ic.iscc_compare(a.code, a.code) == {
+        "meta_dist": 0,
+        "semantic_dist": 0,
+        "data_dist": 0,
+        "instance_match": True,
+    }
+
+    b = ic.Code.rnd(mt=ic.MT.ISCC, bits=256)
+    assert ic.iscc_compare(a.code, b.code) == {
+        "meta_dist": 22,
+        "semantic_dist": 34,
+        "data_dist": 30,
+        "instance_match": False,
+    }

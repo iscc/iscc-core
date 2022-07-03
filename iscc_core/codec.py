@@ -369,7 +369,7 @@ def iscc_decompose(iscc_code):
 def iscc_normalize(iscc_code):
     # type: (str) -> str
     """
-    Normalize an ISCC to its canonical URI form.
+    Normalize an ISCC to its canonical form.
 
     The canonical form of an ISCC is its shortest base32 encoded representation
     prefixed with the string `ISCC:`.
@@ -402,11 +402,11 @@ def iscc_normalize(iscc_code):
     from iscc_core.iscc_code import gen_iscc_code_v0
 
     decoders = {
-        MULTIBASE.base16: bytes.fromhex,  # f
-        MULTIBASE.base32: decode_base32,  # b
-        MULTIBASE.base32hex: decode_base32hex,  # v
-        MULTIBASE.base58btc: base58.b58decode,  # z
-        MULTIBASE.base64url: decode_base64,  # u
+        MULTIBASE.base16.value: bytes.fromhex,  # f
+        MULTIBASE.base32.value: decode_base32,  # b
+        MULTIBASE.base32hex.value: decode_base32hex,  # v
+        MULTIBASE.base58btc.value: base58.b58decode,  # z
+        MULTIBASE.base64url.value: decode_base64,  # u
     }
 
     # Transcode to base32 if <multibase><multicodec> encoded
