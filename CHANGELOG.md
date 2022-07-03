@@ -1,6 +1,6 @@
 # Changelog
 
-## [0.2.9] - Unreleased
+## [0.2.9] - 2022-07-03
 - Added iscc_compare function
 - Optimized soft_hash_audio performance
 - Removed Cython from build requirements
