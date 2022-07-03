@@ -1,6 +1,5 @@
 """Inspect full iscc_core api"""
 import inspect
-from pathlib import Path
 from pprint import pprint
 import iscc_core
 import imp
@@ -40,7 +39,8 @@ def iscc_core_api() -> str:
     module_file_paths = package_contents("iscc_core")
     functions = []
     for mf in module_file_paths:
-        module_name = Path(mf).stem
+        if not mf.endswith(".py"):
+            continue
         tree = parse_ast(mf)
         for func in top_level_functions(tree.body):
             functions.append(f"{func.name}")
