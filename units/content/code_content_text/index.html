@@ -1010,47 +1010,11 @@ from your documents.</p>
 <p>Any markup (like HTML tags or markdown) should be removed from the plain-text
 before passing it to this function.</p>
 </div>
+<p>:param str text: Text for Text-Code creation
+:param int bits: Bit-length of ISCC Code Hash (default 64)
+:return: ISCC schema instance with Text-Code and an aditional property <code>characters</code>
+:rtype: dict</p>
 
-<p><strong>Parameters:</strong></p>
-<table>
-  <thead>
-    <tr>
-      <th>Name</th>
-      <th>Type</th>
-      <th>Description</th>
-      <th>Default</th>
-    </tr>
-  </thead>
-  <tbody>
-      <tr>
-        <td><code>text</code></td>
-        <td><code>str</code></td>
-        <td><p>Text for Text-Code creation</p></td>
-        <td><em>required</em></td>
-      </tr>
-      <tr>
-        <td><code>bits</code></td>
-        <td><code>int</code></td>
-        <td><p>Bit-length of ISCC Code Hash (default 64)</p></td>
-        <td><code>64</code></td>
-      </tr>
-  </tbody>
-</table>
-<p><strong>Returns:</strong></p>
-<table>
-  <thead>
-    <tr>
-      <th>Type</th>
-      <th>Description</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td><code>dict</code></td>
-      <td><p>ISCC schema instance with Text-Code and an aditional property <code>characters</code></p></td>
-    </tr>
-  </tbody>
-</table>
         <details class="quote">
           <summary>Source code in <code>iscc_core\code_content_text.py</code></summary>
           <div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="k">def</span> <span class="nf">gen_text_code_v0</span><span class="p">(</span><span class="n">text</span><span class="p">,</span> <span class="n">bits</span><span class="o">=</span><span class="n">ic</span><span class="o">.</span><span class="n">core_opts</span><span class="o">.</span><span class="n">text_bits</span><span class="p">):</span>
@@ -1123,41 +1087,10 @@ before passing it to this function.</p>
 <li>lowercased</li>
 </ul>
 </div>
+<p>:param str text: Plain text to be hashed.
+:return: 256-bit similarity preserving byte hash.
+:rtype: bytes</p>
 
-<p><strong>Parameters:</strong></p>
-<table>
-  <thead>
-    <tr>
-      <th>Name</th>
-      <th>Type</th>
-      <th>Description</th>
-      <th>Default</th>
-    </tr>
-  </thead>
-  <tbody>
-      <tr>
-        <td><code>text</code></td>
-        <td><code>str</code></td>
-        <td><p>Plain text to be hashed.</p></td>
-        <td><em>required</em></td>
-      </tr>
-  </tbody>
-</table>
-<p><strong>Returns:</strong></p>
-<table>
-  <thead>
-    <tr>
-      <th>Type</th>
-      <th>Description</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td><code>bytes</code></td>
-      <td><p>256-bit similarity preserving byte hash.</p></td>
-    </tr>
-  </tbody>
-</table>
         <details class="quote">
           <summary>Source code in <code>iscc_core\code_content_text.py</code></summary>
           <div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="k">def</span> <span class="nf">soft_hash_text_v0</span><span class="p">(</span><span class="n">text</span><span class="p">):</span>
@@ -1221,41 +1154,10 @@ before passing it to this function.</p>
 <p class="admonition-title">Note</p>
 <p>See: <a href="https://unicode.org/reports/tr15/">Unicode normalization</a>.</p>
 </div>
+<p>:param str text: Plain text to be collapsed.
+:return: Collapsed plain text.
+:rtype: str</p>
 
-<p><strong>Parameters:</strong></p>
-<table>
-  <thead>
-    <tr>
-      <th>Name</th>
-      <th>Type</th>
-      <th>Description</th>
-      <th>Default</th>
-    </tr>
-  </thead>
-  <tbody>
-      <tr>
-        <td><code>text</code></td>
-        <td><code>str</code></td>
-        <td><p>Plain text to be collapsed.</p></td>
-        <td><em>required</em></td>
-      </tr>
-  </tbody>
-</table>
-<p><strong>Returns:</strong></p>
-<table>
-  <thead>
-    <tr>
-      <th>Type</th>
-      <th>Description</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td><code>str</code></td>
-      <td><p>Collapsed plain text.</p></td>
-    </tr>
-  </tbody>
-</table>
         <details class="quote">
           <summary>Source code in <code>iscc_core\code_content_text.py</code></summary>
           <div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="k">def</span> <span class="nf">text_collapse</span><span class="p">(</span><span class="n">text</span><span class="p">):</span>

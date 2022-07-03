@@ -994,53 +994,12 @@
 <div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="k">for</span> <span class="n">chunk</span> <span class="ow">in</span> <span class="n">cdc_data_chunks</span><span class="p">(</span><span class="n">data</span><span class="p">):</span>
 <a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>    <span class="nb">hash</span><span class="p">(</span><span class="n">chunk</span><span class="p">)</span>
 </code></pre></div>
+<p>:param bytes data: Raw data for variable sized chunking.
+:param bool utf32: If true assume we are chunking text that is utf32 encoded.
+:param int avg_chunk_size: Target chunk size in number of bytes.
+:return: A generator that yields data chunks of variable sizes.
+:rtype: Generator[bytes]</p>
 
-<p><strong>Parameters:</strong></p>
-<table>
-  <thead>
-    <tr>
-      <th>Name</th>
-      <th>Type</th>
-      <th>Description</th>
-      <th>Default</th>
-    </tr>
-  </thead>
-  <tbody>
-      <tr>
-        <td><code>data</code></td>
-        <td><code>bytes</code></td>
-        <td><p>Raw data for variable sized chunking.</p></td>
-        <td><em>required</em></td>
-      </tr>
-      <tr>
-        <td><code>utf32</code></td>
-        <td><code>bool</code></td>
-        <td><p>If true assume we are chunking text that is utf32 encoded.</p></td>
-        <td><em>required</em></td>
-      </tr>
-      <tr>
-        <td><code>avg_chunk_size</code></td>
-        <td><code>int</code></td>
-        <td><p>Target chunk size in number of bytes.</p></td>
-        <td><code>1024</code></td>
-      </tr>
-  </tbody>
-</table>
-<p><strong>Returns:</strong></p>
-<table>
-  <thead>
-    <tr>
-      <th>Type</th>
-      <th>Description</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td><code>Union[Generat,[bytes]]</code></td>
-      <td><p>A generator that yields data chunks of variable sizes.</p></td>
-    </tr>
-  </tbody>
-</table>
         <details class="quote">
           <summary>Source code in <code>iscc_core\cdc.py</code></summary>
           <div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="k">def</span> <span class="nf">alg_cdc_chunks</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">utf32</span><span class="p">,</span> <span class="n">avg_chunk_size</span><span class="o">=</span><span class="n">ic</span><span class="o">.</span><span class="n">core_opts</span><span class="o">.</span><span class="n">data_avg_chunk_size</span><span class="p">):</span>
@@ -1104,71 +1063,15 @@
     <div class="doc doc-contents ">
 
       <p>Find breakpoint offset for a given buffer.</p>
+<p>:param Data buffer: The data to be chunked.
+:param int mi: Minimum chunk size.
+:param int ma: Maximung chunk size.
+:param int cs: Center size.
+:param int mask_s: Small mask.
+:param int mask_l: Large mask.
+:return: Offset of dynamic cutpoint in number of bytes.
+:rtype: int</p>
 
-<p><strong>Parameters:</strong></p>
-<table>
-  <thead>
-    <tr>
-      <th>Name</th>
-      <th>Type</th>
-      <th>Description</th>
-      <th>Default</th>
-    </tr>
-  </thead>
-  <tbody>
-      <tr>
-        <td><code>buffer</code></td>
-        <td><code>Data</code></td>
-        <td><p>The data to be chunked.</p></td>
-        <td><em>required</em></td>
-      </tr>
-      <tr>
-        <td><code>mi</code></td>
-        <td><code>int</code></td>
-        <td><p>Minimum chunk size.</p></td>
-        <td><em>required</em></td>
-      </tr>
-      <tr>
-        <td><code>ma</code></td>
-        <td><code>int</code></td>
-        <td><p>Maximung chunk size.</p></td>
-        <td><em>required</em></td>
-      </tr>
-      <tr>
-        <td><code>cs</code></td>
-        <td><code>int</code></td>
-        <td><p>Center size.</p></td>
-        <td><em>required</em></td>
-      </tr>
-      <tr>
-        <td><code>mask_s</code></td>
-        <td><code>int</code></td>
-        <td><p>Small mask.</p></td>
-        <td><em>required</em></td>
-      </tr>
-      <tr>
-        <td><code>mask_l</code></td>
-        <td><code>int</code></td>
-        <td><p>Large mask.</p></td>
-        <td><em>required</em></td>
-      </tr>
-  </tbody>
-</table>
-<p><strong>Returns:</strong></p>
-<table>
-  <thead>
-    <tr>
-      <th>Type</th>
-      <th>Description</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td><code>int</code></td>
-      <td><p>Offset of dynamic cutpoint in number of bytes.</p></td>
-    </tr>
-  </tbody>
-</table>
         <details class="quote">
           <summary>Source code in <code>iscc_core\cdc.py</code></summary>
           <div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="k">def</span> <span class="nf">alg_cdc_offset</span><span class="p">(</span><span class="n">buffer</span><span class="p">,</span> <span class="n">mi</span><span class="p">,</span> <span class="n">ma</span><span class="p">,</span> <span class="n">cs</span><span class="p">,</span> <span class="n">mask_s</span><span class="p">,</span> <span class="n">mask_l</span><span class="p">):</span>
@@ -1225,41 +1128,9 @@
     <div class="doc doc-contents ">
 
       <p>Calculate CDC parameters</p>
+<p>:param int avg_size: Target average size of chunks in number of bytes.
+:returns: Tuple of (min_size, max_size, center_size, mask_s, mask_l).</p>
 
-<p><strong>Parameters:</strong></p>
-<table>
-  <thead>
-    <tr>
-      <th>Name</th>
-      <th>Type</th>
-      <th>Description</th>
-      <th>Default</th>
-    </tr>
-  </thead>
-  <tbody>
-      <tr>
-        <td><code>avg_size</code></td>
-        <td><code>int</code></td>
-        <td><p>Target average size of chunks in number of bytes.</p></td>
-        <td><em>required</em></td>
-      </tr>
-  </tbody>
-</table>
-<p><strong>Returns:</strong></p>
-<table>
-  <thead>
-    <tr>
-      <th>Type</th>
-      <th>Description</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td><code>tuple</code></td>
-      <td><p>Tuple of (min_size, max_size, center_size, mask_s, mask_l).</p></td>
-    </tr>
-  </tbody>
-</table>
         <details class="quote">
           <summary>Source code in <code>iscc_core\cdc.py</code></summary>
           <div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="k">def</span> <span class="nf">alg_cdc_params</span><span class="p">(</span><span class="n">avg_size</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">tuple</span><span class="p">:</span>

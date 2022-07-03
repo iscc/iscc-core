@@ -972,41 +972,10 @@
     <div class="doc doc-contents ">
 
       <p>Creates a similarity preserving hash from a sequence of equal sized hash digests.</p>
+<p>:param list hash_digests: A sequence of equaly sized byte-hashes.
+:returns: Similarity byte-hash
+:rtype: bytes</p>
 
-<p><strong>Parameters:</strong></p>
-<table>
-  <thead>
-    <tr>
-      <th>Name</th>
-      <th>Type</th>
-      <th>Description</th>
-      <th>Default</th>
-    </tr>
-  </thead>
-  <tbody>
-      <tr>
-        <td><code>hash_digests</code></td>
-        <td><code>list</code></td>
-        <td><p>A sequence of equaly sized byte-hashes.</p></td>
-        <td><em>required</em></td>
-      </tr>
-  </tbody>
-</table>
-<p><strong>Returns:</strong></p>
-<table>
-  <thead>
-    <tr>
-      <th>Type</th>
-      <th>Description</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td><code>bytes</code></td>
-      <td><p>Similarity byte-hash</p></td>
-    </tr>
-  </tbody>
-</table>
         <details class="quote">
           <summary>Source code in <code>iscc_core\simhash.py</code></summary>
           <div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="k">def</span> <span class="nf">alg_simhash</span><span class="p">(</span><span class="n">hash_digests</span><span class="p">):</span>

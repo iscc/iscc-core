@@ -1072,47 +1072,11 @@
     <div class="doc doc-contents ">
 
       <p>Create an ISCC Instance-Code with the latest standard algorithm.</p>
+<p>:param Stream stream: Binary data stream for Instance-Code generation
+:param int bits: Bit-length resulting Instance-Code (multiple of 64)
+:return: ISCC object with properties: iscc, datahash, filesize
+:rtype: dict</p>
 
-<p><strong>Parameters:</strong></p>
-<table>
-  <thead>
-    <tr>
-      <th>Name</th>
-      <th>Type</th>
-      <th>Description</th>
-      <th>Default</th>
-    </tr>
-  </thead>
-  <tbody>
-      <tr>
-        <td><code>stream</code></td>
-        <td><code>Stream</code></td>
-        <td><p>Binary data stream for Instance-Code generation</p></td>
-        <td><em>required</em></td>
-      </tr>
-      <tr>
-        <td><code>bits</code></td>
-        <td><code>int</code></td>
-        <td><p>Bit-length resulting Instance-Code (multiple of 64)</p></td>
-        <td><code>64</code></td>
-      </tr>
-  </tbody>
-</table>
-<p><strong>Returns:</strong></p>
-<table>
-  <thead>
-    <tr>
-      <th>Type</th>
-      <th>Description</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td><code>dict</code></td>
-      <td><p>ISCC object with properties: iscc, datahash, filesize</p></td>
-    </tr>
-  </tbody>
-</table>
     </div>
 
   </div>
@@ -1134,47 +1098,11 @@
     <div class="doc doc-contents ">
 
       <p>Create an ISCC Instance-Code with algorithm v0.</p>
+<p>:param Stream stream: Binary data stream for Instance-Code generation
+:param int bits: Bit-length of resulting Instance-Code (multiple of 64)
+:return: ISCC object with Instance-Code and properties: datahash, filesize
+:rtype: dict</p>
 
-<p><strong>Parameters:</strong></p>
-<table>
-  <thead>
-    <tr>
-      <th>Name</th>
-      <th>Type</th>
-      <th>Description</th>
-      <th>Default</th>
-    </tr>
-  </thead>
-  <tbody>
-      <tr>
-        <td><code>stream</code></td>
-        <td><code>Stream</code></td>
-        <td><p>Binary data stream for Instance-Code generation</p></td>
-        <td><em>required</em></td>
-      </tr>
-      <tr>
-        <td><code>bits</code></td>
-        <td><code>int</code></td>
-        <td><p>Bit-length of resulting Instance-Code (multiple of 64)</p></td>
-        <td><code>64</code></td>
-      </tr>
-  </tbody>
-</table>
-<p><strong>Returns:</strong></p>
-<table>
-  <thead>
-    <tr>
-      <th>Type</th>
-      <th>Description</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td><code>dict</code></td>
-      <td><p>ISCC object with Instance-Code and properties: datahash, filesize</p></td>
-    </tr>
-  </tbody>
-</table>
     </div>
 
   </div>
@@ -1196,41 +1124,10 @@
     <div class="doc doc-contents ">
 
       <p>Create 256-bit hash digest for the Instance-Code body</p>
+<p>:param Stream stream: Binary data stream for hash generation.
+:return: 256-bit Instance-Hash digest used as body of Instance-Code
+:rtype: bytes</p>
 
-<p><strong>Parameters:</strong></p>
-<table>
-  <thead>
-    <tr>
-      <th>Name</th>
-      <th>Type</th>
-      <th>Description</th>
-      <th>Default</th>
-    </tr>
-  </thead>
-  <tbody>
-      <tr>
-        <td><code>stream</code></td>
-        <td><code>Stream</code></td>
-        <td><p>Binary data stream for hash generation.</p></td>
-        <td><em>required</em></td>
-      </tr>
-  </tbody>
-</table>
-<p><strong>Returns:</strong></p>
-<table>
-  <thead>
-    <tr>
-      <th>Type</th>
-      <th>Description</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td><code>bytes</code></td>
-      <td><p>256-bit Instance-Hash digest used as body of Instance-Code</p></td>
-    </tr>
-  </tbody>
-</table>
     </div>
 
   </div>
@@ -1282,26 +1179,8 @@ InstanceHasher        </code>
     <div class="doc doc-contents ">
 
       <p>Push data to the Instance-Hash generator.</p>
+<p>:param Data data: Data to be hashed</p>
 
-<p><strong>Parameters:</strong></p>
-<table>
-  <thead>
-    <tr>
-      <th>Name</th>
-      <th>Type</th>
-      <th>Description</th>
-      <th>Default</th>
-    </tr>
-  </thead>
-  <tbody>
-      <tr>
-        <td><code>data</code></td>
-        <td><code>Data</code></td>
-        <td><p>Data to be hashed</p></td>
-        <td><em>required</em></td>
-      </tr>
-  </tbody>
-</table>
     </div>
 
   </div>
@@ -1323,22 +1202,9 @@ InstanceHasher        </code>
     <div class="doc doc-contents ">
 
       <p>Return Instance-Hash</p>
+<p>:return: Instance-Hash digest
+:rtype: bytes</p>
 
-<p><strong>Returns:</strong></p>
-<table>
-  <thead>
-    <tr>
-      <th>Type</th>
-      <th>Description</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td><code>bytes</code></td>
-      <td><p>Instance-Hash digest</p></td>
-    </tr>
-  </tbody>
-</table>
     </div>
 
   </div>
@@ -1360,22 +1226,9 @@ InstanceHasher        </code>
     <div class="doc doc-contents ">
 
       <p>Return blake3 multihash</p>
+<p>:return: Blake3 hash as 256-bit multihash
+:rtype: str</p>
 
-<p><strong>Returns:</strong></p>
-<table>
-  <thead>
-    <tr>
-      <th>Type</th>
-      <th>Description</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td><code>str</code></td>
-      <td><p>Blake3 hash as 256-bit multihash</p></td>
-    </tr>
-  </tbody>
-</table>
     </div>
 
   </div>
@@ -1397,41 +1250,10 @@ InstanceHasher        </code>
     <div class="doc doc-contents ">
 
       <p>Encode digest as an ISCC Instance-Code unit.</p>
+<p>:param int bits: Number of bits for the ISCC Instance-Code
+:return: ISCC Instance-Code
+:rtype: str</p>
 
-<p><strong>Parameters:</strong></p>
-<table>
-  <thead>
-    <tr>
-      <th>Name</th>
-      <th>Type</th>
-      <th>Description</th>
-      <th>Default</th>
-    </tr>
-  </thead>
-  <tbody>
-      <tr>
-        <td><code>bits</code></td>
-        <td><code>int</code></td>
-        <td><p>Number of bits for the ISCC Instance-Code</p></td>
-        <td><code>64</code></td>
-      </tr>
-  </tbody>
-</table>
-<p><strong>Returns:</strong></p>
-<table>
-  <thead>
-    <tr>
-      <th>Type</th>
-      <th>Description</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td><code>str</code></td>
-      <td><p>ISCC Instance-Code</p></td>
-    </tr>
-  </tbody>
-</table>
     </div>
 
   </div>
@@ -1493,26 +1315,8 @@ InstanceHasherV0        </code>
     <div class="doc doc-contents ">
 
       <p>Push data to the Instance-Hash generator.</p>
+<p>:param Data data: Data to be hashed</p>
 
-<p><strong>Parameters:</strong></p>
-<table>
-  <thead>
-    <tr>
-      <th>Name</th>
-      <th>Type</th>
-      <th>Description</th>
-      <th>Default</th>
-    </tr>
-  </thead>
-  <tbody>
-      <tr>
-        <td><code>data</code></td>
-        <td><code>Data</code></td>
-        <td><p>Data to be hashed</p></td>
-        <td><em>required</em></td>
-      </tr>
-  </tbody>
-</table>
     </div>
 
   </div>
@@ -1534,22 +1338,9 @@ InstanceHasherV0        </code>
     <div class="doc doc-contents ">
 
       <p>Return Instance-Hash</p>
+<p>:return: Instance-Hash digest
+:rtype: bytes</p>
 
-<p><strong>Returns:</strong></p>
-<table>
-  <thead>
-    <tr>
-      <th>Type</th>
-      <th>Description</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td><code>bytes</code></td>
-      <td><p>Instance-Hash digest</p></td>
-    </tr>
-  </tbody>
-</table>
     </div>
 
   </div>
@@ -1571,22 +1362,9 @@ InstanceHasherV0        </code>
     <div class="doc doc-contents ">
 
       <p>Return blake3 multihash</p>
+<p>:return: Blake3 hash as 256-bit multihash
+:rtype: str</p>
 
-<p><strong>Returns:</strong></p>
-<table>
-  <thead>
-    <tr>
-      <th>Type</th>
-      <th>Description</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td><code>str</code></td>
-      <td><p>Blake3 hash as 256-bit multihash</p></td>
-    </tr>
-  </tbody>
-</table>
     </div>
 
   </div>
@@ -1608,41 +1386,10 @@ InstanceHasherV0        </code>
     <div class="doc doc-contents ">
 
       <p>Encode digest as an ISCC Instance-Code unit.</p>
+<p>:param int bits: Number of bits for the ISCC Instance-Code
+:return: ISCC Instance-Code
+:rtype: str</p>
 
-<p><strong>Parameters:</strong></p>
-<table>
-  <thead>
-    <tr>
-      <th>Name</th>
-      <th>Type</th>
-      <th>Description</th>
-      <th>Default</th>
-    </tr>
-  </thead>
-  <tbody>
-      <tr>
-        <td><code>bits</code></td>
-        <td><code>int</code></td>
-        <td><p>Number of bits for the ISCC Instance-Code</p></td>
-        <td><code>64</code></td>
-      </tr>
-  </tbody>
-</table>
-<p><strong>Returns:</strong></p>
-<table>
-  <thead>
-    <tr>
-      <th>Type</th>
-      <th>Description</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td><code>str</code></td>
-      <td><p>ISCC Instance-Code</p></td>
-    </tr>
-  </tbody>
-</table>
     </div>
 
   </div>

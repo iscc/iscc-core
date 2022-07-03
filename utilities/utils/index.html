@@ -1115,41 +1115,10 @@ stable, fixed-length CIDv1 header-prefix and allows us to use the CIDv1 as an
 to a hex representation within a Smart Contract. The hex-representation can then be
 used for ID-Substitution. Use <code>ipfs://f01551220{id}</code> as template for the Metadata-URI.</p>
 </div>
+<p>:param Stream stream: Data to be hashed (currently max 262144 bytes supported)
+:return: A valid IPFS CIDv1 that can be used as token-id and metadata-uri
+:rtype: str</p>
 
-<p><strong>Parameters:</strong></p>
-<table>
-  <thead>
-    <tr>
-      <th>Name</th>
-      <th>Type</th>
-      <th>Description</th>
-      <th>Default</th>
-    </tr>
-  </thead>
-  <tbody>
-      <tr>
-        <td><code>stream</code></td>
-        <td><code>Stream</code></td>
-        <td><p>Data to be hashed (currently max 262144 bytes supported)</p></td>
-        <td><em>required</em></td>
-      </tr>
-  </tbody>
-</table>
-<p><strong>Returns:</strong></p>
-<table>
-  <thead>
-    <tr>
-      <th>Type</th>
-      <th>Description</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td><code>str</code></td>
-      <td><p>A valid IPFS CIDv1 that can be used as token-id and metadata-uri</p></td>
-    </tr>
-  </tbody>
-</table>
         <details class="quote">
           <summary>Source code in <code>iscc_core\utils.py</code></summary>
           <div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="k">def</span> <span class="nf">cidv1_hex</span><span class="p">(</span><span class="n">stream</span><span class="p">):</span>
@@ -1265,41 +1234,9 @@ metadata we can convert a CIDv1 to an uint256 Token-ID and vice versa.</p>
 <a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a><span class="mi">83814198383102558219731078260892729932246618004265700685467928187377105751529</span>
 </code></pre></div>
 </div>
+<p>:param str cidv1: An IPFS CIDv1 string base-16 (hex) encoded representation.
+:return int: An uint256 derived from the CIDv1</p>
 
-<p><strong>Parameters:</strong></p>
-<table>
-  <thead>
-    <tr>
-      <th>Name</th>
-      <th>Type</th>
-      <th>Description</th>
-      <th>Default</th>
-    </tr>
-  </thead>
-  <tbody>
-      <tr>
-        <td><code>cidv1</code></td>
-        <td><code>str</code></td>
-        <td><p>An IPFS CIDv1 string base-16 (hex) encoded representation.</p></td>
-        <td><em>required</em></td>
-      </tr>
-  </tbody>
-</table>
-<p><strong>Returns:</strong></p>
-<table>
-  <thead>
-    <tr>
-      <th>Type</th>
-      <th>Description</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td></td>
-      <td><p>An uint256 derived from the CIDv1</p></td>
-    </tr>
-  </tbody>
-</table>
         <details class="quote">
           <summary>Source code in <code>iscc_core\utils.py</code></summary>
           <div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="k">def</span> <span class="nf">cidv1_to_token_id</span><span class="p">(</span><span class="n">cidv1</span><span class="p">):</span>
@@ -1364,41 +1301,9 @@ metadata we can convert a CIDv1 to an uint256 Token-ID and vice versa.</p>
 <a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a><span class="s1">&#39;f01551220b94d27b9934d3e08a52e52d7da7dabfac484efe37a5380ee9088f7ace2efcde9&#39;</span>
 </code></pre></div>
 </div>
+<p>:param token_id: An uint256 Token-ID derived from a CIDv1
+:return str: An IPFS CIDv1 string with default base32 encoding.</p>
 
-<p><strong>Parameters:</strong></p>
-<table>
-  <thead>
-    <tr>
-      <th>Name</th>
-      <th>Type</th>
-      <th>Description</th>
-      <th>Default</th>
-    </tr>
-  </thead>
-  <tbody>
-      <tr>
-        <td><code>token_id</code></td>
-        <td></td>
-        <td><p>An uint256 Token-ID derived from a CIDv1</p></td>
-        <td><em>required</em></td>
-      </tr>
-  </tbody>
-</table>
-<p><strong>Returns:</strong></p>
-<table>
-  <thead>
-    <tr>
-      <th>Type</th>
-      <th>Description</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td></td>
-      <td><p>An IPFS CIDv1 string with default base32 encoding.</p></td>
-    </tr>
-  </tbody>
-</table>
         <details class="quote">
           <summary>Source code in <code>iscc_core\utils.py</code></summary>
           <div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="k">def</span> <span class="nf">cidv1_from_token_id</span><span class="p">(</span><span class="n">token_id</span><span class="p">):</span>
@@ -1443,41 +1348,10 @@ metadata we can convert a CIDv1 to an uint256 Token-ID and vice versa.</p>
     <div class="doc doc-contents ">
 
       <p>Create blake3 hash with multihash prefix.</p>
+<p>:param bytes data: Bytes to be hashed
+:return: Multihash prefixed 256-bit blake3 hash as hex string
+:rtype: str</p>
 
-<p><strong>Parameters:</strong></p>
-<table>
-  <thead>
-    <tr>
-      <th>Name</th>
-      <th>Type</th>
-      <th>Description</th>
-      <th>Default</th>
-    </tr>
-  </thead>
-  <tbody>
-      <tr>
-        <td><code>data</code></td>
-        <td><code>bytes</code></td>
-        <td><p>Bytes to be hashed</p></td>
-        <td><em>required</em></td>
-      </tr>
-  </tbody>
-</table>
-<p><strong>Returns:</strong></p>
-<table>
-  <thead>
-    <tr>
-      <th>Type</th>
-      <th>Description</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td><code>str</code></td>
-      <td><p>Multihash prefixed 256-bit blake3 hash as hex string</p></td>
-    </tr>
-  </tbody>
-</table>
         <details class="quote">
           <summary>Source code in <code>iscc_core\utils.py</code></summary>
           <div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="k">def</span> <span class="nf">multi_hash_blake3</span><span class="p">(</span><span class="n">data</span><span class="p">):</span>
@@ -1518,47 +1392,11 @@ The result type matches the type of the input sequence.
 Fragment slices smaller than the width at the end of the sequence are not produced.
 If "witdh" is smaller than the input sequence than one element will be returned that
 is shorter than the requested width.</p>
+<p>:param Sequence seq: Sequence of values to slide over
+:param int width: Width of sliding window in number of items
+:returns: A generator of window sized items
+:rtype: Generator</p>
 
-<p><strong>Parameters:</strong></p>
-<table>
-  <thead>
-    <tr>
-      <th>Name</th>
-      <th>Type</th>
-      <th>Description</th>
-      <th>Default</th>
-    </tr>
-  </thead>
-  <tbody>
-      <tr>
-        <td><code>seq</code></td>
-        <td><code>Sequence</code></td>
-        <td><p>Sequence of values to slide over</p></td>
-        <td><em>required</em></td>
-      </tr>
-      <tr>
-        <td><code>width</code></td>
-        <td><code>int</code></td>
-        <td><p>Width of sliding window in number of items</p></td>
-        <td><em>required</em></td>
-      </tr>
-  </tbody>
-</table>
-<p><strong>Returns:</strong></p>
-<table>
-  <thead>
-    <tr>
-      <th>Type</th>
-      <th>Description</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td><code>Union[Generat,]</code></td>
-      <td><p>A generator of window sized items</p></td>
-    </tr>
-  </tbody>
-</table>
         <details class="quote">
           <summary>Source code in <code>iscc_core\utils.py</code></summary>
           <div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="k">def</span> <span class="nf">sliding_window</span><span class="p">(</span><span class="n">seq</span><span class="p">,</span> <span class="n">width</span><span class="p">):</span>
@@ -1604,22 +1442,9 @@ is shorter than the requested width.</p>
     <div class="doc doc-contents ">
 
       <p>Calculate separate hamming distances of compatible components of two ISCCs</p>
+<p>:return: A dict with keys meta_dist, semantic_dist, content_dist, data_dist, instance_match
+:rtype: dict</p>
 
-<p><strong>Returns:</strong></p>
-<table>
-  <thead>
-    <tr>
-      <th>Type</th>
-      <th>Description</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td><code>dict</code></td>
-      <td><p>A dict with keys meta_dist, semantic_dist, content_dist, data_dist, instance_match</p></td>
-    </tr>
-  </tbody>
-</table>
         <details class="quote">
           <summary>Source code in <code>iscc_core\utils.py</code></summary>
           <div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="k">def</span> <span class="nf">iscc_compare</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">):</span>
@@ -1669,47 +1494,11 @@ is shorter than the requested width.</p>
 
       <p>Calculate similarity of ISCC codes as a percentage value (0-100).</p>
 <p>MainType, SubType, Version and Length of the codes must be the same.</p>
+<p>:param a: ISCC a
+:param b: ISCC b
+:return: Similarity of ISCC a and b in percent (based on hamming distance)
+:rtype: int</p>
 
-<p><strong>Parameters:</strong></p>
-<table>
-  <thead>
-    <tr>
-      <th>Name</th>
-      <th>Type</th>
-      <th>Description</th>
-      <th>Default</th>
-    </tr>
-  </thead>
-  <tbody>
-      <tr>
-        <td><code>a</code></td>
-        <td></td>
-        <td><p>ISCC a</p></td>
-        <td><em>required</em></td>
-      </tr>
-      <tr>
-        <td><code>b</code></td>
-        <td></td>
-        <td><p>ISCC b</p></td>
-        <td><em>required</em></td>
-      </tr>
-  </tbody>
-</table>
-<p><strong>Returns:</strong></p>
-<table>
-  <thead>
-    <tr>
-      <th>Type</th>
-      <th>Description</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td><code>int</code></td>
-      <td><p>Similarity of ISCC a and b in percent (based on hamming distance)</p></td>
-    </tr>
-  </tbody>
-</table>
         <details class="quote">
           <summary>Source code in <code>iscc_core\utils.py</code></summary>
           <div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="k">def</span> <span class="nf">iscc_similarity</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">):</span>
@@ -1753,47 +1542,11 @@ is shorter than the requested width.</p>
 
       <p>Calculate hamming distance of ISCC codes.</p>
 <p>MainType, SubType, Version and Length of the codes must be the same.</p>
+<p>:param a: ISCC a
+:param b: ISCC b
+:return: Hamming distanced in number of bits.
+:rtype: int</p>
 
-<p><strong>Parameters:</strong></p>
-<table>
-  <thead>
-    <tr>
-      <th>Name</th>
-      <th>Type</th>
-      <th>Description</th>
-      <th>Default</th>
-    </tr>
-  </thead>
-  <tbody>
-      <tr>
-        <td><code>a</code></td>
-        <td></td>
-        <td><p>ISCC a</p></td>
-        <td><em>required</em></td>
-      </tr>
-      <tr>
-        <td><code>b</code></td>
-        <td></td>
-        <td><p>ISCC b</p></td>
-        <td><em>required</em></td>
-      </tr>
-  </tbody>
-</table>
-<p><strong>Returns:</strong></p>
-<table>
-  <thead>
-    <tr>
-      <th>Type</th>
-      <th>Description</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td><code>int</code></td>
-      <td><p>Hamming distanced in number of bits.</p></td>
-    </tr>
-  </tbody>
-</table>
         <details class="quote">
           <summary>Source code in <code>iscc_core\utils.py</code></summary>
           <div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="k">def</span> <span class="nf">iscc_distance</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">):</span>
@@ -1833,47 +1586,11 @@ is shorter than the requested width.</p>
     <div class="doc doc-contents ">
 
       <p>Calculate hamming distance for binary hash digests of equal length.</p>
+<p>:param bytes a: binary hash digest
+:param bytes b: binary hash digest
+:return: Hamming distance in number of bits.
+:rtype: int</p>
 
-<p><strong>Parameters:</strong></p>
-<table>
-  <thead>
-    <tr>
-      <th>Name</th>
-      <th>Type</th>
-      <th>Description</th>
-      <th>Default</th>
-    </tr>
-  </thead>
-  <tbody>
-      <tr>
-        <td><code>a</code></td>
-        <td><code>bytes</code></td>
-        <td><p>binary hash digest</p></td>
-        <td><em>required</em></td>
-      </tr>
-      <tr>
-        <td><code>b</code></td>
-        <td><code>bytes</code></td>
-        <td><p>binary hash digest</p></td>
-        <td><em>required</em></td>
-      </tr>
-  </tbody>
-</table>
-<p><strong>Returns:</strong></p>
-<table>
-  <thead>
-    <tr>
-      <th>Type</th>
-      <th>Description</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td><code>int</code></td>
-      <td><p>Hamming distance in number of bits.</p></td>
-    </tr>
-  </tbody>
-</table>
         <details class="quote">
           <summary>Source code in <code>iscc_core\utils.py</code></summary>
           <div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="k">def</span> <span class="nf">iscc_distance_bytes</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">):</span>
@@ -1916,62 +1633,12 @@ is shorter than the requested width.</p>
 
       <p>Unpack two ISCC codes and return their body hash digests if their headers match.</p>
 <p>Headers match if their MainType, SubType, and Version are identical.</p>
+<p>:param a: ISCC a
+:param b: ISCC b
+:return: Tuple with hash digests of a and b
+:rtype: Tuple[bytes, bytes]
+:raise ValueError: If ISCC headers don´t match</p>
 
-<p><strong>Parameters:</strong></p>
-<table>
-  <thead>
-    <tr>
-      <th>Name</th>
-      <th>Type</th>
-      <th>Description</th>
-      <th>Default</th>
-    </tr>
-  </thead>
-  <tbody>
-      <tr>
-        <td><code>a</code></td>
-        <td></td>
-        <td><p>ISCC a</p></td>
-        <td><em>required</em></td>
-      </tr>
-      <tr>
-        <td><code>b</code></td>
-        <td></td>
-        <td><p>ISCC b</p></td>
-        <td><em>required</em></td>
-      </tr>
-  </tbody>
-</table>
-<p><strong>Returns:</strong></p>
-<table>
-  <thead>
-    <tr>
-      <th>Type</th>
-      <th>Description</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td><code>Tuple[bytes, bytes]</code></td>
-      <td><p>Tuple with hash digests of a and b</p></td>
-    </tr>
-  </tbody>
-</table>
-<p><strong>Exceptions:</strong></p>
-<table>
-  <thead>
-    <tr>
-      <th>Type</th>
-      <th>Description</th>
-    </tr>
-  </thead>
-  <tbody>
-      <tr>
-        <td><code>ValueError</code></td>
-        <td><p>If ISCC headers don´t match</p></td>
-      </tr>
-  </tbody>
-</table>
         <details class="quote">
           <summary>Source code in <code>iscc_core\utils.py</code></summary>
           <div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="k">def</span> <span class="nf">iscc_pair_unpack</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">):</span>

@@ -1020,41 +1020,10 @@ is compatible with UUID.</p>
     <div class="doc doc-contents ">
 
       <p>Create an ISCC Flake-Code with the latest standard algorithm</p>
+<p>:param int bits: Target bit-length of generated Flake-Code
+:return: ISCC object with Flake-Code
+:rtype: dict</p>
 
-<p><strong>Parameters:</strong></p>
-<table>
-  <thead>
-    <tr>
-      <th>Name</th>
-      <th>Type</th>
-      <th>Description</th>
-      <th>Default</th>
-    </tr>
-  </thead>
-  <tbody>
-      <tr>
-        <td><code>bits</code></td>
-        <td><code>int</code></td>
-        <td><p>Target bit-length of generated Flake-Code</p></td>
-        <td><code>64</code></td>
-      </tr>
-  </tbody>
-</table>
-<p><strong>Returns:</strong></p>
-<table>
-  <thead>
-    <tr>
-      <th>Type</th>
-      <th>Description</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td><code>dict</code></td>
-      <td><p>ISCC object with Flake-Code</p></td>
-    </tr>
-  </tbody>
-</table>
     </div>
 
   </div>
@@ -1076,41 +1045,10 @@ is compatible with UUID.</p>
     <div class="doc doc-contents ">
 
       <p>Create an ISCC Flake-Code with the latest algorithm v0</p>
+<p>:param int bits: Target bit-length of generated Flake-Code
+:return: ISCC object with Flake-Code
+:rtype: dict</p>
 
-<p><strong>Parameters:</strong></p>
-<table>
-  <thead>
-    <tr>
-      <th>Name</th>
-      <th>Type</th>
-      <th>Description</th>
-      <th>Default</th>
-    </tr>
-  </thead>
-  <tbody>
-      <tr>
-        <td><code>bits</code></td>
-        <td><code>int</code></td>
-        <td><p>Target bit-length of generated Flake-Code</p></td>
-        <td><code>64</code></td>
-      </tr>
-  </tbody>
-</table>
-<p><strong>Returns:</strong></p>
-<table>
-  <thead>
-    <tr>
-      <th>Type</th>
-      <th>Description</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td><code>dict</code></td>
-      <td><p>ISCC object with Flake-Code</p></td>
-    </tr>
-  </tbody>
-</table>
     </div>
 
   </div>
@@ -1132,47 +1070,11 @@ is compatible with UUID.</p>
     <div class="doc doc-contents ">
 
       <p>Generate time and randomness based Flake-Hash</p>
+<p>:param Optional[float] ts: Unix timestamp (defaults to current time)
+:param int bits: Bit-length resulting Flake-Code (multiple of 32)
+:return: Flake-Hash digest
+:rtype: bytes</p>
 
-<p><strong>Parameters:</strong></p>
-<table>
-  <thead>
-    <tr>
-      <th>Name</th>
-      <th>Type</th>
-      <th>Description</th>
-      <th>Default</th>
-    </tr>
-  </thead>
-  <tbody>
-      <tr>
-        <td><code>ts</code></td>
-        <td><code>Optional[float]</code></td>
-        <td><p>Unix timestamp (defaults to current time)</p></td>
-        <td><code>None</code></td>
-      </tr>
-      <tr>
-        <td><code>bits</code></td>
-        <td><code>int</code></td>
-        <td><p>Bit-length resulting Flake-Code (multiple of 32)</p></td>
-        <td><code>64</code></td>
-      </tr>
-  </tbody>
-</table>
-<p><strong>Returns:</strong></p>
-<table>
-  <thead>
-    <tr>
-      <th>Type</th>
-      <th>Description</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td><code>bytes</code></td>
-      <td><p>Flake-Hash digest</p></td>
-    </tr>
-  </tbody>
-</table>
     </div>
 
   </div>

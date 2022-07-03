@@ -1000,47 +1000,11 @@ assets and create individual Content-Codes per asset.</p>
     <div class="doc doc-contents ">
 
       <p>Create an ISCC Content-Code Mixed with the latest standard algorithm.</p>
+<p>:param Iterable[str] codes: a list of Content-Codes.
+:param int bits: Target bit-length of generated Content-Code-Mixed.
+:return: ISCC object with Content-Code Mixed.
+:rtype: dict</p>
 
-<p><strong>Parameters:</strong></p>
-<table>
-  <thead>
-    <tr>
-      <th>Name</th>
-      <th>Type</th>
-      <th>Description</th>
-      <th>Default</th>
-    </tr>
-  </thead>
-  <tbody>
-      <tr>
-        <td><code>codes</code></td>
-        <td><code>Iterable[str]</code></td>
-        <td><p>a list of Content-Codes.</p></td>
-        <td><em>required</em></td>
-      </tr>
-      <tr>
-        <td><code>bits</code></td>
-        <td><code>int</code></td>
-        <td><p>Target bit-length of generated Content-Code-Mixed.</p></td>
-        <td><code>64</code></td>
-      </tr>
-  </tbody>
-</table>
-<p><strong>Returns:</strong></p>
-<table>
-  <thead>
-    <tr>
-      <th>Type</th>
-      <th>Description</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td><code>dict</code></td>
-      <td><p>ISCC object with Content-Code Mixed.</p></td>
-    </tr>
-  </tbody>
-</table>
     </div>
 
   </div>
@@ -1064,47 +1028,11 @@ assets and create individual Content-Codes per asset.</p>
       <p>Create an ISCC Content-Code-Mixed with algorithm v0.</p>
 <p>If the provided codes are of mixed length they are stripped to <code>bits</code> length for
 calculation.</p>
+<p>:param Iterable[str] codes: a list of Content-Codes.
+:param int bits: Target bit-length of generated Content-Code-Mixed.
+:return: ISCC object with Content-Code Mixed.
+:rtype: dict</p>
 
-<p><strong>Parameters:</strong></p>
-<table>
-  <thead>
-    <tr>
-      <th>Name</th>
-      <th>Type</th>
-      <th>Description</th>
-      <th>Default</th>
-    </tr>
-  </thead>
-  <tbody>
-      <tr>
-        <td><code>codes</code></td>
-        <td><code>Iterable[str]</code></td>
-        <td><p>a list of Content-Codes.</p></td>
-        <td><em>required</em></td>
-      </tr>
-      <tr>
-        <td><code>bits</code></td>
-        <td><code>int</code></td>
-        <td><p>Target bit-length of generated Content-Code-Mixed.</p></td>
-        <td><code>64</code></td>
-      </tr>
-  </tbody>
-</table>
-<p><strong>Returns:</strong></p>
-<table>
-  <thead>
-    <tr>
-      <th>Type</th>
-      <th>Description</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td><code>dict</code></td>
-      <td><p>ISCC object with Content-Code Mixed.</p></td>
-    </tr>
-  </tbody>
-</table>
     </div>
 
   </div>
@@ -1129,47 +1057,11 @@ calculation.</p>
 <p>The similarity hash is created from the bodies of the input codes with the first
 byte of the code-header prepended.</p>
 <p>All codes must be of main-type CONTENT and have a minimum length of <code>bits</code>.</p>
+<p>:param Sequence[bytes] cc_digests: a list of Content-Code digests.
+:param int bits: Target bit-length of generated Content-Code-Mixed.
+:return: Similarity preserving byte hash.
+:rtype: bytes</p>
 
-<p><strong>Parameters:</strong></p>
-<table>
-  <thead>
-    <tr>
-      <th>Name</th>
-      <th>Type</th>
-      <th>Description</th>
-      <th>Default</th>
-    </tr>
-  </thead>
-  <tbody>
-      <tr>
-        <td><code>cc_digests</code></td>
-        <td><code>Sequence[bytes]</code></td>
-        <td><p>a list of Content-Code digests.</p></td>
-        <td><em>required</em></td>
-      </tr>
-      <tr>
-        <td><code>bits</code></td>
-        <td><code>int</code></td>
-        <td><p>Target bit-length of generated Content-Code-Mixed.</p></td>
-        <td><code>64</code></td>
-      </tr>
-  </tbody>
-</table>
-<p><strong>Returns:</strong></p>
-<table>
-  <thead>
-    <tr>
-      <th>Type</th>
-      <th>Description</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td><code>bytes</code></td>
-      <td><p>Similarity preserving byte hash.</p></td>
-    </tr>
-  </tbody>
-</table>
     </div>
 
   </div>

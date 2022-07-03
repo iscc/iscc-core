@@ -1015,22 +1015,9 @@ implementation testing.</p>
     <div class="doc doc-contents ">
 
       <p>Yield tuples of test data.</p>
+<p>:return: Tuple with testdata (test_name, func_obj, inputs, outputs)
+:rtype: Generator[Tuple[str, Callable, List[Any], List[Any]]]</p>
 
-<p><strong>Returns:</strong></p>
-<table>
-  <thead>
-    <tr>
-      <th>Type</th>
-      <th>Description</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td><code>Union[Generat,[Tuple[str, Callable, List[Any], List[Any]]]]</code></td>
-      <td><p>Tuple with testdata (test_name, func_obj, inputs, outputs)</p></td>
-    </tr>
-  </tbody>
-</table>
     </div>
 
   </div>
@@ -1052,22 +1039,9 @@ implementation testing.</p>
     <div class="doc doc-contents ">
 
       <p>Run conformance tests.</p>
+<p>:return: whether all tests passed
+:rtype: bool</p>
 
-<p><strong>Returns:</strong></p>
-<table>
-  <thead>
-    <tr>
-      <th>Type</th>
-      <th>Description</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td><code>bool</code></td>
-      <td><p>whether all tests passed</p></td>
-    </tr>
-  </tbody>
-</table>
     </div>
 
   </div>

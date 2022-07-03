@@ -999,47 +999,11 @@ using the following command line parameters:</p>
     <div class="doc doc-contents ">
 
       <p>Create an ISCC Content-Code Audio with the latest standard algorithm.</p>
+<p>:param Iterable[int] cv: Chromaprint vector
+:param int bits: Bit-length resulting Content-Code Audio (multiple of 64)
+:return: ISCC object with Content-Code Audio
+:rtype: dict</p>
 
-<p><strong>Parameters:</strong></p>
-<table>
-  <thead>
-    <tr>
-      <th>Name</th>
-      <th>Type</th>
-      <th>Description</th>
-      <th>Default</th>
-    </tr>
-  </thead>
-  <tbody>
-      <tr>
-        <td><code>cv</code></td>
-        <td><code>Iterable[int]</code></td>
-        <td><p>Chromaprint vector</p></td>
-        <td><em>required</em></td>
-      </tr>
-      <tr>
-        <td><code>bits</code></td>
-        <td><code>int</code></td>
-        <td><p>Bit-length resulting Content-Code Audio (multiple of 64)</p></td>
-        <td><code>64</code></td>
-      </tr>
-  </tbody>
-</table>
-<p><strong>Returns:</strong></p>
-<table>
-  <thead>
-    <tr>
-      <th>Type</th>
-      <th>Description</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td><code>dict</code></td>
-      <td><p>ISCC object with Content-Code Audio</p></td>
-    </tr>
-  </tbody>
-</table>
     </div>
 
   </div>
@@ -1061,47 +1025,11 @@ using the following command line parameters:</p>
     <div class="doc doc-contents ">
 
       <p>Create an ISCC Content-Code Audio with algorithm v0.</p>
+<p>:param Iterable[int] cv: Chromaprint vector
+:param int bits: Bit-length resulting Content-Code Audio (multiple of 64)
+:return: ISCC object with Content-Code Audio
+:rtype: dict</p>
 
-<p><strong>Parameters:</strong></p>
-<table>
-  <thead>
-    <tr>
-      <th>Name</th>
-      <th>Type</th>
-      <th>Description</th>
-      <th>Default</th>
-    </tr>
-  </thead>
-  <tbody>
-      <tr>
-        <td><code>cv</code></td>
-        <td><code>Iterable[int]</code></td>
-        <td><p>Chromaprint vector</p></td>
-        <td><em>required</em></td>
-      </tr>
-      <tr>
-        <td><code>bits</code></td>
-        <td><code>int</code></td>
-        <td><p>Bit-length resulting Content-Code Audio (multiple of 64)</p></td>
-        <td><code>64</code></td>
-      </tr>
-  </tbody>
-</table>
-<p><strong>Returns:</strong></p>
-<table>
-  <thead>
-    <tr>
-      <th>Type</th>
-      <th>Description</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td><code>dict</code></td>
-      <td><p>ISCC object with Content-Code Audio</p></td>
-    </tr>
-  </tbody>
-</table>
     </div>
 
   </div>
@@ -1123,47 +1051,11 @@ using the following command line parameters:</p>
     <div class="doc doc-contents ">
 
       <p>Create audio similarity hash from a chromaprint vector.</p>
+<p>:param Iterable[int] cv: Chromaprint vector
+:param int bits: Bit-length resulting similarity hash (multiple of 32)
+:return: Audio-Hash digest
+:rtype: bytes</p>
 
-<p><strong>Parameters:</strong></p>
-<table>
-  <thead>
-    <tr>
-      <th>Name</th>
-      <th>Type</th>
-      <th>Description</th>
-      <th>Default</th>
-    </tr>
-  </thead>
-  <tbody>
-      <tr>
-        <td><code>cv</code></td>
-        <td><code>Iterable[int]</code></td>
-        <td><p>Chromaprint vector</p></td>
-        <td><em>required</em></td>
-      </tr>
-      <tr>
-        <td><code>bits</code></td>
-        <td><code>int</code></td>
-        <td><p>Bit-length resulting similarity hash (multiple of 32)</p></td>
-        <td><code>64</code></td>
-      </tr>
-  </tbody>
-</table>
-<p><strong>Returns:</strong></p>
-<table>
-  <thead>
-    <tr>
-      <th>Type</th>
-      <th>Description</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td><code>bytes</code></td>
-      <td><p>Audio-Hash digest</p></td>
-    </tr>
-  </tbody>
-</table>
     </div>
 
   </div>

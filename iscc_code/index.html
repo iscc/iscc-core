@@ -992,41 +992,10 @@ five <strong>ISCC-UNITs</strong> together with a single common header:</p>
 
       <p>Combine multiple ISCC-UNITS to an ISCC-CODE with a common header using
 algorithm v0.</p>
+<p>:param Sequence[str] codes: A valid sequence of singluar ISCC-UNITS.
+:return: An ISCC object with ISCC-CODE
+:rtype: dict</p>
 
-<p><strong>Parameters:</strong></p>
-<table>
-  <thead>
-    <tr>
-      <th>Name</th>
-      <th>Type</th>
-      <th>Description</th>
-      <th>Default</th>
-    </tr>
-  </thead>
-  <tbody>
-      <tr>
-        <td><code>codes</code></td>
-        <td><code>Sequence[str]</code></td>
-        <td><p>A valid sequence of singluar ISCC-UNITS.</p></td>
-        <td><em>required</em></td>
-      </tr>
-  </tbody>
-</table>
-<p><strong>Returns:</strong></p>
-<table>
-  <thead>
-    <tr>
-      <th>Type</th>
-      <th>Description</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td><code>dict</code></td>
-      <td><p>An ISCC object with ISCC-CODE</p></td>
-    </tr>
-  </tbody>
-</table>
         <details class="quote">
           <summary>Source code in <code>iscc_core\iscc_code.py</code></summary>
           <div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="k">def</span> <span class="nf">gen_iscc_code_v0</span><span class="p">(</span><span class="n">codes</span><span class="p">):</span>

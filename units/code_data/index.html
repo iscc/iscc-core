@@ -1072,47 +1072,11 @@
     <div class="doc doc-contents ">
 
       <p>Create a similarity preserving ISCC Data-Code with the latest standard algorithm.</p>
+<p>:param Stream stream: Input data stream.
+:param int bits: Bit-length of ISCC Data-Code (default 64).
+:return: ISCC Data-Code
+:rtype: dict</p>
 
-<p><strong>Parameters:</strong></p>
-<table>
-  <thead>
-    <tr>
-      <th>Name</th>
-      <th>Type</th>
-      <th>Description</th>
-      <th>Default</th>
-    </tr>
-  </thead>
-  <tbody>
-      <tr>
-        <td><code>stream</code></td>
-        <td><code>Stream</code></td>
-        <td><p>Input data stream.</p></td>
-        <td><em>required</em></td>
-      </tr>
-      <tr>
-        <td><code>bits</code></td>
-        <td><code>int</code></td>
-        <td><p>Bit-length of ISCC Data-Code (default 64).</p></td>
-        <td><code>64</code></td>
-      </tr>
-  </tbody>
-</table>
-<p><strong>Returns:</strong></p>
-<table>
-  <thead>
-    <tr>
-      <th>Type</th>
-      <th>Description</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td><code>dict</code></td>
-      <td><p>ISCC Data-Code</p></td>
-    </tr>
-  </tbody>
-</table>
     </div>
 
   </div>
@@ -1134,47 +1098,11 @@
     <div class="doc doc-contents ">
 
       <p>Create an ISCC Data-Code with algorithm v0.</p>
+<p>:param Stream stream: Input data stream.
+:param int bits: Bit-length of ISCC Data-Code (default 64).
+:return: ISCC object with Data-Code
+:rtype: dict</p>
 
-<p><strong>Parameters:</strong></p>
-<table>
-  <thead>
-    <tr>
-      <th>Name</th>
-      <th>Type</th>
-      <th>Description</th>
-      <th>Default</th>
-    </tr>
-  </thead>
-  <tbody>
-      <tr>
-        <td><code>stream</code></td>
-        <td><code>Stream</code></td>
-        <td><p>Input data stream.</p></td>
-        <td><em>required</em></td>
-      </tr>
-      <tr>
-        <td><code>bits</code></td>
-        <td><code>int</code></td>
-        <td><p>Bit-length of ISCC Data-Code (default 64).</p></td>
-        <td><code>64</code></td>
-      </tr>
-  </tbody>
-</table>
-<p><strong>Returns:</strong></p>
-<table>
-  <thead>
-    <tr>
-      <th>Type</th>
-      <th>Description</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td><code>dict</code></td>
-      <td><p>ISCC object with Data-Code</p></td>
-    </tr>
-  </tbody>
-</table>
     </div>
 
   </div>
@@ -1196,41 +1124,10 @@
     <div class="doc doc-contents ">
 
       <p>Create a similarity preserving Data-Hash digest</p>
+<p>:param Stream stream: Input data stream.
+:return: 256-bit Data-Hash (soft-hash) digest used as body for Data-Code
+:rtype: bytes</p>
 
-<p><strong>Parameters:</strong></p>
-<table>
-  <thead>
-    <tr>
-      <th>Name</th>
-      <th>Type</th>
-      <th>Description</th>
-      <th>Default</th>
-    </tr>
-  </thead>
-  <tbody>
-      <tr>
-        <td><code>stream</code></td>
-        <td><code>Stream</code></td>
-        <td><p>Input data stream.</p></td>
-        <td><em>required</em></td>
-      </tr>
-  </tbody>
-</table>
-<p><strong>Returns:</strong></p>
-<table>
-  <thead>
-    <tr>
-      <th>Type</th>
-      <th>Description</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td><code>bytes</code></td>
-      <td><p>256-bit Data-Hash (soft-hash) digest used as body for Data-Code</p></td>
-    </tr>
-  </tbody>
-</table>
     </div>
 
   </div>
@@ -1279,26 +1176,8 @@ DataHasher        </code>
     <div class="doc doc-contents ">
 
       <p>Create a DataHasher</p>
+<p>:param Optional[Data] data: initial payload for hashing.</p>
 
-<p><strong>Parameters:</strong></p>
-<table>
-  <thead>
-    <tr>
-      <th>Name</th>
-      <th>Type</th>
-      <th>Description</th>
-      <th>Default</th>
-    </tr>
-  </thead>
-  <tbody>
-      <tr>
-        <td><code>data</code></td>
-        <td><code>Optional[Data]</code></td>
-        <td><p>initial payload for hashing.</p></td>
-        <td><code>None</code></td>
-      </tr>
-  </tbody>
-</table>
     </div>
 
   </div>
@@ -1364,41 +1243,10 @@ DataHasher        </code>
     <div class="doc doc-contents ">
 
       <p>Encode digest as an ISCC Data-Code unit.</p>
+<p>:param int bits: Number of bits for the ISCC Data-Code
+:return: ISCC Data-Code
+:rtype: str</p>
 
-<p><strong>Parameters:</strong></p>
-<table>
-  <thead>
-    <tr>
-      <th>Name</th>
-      <th>Type</th>
-      <th>Description</th>
-      <th>Default</th>
-    </tr>
-  </thead>
-  <tbody>
-      <tr>
-        <td><code>bits</code></td>
-        <td><code>int</code></td>
-        <td><p>Number of bits for the ISCC Data-Code</p></td>
-        <td><code>64</code></td>
-      </tr>
-  </tbody>
-</table>
-<p><strong>Returns:</strong></p>
-<table>
-  <thead>
-    <tr>
-      <th>Type</th>
-      <th>Description</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td><code>str</code></td>
-      <td><p>ISCC Data-Code</p></td>
-    </tr>
-  </tbody>
-</table>
     </div>
 
   </div>
@@ -1457,26 +1305,8 @@ DataHasherV0        </code>
     <div class="doc doc-contents ">
 
       <p>Create a DataHasher</p>
+<p>:param Optional[Data] data: initial payload for hashing.</p>
 
-<p><strong>Parameters:</strong></p>
-<table>
-  <thead>
-    <tr>
-      <th>Name</th>
-      <th>Type</th>
-      <th>Description</th>
-      <th>Default</th>
-    </tr>
-  </thead>
-  <tbody>
-      <tr>
-        <td><code>data</code></td>
-        <td><code>Optional[Data]</code></td>
-        <td><p>initial payload for hashing.</p></td>
-        <td><code>None</code></td>
-      </tr>
-  </tbody>
-</table>
     </div>
 
   </div>
@@ -1542,41 +1372,10 @@ DataHasherV0        </code>
     <div class="doc doc-contents ">
 
       <p>Encode digest as an ISCC Data-Code unit.</p>
+<p>:param int bits: Number of bits for the ISCC Data-Code
+:return: ISCC Data-Code
+:rtype: str</p>
 
-<p><strong>Parameters:</strong></p>
-<table>
-  <thead>
-    <tr>
-      <th>Name</th>
-      <th>Type</th>
-      <th>Description</th>
-      <th>Default</th>
-    </tr>
-  </thead>
-  <tbody>
-      <tr>
-        <td><code>bits</code></td>
-        <td><code>int</code></td>
-        <td><p>Number of bits for the ISCC Data-Code</p></td>
-        <td><code>64</code></td>
-      </tr>
-  </tbody>
-</table>
-<p><strong>Returns:</strong></p>
-<table>
-  <thead>
-    <tr>
-      <th>Type</th>
-      <th>Description</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td><code>str</code></td>
-      <td><p>ISCC Data-Code</p></td>
-    </tr>
-  </tbody>
-</table>
     </div>
 
   </div>

@@ -973,41 +973,10 @@
 
       <p>Discrete cosine transform.</p>
 <p>See: <a href="https://www.nayuki.io/page/fast-discrete-cosine-transform-algorithms">nayuki.io</a>.</p>
+<p>:param Sequence[float] v: Input vector for DCT calculation.
+:return: DCT Transformed vector.
+:rtype: List</p>
 
-<p><strong>Parameters:</strong></p>
-<table>
-  <thead>
-    <tr>
-      <th>Name</th>
-      <th>Type</th>
-      <th>Description</th>
-      <th>Default</th>
-    </tr>
-  </thead>
-  <tbody>
-      <tr>
-        <td><code>v</code></td>
-        <td><code>Sequence[float]</code></td>
-        <td><p>Input vector for DCT calculation.</p></td>
-        <td><em>required</em></td>
-      </tr>
-  </tbody>
-</table>
-<p><strong>Returns:</strong></p>
-<table>
-  <thead>
-    <tr>
-      <th>Type</th>
-      <th>Description</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td><code>List</code></td>
-      <td><p>DCT Transformed vector.</p></td>
-    </tr>
-  </tbody>
-</table>
         <details class="quote">
           <summary>Source code in <code>iscc_core\dct.py</code></summary>
           <div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="k">def</span> <span class="nf">alg_dct</span><span class="p">(</span><span class="n">v</span><span class="p">):</span>

@@ -1004,47 +1004,11 @@ dct-matrix against their median values to set the hash-bits.</p>
     <div class="doc doc-contents ">
 
       <p>Create an ISCC Content-Code Image with the latest standard algorithm.</p>
+<p>:param Sequence[int] pixels: Normalized image pixels (32x32 flattened gray values).
+:param int bits: Bit-length of ISCC Content-Code Image (default 64).
+:return: ISCC object with Content-Code Image.
+:rtype: ISCC</p>
 
-<p><strong>Parameters:</strong></p>
-<table>
-  <thead>
-    <tr>
-      <th>Name</th>
-      <th>Type</th>
-      <th>Description</th>
-      <th>Default</th>
-    </tr>
-  </thead>
-  <tbody>
-      <tr>
-        <td><code>pixels</code></td>
-        <td><code>Sequence[int]</code></td>
-        <td><p>Normalized image pixels (32x32 flattened gray values).</p></td>
-        <td><em>required</em></td>
-      </tr>
-      <tr>
-        <td><code>bits</code></td>
-        <td><code>int</code></td>
-        <td><p>Bit-length of ISCC Content-Code Image (default 64).</p></td>
-        <td><code>64</code></td>
-      </tr>
-  </tbody>
-</table>
-<p><strong>Returns:</strong></p>
-<table>
-  <thead>
-    <tr>
-      <th>Type</th>
-      <th>Description</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td><code>ISCC</code></td>
-      <td><p>ISCC object with Content-Code Image.</p></td>
-    </tr>
-  </tbody>
-</table>
     </div>
 
   </div>
@@ -1066,47 +1030,11 @@ dct-matrix against their median values to set the hash-bits.</p>
     <div class="doc doc-contents ">
 
       <p>Create an ISCC Content-Code Image with algorithm v0.</p>
+<p>:param Sequence[int] pixels: Normalized image pixels (32x32 flattened gray values)
+:param int bits: Bit-length of ISCC Content-Code Image (default 64).
+:return: ISCC object with Content-Code Image.
+:rtype: ISCC</p>
 
-<p><strong>Parameters:</strong></p>
-<table>
-  <thead>
-    <tr>
-      <th>Name</th>
-      <th>Type</th>
-      <th>Description</th>
-      <th>Default</th>
-    </tr>
-  </thead>
-  <tbody>
-      <tr>
-        <td><code>pixels</code></td>
-        <td><code>Sequence[int]</code></td>
-        <td><p>Normalized image pixels (32x32 flattened gray values)</p></td>
-        <td><em>required</em></td>
-      </tr>
-      <tr>
-        <td><code>bits</code></td>
-        <td><code>int</code></td>
-        <td><p>Bit-length of ISCC Content-Code Image (default 64).</p></td>
-        <td><code>64</code></td>
-      </tr>
-  </tbody>
-</table>
-<p><strong>Returns:</strong></p>
-<table>
-  <thead>
-    <tr>
-      <th>Type</th>
-      <th>Description</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td><code>ISCC</code></td>
-      <td><p>ISCC object with Content-Code Image.</p></td>
-    </tr>
-  </tbody>
-</table>
     </div>
 
   </div>
@@ -1128,47 +1056,11 @@ dct-matrix against their median values to set the hash-bits.</p>
     <div class="doc doc-contents ">
 
       <p>Calculate image hash from normalized grayscale pixel sequence of length 1024.</p>
+<p>:param Sequence[int] pixels:
+:param int bits: Bit-length of image hash (default 64).
+:return: Similarity preserving Image-Hash digest.
+:rtype: bytes</p>
 
-<p><strong>Parameters:</strong></p>
-<table>
-  <thead>
-    <tr>
-      <th>Name</th>
-      <th>Type</th>
-      <th>Description</th>
-      <th>Default</th>
-    </tr>
-  </thead>
-  <tbody>
-      <tr>
-        <td><code>pixels</code></td>
-        <td><code>Sequence[int]</code></td>
-        <td></td>
-        <td><em>required</em></td>
-      </tr>
-      <tr>
-        <td><code>bits</code></td>
-        <td><code>int</code></td>
-        <td><p>Bit-length of image hash (default 64).</p></td>
-        <td><code>64</code></td>
-      </tr>
-  </tbody>
-</table>
-<p><strong>Returns:</strong></p>
-<table>
-  <thead>
-    <tr>
-      <th>Type</th>
-      <th>Description</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td><code>bytes</code></td>
-      <td><p>Similarity preserving Image-Hash digest.</p></td>
-    </tr>
-  </tbody>
-</table>
     </div>
 
   </div>

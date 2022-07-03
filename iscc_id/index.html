@@ -1017,59 +1017,13 @@ signatory.</p>
     <div class="doc doc-contents ">
 
       <p>Generate  ISCC-ID from ISCC-CODE with the latest standard algorithm.</p>
+<p>:param str iscc_code: The ISCC-CODE from which to mint the ISCC-ID.
+:param int chain_id: Chain-ID of blockchain from which the ISCC-ID is minted.
+:param str wallet: The wallet address that signes the ISCC declaration
+:param int uc: Uniqueness counter of ISCC-ID.
+:return: ISCC object with an ISCC-ID
+:rtype: dict</p>
 
-<p><strong>Parameters:</strong></p>
-<table>
-  <thead>
-    <tr>
-      <th>Name</th>
-      <th>Type</th>
-      <th>Description</th>
-      <th>Default</th>
-    </tr>
-  </thead>
-  <tbody>
-      <tr>
-        <td><code>iscc_code</code></td>
-        <td><code>str</code></td>
-        <td><p>The ISCC-CODE from which to mint the ISCC-ID.</p></td>
-        <td><em>required</em></td>
-      </tr>
-      <tr>
-        <td><code>chain_id</code></td>
-        <td><code>int</code></td>
-        <td><p>Chain-ID of blockchain from which the ISCC-ID is minted.</p></td>
-        <td><em>required</em></td>
-      </tr>
-      <tr>
-        <td><code>wallet</code></td>
-        <td><code>str</code></td>
-        <td><p>The wallet address that signes the ISCC declaration</p></td>
-        <td><em>required</em></td>
-      </tr>
-      <tr>
-        <td><code>uc</code></td>
-        <td><code>int</code></td>
-        <td><p>Uniqueness counter of ISCC-ID.</p></td>
-        <td><code>0</code></td>
-      </tr>
-  </tbody>
-</table>
-<p><strong>Returns:</strong></p>
-<table>
-  <thead>
-    <tr>
-      <th>Type</th>
-      <th>Description</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td><code>dict</code></td>
-      <td><p>ISCC object with an ISCC-ID</p></td>
-    </tr>
-  </tbody>
-</table>
     </div>
 
   </div>
@@ -1092,59 +1046,13 @@ signatory.</p>
 
       <p>Generate an ISCC-ID from an ISCC-CODE with uniqueness counter 'uc' with
 algorithm v0.</p>
+<p>:param str iscc_code: The ISCC-CODE from which to mint the ISCC-ID.
+:param int chain_id: Chain-ID of blockchain from which the ISCC-ID is minted.
+:param str wallet: The wallet address that signes the ISCC declaration
+:param int uc: Uniqueness counter of ISCC-ID.
+:return: ISCC object with an ISCC-ID
+:rtype: dict</p>
 
-<p><strong>Parameters:</strong></p>
-<table>
-  <thead>
-    <tr>
-      <th>Name</th>
-      <th>Type</th>
-      <th>Description</th>
-      <th>Default</th>
-    </tr>
-  </thead>
-  <tbody>
-      <tr>
-        <td><code>iscc_code</code></td>
-        <td><code>str</code></td>
-        <td><p>The ISCC-CODE from which to mint the ISCC-ID.</p></td>
-        <td><em>required</em></td>
-      </tr>
-      <tr>
-        <td><code>chain_id</code></td>
-        <td><code>int</code></td>
-        <td><p>Chain-ID of blockchain from which the ISCC-ID is minted.</p></td>
-        <td><em>required</em></td>
-      </tr>
-      <tr>
-        <td><code>wallet</code></td>
-        <td><code>str</code></td>
-        <td><p>The wallet address that signes the ISCC declaration</p></td>
-        <td><em>required</em></td>
-      </tr>
-      <tr>
-        <td><code>uc</code></td>
-        <td><code>int</code></td>
-        <td><p>Uniqueness counter of ISCC-ID.</p></td>
-        <td><code>0</code></td>
-      </tr>
-  </tbody>
-</table>
-<p><strong>Returns:</strong></p>
-<table>
-  <thead>
-    <tr>
-      <th>Type</th>
-      <th>Description</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td><code>dict</code></td>
-      <td><p>ISCC object with an ISCC-ID</p></td>
-    </tr>
-  </tbody>
-</table>
     </div>
 
   </div>
@@ -1167,53 +1075,12 @@ algorithm v0.</p>
 
       <p>Calculate ISCC-ID hash digest from ISCC-CODE with algorithm v0.</p>
 <p>Accepts an ISCC-CODE or any sequence of ISCC-UNITs.</p>
+<p>:param str iscc_code: ISCC-CODE
+:param str wallet: The wallet address that signes the ISCC declaration
+:param int uc: Uniqueness counter for ISCC-ID.
+:return: Digest for ISCC-ID without header but including uniqueness counter.
+:rtype: bytes</p>
 
-<p><strong>Parameters:</strong></p>
-<table>
-  <thead>
-    <tr>
-      <th>Name</th>
-      <th>Type</th>
-      <th>Description</th>
-      <th>Default</th>
-    </tr>
-  </thead>
-  <tbody>
-      <tr>
-        <td><code>iscc_code</code></td>
-        <td><code>str</code></td>
-        <td><p>ISCC-CODE</p></td>
-        <td><em>required</em></td>
-      </tr>
-      <tr>
-        <td><code>wallet</code></td>
-        <td><code>str</code></td>
-        <td><p>The wallet address that signes the ISCC declaration</p></td>
-        <td><em>required</em></td>
-      </tr>
-      <tr>
-        <td><code>uc</code></td>
-        <td><code>int</code></td>
-        <td><p>Uniqueness counter for ISCC-ID.</p></td>
-        <td><code>0</code></td>
-      </tr>
-  </tbody>
-</table>
-<p><strong>Returns:</strong></p>
-<table>
-  <thead>
-    <tr>
-      <th>Type</th>
-      <th>Description</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td><code>bytes</code></td>
-      <td><p>Digest for ISCC-ID without header but including uniqueness counter.</p></td>
-    </tr>
-  </tbody>
-</table>
     </div>
 
   </div>
@@ -1235,41 +1102,10 @@ algorithm v0.</p>
     <div class="doc doc-contents ">
 
       <p>Increment uniqueness counter of an ISCC-ID with latest standard algorithm.</p>
+<p>:param str iscc_id: Base32-encoded ISCC-ID.
+:return: Base32-encoded ISCC-ID with counter incremented by one.
+:rtype: str</p>
 
-<p><strong>Parameters:</strong></p>
-<table>
-  <thead>
-    <tr>
-      <th>Name</th>
-      <th>Type</th>
-      <th>Description</th>
-      <th>Default</th>
-    </tr>
-  </thead>
-  <tbody>
-      <tr>
-        <td><code>iscc_id</code></td>
-        <td><code>str</code></td>
-        <td><p>Base32-encoded ISCC-ID.</p></td>
-        <td><em>required</em></td>
-      </tr>
-  </tbody>
-</table>
-<p><strong>Returns:</strong></p>
-<table>
-  <thead>
-    <tr>
-      <th>Type</th>
-      <th>Description</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td><code>str</code></td>
-      <td><p>Base32-encoded ISCC-ID with counter incremented by one.</p></td>
-    </tr>
-  </tbody>
-</table>
     </div>
 
   </div>
@@ -1291,41 +1127,10 @@ algorithm v0.</p>
     <div class="doc doc-contents ">
 
       <p>Increment uniqueness counter of an ISCC-ID with algorithm v0.</p>
+<p>:param str iscc_id: Base32-encoded ISCC-ID.
+:return: Base32-encoded ISCC-ID with counter incremented by one (without "ISCC:" prefix).
+:rtype: str</p>
 
-<p><strong>Parameters:</strong></p>
-<table>
-  <thead>
-    <tr>
-      <th>Name</th>
-      <th>Type</th>
-      <th>Description</th>
-      <th>Default</th>
-    </tr>
-  </thead>
-  <tbody>
-      <tr>
-        <td><code>iscc_id</code></td>
-        <td><code>str</code></td>
-        <td><p>Base32-encoded ISCC-ID.</p></td>
-        <td><em>required</em></td>
-      </tr>
-  </tbody>
-</table>
-<p><strong>Returns:</strong></p>
-<table>
-  <thead>
-    <tr>
-      <th>Type</th>
-      <th>Description</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td><code>str</code></td>
-      <td><p>Base32-encoded ISCC-ID with counter incremented by one (without "ISCC:" prefix).</p></td>
-    </tr>
-  </tbody>
-</table>
     </div>
 
   </div>

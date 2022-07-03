@@ -1000,47 +1000,11 @@ But the format requires a custom binary parser to decode the frame signaturs.</p
     <div class="doc doc-contents ">
 
       <p>Create an ISCC Video-Code with the latest standard algorithm.</p>
+<p>:param ic.FrameSig frame_sigs: Sequence of MP7 frame signatures
+:param int bits: Bit-length resulting Instance-Code (multiple of 64)
+:return: ISCC object with Video-Code
+:rtype: dict</p>
 
-<p><strong>Parameters:</strong></p>
-<table>
-  <thead>
-    <tr>
-      <th>Name</th>
-      <th>Type</th>
-      <th>Description</th>
-      <th>Default</th>
-    </tr>
-  </thead>
-  <tbody>
-      <tr>
-        <td><code>frame_sigs</code></td>
-        <td><code>ic.FrameSig</code></td>
-        <td><p>Sequence of MP7 frame signatures</p></td>
-        <td><em>required</em></td>
-      </tr>
-      <tr>
-        <td><code>bits</code></td>
-        <td><code>int</code></td>
-        <td><p>Bit-length resulting Instance-Code (multiple of 64)</p></td>
-        <td><code>64</code></td>
-      </tr>
-  </tbody>
-</table>
-<p><strong>Returns:</strong></p>
-<table>
-  <thead>
-    <tr>
-      <th>Type</th>
-      <th>Description</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td><code>dict</code></td>
-      <td><p>ISCC object with Video-Code</p></td>
-    </tr>
-  </tbody>
-</table>
     </div>
 
   </div>
@@ -1062,47 +1026,11 @@ But the format requires a custom binary parser to decode the frame signaturs.</p
     <div class="doc doc-contents ">
 
       <p>Create an ISCC Video-Code with algorithm v0.</p>
+<p>:param ic.FrameSig frame_sigs: Sequence of MP7 frame signatures
+:param int bits: Bit-length resulting Video-Code (multiple of 64)
+:return: ISCC object with Video-Code
+:rtype: dict</p>
 
-<p><strong>Parameters:</strong></p>
-<table>
-  <thead>
-    <tr>
-      <th>Name</th>
-      <th>Type</th>
-      <th>Description</th>
-      <th>Default</th>
-    </tr>
-  </thead>
-  <tbody>
-      <tr>
-        <td><code>frame_sigs</code></td>
-        <td><code>ic.FrameSig</code></td>
-        <td><p>Sequence of MP7 frame signatures</p></td>
-        <td><em>required</em></td>
-      </tr>
-      <tr>
-        <td><code>bits</code></td>
-        <td><code>int</code></td>
-        <td><p>Bit-length resulting Video-Code (multiple of 64)</p></td>
-        <td><code>64</code></td>
-      </tr>
-  </tbody>
-</table>
-<p><strong>Returns:</strong></p>
-<table>
-  <thead>
-    <tr>
-      <th>Type</th>
-      <th>Description</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td><code>dict</code></td>
-      <td><p>ISCC object with Video-Code</p></td>
-    </tr>
-  </tbody>
-</table>
     </div>
 
   </div>
@@ -1124,32 +1052,9 @@ But the format requires a custom binary parser to decode the frame signaturs.</p
     <div class="doc doc-contents ">
 
       <p>Compute video hash v0 from MP7 frame signatures.</p>
+<p>:param ic.FrameSig frame_sigs: 2D matrix of MP7 frame signatures
+:param int bits: Bit-length of resulting Video-Code (multiple of 64)</p>
 
-<p><strong>Parameters:</strong></p>
-<table>
-  <thead>
-    <tr>
-      <th>Name</th>
-      <th>Type</th>
-      <th>Description</th>
-      <th>Default</th>
-    </tr>
-  </thead>
-  <tbody>
-      <tr>
-        <td><code>frame_sigs</code></td>
-        <td><code>ic.FrameSig</code></td>
-        <td><p>2D matrix of MP7 frame signatures</p></td>
-        <td><em>required</em></td>
-      </tr>
-      <tr>
-        <td><code>bits</code></td>
-        <td><code>int</code></td>
-        <td><p>Bit-length of resulting Video-Code (multiple of 64)</p></td>
-        <td><code>64</code></td>
-      </tr>
-  </tbody>
-</table>
     </div>
 
   </div>

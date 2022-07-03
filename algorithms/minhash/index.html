@@ -1008,41 +1008,10 @@
     <div class="doc doc-contents ">
 
       <p>Calculate a 64 dimensional minhash integer vector.</p>
+<p>:param List[int] features: List of integer features
+:return: Minhash vector
+:rtype: List[int]</p>
 
-<p><strong>Parameters:</strong></p>
-<table>
-  <thead>
-    <tr>
-      <th>Name</th>
-      <th>Type</th>
-      <th>Description</th>
-      <th>Default</th>
-    </tr>
-  </thead>
-  <tbody>
-      <tr>
-        <td><code>features</code></td>
-        <td><code>List[int]</code></td>
-        <td><p>List of integer features</p></td>
-        <td><em>required</em></td>
-      </tr>
-  </tbody>
-</table>
-<p><strong>Returns:</strong></p>
-<table>
-  <thead>
-    <tr>
-      <th>Type</th>
-      <th>Description</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td><code>List[int]</code></td>
-      <td><p>Minhash vector</p></td>
-    </tr>
-  </tbody>
-</table>
         <details class="quote">
           <summary>Source code in <code>iscc_core\minhash.py</code></summary>
           <div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="k">def</span> <span class="nf">alg_minhash</span><span class="p">(</span><span class="n">features</span><span class="p">):</span>
@@ -1080,41 +1049,10 @@
     <div class="doc doc-contents ">
 
       <p>Create 64-bit minimum hash digest.</p>
+<p>:param List[int] features: List of integer features
+:return: 64-bit binary from the least significant bits of the minhash values
+:rtype: bytes</p>
 
-<p><strong>Parameters:</strong></p>
-<table>
-  <thead>
-    <tr>
-      <th>Name</th>
-      <th>Type</th>
-      <th>Description</th>
-      <th>Default</th>
-    </tr>
-  </thead>
-  <tbody>
-      <tr>
-        <td><code>features</code></td>
-        <td><code>List[int]</code></td>
-        <td><p>List of integer features</p></td>
-        <td><em>required</em></td>
-      </tr>
-  </tbody>
-</table>
-<p><strong>Returns:</strong></p>
-<table>
-  <thead>
-    <tr>
-      <th>Type</th>
-      <th>Description</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td><code>bytes</code></td>
-      <td><p>64-bit binary from the least significant bits of the minhash values</p></td>
-    </tr>
-  </tbody>
-</table>
         <details class="quote">
           <summary>Source code in <code>iscc_core\minhash.py</code></summary>
           <div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="k">def</span> <span class="nf">alg_minhash_64</span><span class="p">(</span><span class="n">features</span><span class="p">):</span>
@@ -1150,41 +1088,10 @@
     <div class="doc doc-contents ">
 
       <p>Create 256-bit minimum hash digest.</p>
+<p>:param List[int] features: List of integer features
+:return: 256-bit binary from the least significant bits of the minhash values
+:rtype: bytes</p>
 
-<p><strong>Parameters:</strong></p>
-<table>
-  <thead>
-    <tr>
-      <th>Name</th>
-      <th>Type</th>
-      <th>Description</th>
-      <th>Default</th>
-    </tr>
-  </thead>
-  <tbody>
-      <tr>
-        <td><code>features</code></td>
-        <td><code>List[int]</code></td>
-        <td><p>List of integer features</p></td>
-        <td><em>required</em></td>
-      </tr>
-  </tbody>
-</table>
-<p><strong>Returns:</strong></p>
-<table>
-  <thead>
-    <tr>
-      <th>Type</th>
-      <th>Description</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td><code>bytes</code></td>
-      <td><p>256-bit binary from the least significant bits of the minhash values</p></td>
-    </tr>
-  </tbody>
-</table>
         <details class="quote">
           <summary>Source code in <code>iscc_core\minhash.py</code></summary>
           <div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="k">def</span> <span class="nf">alg_minhash_256</span><span class="p">(</span><span class="n">features</span><span class="p">):</span>
@@ -1223,47 +1130,11 @@
 <p>Concatenates <code>lsb</code> number of least-significant bits from each integer in <code>mhash</code>.
 For example an <code>mhash</code> with 64 integers and <code>lsb=4</code> will produce a 256-bit summary
 of the minhash vector.</p>
+<p>:param List[int] mhash: List of minhash integer features
+:param int lsb: Number of the least significant bits to retain
+:return: 256-bit binary from the least significant bits of the minhash values
+:rtype: bytes</p>
 
-<p><strong>Parameters:</strong></p>
-<table>
-  <thead>
-    <tr>
-      <th>Name</th>
-      <th>Type</th>
-      <th>Description</th>
-      <th>Default</th>
-    </tr>
-  </thead>
-  <tbody>
-      <tr>
-        <td><code>mhash</code></td>
-        <td><code>List[int]</code></td>
-        <td><p>List of minhash integer features</p></td>
-        <td><em>required</em></td>
-      </tr>
-      <tr>
-        <td><code>lsb</code></td>
-        <td><code>int</code></td>
-        <td><p>Number of the least significant bits to retain</p></td>
-        <td><code>4</code></td>
-      </tr>
-  </tbody>
-</table>
-<p><strong>Returns:</strong></p>
-<table>
-  <thead>
-    <tr>
-      <th>Type</th>
-      <th>Description</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td><code>bytes</code></td>
-      <td><p>256-bit binary from the least significant bits of the minhash values</p></td>
-    </tr>
-  </tbody>
-</table>
         <details class="quote">
           <summary>Source code in <code>iscc_core\minhash.py</code></summary>
           <div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="k">def</span> <span class="nf">alg_minhash_compress</span><span class="p">(</span><span class="n">mhash</span><span class="p">,</span> <span class="n">lsb</span><span class="o">=</span><span class="mi">4</span><span class="p">):</span>

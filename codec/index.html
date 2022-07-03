@@ -1150,65 +1150,14 @@
 <p>The <code>length</code> value must be the <strong>length in number of bits</strong> for the component.
 If <code>digest</code> has more bits than specified by <code>length</code> it wil be truncated.</p>
 </div>
+<p>:param MainType mtype: Maintype of unit (0-6)
+:param SubType stype: SubType of unit depending on MainType (0-5)
+:param Version version: Version of unit algorithm (0).
+:param length bit_length: Length of unit, in number of bits (multiple of 32)
+:param bytes digest: The hash digest of the unit.
+:return: Base32 encoded ISCC-UNIT.
+:rtype: str</p>
 
-<p><strong>Parameters:</strong></p>
-<table>
-  <thead>
-    <tr>
-      <th>Name</th>
-      <th>Type</th>
-      <th>Description</th>
-      <th>Default</th>
-    </tr>
-  </thead>
-  <tbody>
-      <tr>
-        <td><code>mtype</code></td>
-        <td><code>MainType</code></td>
-        <td><p>Maintype of unit (0-6)</p></td>
-        <td><em>required</em></td>
-      </tr>
-      <tr>
-        <td><code>stype</code></td>
-        <td><code>SubType</code></td>
-        <td><p>SubType of unit depending on MainType (0-5)</p></td>
-        <td><em>required</em></td>
-      </tr>
-      <tr>
-        <td><code>version</code></td>
-        <td><code>Version</code></td>
-        <td><p>Version of unit algorithm (0).</p></td>
-        <td><em>required</em></td>
-      </tr>
-      <tr>
-        <td><code>bit_length</code></td>
-        <td><code>length</code></td>
-        <td><p>Length of unit, in number of bits (multiple of 32)</p></td>
-        <td><em>required</em></td>
-      </tr>
-      <tr>
-        <td><code>digest</code></td>
-        <td><code>bytes</code></td>
-        <td><p>The hash digest of the unit.</p></td>
-        <td><em>required</em></td>
-      </tr>
-  </tbody>
-</table>
-<p><strong>Returns:</strong></p>
-<table>
-  <thead>
-    <tr>
-      <th>Type</th>
-      <th>Description</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td><code>str</code></td>
-      <td><p>Base32 encoded ISCC-UNIT.</p></td>
-    </tr>
-  </tbody>
-</table>
         <details class="quote">
           <summary>Source code in <code>iscc_core\codec.py</code></summary>
           <div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="k">def</span> <span class="nf">encode_component</span><span class="p">(</span><span class="n">mtype</span><span class="p">,</span> <span class="n">stype</span><span class="p">,</span> <span class="n">version</span><span class="p">,</span> <span class="n">bit_length</span><span class="p">,</span> <span class="n">digest</span><span class="p">):</span>
@@ -1271,59 +1220,13 @@ is uneven it is padded with 4-bit <code>0000</code> at the end.</p>
 <p>The length value must be encoded beforhand because its semantics depend on
 the MainType (see <code>encode_length</code> function).</p>
 </div>
+<p>:param MainType mtype: MainType of unit.
+:param SubType stype: SubType of unit.
+:param Version version: Version of component algorithm.
+:param Length length: length value of unit (1 means 64-bits for standard units)
+:return: Varnibble stream encoded ISCC header as bytes.
+:rtype: bytes</p>
 
-<p><strong>Parameters:</strong></p>
-<table>
-  <thead>
-    <tr>
-      <th>Name</th>
-      <th>Type</th>
-      <th>Description</th>
-      <th>Default</th>
-    </tr>
-  </thead>
-  <tbody>
-      <tr>
-        <td><code>mtype</code></td>
-        <td><code>MainType</code></td>
-        <td><p>MainType of unit.</p></td>
-        <td><em>required</em></td>
-      </tr>
-      <tr>
-        <td><code>stype</code></td>
-        <td><code>SubType</code></td>
-        <td><p>SubType of unit.</p></td>
-        <td><em>required</em></td>
-      </tr>
-      <tr>
-        <td><code>version</code></td>
-        <td><code>Version</code></td>
-        <td><p>Version of component algorithm.</p></td>
-        <td><code>0</code></td>
-      </tr>
-      <tr>
-        <td><code>length</code></td>
-        <td><code>Length</code></td>
-        <td><p>length value of unit (1 means 64-bits for standard units)</p></td>
-        <td><code>1</code></td>
-      </tr>
-  </tbody>
-</table>
-<p><strong>Returns:</strong></p>
-<table>
-  <thead>
-    <tr>
-      <th>Type</th>
-      <th>Description</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td><code>bytes</code></td>
-      <td><p>Varnibble stream encoded ISCC header as bytes.</p></td>
-    </tr>
-  </tbody>
-</table>
         <details class="quote">
           <summary>Source code in <code>iscc_core\codec.py</code></summary>
           <div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="k">def</span> <span class="nf">encode_header</span><span class="p">(</span><span class="n">mtype</span><span class="p">,</span> <span class="n">stype</span><span class="p">,</span> <span class="n">version</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">length</span><span class="o">=</span><span class="mi">1</span><span class="p">):</span>
@@ -1413,41 +1316,10 @@ the MainType (see <code>encode_length</code> function).</p>
 </tr>
 </tbody>
 </table>
+<p>:param int n: Positive integer to be encoded as varnibble (0-4679)
+:return: Varnibble encoded integera
+:rtype: bitarray</p>
 
-<p><strong>Parameters:</strong></p>
-<table>
-  <thead>
-    <tr>
-      <th>Name</th>
-      <th>Type</th>
-      <th>Description</th>
-      <th>Default</th>
-    </tr>
-  </thead>
-  <tbody>
-      <tr>
-        <td><code>n</code></td>
-        <td><code>int</code></td>
-        <td><p>Positive integer to be encoded as varnibble (0-4679)</p></td>
-        <td><em>required</em></td>
-      </tr>
-  </tbody>
-</table>
-<p><strong>Returns:</strong></p>
-<table>
-  <thead>
-    <tr>
-      <th>Type</th>
-      <th>Description</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td><code>bitarray</code></td>
-      <td><p>Varnibble encoded integera</p></td>
-    </tr>
-  </tbody>
-</table>
         <details class="quote">
           <summary>Source code in <code>iscc_core\codec.py</code></summary>
           <div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="k">def</span> <span class="nf">encode_varnibble</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
@@ -1505,41 +1377,10 @@ the MainType (see <code>encode_length</code> function).</p>
 <p>Tail data is included to enable decoding of sequential ISCCs. The returned tail
 data must be truncated to decode_length(r[0], r[3]) bits to recover the actual
 hash-bytes.</p>
+<p>:param bytes data: ISCC bytes
+:return: (MainType, SubType, Version, length, TailData)
+:rtype: IsccTuple</p>
 
-<p><strong>Parameters:</strong></p>
-<table>
-  <thead>
-    <tr>
-      <th>Name</th>
-      <th>Type</th>
-      <th>Description</th>
-      <th>Default</th>
-    </tr>
-  </thead>
-  <tbody>
-      <tr>
-        <td><code>data</code></td>
-        <td><code>bytes</code></td>
-        <td><p>ISCC bytes</p></td>
-        <td><em>required</em></td>
-      </tr>
-  </tbody>
-</table>
-<p><strong>Returns:</strong></p>
-<table>
-  <thead>
-    <tr>
-      <th>Type</th>
-      <th>Description</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td><code>IsccTuple</code></td>
-      <td><p>(MainType, SubType, Version, length, TailData)</p></td>
-    </tr>
-  </tbody>
-</table>
         <details class="quote">
           <summary>Source code in <code>iscc_core\codec.py</code></summary>
           <div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="k">def</span> <span class="nf">decode_header</span><span class="p">(</span><span class="n">data</span><span class="p">):</span>
@@ -1595,41 +1436,10 @@ hash-bytes.</p>
     <div class="doc doc-contents ">
 
       <p>Reads first varnibble, returns its integer value and remaining bits.</p>
+<p>:param bitarray b: Array of header bits
+:return: A tuple of the integer value of first varnible and the remaining bits.
+:rtype: Tuple[int, bitarray]</p>
 
-<p><strong>Parameters:</strong></p>
-<table>
-  <thead>
-    <tr>
-      <th>Name</th>
-      <th>Type</th>
-      <th>Description</th>
-      <th>Default</th>
-    </tr>
-  </thead>
-  <tbody>
-      <tr>
-        <td><code>b</code></td>
-        <td><code>bitarray</code></td>
-        <td><p>Array of header bits</p></td>
-        <td><em>required</em></td>
-      </tr>
-  </tbody>
-</table>
-<p><strong>Returns:</strong></p>
-<table>
-  <thead>
-    <tr>
-      <th>Type</th>
-      <th>Description</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td><code>Tuple[int, bitarray]</code></td>
-      <td><p>A tuple of the integer value of first varnible and the remaining bits.</p></td>
-    </tr>
-  </tbody>
-</table>
         <details class="quote">
           <summary>Source code in <code>iscc_core\codec.py</code></summary>
           <div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="k">def</span> <span class="nf">decode_varnibble</span><span class="p">(</span><span class="n">b</span><span class="p">):</span>
@@ -1677,41 +1487,10 @@ hash-bytes.</p>
 
       <p>Encodes a combination of ISCC units to an integer between 0-7 to be used as length
 value for the final encoding of MT.ISCC</p>
+<p>:param Tuple units: A tuple of a MainType combination (can be empty)
+:return: Integer value to be used as length-value for header encoding
+:rtype: int</p>
 
-<p><strong>Parameters:</strong></p>
-<table>
-  <thead>
-    <tr>
-      <th>Name</th>
-      <th>Type</th>
-      <th>Description</th>
-      <th>Default</th>
-    </tr>
-  </thead>
-  <tbody>
-      <tr>
-        <td><code>units</code></td>
-        <td><code>Tuple</code></td>
-        <td><p>A tuple of a MainType combination (can be empty)</p></td>
-        <td><em>required</em></td>
-      </tr>
-  </tbody>
-</table>
-<p><strong>Returns:</strong></p>
-<table>
-  <thead>
-    <tr>
-      <th>Type</th>
-      <th>Description</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td><code>int</code></td>
-      <td><p>Integer value to be used as length-value for header encoding</p></td>
-    </tr>
-  </tbody>
-</table>
         <details class="quote">
           <summary>Source code in <code>iscc_core\codec.py</code></summary>
           <div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="k">def</span> <span class="nf">encode_units</span><span class="p">(</span><span class="n">units</span><span class="p">):</span>
@@ -1794,7 +1573,7 @@ Examples: 32 -&gt; 0, 64 -&gt; 1, 96 -&gt; 2 ...
 optional. Length means the composition of optional 64-bit units included
 in the ISCC composite.
 
-Examples:
+!!! examples
     No optional units      -&gt; 0000 -&gt; 0
     CONTENT                -&gt; 0001 -&gt; 1
     SEMANTIC               -&gt; 0010 -&gt; 2
@@ -1806,53 +1585,17 @@ Examples:
 <p>For MainType <code>ID</code>:</p>
 <div class="highlight"><pre><span></span><code>Lengths means number the number of bits for the body including the counter
 Length is encoded as number of bytes of the counter (64-bit body is implicit)
-Examples:
+!!! examples
     64 -&gt; 0 (No counter)
     72 -&gt; 1 (One byte counter)
     80 -&gt; 2 (Two byte counter)
     ...
 </code></pre></div>
+<p>:param MainType mtype: The MainType for which to encode the length value.
+:param Length length: The length expressed according to the semantics of the type
+:return: The length value encoded as integer for use with write_header.
+:rtype: int</p>
 
-<p><strong>Parameters:</strong></p>
-<table>
-  <thead>
-    <tr>
-      <th>Name</th>
-      <th>Type</th>
-      <th>Description</th>
-      <th>Default</th>
-    </tr>
-  </thead>
-  <tbody>
-      <tr>
-        <td><code>mtype</code></td>
-        <td><code>MainType</code></td>
-        <td><p>The MainType for which to encode the length value.</p></td>
-        <td><em>required</em></td>
-      </tr>
-      <tr>
-        <td><code>length</code></td>
-        <td><code>Length</code></td>
-        <td><p>The length expressed according to the semantics of the type</p></td>
-        <td><em>required</em></td>
-      </tr>
-  </tbody>
-</table>
-<p><strong>Returns:</strong></p>
-<table>
-  <thead>
-    <tr>
-      <th>Type</th>
-      <th>Description</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td><code>int</code></td>
-      <td><p>The length value encoded as integer for use with write_header.</p></td>
-    </tr>
-  </tbody>
-</table>
         <details class="quote">
           <summary>Source code in <code>iscc_core\codec.py</code></summary>
           <div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="k">def</span> <span class="nf">encode_length</span><span class="p">(</span><span class="n">mtype</span><span class="p">,</span> <span class="n">length</span><span class="p">):</span>
@@ -2272,41 +2015,10 @@ Iscc:Maagztfqttvizpjr
 <a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="s1">&#39;ISCC:KUAG2PRCRS5LNVZVJKAFAVOJXLZZM&#39;</span>
 </code></pre></div>
 </div>
+<p>:param str iscc_code: Any valid ISCC string
+:return: Normalized ISCC
+:rtype: str</p>
 
-<p><strong>Parameters:</strong></p>
-<table>
-  <thead>
-    <tr>
-      <th>Name</th>
-      <th>Type</th>
-      <th>Description</th>
-      <th>Default</th>
-    </tr>
-  </thead>
-  <tbody>
-      <tr>
-        <td><code>iscc_code</code></td>
-        <td><code>str</code></td>
-        <td><p>Any valid ISCC string</p></td>
-        <td><em>required</em></td>
-      </tr>
-  </tbody>
-</table>
-<p><strong>Returns:</strong></p>
-<table>
-  <thead>
-    <tr>
-      <th>Type</th>
-      <th>Description</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td><code>str</code></td>
-      <td><p>Normalized ISCC</p></td>
-    </tr>
-  </tbody>
-</table>
         <details class="quote">
           <summary>Source code in <code>iscc_core\codec.py</code></summary>
           <div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="k">def</span> <span class="nf">iscc_normalize</span><span class="p">(</span><span class="n">iscc_code</span><span class="p">):</span>
@@ -2387,41 +2099,10 @@ Iscc:Maagztfqttvizpjr
     <div class="doc doc-contents ">
 
       <p>Decode ISCC to an IsccTuple</p>
+<p>:param str iscc: ISCC string
+:return: ISCC decoded to an IsccTuple
+:rtype: IsccTuple</p>
 
-<p><strong>Parameters:</strong></p>
-<table>
-  <thead>
-    <tr>
-      <th>Name</th>
-      <th>Type</th>
-      <th>Description</th>
-      <th>Default</th>
-    </tr>
-  </thead>
-  <tbody>
-      <tr>
-        <td><code>iscc</code></td>
-        <td><code>str</code></td>
-        <td><p>ISCC string</p></td>
-        <td><em>required</em></td>
-      </tr>
-  </tbody>
-</table>
-<p><strong>Returns:</strong></p>
-<table>
-  <thead>
-    <tr>
-      <th>Type</th>
-      <th>Description</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td><code>IsccTuple</code></td>
-      <td><p>ISCC decoded to an IsccTuple</p></td>
-    </tr>
-  </tbody>
-</table>
         <details class="quote">
           <summary>Source code in <code>iscc_core\codec.py</code></summary>
           <div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="k">def</span> <span class="nf">iscc_decode</span><span class="p">(</span><span class="n">iscc</span><span class="p">):</span>
@@ -2459,41 +2140,10 @@ Iscc:Maagztfqttvizpjr
     <div class="doc doc-contents ">
 
       <p>Convert ISCC to a human-readable representation</p>
+<p>:param str iscc: ISCC string
+:return: Human-readable representation of ISCC
+:rtype: str</p>
 
-<p><strong>Parameters:</strong></p>
-<table>
-  <thead>
-    <tr>
-      <th>Name</th>
-      <th>Type</th>
-      <th>Description</th>
-      <th>Default</th>
-    </tr>
-  </thead>
-  <tbody>
-      <tr>
-        <td><code>iscc</code></td>
-        <td><code>str</code></td>
-        <td><p>ISCC string</p></td>
-        <td><em>required</em></td>
-      </tr>
-  </tbody>
-</table>
-<p><strong>Returns:</strong></p>
-<table>
-  <thead>
-    <tr>
-      <th>Type</th>
-      <th>Description</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td><code>str</code></td>
-      <td><p>Human-readable representation of ISCC</p></td>
-    </tr>
-  </tbody>
-</table>
         <details class="quote">
           <summary>Source code in <code>iscc_core\codec.py</code></summary>
           <div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="k">def</span> <span class="nf">iscc_explain</span><span class="p">(</span><span class="n">iscc</span><span class="p">):</span>
@@ -2539,41 +2189,10 @@ Iscc:Maagztfqttvizpjr
 
       <p>Extract and convert ISCC HEADER to a readable Type-ID string.</p>
 <p>Type-ids can be used as names in databases to index ISCC-UNITs seperatly.</p>
+<p>:param str iscc: ISCC string
+:return: Unique Type-ID string
+:rtype: str</p>
 
-<p><strong>Parameters:</strong></p>
-<table>
-  <thead>
-    <tr>
-      <th>Name</th>
-      <th>Type</th>
-      <th>Description</th>
-      <th>Default</th>
-    </tr>
-  </thead>
-  <tbody>
-      <tr>
-        <td><code>iscc</code></td>
-        <td><code>str</code></td>
-        <td><p>ISCC string</p></td>
-        <td><em>required</em></td>
-      </tr>
-  </tbody>
-</table>
-<p><strong>Returns:</strong></p>
-<table>
-  <thead>
-    <tr>
-      <th>Type</th>
-      <th>Description</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td><code>str</code></td>
-      <td><p>Unique Type-ID string</p></td>
-    </tr>
-  </tbody>
-</table>
         <details class="quote">
           <summary>Source code in <code>iscc_core\codec.py</code></summary>
           <div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="k">def</span> <span class="nf">iscc_type_id</span><span class="p">(</span><span class="n">iscc</span><span class="p">):</span>
@@ -2630,47 +2249,11 @@ Iscc:Maagztfqttvizpjr
 <li>has a valid combination of header values</li>
 <li>is represented in its canonical URI form</li>
 </ul>
+<p>:param str iscc: ISCC string
+:param bool strict: Raise an exeption if validation fails (default True)
+:return: True if sting is valid else false. (raises ValueError in strict mode)
+:rtype: bool</p>
 
-<p><strong>Parameters:</strong></p>
-<table>
-  <thead>
-    <tr>
-      <th>Name</th>
-      <th>Type</th>
-      <th>Description</th>
-      <th>Default</th>
-    </tr>
-  </thead>
-  <tbody>
-      <tr>
-        <td><code>iscc</code></td>
-        <td><code>str</code></td>
-        <td><p>ISCC string</p></td>
-        <td><em>required</em></td>
-      </tr>
-      <tr>
-        <td><code>strict</code></td>
-        <td><code>bool</code></td>
-        <td><p>Raise an exeption if validation fails (default True)</p></td>
-        <td><code>True</code></td>
-      </tr>
-  </tbody>
-</table>
-<p><strong>Returns:</strong></p>
-<table>
-  <thead>
-    <tr>
-      <th>Type</th>
-      <th>Description</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td><code>bool</code></td>
-      <td><p>True if sting is valid else false. (raises ValueError in strict mode)</p></td>
-    </tr>
-  </tbody>
-</table>
         <details class="quote">
           <summary>Source code in <code>iscc_core\codec.py</code></summary>
           <div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="k">def</span> <span class="nf">iscc_validate</span><span class="p">(</span><span class="n">iscc</span><span class="p">,</span> <span class="n">strict</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
@@ -2760,41 +2343,10 @@ Iscc:Maagztfqttvizpjr
 
       <p>Cleanup ISCC string.</p>
 <p>Removes leading scheme, dashes, leading/trailing whitespace.</p>
+<p>:param str iscc: Any valid ISCC string
+:return: Cleaned ISCC string.
+:rtype: str</p>
 
-<p><strong>Parameters:</strong></p>
-<table>
-  <thead>
-    <tr>
-      <th>Name</th>
-      <th>Type</th>
-      <th>Description</th>
-      <th>Default</th>
-    </tr>
-  </thead>
-  <tbody>
-      <tr>
-        <td><code>iscc</code></td>
-        <td><code>str</code></td>
-        <td><p>Any valid ISCC string</p></td>
-        <td><em>required</em></td>
-      </tr>
-  </tbody>
-</table>
-<p><strong>Returns:</strong></p>
-<table>
-  <thead>
-    <tr>
-      <th>Type</th>
-      <th>Description</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td><code>str</code></td>
-      <td><p>Cleaned ISCC string.</p></td>
-    </tr>
-  </tbody>
-</table>
         <details class="quote">
           <summary>Source code in <code>iscc_core\codec.py</code></summary>
           <div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="k">def</span> <span class="nf">iscc_clean</span><span class="p">(</span><span class="n">iscc</span><span class="p">):</span>
