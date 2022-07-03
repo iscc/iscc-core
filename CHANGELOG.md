@@ -1,5 +1,9 @@
 # Changelog
 
+## [0.2.10] - 2022-07-03
+- Fix pip instalation is missing setuptools
+- Update mkdocs
+
 ## [0.2.9] - 2022-07-03
 - Added iscc_compare function
 - Optimized soft_hash_audio performance

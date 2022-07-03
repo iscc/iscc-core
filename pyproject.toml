@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "iscc-core"
-version = "0.2.9"
+version = "0.2.10"
 build = "build.py"
 description = "ISCC - Core Algorithms"
 authors = ["Titusz <tp@py7.de>"]
@@ -63,7 +63,7 @@ turbo = ["cython"]
 pytest = "*"
 black = { version = "*", allow-prereleases = true }
 mkdocs-material = "*"
-mkdocstrings = {extras = ["python-legacy"], version = "^0.18.0"}
+mkdocstrings = {extras = ["python-legacy"], version = "^0.19"}
 toml = "*"
 PyYAML = "*"
 coverage = "*"
@@ -87,5 +87,5 @@ sec = { cmd = "poetry run bandit -r iscc_core -q", help = "Security check with b
 all = ["gentests", "format", "docs", "lf", "test", "sec"]
 
 [build-system]
-requires = ["poetry-core>=1.0.0"]
+requires = ["poetry-core>=1.0.0", "setuptools", "wheel"]
 build-backend = "poetry.core.masonry.api"
