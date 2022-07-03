@@ -15,7 +15,7 @@
         <link rel="canonical" href="https://core.iscc.codes/">
       
       <link rel="icon" href="images/iscc-logo-icon-black.svg">
-      <meta name="generator" content="mkdocs-1.3.0, mkdocs-material-8.2.9">
+      <meta name="generator" content="mkdocs-1.3.0, mkdocs-material-8.3.8">
     
     
       
@@ -23,11 +23,12 @@
       
     
     
-      <link rel="stylesheet" href="assets/stylesheets/main.120efc48.min.css">
+      <link rel="stylesheet" href="assets/stylesheets/main.1d29e8d0.min.css">
       
         
-        <link rel="stylesheet" href="assets/stylesheets/palette.9647289d.min.css">
+        <link rel="stylesheet" href="assets/stylesheets/palette.cbb835fc.min.css">
         
+      
       
     
     
@@ -549,7 +550,7 @@
     <li class="md-nav__item md-nav__item--nested">
       
       
-        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_4" data-md-state="indeterminate" type="checkbox" id="__nav_4" checked>
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" data-md-toggle="__nav_4" type="checkbox" id="__nav_4" checked>
       
       
       
@@ -613,7 +614,7 @@
     <li class="md-nav__item md-nav__item--nested">
       
       
-        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_4_3" data-md-state="indeterminate" type="checkbox" id="__nav_4_3" checked>
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" data-md-toggle="__nav_4_3" type="checkbox" id="__nav_4_3" checked>
       
       
       
@@ -820,7 +821,7 @@
     <li class="md-nav__item md-nav__item--nested">
       
       
-        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_7" data-md-state="indeterminate" type="checkbox" id="__nav_7" checked>
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" data-md-toggle="__nav_7" type="checkbox" id="__nav_7" checked>
       
       
       
@@ -1089,8 +1090,8 @@
 <div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>pip install iscc-core
 </code></pre></div>
 <h2 id="quick-start">Quick Start<a class="headerlink" href="#quick-start" title="Permanent link">#</a></h2>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="kn">import</span> <span class="nn">iscc_core</span> <span class="k">as</span> <span class="nn">ic</span>
-<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="kn">import</span> <span class="nn">json</span>
+<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="kn">import</span> <span class="nn">iscc_core</span> <span class="k">as</span> <span class="nn">ic</span>
 <a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a>
 <a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a><span class="n">meta_code</span> <span class="o">=</span> <span class="n">ic</span><span class="o">.</span><span class="n">gen_meta_code</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s2">&quot;ISCC Test Document!&quot;</span><span class="p">)</span>
 <a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a>
@@ -1115,20 +1116,29 @@
 <a id="__codelineno-1-24" name="__codelineno-1-24" href="#__codelineno-1-24"></a>    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Instance-Code: </span><span class="si">{</span><span class="n">instance_code</span><span class="p">[</span><span class="s1">&#39;iscc&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
 <a id="__codelineno-1-25" name="__codelineno-1-25" href="#__codelineno-1-25"></a>    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Structure:     </span><span class="si">{</span><span class="n">ic</span><span class="o">.</span><span class="n">iscc_explain</span><span class="p">(</span><span class="n">instance_code</span><span class="p">[</span><span class="s1">&#39;iscc&#39;</span><span class="p">])</span><span class="si">}</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
 <a id="__codelineno-1-26" name="__codelineno-1-26" href="#__codelineno-1-26"></a>
-<a id="__codelineno-1-27" name="__codelineno-1-27" href="#__codelineno-1-27"></a><span class="n">iscc_code</span> <span class="o">=</span> <span class="n">ic</span><span class="o">.</span><span class="n">gen_iscc_code</span><span class="p">(</span>
-<a id="__codelineno-1-28" name="__codelineno-1-28" href="#__codelineno-1-28"></a>    <span class="p">(</span><span class="n">meta_code</span><span class="p">[</span><span class="s2">&quot;iscc&quot;</span><span class="p">],</span> <span class="n">text_code</span><span class="p">[</span><span class="s2">&quot;iscc&quot;</span><span class="p">],</span> <span class="n">data_code</span><span class="p">[</span><span class="s2">&quot;iscc&quot;</span><span class="p">],</span> <span class="n">instance_code</span><span class="p">[</span><span class="s2">&quot;iscc&quot;</span><span class="p">])</span>
-<a id="__codelineno-1-29" name="__codelineno-1-29" href="#__codelineno-1-29"></a><span class="p">)</span>
-<a id="__codelineno-1-30" name="__codelineno-1-30" href="#__codelineno-1-30"></a>
-<a id="__codelineno-1-31" name="__codelineno-1-31" href="#__codelineno-1-31"></a><span class="n">iscc_obj</span> <span class="o">=</span> <span class="n">ic</span><span class="o">.</span><span class="n">Code</span><span class="p">(</span><span class="n">iscc_code</span><span class="p">[</span><span class="s2">&quot;iscc&quot;</span><span class="p">])</span>
-<a id="__codelineno-1-32" name="__codelineno-1-32" href="#__codelineno-1-32"></a><span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;ISCC-CODE:     </span><span class="si">{</span><span class="n">ic</span><span class="o">.</span><span class="n">iscc_normalize</span><span class="p">(</span><span class="n">iscc_obj</span><span class="o">.</span><span class="n">code</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
-<a id="__codelineno-1-33" name="__codelineno-1-33" href="#__codelineno-1-33"></a><span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Structure:     </span><span class="si">{</span><span class="n">iscc_obj</span><span class="o">.</span><span class="n">explain</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
-<a id="__codelineno-1-34" name="__codelineno-1-34" href="#__codelineno-1-34"></a><span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Multiformat:   </span><span class="si">{</span><span class="n">iscc_obj</span><span class="o">.</span><span class="n">mf_base32</span><span class="si">}</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
-<a id="__codelineno-1-35" name="__codelineno-1-35" href="#__codelineno-1-35"></a>
-<a id="__codelineno-1-36" name="__codelineno-1-36" href="#__codelineno-1-36"></a><span class="n">iscc_id</span> <span class="o">=</span> <span class="n">ic</span><span class="o">.</span><span class="n">gen_iscc_id</span><span class="p">(</span><span class="n">iscc_obj</span><span class="o">.</span><span class="n">code</span><span class="p">,</span> <span class="n">chain_id</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">wallet</span><span class="o">=</span><span class="s2">&quot;1Bq568oLhi5HvdgC6rcBSGmu4G3FeAntCz&quot;</span><span class="p">)</span>
-<a id="__codelineno-1-37" name="__codelineno-1-37" href="#__codelineno-1-37"></a><span class="n">iscc_id_obj</span> <span class="o">=</span> <span class="n">ic</span><span class="o">.</span><span class="n">Code</span><span class="p">(</span><span class="n">iscc_id</span><span class="p">[</span><span class="s2">&quot;iscc&quot;</span><span class="p">])</span>
-<a id="__codelineno-1-38" name="__codelineno-1-38" href="#__codelineno-1-38"></a><span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;ISCC-ID:       </span><span class="si">{</span><span class="n">ic</span><span class="o">.</span><span class="n">iscc_normalize</span><span class="p">(</span><span class="n">iscc_id_obj</span><span class="o">.</span><span class="n">code</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
-<a id="__codelineno-1-39" name="__codelineno-1-39" href="#__codelineno-1-39"></a><span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Structure:     </span><span class="si">{</span><span class="n">iscc_id_obj</span><span class="o">.</span><span class="n">explain</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
-<a id="__codelineno-1-40" name="__codelineno-1-40" href="#__codelineno-1-40"></a><span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Multiformat:   </span><span class="si">{</span><span class="n">iscc_id_obj</span><span class="o">.</span><span class="n">mf_base32</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<a id="__codelineno-1-27" name="__codelineno-1-27" href="#__codelineno-1-27"></a><span class="c1"># Compbine ISCC-UNITs into ISCC-CODE</span>
+<a id="__codelineno-1-28" name="__codelineno-1-28" href="#__codelineno-1-28"></a><span class="n">iscc_code</span> <span class="o">=</span> <span class="n">ic</span><span class="o">.</span><span class="n">gen_iscc_code</span><span class="p">(</span>
+<a id="__codelineno-1-29" name="__codelineno-1-29" href="#__codelineno-1-29"></a>    <span class="p">(</span><span class="n">meta_code</span><span class="p">[</span><span class="s2">&quot;iscc&quot;</span><span class="p">],</span> <span class="n">text_code</span><span class="p">[</span><span class="s2">&quot;iscc&quot;</span><span class="p">],</span> <span class="n">data_code</span><span class="p">[</span><span class="s2">&quot;iscc&quot;</span><span class="p">],</span> <span class="n">instance_code</span><span class="p">[</span><span class="s2">&quot;iscc&quot;</span><span class="p">])</span>
+<a id="__codelineno-1-30" name="__codelineno-1-30" href="#__codelineno-1-30"></a><span class="p">)</span>
+<a id="__codelineno-1-31" name="__codelineno-1-31" href="#__codelineno-1-31"></a>
+<a id="__codelineno-1-32" name="__codelineno-1-32" href="#__codelineno-1-32"></a><span class="c1"># Create convenience `Code` object from ISCC string</span>
+<a id="__codelineno-1-33" name="__codelineno-1-33" href="#__codelineno-1-33"></a><span class="n">iscc_obj</span> <span class="o">=</span> <span class="n">ic</span><span class="o">.</span><span class="n">Code</span><span class="p">(</span><span class="n">iscc_code</span><span class="p">[</span><span class="s2">&quot;iscc&quot;</span><span class="p">])</span>
+<a id="__codelineno-1-34" name="__codelineno-1-34" href="#__codelineno-1-34"></a><span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;ISCC-CODE:     </span><span class="si">{</span><span class="n">ic</span><span class="o">.</span><span class="n">iscc_normalize</span><span class="p">(</span><span class="n">iscc_obj</span><span class="o">.</span><span class="n">code</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<a id="__codelineno-1-35" name="__codelineno-1-35" href="#__codelineno-1-35"></a><span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Structure:     </span><span class="si">{</span><span class="n">iscc_obj</span><span class="o">.</span><span class="n">explain</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<a id="__codelineno-1-36" name="__codelineno-1-36" href="#__codelineno-1-36"></a><span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Multiformat:   </span><span class="si">{</span><span class="n">iscc_obj</span><span class="o">.</span><span class="n">mf_base32</span><span class="si">}</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+<a id="__codelineno-1-37" name="__codelineno-1-37" href="#__codelineno-1-37"></a>
+<a id="__codelineno-1-38" name="__codelineno-1-38" href="#__codelineno-1-38"></a><span class="c1"># Compare with random ISCC-CODE:</span>
+<a id="__codelineno-1-39" name="__codelineno-1-39" href="#__codelineno-1-39"></a><span class="n">rand_iscc</span> <span class="o">=</span> <span class="n">ic</span><span class="o">.</span><span class="n">Code</span><span class="o">.</span><span class="n">rnd</span><span class="p">(</span><span class="n">mt</span><span class="o">=</span><span class="n">ic</span><span class="o">.</span><span class="n">MT</span><span class="o">.</span><span class="n">ISCC</span><span class="p">,</span> <span class="n">bits</span><span class="o">=</span><span class="mi">256</span><span class="p">)</span>
+<a id="__codelineno-1-40" name="__codelineno-1-40" href="#__codelineno-1-40"></a><span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Compare ISCC-CODES:</span><span class="se">\n</span><span class="si">{</span><span class="n">iscc_obj</span><span class="o">.</span><span class="n">uri</span><span class="si">}</span><span class="se">\n</span><span class="si">{</span><span class="n">rand_iscc</span><span class="o">.</span><span class="n">uri</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<a id="__codelineno-1-41" name="__codelineno-1-41" href="#__codelineno-1-41"></a><span class="nb">print</span><span class="p">(</span><span class="n">json</span><span class="o">.</span><span class="n">dumps</span><span class="p">(</span><span class="n">ic</span><span class="o">.</span><span class="n">iscc_compare</span><span class="p">(</span><span class="n">iscc_obj</span><span class="o">.</span><span class="n">code</span><span class="p">,</span> <span class="n">rand_iscc</span><span class="o">.</span><span class="n">code</span><span class="p">),</span> <span class="n">indent</span><span class="o">=</span><span class="mi">2</span><span class="p">))</span>
+<a id="__codelineno-1-42" name="__codelineno-1-42" href="#__codelineno-1-42"></a>
+<a id="__codelineno-1-43" name="__codelineno-1-43" href="#__codelineno-1-43"></a><span class="c1"># Generate an ISCC-ID</span>
+<a id="__codelineno-1-44" name="__codelineno-1-44" href="#__codelineno-1-44"></a><span class="n">iscc_id</span> <span class="o">=</span> <span class="n">ic</span><span class="o">.</span><span class="n">gen_iscc_id</span><span class="p">(</span><span class="n">iscc_obj</span><span class="o">.</span><span class="n">code</span><span class="p">,</span> <span class="n">chain_id</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">wallet</span><span class="o">=</span><span class="s2">&quot;1Bq568oLhi5HvdgC6rcBSGmu4G3FeAntCz&quot;</span><span class="p">)</span>
+<a id="__codelineno-1-45" name="__codelineno-1-45" href="#__codelineno-1-45"></a><span class="n">iscc_id_obj</span> <span class="o">=</span> <span class="n">ic</span><span class="o">.</span><span class="n">Code</span><span class="p">(</span><span class="n">iscc_id</span><span class="p">[</span><span class="s2">&quot;iscc&quot;</span><span class="p">])</span>
+<a id="__codelineno-1-46" name="__codelineno-1-46" href="#__codelineno-1-46"></a><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Construct ISCC-ID:&quot;</span><span class="p">)</span>
+<a id="__codelineno-1-47" name="__codelineno-1-47" href="#__codelineno-1-47"></a><span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;ISCC-ID:       </span><span class="si">{</span><span class="n">ic</span><span class="o">.</span><span class="n">iscc_normalize</span><span class="p">(</span><span class="n">iscc_id_obj</span><span class="o">.</span><span class="n">code</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<a id="__codelineno-1-48" name="__codelineno-1-48" href="#__codelineno-1-48"></a><span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Structure:     </span><span class="si">{</span><span class="n">iscc_id_obj</span><span class="o">.</span><span class="n">explain</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<a id="__codelineno-1-49" name="__codelineno-1-49" href="#__codelineno-1-49"></a><span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Multiformat:   </span><span class="si">{</span><span class="n">iscc_id_obj</span><span class="o">.</span><span class="n">mf_base32</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
 </code></pre></div>
 <p>The output of this example is as follows:</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>Meta-Code:     ISCC:AAAT4EBWK27737D2
@@ -1147,9 +1157,19 @@
 <a id="__codelineno-2-14" name="__codelineno-2-14" href="#__codelineno-2-14"></a>Structure:     ISCC-TEXT-V0-MCDI-3e103656bffdfc7a060498817dcefc6ffa258b1dcef791a6bc7cf1d14991538d
 <a id="__codelineno-2-15" name="__codelineno-2-15" href="#__codelineno-2-15"></a>Multiformat:   bzqavabj6ca3fnp757r5ambeyqf6457dp7isywhoo66i2npd46hiutektru
 <a id="__codelineno-2-16" name="__codelineno-2-16" href="#__codelineno-2-16"></a>
-<a id="__codelineno-2-17" name="__codelineno-2-17" href="#__codelineno-2-17"></a>ISCC-ID:       ISCC:MEAJU5AXCPOIOYFL
-<a id="__codelineno-2-18" name="__codelineno-2-18" href="#__codelineno-2-18"></a>Structure:     ID-BITCOIN-V0-64-9a741713dc8760ab
-<a id="__codelineno-2-19" name="__codelineno-2-19" href="#__codelineno-2-19"></a>Multiformat:   bzqawcae2oqlrhxehmcvq
+<a id="__codelineno-2-17" name="__codelineno-2-17" href="#__codelineno-2-17"></a>Compare ISCC-CODES:
+<a id="__codelineno-2-18" name="__codelineno-2-18" href="#__codelineno-2-18"></a>ISCC:KACT4EBWK27737D2AYCJRAL5Z36G76RFRMO4554RU26HZ4ORJGIVHDI
+<a id="__codelineno-2-19" name="__codelineno-2-19" href="#__codelineno-2-19"></a>ISCC:KMDMRJYGHHVRCZ5TM6U4G6D4MXA6LAXC4ZRPOKFU7JBEQXR2BJOS6NA
+<a id="__codelineno-2-20" name="__codelineno-2-20" href="#__codelineno-2-20"></a>{
+<a id="__codelineno-2-21" name="__codelineno-2-21" href="#__codelineno-2-21"></a>  &quot;meta_dist&quot;: 37,
+<a id="__codelineno-2-22" name="__codelineno-2-22" href="#__codelineno-2-22"></a>  &quot;data_dist&quot;: 39,
+<a id="__codelineno-2-23" name="__codelineno-2-23" href="#__codelineno-2-23"></a>  &quot;instance_match&quot;: false
+<a id="__codelineno-2-24" name="__codelineno-2-24" href="#__codelineno-2-24"></a>}
+<a id="__codelineno-2-25" name="__codelineno-2-25" href="#__codelineno-2-25"></a>
+<a id="__codelineno-2-26" name="__codelineno-2-26" href="#__codelineno-2-26"></a>Construct ISCC-ID:
+<a id="__codelineno-2-27" name="__codelineno-2-27" href="#__codelineno-2-27"></a>ISCC-ID:       ISCC:MEAJU5AXCPOIOYFL
+<a id="__codelineno-2-28" name="__codelineno-2-28" href="#__codelineno-2-28"></a>Structure:     ID-BITCOIN-V0-64-9a741713dc8760ab
+<a id="__codelineno-2-29" name="__codelineno-2-29" href="#__codelineno-2-29"></a>Multiformat:   bzqawcae2oqlrhxehmcvq
 </code></pre></div>
 <h2 id="documentation">Documentation<a class="headerlink" href="#documentation" title="Permanent link">#</a></h2>
 <p><a href="https://core.iscc.codes">https://core.iscc.codes</a></p>
@@ -1169,6 +1189,7 @@ other backward incompatible changes are to be expected until the upcoming v1.5 s
 
               
             </article>
+            
           </div>
         </div>
         
@@ -1176,7 +1197,8 @@ other backward incompatible changes are to be expected until the upcoming v1.5 s
       
         <footer class="md-footer">
   
-    <nav class="md-footer__inner md-grid" aria-label="Footer">
+    
+    <nav class="md-footer__inner md-grid" aria-label="Footer" >
       
       
         
@@ -1220,10 +1242,10 @@ other backward incompatible changes are to be expected until the upcoming v1.5 s
     <div class="md-dialog" data-md-component="dialog">
       <div class="md-dialog__inner md-typeset"></div>
     </div>
-    <script id="__config" type="application/json">{"base": ".", "features": ["toc.integrate", "navigation.indexes", "navigation.tracking", "navigation.tabs", "navigation.tabs.sticky", "navigation.expand"], "search": "assets/javascripts/workers/search.2a1c317c.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version.title": "Select version"}}</script>
+    <script id="__config" type="application/json">{"base": ".", "features": ["toc.integrate", "navigation.indexes", "navigation.tracking", "navigation.tabs", "navigation.tabs.sticky", "navigation.expand"], "search": "assets/javascripts/workers/search.b97dbffb.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version.title": "Select version"}}</script>
     
     
-      <script src="assets/javascripts/bundle.6e54b5cd.min.js"></script>
+      <script src="assets/javascripts/bundle.0238f547.min.js"></script>
       
     
   </body>
