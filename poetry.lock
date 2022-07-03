@@ -375,7 +375,7 @@ python-versions = ">=3.6"
 
 [[package]]
 name = "mkdocstrings"
-version = "0.18.1"
+version = "0.19.0"
 description = "Automatic documentation from sources, for MkDocs."
 category = "dev"
 optional = false
@@ -387,10 +387,7 @@ Markdown = ">=3.3"
 MarkupSafe = ">=1.1"
 mkdocs = ">=1.2"
 mkdocs-autorefs = ">=0.3.1"
-mkdocstrings-python-legacy = [
-    {version = ">=0.2"},
-    {version = ">=0.2.1", optional = true, markers = "extra == \"python-legacy\""},
-]
+mkdocstrings-python-legacy = {version = ">=0.2.1", optional = true, markers = "extra == \"python-legacy\""}
 pymdown-extensions = ">=6.3"
 
 [package.extras]
@@ -792,7 +789,7 @@ turbo = ["cython"]
 [metadata]
 lock-version = "1.1"
 python-versions = ">=3.7,<4.0"
-content-hash = "e867bf40b1c101c969c5dfc255dcd74ddf57124a42d1e65017fc68892a634d1e"
+content-hash = "014940e13ca3c37750bbe584764d2b2f5c9f316c67218083f0e7e165a113db60"
 
 [metadata.files]
 astunparse = [
@@ -1119,8 +1116,8 @@ mkdocs-material-extensions = [
     {file = "mkdocs_material_extensions-1.0.3-py3-none-any.whl", hash = "sha256:a82b70e533ce060b2a5d9eb2bc2e1be201cf61f901f93704b4acf6e3d5983a44"},
 ]
 mkdocstrings = [
-    {file = "mkdocstrings-0.18.1-py3-none-any.whl", hash = "sha256:4053929356df8cd69ed32eef71d8f676a472ef72980c9ffd4f933ead1debcdad"},
-    {file = "mkdocstrings-0.18.1.tar.gz", hash = "sha256:fb7c91ce7e3ab70488d3fa6c073a4f827cdc319042f682ef8ea95459790d64fc"},
+    {file = "mkdocstrings-0.19.0-py3-none-any.whl", hash = "sha256:3217d510d385c961f69385a670b2677e68e07b5fea4a504d86bf54c006c87c7d"},
+    {file = "mkdocstrings-0.19.0.tar.gz", hash = "sha256:efa34a67bad11229d532d89f6836a8a215937548623b64f3698a1df62e01cc3e"},
 ]
 mkdocstrings-python-legacy = [
     {file = "mkdocstrings-python-legacy-0.2.2.tar.gz", hash = "sha256:f0e7ec6a19750581b752acb38f6b32fcd1efe006f14f6703125d2c2c9a5c6f02"},
