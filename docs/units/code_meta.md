@@ -22,7 +22,7 @@ Seed-Metadata has 3 possible elements:
 !!! note
 
     Due to the broad applicability of the ISCC we do not prescribe a particular schema for the
-    supplied `metadata`. But we use the Data-URL format because it can encode and self-describe
+    `meta`-element. Instead we use the Data-URL format because it can encode and self-describe
     any conceivable metadata in a sufficently machine-interpretable form at any desired specificity.
 
     **Data-URL Examples**:
@@ -42,8 +42,8 @@ Seed-Metadata has 3 possible elements:
 
 The first 32-bits of a Meta-Code are calculated as a simliarity hash from the `name` field.
 The second 32-bits are also calculated from the `name` field if no other input was supplied.
-If `description` is suplied but no `metadata`, the `description` will be used for the second
-32-bits. If `metadata` is supplied it will be used in favour of `description` for the second
+If `description` is suplied but no `meta`, the `description` will be used for the second
+32-bits. If `meta` is supplied it will be used in favour of `description` for the second
 32-bits.
 
 ```mermaid
