@@ -1,5 +1,7 @@
 # Changelog
 
+## [0.2.12] - Unreleased
+
 ## [0.2.11] - 2022-07-03
 - Add support for gracefull build failures
 
