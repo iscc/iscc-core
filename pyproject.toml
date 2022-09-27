@@ -53,7 +53,7 @@ uvarint = "^1.2"
 loguru = "^0.6"
 base58 = "^2.1"
 bases = "^0.2"
-data-url = "^1.0"
+data-url = "1.0.5"
 jcs = "^0.2"
 
 [tool.poetry.extras]
