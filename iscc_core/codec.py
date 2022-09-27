@@ -551,6 +551,13 @@ def iscc_validate(iscc, strict=True):
         else:
             return False
 
+    m, s, v, l, t = decode_header(decode_base32(cleaned))
+    if v != 0:
+        if strict:
+            raise ValueError(f"Unknown version {v} in version header")
+        else:
+            return False
+
     return True
 
 
