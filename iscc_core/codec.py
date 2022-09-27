@@ -417,6 +417,10 @@ def iscc_normalize(iscc_code):
         if not decoded.startswith(MC_PREFIX):
             raise ValueError(f"Malformed multiformat codec: {decoded[:2]}")
         iscc_code = encode_base32(decoded[2:])
+    else:
+        prefix = iscc_code.lstrip("ISCC:").lstrip("iscc:")[:2].upper()
+        if prefix not in PREFIXES:
+            raise ValueError(f"ISCC starts with invalid prefix {prefix}")
 
     decomposed = iscc_decompose(iscc_code)
     recomposed = gen_iscc_code_v0(decomposed)["iscc"] if len(decomposed) >= 2 else decomposed[0]
@@ -515,37 +519,9 @@ def iscc_validate(iscc, strict=True):
         else:
             return False
 
-    # Header valid
-    valid_prefixes = {
-        "AA",
-        "CA",
-        "CE",
-        "CI",
-        "CM",
-        "CQ",
-        "EA",
-        "EE",
-        "EI",
-        "EM",
-        "EQ",
-        "GA",
-        "IA",
-        "KA",
-        "KE",
-        "KI",
-        "KM",
-        "KQ",
-        "KU",
-        "KY",
-        "MA",
-        "ME",
-        "MI",
-        "MM",
-        "OA",
-    }
     cleaned = iscc_clean(iscc)
     prefix = cleaned[:2]
-    if prefix not in valid_prefixes:
+    if prefix not in PREFIXES:
         if strict:
             raise ValueError(f"Header starts with invalid sequence {prefix}")
         else:

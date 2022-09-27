@@ -2,7 +2,8 @@
 
 ## [0.2.12] - Unreleased
 - Fixed issue with data url compound media types
-- Add ISCC version validation to `iscc_validate`
+- Added ISCC version validation to `iscc_validate`
+- Added prefix check to `iscc_normalize`
 - Updated dependencies
 
 ## [0.2.11] - 2022-07-03

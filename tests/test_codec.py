@@ -298,6 +298,11 @@ def test_Code_rnd():
     assert ic.Code.rnd(ic.MT.DATA).maintype == ic.MT.DATA
 
 
+def test_noramlize_bad_prefix():
+    with pytest.raises(ValueError):
+        ic.iscc_normalize("ISCC:LA22222222")
+
+
 def test_normalize_single_canonical():
     n = ic.iscc_normalize("ISCC:AAATTZCKVH3S42TP")
     assert n == "ISCC:AAATTZCKVH3S42TP"

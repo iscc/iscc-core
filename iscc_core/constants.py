@@ -199,3 +199,31 @@ SUBTYPE_MAP = {
 
 #: Multicodec prefix code
 MC_PREFIX: bytes = b"\xcc\x01"
+
+PREFIXES = [
+    "AA",
+    "CA",
+    "CE",
+    "CI",
+    "CM",
+    "CQ",
+    "EA",
+    "EE",
+    "EI",
+    "EM",
+    "EQ",
+    "GA",
+    "IA",
+    "KA",
+    "KE",
+    "KI",
+    "KM",
+    "KQ",
+    "KU",
+    "KY",
+    "MA",
+    "ME",
+    "MI",
+    "MM",
+    "OA",
+]
