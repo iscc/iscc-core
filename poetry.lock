@@ -179,8 +179,8 @@ python-versions = ">=2.6, !=3.0.*, !=3.1.*, !=3.2.*"
 
 [[package]]
 name = "data-url"
-version = "1.0.5"
-description = ""
+version = "1.0.7"
+description = "Easy Data URL management for python"
 category = "main"
 optional = false
 python-versions = ">=3.5"
@@ -854,7 +854,7 @@ turbo = ["cython"]
 [metadata]
 lock-version = "1.1"
 python-versions = ">=3.7,<4.0"
-content-hash = "3d23221101c92b179b127a7d57db85831c29402080982adfcb7f69b50992c557"
+content-hash = "87d2b8424eb70dddfde9d32eec750e40ec7771b89c59535eaa76af9f9a2ee72f"
 
 [metadata.files]
 astunparse = [
@@ -1089,7 +1089,7 @@ Cython = [
     {file = "Cython-0.29.32.tar.gz", hash = "sha256:8733cf4758b79304f2a4e39ebfac5e92341bce47bcceb26c1254398b2f8c1af7"},
 ]
 data-url = [
-    {file = "data_url-1.0.5.tar.gz", hash = "sha256:fd8013ad375be9056cbcf783dcf1d9e15eb3d6697107b0bc0ce0217cf96b03c2"},
+    {file = "data_url-1.0.7.tar.gz", hash = "sha256:951cad26c340c9a1a029b77718ab028580d851d5ff6777c84b34c224dab3e4c4"},
 ]
 ghp-import = [
     {file = "ghp-import-2.1.0.tar.gz", hash = "sha256:9c535c4c61193c2df8871222567d7fd7e5014d835f97dc7b7439069e2413d343"},

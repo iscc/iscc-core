@@ -42,18 +42,18 @@ classifiers=[
 
 [tool.poetry.dependencies]
 python = ">=3.7,<4.0"
-cython = { version = "*", optional = true }
-blake3 = "*"
-xxhash = "*"
-more-itertools = "*"
-bitarray-hardbyte = "*"
-pybase64 = "*"
+cython = { version = "^0.29", optional = true }
+blake3 = "^0.3"
+xxhash = "^3.0"
+more-itertools = "^8.14"
+bitarray-hardbyte = "^2.3"
+pybase64 = "^1.2"
 pydantic = {extras = ["dotenv"], version = "*"}
 uvarint = "^1.2"
 loguru = "^0.6"
 base58 = "^2.1"
 bases = "^0.2"
-data-url = "1.0.5"
+data-url = "^1.0"
 jcs = "^0.2"
 
 [tool.poetry.extras]
