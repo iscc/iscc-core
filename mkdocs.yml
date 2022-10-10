@@ -28,9 +28,7 @@ theme:
   logo: images/iscc-logo-icon-white.svg
   favicon: images/iscc-logo-icon-black.svg
   language: en
-  font:
-    text: Readex Pro
-    code: JetBrains Mono
+  font: false
   palette:
     - scheme: slate
       toggle:
