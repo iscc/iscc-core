@@ -1,6 +1,6 @@
 # **ISCC** - Utilities
 
 ::: iscc_core.utils
-    rendering:
+    options:
         show_source: true
         heading_level: 3

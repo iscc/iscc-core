@@ -1,5 +1,5 @@
 # ISCC - Content Defined Chunking
 
 ::: iscc_core.cdc
-    rendering:
+    options:
         show_source: true

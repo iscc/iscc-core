@@ -1,4 +1,4 @@
 # ISCC - Minhash
 ::: iscc_core.minhash
-    rendering:
+    options:
         show_source: true

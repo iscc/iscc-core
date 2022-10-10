@@ -4,6 +4,7 @@
 - Fixed issue with data url compound media types
 - Added ISCC version validation to `iscc_validate`
 - Added prefix check to `iscc_normalize`
+- Bundled fonts with documentation
 - Updated dependencies
 
 ## [0.2.11] - 2022-07-03

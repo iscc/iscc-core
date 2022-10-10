@@ -1,4 +1,4 @@
 # ISCC - Simhash
 ::: iscc_core.simhash
-    rendering:
+    options:
         show_source: true

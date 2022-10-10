@@ -92,13 +92,12 @@ flowchart LR
 ## Functions
 
 ::: iscc_core.code_meta
-    selection:
+    options:
         members:
             - gen_meta_code_v0
             - soft_hash_meta_v0
             - text_clean
             - text_remove_newlines
             - text_trim
-    rendering:
         show_source: true
 

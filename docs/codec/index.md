@@ -11,6 +11,6 @@ This module implements encoding, decoding and transcoding functions of ISCC
 
 
 ::: iscc_core.codec
-    rendering:
+    options:
         show_source: true
         heading_level: 3

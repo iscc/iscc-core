@@ -1,4 +1,4 @@
 # ISCC - Winner Takes All Hash
 ::: iscc_core.wtahash
-    rendering:
+    options:
         show_source: true

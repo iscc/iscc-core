@@ -51,13 +51,10 @@ plugins:
   - search
   - autorefs
   - mkdocstrings:
-      watch:
-        - iscc_core
       handlers:
         python:
-          selection:
-            docstring_style: restructured-text
-          rendering:
+          options:
+            docstring_style: sphinx
             show_root_heading: false
             show_root_toc_entry: false
             show_root_full_path: true
