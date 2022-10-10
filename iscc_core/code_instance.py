@@ -15,7 +15,7 @@ __all__ = [
 
 
 def gen_instance_code(stream, bits=ic.core_opts.instance_bits):
-    # type: (Stream, int) -> dict
+    # type: (ic.Stream, int) -> dict
     """
     Create an ISCC Instance-Code with the latest standard algorithm.
 
@@ -28,7 +28,7 @@ def gen_instance_code(stream, bits=ic.core_opts.instance_bits):
 
 
 def gen_instance_code_v0(stream, bits=ic.core_opts.instance_bits):
-    # type: (Stream, int) -> dict
+    # type: (ic.Stream, int) -> dict
     """
     Create an ISCC Instance-Code with algorithm v0.
 
