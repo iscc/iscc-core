@@ -10,8 +10,8 @@ jobs:
         os: [ubuntu-18.04, macos-10.15, windows-2019]
     runs-on: ${{ matrix.os }}
     steps:
-      - uses: actions/checkout@v2
-      - uses: actions/setup-python@v2
+      - uses: actions/checkout@v3
+      - uses: actions/setup-python@v4
         with:
           python-version: ${{ matrix.python-version }}
 
@@ -33,4 +33,4 @@ jobs:
         run: poetry run pytest -q tests --turbo
 
       - name: Upload coverage to Codecov
-        uses: codecov/codecov-action@v2
+        uses: codecov/codecov-action@v3
