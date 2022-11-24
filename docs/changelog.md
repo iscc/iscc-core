@@ -1,6 +1,6 @@
 # Changelog
 
-## [0.2.12] - Unreleased
+## [0.2.12] - 2022-11-24
 - Fixed issue with data url compound media types
 - Added ISCC version validation to `iscc_validate`
 - Added prefix check to `iscc_normalize`
