@@ -1,5 +1,9 @@
 # Changelog
 
+## [0.2.13] - Unreleased
+- Added documentation for options
+- Added python 3.11 support
+
 ## [0.2.12] - 2022-11-24
 - Fixed issue with data url compound media types
 - Added ISCC version validation to `iscc_validate`

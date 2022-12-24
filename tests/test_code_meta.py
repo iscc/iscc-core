@@ -35,7 +35,6 @@ def test_gen_meta_code_name_and_desc():
 
 
 def test_gen_meta_code_meta_dict():
-
     m = ic.gen_meta_code_v0("hello", None, {"hello": "metadata"})
     assert m == {
         "iscc": "ISCC:AAAWKLHFXMFCA2OC",

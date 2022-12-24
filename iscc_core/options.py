@@ -1,4 +1,16 @@
 # -*- coding: utf-8 -*-
+"""Options for the iscc-core package can be configured using environment variables. Variables are
+loaded as class-attributes on the `CoreOptions` instance. Environment variables are named like
+the class-attribute but prefixed with `ISCC_CORE_` and upper-cased.
+
+!!! example "Example how to access configuration options"
+    ```python
+    import iscc_core as ic
+
+    # To access ISCC_CORE_TEXT_NGRAM_SIZE setting use
+    text_ngram_size: int = ic.core_opts.text_ngram_size
+    ```
+"""
 from typing import Tuple
 from pydantic import BaseSettings, Field
 from loguru import logger as log

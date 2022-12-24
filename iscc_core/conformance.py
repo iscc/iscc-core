@@ -60,7 +60,6 @@ def conformance_testdata():
     for func_name, tests in data.items():
         func_obj = getattr(ic, func_name)
         for test_name, test_values in tests.items():
-
             # Convert stream and bytes test values
             ntv = []
             for tv in test_values["inputs"]:
