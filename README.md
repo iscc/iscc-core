@@ -33,7 +33,7 @@ ISCC codes. It also a good reference for porting ISCC to other programming langu
 !!! tip
     This is a low level reference implementation that does not inlcude features like mediatype
     detection, metadata extraction or file format specific content extraction. Please have a look at
-    the [iscc-sdk](https://github.com/iscc/iscc-skd/) which adds those higher level features on top
+    the [iscc-sdk](https://github.com/iscc/iscc-sdk) which adds those higher level features on top
     of the `iscc-core` library.
 
 ## ISCC Architecture
