@@ -90,7 +90,7 @@ with open("demo.txt", "rb") as stream:
     print(f"Instance-Code: {instance_code['iscc']}")
     print(f"Structure:     {ic.iscc_explain(instance_code['iscc'])}\n")
 
-# Compbine ISCC-UNITs into ISCC-CODE
+# Combine ISCC-UNITs into ISCC-CODE
 iscc_code = ic.gen_iscc_code(
     (meta_code["iscc"], text_code["iscc"], data_code["iscc"], instance_code["iscc"])
 )
@@ -101,18 +101,11 @@ print(f"ISCC-CODE:     {ic.iscc_normalize(iscc_obj.code)}")
 print(f"Structure:     {iscc_obj.explain}")
 print(f"Multiformat:   {iscc_obj.mf_base32}\n")
 
-# Compare with random ISCC-CODE:
-rand_iscc = ic.Code.rnd(mt=ic.MT.ISCC, bits=256)
-print(f"Compare ISCC-CODES:\n{iscc_obj.uri}\n{rand_iscc.uri}")
-print(json.dumps(ic.iscc_compare(iscc_obj.code, rand_iscc.code), indent=2))
-
-# Generate an ISCC-ID
-iscc_id = ic.gen_iscc_id(iscc_obj.code, chain_id=1, wallet="1Bq568oLhi5HvdgC6rcBSGmu4G3FeAntCz")
-iscc_id_obj = ic.Code(iscc_id["iscc"])
-print("\nConstruct ISCC-ID:")
-print(f"ISCC-ID:       {ic.iscc_normalize(iscc_id_obj.code)}")
-print(f"Structure:     {iscc_id_obj.explain}")
-print(f"Multiformat:   {iscc_id_obj.mf_base32}")
+# Compare with changed ISCC-CODE:
+new_dc, new_ic = ic.Code.rnd(mt=ic.MT.DATA), ic.Code.rnd(mt=ic.MT.INSTANCE)
+new_iscc = ic.gen_iscc_code((meta_code["iscc"], text_code["iscc"], new_dc.uri, new_ic.uri))
+print(f"Compare ISCC-CODES:\n{iscc_obj.uri}\n{new_iscc['iscc']}")
+print(json.dumps(ic.iscc_compare(iscc_obj.code, new_iscc["iscc"]), indent=2))
 ```
 
 The output of this example is as follows:
@@ -136,17 +129,13 @@ Multiformat:   bzqavabj6ca3fnp757r5ambeyqf6457dp7isywhoo66i2npd46hiutektru
 
 Compare ISCC-CODES:
 ISCC:KACT4EBWK27737D2AYCJRAL5Z36G76RFRMO4554RU26HZ4ORJGIVHDI
-ISCC:KMDMRJYGHHVRCZ5TM6U4G6D4MXA6LAXC4ZRPOKFU7JBEQXR2BJOS6NA
+ISCC:KACT4EBWK27737D2AYCJRAL5Z36G7Y7HA2BMECKMVRBEQXR2BJOS6NA
 {
-  "meta_dist": 37,
-  "data_dist": 39,
+  "meta_dist": 0,
+  "content_dist": 0,
+  "data_dist": 33,
   "instance_match": false
 }
-
-Construct ISCC-ID:
-ISCC-ID:       ISCC:MEAJU5AXCPOIOYFL
-Structure:     ID-BITCOIN-V0-64-9a741713dc8760ab
-Multiformat:   bzqawcae2oqlrhxehmcvq
 ```
 
 ## Documentation

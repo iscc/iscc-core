@@ -5,6 +5,7 @@
 - Added python 3.11 support
 - Added Markdown formating
 - Updated architecture figures
+- Improved example code
 - Optimized LF conversion
 - Updated dependencies
 
