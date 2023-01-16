@@ -132,8 +132,6 @@ def decode_header(data):
         value, data = decode_varnibble(data)
         result.append(value)
 
-    # TODO: validate correctness of decoded data.
-
     # Strip 4-bit padding if required
     if len(data) % 8 and data[:4] == bitarray("0000"):
         data = data[4:]
@@ -433,7 +431,7 @@ def iscc_normalize(iscc_code):
 
 
 def iscc_decode(iscc):
-    # type (str) -> IsccTuple
+    # type: (str) -> IsccTuple
     """
     Decode ISCC to an IsccTuple
 
@@ -447,7 +445,7 @@ def iscc_decode(iscc):
 
 
 def iscc_explain(iscc):
-    # type (str) -> str:
+    # type: (str) -> str
     """
     Convert ISCC to a human-readable representation
 
@@ -468,7 +466,7 @@ def iscc_explain(iscc):
 
 
 def iscc_type_id(iscc):
-    # type (str) - str:
+    # type: (str) -> str
     """
     Extract and convert ISCC HEADER to a readable Type-ID string.
 

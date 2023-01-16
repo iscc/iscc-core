@@ -4,4 +4,4 @@
     options:
         show_if_no_docstring: true
         separate_signature: true
-        filters: ["!Config", "!__all__"]
+        filters: ["!Config", "!__all__", "!flake_bits"]

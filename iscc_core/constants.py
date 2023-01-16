@@ -33,8 +33,6 @@ class MT(enum.IntEnum):
     | 3    | DATA     | 0011 | Match on data similarity                                |
     | 4    | INSTANCE | 0100 | Match on data identity                                  |
     | 5    | ISCC     | 0101 | Composite of two or more ISCC-UNITs with common header  |
-    | 6    | ID       | 0110 | Short unique identifier bound to ISCC, timestamp, pubkey|
-    | 7    | FLAKE    | 0111 | Unique time, randomness and counter based distributed ID|
     """
 
     META = 0
@@ -147,6 +145,17 @@ class LN(enum.IntEnum):
     ## LN - Length
 
     Valid lengths for hash-digests.
+
+    - L32 = 32
+    - L64 = 64
+    - L72 = 72
+    - L80 = 80
+    - L96 = 96
+    - L128 = 128
+    - L160 = 160
+    - L192 = 192
+    - L224 = 224
+    - L256 = 256
     """
 
     L32 = 32
@@ -164,6 +173,12 @@ class LN(enum.IntEnum):
 class MULTIBASE(str, enum.Enum):
     """
     Supported Multibase encodings.
+
+    - base16 -> f
+    - base32 -> b
+    - base32hex -> v
+    - base58btc -> z
+    - base64url -> u
     """
 
     base16 = "f"

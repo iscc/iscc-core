@@ -107,9 +107,7 @@ nav:
           - Mixed-Code: units/content/code_content_mixed.md
       - Data-Code: units/code_data.md
       - Instance-Code: units/code_instance.md
-      - Flake-Code: units/code_flake.md
   - ISCC-CODE: iscc_code.md
-  - ISCC-ID: iscc_id.md
   - Algorithms:
       - CDC: algorithms/cdc.md
       - DCT: algorithms/dct.md

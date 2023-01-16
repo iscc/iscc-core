@@ -4,13 +4,12 @@
 The ISCC Text-Code is generated from plain-text that has been extracted
 from a media assets.
 
-!!! tip
+!!! Warning
 
     Plain-text extraction from documents in various formats (especially PDF) may
     yield very diffent results depending on the extraction tools being used.
-    For **reproducible Text-Code generation** use
-    [Apache Tika v2.2.1](https://tika.apache.org/2.2.1/index.html) to extract text
-    from your documents.
+    The [iscc-sdk](https://github.com/iscc/iscc-sdk) uses [Apache Tika](https://tika.apache.org)
+    to extract text from documents for Text-Code generation.
 
 **Algorithm overview**
 

@@ -4,10 +4,10 @@
 Creates an ISCC object that provides an `iscc`-field with an Audio-Code and a
 `duration`-field.
 
-The Content-Code Audio is generated from a [Chromaprint](https://acoustid.org/chromaprint)
-fingerprint provided as a vector of 32-bit signed integers.
-Chromaprints are extracted with [fpcalc 1.5.0](https://acoustid.org/chromaprint)
-using the following command line parameters:
+The Content-Code Audio is generated from a Chromaprint fingerprint provided as a vector of 32-bit
+signed integers. The [iscc-sdk](https://github.com/iscc/iscc-sdk) uses
+[fpcalc](https://acoustid.org/chromaprint) to extract Chromaprint vectors with the following
+command line parameters:
 
 `$ fpcalc -raw -json -signed -length 0 myaudiofile.mp3`
 """

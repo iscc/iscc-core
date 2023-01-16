@@ -1,9 +1,9 @@
 # -*- coding: utf-8 -*-
 """*A similarity preserving hash for video content*
 
-The **Content-Code Video** is generated from MPEG-7 Video Frame Signatures.
-Frame Signatures can be extracted with ffmpeg (see: https://www.ffmpeg.org/) using the
-following command line parameters:
+The **Content-Code Video** is generated from MPEG-7 video frame signatures.
+The [iscc-sdk](https://github.com/iscc/iscc-sdk) uses [ffmpeg](https://www.ffmpeg.org) to
+extract frame signatures with the following command line parameters:
 
 `$ ffmpeg -i video.mpg -vf fps=fps=5,signature=format=xml:filename=sig.xml -f null -`
 
