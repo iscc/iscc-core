@@ -270,18 +270,6 @@
   
 
 
-  <li class="md-tabs__item">
-    <a href="../../../iscc_id/" class="md-tabs__link">
-      ISCC-ID
-    </a>
-  </li>
-
-      
-        
-  
-  
-
-
   
   
   
@@ -458,8 +446,6 @@
         
           
             
-          
-        
           
         
           
@@ -719,20 +705,6 @@
 
             
           
-            
-              
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../code_flake/" class="md-nav__link">
-        Flake-Code
-      </a>
-    </li>
-  
-
-            
-          
         </ul>
       </nav>
     </li>
@@ -761,21 +733,6 @@
   
   
   
-    <li class="md-nav__item">
-      <a href="../../../iscc_id/" class="md-nav__link">
-        ISCC-ID
-      </a>
-    </li>
-  
-
-    
-      
-      
-      
-
-  
-  
-  
     
     <li class="md-nav__item md-nav__item--nested">
       
@@ -784,7 +741,7 @@
       
         
       
-      <input class="md-nav__toggle md-toggle md-toggle--indeterminate" data-md-toggle="__nav_7" type="checkbox" id="__nav_7" >
+      <input class="md-nav__toggle md-toggle md-toggle--indeterminate" data-md-toggle="__nav_6" type="checkbox" id="__nav_6" >
       
       
         
@@ -800,13 +757,13 @@
         
       
       
-        <label class="md-nav__link" for="__nav_7" tabindex="0" aria-expanded="false">
+        <label class="md-nav__link" for="__nav_6" tabindex="0" aria-expanded="false">
           Algorithms
           <span class="md-nav__icon md-icon"></span>
         </label>
       
       <nav class="md-nav" aria-label="Algorithms" data-md-level="1">
-        <label class="md-nav__title" for="__nav_7">
+        <label class="md-nav__title" for="__nav_6">
           <span class="md-nav__icon md-icon"></span>
           Algorithms
         </label>
@@ -979,10 +936,10 @@
       <p><em>A similarity preserving hash for audio content (soft hash).</em></p>
 <p>Creates an ISCC object that provides an <code>iscc</code>-field with an Audio-Code and a
 <code>duration</code>-field.</p>
-<p>The Content-Code Audio is generated from a <a href="https://acoustid.org/chromaprint">Chromaprint</a>
-fingerprint provided as a vector of 32-bit signed integers.
-Chromaprints are extracted with <a href="https://acoustid.org/chromaprint">fpcalc 1.5.0</a>
-using the following command line parameters:</p>
+<p>The Content-Code Audio is generated from a Chromaprint fingerprint provided as a vector of 32-bit
+signed integers. The <a href="https://github.com/iscc/iscc-sdk">iscc-sdk</a> uses
+<a href="https://acoustid.org/chromaprint">fpcalc</a> to extract Chromaprint vectors with the following
+command line parameters:</p>
 <p><code>$ fpcalc -raw -json -signed -length 0 myaudiofile.mp3</code></p>
 
   

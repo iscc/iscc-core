@@ -270,18 +270,6 @@
   
 
 
-  <li class="md-tabs__item">
-    <a href="../iscc_id/" class="md-tabs__link">
-      ISCC-ID
-    </a>
-  </li>
-
-      
-        
-  
-  
-
-
   
   
   
@@ -529,26 +517,6 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#iscc_core.constants.ST_ID" class="md-nav__link">
-    ST_ID
-  </a>
-  
-    <nav class="md-nav" aria-label="ST_ID">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#iscc_core.constants.ST_ID--st_id" class="md-nav__link">
-    ST_ID
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
   <a href="#iscc_core.constants.VS" class="md-nav__link">
     VS
   </a>
@@ -639,8 +607,6 @@
         
           
             
-          
-        
           
         
           
@@ -845,20 +811,6 @@
 
             
           
-            
-              
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../units/code_flake/" class="md-nav__link">
-        Flake-Code
-      </a>
-    </li>
-  
-
-            
-          
         </ul>
       </nav>
     </li>
@@ -887,21 +839,6 @@
   
   
   
-    <li class="md-nav__item">
-      <a href="../iscc_id/" class="md-nav__link">
-        ISCC-ID
-      </a>
-    </li>
-  
-
-    
-      
-      
-      
-
-  
-  
-  
     
     <li class="md-nav__item md-nav__item--nested">
       
@@ -910,7 +847,7 @@
       
         
       
-      <input class="md-nav__toggle md-toggle md-toggle--indeterminate" data-md-toggle="__nav_7" type="checkbox" id="__nav_7" >
+      <input class="md-nav__toggle md-toggle md-toggle--indeterminate" data-md-toggle="__nav_6" type="checkbox" id="__nav_6" >
       
       
         
@@ -926,13 +863,13 @@
         
       
       
-        <label class="md-nav__link" for="__nav_7" tabindex="0" aria-expanded="false">
+        <label class="md-nav__link" for="__nav_6" tabindex="0" aria-expanded="false">
           Algorithms
           <span class="md-nav__icon md-icon"></span>
         </label>
       
       <nav class="md-nav" aria-label="Algorithms" data-md-level="1">
-        <label class="md-nav__title" for="__nav_7">
+        <label class="md-nav__title" for="__nav_6">
           <span class="md-nav__icon md-icon"></span>
           Algorithms
         </label>
@@ -1172,18 +1109,6 @@
 <td align="left">ISCC</td>
 <td>0101</td>
 <td>Composite of two or more ISCC-UNITs with common header</td>
-</tr>
-<tr>
-<td>6</td>
-<td align="left">ID</td>
-<td>0110</td>
-<td>Short unique identifier bound to ISCC, timestamp, pubkey</td>
-</tr>
-<tr>
-<td>7</td>
-<td align="left">FLAKE</td>
-<td>0111</td>
-<td>Unique time, randomness and counter based distributed ID</td>
 </tr>
 </tbody>
 </table>
@@ -1440,80 +1365,6 @@
 
 
 
-<h3 id="iscc_core.constants.ST_ID" class="doc doc-heading">
-        <code>ST_ID</code>
-
-
-<a href="#iscc_core.constants.ST_ID" class="headerlink" title="Permanent link">#</a></h3>
-
-
-  <div class="doc doc-contents ">
-
-  
-      <h6 id="iscc_core.constants.ST_ID--st_id">ST_ID<a class="headerlink" href="#iscc_core.constants.ST_ID--st_id" title="Permanent link">#</a></h6>
-<p>SubTypes for <code>MT.ID</code></p>
-<table>
-<thead>
-<tr>
-<th>Uint</th>
-<th align="left">Symbol</th>
-<th>Bits</th>
-<th>Purpose</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>0</td>
-<td align="left">PRIVATE</td>
-<td>0000</td>
-<td>ISCC-ID minted via private repository (not unique)</td>
-</tr>
-<tr>
-<td>1</td>
-<td align="left">BITCOIN</td>
-<td>0001</td>
-<td>ISCC-ID minted via Bitcoin blockchain</td>
-</tr>
-<tr>
-<td>2</td>
-<td align="left">ETHEREUM</td>
-<td>0010</td>
-<td>ISCC-ID minted via Ethereum blockchain</td>
-</tr>
-<tr>
-<td>3</td>
-<td align="left">POLYGON</td>
-<td>0011</td>
-<td>ISCC-ID minted via Polygon blockchain</td>
-</tr>
-</tbody>
-</table>
-
-
-
-  
-
-  <div class="doc doc-children">
-
-
-
-
-
-  </div>
-
-  </div>
-
-</div>
-
-
-
-
-
-
-<div class="doc doc-object doc-class">
-
-
-
 <h3 id="iscc_core.constants.VS" class="doc doc-heading">
         <code>VS</code>
 
@@ -1582,6 +1433,18 @@
   
       <h5 id="iscc_core.constants.LN--ln-length">LN - Length<a class="headerlink" href="#iscc_core.constants.LN--ln-length" title="Permanent link">#</a></h5>
 <p>Valid lengths for hash-digests.</p>
+<ul>
+<li>L32 = 32</li>
+<li>L64 = 64</li>
+<li>L72 = 72</li>
+<li>L80 = 80</li>
+<li>L96 = 96</li>
+<li>L128 = 128</li>
+<li>L160 = 160</li>
+<li>L192 = 192</li>
+<li>L224 = 224</li>
+<li>L256 = 256</li>
+</ul>
 
 
 
@@ -1619,6 +1482,13 @@
 
   
       <p>Supported Multibase encodings.</p>
+<ul>
+<li>base16 -&gt; f</li>
+<li>base32 -&gt; b</li>
+<li>base32hex -&gt; v</li>
+<li>base58btc -&gt; z</li>
+<li>base64url -&gt; u</li>
+</ul>
 
 
 

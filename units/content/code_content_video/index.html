@@ -270,18 +270,6 @@
   
 
 
-  <li class="md-tabs__item">
-    <a href="../../../iscc_id/" class="md-tabs__link">
-      ISCC-ID
-    </a>
-  </li>
-
-      
-        
-  
-  
-
-
   
   
   
@@ -458,8 +446,6 @@
         
           
             
-          
-        
           
         
           
@@ -719,20 +705,6 @@
 
             
           
-            
-              
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../code_flake/" class="md-nav__link">
-        Flake-Code
-      </a>
-    </li>
-  
-
-            
-          
         </ul>
       </nav>
     </li>
@@ -761,21 +733,6 @@
   
   
   
-    <li class="md-nav__item">
-      <a href="../../../iscc_id/" class="md-nav__link">
-        ISCC-ID
-      </a>
-    </li>
-  
-
-    
-      
-      
-      
-
-  
-  
-  
     
     <li class="md-nav__item md-nav__item--nested">
       
@@ -784,7 +741,7 @@
       
         
       
-      <input class="md-nav__toggle md-toggle md-toggle--indeterminate" data-md-toggle="__nav_7" type="checkbox" id="__nav_7" >
+      <input class="md-nav__toggle md-toggle md-toggle--indeterminate" data-md-toggle="__nav_6" type="checkbox" id="__nav_6" >
       
       
         
@@ -800,13 +757,13 @@
         
       
       
-        <label class="md-nav__link" for="__nav_7" tabindex="0" aria-expanded="false">
+        <label class="md-nav__link" for="__nav_6" tabindex="0" aria-expanded="false">
           Algorithms
           <span class="md-nav__icon md-icon"></span>
         </label>
       
       <nav class="md-nav" aria-label="Algorithms" data-md-level="1">
-        <label class="md-nav__title" for="__nav_7">
+        <label class="md-nav__title" for="__nav_6">
           <span class="md-nav__icon md-icon"></span>
           Algorithms
         </label>
@@ -977,9 +934,9 @@
   <div class="doc doc-contents first">
   
       <p><em>A similarity preserving hash for video content</em></p>
-<p>The <strong>Content-Code Video</strong> is generated from MPEG-7 Video Frame Signatures.
-Frame Signatures can be extracted with ffmpeg (see: <a href="https://www.ffmpeg.org/">https://www.ffmpeg.org/</a>) using the
-following command line parameters:</p>
+<p>The <strong>Content-Code Video</strong> is generated from MPEG-7 video frame signatures.
+The <a href="https://github.com/iscc/iscc-sdk">iscc-sdk</a> uses <a href="https://www.ffmpeg.org">ffmpeg</a> to
+extract frame signatures with the following command line parameters:</p>
 <p><code>$ ffmpeg -i video.mpg -vf fps=fps=5,signature=format=xml:filename=sig.xml -f null -</code></p>
 <p>The relevant frame signatures can be parsed from the following elements in sig.xml:</p>
 <p><code>&lt;FrameSignature&gt;0  0  0  1  0  0  1  0  1  1  0  0  1  1 ...&lt;/FrameSignature&gt;</code></p>
