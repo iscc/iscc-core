@@ -4,7 +4,8 @@
 - Added documentation for options
 - Added python 3.11 support
 - Added Markdown formating
-- Optimize LF conversion
+- Updated architecture figures
+- Optimized LF conversion
 - Updated dependencies
 
 ## [0.2.12] - 2022-11-24
