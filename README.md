@@ -6,22 +6,35 @@
 [![Quality](https://app.codacy.com/project/badge/Grade/ad1cc48ac0c0413ea2373a938148f019)](https://www.codacy.com/gh/iscc/iscc-core/dashboard)
 [![Downloads](https://pepy.tech/badge/iscc-core)](https://pepy.tech/project/iscc-core)
 
-`iscc-core` is the reference implementation of the core algorithms of the [ISCC](https://iscc.codes) (*International Standard Content Code*)
+`iscc-core` is the reference implementation of the core algorithms of the [ISCC](https://iscc.codes)
+(*International Standard Content Code*)
 
 ## What is the ISCC
 
 The ISCC is a similarity preserving fingerprint and identifier for digital media assets.
 
-ISCCs are generated algorithmically from digital content, just like cryptographic hashes. However, instead of using a single cryptographic hash function to identify data only, the ISCC uses various algorithms to create a composite identifier that exhibits similarity-preserving properties (soft hash).
+ISCCs are generated algorithmically from digital content, just like cryptographic hashes. However,
+instead of using a single cryptographic hash function to identify data only, the ISCC uses various
+algorithms to create a composite identifier that exhibits similarity-preserving properties (soft
+hash).
 
-The component-based structure of the ISCC identifies content at multiple levels of abstraction. Each component is self-describing, modular, and can be used separately or with others to aid in various content identification tasks. The algorithmic design supports content deduplication, database synchronization, indexing, integrity verification, timestamping, versioning, data provenance, similarity clustering, anomaly detection, usage tracking, allocation of royalties, fact-checking and general digital asset management use-cases.
+The component-based structure of the ISCC identifies content at multiple levels of abstraction. Each
+component is self-describing, modular, and can be used separately or with others to aid in various
+content identification tasks. The algorithmic design supports content deduplication, database
+synchronization, indexing, integrity verification, timestamping, versioning, data provenance,
+similarity clustering, anomaly detection, usage tracking, allocation of royalties, fact-checking and
+general digital asset management use-cases.
 
 ## What is `iscc-core`
 
-`iscc-core` is a python based reference library of the core algorithms to create standard-compliant ISCC codes. It also a good reference for porting ISCC to other programming languages.
+`iscc-core` is a python based reference library of the core algorithms to create standard-compliant
+ISCC codes. It also a good reference for porting ISCC to other programming languages.
 
 !!! tip
-    This is a low level reference implementation that does not inlcude features like mediatype detection, metadata extraction or file format specific content extraction. Please have a look at the [iscc-sdk](https://github.com/iscc/iscc-skd/) which adds those higher level features on top of the `iscc-core` library.
+    This is a low level reference implementation that does not inlcude features like mediatype
+    detection, metadata extraction or file format specific content extraction. Please have a look at
+    the [iscc-sdk](https://github.com/iscc/iscc-skd/) which adds those higher level features on top
+    of the `iscc-core` library.
 
 ## ISCC Architecture
 
@@ -30,7 +43,7 @@ The component-based structure of the ISCC identifies content at multiple levels 
 ## ISCC MainTypes
 
 | Idx | Slug     | Bits | Purpose                                                  |
-|-----|:---------|------|----------------------------------------------------------|
+| --- | :------- | ---- | -------------------------------------------------------- |
 | 0   | META     | 0000 | Match on metadata similarity                             |
 | 1   | SEMANTIC | 0001 | Match on semantic content similarity                     |
 | 2   | CONTENT  | 0010 | Match on perceptual content similarity                   |
@@ -143,19 +156,20 @@ Multiformat:   bzqawcae2oqlrhxehmcvq
 ## Project Status
 
 The ISCC has been accepted by ISO as full work item ISO/AWI 24138 - International Standard Content
-Code and is currently being standardized at TC 46/SC 9/WG 18. https://www.iso.org/standard/77899.html
+Code and is currently being standardized at TC 46/SC 9/WG 18.
+https://www.iso.org/standard/77899.html
 
 !!! attention
-
     The iscc-core library and the accompanying documentation is under development. API changes and
     other backward incompatible changes are to be expected until the upcoming v1.5 stable release.
 
-
 ## Maintainers
+
 [@titusz](https://github.com/titusz)
 
 ## Contributing
 
-Pull requests are welcome. For significant changes, please open an issue first to discuss your plans. Please make sure to update tests as appropriate.
+Pull requests are welcome. For significant changes, please open an issue first to discuss your
+plans. Please make sure to update tests as appropriate.
 
 You may also want join our developer chat on Telegram at <https://t.me/iscc_dev>.

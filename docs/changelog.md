@@ -3,6 +3,7 @@
 ## [0.2.13] - Unreleased
 - Added documentation for options
 - Added python 3.11 support
+- Added Markdown formating
 - Optimize LF conversion
 - Updated dependencies
 
