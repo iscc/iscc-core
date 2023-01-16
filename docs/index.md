@@ -139,7 +139,59 @@ ISCC:KACT4EBWK27737D2AYCJRAL5Z36G7Y7HA2BMECKMVRBEQXR2BJOS6NA
 
 ## Documentation
 
-<https://core.iscc.codes>
+Documentation is published at<https://core.iscc.codes>
+
+## Development
+
+**Requirements**
+
+- [Python 3.7.2](https://www.python.org/) or higher for code generation and static site building.
+- [Poetry](https://python-poetry.org/) for installation and dependency management.
+
+**Development Setup**
+
+```shell
+git clone https://github.com/iscc/iscc-core.git
+cd iscc-core
+poetry install
+```
+
+**Development Tasks**
+
+Tests, coverage, code formatting and other tasks can be run with the `poe` command:
+
+```shell
+poe
+
+Poe the Poet - A task runner that works well with poetry.
+version 0.18.1
+
+Result: No task specified.
+
+USAGE
+  poe [-h] [-v | -q] [--root PATH] [--ansi | --no-ansi] task [task arguments]
+
+GLOBAL OPTIONS
+  -h, --help     Show this help page and exit
+  --version      Print the version and exit
+  -v, --verbose  Increase command output (repeatable)
+  -q, --quiet    Decrease command output (repeatable)
+  -d, --dry-run  Print the task contents but don't actually run it
+  --root PATH    Specify where to find the pyproject.toml
+  --ansi         Force enable ANSI output
+  --no-ansi      Force disable ANSI output
+CONFIGURED TASKS
+  gentests       Generate conformance test data
+  format         Code style formating with black
+  docs           Copy README.md to /docs
+  format-md      Markdown formating with mdformat
+  lf             Convert line endings to lf
+  test           Run tests with coverage
+  sec            Security check with bandit
+  all
+```
+
+Use `poe all` to run all tasks before committing any changes.
 
 ## Project Status
 

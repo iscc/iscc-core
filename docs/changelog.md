@@ -4,6 +4,7 @@
 - Added documentation for options
 - Added python 3.11 support
 - Added Markdown formating
+- Added developmnet documentation
 - Updated architecture figures
 - Documentation cleanup
 - Improved example code
