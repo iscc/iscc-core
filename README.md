@@ -194,13 +194,13 @@ Use `poe all` to run all tasks before committing any changes.
 
 ## Project Status
 
-The ISCC has been accepted by ISO as full work item ISO/AWI 24138 - International Standard Content
-Code and is currently being standardized at TC 46/SC 9/WG 18.
-https://www.iso.org/standard/77899.html
+The ISCC is under development as ISO/CD 24138 - International Standard Content Code within ISO TC
+46/SC 9/WG 18. https://www.iso.org/standard/77899.html
 
 !!! attention
-    The iscc-core library and the accompanying documentation is under development. API changes and
-    other backward incompatible changes are to be expected until the upcoming v1.5 stable release.
+    The iscc-core reference library and the accompanying documentation is under development. API
+    changes and other backward incompatible changes are to be expected until the upcoming v1.0
+    stable release.
 
 ## Maintainers
 
