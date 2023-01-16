@@ -14,8 +14,14 @@
       
         <link rel="canonical" href="https://core.iscc.codes/utilities/utils/">
       
+      
+        <link rel="prev" href="../../options/options/">
+      
+      
+        <link rel="next" href="../../conformance/">
+      
       <link rel="icon" href="../../images/iscc-logo-icon-black.svg">
-      <meta name="generator" content="mkdocs-1.4.2, mkdocs-material-8.5.10">
+      <meta name="generator" content="mkdocs-1.4.2, mkdocs-material-9.0.5">
     
     
       
@@ -23,11 +29,10 @@
       
     
     
-      <link rel="stylesheet" href="../../assets/stylesheets/main.975780f9.min.css">
+      <link rel="stylesheet" href="../../assets/stylesheets/main.558e4712.min.css">
       
         
         <link rel="stylesheet" href="../../assets/stylesheets/palette.2505c338.min.css">
-        
       
       
 
@@ -121,8 +126,6 @@
       <form class="md-header__option" data-md-component="palette">
         
           
-          
-          
           <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="" data-md-color-accent=""  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_1">
           
             <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_2" hidden>
@@ -130,8 +133,6 @@
             </label>
           
         
-          
-          
           
           <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="" data-md-color-accent=""  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_2">
           
@@ -170,7 +171,7 @@
           <div class="md-search-result__meta">
             Initializing search
           </div>
-          <ol class="md-search-result__list"></ol>
+          <ol class="md-search-result__list" role="presentation"></ol>
         </div>
       </div>
     </div>
@@ -447,8 +448,11 @@
     <li class="md-nav__item md-nav__item--nested">
       
       
-        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" data-md-toggle="__nav_4" type="checkbox" id="__nav_4" checked>
       
+      
+        
+      
+      <input class="md-nav__toggle md-toggle md-toggle--indeterminate" data-md-toggle="__nav_4" type="checkbox" id="__nav_4" >
       
       
         
@@ -511,8 +515,11 @@
     <li class="md-nav__item md-nav__item--nested">
       
       
-        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" data-md-toggle="__nav_4_3" type="checkbox" id="__nav_4_3" checked>
       
+      
+        
+      
+      <input class="md-nav__toggle md-toggle md-toggle--indeterminate" data-md-toggle="__nav_4_3" type="checkbox" id="__nav_4_3" >
       
       
         
@@ -718,8 +725,11 @@
     <li class="md-nav__item md-nav__item--nested">
       
       
-        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" data-md-toggle="__nav_7" type="checkbox" id="__nav_7" checked>
       
+      
+        
+      
+      <input class="md-nav__toggle md-toggle md-toggle--indeterminate" data-md-toggle="__nav_7" type="checkbox" id="__nav_7" >
       
       
         
@@ -735,7 +745,7 @@
         
       
       
-        <label class="md-nav__link" for="__nav_7">
+        <label class="md-nav__link" for="__nav_7" tabindex="0" aria-expanded="false">
           Algorithms
           <span class="md-nav__icon md-icon"></span>
         </label>
@@ -1008,10 +1018,9 @@
                 
                   
 
-  <a href="https://github.com/iscc/iscc-core/edit/main/docs/utilities/utils.md" title="Edit this page" class="md-content__button md-icon">
-    
-    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20.71 7.04c.39-.39.39-1.04 0-1.41l-2.34-2.34c-.37-.39-1.02-.39-1.41 0l-1.84 1.83 3.75 3.75M3 17.25V21h3.75L17.81 9.93l-3.75-3.75L3 17.25Z"/></svg>
-  </a>
+  
+  
+
 
 
 <h1 id="iscc-utilities"><strong>ISCC</strong> - Utilities<a class="headerlink" href="#iscc-utilities" title="Permanent link">#</a></h1>
@@ -1065,7 +1074,7 @@
 <span class="normal"><a href="#__codelineno-0-40">40</a></span>
 <span class="normal"><a href="#__codelineno-0-41">41</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-0-29" name="__codelineno-0-29"></a><span class="k">def</span> <span class="nf">json_canonical</span><span class="p">(</span><span class="n">obj</span><span class="p">):</span>
 <a id="__codelineno-0-30" name="__codelineno-0-30"></a>    <span class="c1"># type: (Any) -&gt; bytes</span>
-<a id="__codelineno-0-31" name="__codelineno-0-31"></a>    <span class="sd">&quot;&quot;&quot;</span>
+<a id="__codelineno-0-31" name="__codelineno-0-31"></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <a id="__codelineno-0-32" name="__codelineno-0-32"></a><span class="sd">    Canonical, deterministic serialization of ISCC metadata.</span>
 <a id="__codelineno-0-33" name="__codelineno-0-33"></a>
 <a id="__codelineno-0-34" name="__codelineno-0-34"></a><span class="sd">    We serialize ISCC metadata in a deterministic/reproducible manner by using</span>
@@ -1123,8 +1132,8 @@ stable, fixed-length CIDv1 header-prefix and allows us to use the CIDv1 as an
 <p>The result might not look like a valid IPFS CIDv1, but it actually is:
 <a href="https://ipfs.io/ipfs/f01551220b94d27b9934d3e08a52e52d7da7dabfac484efe37a5380ee9088f7ace2efcde9">https://ipfs.io/ipfs/f01551220b94d27b9934d3e08a52e52d7da7dabfac484efe37a5380ee9088f7ace2efcde9</a></p>
 <p>With IPFS v0.11.0 this equals to:
-<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="nv">$ipfs</span> add --cid-version<span class="o">=</span><span class="m">1</span> &lt;myfile&gt;
-<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="nv">$ipfs</span> cid format -b<span class="o">=</span>base16 bafkreifzjut3te2nhyekklss27nh3k72ysco7y32koao5eei66wof36n5e
+<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="nv">$ipfs</span><span class="w"> </span>add<span class="w"> </span>--cid-version<span class="o">=</span><span class="m">1</span><span class="w"> </span>&lt;myfile&gt;
+<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="nv">$ipfs</span><span class="w"> </span>cid<span class="w"> </span>format<span class="w"> </span>-b<span class="o">=</span>base16<span class="w"> </span>bafkreifzjut3te2nhyekklss27nh3k72ysco7y32koao5eei66wof36n5e
 <a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a>f01551220b94d27b9934d3e08a52e52d7da7dabfac484efe37a5380ee9088f7ace2efcde9
 </code></pre></div></p>
 <p>When using <code>cidv1_to_token_id</code> for this hash you get an <code>uint256</code> that can be converted
@@ -1257,7 +1266,7 @@ used for ID-Substitution. Use <code>ipfs://f01551220{id}</code> as template for 
 <span class="normal"><a href="#__codelineno-0-122">122</a></span>
 <span class="normal"><a href="#__codelineno-0-123">123</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-0-44" name="__codelineno-0-44"></a><span class="k">def</span> <span class="nf">cidv1_hex</span><span class="p">(</span><span class="n">stream</span><span class="p">):</span>
 <a id="__codelineno-0-45" name="__codelineno-0-45"></a>    <span class="c1"># type: (Union[Stream, bytes]) -&gt; str</span>
-<a id="__codelineno-0-46" name="__codelineno-0-46"></a>    <span class="sd">&quot;&quot;&quot;</span>
+<a id="__codelineno-0-46" name="__codelineno-0-46"></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <a id="__codelineno-0-47" name="__codelineno-0-47"></a><span class="sd">    Create a [IPFS CIDv1](https://specs.ipld.io/block-layer/CID.html#cids-version-1) hash for ISCC</span>
 <a id="__codelineno-0-48" name="__codelineno-0-48"></a><span class="sd">    metadata in `base16` (hexadecimal) representation.</span>
 <a id="__codelineno-0-49" name="__codelineno-0-49"></a>
@@ -1445,7 +1454,7 @@ metadata we can convert a CIDv1 to an uint256 Token-ID and vice versa.</p>
 <span class="normal"><a href="#__codelineno-0-155">155</a></span>
 <span class="normal"><a href="#__codelineno-0-156">156</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-0-126" name="__codelineno-0-126"></a><span class="k">def</span> <span class="nf">cidv1_to_token_id</span><span class="p">(</span><span class="n">cidv1</span><span class="p">):</span>
 <a id="__codelineno-0-127" name="__codelineno-0-127"></a>    <span class="c1"># type: (str) -&gt; int</span>
-<a id="__codelineno-0-128" name="__codelineno-0-128"></a>    <span class="sd">&quot;&quot;&quot;</span>
+<a id="__codelineno-0-128" name="__codelineno-0-128"></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <a id="__codelineno-0-129" name="__codelineno-0-129"></a><span class="sd">    Convert default IPFS CIDv1 to an uint256 Token-ID.</span>
 <a id="__codelineno-0-130" name="__codelineno-0-130"></a>
 <a id="__codelineno-0-131" name="__codelineno-0-131"></a><span class="sd">    To save storage space in Smart Contracts and to securely link an NFT Token-ID to its associated</span>
@@ -1569,7 +1578,7 @@ metadata we can convert a CIDv1 to an uint256 Token-ID and vice versa.</p>
 <span class="normal"><a href="#__codelineno-0-176">176</a></span>
 <span class="normal"><a href="#__codelineno-0-177">177</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-0-159" name="__codelineno-0-159"></a><span class="k">def</span> <span class="nf">cidv1_from_token_id</span><span class="p">(</span><span class="n">token_id</span><span class="p">):</span>
 <a id="__codelineno-0-160" name="__codelineno-0-160"></a>    <span class="c1"># type: (int) -&gt; str</span>
-<a id="__codelineno-0-161" name="__codelineno-0-161"></a>    <span class="sd">&quot;&quot;&quot;</span>
+<a id="__codelineno-0-161" name="__codelineno-0-161"></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <a id="__codelineno-0-162" name="__codelineno-0-162"></a><span class="sd">    Convert Token-ID to default IPFS CIDv1 (reverse of `cidv1_to_token_id`).</span>
 <a id="__codelineno-0-163" name="__codelineno-0-163"></a>
 <a id="__codelineno-0-164" name="__codelineno-0-164"></a><span class="sd">    !!! example</span>
@@ -1666,7 +1675,7 @@ metadata we can convert a CIDv1 to an uint256 Token-ID and vice versa.</p>
 <span class="normal"><a href="#__codelineno-0-188">188</a></span>
 <span class="normal"><a href="#__codelineno-0-189">189</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-0-180" name="__codelineno-0-180"></a><span class="k">def</span> <span class="nf">multi_hash_blake3</span><span class="p">(</span><span class="n">data</span><span class="p">):</span>
 <a id="__codelineno-0-181" name="__codelineno-0-181"></a>    <span class="c1"># type: (bytes) -&gt; str</span>
-<a id="__codelineno-0-182" name="__codelineno-0-182"></a>    <span class="sd">&quot;&quot;&quot;</span>
+<a id="__codelineno-0-182" name="__codelineno-0-182"></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <a id="__codelineno-0-183" name="__codelineno-0-183"></a><span class="sd">    Create blake3 hash with multihash prefix.</span>
 <a id="__codelineno-0-184" name="__codelineno-0-184"></a>
 <a id="__codelineno-0-185" name="__codelineno-0-185"></a><span class="sd">    :param bytes data: Bytes to be hashed</span>
@@ -1779,7 +1788,7 @@ is shorter than the requested width.</p>
 <span class="normal"><a href="#__codelineno-0-210">210</a></span>
 <span class="normal"><a href="#__codelineno-0-211">211</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-0-192" name="__codelineno-0-192"></a><span class="k">def</span> <span class="nf">sliding_window</span><span class="p">(</span><span class="n">seq</span><span class="p">,</span> <span class="n">width</span><span class="p">):</span>
 <a id="__codelineno-0-193" name="__codelineno-0-193"></a>    <span class="c1"># type: (Sequence, int) -&gt; Generator</span>
-<a id="__codelineno-0-194" name="__codelineno-0-194"></a>    <span class="sd">&quot;&quot;&quot;</span>
+<a id="__codelineno-0-194" name="__codelineno-0-194"></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <a id="__codelineno-0-195" name="__codelineno-0-195"></a><span class="sd">    Generate a sequence of equal &quot;width&quot; slices each advancing by one elemnt.</span>
 <a id="__codelineno-0-196" name="__codelineno-0-196"></a>
 <a id="__codelineno-0-197" name="__codelineno-0-197"></a><span class="sd">    All types that have a length and can be sliced are supported (list, tuple, str ...).</span>
@@ -1866,7 +1875,7 @@ is shorter than the requested width.</p>
 <span class="normal"><a href="#__codelineno-0-235">235</a></span>
 <span class="normal"><a href="#__codelineno-0-236">236</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-0-214" name="__codelineno-0-214"></a><span class="k">def</span> <span class="nf">iscc_compare</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">):</span>
 <a id="__codelineno-0-215" name="__codelineno-0-215"></a>    <span class="c1"># type: (str, str) -&gt; dict</span>
-<a id="__codelineno-0-216" name="__codelineno-0-216"></a>    <span class="sd">&quot;&quot;&quot;</span>
+<a id="__codelineno-0-216" name="__codelineno-0-216"></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <a id="__codelineno-0-217" name="__codelineno-0-217"></a><span class="sd">    Calculate separate hamming distances of compatible components of two ISCCs</span>
 <a id="__codelineno-0-218" name="__codelineno-0-218"></a>
 <a id="__codelineno-0-219" name="__codelineno-0-219"></a><span class="sd">    :return: A dict with keys meta_dist, semantic_dist, content_dist, data_dist, instance_match</span>
@@ -1983,7 +1992,7 @@ is shorter than the requested width.</p>
 <span class="normal"><a href="#__codelineno-0-254">254</a></span>
 <span class="normal"><a href="#__codelineno-0-255">255</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-0-239" name="__codelineno-0-239"></a><span class="k">def</span> <span class="nf">iscc_similarity</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">):</span>
 <a id="__codelineno-0-240" name="__codelineno-0-240"></a>    <span class="c1"># type: (str, str) -&gt; int</span>
-<a id="__codelineno-0-241" name="__codelineno-0-241"></a>    <span class="sd">&quot;&quot;&quot;</span>
+<a id="__codelineno-0-241" name="__codelineno-0-241"></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <a id="__codelineno-0-242" name="__codelineno-0-242"></a><span class="sd">    Calculate similarity of ISCC codes as a percentage value (0-100).</span>
 <a id="__codelineno-0-243" name="__codelineno-0-243"></a>
 <a id="__codelineno-0-244" name="__codelineno-0-244"></a><span class="sd">    MainType, SubType, Version and Length of the codes must be the same.</span>
@@ -2091,7 +2100,7 @@ is shorter than the requested width.</p>
 <span class="normal"><a href="#__codelineno-0-270">270</a></span>
 <span class="normal"><a href="#__codelineno-0-271">271</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-0-258" name="__codelineno-0-258"></a><span class="k">def</span> <span class="nf">iscc_distance</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">):</span>
 <a id="__codelineno-0-259" name="__codelineno-0-259"></a>    <span class="c1"># type: (str, str) -&gt; int</span>
-<a id="__codelineno-0-260" name="__codelineno-0-260"></a>    <span class="sd">&quot;&quot;&quot;</span>
+<a id="__codelineno-0-260" name="__codelineno-0-260"></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <a id="__codelineno-0-261" name="__codelineno-0-261"></a><span class="sd">    Calculate hamming distance of ISCC codes.</span>
 <a id="__codelineno-0-262" name="__codelineno-0-262"></a>
 <a id="__codelineno-0-263" name="__codelineno-0-263"></a><span class="sd">    MainType, SubType, Version and Length of the codes must be the same.</span>
@@ -2199,7 +2208,7 @@ is shorter than the requested width.</p>
 <span class="normal"><a href="#__codelineno-0-288">288</a></span>
 <span class="normal"><a href="#__codelineno-0-289">289</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-0-274" name="__codelineno-0-274"></a><span class="k">def</span> <span class="nf">iscc_distance_bytes</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">):</span>
 <a id="__codelineno-0-275" name="__codelineno-0-275"></a>    <span class="c1"># type: (bytes, bytes) -&gt; int</span>
-<a id="__codelineno-0-276" name="__codelineno-0-276"></a>    <span class="sd">&quot;&quot;&quot;</span>
+<a id="__codelineno-0-276" name="__codelineno-0-276"></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <a id="__codelineno-0-277" name="__codelineno-0-277"></a><span class="sd">    Calculate hamming distance for binary hash digests of equal length.</span>
 <a id="__codelineno-0-278" name="__codelineno-0-278"></a>
 <a id="__codelineno-0-279" name="__codelineno-0-279"></a><span class="sd">    :param bytes a: binary hash digest</span>
@@ -2329,7 +2338,7 @@ is shorter than the requested width.</p>
 <span class="normal"><a href="#__codelineno-0-309">309</a></span>
 <span class="normal"><a href="#__codelineno-0-310">310</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-0-292" name="__codelineno-0-292"></a><span class="k">def</span> <span class="nf">iscc_pair_unpack</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">):</span>
 <a id="__codelineno-0-293" name="__codelineno-0-293"></a>    <span class="c1"># type: (str, str) -&gt; Tuple[bytes, bytes]</span>
-<a id="__codelineno-0-294" name="__codelineno-0-294"></a>    <span class="sd">&quot;&quot;&quot;</span>
+<a id="__codelineno-0-294" name="__codelineno-0-294"></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <a id="__codelineno-0-295" name="__codelineno-0-295"></a><span class="sd">    Unpack two ISCC codes and return their body hash digests if their headers match.</span>
 <a id="__codelineno-0-296" name="__codelineno-0-296"></a>
 <a id="__codelineno-0-297" name="__codelineno-0-297"></a><span class="sd">    Headers match if their MainType, SubType, and Version are identical.</span>
@@ -2378,42 +2387,6 @@ is shorter than the requested width.</p>
       
         <footer class="md-footer">
   
-    
-    <nav class="md-footer__inner md-grid" aria-label="Footer" >
-      
-        
-        <a href="../../options/options/" class="md-footer__link md-footer__link--prev" aria-label="Previous: Options" rel="prev">
-          <div class="md-footer__button md-icon">
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
-          </div>
-          <div class="md-footer__title">
-            <div class="md-ellipsis">
-              <span class="md-footer__direction">
-                Previous
-              </span>
-              Options
-            </div>
-          </div>
-        </a>
-      
-      
-        
-        <a href="../../conformance/" class="md-footer__link md-footer__link--next" aria-label="Next: Conformance" rel="next">
-          <div class="md-footer__title">
-            <div class="md-ellipsis">
-              <span class="md-footer__direction">
-                Next
-              </span>
-              Conformance
-            </div>
-          </div>
-          <div class="md-footer__button md-icon">
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11H4Z"/></svg>
-          </div>
-        </a>
-      
-    </nav>
-  
   <div class="md-footer-meta md-typeset">
     <div class="md-footer-meta__inner md-grid">
       <div class="md-copyright">
@@ -2439,12 +2412,11 @@ is shorter than the requested width.</p>
       <div class="md-dialog__inner md-typeset"></div>
     </div>
     
-    <script id="__config" type="application/json">{"base": "../..", "features": ["toc.integrate", "navigation.indexes", "navigation.tracking", "navigation.tabs", "navigation.tabs.sticky", "navigation.expand"], "search": "../../assets/javascripts/workers/search.16e2a7d4.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version.title": "Select version"}}</script>
+    <script id="__config" type="application/json">{"base": "../..", "features": ["toc.integrate", "navigation.indexes", "navigation.tracking", "navigation.tabs", "navigation.tabs.sticky", "navigation.expand"], "search": "../../assets/javascripts/workers/search.e5c33ebb.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
     
     
-      <script src="../../assets/javascripts/bundle.5a2dcb6a.min.js"></script>
+      <script src="../../assets/javascripts/bundle.51d95adb.min.js"></script>
       
-    
     
   </body>
 </html>

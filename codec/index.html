@@ -14,8 +14,14 @@
       
         <link rel="canonical" href="https://core.iscc.codes/codec/">
       
+      
+        <link rel="prev" href="../constants/">
+      
+      
+        <link rel="next" href="../units/">
+      
       <link rel="icon" href="../images/iscc-logo-icon-black.svg">
-      <meta name="generator" content="mkdocs-1.4.2, mkdocs-material-8.5.10">
+      <meta name="generator" content="mkdocs-1.4.2, mkdocs-material-9.0.5">
     
     
       
@@ -23,11 +29,10 @@
       
     
     
-      <link rel="stylesheet" href="../assets/stylesheets/main.975780f9.min.css">
+      <link rel="stylesheet" href="../assets/stylesheets/main.558e4712.min.css">
       
         
         <link rel="stylesheet" href="../assets/stylesheets/palette.2505c338.min.css">
-        
       
       
 
@@ -121,8 +126,6 @@
       <form class="md-header__option" data-md-component="palette">
         
           
-          
-          
           <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="" data-md-color-accent=""  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_1">
           
             <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_2" hidden>
@@ -130,8 +133,6 @@
             </label>
           
         
-          
-          
           
           <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="" data-md-color-accent=""  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_2">
           
@@ -170,7 +171,7 @@
           <div class="md-search-result__meta">
             Initializing search
           </div>
-          <ol class="md-search-result__list"></ol>
+          <ol class="md-search-result__list" role="presentation"></ol>
         </div>
       </div>
     </div>
@@ -802,8 +803,11 @@
     <li class="md-nav__item md-nav__item--nested">
       
       
-        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" data-md-toggle="__nav_4" type="checkbox" id="__nav_4" checked>
       
+      
+        
+      
+      <input class="md-nav__toggle md-toggle md-toggle--indeterminate" data-md-toggle="__nav_4" type="checkbox" id="__nav_4" >
       
       
         
@@ -866,8 +870,11 @@
     <li class="md-nav__item md-nav__item--nested">
       
       
-        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" data-md-toggle="__nav_4_3" type="checkbox" id="__nav_4_3" checked>
       
+      
+        
+      
+      <input class="md-nav__toggle md-toggle md-toggle--indeterminate" data-md-toggle="__nav_4_3" type="checkbox" id="__nav_4_3" >
       
       
         
@@ -1073,8 +1080,11 @@
     <li class="md-nav__item md-nav__item--nested">
       
       
-        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" data-md-toggle="__nav_7" type="checkbox" id="__nav_7" checked>
       
+      
+        
+      
+      <input class="md-nav__toggle md-toggle md-toggle--indeterminate" data-md-toggle="__nav_7" type="checkbox" id="__nav_7" >
       
       
         
@@ -1090,7 +1100,7 @@
         
       
       
-        <label class="md-nav__link" for="__nav_7">
+        <label class="md-nav__link" for="__nav_7" tabindex="0" aria-expanded="false">
           Algorithms
           <span class="md-nav__icon md-icon"></span>
         </label>
@@ -1252,10 +1262,9 @@
                 
                   
 
-  <a href="https://github.com/iscc/iscc-core/edit/main/docs/codec/index.md" title="Edit this page" class="md-content__button md-icon">
-    
-    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20.71 7.04c.39-.39.39-1.04 0-1.41l-2.34-2.34c-.37-.39-1.02-.39-1.41 0l-1.84 1.83 3.75 3.75M3 17.25V21h3.75L17.81 9.93l-3.75-3.75L3 17.25Z"/></svg>
-  </a>
+  
+  
+
 
 
 <h1 id="iscc-codec">ISCC - Codec<a class="headerlink" href="#iscc-codec" title="Permanent link">#</a></h1>
@@ -1416,7 +1425,7 @@ If <code>digest</code> has more bits than specified by <code>length</code> it wi
 <span class="normal"><a href="#__codelineno-0-51">51</a></span>
 <span class="normal"><a href="#__codelineno-0-52">52</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-0-23" name="__codelineno-0-23"></a><span class="k">def</span> <span class="nf">encode_component</span><span class="p">(</span><span class="n">mtype</span><span class="p">,</span> <span class="n">stype</span><span class="p">,</span> <span class="n">version</span><span class="p">,</span> <span class="n">bit_length</span><span class="p">,</span> <span class="n">digest</span><span class="p">):</span>
 <a id="__codelineno-0-24" name="__codelineno-0-24"></a>    <span class="c1"># type: (MainType, SubType, Version, Length, bytes) -&gt; str</span>
-<a id="__codelineno-0-25" name="__codelineno-0-25"></a>    <span class="sd">&quot;&quot;&quot;</span>
+<a id="__codelineno-0-25" name="__codelineno-0-25"></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <a id="__codelineno-0-26" name="__codelineno-0-26"></a><span class="sd">    Encode an ISCC unit inlcuding header and body with standard base32 encoding.</span>
 <a id="__codelineno-0-27" name="__codelineno-0-27"></a>
 <a id="__codelineno-0-28" name="__codelineno-0-28"></a><span class="sd">    !!! note</span>
@@ -1558,7 +1567,7 @@ If <code>digest</code> has more bits than specified by <code>length</code> it wi
 <span class="normal"><a href="#__codelineno-0-45">45</a></span>
 <span class="normal"><a href="#__codelineno-0-46">46</a></span>
 <span class="normal"><a href="#__codelineno-0-47">47</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-0-24" name="__codelineno-0-24"></a><span class="k">class</span> <span class="nc">MT</span><span class="p">(</span><span class="n">enum</span><span class="o">.</span><span class="n">IntEnum</span><span class="p">):</span>
-<a id="__codelineno-0-25" name="__codelineno-0-25"></a>    <span class="sd">&quot;&quot;&quot;</span>
+<a id="__codelineno-0-25" name="__codelineno-0-25"></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <a id="__codelineno-0-26" name="__codelineno-0-26"></a><span class="sd">    ## MT - MainTypes</span>
 <a id="__codelineno-0-27" name="__codelineno-0-27"></a>
 <a id="__codelineno-0-28" name="__codelineno-0-28"></a><span class="sd">    | Uint | Symbol   | Bits | Purpose                                                 |</span>
@@ -1650,7 +1659,7 @@ If <code>digest</code> has more bits than specified by <code>length</code> it wi
 <span class="normal"><a href="#__codelineno-0-57">57</a></span>
 <span class="normal"><a href="#__codelineno-0-58">58</a></span>
 <span class="normal"><a href="#__codelineno-0-59">59</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-0-50" name="__codelineno-0-50"></a><span class="k">class</span> <span class="nc">ST</span><span class="p">(</span><span class="n">enum</span><span class="o">.</span><span class="n">IntEnum</span><span class="p">):</span>
-<a id="__codelineno-0-51" name="__codelineno-0-51"></a>    <span class="sd">&quot;&quot;&quot;</span>
+<a id="__codelineno-0-51" name="__codelineno-0-51"></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <a id="__codelineno-0-52" name="__codelineno-0-52"></a><span class="sd">    ## ST - SubTypes</span>
 <a id="__codelineno-0-53" name="__codelineno-0-53"></a>
 <a id="__codelineno-0-54" name="__codelineno-0-54"></a><span class="sd">    | Uint | Symbol   | Bits | Purpose                                                 |</span>
@@ -1803,7 +1812,7 @@ the MainType (see <code>encode_length</code> function).</p>
 <span class="normal"><a href="#__codelineno-0-79">79</a></span>
 <span class="normal"><a href="#__codelineno-0-80">80</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-0-55" name="__codelineno-0-55"></a><span class="k">def</span> <span class="nf">encode_header</span><span class="p">(</span><span class="n">mtype</span><span class="p">,</span> <span class="n">stype</span><span class="p">,</span> <span class="n">version</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">length</span><span class="o">=</span><span class="mi">1</span><span class="p">):</span>
 <a id="__codelineno-0-56" name="__codelineno-0-56"></a>    <span class="c1"># type: (MainType, SubType, Version, Length) -&gt; bytes</span>
-<a id="__codelineno-0-57" name="__codelineno-0-57"></a>    <span class="sd">&quot;&quot;&quot;</span>
+<a id="__codelineno-0-57" name="__codelineno-0-57"></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <a id="__codelineno-0-58" name="__codelineno-0-58"></a><span class="sd">    Encodes header values with nibble-sized (4-bit) variable-length encoding.</span>
 <a id="__codelineno-0-59" name="__codelineno-0-59"></a><span class="sd">    The result is minimum 2 and maximum 8 bytes long. If the final count of nibbles</span>
 <a id="__codelineno-0-60" name="__codelineno-0-60"></a><span class="sd">    is uneven it is padded with 4-bit `0000` at the end.</span>
@@ -1920,7 +1929,7 @@ the MainType (see <code>encode_length</code> function).</p>
 <span class="normal"><a href="#__codelineno-0-79">79</a></span>
 <span class="normal"><a href="#__codelineno-0-80">80</a></span>
 <span class="normal"><a href="#__codelineno-0-81">81</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-0-62" name="__codelineno-0-62"></a><span class="k">class</span> <span class="nc">ST_CC</span><span class="p">(</span><span class="n">enum</span><span class="o">.</span><span class="n">IntEnum</span><span class="p">):</span>
-<a id="__codelineno-0-63" name="__codelineno-0-63"></a>    <span class="sd">&quot;&quot;&quot;</span>
+<a id="__codelineno-0-63" name="__codelineno-0-63"></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <a id="__codelineno-0-64" name="__codelineno-0-64"></a><span class="sd">    ### ST_CC</span>
 <a id="__codelineno-0-65" name="__codelineno-0-65"></a>
 <a id="__codelineno-0-66" name="__codelineno-0-66"></a><span class="sd">    SubTypes for `MT.CONTENT`</span>
@@ -2087,7 +2096,7 @@ the MainType (see <code>encode_length</code> function).</p>
 <span class="normal"><a href="#__codelineno-0-110">110</a></span>
 <span class="normal"><a href="#__codelineno-0-111">111</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-0-83" name="__codelineno-0-83"></a><span class="k">def</span> <span class="nf">encode_varnibble</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
 <a id="__codelineno-0-84" name="__codelineno-0-84"></a>    <span class="c1"># type: (int) -&gt; bitarray</span>
-<a id="__codelineno-0-85" name="__codelineno-0-85"></a>    <span class="sd">&quot;&quot;&quot;</span>
+<a id="__codelineno-0-85" name="__codelineno-0-85"></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <a id="__codelineno-0-86" name="__codelineno-0-86"></a><span class="sd">    Writes integer to variable length sequence of 4-bit chunks.</span>
 <a id="__codelineno-0-87" name="__codelineno-0-87"></a>
 <a id="__codelineno-0-88" name="__codelineno-0-88"></a><span class="sd">    Variable-length encoding scheme:</span>
@@ -2223,7 +2232,7 @@ the MainType (see <code>encode_length</code> function).</p>
 <span class="normal"><a href="#__codelineno-0-105">105</a></span>
 <span class="normal"><a href="#__codelineno-0-106">106</a></span>
 <span class="normal"><a href="#__codelineno-0-107">107</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-0-84" name="__codelineno-0-84"></a><span class="k">class</span> <span class="nc">ST_ISCC</span><span class="p">(</span><span class="n">enum</span><span class="o">.</span><span class="n">IntEnum</span><span class="p">):</span>
-<a id="__codelineno-0-85" name="__codelineno-0-85"></a>    <span class="sd">&quot;&quot;&quot;</span>
+<a id="__codelineno-0-85" name="__codelineno-0-85"></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <a id="__codelineno-0-86" name="__codelineno-0-86"></a><span class="sd">    ### ST_ISCC</span>
 <a id="__codelineno-0-87" name="__codelineno-0-87"></a>
 <a id="__codelineno-0-88" name="__codelineno-0-88"></a><span class="sd">    SubTypes for `MT.ISCC`</span>
@@ -2342,7 +2351,7 @@ the MainType (see <code>encode_length</code> function).</p>
 <span class="normal"><a href="#__codelineno-0-125">125</a></span>
 <span class="normal"><a href="#__codelineno-0-126">126</a></span>
 <span class="normal"><a href="#__codelineno-0-127">127</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-0-110" name="__codelineno-0-110"></a><span class="k">class</span> <span class="nc">ST_ID</span><span class="p">(</span><span class="n">enum</span><span class="o">.</span><span class="n">IntEnum</span><span class="p">):</span>
-<a id="__codelineno-0-111" name="__codelineno-0-111"></a>    <span class="sd">&quot;&quot;&quot;</span>
+<a id="__codelineno-0-111" name="__codelineno-0-111"></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <a id="__codelineno-0-112" name="__codelineno-0-112"></a><span class="sd">    ### ST_ID</span>
 <a id="__codelineno-0-113" name="__codelineno-0-113"></a>
 <a id="__codelineno-0-114" name="__codelineno-0-114"></a><span class="sd">    SubTypes for `MT.ID`</span>
@@ -2473,7 +2482,7 @@ hash-bytes.</p>
 <span class="normal"><a href="#__codelineno-0-142">142</a></span>
 <span class="normal"><a href="#__codelineno-0-143">143</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-0-114" name="__codelineno-0-114"></a><span class="k">def</span> <span class="nf">decode_header</span><span class="p">(</span><span class="n">data</span><span class="p">):</span>
 <a id="__codelineno-0-115" name="__codelineno-0-115"></a>    <span class="c1"># type: (bytes) -&gt; IsccTuple</span>
-<a id="__codelineno-0-116" name="__codelineno-0-116"></a>    <span class="sd">&quot;&quot;&quot;</span>
+<a id="__codelineno-0-116" name="__codelineno-0-116"></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <a id="__codelineno-0-117" name="__codelineno-0-117"></a><span class="sd">    Decodes varnibble encoded header and returns it together with `tail data`.</span>
 <a id="__codelineno-0-118" name="__codelineno-0-118"></a>
 <a id="__codelineno-0-119" name="__codelineno-0-119"></a><span class="sd">    Tail data is included to enable decoding of sequential ISCCs. The returned tail</span>
@@ -2563,7 +2572,7 @@ hash-bytes.</p>
 <span class="normal"><a href="#__codelineno-0-140">140</a></span>
 <span class="normal"><a href="#__codelineno-0-141">141</a></span>
 <span class="normal"><a href="#__codelineno-0-142">142</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-0-130" name="__codelineno-0-130"></a><span class="k">class</span> <span class="nc">VS</span><span class="p">(</span><span class="n">enum</span><span class="o">.</span><span class="n">IntEnum</span><span class="p">):</span>
-<a id="__codelineno-0-131" name="__codelineno-0-131"></a>    <span class="sd">&quot;&quot;&quot;</span>
+<a id="__codelineno-0-131" name="__codelineno-0-131"></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <a id="__codelineno-0-132" name="__codelineno-0-132"></a><span class="sd">    ## VS - Version</span>
 <a id="__codelineno-0-133" name="__codelineno-0-133"></a>
 <a id="__codelineno-0-134" name="__codelineno-0-134"></a><span class="sd">    Code Version</span>
@@ -2634,7 +2643,7 @@ hash-bytes.</p>
 <span class="normal"><a href="#__codelineno-0-159">159</a></span>
 <span class="normal"><a href="#__codelineno-0-160">160</a></span>
 <span class="normal"><a href="#__codelineno-0-161">161</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-0-145" name="__codelineno-0-145"></a><span class="k">class</span> <span class="nc">LN</span><span class="p">(</span><span class="n">enum</span><span class="o">.</span><span class="n">IntEnum</span><span class="p">):</span>
-<a id="__codelineno-0-146" name="__codelineno-0-146"></a>    <span class="sd">&quot;&quot;&quot;</span>
+<a id="__codelineno-0-146" name="__codelineno-0-146"></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <a id="__codelineno-0-147" name="__codelineno-0-147"></a><span class="sd">    ## LN - Length</span>
 <a id="__codelineno-0-148" name="__codelineno-0-148"></a>
 <a id="__codelineno-0-149" name="__codelineno-0-149"></a><span class="sd">    Valid lengths for hash-digests.</span>
@@ -2752,7 +2761,7 @@ hash-bytes.</p>
 <span class="normal"><a href="#__codelineno-0-165">165</a></span>
 <span class="normal"><a href="#__codelineno-0-166">166</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-0-146" name="__codelineno-0-146"></a><span class="k">def</span> <span class="nf">decode_varnibble</span><span class="p">(</span><span class="n">b</span><span class="p">):</span>
 <a id="__codelineno-0-147" name="__codelineno-0-147"></a>    <span class="c1"># type: (bitarray) -&gt; Tuple[int, bitarray]</span>
-<a id="__codelineno-0-148" name="__codelineno-0-148"></a>    <span class="sd">&quot;&quot;&quot;Reads first varnibble, returns its integer value and remaining bits.</span>
+<a id="__codelineno-0-148" name="__codelineno-0-148"></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;Reads first varnibble, returns its integer value and remaining bits.</span>
 <a id="__codelineno-0-149" name="__codelineno-0-149"></a>
 <a id="__codelineno-0-150" name="__codelineno-0-150"></a><span class="sd">    :param bitarray b: Array of header bits</span>
 <a id="__codelineno-0-151" name="__codelineno-0-151"></a><span class="sd">    :return: A tuple of the integer value of first varnible and the remaining bits.</span>
@@ -2811,7 +2820,7 @@ hash-bytes.</p>
 <span class="normal"><a href="#__codelineno-0-171">171</a></span>
 <span class="normal"><a href="#__codelineno-0-172">172</a></span>
 <span class="normal"><a href="#__codelineno-0-173">173</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-0-164" name="__codelineno-0-164"></a><span class="k">class</span> <span class="nc">MULTIBASE</span><span class="p">(</span><span class="nb">str</span><span class="p">,</span> <span class="n">enum</span><span class="o">.</span><span class="n">Enum</span><span class="p">):</span>
-<a id="__codelineno-0-165" name="__codelineno-0-165"></a>    <span class="sd">&quot;&quot;&quot;</span>
+<a id="__codelineno-0-165" name="__codelineno-0-165"></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <a id="__codelineno-0-166" name="__codelineno-0-166"></a><span class="sd">    Supported Multibase encodings.</span>
 <a id="__codelineno-0-167" name="__codelineno-0-167"></a><span class="sd">    &quot;&quot;&quot;</span>
 <a id="__codelineno-0-168" name="__codelineno-0-168"></a>
@@ -2913,7 +2922,7 @@ value for the final encoding of MT.ISCC</p>
 <span class="normal"><a href="#__codelineno-0-178">178</a></span>
 <span class="normal"><a href="#__codelineno-0-179">179</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-0-169" name="__codelineno-0-169"></a><span class="k">def</span> <span class="nf">encode_units</span><span class="p">(</span><span class="n">units</span><span class="p">):</span>
 <a id="__codelineno-0-170" name="__codelineno-0-170"></a>    <span class="c1"># type: (Tuple[MT, ...]) -&gt; int</span>
-<a id="__codelineno-0-171" name="__codelineno-0-171"></a>    <span class="sd">&quot;&quot;&quot;</span>
+<a id="__codelineno-0-171" name="__codelineno-0-171"></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <a id="__codelineno-0-172" name="__codelineno-0-172"></a><span class="sd">    Encodes a combination of ISCC units to an integer between 0-7 to be used as length</span>
 <a id="__codelineno-0-173" name="__codelineno-0-173"></a><span class="sd">    value for the final encoding of MT.ISCC</span>
 <a id="__codelineno-0-174" name="__codelineno-0-174"></a>
@@ -2959,7 +2968,7 @@ ordered tuple of MainTypes.</p>
 <span class="normal"><a href="#__codelineno-0-188">188</a></span>
 <span class="normal"><a href="#__codelineno-0-189">189</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-0-182" name="__codelineno-0-182"></a><span class="k">def</span> <span class="nf">decode_units</span><span class="p">(</span><span class="n">unit_id</span><span class="p">):</span>
 <a id="__codelineno-0-183" name="__codelineno-0-183"></a>    <span class="c1"># type: (int) -&gt; Tuple[MT, ...]</span>
-<a id="__codelineno-0-184" name="__codelineno-0-184"></a>    <span class="sd">&quot;&quot;&quot;</span>
+<a id="__codelineno-0-184" name="__codelineno-0-184"></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <a id="__codelineno-0-185" name="__codelineno-0-185"></a><span class="sd">    Decodes an ISCC header length value that has been encoded with a unit_id to an</span>
 <a id="__codelineno-0-186" name="__codelineno-0-186"></a><span class="sd">    ordered tuple of MainTypes.</span>
 <a id="__codelineno-0-187" name="__codelineno-0-187"></a><span class="sd">    &quot;&quot;&quot;</span>
@@ -3136,7 +3145,7 @@ Examples:
 <span class="normal"><a href="#__codelineno-0-252">252</a></span>
 <span class="normal"><a href="#__codelineno-0-253">253</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-0-192" name="__codelineno-0-192"></a><span class="k">def</span> <span class="nf">encode_length</span><span class="p">(</span><span class="n">mtype</span><span class="p">,</span> <span class="n">length</span><span class="p">):</span>
 <a id="__codelineno-0-193" name="__codelineno-0-193"></a>    <span class="c1"># type: (MainType, Length) -&gt; int</span>
-<a id="__codelineno-0-194" name="__codelineno-0-194"></a>    <span class="sd">&quot;&quot;&quot;</span>
+<a id="__codelineno-0-194" name="__codelineno-0-194"></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <a id="__codelineno-0-195" name="__codelineno-0-195"></a><span class="sd">    Encode length to integer value for header encoding.</span>
 <a id="__codelineno-0-196" name="__codelineno-0-196"></a>
 <a id="__codelineno-0-197" name="__codelineno-0-197"></a><span class="sd">    The `length` value has MainType-specific semantics:</span>
@@ -3242,7 +3251,7 @@ number of bits)</p>
 <span class="normal"><a href="#__codelineno-0-270">270</a></span>
 <span class="normal"><a href="#__codelineno-0-271">271</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-0-256" name="__codelineno-0-256"></a><span class="k">def</span> <span class="nf">decode_length</span><span class="p">(</span><span class="n">mtype</span><span class="p">,</span> <span class="n">length</span><span class="p">):</span>
 <a id="__codelineno-0-257" name="__codelineno-0-257"></a>    <span class="c1"># type: (MainType, Length) -&gt; LN</span>
-<a id="__codelineno-0-258" name="__codelineno-0-258"></a>    <span class="sd">&quot;&quot;&quot;</span>
+<a id="__codelineno-0-258" name="__codelineno-0-258"></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <a id="__codelineno-0-259" name="__codelineno-0-259"></a><span class="sd">    Dedoce raw length value from ISCC header to length of digest in number of bits.</span>
 <a id="__codelineno-0-260" name="__codelineno-0-260"></a>
 <a id="__codelineno-0-261" name="__codelineno-0-261"></a><span class="sd">    Decodes a raw header integer value in to its semantically meaningfull value (eg.</span>
@@ -3290,7 +3299,7 @@ number of bits)</p>
 <span class="normal"><a href="#__codelineno-0-278">278</a></span>
 <span class="normal"><a href="#__codelineno-0-279">279</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-0-274" name="__codelineno-0-274"></a><span class="k">def</span> <span class="nf">encode_base32</span><span class="p">(</span><span class="n">data</span><span class="p">):</span>
 <a id="__codelineno-0-275" name="__codelineno-0-275"></a>    <span class="c1"># type: (bytes) -&gt; str</span>
-<a id="__codelineno-0-276" name="__codelineno-0-276"></a>    <span class="sd">&quot;&quot;&quot;</span>
+<a id="__codelineno-0-276" name="__codelineno-0-276"></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <a id="__codelineno-0-277" name="__codelineno-0-277"></a><span class="sd">    Standard RFC4648 base32 encoding without padding.</span>
 <a id="__codelineno-0-278" name="__codelineno-0-278"></a><span class="sd">    &quot;&quot;&quot;</span>
 <a id="__codelineno-0-279" name="__codelineno-0-279"></a>    <span class="k">return</span> <span class="n">b32encode</span><span class="p">(</span><span class="n">data</span><span class="p">)</span><span class="o">.</span><span class="n">decode</span><span class="p">(</span><span class="s2">&quot;ascii&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">rstrip</span><span class="p">(</span><span class="s2">&quot;=&quot;</span><span class="p">)</span>
@@ -3332,7 +3341,7 @@ number of bits)</p>
 <span class="normal"><a href="#__codelineno-0-290">290</a></span>
 <span class="normal"><a href="#__codelineno-0-291">291</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-0-282" name="__codelineno-0-282"></a><span class="k">def</span> <span class="nf">decode_base32</span><span class="p">(</span><span class="n">code</span><span class="p">):</span>
 <a id="__codelineno-0-283" name="__codelineno-0-283"></a>    <span class="c1"># type: (str) -&gt; bytes</span>
-<a id="__codelineno-0-284" name="__codelineno-0-284"></a>    <span class="sd">&quot;&quot;&quot;</span>
+<a id="__codelineno-0-284" name="__codelineno-0-284"></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <a id="__codelineno-0-285" name="__codelineno-0-285"></a><span class="sd">    Standard RFC4648 base32 decoding without padding and with casefolding.</span>
 <a id="__codelineno-0-286" name="__codelineno-0-286"></a><span class="sd">    &quot;&quot;&quot;</span>
 <a id="__codelineno-0-287" name="__codelineno-0-287"></a>    <span class="c1"># python stdlib does not support base32 without padding, so we have to re-pad.</span>
@@ -3373,7 +3382,7 @@ number of bits)</p>
 <span class="normal"><a href="#__codelineno-0-297">297</a></span>
 <span class="normal"><a href="#__codelineno-0-298">298</a></span>
 <span class="normal"><a href="#__codelineno-0-299">299</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-0-294" name="__codelineno-0-294"></a><span class="k">def</span> <span class="nf">encode_base64</span><span class="p">(</span><span class="n">data</span><span class="p">:</span> <span class="nb">bytes</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
-<a id="__codelineno-0-295" name="__codelineno-0-295"></a>    <span class="sd">&quot;&quot;&quot;</span>
+<a id="__codelineno-0-295" name="__codelineno-0-295"></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <a id="__codelineno-0-296" name="__codelineno-0-296"></a><span class="sd">    Standard RFC4648 base64url encoding without padding.</span>
 <a id="__codelineno-0-297" name="__codelineno-0-297"></a><span class="sd">    &quot;&quot;&quot;</span>
 <a id="__codelineno-0-298" name="__codelineno-0-298"></a>    <span class="n">code</span> <span class="o">=</span> <span class="n">urlsafe_b64encode</span><span class="p">(</span><span class="n">data</span><span class="p">)</span><span class="o">.</span><span class="n">decode</span><span class="p">(</span><span class="s2">&quot;ascii&quot;</span><span class="p">)</span>
@@ -3412,7 +3421,7 @@ number of bits)</p>
 <span class="normal"><a href="#__codelineno-0-306">306</a></span>
 <span class="normal"><a href="#__codelineno-0-307">307</a></span>
 <span class="normal"><a href="#__codelineno-0-308">308</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-0-302" name="__codelineno-0-302"></a><span class="k">def</span> <span class="nf">decode_base64</span><span class="p">(</span><span class="n">code</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bytes</span><span class="p">:</span>
-<a id="__codelineno-0-303" name="__codelineno-0-303"></a>    <span class="sd">&quot;&quot;&quot;</span>
+<a id="__codelineno-0-303" name="__codelineno-0-303"></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <a id="__codelineno-0-304" name="__codelineno-0-304"></a><span class="sd">    Standard RFC4648 base64url decoding without padding.</span>
 <a id="__codelineno-0-305" name="__codelineno-0-305"></a><span class="sd">    &quot;&quot;&quot;</span>
 <a id="__codelineno-0-306" name="__codelineno-0-306"></a>    <span class="n">padding</span> <span class="o">=</span> <span class="mi">4</span> <span class="o">-</span> <span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">code</span><span class="p">)</span> <span class="o">%</span> <span class="mi">4</span><span class="p">)</span>
@@ -3453,7 +3462,7 @@ number of bits)</p>
 <span class="normal"><a href="#__codelineno-0-315">315</a></span>
 <span class="normal"><a href="#__codelineno-0-316">316</a></span>
 <span class="normal"><a href="#__codelineno-0-317">317</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-0-311" name="__codelineno-0-311"></a><span class="k">def</span> <span class="nf">encode_base32hex</span><span class="p">(</span><span class="n">data</span><span class="p">):</span>
-<a id="__codelineno-0-312" name="__codelineno-0-312"></a>    <span class="sd">&quot;&quot;&quot;</span>
+<a id="__codelineno-0-312" name="__codelineno-0-312"></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <a id="__codelineno-0-313" name="__codelineno-0-313"></a><span class="sd">    RFC4648 Base32hex encoding without padding</span>
 <a id="__codelineno-0-314" name="__codelineno-0-314"></a>
 <a id="__codelineno-0-315" name="__codelineno-0-315"></a><span class="sd">    see: https://tools.ietf.org/html/rfc4648#page-10</span>
@@ -3494,7 +3503,7 @@ number of bits)</p>
 <span class="normal"><a href="#__codelineno-0-324">324</a></span>
 <span class="normal"><a href="#__codelineno-0-325">325</a></span>
 <span class="normal"><a href="#__codelineno-0-326">326</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-0-320" name="__codelineno-0-320"></a><span class="k">def</span> <span class="nf">decode_base32hex</span><span class="p">(</span><span class="n">data</span><span class="p">):</span>
-<a id="__codelineno-0-321" name="__codelineno-0-321"></a>    <span class="sd">&quot;&quot;&quot;</span>
+<a id="__codelineno-0-321" name="__codelineno-0-321"></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <a id="__codelineno-0-322" name="__codelineno-0-322"></a><span class="sd">    RFC4648 Base32hex decoding without padding</span>
 <a id="__codelineno-0-323" name="__codelineno-0-323"></a>
 <a id="__codelineno-0-324" name="__codelineno-0-324"></a><span class="sd">    see: https://tools.ietf.org/html/rfc4648#page-10</span>
@@ -3568,7 +3577,7 @@ by a hyphen.</p>
 <span class="normal"><a href="#__codelineno-0-365">365</a></span>
 <span class="normal"><a href="#__codelineno-0-366">366</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-0-329" name="__codelineno-0-329"></a><span class="k">def</span> <span class="nf">iscc_decompose</span><span class="p">(</span><span class="n">iscc_code</span><span class="p">):</span>
 <a id="__codelineno-0-330" name="__codelineno-0-330"></a>    <span class="c1"># type: (str) -&gt; List[str]</span>
-<a id="__codelineno-0-331" name="__codelineno-0-331"></a>    <span class="sd">&quot;&quot;&quot;</span>
+<a id="__codelineno-0-331" name="__codelineno-0-331"></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <a id="__codelineno-0-332" name="__codelineno-0-332"></a><span class="sd">    Decompose a normalized ISCC-CODE or any valid ISCC sequence into a list of ISCC-UNITS.</span>
 <a id="__codelineno-0-333" name="__codelineno-0-333"></a>
 <a id="__codelineno-0-334" name="__codelineno-0-334"></a><span class="sd">    A valid ISCC sequence is a string concatenation of ISCC-UNITS optionally seperated</span>
@@ -3754,7 +3763,7 @@ Iscc:Maagztfqttvizpjr
 <span class="normal"><a href="#__codelineno-0-426">426</a></span>
 <span class="normal"><a href="#__codelineno-0-427">427</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-0-369" name="__codelineno-0-369"></a><span class="k">def</span> <span class="nf">iscc_normalize</span><span class="p">(</span><span class="n">iscc_code</span><span class="p">):</span>
 <a id="__codelineno-0-370" name="__codelineno-0-370"></a>    <span class="c1"># type: (str) -&gt; str</span>
-<a id="__codelineno-0-371" name="__codelineno-0-371"></a>    <span class="sd">&quot;&quot;&quot;</span>
+<a id="__codelineno-0-371" name="__codelineno-0-371"></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <a id="__codelineno-0-372" name="__codelineno-0-372"></a><span class="sd">    Normalize an ISCC to its canonical form.</span>
 <a id="__codelineno-0-373" name="__codelineno-0-373"></a>
 <a id="__codelineno-0-374" name="__codelineno-0-374"></a><span class="sd">    The canonical form of an ISCC is its shortest base32 encoded representation</span>
@@ -3893,7 +3902,7 @@ Iscc:Maagztfqttvizpjr
 <span class="normal"><a href="#__codelineno-0-445">445</a></span>
 <span class="normal"><a href="#__codelineno-0-446">446</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-0-435" name="__codelineno-0-435"></a><span class="k">def</span> <span class="nf">iscc_decode</span><span class="p">(</span><span class="n">iscc</span><span class="p">):</span>
 <a id="__codelineno-0-436" name="__codelineno-0-436"></a>    <span class="c1"># type (str) -&gt; IsccTuple</span>
-<a id="__codelineno-0-437" name="__codelineno-0-437"></a>    <span class="sd">&quot;&quot;&quot;</span>
+<a id="__codelineno-0-437" name="__codelineno-0-437"></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <a id="__codelineno-0-438" name="__codelineno-0-438"></a><span class="sd">    Decode ISCC to an IsccTuple</span>
 <a id="__codelineno-0-439" name="__codelineno-0-439"></a>
 <a id="__codelineno-0-440" name="__codelineno-0-440"></a><span class="sd">    :param str iscc: ISCC string</span>
@@ -3992,7 +4001,7 @@ Iscc:Maagztfqttvizpjr
 <span class="normal"><a href="#__codelineno-0-466">466</a></span>
 <span class="normal"><a href="#__codelineno-0-467">467</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-0-449" name="__codelineno-0-449"></a><span class="k">def</span> <span class="nf">iscc_explain</span><span class="p">(</span><span class="n">iscc</span><span class="p">):</span>
 <a id="__codelineno-0-450" name="__codelineno-0-450"></a>    <span class="c1"># type (str) -&gt; str:</span>
-<a id="__codelineno-0-451" name="__codelineno-0-451"></a>    <span class="sd">&quot;&quot;&quot;</span>
+<a id="__codelineno-0-451" name="__codelineno-0-451"></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <a id="__codelineno-0-452" name="__codelineno-0-452"></a><span class="sd">    Convert ISCC to a human-readable representation</span>
 <a id="__codelineno-0-453" name="__codelineno-0-453"></a>
 <a id="__codelineno-0-454" name="__codelineno-0-454"></a><span class="sd">    :param str iscc: ISCC string</span>
@@ -4104,7 +4113,7 @@ Iscc:Maagztfqttvizpjr
 <span class="normal"><a href="#__codelineno-0-492">492</a></span>
 <span class="normal"><a href="#__codelineno-0-493">493</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-0-470" name="__codelineno-0-470"></a><span class="k">def</span> <span class="nf">iscc_type_id</span><span class="p">(</span><span class="n">iscc</span><span class="p">):</span>
 <a id="__codelineno-0-471" name="__codelineno-0-471"></a>    <span class="c1"># type (str) - str:</span>
-<a id="__codelineno-0-472" name="__codelineno-0-472"></a>    <span class="sd">&quot;&quot;&quot;</span>
+<a id="__codelineno-0-472" name="__codelineno-0-472"></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <a id="__codelineno-0-473" name="__codelineno-0-473"></a><span class="sd">    Extract and convert ISCC HEADER to a readable Type-ID string.</span>
 <a id="__codelineno-0-474" name="__codelineno-0-474"></a>
 <a id="__codelineno-0-475" name="__codelineno-0-475"></a><span class="sd">    Type-ids can be used as names in databases to index ISCC-UNITs seperatly.</span>
@@ -4255,7 +4264,7 @@ Iscc:Maagztfqttvizpjr
 <span class="normal"><a href="#__codelineno-0-536">536</a></span>
 <span class="normal"><a href="#__codelineno-0-537">537</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-0-496" name="__codelineno-0-496"></a><span class="k">def</span> <span class="nf">iscc_validate</span><span class="p">(</span><span class="n">iscc</span><span class="p">,</span> <span class="n">strict</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
 <a id="__codelineno-0-497" name="__codelineno-0-497"></a>    <span class="c1"># type: (str, bool) -&gt; bool</span>
-<a id="__codelineno-0-498" name="__codelineno-0-498"></a>    <span class="sd">&quot;&quot;&quot;</span>
+<a id="__codelineno-0-498" name="__codelineno-0-498"></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <a id="__codelineno-0-499" name="__codelineno-0-499"></a><span class="sd">    Validate that a given string is a *strictly well-formed* ISCC.</span>
 <a id="__codelineno-0-500" name="__codelineno-0-500"></a>
 <a id="__codelineno-0-501" name="__codelineno-0-501"></a><span class="sd">    A *strictly well-formed* ISCC is:</span>
@@ -4391,7 +4400,7 @@ Iscc:Maagztfqttvizpjr
 <span class="normal"><a href="#__codelineno-0-563">563</a></span>
 <span class="normal"><a href="#__codelineno-0-564">564</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-0-540" name="__codelineno-0-540"></a><span class="k">def</span> <span class="nf">iscc_clean</span><span class="p">(</span><span class="n">iscc</span><span class="p">):</span>
 <a id="__codelineno-0-541" name="__codelineno-0-541"></a>    <span class="c1"># type: (str) -&gt; str</span>
-<a id="__codelineno-0-542" name="__codelineno-0-542"></a>    <span class="sd">&quot;&quot;&quot;</span>
+<a id="__codelineno-0-542" name="__codelineno-0-542"></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <a id="__codelineno-0-543" name="__codelineno-0-543"></a><span class="sd">    Cleanup ISCC string.</span>
 <a id="__codelineno-0-544" name="__codelineno-0-544"></a>
 <a id="__codelineno-0-545" name="__codelineno-0-545"></a><span class="sd">    Removes leading scheme, dashes, leading/trailing whitespace.</span>
@@ -4446,42 +4455,6 @@ Iscc:Maagztfqttvizpjr
       
         <footer class="md-footer">
   
-    
-    <nav class="md-footer__inner md-grid" aria-label="Footer" >
-      
-        
-        <a href="../constants/" class="md-footer__link md-footer__link--prev" aria-label="Previous: Types" rel="prev">
-          <div class="md-footer__button md-icon">
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
-          </div>
-          <div class="md-footer__title">
-            <div class="md-ellipsis">
-              <span class="md-footer__direction">
-                Previous
-              </span>
-              Types
-            </div>
-          </div>
-        </a>
-      
-      
-        
-        <a href="../units/" class="md-footer__link md-footer__link--next" aria-label="Next: ISCC - UNITs" rel="next">
-          <div class="md-footer__title">
-            <div class="md-ellipsis">
-              <span class="md-footer__direction">
-                Next
-              </span>
-              ISCC - UNITs
-            </div>
-          </div>
-          <div class="md-footer__button md-icon">
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11H4Z"/></svg>
-          </div>
-        </a>
-      
-    </nav>
-  
   <div class="md-footer-meta md-typeset">
     <div class="md-footer-meta__inner md-grid">
       <div class="md-copyright">
@@ -4507,12 +4480,11 @@ Iscc:Maagztfqttvizpjr
       <div class="md-dialog__inner md-typeset"></div>
     </div>
     
-    <script id="__config" type="application/json">{"base": "..", "features": ["toc.integrate", "navigation.indexes", "navigation.tracking", "navigation.tabs", "navigation.tabs.sticky", "navigation.expand"], "search": "../assets/javascripts/workers/search.16e2a7d4.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version.title": "Select version"}}</script>
+    <script id="__config" type="application/json">{"base": "..", "features": ["toc.integrate", "navigation.indexes", "navigation.tracking", "navigation.tabs", "navigation.tabs.sticky", "navigation.expand"], "search": "../assets/javascripts/workers/search.e5c33ebb.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
     
     
-      <script src="../assets/javascripts/bundle.5a2dcb6a.min.js"></script>
+      <script src="../assets/javascripts/bundle.51d95adb.min.js"></script>
       
-    
     
   </body>
 </html>
