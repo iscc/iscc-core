@@ -1012,14 +1012,6 @@
   <div class="doc doc-contents first">
   
       <p>Create an ISCC Meta-Code with the algorithm version 0.</p>
-<div class="admonition note">
-<p class="admonition-title">Note</p>
-<p>The input for the <code>metadata</code> field can be:</p>
-<ul>
-<li>Structured (JSON/JCS serializable) metadata</li>
-<li>Raw bytes from a file header</li>
-</ul>
-</div>
 
   <p><strong>Parameters:</strong></p>
   <table>
@@ -1166,92 +1158,78 @@
 <span class="normal"><a href="#__codelineno-0-103">103</a></span>
 <span class="normal"><a href="#__codelineno-0-104">104</a></span>
 <span class="normal"><a href="#__codelineno-0-105">105</a></span>
-<span class="normal"><a href="#__codelineno-0-106">106</a></span>
-<span class="normal"><a href="#__codelineno-0-107">107</a></span>
-<span class="normal"><a href="#__codelineno-0-108">108</a></span>
-<span class="normal"><a href="#__codelineno-0-109">109</a></span>
-<span class="normal"><a href="#__codelineno-0-110">110</a></span>
-<span class="normal"><a href="#__codelineno-0-111">111</a></span>
-<span class="normal"><a href="#__codelineno-0-112">112</a></span>
-<span class="normal"><a href="#__codelineno-0-113">113</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-0-35" name="__codelineno-0-35"></a><span class="k">def</span> <span class="nf">gen_meta_code_v0</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">description</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">meta</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">bits</span><span class="o">=</span><span class="n">ic</span><span class="o">.</span><span class="n">core_opts</span><span class="o">.</span><span class="n">meta_bits</span><span class="p">):</span>
+<span class="normal"><a href="#__codelineno-0-106">106</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-0-35" name="__codelineno-0-35"></a><span class="k">def</span> <span class="nf">gen_meta_code_v0</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">description</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">meta</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">bits</span><span class="o">=</span><span class="n">ic</span><span class="o">.</span><span class="n">core_opts</span><span class="o">.</span><span class="n">meta_bits</span><span class="p">):</span>
 <a id="__codelineno-0-36" name="__codelineno-0-36"></a>    <span class="c1"># type: (str, Optional[str], Optional[ic.Meta], int) -&gt; dict</span>
 <a id="__codelineno-0-37" name="__codelineno-0-37"></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <a id="__codelineno-0-38" name="__codelineno-0-38"></a><span class="sd">    Create an ISCC Meta-Code with the algorithm version 0.</span>
 <a id="__codelineno-0-39" name="__codelineno-0-39"></a>
-<a id="__codelineno-0-40" name="__codelineno-0-40"></a><span class="sd">    !!! note</span>
-<a id="__codelineno-0-41" name="__codelineno-0-41"></a>
-<a id="__codelineno-0-42" name="__codelineno-0-42"></a><span class="sd">        The input for the `metadata` field can be:</span>
-<a id="__codelineno-0-43" name="__codelineno-0-43"></a>
-<a id="__codelineno-0-44" name="__codelineno-0-44"></a><span class="sd">        - Structured (JSON/JCS serializable) metadata</span>
-<a id="__codelineno-0-45" name="__codelineno-0-45"></a><span class="sd">        - Raw bytes from a file header</span>
-<a id="__codelineno-0-46" name="__codelineno-0-46"></a>
-<a id="__codelineno-0-47" name="__codelineno-0-47"></a><span class="sd">    :param str name: Name or title of the work manifested by the digital asset</span>
-<a id="__codelineno-0-48" name="__codelineno-0-48"></a><span class="sd">    :param Optional[str] description: Optional description for disambiguation</span>
-<a id="__codelineno-0-49" name="__codelineno-0-49"></a><span class="sd">    :param Optional[Union[dict,str] meta: Dict or Data-URL string with extended metadata</span>
-<a id="__codelineno-0-50" name="__codelineno-0-50"></a><span class="sd">    :param int bits: Bit-length of resulting Meta-Code (multiple of 64)</span>
-<a id="__codelineno-0-51" name="__codelineno-0-51"></a><span class="sd">    :return: ISCC object with possible fields: iscc, name, description, metadata, metahash</span>
-<a id="__codelineno-0-52" name="__codelineno-0-52"></a><span class="sd">    :rtype: dict</span>
-<a id="__codelineno-0-53" name="__codelineno-0-53"></a><span class="sd">    &quot;&quot;&quot;</span>
-<a id="__codelineno-0-54" name="__codelineno-0-54"></a>
-<a id="__codelineno-0-55" name="__codelineno-0-55"></a>    <span class="c1"># 1. Normalize `name`</span>
-<a id="__codelineno-0-56" name="__codelineno-0-56"></a>    <span class="n">name</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span> <span class="k">if</span> <span class="n">name</span> <span class="ow">is</span> <span class="kc">None</span> <span class="k">else</span> <span class="n">name</span>
-<a id="__codelineno-0-57" name="__codelineno-0-57"></a>    <span class="n">name</span> <span class="o">=</span> <span class="n">text_clean</span><span class="p">(</span><span class="n">name</span><span class="p">)</span>
-<a id="__codelineno-0-58" name="__codelineno-0-58"></a>    <span class="n">name</span> <span class="o">=</span> <span class="n">text_remove_newlines</span><span class="p">(</span><span class="n">name</span><span class="p">)</span>
-<a id="__codelineno-0-59" name="__codelineno-0-59"></a>    <span class="n">name</span> <span class="o">=</span> <span class="n">text_trim</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">ic</span><span class="o">.</span><span class="n">core_opts</span><span class="o">.</span><span class="n">meta_trim_name</span><span class="p">)</span>
-<a id="__codelineno-0-60" name="__codelineno-0-60"></a>
-<a id="__codelineno-0-61" name="__codelineno-0-61"></a>    <span class="k">if</span> <span class="ow">not</span> <span class="n">name</span><span class="p">:</span>
-<a id="__codelineno-0-62" name="__codelineno-0-62"></a>        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Meta-Code requires non-empty name element (after normalization)&quot;</span><span class="p">)</span>
-<a id="__codelineno-0-63" name="__codelineno-0-63"></a>
-<a id="__codelineno-0-64" name="__codelineno-0-64"></a>    <span class="c1"># 2. Normalize `description`</span>
-<a id="__codelineno-0-65" name="__codelineno-0-65"></a>    <span class="n">description</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span> <span class="k">if</span> <span class="n">description</span> <span class="ow">is</span> <span class="kc">None</span> <span class="k">else</span> <span class="n">description</span>
-<a id="__codelineno-0-66" name="__codelineno-0-66"></a>    <span class="n">description</span> <span class="o">=</span> <span class="n">text_clean</span><span class="p">(</span><span class="n">description</span><span class="p">)</span>
-<a id="__codelineno-0-67" name="__codelineno-0-67"></a>    <span class="n">description</span> <span class="o">=</span> <span class="n">text_trim</span><span class="p">(</span><span class="n">description</span><span class="p">,</span> <span class="n">ic</span><span class="o">.</span><span class="n">core_opts</span><span class="o">.</span><span class="n">meta_trim_description</span><span class="p">)</span>
-<a id="__codelineno-0-68" name="__codelineno-0-68"></a>
-<a id="__codelineno-0-69" name="__codelineno-0-69"></a>    <span class="c1"># Calculate meta_code, metahash, and output metadata values for the different input cases</span>
-<a id="__codelineno-0-70" name="__codelineno-0-70"></a>    <span class="k">if</span> <span class="n">meta</span><span class="p">:</span>
-<a id="__codelineno-0-71" name="__codelineno-0-71"></a>        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">meta</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
-<a id="__codelineno-0-72" name="__codelineno-0-72"></a>            <span class="c1"># Data-URL expected</span>
-<a id="__codelineno-0-73" name="__codelineno-0-73"></a>            <span class="n">durl</span> <span class="o">=</span> <span class="n">meta</span>
-<a id="__codelineno-0-74" name="__codelineno-0-74"></a>            <span class="n">payload</span> <span class="o">=</span> <span class="n">DataURL</span><span class="o">.</span><span class="n">from_url</span><span class="p">(</span><span class="n">durl</span><span class="p">)</span><span class="o">.</span><span class="n">data</span>
-<a id="__codelineno-0-75" name="__codelineno-0-75"></a>            <span class="n">meta_code_digest</span> <span class="o">=</span> <span class="n">soft_hash_meta_v0</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">payload</span><span class="p">)</span>
-<a id="__codelineno-0-76" name="__codelineno-0-76"></a>            <span class="n">metahash</span> <span class="o">=</span> <span class="n">ic</span><span class="o">.</span><span class="n">multi_hash_blake3</span><span class="p">(</span><span class="n">payload</span><span class="p">)</span>
-<a id="__codelineno-0-77" name="__codelineno-0-77"></a>            <span class="n">metadata_value</span> <span class="o">=</span> <span class="n">durl</span>
-<a id="__codelineno-0-78" name="__codelineno-0-78"></a>        <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">meta</span><span class="p">,</span> <span class="nb">dict</span><span class="p">):</span>
-<a id="__codelineno-0-79" name="__codelineno-0-79"></a>            <span class="n">payload</span> <span class="o">=</span> <span class="n">jcs</span><span class="o">.</span><span class="n">canonicalize</span><span class="p">(</span><span class="n">meta</span><span class="p">)</span>
-<a id="__codelineno-0-80" name="__codelineno-0-80"></a>            <span class="n">meta_code_digest</span> <span class="o">=</span> <span class="n">soft_hash_meta_v0</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">payload</span><span class="p">)</span>
-<a id="__codelineno-0-81" name="__codelineno-0-81"></a>            <span class="n">metahash</span> <span class="o">=</span> <span class="n">ic</span><span class="o">.</span><span class="n">multi_hash_blake3</span><span class="p">(</span><span class="n">payload</span><span class="p">)</span>
-<a id="__codelineno-0-82" name="__codelineno-0-82"></a>            <span class="n">media_type</span> <span class="o">=</span> <span class="s2">&quot;application/ld+json&quot;</span> <span class="k">if</span> <span class="s2">&quot;@context&quot;</span> <span class="ow">in</span> <span class="n">meta</span> <span class="k">else</span> <span class="s2">&quot;application/json&quot;</span>
-<a id="__codelineno-0-83" name="__codelineno-0-83"></a>            <span class="n">durl_obj</span> <span class="o">=</span> <span class="n">DataURL</span><span class="o">.</span><span class="n">from_data</span><span class="p">(</span><span class="n">media_type</span><span class="p">,</span> <span class="n">base64_encode</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">payload</span><span class="p">)</span>
-<a id="__codelineno-0-84" name="__codelineno-0-84"></a>            <span class="n">metadata_value</span> <span class="o">=</span> <span class="n">durl_obj</span><span class="o">.</span><span class="n">url</span>
-<a id="__codelineno-0-85" name="__codelineno-0-85"></a>        <span class="k">else</span><span class="p">:</span>
-<a id="__codelineno-0-86" name="__codelineno-0-86"></a>            <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;metadata must be Data-URL string or dict not </span><span class="si">{</span><span class="nb">type</span><span class="p">(</span><span class="n">meta</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
-<a id="__codelineno-0-87" name="__codelineno-0-87"></a>    <span class="k">else</span><span class="p">:</span>
-<a id="__codelineno-0-88" name="__codelineno-0-88"></a>        <span class="n">payload</span> <span class="o">=</span> <span class="s2">&quot; &quot;</span><span class="o">.</span><span class="n">join</span><span class="p">((</span><span class="n">name</span><span class="p">,</span> <span class="n">description</span><span class="p">))</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span><span class="s2">&quot;utf-8&quot;</span><span class="p">)</span>
-<a id="__codelineno-0-89" name="__codelineno-0-89"></a>        <span class="n">meta_code_digest</span> <span class="o">=</span> <span class="n">soft_hash_meta_v0</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">description</span><span class="p">)</span>
-<a id="__codelineno-0-90" name="__codelineno-0-90"></a>        <span class="n">metahash</span> <span class="o">=</span> <span class="n">ic</span><span class="o">.</span><span class="n">multi_hash_blake3</span><span class="p">(</span><span class="n">payload</span><span class="p">)</span>
-<a id="__codelineno-0-91" name="__codelineno-0-91"></a>        <span class="n">metadata_value</span> <span class="o">=</span> <span class="kc">None</span>
-<a id="__codelineno-0-92" name="__codelineno-0-92"></a>
-<a id="__codelineno-0-93" name="__codelineno-0-93"></a>    <span class="n">meta_code</span> <span class="o">=</span> <span class="n">ic</span><span class="o">.</span><span class="n">encode_component</span><span class="p">(</span>
-<a id="__codelineno-0-94" name="__codelineno-0-94"></a>        <span class="n">mtype</span><span class="o">=</span><span class="n">ic</span><span class="o">.</span><span class="n">MT</span><span class="o">.</span><span class="n">META</span><span class="p">,</span>
-<a id="__codelineno-0-95" name="__codelineno-0-95"></a>        <span class="n">stype</span><span class="o">=</span><span class="n">ic</span><span class="o">.</span><span class="n">ST</span><span class="o">.</span><span class="n">NONE</span><span class="p">,</span>
-<a id="__codelineno-0-96" name="__codelineno-0-96"></a>        <span class="n">version</span><span class="o">=</span><span class="n">ic</span><span class="o">.</span><span class="n">VS</span><span class="o">.</span><span class="n">V0</span><span class="p">,</span>
-<a id="__codelineno-0-97" name="__codelineno-0-97"></a>        <span class="n">bit_length</span><span class="o">=</span><span class="n">bits</span><span class="p">,</span>
-<a id="__codelineno-0-98" name="__codelineno-0-98"></a>        <span class="n">digest</span><span class="o">=</span><span class="n">meta_code_digest</span><span class="p">,</span>
-<a id="__codelineno-0-99" name="__codelineno-0-99"></a>    <span class="p">)</span>
-<a id="__codelineno-0-100" name="__codelineno-0-100"></a>    <span class="n">iscc</span> <span class="o">=</span> <span class="s2">&quot;ISCC:&quot;</span> <span class="o">+</span> <span class="n">meta_code</span>
-<a id="__codelineno-0-101" name="__codelineno-0-101"></a>
-<a id="__codelineno-0-102" name="__codelineno-0-102"></a>    <span class="c1"># Build result</span>
-<a id="__codelineno-0-103" name="__codelineno-0-103"></a>    <span class="n">result</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;iscc&quot;</span><span class="p">:</span> <span class="n">iscc</span><span class="p">}</span>
-<a id="__codelineno-0-104" name="__codelineno-0-104"></a>    <span class="k">if</span> <span class="n">name</span><span class="p">:</span>
-<a id="__codelineno-0-105" name="__codelineno-0-105"></a>        <span class="n">result</span><span class="p">[</span><span class="s2">&quot;name&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">name</span>
-<a id="__codelineno-0-106" name="__codelineno-0-106"></a>    <span class="k">if</span> <span class="n">description</span><span class="p">:</span>
-<a id="__codelineno-0-107" name="__codelineno-0-107"></a>        <span class="n">result</span><span class="p">[</span><span class="s2">&quot;description&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">description</span>
-<a id="__codelineno-0-108" name="__codelineno-0-108"></a>    <span class="k">if</span> <span class="n">metadata_value</span><span class="p">:</span>
-<a id="__codelineno-0-109" name="__codelineno-0-109"></a>        <span class="n">result</span><span class="p">[</span><span class="s2">&quot;meta&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">metadata_value</span>
-<a id="__codelineno-0-110" name="__codelineno-0-110"></a>
-<a id="__codelineno-0-111" name="__codelineno-0-111"></a>    <span class="n">result</span><span class="p">[</span><span class="s2">&quot;metahash&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">metahash</span>
-<a id="__codelineno-0-112" name="__codelineno-0-112"></a>
-<a id="__codelineno-0-113" name="__codelineno-0-113"></a>    <span class="k">return</span> <span class="n">result</span>
+<a id="__codelineno-0-40" name="__codelineno-0-40"></a><span class="sd">    :param str name: Name or title of the work manifested by the digital asset</span>
+<a id="__codelineno-0-41" name="__codelineno-0-41"></a><span class="sd">    :param Optional[str] description: Optional description for disambiguation</span>
+<a id="__codelineno-0-42" name="__codelineno-0-42"></a><span class="sd">    :param Optional[Union[dict,str] meta: Dict or Data-URL string with extended metadata</span>
+<a id="__codelineno-0-43" name="__codelineno-0-43"></a><span class="sd">    :param int bits: Bit-length of resulting Meta-Code (multiple of 64)</span>
+<a id="__codelineno-0-44" name="__codelineno-0-44"></a><span class="sd">    :return: ISCC object with possible fields: iscc, name, description, metadata, metahash</span>
+<a id="__codelineno-0-45" name="__codelineno-0-45"></a><span class="sd">    :rtype: dict</span>
+<a id="__codelineno-0-46" name="__codelineno-0-46"></a><span class="sd">    &quot;&quot;&quot;</span>
+<a id="__codelineno-0-47" name="__codelineno-0-47"></a>
+<a id="__codelineno-0-48" name="__codelineno-0-48"></a>    <span class="c1"># 1. Normalize `name`</span>
+<a id="__codelineno-0-49" name="__codelineno-0-49"></a>    <span class="n">name</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span> <span class="k">if</span> <span class="n">name</span> <span class="ow">is</span> <span class="kc">None</span> <span class="k">else</span> <span class="n">name</span>
+<a id="__codelineno-0-50" name="__codelineno-0-50"></a>    <span class="n">name</span> <span class="o">=</span> <span class="n">text_clean</span><span class="p">(</span><span class="n">name</span><span class="p">)</span>
+<a id="__codelineno-0-51" name="__codelineno-0-51"></a>    <span class="n">name</span> <span class="o">=</span> <span class="n">text_remove_newlines</span><span class="p">(</span><span class="n">name</span><span class="p">)</span>
+<a id="__codelineno-0-52" name="__codelineno-0-52"></a>    <span class="n">name</span> <span class="o">=</span> <span class="n">text_trim</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">ic</span><span class="o">.</span><span class="n">core_opts</span><span class="o">.</span><span class="n">meta_trim_name</span><span class="p">)</span>
+<a id="__codelineno-0-53" name="__codelineno-0-53"></a>
+<a id="__codelineno-0-54" name="__codelineno-0-54"></a>    <span class="k">if</span> <span class="ow">not</span> <span class="n">name</span><span class="p">:</span>
+<a id="__codelineno-0-55" name="__codelineno-0-55"></a>        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Meta-Code requires non-empty name element (after normalization)&quot;</span><span class="p">)</span>
+<a id="__codelineno-0-56" name="__codelineno-0-56"></a>
+<a id="__codelineno-0-57" name="__codelineno-0-57"></a>    <span class="c1"># 2. Normalize `description`</span>
+<a id="__codelineno-0-58" name="__codelineno-0-58"></a>    <span class="n">description</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span> <span class="k">if</span> <span class="n">description</span> <span class="ow">is</span> <span class="kc">None</span> <span class="k">else</span> <span class="n">description</span>
+<a id="__codelineno-0-59" name="__codelineno-0-59"></a>    <span class="n">description</span> <span class="o">=</span> <span class="n">text_clean</span><span class="p">(</span><span class="n">description</span><span class="p">)</span>
+<a id="__codelineno-0-60" name="__codelineno-0-60"></a>    <span class="n">description</span> <span class="o">=</span> <span class="n">text_trim</span><span class="p">(</span><span class="n">description</span><span class="p">,</span> <span class="n">ic</span><span class="o">.</span><span class="n">core_opts</span><span class="o">.</span><span class="n">meta_trim_description</span><span class="p">)</span>
+<a id="__codelineno-0-61" name="__codelineno-0-61"></a>
+<a id="__codelineno-0-62" name="__codelineno-0-62"></a>    <span class="c1"># Calculate meta_code, metahash, and output metadata values for the different input cases</span>
+<a id="__codelineno-0-63" name="__codelineno-0-63"></a>    <span class="k">if</span> <span class="n">meta</span><span class="p">:</span>
+<a id="__codelineno-0-64" name="__codelineno-0-64"></a>        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">meta</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
+<a id="__codelineno-0-65" name="__codelineno-0-65"></a>            <span class="c1"># Data-URL expected</span>
+<a id="__codelineno-0-66" name="__codelineno-0-66"></a>            <span class="n">durl</span> <span class="o">=</span> <span class="n">meta</span>
+<a id="__codelineno-0-67" name="__codelineno-0-67"></a>            <span class="n">payload</span> <span class="o">=</span> <span class="n">DataURL</span><span class="o">.</span><span class="n">from_url</span><span class="p">(</span><span class="n">durl</span><span class="p">)</span><span class="o">.</span><span class="n">data</span>
+<a id="__codelineno-0-68" name="__codelineno-0-68"></a>            <span class="n">meta_code_digest</span> <span class="o">=</span> <span class="n">soft_hash_meta_v0</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">payload</span><span class="p">)</span>
+<a id="__codelineno-0-69" name="__codelineno-0-69"></a>            <span class="n">metahash</span> <span class="o">=</span> <span class="n">ic</span><span class="o">.</span><span class="n">multi_hash_blake3</span><span class="p">(</span><span class="n">payload</span><span class="p">)</span>
+<a id="__codelineno-0-70" name="__codelineno-0-70"></a>            <span class="n">metadata_value</span> <span class="o">=</span> <span class="n">durl</span>
+<a id="__codelineno-0-71" name="__codelineno-0-71"></a>        <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">meta</span><span class="p">,</span> <span class="nb">dict</span><span class="p">):</span>
+<a id="__codelineno-0-72" name="__codelineno-0-72"></a>            <span class="n">payload</span> <span class="o">=</span> <span class="n">jcs</span><span class="o">.</span><span class="n">canonicalize</span><span class="p">(</span><span class="n">meta</span><span class="p">)</span>
+<a id="__codelineno-0-73" name="__codelineno-0-73"></a>            <span class="n">meta_code_digest</span> <span class="o">=</span> <span class="n">soft_hash_meta_v0</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">payload</span><span class="p">)</span>
+<a id="__codelineno-0-74" name="__codelineno-0-74"></a>            <span class="n">metahash</span> <span class="o">=</span> <span class="n">ic</span><span class="o">.</span><span class="n">multi_hash_blake3</span><span class="p">(</span><span class="n">payload</span><span class="p">)</span>
+<a id="__codelineno-0-75" name="__codelineno-0-75"></a>            <span class="n">media_type</span> <span class="o">=</span> <span class="s2">&quot;application/ld+json&quot;</span> <span class="k">if</span> <span class="s2">&quot;@context&quot;</span> <span class="ow">in</span> <span class="n">meta</span> <span class="k">else</span> <span class="s2">&quot;application/json&quot;</span>
+<a id="__codelineno-0-76" name="__codelineno-0-76"></a>            <span class="n">durl_obj</span> <span class="o">=</span> <span class="n">DataURL</span><span class="o">.</span><span class="n">from_data</span><span class="p">(</span><span class="n">media_type</span><span class="p">,</span> <span class="n">base64_encode</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">payload</span><span class="p">)</span>
+<a id="__codelineno-0-77" name="__codelineno-0-77"></a>            <span class="n">metadata_value</span> <span class="o">=</span> <span class="n">durl_obj</span><span class="o">.</span><span class="n">url</span>
+<a id="__codelineno-0-78" name="__codelineno-0-78"></a>        <span class="k">else</span><span class="p">:</span>
+<a id="__codelineno-0-79" name="__codelineno-0-79"></a>            <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;metadata must be Data-URL string or dict not </span><span class="si">{</span><span class="nb">type</span><span class="p">(</span><span class="n">meta</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<a id="__codelineno-0-80" name="__codelineno-0-80"></a>    <span class="k">else</span><span class="p">:</span>
+<a id="__codelineno-0-81" name="__codelineno-0-81"></a>        <span class="n">payload</span> <span class="o">=</span> <span class="s2">&quot; &quot;</span><span class="o">.</span><span class="n">join</span><span class="p">((</span><span class="n">name</span><span class="p">,</span> <span class="n">description</span><span class="p">))</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span><span class="s2">&quot;utf-8&quot;</span><span class="p">)</span>
+<a id="__codelineno-0-82" name="__codelineno-0-82"></a>        <span class="n">meta_code_digest</span> <span class="o">=</span> <span class="n">soft_hash_meta_v0</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">description</span><span class="p">)</span>
+<a id="__codelineno-0-83" name="__codelineno-0-83"></a>        <span class="n">metahash</span> <span class="o">=</span> <span class="n">ic</span><span class="o">.</span><span class="n">multi_hash_blake3</span><span class="p">(</span><span class="n">payload</span><span class="p">)</span>
+<a id="__codelineno-0-84" name="__codelineno-0-84"></a>        <span class="n">metadata_value</span> <span class="o">=</span> <span class="kc">None</span>
+<a id="__codelineno-0-85" name="__codelineno-0-85"></a>
+<a id="__codelineno-0-86" name="__codelineno-0-86"></a>    <span class="n">meta_code</span> <span class="o">=</span> <span class="n">ic</span><span class="o">.</span><span class="n">encode_component</span><span class="p">(</span>
+<a id="__codelineno-0-87" name="__codelineno-0-87"></a>        <span class="n">mtype</span><span class="o">=</span><span class="n">ic</span><span class="o">.</span><span class="n">MT</span><span class="o">.</span><span class="n">META</span><span class="p">,</span>
+<a id="__codelineno-0-88" name="__codelineno-0-88"></a>        <span class="n">stype</span><span class="o">=</span><span class="n">ic</span><span class="o">.</span><span class="n">ST</span><span class="o">.</span><span class="n">NONE</span><span class="p">,</span>
+<a id="__codelineno-0-89" name="__codelineno-0-89"></a>        <span class="n">version</span><span class="o">=</span><span class="n">ic</span><span class="o">.</span><span class="n">VS</span><span class="o">.</span><span class="n">V0</span><span class="p">,</span>
+<a id="__codelineno-0-90" name="__codelineno-0-90"></a>        <span class="n">bit_length</span><span class="o">=</span><span class="n">bits</span><span class="p">,</span>
+<a id="__codelineno-0-91" name="__codelineno-0-91"></a>        <span class="n">digest</span><span class="o">=</span><span class="n">meta_code_digest</span><span class="p">,</span>
+<a id="__codelineno-0-92" name="__codelineno-0-92"></a>    <span class="p">)</span>
+<a id="__codelineno-0-93" name="__codelineno-0-93"></a>    <span class="n">iscc</span> <span class="o">=</span> <span class="s2">&quot;ISCC:&quot;</span> <span class="o">+</span> <span class="n">meta_code</span>
+<a id="__codelineno-0-94" name="__codelineno-0-94"></a>
+<a id="__codelineno-0-95" name="__codelineno-0-95"></a>    <span class="c1"># Build result</span>
+<a id="__codelineno-0-96" name="__codelineno-0-96"></a>    <span class="n">result</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;iscc&quot;</span><span class="p">:</span> <span class="n">iscc</span><span class="p">}</span>
+<a id="__codelineno-0-97" name="__codelineno-0-97"></a>    <span class="k">if</span> <span class="n">name</span><span class="p">:</span>
+<a id="__codelineno-0-98" name="__codelineno-0-98"></a>        <span class="n">result</span><span class="p">[</span><span class="s2">&quot;name&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">name</span>
+<a id="__codelineno-0-99" name="__codelineno-0-99"></a>    <span class="k">if</span> <span class="n">description</span><span class="p">:</span>
+<a id="__codelineno-0-100" name="__codelineno-0-100"></a>        <span class="n">result</span><span class="p">[</span><span class="s2">&quot;description&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">description</span>
+<a id="__codelineno-0-101" name="__codelineno-0-101"></a>    <span class="k">if</span> <span class="n">metadata_value</span><span class="p">:</span>
+<a id="__codelineno-0-102" name="__codelineno-0-102"></a>        <span class="n">result</span><span class="p">[</span><span class="s2">&quot;meta&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">metadata_value</span>
+<a id="__codelineno-0-103" name="__codelineno-0-103"></a>
+<a id="__codelineno-0-104" name="__codelineno-0-104"></a>    <span class="n">result</span><span class="p">[</span><span class="s2">&quot;metahash&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">metahash</span>
+<a id="__codelineno-0-105" name="__codelineno-0-105"></a>
+<a id="__codelineno-0-106" name="__codelineno-0-106"></a>    <span class="k">return</span> <span class="n">result</span>
 </code></pre></div></td></tr></table></div>
       </details>
   </div>
