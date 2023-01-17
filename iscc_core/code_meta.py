@@ -37,13 +37,6 @@ def gen_meta_code_v0(name, description=None, meta=None, bits=ic.core_opts.meta_b
     """
     Create an ISCC Meta-Code with the algorithm version 0.
 
-    !!! note
-
-        The input for the `metadata` field can be:
-
-        - Structured (JSON/JCS serializable) metadata
-        - Raw bytes from a file header
-
     :param str name: Name or title of the work manifested by the digital asset
     :param Optional[str] description: Optional description for disambiguation
     :param Optional[Union[dict,str] meta: Dict or Data-URL string with extended metadata

@@ -1,8 +1,9 @@
 # Changelog
 
-## [0.2.14] - Unreleased
+## [0.2.14] - 2023-01-17
 - Added ISO Reference documentation
 - Removed non-standard conformance tests
+- Fixed Meta-Code documentation
 - Improved documentation CSS
 
 ## [0.2.13] - 2023-01-16
