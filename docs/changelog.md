@@ -1,6 +1,7 @@
 # Changelog
 
 ## [0.2.14] - Unreleased
+- Added ISO Reference documentation
 - Removed non-standard conformance tests
 - Improved documentation CSS
 

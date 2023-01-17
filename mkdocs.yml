@@ -93,6 +93,7 @@ markdown_extensions:
 
 nav:
   - Overview: index.md
+  - ISO Reference: iso-reference.md
   - Types: constants.md
   - Codec: codec/index.md
   - ISCC-UNITs:
