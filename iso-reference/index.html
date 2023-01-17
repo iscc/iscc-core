@@ -1,0 +1,2308 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="International Standard Content Code - Core algorithms python implementation.">
+      
+      
+        <meta name="author" content="Titusz Pan">
+      
+      
+        <link rel="canonical" href="https://core.iscc.codes/iso-reference/">
+      
+      
+        <link rel="prev" href="..">
+      
+      
+        <link rel="next" href="../constants/">
+      
+      <link rel="icon" href="../images/iscc-logo-icon-black.svg">
+      <meta name="generator" content="mkdocs-1.4.2, mkdocs-material-9.0.5">
+    
+    
+      
+        <title>ISO Reference - ISCC - Codec & Algorithms</title>
+      
+    
+    
+      <link rel="stylesheet" href="../assets/stylesheets/main.558e4712.min.css">
+      
+        
+        <link rel="stylesheet" href="../assets/stylesheets/palette.2505c338.min.css">
+      
+      
+
+    
+    
+    
+      
+    
+    
+      <link rel="stylesheet" href="../assets/_mkdocstrings.css">
+    
+      <link rel="stylesheet" href="../stylesheets/extra.css">
+    
+    <script>__md_scope=new URL("..",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+  
+
+
+  <script defer data-domain="core.iscc.codes" src="https://stats.iscc.codes/js/plausible.js"></script>
+  
+    <script>"undefined"!=typeof __md_analytics&&__md_analytics()</script>
+  
+
+    
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="slate" data-md-color-primary="" data-md-color-accent="">
+  
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&"object"==typeof palette.color)for(var key of Object.keys(palette.color))document.body.setAttribute("data-md-color-"+key,palette.color[key])</script>
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#iscc-iso-reference" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--lifted" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href=".." title="ISCC - Codec &amp; Algorithms" class="md-header__button md-logo" aria-label="ISCC - Codec & Algorithms" data-md-component="logo">
+      
+  <img src="../images/iscc-logo-icon-white.svg" alt="logo">
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2Z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            ISCC - Codec & Algorithms
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              ISO Reference
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      <form class="md-header__option" data-md-component="palette">
+        
+          
+          <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="" data-md-color-accent=""  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_1">
+          
+            <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_2" hidden>
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M17 7H7a5 5 0 0 0-5 5 5 5 0 0 0 5 5h10a5 5 0 0 0 5-5 5 5 0 0 0-5-5m0 8a3 3 0 0 1-3-3 3 3 0 0 1 3-3 3 3 0 0 1 3 3 3 3 0 0 1-3 3Z"/></svg>
+            </label>
+          
+        
+          
+          <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="" data-md-color-accent=""  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_2">
+          
+            <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_1" hidden>
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M17 6H7c-3.31 0-6 2.69-6 6s2.69 6 6 6h10c3.31 0 6-2.69 6-6s-2.69-6-6-6zm0 10H7c-2.21 0-4-1.79-4-4s1.79-4 4-4h10c2.21 0 4 1.79 4 4s-1.79 4-4 4zM7 9c-1.66 0-3 1.34-3 3s1.34 3 3 3 3-1.34 3-3-1.34-3-3-3z"/></svg>
+            </label>
+          
+        
+      </form>
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41Z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/iscc/iscc-core" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.2.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    iscc/iscc-core
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+    
+      
+<nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
+  <div class="md-tabs__inner md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+
+
+  <li class="md-tabs__item">
+    <a href=".." class="md-tabs__link">
+      Overview
+    </a>
+  </li>
+
+      
+        
+  
+  
+    
+  
+
+
+  <li class="md-tabs__item">
+    <a href="./" class="md-tabs__link md-tabs__link--active">
+      ISO Reference
+    </a>
+  </li>
+
+      
+        
+  
+  
+
+
+  <li class="md-tabs__item">
+    <a href="../constants/" class="md-tabs__link">
+      Types
+    </a>
+  </li>
+
+      
+        
+  
+  
+
+
+  <li class="md-tabs__item">
+    <a href="../codec/" class="md-tabs__link">
+      Codec
+    </a>
+  </li>
+
+      
+        
+  
+  
+
+
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../units/" class="md-tabs__link">
+        ISCC-UNITs
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+
+
+  <li class="md-tabs__item">
+    <a href="../iscc_code/" class="md-tabs__link">
+      ISCC-CODE
+    </a>
+  </li>
+
+      
+        
+  
+  
+
+
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../algorithms/cdc/" class="md-tabs__link">
+        Algorithms
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+
+
+  <li class="md-tabs__item">
+    <a href="../options/options/" class="md-tabs__link">
+      Options
+    </a>
+  </li>
+
+      
+        
+  
+  
+
+
+  <li class="md-tabs__item">
+    <a href="../utilities/utils/" class="md-tabs__link">
+      Utilities
+    </a>
+  </li>
+
+      
+        
+  
+  
+
+
+  <li class="md-tabs__item">
+    <a href="../conformance/" class="md-tabs__link">
+      Conformance
+    </a>
+  </li>
+
+      
+        
+  
+  
+
+
+  <li class="md-tabs__item">
+    <a href="../changelog/" class="md-tabs__link">
+      Changelog
+    </a>
+  </li>
+
+      
+    </ul>
+  </div>
+</nav>
+    
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+  
+
+
+  
+
+<nav class="md-nav md-nav--primary md-nav--lifted md-nav--integrated" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href=".." title="ISCC - Codec &amp; Algorithms" class="md-nav__button md-logo" aria-label="ISCC - Codec & Algorithms" data-md-component="logo">
+      
+  <img src="../images/iscc-logo-icon-white.svg" alt="logo">
+
+    </a>
+    ISCC - Codec & Algorithms
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/iscc/iscc-core" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.2.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    iscc/iscc-core
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href=".." class="md-nav__link">
+        Overview
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+    
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          ISO Reference
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        ISO Reference
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#iso-24138-51-meta-code" class="md-nav__link">
+    ISO 24138 / 5.1 Meta-Code
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#iso-24138-53-text-code" class="md-nav__link">
+    ISO 24138 / 5.3 Text-Code
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#iso-24138-54-image-code" class="md-nav__link">
+    ISO 24138 / 5.4 Image-Code
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#iso-24138-55-audio-code" class="md-nav__link">
+    ISO 24138 / 5.5 Audio-Code
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#iso-24138-56-video-code" class="md-nav__link">
+    ISO 24138 / 5.6 Video-Code
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#iso-24138-57-mixed-code" class="md-nav__link">
+    ISO 24138 / 5.7 Mixed-Code
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#iso-24138-58-data-code" class="md-nav__link">
+    ISO 24138 / 5.8 Data-Code
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#iso-24138-59-instance-code" class="md-nav__link">
+    ISO 24138 / 5.9 Instance-Code
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#iso-24138-60-iscc-code" class="md-nav__link">
+    ISO 24138 / 6.0 ISCC-CODE
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../constants/" class="md-nav__link">
+        Types
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../codec/" class="md-nav__link">
+        Codec
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+        
+      
+      <input class="md-nav__toggle md-toggle md-toggle--indeterminate" data-md-toggle="__nav_5" type="checkbox" id="__nav_5" >
+      
+      
+        
+          
+            
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+      
+      
+        
+        
+        <div class="md-nav__link md-nav__link--index ">
+          <a href="../units/">ISCC-UNITs</a>
+          
+            <label for="__nav_5">
+              <span class="md-nav__icon md-icon"></span>
+            </label>
+          
+        </div>
+      
+      <nav class="md-nav" aria-label="ISCC-UNITs" data-md-level="1">
+        <label class="md-nav__title" for="__nav_5">
+          <span class="md-nav__icon md-icon"></span>
+          ISCC-UNITs
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../units/code_meta/" class="md-nav__link">
+        Meta-Code
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+        
+      
+      <input class="md-nav__toggle md-toggle md-toggle--indeterminate" data-md-toggle="__nav_5_3" type="checkbox" id="__nav_5_3" >
+      
+      
+        
+          
+            
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+      
+      
+        
+        
+        <div class="md-nav__link md-nav__link--index ">
+          <a href="../units/content/">Content-Codes</a>
+          
+            <label for="__nav_5_3">
+              <span class="md-nav__icon md-icon"></span>
+            </label>
+          
+        </div>
+      
+      <nav class="md-nav" aria-label="Content-Codes" data-md-level="2">
+        <label class="md-nav__title" for="__nav_5_3">
+          <span class="md-nav__icon md-icon"></span>
+          Content-Codes
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../units/content/code_content_text/" class="md-nav__link">
+        Text-Code
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../units/content/code_content_image/" class="md-nav__link">
+        Image-Code
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../units/content/code_content_audio/" class="md-nav__link">
+        Audio-Code
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../units/content/code_content_video/" class="md-nav__link">
+        Video-Code
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../units/content/code_content_mixed/" class="md-nav__link">
+        Mixed-Code
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../units/code_data/" class="md-nav__link">
+        Data-Code
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../units/code_instance/" class="md-nav__link">
+        Instance-Code
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../iscc_code/" class="md-nav__link">
+        ISCC-CODE
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+        
+      
+      <input class="md-nav__toggle md-toggle md-toggle--indeterminate" data-md-toggle="__nav_7" type="checkbox" id="__nav_7" >
+      
+      
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+      
+      
+        <label class="md-nav__link" for="__nav_7" tabindex="0" aria-expanded="false">
+          Algorithms
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Algorithms" data-md-level="1">
+        <label class="md-nav__title" for="__nav_7">
+          <span class="md-nav__icon md-icon"></span>
+          Algorithms
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../algorithms/cdc/" class="md-nav__link">
+        CDC
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../algorithms/dct/" class="md-nav__link">
+        DCT
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../algorithms/simhash/" class="md-nav__link">
+        Simhash
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../algorithms/minhash/" class="md-nav__link">
+        Minhash
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../algorithms/wtahash/" class="md-nav__link">
+        WTAHash
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../options/options/" class="md-nav__link">
+        Options
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../utilities/utils/" class="md-nav__link">
+        Utilities
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../conformance/" class="md-nav__link">
+        Conformance
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../changelog/" class="md-nav__link">
+        Changelog
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+  
+  
+
+
+
+<h1 id="iscc-iso-reference">ISCC - ISO Reference<a class="headerlink" href="#iscc-iso-reference" title="Permanent link">#</a></h1>
+<p>The following functions are the reference implementations of
+<a href="https://www.iso.org/standard/77899.html">ISO 24138</a>:</p>
+<h2 id="iso-24138-51-meta-code">ISO 24138 / 5.1 Meta-Code<a class="headerlink" href="#iso-24138-51-meta-code" title="Permanent link">#</a></h2>
+
+
+<div class="doc doc-object doc-function">
+
+
+
+<hnone id="iscc_core.gen_meta_code_v0" class="doc doc-heading">
+<code class="highlight language-python"><span class="n">gen_meta_code_v0</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">description</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">meta</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">bits</span><span class="o">=</span><span class="n">ic</span><span class="o">.</span><span class="n">core_opts</span><span class="o">.</span><span class="n">meta_bits</span><span class="p">)</span></code>
+
+<a href="#iscc_core.gen_meta_code_v0" class="headerlink" title="Permanent link">#</a></hnone>
+
+
+  <div class="doc doc-contents first">
+  
+      <p>Create an ISCC Meta-Code with the algorithm version 0.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The input for the <code>metadata</code> field can be:</p>
+<ul>
+<li>Structured (JSON/JCS serializable) metadata</li>
+<li>Raw bytes from a file header</li>
+</ul>
+</div>
+
+  <p><strong>Parameters:</strong></p>
+  <table>
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Type</th>
+        <th>Description</th>
+        <th>Default</th>
+      </tr>
+    </thead>
+    <tbody>
+        <tr>
+          <td><code>name</code></td>
+          <td>
+                <code>str</code>
+          </td>
+          <td><p>Name or title of the work manifested by the digital asset</p></td>
+          <td>
+              <em>required</em>
+          </td>
+        </tr>
+        <tr>
+          <td><code>description</code></td>
+          <td>
+                <code>Optional[str]</code>
+          </td>
+          <td><p>Optional description for disambiguation</p></td>
+          <td>
+                <code>None</code>
+          </td>
+        </tr>
+        <tr>
+          <td><code>meta</code></td>
+          <td>
+                <code>Optional[Union[dict,str]</code>
+          </td>
+          <td><p>Dict or Data-URL string with extended metadata</p></td>
+          <td>
+                <code>None</code>
+          </td>
+        </tr>
+        <tr>
+          <td><code>bits</code></td>
+          <td>
+                <code>int</code>
+          </td>
+          <td><p>Bit-length of resulting Meta-Code (multiple of 64)</p></td>
+          <td>
+                <code>ic.core_opts.meta_bits</code>
+          </td>
+        </tr>
+    </tbody>
+  </table>
+
+  <p><strong>Returns:</strong></p>
+  <table>
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+        <tr>
+          <td>
+                <code>dict</code>
+          </td>
+          <td><p>ISCC object with possible fields: iscc, name, description, metadata, metahash</p></td>
+        </tr>
+    </tbody>
+  </table>
+
+      <details class="quote">
+        <summary>Source code in <code>iscc_core\code_meta.py</code></summary>
+        <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-0-35"> 35</a></span>
+<span class="normal"><a href="#__codelineno-0-36"> 36</a></span>
+<span class="normal"><a href="#__codelineno-0-37"> 37</a></span>
+<span class="normal"><a href="#__codelineno-0-38"> 38</a></span>
+<span class="normal"><a href="#__codelineno-0-39"> 39</a></span>
+<span class="normal"><a href="#__codelineno-0-40"> 40</a></span>
+<span class="normal"><a href="#__codelineno-0-41"> 41</a></span>
+<span class="normal"><a href="#__codelineno-0-42"> 42</a></span>
+<span class="normal"><a href="#__codelineno-0-43"> 43</a></span>
+<span class="normal"><a href="#__codelineno-0-44"> 44</a></span>
+<span class="normal"><a href="#__codelineno-0-45"> 45</a></span>
+<span class="normal"><a href="#__codelineno-0-46"> 46</a></span>
+<span class="normal"><a href="#__codelineno-0-47"> 47</a></span>
+<span class="normal"><a href="#__codelineno-0-48"> 48</a></span>
+<span class="normal"><a href="#__codelineno-0-49"> 49</a></span>
+<span class="normal"><a href="#__codelineno-0-50"> 50</a></span>
+<span class="normal"><a href="#__codelineno-0-51"> 51</a></span>
+<span class="normal"><a href="#__codelineno-0-52"> 52</a></span>
+<span class="normal"><a href="#__codelineno-0-53"> 53</a></span>
+<span class="normal"><a href="#__codelineno-0-54"> 54</a></span>
+<span class="normal"><a href="#__codelineno-0-55"> 55</a></span>
+<span class="normal"><a href="#__codelineno-0-56"> 56</a></span>
+<span class="normal"><a href="#__codelineno-0-57"> 57</a></span>
+<span class="normal"><a href="#__codelineno-0-58"> 58</a></span>
+<span class="normal"><a href="#__codelineno-0-59"> 59</a></span>
+<span class="normal"><a href="#__codelineno-0-60"> 60</a></span>
+<span class="normal"><a href="#__codelineno-0-61"> 61</a></span>
+<span class="normal"><a href="#__codelineno-0-62"> 62</a></span>
+<span class="normal"><a href="#__codelineno-0-63"> 63</a></span>
+<span class="normal"><a href="#__codelineno-0-64"> 64</a></span>
+<span class="normal"><a href="#__codelineno-0-65"> 65</a></span>
+<span class="normal"><a href="#__codelineno-0-66"> 66</a></span>
+<span class="normal"><a href="#__codelineno-0-67"> 67</a></span>
+<span class="normal"><a href="#__codelineno-0-68"> 68</a></span>
+<span class="normal"><a href="#__codelineno-0-69"> 69</a></span>
+<span class="normal"><a href="#__codelineno-0-70"> 70</a></span>
+<span class="normal"><a href="#__codelineno-0-71"> 71</a></span>
+<span class="normal"><a href="#__codelineno-0-72"> 72</a></span>
+<span class="normal"><a href="#__codelineno-0-73"> 73</a></span>
+<span class="normal"><a href="#__codelineno-0-74"> 74</a></span>
+<span class="normal"><a href="#__codelineno-0-75"> 75</a></span>
+<span class="normal"><a href="#__codelineno-0-76"> 76</a></span>
+<span class="normal"><a href="#__codelineno-0-77"> 77</a></span>
+<span class="normal"><a href="#__codelineno-0-78"> 78</a></span>
+<span class="normal"><a href="#__codelineno-0-79"> 79</a></span>
+<span class="normal"><a href="#__codelineno-0-80"> 80</a></span>
+<span class="normal"><a href="#__codelineno-0-81"> 81</a></span>
+<span class="normal"><a href="#__codelineno-0-82"> 82</a></span>
+<span class="normal"><a href="#__codelineno-0-83"> 83</a></span>
+<span class="normal"><a href="#__codelineno-0-84"> 84</a></span>
+<span class="normal"><a href="#__codelineno-0-85"> 85</a></span>
+<span class="normal"><a href="#__codelineno-0-86"> 86</a></span>
+<span class="normal"><a href="#__codelineno-0-87"> 87</a></span>
+<span class="normal"><a href="#__codelineno-0-88"> 88</a></span>
+<span class="normal"><a href="#__codelineno-0-89"> 89</a></span>
+<span class="normal"><a href="#__codelineno-0-90"> 90</a></span>
+<span class="normal"><a href="#__codelineno-0-91"> 91</a></span>
+<span class="normal"><a href="#__codelineno-0-92"> 92</a></span>
+<span class="normal"><a href="#__codelineno-0-93"> 93</a></span>
+<span class="normal"><a href="#__codelineno-0-94"> 94</a></span>
+<span class="normal"><a href="#__codelineno-0-95"> 95</a></span>
+<span class="normal"><a href="#__codelineno-0-96"> 96</a></span>
+<span class="normal"><a href="#__codelineno-0-97"> 97</a></span>
+<span class="normal"><a href="#__codelineno-0-98"> 98</a></span>
+<span class="normal"><a href="#__codelineno-0-99"> 99</a></span>
+<span class="normal"><a href="#__codelineno-0-100">100</a></span>
+<span class="normal"><a href="#__codelineno-0-101">101</a></span>
+<span class="normal"><a href="#__codelineno-0-102">102</a></span>
+<span class="normal"><a href="#__codelineno-0-103">103</a></span>
+<span class="normal"><a href="#__codelineno-0-104">104</a></span>
+<span class="normal"><a href="#__codelineno-0-105">105</a></span>
+<span class="normal"><a href="#__codelineno-0-106">106</a></span>
+<span class="normal"><a href="#__codelineno-0-107">107</a></span>
+<span class="normal"><a href="#__codelineno-0-108">108</a></span>
+<span class="normal"><a href="#__codelineno-0-109">109</a></span>
+<span class="normal"><a href="#__codelineno-0-110">110</a></span>
+<span class="normal"><a href="#__codelineno-0-111">111</a></span>
+<span class="normal"><a href="#__codelineno-0-112">112</a></span>
+<span class="normal"><a href="#__codelineno-0-113">113</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-0-35" name="__codelineno-0-35"></a><span class="k">def</span> <span class="nf">gen_meta_code_v0</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">description</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">meta</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">bits</span><span class="o">=</span><span class="n">ic</span><span class="o">.</span><span class="n">core_opts</span><span class="o">.</span><span class="n">meta_bits</span><span class="p">):</span>
+<a id="__codelineno-0-36" name="__codelineno-0-36"></a>    <span class="c1"># type: (str, Optional[str], Optional[ic.Meta], int) -&gt; dict</span>
+<a id="__codelineno-0-37" name="__codelineno-0-37"></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<a id="__codelineno-0-38" name="__codelineno-0-38"></a><span class="sd">    Create an ISCC Meta-Code with the algorithm version 0.</span>
+<a id="__codelineno-0-39" name="__codelineno-0-39"></a>
+<a id="__codelineno-0-40" name="__codelineno-0-40"></a><span class="sd">    !!! note</span>
+<a id="__codelineno-0-41" name="__codelineno-0-41"></a>
+<a id="__codelineno-0-42" name="__codelineno-0-42"></a><span class="sd">        The input for the `metadata` field can be:</span>
+<a id="__codelineno-0-43" name="__codelineno-0-43"></a>
+<a id="__codelineno-0-44" name="__codelineno-0-44"></a><span class="sd">        - Structured (JSON/JCS serializable) metadata</span>
+<a id="__codelineno-0-45" name="__codelineno-0-45"></a><span class="sd">        - Raw bytes from a file header</span>
+<a id="__codelineno-0-46" name="__codelineno-0-46"></a>
+<a id="__codelineno-0-47" name="__codelineno-0-47"></a><span class="sd">    :param str name: Name or title of the work manifested by the digital asset</span>
+<a id="__codelineno-0-48" name="__codelineno-0-48"></a><span class="sd">    :param Optional[str] description: Optional description for disambiguation</span>
+<a id="__codelineno-0-49" name="__codelineno-0-49"></a><span class="sd">    :param Optional[Union[dict,str] meta: Dict or Data-URL string with extended metadata</span>
+<a id="__codelineno-0-50" name="__codelineno-0-50"></a><span class="sd">    :param int bits: Bit-length of resulting Meta-Code (multiple of 64)</span>
+<a id="__codelineno-0-51" name="__codelineno-0-51"></a><span class="sd">    :return: ISCC object with possible fields: iscc, name, description, metadata, metahash</span>
+<a id="__codelineno-0-52" name="__codelineno-0-52"></a><span class="sd">    :rtype: dict</span>
+<a id="__codelineno-0-53" name="__codelineno-0-53"></a><span class="sd">    &quot;&quot;&quot;</span>
+<a id="__codelineno-0-54" name="__codelineno-0-54"></a>
+<a id="__codelineno-0-55" name="__codelineno-0-55"></a>    <span class="c1"># 1. Normalize `name`</span>
+<a id="__codelineno-0-56" name="__codelineno-0-56"></a>    <span class="n">name</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span> <span class="k">if</span> <span class="n">name</span> <span class="ow">is</span> <span class="kc">None</span> <span class="k">else</span> <span class="n">name</span>
+<a id="__codelineno-0-57" name="__codelineno-0-57"></a>    <span class="n">name</span> <span class="o">=</span> <span class="n">text_clean</span><span class="p">(</span><span class="n">name</span><span class="p">)</span>
+<a id="__codelineno-0-58" name="__codelineno-0-58"></a>    <span class="n">name</span> <span class="o">=</span> <span class="n">text_remove_newlines</span><span class="p">(</span><span class="n">name</span><span class="p">)</span>
+<a id="__codelineno-0-59" name="__codelineno-0-59"></a>    <span class="n">name</span> <span class="o">=</span> <span class="n">text_trim</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">ic</span><span class="o">.</span><span class="n">core_opts</span><span class="o">.</span><span class="n">meta_trim_name</span><span class="p">)</span>
+<a id="__codelineno-0-60" name="__codelineno-0-60"></a>
+<a id="__codelineno-0-61" name="__codelineno-0-61"></a>    <span class="k">if</span> <span class="ow">not</span> <span class="n">name</span><span class="p">:</span>
+<a id="__codelineno-0-62" name="__codelineno-0-62"></a>        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Meta-Code requires non-empty name element (after normalization)&quot;</span><span class="p">)</span>
+<a id="__codelineno-0-63" name="__codelineno-0-63"></a>
+<a id="__codelineno-0-64" name="__codelineno-0-64"></a>    <span class="c1"># 2. Normalize `description`</span>
+<a id="__codelineno-0-65" name="__codelineno-0-65"></a>    <span class="n">description</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span> <span class="k">if</span> <span class="n">description</span> <span class="ow">is</span> <span class="kc">None</span> <span class="k">else</span> <span class="n">description</span>
+<a id="__codelineno-0-66" name="__codelineno-0-66"></a>    <span class="n">description</span> <span class="o">=</span> <span class="n">text_clean</span><span class="p">(</span><span class="n">description</span><span class="p">)</span>
+<a id="__codelineno-0-67" name="__codelineno-0-67"></a>    <span class="n">description</span> <span class="o">=</span> <span class="n">text_trim</span><span class="p">(</span><span class="n">description</span><span class="p">,</span> <span class="n">ic</span><span class="o">.</span><span class="n">core_opts</span><span class="o">.</span><span class="n">meta_trim_description</span><span class="p">)</span>
+<a id="__codelineno-0-68" name="__codelineno-0-68"></a>
+<a id="__codelineno-0-69" name="__codelineno-0-69"></a>    <span class="c1"># Calculate meta_code, metahash, and output metadata values for the different input cases</span>
+<a id="__codelineno-0-70" name="__codelineno-0-70"></a>    <span class="k">if</span> <span class="n">meta</span><span class="p">:</span>
+<a id="__codelineno-0-71" name="__codelineno-0-71"></a>        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">meta</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
+<a id="__codelineno-0-72" name="__codelineno-0-72"></a>            <span class="c1"># Data-URL expected</span>
+<a id="__codelineno-0-73" name="__codelineno-0-73"></a>            <span class="n">durl</span> <span class="o">=</span> <span class="n">meta</span>
+<a id="__codelineno-0-74" name="__codelineno-0-74"></a>            <span class="n">payload</span> <span class="o">=</span> <span class="n">DataURL</span><span class="o">.</span><span class="n">from_url</span><span class="p">(</span><span class="n">durl</span><span class="p">)</span><span class="o">.</span><span class="n">data</span>
+<a id="__codelineno-0-75" name="__codelineno-0-75"></a>            <span class="n">meta_code_digest</span> <span class="o">=</span> <span class="n">soft_hash_meta_v0</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">payload</span><span class="p">)</span>
+<a id="__codelineno-0-76" name="__codelineno-0-76"></a>            <span class="n">metahash</span> <span class="o">=</span> <span class="n">ic</span><span class="o">.</span><span class="n">multi_hash_blake3</span><span class="p">(</span><span class="n">payload</span><span class="p">)</span>
+<a id="__codelineno-0-77" name="__codelineno-0-77"></a>            <span class="n">metadata_value</span> <span class="o">=</span> <span class="n">durl</span>
+<a id="__codelineno-0-78" name="__codelineno-0-78"></a>        <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">meta</span><span class="p">,</span> <span class="nb">dict</span><span class="p">):</span>
+<a id="__codelineno-0-79" name="__codelineno-0-79"></a>            <span class="n">payload</span> <span class="o">=</span> <span class="n">jcs</span><span class="o">.</span><span class="n">canonicalize</span><span class="p">(</span><span class="n">meta</span><span class="p">)</span>
+<a id="__codelineno-0-80" name="__codelineno-0-80"></a>            <span class="n">meta_code_digest</span> <span class="o">=</span> <span class="n">soft_hash_meta_v0</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">payload</span><span class="p">)</span>
+<a id="__codelineno-0-81" name="__codelineno-0-81"></a>            <span class="n">metahash</span> <span class="o">=</span> <span class="n">ic</span><span class="o">.</span><span class="n">multi_hash_blake3</span><span class="p">(</span><span class="n">payload</span><span class="p">)</span>
+<a id="__codelineno-0-82" name="__codelineno-0-82"></a>            <span class="n">media_type</span> <span class="o">=</span> <span class="s2">&quot;application/ld+json&quot;</span> <span class="k">if</span> <span class="s2">&quot;@context&quot;</span> <span class="ow">in</span> <span class="n">meta</span> <span class="k">else</span> <span class="s2">&quot;application/json&quot;</span>
+<a id="__codelineno-0-83" name="__codelineno-0-83"></a>            <span class="n">durl_obj</span> <span class="o">=</span> <span class="n">DataURL</span><span class="o">.</span><span class="n">from_data</span><span class="p">(</span><span class="n">media_type</span><span class="p">,</span> <span class="n">base64_encode</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">payload</span><span class="p">)</span>
+<a id="__codelineno-0-84" name="__codelineno-0-84"></a>            <span class="n">metadata_value</span> <span class="o">=</span> <span class="n">durl_obj</span><span class="o">.</span><span class="n">url</span>
+<a id="__codelineno-0-85" name="__codelineno-0-85"></a>        <span class="k">else</span><span class="p">:</span>
+<a id="__codelineno-0-86" name="__codelineno-0-86"></a>            <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;metadata must be Data-URL string or dict not </span><span class="si">{</span><span class="nb">type</span><span class="p">(</span><span class="n">meta</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<a id="__codelineno-0-87" name="__codelineno-0-87"></a>    <span class="k">else</span><span class="p">:</span>
+<a id="__codelineno-0-88" name="__codelineno-0-88"></a>        <span class="n">payload</span> <span class="o">=</span> <span class="s2">&quot; &quot;</span><span class="o">.</span><span class="n">join</span><span class="p">((</span><span class="n">name</span><span class="p">,</span> <span class="n">description</span><span class="p">))</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span><span class="s2">&quot;utf-8&quot;</span><span class="p">)</span>
+<a id="__codelineno-0-89" name="__codelineno-0-89"></a>        <span class="n">meta_code_digest</span> <span class="o">=</span> <span class="n">soft_hash_meta_v0</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">description</span><span class="p">)</span>
+<a id="__codelineno-0-90" name="__codelineno-0-90"></a>        <span class="n">metahash</span> <span class="o">=</span> <span class="n">ic</span><span class="o">.</span><span class="n">multi_hash_blake3</span><span class="p">(</span><span class="n">payload</span><span class="p">)</span>
+<a id="__codelineno-0-91" name="__codelineno-0-91"></a>        <span class="n">metadata_value</span> <span class="o">=</span> <span class="kc">None</span>
+<a id="__codelineno-0-92" name="__codelineno-0-92"></a>
+<a id="__codelineno-0-93" name="__codelineno-0-93"></a>    <span class="n">meta_code</span> <span class="o">=</span> <span class="n">ic</span><span class="o">.</span><span class="n">encode_component</span><span class="p">(</span>
+<a id="__codelineno-0-94" name="__codelineno-0-94"></a>        <span class="n">mtype</span><span class="o">=</span><span class="n">ic</span><span class="o">.</span><span class="n">MT</span><span class="o">.</span><span class="n">META</span><span class="p">,</span>
+<a id="__codelineno-0-95" name="__codelineno-0-95"></a>        <span class="n">stype</span><span class="o">=</span><span class="n">ic</span><span class="o">.</span><span class="n">ST</span><span class="o">.</span><span class="n">NONE</span><span class="p">,</span>
+<a id="__codelineno-0-96" name="__codelineno-0-96"></a>        <span class="n">version</span><span class="o">=</span><span class="n">ic</span><span class="o">.</span><span class="n">VS</span><span class="o">.</span><span class="n">V0</span><span class="p">,</span>
+<a id="__codelineno-0-97" name="__codelineno-0-97"></a>        <span class="n">bit_length</span><span class="o">=</span><span class="n">bits</span><span class="p">,</span>
+<a id="__codelineno-0-98" name="__codelineno-0-98"></a>        <span class="n">digest</span><span class="o">=</span><span class="n">meta_code_digest</span><span class="p">,</span>
+<a id="__codelineno-0-99" name="__codelineno-0-99"></a>    <span class="p">)</span>
+<a id="__codelineno-0-100" name="__codelineno-0-100"></a>    <span class="n">iscc</span> <span class="o">=</span> <span class="s2">&quot;ISCC:&quot;</span> <span class="o">+</span> <span class="n">meta_code</span>
+<a id="__codelineno-0-101" name="__codelineno-0-101"></a>
+<a id="__codelineno-0-102" name="__codelineno-0-102"></a>    <span class="c1"># Build result</span>
+<a id="__codelineno-0-103" name="__codelineno-0-103"></a>    <span class="n">result</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;iscc&quot;</span><span class="p">:</span> <span class="n">iscc</span><span class="p">}</span>
+<a id="__codelineno-0-104" name="__codelineno-0-104"></a>    <span class="k">if</span> <span class="n">name</span><span class="p">:</span>
+<a id="__codelineno-0-105" name="__codelineno-0-105"></a>        <span class="n">result</span><span class="p">[</span><span class="s2">&quot;name&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">name</span>
+<a id="__codelineno-0-106" name="__codelineno-0-106"></a>    <span class="k">if</span> <span class="n">description</span><span class="p">:</span>
+<a id="__codelineno-0-107" name="__codelineno-0-107"></a>        <span class="n">result</span><span class="p">[</span><span class="s2">&quot;description&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">description</span>
+<a id="__codelineno-0-108" name="__codelineno-0-108"></a>    <span class="k">if</span> <span class="n">metadata_value</span><span class="p">:</span>
+<a id="__codelineno-0-109" name="__codelineno-0-109"></a>        <span class="n">result</span><span class="p">[</span><span class="s2">&quot;meta&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">metadata_value</span>
+<a id="__codelineno-0-110" name="__codelineno-0-110"></a>
+<a id="__codelineno-0-111" name="__codelineno-0-111"></a>    <span class="n">result</span><span class="p">[</span><span class="s2">&quot;metahash&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">metahash</span>
+<a id="__codelineno-0-112" name="__codelineno-0-112"></a>
+<a id="__codelineno-0-113" name="__codelineno-0-113"></a>    <span class="k">return</span> <span class="n">result</span>
+</code></pre></div></td></tr></table></div>
+      </details>
+  </div>
+
+</div><h2 id="iso-24138-53-text-code">ISO 24138 / 5.3 Text-Code<a class="headerlink" href="#iso-24138-53-text-code" title="Permanent link">#</a></h2>
+
+
+<div class="doc doc-object doc-function">
+
+
+
+<hnone id="iscc_core.gen_text_code_v0" class="doc doc-heading">
+<code class="highlight language-python"><span class="n">gen_text_code_v0</span><span class="p">(</span><span class="n">text</span><span class="p">,</span> <span class="n">bits</span><span class="o">=</span><span class="n">ic</span><span class="o">.</span><span class="n">core_opts</span><span class="o">.</span><span class="n">text_bits</span><span class="p">)</span></code>
+
+<a href="#iscc_core.gen_text_code_v0" class="headerlink" title="Permanent link">#</a></hnone>
+
+
+  <div class="doc doc-contents first">
+  
+      <p>Create an ISCC Text-Code with algorithm v0.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Any markup (like HTML tags or markdown) should be removed from the plain-text
+before passing it to this function.</p>
+</div>
+
+  <p><strong>Parameters:</strong></p>
+  <table>
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Type</th>
+        <th>Description</th>
+        <th>Default</th>
+      </tr>
+    </thead>
+    <tbody>
+        <tr>
+          <td><code>text</code></td>
+          <td>
+                <code>str</code>
+          </td>
+          <td><p>Text for Text-Code creation</p></td>
+          <td>
+              <em>required</em>
+          </td>
+        </tr>
+        <tr>
+          <td><code>bits</code></td>
+          <td>
+                <code>int</code>
+          </td>
+          <td><p>Bit-length of ISCC Code Hash (default 64)</p></td>
+          <td>
+                <code>ic.core_opts.text_bits</code>
+          </td>
+        </tr>
+    </tbody>
+  </table>
+
+  <p><strong>Returns:</strong></p>
+  <table>
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+        <tr>
+          <td>
+                <code>dict</code>
+          </td>
+          <td><p>ISCC schema instance with Text-Code and an aditional property <code>characters</code></p></td>
+        </tr>
+    </tbody>
+  </table>
+
+      <details class="quote">
+        <summary>Source code in <code>iscc_core\code_content_text.py</code></summary>
+        <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-0-46">46</a></span>
+<span class="normal"><a href="#__codelineno-0-47">47</a></span>
+<span class="normal"><a href="#__codelineno-0-48">48</a></span>
+<span class="normal"><a href="#__codelineno-0-49">49</a></span>
+<span class="normal"><a href="#__codelineno-0-50">50</a></span>
+<span class="normal"><a href="#__codelineno-0-51">51</a></span>
+<span class="normal"><a href="#__codelineno-0-52">52</a></span>
+<span class="normal"><a href="#__codelineno-0-53">53</a></span>
+<span class="normal"><a href="#__codelineno-0-54">54</a></span>
+<span class="normal"><a href="#__codelineno-0-55">55</a></span>
+<span class="normal"><a href="#__codelineno-0-56">56</a></span>
+<span class="normal"><a href="#__codelineno-0-57">57</a></span>
+<span class="normal"><a href="#__codelineno-0-58">58</a></span>
+<span class="normal"><a href="#__codelineno-0-59">59</a></span>
+<span class="normal"><a href="#__codelineno-0-60">60</a></span>
+<span class="normal"><a href="#__codelineno-0-61">61</a></span>
+<span class="normal"><a href="#__codelineno-0-62">62</a></span>
+<span class="normal"><a href="#__codelineno-0-63">63</a></span>
+<span class="normal"><a href="#__codelineno-0-64">64</a></span>
+<span class="normal"><a href="#__codelineno-0-65">65</a></span>
+<span class="normal"><a href="#__codelineno-0-66">66</a></span>
+<span class="normal"><a href="#__codelineno-0-67">67</a></span>
+<span class="normal"><a href="#__codelineno-0-68">68</a></span>
+<span class="normal"><a href="#__codelineno-0-69">69</a></span>
+<span class="normal"><a href="#__codelineno-0-70">70</a></span>
+<span class="normal"><a href="#__codelineno-0-71">71</a></span>
+<span class="normal"><a href="#__codelineno-0-72">72</a></span>
+<span class="normal"><a href="#__codelineno-0-73">73</a></span>
+<span class="normal"><a href="#__codelineno-0-74">74</a></span>
+<span class="normal"><a href="#__codelineno-0-75">75</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-0-46" name="__codelineno-0-46"></a><span class="k">def</span> <span class="nf">gen_text_code_v0</span><span class="p">(</span><span class="n">text</span><span class="p">,</span> <span class="n">bits</span><span class="o">=</span><span class="n">ic</span><span class="o">.</span><span class="n">core_opts</span><span class="o">.</span><span class="n">text_bits</span><span class="p">):</span>
+<a id="__codelineno-0-47" name="__codelineno-0-47"></a>    <span class="c1"># type: (str, int) -&gt; dict</span>
+<a id="__codelineno-0-48" name="__codelineno-0-48"></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<a id="__codelineno-0-49" name="__codelineno-0-49"></a><span class="sd">    Create an ISCC Text-Code with algorithm v0.</span>
+<a id="__codelineno-0-50" name="__codelineno-0-50"></a>
+<a id="__codelineno-0-51" name="__codelineno-0-51"></a><span class="sd">    !!! note</span>
+<a id="__codelineno-0-52" name="__codelineno-0-52"></a><span class="sd">        Any markup (like HTML tags or markdown) should be removed from the plain-text</span>
+<a id="__codelineno-0-53" name="__codelineno-0-53"></a><span class="sd">        before passing it to this function.</span>
+<a id="__codelineno-0-54" name="__codelineno-0-54"></a>
+<a id="__codelineno-0-55" name="__codelineno-0-55"></a><span class="sd">    :param str text: Text for Text-Code creation</span>
+<a id="__codelineno-0-56" name="__codelineno-0-56"></a><span class="sd">    :param int bits: Bit-length of ISCC Code Hash (default 64)</span>
+<a id="__codelineno-0-57" name="__codelineno-0-57"></a><span class="sd">    :return: ISCC schema instance with Text-Code and an aditional property `characters`</span>
+<a id="__codelineno-0-58" name="__codelineno-0-58"></a><span class="sd">    :rtype: dict</span>
+<a id="__codelineno-0-59" name="__codelineno-0-59"></a><span class="sd">    &quot;&quot;&quot;</span>
+<a id="__codelineno-0-60" name="__codelineno-0-60"></a>
+<a id="__codelineno-0-61" name="__codelineno-0-61"></a>    <span class="n">text</span> <span class="o">=</span> <span class="n">text_collapse</span><span class="p">(</span><span class="n">text</span><span class="p">)</span>
+<a id="__codelineno-0-62" name="__codelineno-0-62"></a>    <span class="n">characters</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">text</span><span class="p">)</span>
+<a id="__codelineno-0-63" name="__codelineno-0-63"></a>    <span class="n">digest</span> <span class="o">=</span> <span class="n">soft_hash_text_v0</span><span class="p">(</span><span class="n">text</span><span class="p">)</span>
+<a id="__codelineno-0-64" name="__codelineno-0-64"></a>
+<a id="__codelineno-0-65" name="__codelineno-0-65"></a>    <span class="n">text_code</span> <span class="o">=</span> <span class="n">ic</span><span class="o">.</span><span class="n">encode_component</span><span class="p">(</span>
+<a id="__codelineno-0-66" name="__codelineno-0-66"></a>        <span class="n">mtype</span><span class="o">=</span><span class="n">ic</span><span class="o">.</span><span class="n">MT</span><span class="o">.</span><span class="n">CONTENT</span><span class="p">,</span>
+<a id="__codelineno-0-67" name="__codelineno-0-67"></a>        <span class="n">stype</span><span class="o">=</span><span class="n">ic</span><span class="o">.</span><span class="n">ST_CC</span><span class="o">.</span><span class="n">TEXT</span><span class="p">,</span>
+<a id="__codelineno-0-68" name="__codelineno-0-68"></a>        <span class="n">version</span><span class="o">=</span><span class="n">ic</span><span class="o">.</span><span class="n">VS</span><span class="o">.</span><span class="n">V0</span><span class="p">,</span>
+<a id="__codelineno-0-69" name="__codelineno-0-69"></a>        <span class="n">bit_length</span><span class="o">=</span><span class="n">bits</span><span class="p">,</span>
+<a id="__codelineno-0-70" name="__codelineno-0-70"></a>        <span class="n">digest</span><span class="o">=</span><span class="n">digest</span><span class="p">,</span>
+<a id="__codelineno-0-71" name="__codelineno-0-71"></a>    <span class="p">)</span>
+<a id="__codelineno-0-72" name="__codelineno-0-72"></a>
+<a id="__codelineno-0-73" name="__codelineno-0-73"></a>    <span class="n">iscc</span> <span class="o">=</span> <span class="s2">&quot;ISCC:&quot;</span> <span class="o">+</span> <span class="n">text_code</span>
+<a id="__codelineno-0-74" name="__codelineno-0-74"></a>
+<a id="__codelineno-0-75" name="__codelineno-0-75"></a>    <span class="k">return</span> <span class="nb">dict</span><span class="p">(</span><span class="n">iscc</span><span class="o">=</span><span class="n">iscc</span><span class="p">,</span> <span class="n">characters</span><span class="o">=</span><span class="n">characters</span><span class="p">)</span>
+</code></pre></div></td></tr></table></div>
+      </details>
+  </div>
+
+</div><h2 id="iso-24138-54-image-code">ISO 24138 / 5.4 Image-Code<a class="headerlink" href="#iso-24138-54-image-code" title="Permanent link">#</a></h2>
+
+
+<div class="doc doc-object doc-function">
+
+
+
+<hnone id="iscc_core.gen_image_code_v0" class="doc doc-heading">
+<code class="highlight language-python"><span class="n">gen_image_code_v0</span><span class="p">(</span><span class="n">pixels</span><span class="p">,</span> <span class="n">bits</span><span class="o">=</span><span class="n">ic</span><span class="o">.</span><span class="n">core_opts</span><span class="o">.</span><span class="n">image_bits</span><span class="p">)</span></code>
+
+<a href="#iscc_core.gen_image_code_v0" class="headerlink" title="Permanent link">#</a></hnone>
+
+
+  <div class="doc doc-contents first">
+  
+      <p>Create an ISCC Content-Code Image with algorithm v0.</p>
+
+  <p><strong>Parameters:</strong></p>
+  <table>
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Type</th>
+        <th>Description</th>
+        <th>Default</th>
+      </tr>
+    </thead>
+    <tbody>
+        <tr>
+          <td><code>pixels</code></td>
+          <td>
+                <code>Sequence[int]</code>
+          </td>
+          <td><p>Normalized image pixels (32x32 flattened gray values)</p></td>
+          <td>
+              <em>required</em>
+          </td>
+        </tr>
+        <tr>
+          <td><code>bits</code></td>
+          <td>
+                <code>int</code>
+          </td>
+          <td><p>Bit-length of ISCC Content-Code Image (default 64).</p></td>
+          <td>
+                <code>ic.core_opts.image_bits</code>
+          </td>
+        </tr>
+    </tbody>
+  </table>
+
+  <p><strong>Returns:</strong></p>
+  <table>
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+        <tr>
+          <td>
+                <code>ISCC</code>
+          </td>
+          <td><p>ISCC object with Content-Code Image.</p></td>
+        </tr>
+    </tbody>
+  </table>
+
+      <details class="quote">
+        <summary>Source code in <code>iscc_core\code_content_image.py</code></summary>
+        <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-0-43">43</a></span>
+<span class="normal"><a href="#__codelineno-0-44">44</a></span>
+<span class="normal"><a href="#__codelineno-0-45">45</a></span>
+<span class="normal"><a href="#__codelineno-0-46">46</a></span>
+<span class="normal"><a href="#__codelineno-0-47">47</a></span>
+<span class="normal"><a href="#__codelineno-0-48">48</a></span>
+<span class="normal"><a href="#__codelineno-0-49">49</a></span>
+<span class="normal"><a href="#__codelineno-0-50">50</a></span>
+<span class="normal"><a href="#__codelineno-0-51">51</a></span>
+<span class="normal"><a href="#__codelineno-0-52">52</a></span>
+<span class="normal"><a href="#__codelineno-0-53">53</a></span>
+<span class="normal"><a href="#__codelineno-0-54">54</a></span>
+<span class="normal"><a href="#__codelineno-0-55">55</a></span>
+<span class="normal"><a href="#__codelineno-0-56">56</a></span>
+<span class="normal"><a href="#__codelineno-0-57">57</a></span>
+<span class="normal"><a href="#__codelineno-0-58">58</a></span>
+<span class="normal"><a href="#__codelineno-0-59">59</a></span>
+<span class="normal"><a href="#__codelineno-0-60">60</a></span>
+<span class="normal"><a href="#__codelineno-0-61">61</a></span>
+<span class="normal"><a href="#__codelineno-0-62">62</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-0-43" name="__codelineno-0-43"></a><span class="k">def</span> <span class="nf">gen_image_code_v0</span><span class="p">(</span><span class="n">pixels</span><span class="p">,</span> <span class="n">bits</span><span class="o">=</span><span class="n">ic</span><span class="o">.</span><span class="n">core_opts</span><span class="o">.</span><span class="n">image_bits</span><span class="p">):</span>
+<a id="__codelineno-0-44" name="__codelineno-0-44"></a>    <span class="c1"># type: (Sequence[int], int) -&gt; dict</span>
+<a id="__codelineno-0-45" name="__codelineno-0-45"></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<a id="__codelineno-0-46" name="__codelineno-0-46"></a><span class="sd">    Create an ISCC Content-Code Image with algorithm v0.</span>
+<a id="__codelineno-0-47" name="__codelineno-0-47"></a>
+<a id="__codelineno-0-48" name="__codelineno-0-48"></a><span class="sd">    :param Sequence[int] pixels: Normalized image pixels (32x32 flattened gray values)</span>
+<a id="__codelineno-0-49" name="__codelineno-0-49"></a><span class="sd">    :param int bits: Bit-length of ISCC Content-Code Image (default 64).</span>
+<a id="__codelineno-0-50" name="__codelineno-0-50"></a><span class="sd">    :return: ISCC object with Content-Code Image.</span>
+<a id="__codelineno-0-51" name="__codelineno-0-51"></a><span class="sd">    :rtype: ISCC</span>
+<a id="__codelineno-0-52" name="__codelineno-0-52"></a><span class="sd">    &quot;&quot;&quot;</span>
+<a id="__codelineno-0-53" name="__codelineno-0-53"></a>    <span class="n">digest</span> <span class="o">=</span> <span class="n">soft_hash_image_v0</span><span class="p">(</span><span class="n">pixels</span><span class="p">,</span> <span class="n">bits</span><span class="o">=</span><span class="n">bits</span><span class="p">)</span>
+<a id="__codelineno-0-54" name="__codelineno-0-54"></a>    <span class="n">image_code</span> <span class="o">=</span> <span class="n">ic</span><span class="o">.</span><span class="n">encode_component</span><span class="p">(</span>
+<a id="__codelineno-0-55" name="__codelineno-0-55"></a>        <span class="n">mtype</span><span class="o">=</span><span class="n">ic</span><span class="o">.</span><span class="n">MT</span><span class="o">.</span><span class="n">CONTENT</span><span class="p">,</span>
+<a id="__codelineno-0-56" name="__codelineno-0-56"></a>        <span class="n">stype</span><span class="o">=</span><span class="n">ic</span><span class="o">.</span><span class="n">ST_CC</span><span class="o">.</span><span class="n">IMAGE</span><span class="p">,</span>
+<a id="__codelineno-0-57" name="__codelineno-0-57"></a>        <span class="n">version</span><span class="o">=</span><span class="n">ic</span><span class="o">.</span><span class="n">VS</span><span class="o">.</span><span class="n">V0</span><span class="p">,</span>
+<a id="__codelineno-0-58" name="__codelineno-0-58"></a>        <span class="n">bit_length</span><span class="o">=</span><span class="n">bits</span><span class="p">,</span>
+<a id="__codelineno-0-59" name="__codelineno-0-59"></a>        <span class="n">digest</span><span class="o">=</span><span class="n">digest</span><span class="p">,</span>
+<a id="__codelineno-0-60" name="__codelineno-0-60"></a>    <span class="p">)</span>
+<a id="__codelineno-0-61" name="__codelineno-0-61"></a>    <span class="n">iscc</span> <span class="o">=</span> <span class="s2">&quot;ISCC:&quot;</span> <span class="o">+</span> <span class="n">image_code</span>
+<a id="__codelineno-0-62" name="__codelineno-0-62"></a>    <span class="k">return</span> <span class="p">{</span><span class="s2">&quot;iscc&quot;</span><span class="p">:</span> <span class="n">iscc</span><span class="p">}</span>
+</code></pre></div></td></tr></table></div>
+      </details>
+  </div>
+
+</div><h2 id="iso-24138-55-audio-code">ISO 24138 / 5.5 Audio-Code<a class="headerlink" href="#iso-24138-55-audio-code" title="Permanent link">#</a></h2>
+
+
+<div class="doc doc-object doc-function">
+
+
+
+<hnone id="iscc_core.gen_audio_code_v0" class="doc doc-heading">
+<code class="highlight language-python"><span class="n">gen_audio_code_v0</span><span class="p">(</span><span class="n">cv</span><span class="p">,</span> <span class="n">bits</span><span class="o">=</span><span class="n">ic</span><span class="o">.</span><span class="n">core_opts</span><span class="o">.</span><span class="n">audio_bits</span><span class="p">)</span></code>
+
+<a href="#iscc_core.gen_audio_code_v0" class="headerlink" title="Permanent link">#</a></hnone>
+
+
+  <div class="doc doc-contents first">
+  
+      <p>Create an ISCC Content-Code Audio with algorithm v0.</p>
+
+  <p><strong>Parameters:</strong></p>
+  <table>
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Type</th>
+        <th>Description</th>
+        <th>Default</th>
+      </tr>
+    </thead>
+    <tbody>
+        <tr>
+          <td><code>cv</code></td>
+          <td>
+                <code>Iterable[int]</code>
+          </td>
+          <td><p>Chromaprint vector</p></td>
+          <td>
+              <em>required</em>
+          </td>
+        </tr>
+        <tr>
+          <td><code>bits</code></td>
+          <td>
+                <code>int</code>
+          </td>
+          <td><p>Bit-length resulting Content-Code Audio (multiple of 64)</p></td>
+          <td>
+                <code>ic.core_opts.audio_bits</code>
+          </td>
+        </tr>
+    </tbody>
+  </table>
+
+  <p><strong>Returns:</strong></p>
+  <table>
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+        <tr>
+          <td>
+                <code>dict</code>
+          </td>
+          <td><p>ISCC object with Content-Code Audio</p></td>
+        </tr>
+    </tbody>
+  </table>
+
+      <details class="quote">
+        <summary>Source code in <code>iscc_core\code_content_audio.py</code></summary>
+        <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-0-39">39</a></span>
+<span class="normal"><a href="#__codelineno-0-40">40</a></span>
+<span class="normal"><a href="#__codelineno-0-41">41</a></span>
+<span class="normal"><a href="#__codelineno-0-42">42</a></span>
+<span class="normal"><a href="#__codelineno-0-43">43</a></span>
+<span class="normal"><a href="#__codelineno-0-44">44</a></span>
+<span class="normal"><a href="#__codelineno-0-45">45</a></span>
+<span class="normal"><a href="#__codelineno-0-46">46</a></span>
+<span class="normal"><a href="#__codelineno-0-47">47</a></span>
+<span class="normal"><a href="#__codelineno-0-48">48</a></span>
+<span class="normal"><a href="#__codelineno-0-49">49</a></span>
+<span class="normal"><a href="#__codelineno-0-50">50</a></span>
+<span class="normal"><a href="#__codelineno-0-51">51</a></span>
+<span class="normal"><a href="#__codelineno-0-52">52</a></span>
+<span class="normal"><a href="#__codelineno-0-53">53</a></span>
+<span class="normal"><a href="#__codelineno-0-54">54</a></span>
+<span class="normal"><a href="#__codelineno-0-55">55</a></span>
+<span class="normal"><a href="#__codelineno-0-56">56</a></span>
+<span class="normal"><a href="#__codelineno-0-57">57</a></span>
+<span class="normal"><a href="#__codelineno-0-58">58</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-0-39" name="__codelineno-0-39"></a><span class="k">def</span> <span class="nf">gen_audio_code_v0</span><span class="p">(</span><span class="n">cv</span><span class="p">,</span> <span class="n">bits</span><span class="o">=</span><span class="n">ic</span><span class="o">.</span><span class="n">core_opts</span><span class="o">.</span><span class="n">audio_bits</span><span class="p">):</span>
+<a id="__codelineno-0-40" name="__codelineno-0-40"></a>    <span class="c1"># type: (Iterable[int], int) -&gt; dict</span>
+<a id="__codelineno-0-41" name="__codelineno-0-41"></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<a id="__codelineno-0-42" name="__codelineno-0-42"></a><span class="sd">    Create an ISCC Content-Code Audio with algorithm v0.</span>
+<a id="__codelineno-0-43" name="__codelineno-0-43"></a>
+<a id="__codelineno-0-44" name="__codelineno-0-44"></a><span class="sd">    :param Iterable[int] cv: Chromaprint vector</span>
+<a id="__codelineno-0-45" name="__codelineno-0-45"></a><span class="sd">    :param int bits: Bit-length resulting Content-Code Audio (multiple of 64)</span>
+<a id="__codelineno-0-46" name="__codelineno-0-46"></a><span class="sd">    :return: ISCC object with Content-Code Audio</span>
+<a id="__codelineno-0-47" name="__codelineno-0-47"></a><span class="sd">    :rtype: dict</span>
+<a id="__codelineno-0-48" name="__codelineno-0-48"></a><span class="sd">    &quot;&quot;&quot;</span>
+<a id="__codelineno-0-49" name="__codelineno-0-49"></a>    <span class="n">digest</span> <span class="o">=</span> <span class="n">soft_hash_audio_v0</span><span class="p">(</span><span class="n">cv</span><span class="p">,</span> <span class="n">bits</span><span class="o">=</span><span class="n">bits</span><span class="p">)</span>
+<a id="__codelineno-0-50" name="__codelineno-0-50"></a>    <span class="n">audio_code</span> <span class="o">=</span> <span class="n">ic</span><span class="o">.</span><span class="n">encode_component</span><span class="p">(</span>
+<a id="__codelineno-0-51" name="__codelineno-0-51"></a>        <span class="n">mtype</span><span class="o">=</span><span class="n">ic</span><span class="o">.</span><span class="n">MT</span><span class="o">.</span><span class="n">CONTENT</span><span class="p">,</span>
+<a id="__codelineno-0-52" name="__codelineno-0-52"></a>        <span class="n">stype</span><span class="o">=</span><span class="n">ic</span><span class="o">.</span><span class="n">ST_CC</span><span class="o">.</span><span class="n">AUDIO</span><span class="p">,</span>
+<a id="__codelineno-0-53" name="__codelineno-0-53"></a>        <span class="n">version</span><span class="o">=</span><span class="n">ic</span><span class="o">.</span><span class="n">VS</span><span class="o">.</span><span class="n">V0</span><span class="p">,</span>
+<a id="__codelineno-0-54" name="__codelineno-0-54"></a>        <span class="n">bit_length</span><span class="o">=</span><span class="n">bits</span><span class="p">,</span>
+<a id="__codelineno-0-55" name="__codelineno-0-55"></a>        <span class="n">digest</span><span class="o">=</span><span class="n">digest</span><span class="p">,</span>
+<a id="__codelineno-0-56" name="__codelineno-0-56"></a>    <span class="p">)</span>
+<a id="__codelineno-0-57" name="__codelineno-0-57"></a>    <span class="n">iscc</span> <span class="o">=</span> <span class="s2">&quot;ISCC:&quot;</span> <span class="o">+</span> <span class="n">audio_code</span>
+<a id="__codelineno-0-58" name="__codelineno-0-58"></a>    <span class="k">return</span> <span class="p">{</span><span class="s2">&quot;iscc&quot;</span><span class="p">:</span> <span class="n">iscc</span><span class="p">}</span>
+</code></pre></div></td></tr></table></div>
+      </details>
+  </div>
+
+</div><h2 id="iso-24138-56-video-code">ISO 24138 / 5.6 Video-Code<a class="headerlink" href="#iso-24138-56-video-code" title="Permanent link">#</a></h2>
+
+
+<div class="doc doc-object doc-function">
+
+
+
+<hnone id="iscc_core.gen_video_code_v0" class="doc doc-heading">
+<code class="highlight language-python"><span class="n">gen_video_code_v0</span><span class="p">(</span><span class="n">frame_sigs</span><span class="p">,</span> <span class="n">bits</span><span class="o">=</span><span class="n">ic</span><span class="o">.</span><span class="n">core_opts</span><span class="o">.</span><span class="n">video_bits</span><span class="p">)</span></code>
+
+<a href="#iscc_core.gen_video_code_v0" class="headerlink" title="Permanent link">#</a></hnone>
+
+
+  <div class="doc doc-contents first">
+  
+      <p>Create an ISCC Video-Code with algorithm v0.</p>
+
+  <p><strong>Parameters:</strong></p>
+  <table>
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Type</th>
+        <th>Description</th>
+        <th>Default</th>
+      </tr>
+    </thead>
+    <tbody>
+        <tr>
+          <td><code>frame_sigs</code></td>
+          <td>
+                <code>ic.FrameSig</code>
+          </td>
+          <td><p>Sequence of MP7 frame signatures</p></td>
+          <td>
+              <em>required</em>
+          </td>
+        </tr>
+        <tr>
+          <td><code>bits</code></td>
+          <td>
+                <code>int</code>
+          </td>
+          <td><p>Bit-length resulting Video-Code (multiple of 64)</p></td>
+          <td>
+                <code>ic.core_opts.video_bits</code>
+          </td>
+        </tr>
+    </tbody>
+  </table>
+
+  <p><strong>Returns:</strong></p>
+  <table>
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+        <tr>
+          <td>
+                <code>dict</code>
+          </td>
+          <td><p>ISCC object with Video-Code</p></td>
+        </tr>
+    </tbody>
+  </table>
+
+      <details class="quote">
+        <summary>Source code in <code>iscc_core\code_content_video.py</code></summary>
+        <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-0-35">35</a></span>
+<span class="normal"><a href="#__codelineno-0-36">36</a></span>
+<span class="normal"><a href="#__codelineno-0-37">37</a></span>
+<span class="normal"><a href="#__codelineno-0-38">38</a></span>
+<span class="normal"><a href="#__codelineno-0-39">39</a></span>
+<span class="normal"><a href="#__codelineno-0-40">40</a></span>
+<span class="normal"><a href="#__codelineno-0-41">41</a></span>
+<span class="normal"><a href="#__codelineno-0-42">42</a></span>
+<span class="normal"><a href="#__codelineno-0-43">43</a></span>
+<span class="normal"><a href="#__codelineno-0-44">44</a></span>
+<span class="normal"><a href="#__codelineno-0-45">45</a></span>
+<span class="normal"><a href="#__codelineno-0-46">46</a></span>
+<span class="normal"><a href="#__codelineno-0-47">47</a></span>
+<span class="normal"><a href="#__codelineno-0-48">48</a></span>
+<span class="normal"><a href="#__codelineno-0-49">49</a></span>
+<span class="normal"><a href="#__codelineno-0-50">50</a></span>
+<span class="normal"><a href="#__codelineno-0-51">51</a></span>
+<span class="normal"><a href="#__codelineno-0-52">52</a></span>
+<span class="normal"><a href="#__codelineno-0-53">53</a></span>
+<span class="normal"><a href="#__codelineno-0-54">54</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-0-35" name="__codelineno-0-35"></a><span class="k">def</span> <span class="nf">gen_video_code_v0</span><span class="p">(</span><span class="n">frame_sigs</span><span class="p">,</span> <span class="n">bits</span><span class="o">=</span><span class="n">ic</span><span class="o">.</span><span class="n">core_opts</span><span class="o">.</span><span class="n">video_bits</span><span class="p">):</span>
+<a id="__codelineno-0-36" name="__codelineno-0-36"></a>    <span class="c1"># type: (Sequence[ic.FrameSig], int) -&gt; dict</span>
+<a id="__codelineno-0-37" name="__codelineno-0-37"></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<a id="__codelineno-0-38" name="__codelineno-0-38"></a><span class="sd">    Create an ISCC Video-Code with algorithm v0.</span>
+<a id="__codelineno-0-39" name="__codelineno-0-39"></a>
+<a id="__codelineno-0-40" name="__codelineno-0-40"></a><span class="sd">    :param ic.FrameSig frame_sigs: Sequence of MP7 frame signatures</span>
+<a id="__codelineno-0-41" name="__codelineno-0-41"></a><span class="sd">    :param int bits: Bit-length resulting Video-Code (multiple of 64)</span>
+<a id="__codelineno-0-42" name="__codelineno-0-42"></a><span class="sd">    :return: ISCC object with Video-Code</span>
+<a id="__codelineno-0-43" name="__codelineno-0-43"></a><span class="sd">    :rtype: dict</span>
+<a id="__codelineno-0-44" name="__codelineno-0-44"></a><span class="sd">    &quot;&quot;&quot;</span>
+<a id="__codelineno-0-45" name="__codelineno-0-45"></a>    <span class="n">digest</span> <span class="o">=</span> <span class="n">soft_hash_video_v0</span><span class="p">(</span><span class="n">frame_sigs</span><span class="p">,</span> <span class="n">bits</span><span class="o">=</span><span class="n">bits</span><span class="p">)</span>
+<a id="__codelineno-0-46" name="__codelineno-0-46"></a>    <span class="n">video_code</span> <span class="o">=</span> <span class="n">ic</span><span class="o">.</span><span class="n">encode_component</span><span class="p">(</span>
+<a id="__codelineno-0-47" name="__codelineno-0-47"></a>        <span class="n">mtype</span><span class="o">=</span><span class="n">ic</span><span class="o">.</span><span class="n">MT</span><span class="o">.</span><span class="n">CONTENT</span><span class="p">,</span>
+<a id="__codelineno-0-48" name="__codelineno-0-48"></a>        <span class="n">stype</span><span class="o">=</span><span class="n">ic</span><span class="o">.</span><span class="n">ST_CC</span><span class="o">.</span><span class="n">VIDEO</span><span class="p">,</span>
+<a id="__codelineno-0-49" name="__codelineno-0-49"></a>        <span class="n">version</span><span class="o">=</span><span class="n">ic</span><span class="o">.</span><span class="n">VS</span><span class="o">.</span><span class="n">V0</span><span class="p">,</span>
+<a id="__codelineno-0-50" name="__codelineno-0-50"></a>        <span class="n">bit_length</span><span class="o">=</span><span class="n">bits</span><span class="p">,</span>
+<a id="__codelineno-0-51" name="__codelineno-0-51"></a>        <span class="n">digest</span><span class="o">=</span><span class="n">digest</span><span class="p">,</span>
+<a id="__codelineno-0-52" name="__codelineno-0-52"></a>    <span class="p">)</span>
+<a id="__codelineno-0-53" name="__codelineno-0-53"></a>    <span class="n">iscc</span> <span class="o">=</span> <span class="s2">&quot;ISCC:&quot;</span> <span class="o">+</span> <span class="n">video_code</span>
+<a id="__codelineno-0-54" name="__codelineno-0-54"></a>    <span class="k">return</span> <span class="nb">dict</span><span class="p">(</span><span class="n">iscc</span><span class="o">=</span><span class="n">iscc</span><span class="p">)</span>
+</code></pre></div></td></tr></table></div>
+      </details>
+  </div>
+
+</div><h2 id="iso-24138-57-mixed-code">ISO 24138 / 5.7 Mixed-Code<a class="headerlink" href="#iso-24138-57-mixed-code" title="Permanent link">#</a></h2>
+
+
+<div class="doc doc-object doc-function">
+
+
+
+<hnone id="iscc_core.gen_mixed_code_v0" class="doc doc-heading">
+<code class="highlight language-python"><span class="n">gen_mixed_code_v0</span><span class="p">(</span><span class="n">codes</span><span class="p">,</span> <span class="n">bits</span><span class="o">=</span><span class="n">ic</span><span class="o">.</span><span class="n">core_opts</span><span class="o">.</span><span class="n">mixed_bits</span><span class="p">)</span></code>
+
+<a href="#iscc_core.gen_mixed_code_v0" class="headerlink" title="Permanent link">#</a></hnone>
+
+
+  <div class="doc doc-contents first">
+  
+      <p>Create an ISCC Content-Code-Mixed with algorithm v0.</p>
+<p>If the provided codes are of mixed length they are stripped to <code>bits</code> length for
+calculation.</p>
+
+  <p><strong>Parameters:</strong></p>
+  <table>
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Type</th>
+        <th>Description</th>
+        <th>Default</th>
+      </tr>
+    </thead>
+    <tbody>
+        <tr>
+          <td><code>codes</code></td>
+          <td>
+                <code>Iterable[str]</code>
+          </td>
+          <td><p>a list of Content-Codes.</p></td>
+          <td>
+              <em>required</em>
+          </td>
+        </tr>
+        <tr>
+          <td><code>bits</code></td>
+          <td>
+                <code>int</code>
+          </td>
+          <td><p>Target bit-length of generated Content-Code-Mixed.</p></td>
+          <td>
+                <code>ic.core_opts.mixed_bits</code>
+          </td>
+        </tr>
+    </tbody>
+  </table>
+
+  <p><strong>Returns:</strong></p>
+  <table>
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+        <tr>
+          <td>
+                <code>dict</code>
+          </td>
+          <td><p>ISCC object with Content-Code Mixed.</p></td>
+        </tr>
+    </tbody>
+  </table>
+
+      <details class="quote">
+        <summary>Source code in <code>iscc_core\code_content_mixed.py</code></summary>
+        <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-0-39">39</a></span>
+<span class="normal"><a href="#__codelineno-0-40">40</a></span>
+<span class="normal"><a href="#__codelineno-0-41">41</a></span>
+<span class="normal"><a href="#__codelineno-0-42">42</a></span>
+<span class="normal"><a href="#__codelineno-0-43">43</a></span>
+<span class="normal"><a href="#__codelineno-0-44">44</a></span>
+<span class="normal"><a href="#__codelineno-0-45">45</a></span>
+<span class="normal"><a href="#__codelineno-0-46">46</a></span>
+<span class="normal"><a href="#__codelineno-0-47">47</a></span>
+<span class="normal"><a href="#__codelineno-0-48">48</a></span>
+<span class="normal"><a href="#__codelineno-0-49">49</a></span>
+<span class="normal"><a href="#__codelineno-0-50">50</a></span>
+<span class="normal"><a href="#__codelineno-0-51">51</a></span>
+<span class="normal"><a href="#__codelineno-0-52">52</a></span>
+<span class="normal"><a href="#__codelineno-0-53">53</a></span>
+<span class="normal"><a href="#__codelineno-0-54">54</a></span>
+<span class="normal"><a href="#__codelineno-0-55">55</a></span>
+<span class="normal"><a href="#__codelineno-0-56">56</a></span>
+<span class="normal"><a href="#__codelineno-0-57">57</a></span>
+<span class="normal"><a href="#__codelineno-0-58">58</a></span>
+<span class="normal"><a href="#__codelineno-0-59">59</a></span>
+<span class="normal"><a href="#__codelineno-0-60">60</a></span>
+<span class="normal"><a href="#__codelineno-0-61">61</a></span>
+<span class="normal"><a href="#__codelineno-0-62">62</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-0-39" name="__codelineno-0-39"></a><span class="k">def</span> <span class="nf">gen_mixed_code_v0</span><span class="p">(</span><span class="n">codes</span><span class="p">,</span> <span class="n">bits</span><span class="o">=</span><span class="n">ic</span><span class="o">.</span><span class="n">core_opts</span><span class="o">.</span><span class="n">mixed_bits</span><span class="p">):</span>
+<a id="__codelineno-0-40" name="__codelineno-0-40"></a>    <span class="c1"># type: (Sequence[str], int) -&gt; dict</span>
+<a id="__codelineno-0-41" name="__codelineno-0-41"></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<a id="__codelineno-0-42" name="__codelineno-0-42"></a><span class="sd">    Create an ISCC Content-Code-Mixed with algorithm v0.</span>
+<a id="__codelineno-0-43" name="__codelineno-0-43"></a>
+<a id="__codelineno-0-44" name="__codelineno-0-44"></a><span class="sd">    If the provided codes are of mixed length they are stripped to `bits` length for</span>
+<a id="__codelineno-0-45" name="__codelineno-0-45"></a><span class="sd">    calculation.</span>
+<a id="__codelineno-0-46" name="__codelineno-0-46"></a>
+<a id="__codelineno-0-47" name="__codelineno-0-47"></a><span class="sd">    :param Iterable[str] codes: a list of Content-Codes.</span>
+<a id="__codelineno-0-48" name="__codelineno-0-48"></a><span class="sd">    :param int bits: Target bit-length of generated Content-Code-Mixed.</span>
+<a id="__codelineno-0-49" name="__codelineno-0-49"></a><span class="sd">    :return: ISCC object with Content-Code Mixed.</span>
+<a id="__codelineno-0-50" name="__codelineno-0-50"></a><span class="sd">    :rtype: dict</span>
+<a id="__codelineno-0-51" name="__codelineno-0-51"></a><span class="sd">    &quot;&quot;&quot;</span>
+<a id="__codelineno-0-52" name="__codelineno-0-52"></a>    <span class="n">digests</span> <span class="o">=</span> <span class="p">[</span><span class="n">ic</span><span class="o">.</span><span class="n">decode_base32</span><span class="p">(</span><span class="n">ic</span><span class="o">.</span><span class="n">iscc_clean</span><span class="p">(</span><span class="n">code</span><span class="p">))</span> <span class="k">for</span> <span class="n">code</span> <span class="ow">in</span> <span class="n">codes</span><span class="p">]</span>
+<a id="__codelineno-0-53" name="__codelineno-0-53"></a>    <span class="n">digest</span> <span class="o">=</span> <span class="n">soft_hash_codes_v0</span><span class="p">(</span><span class="n">digests</span><span class="p">,</span> <span class="n">bits</span><span class="o">=</span><span class="n">bits</span><span class="p">)</span>
+<a id="__codelineno-0-54" name="__codelineno-0-54"></a>    <span class="n">mixed_code</span> <span class="o">=</span> <span class="n">ic</span><span class="o">.</span><span class="n">encode_component</span><span class="p">(</span>
+<a id="__codelineno-0-55" name="__codelineno-0-55"></a>        <span class="n">mtype</span><span class="o">=</span><span class="n">ic</span><span class="o">.</span><span class="n">MT</span><span class="o">.</span><span class="n">CONTENT</span><span class="p">,</span>
+<a id="__codelineno-0-56" name="__codelineno-0-56"></a>        <span class="n">stype</span><span class="o">=</span><span class="n">ic</span><span class="o">.</span><span class="n">ST_CC</span><span class="o">.</span><span class="n">MIXED</span><span class="p">,</span>
+<a id="__codelineno-0-57" name="__codelineno-0-57"></a>        <span class="n">version</span><span class="o">=</span><span class="n">ic</span><span class="o">.</span><span class="n">VS</span><span class="o">.</span><span class="n">V0</span><span class="p">,</span>
+<a id="__codelineno-0-58" name="__codelineno-0-58"></a>        <span class="n">bit_length</span><span class="o">=</span><span class="n">bits</span><span class="p">,</span>
+<a id="__codelineno-0-59" name="__codelineno-0-59"></a>        <span class="n">digest</span><span class="o">=</span><span class="n">digest</span><span class="p">,</span>
+<a id="__codelineno-0-60" name="__codelineno-0-60"></a>    <span class="p">)</span>
+<a id="__codelineno-0-61" name="__codelineno-0-61"></a>    <span class="n">iscc</span> <span class="o">=</span> <span class="s2">&quot;ISCC:&quot;</span> <span class="o">+</span> <span class="n">mixed_code</span>
+<a id="__codelineno-0-62" name="__codelineno-0-62"></a>    <span class="k">return</span> <span class="nb">dict</span><span class="p">(</span><span class="n">iscc</span><span class="o">=</span><span class="n">iscc</span><span class="p">,</span> <span class="n">parts</span><span class="o">=</span><span class="nb">list</span><span class="p">(</span><span class="n">codes</span><span class="p">))</span>
+</code></pre></div></td></tr></table></div>
+      </details>
+  </div>
+
+</div><h2 id="iso-24138-58-data-code">ISO 24138 / 5.8 Data-Code<a class="headerlink" href="#iso-24138-58-data-code" title="Permanent link">#</a></h2>
+
+
+<div class="doc doc-object doc-function">
+
+
+
+<hnone id="iscc_core.gen_data_code_v0" class="doc doc-heading">
+<code class="highlight language-python"><span class="n">gen_data_code_v0</span><span class="p">(</span><span class="n">stream</span><span class="p">,</span> <span class="n">bits</span><span class="o">=</span><span class="n">ic</span><span class="o">.</span><span class="n">core_opts</span><span class="o">.</span><span class="n">data_bits</span><span class="p">)</span></code>
+
+<a href="#iscc_core.gen_data_code_v0" class="headerlink" title="Permanent link">#</a></hnone>
+
+
+  <div class="doc doc-contents first">
+  
+      <p>Create an ISCC Data-Code with algorithm v0.</p>
+
+  <p><strong>Parameters:</strong></p>
+  <table>
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Type</th>
+        <th>Description</th>
+        <th>Default</th>
+      </tr>
+    </thead>
+    <tbody>
+        <tr>
+          <td><code>stream</code></td>
+          <td>
+                <code>Stream</code>
+          </td>
+          <td><p>Input data stream.</p></td>
+          <td>
+              <em>required</em>
+          </td>
+        </tr>
+        <tr>
+          <td><code>bits</code></td>
+          <td>
+                <code>int</code>
+          </td>
+          <td><p>Bit-length of ISCC Data-Code (default 64).</p></td>
+          <td>
+                <code>ic.core_opts.data_bits</code>
+          </td>
+        </tr>
+    </tbody>
+  </table>
+
+  <p><strong>Returns:</strong></p>
+  <table>
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+        <tr>
+          <td>
+                <code>dict</code>
+          </td>
+          <td><p>ISCC object with Data-Code</p></td>
+        </tr>
+    </tbody>
+  </table>
+
+      <details class="quote">
+        <summary>Source code in <code>iscc_core\code_data.py</code></summary>
+        <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-0-29">29</a></span>
+<span class="normal"><a href="#__codelineno-0-30">30</a></span>
+<span class="normal"><a href="#__codelineno-0-31">31</a></span>
+<span class="normal"><a href="#__codelineno-0-32">32</a></span>
+<span class="normal"><a href="#__codelineno-0-33">33</a></span>
+<span class="normal"><a href="#__codelineno-0-34">34</a></span>
+<span class="normal"><a href="#__codelineno-0-35">35</a></span>
+<span class="normal"><a href="#__codelineno-0-36">36</a></span>
+<span class="normal"><a href="#__codelineno-0-37">37</a></span>
+<span class="normal"><a href="#__codelineno-0-38">38</a></span>
+<span class="normal"><a href="#__codelineno-0-39">39</a></span>
+<span class="normal"><a href="#__codelineno-0-40">40</a></span>
+<span class="normal"><a href="#__codelineno-0-41">41</a></span>
+<span class="normal"><a href="#__codelineno-0-42">42</a></span>
+<span class="normal"><a href="#__codelineno-0-43">43</a></span>
+<span class="normal"><a href="#__codelineno-0-44">44</a></span>
+<span class="normal"><a href="#__codelineno-0-45">45</a></span>
+<span class="normal"><a href="#__codelineno-0-46">46</a></span>
+<span class="normal"><a href="#__codelineno-0-47">47</a></span>
+<span class="normal"><a href="#__codelineno-0-48">48</a></span>
+<span class="normal"><a href="#__codelineno-0-49">49</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-0-29" name="__codelineno-0-29"></a><span class="k">def</span> <span class="nf">gen_data_code_v0</span><span class="p">(</span><span class="n">stream</span><span class="p">,</span> <span class="n">bits</span><span class="o">=</span><span class="n">ic</span><span class="o">.</span><span class="n">core_opts</span><span class="o">.</span><span class="n">data_bits</span><span class="p">):</span>
+<a id="__codelineno-0-30" name="__codelineno-0-30"></a>    <span class="c1"># type: (ic.Stream, int) -&gt; dict</span>
+<a id="__codelineno-0-31" name="__codelineno-0-31"></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<a id="__codelineno-0-32" name="__codelineno-0-32"></a><span class="sd">    Create an ISCC Data-Code with algorithm v0.</span>
+<a id="__codelineno-0-33" name="__codelineno-0-33"></a>
+<a id="__codelineno-0-34" name="__codelineno-0-34"></a><span class="sd">    :param Stream stream: Input data stream.</span>
+<a id="__codelineno-0-35" name="__codelineno-0-35"></a><span class="sd">    :param int bits: Bit-length of ISCC Data-Code (default 64).</span>
+<a id="__codelineno-0-36" name="__codelineno-0-36"></a><span class="sd">    :return: ISCC object with Data-Code</span>
+<a id="__codelineno-0-37" name="__codelineno-0-37"></a><span class="sd">    :rtype: dict</span>
+<a id="__codelineno-0-38" name="__codelineno-0-38"></a><span class="sd">    &quot;&quot;&quot;</span>
+<a id="__codelineno-0-39" name="__codelineno-0-39"></a>
+<a id="__codelineno-0-40" name="__codelineno-0-40"></a>    <span class="n">hasher</span> <span class="o">=</span> <span class="n">DataHasherV0</span><span class="p">()</span>
+<a id="__codelineno-0-41" name="__codelineno-0-41"></a>    <span class="n">data</span> <span class="o">=</span> <span class="n">stream</span><span class="o">.</span><span class="n">read</span><span class="p">(</span><span class="n">ic</span><span class="o">.</span><span class="n">core_opts</span><span class="o">.</span><span class="n">io_read_size</span><span class="p">)</span>
+<a id="__codelineno-0-42" name="__codelineno-0-42"></a>
+<a id="__codelineno-0-43" name="__codelineno-0-43"></a>    <span class="k">while</span> <span class="n">data</span><span class="p">:</span>
+<a id="__codelineno-0-44" name="__codelineno-0-44"></a>        <span class="n">hasher</span><span class="o">.</span><span class="n">push</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+<a id="__codelineno-0-45" name="__codelineno-0-45"></a>        <span class="n">data</span> <span class="o">=</span> <span class="n">stream</span><span class="o">.</span><span class="n">read</span><span class="p">(</span><span class="n">ic</span><span class="o">.</span><span class="n">core_opts</span><span class="o">.</span><span class="n">io_read_size</span><span class="p">)</span>
+<a id="__codelineno-0-46" name="__codelineno-0-46"></a>
+<a id="__codelineno-0-47" name="__codelineno-0-47"></a>    <span class="n">data_code</span> <span class="o">=</span> <span class="n">hasher</span><span class="o">.</span><span class="n">code</span><span class="p">(</span><span class="n">bits</span><span class="o">=</span><span class="n">bits</span><span class="p">)</span>
+<a id="__codelineno-0-48" name="__codelineno-0-48"></a>    <span class="n">iscc</span> <span class="o">=</span> <span class="s2">&quot;ISCC:&quot;</span> <span class="o">+</span> <span class="n">data_code</span>
+<a id="__codelineno-0-49" name="__codelineno-0-49"></a>    <span class="k">return</span> <span class="nb">dict</span><span class="p">(</span><span class="n">iscc</span><span class="o">=</span><span class="n">iscc</span><span class="p">)</span>
+</code></pre></div></td></tr></table></div>
+      </details>
+  </div>
+
+</div><h2 id="iso-24138-59-instance-code">ISO 24138 / 5.9 Instance-Code<a class="headerlink" href="#iso-24138-59-instance-code" title="Permanent link">#</a></h2>
+
+
+<div class="doc doc-object doc-function">
+
+
+
+<hnone id="iscc_core.gen_instance_code_v0" class="doc doc-heading">
+<code class="highlight language-python"><span class="n">gen_instance_code_v0</span><span class="p">(</span><span class="n">stream</span><span class="p">,</span> <span class="n">bits</span><span class="o">=</span><span class="n">ic</span><span class="o">.</span><span class="n">core_opts</span><span class="o">.</span><span class="n">instance_bits</span><span class="p">)</span></code>
+
+<a href="#iscc_core.gen_instance_code_v0" class="headerlink" title="Permanent link">#</a></hnone>
+
+
+  <div class="doc doc-contents first">
+  
+      <p>Create an ISCC Instance-Code with algorithm v0.</p>
+
+  <p><strong>Parameters:</strong></p>
+  <table>
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Type</th>
+        <th>Description</th>
+        <th>Default</th>
+      </tr>
+    </thead>
+    <tbody>
+        <tr>
+          <td><code>stream</code></td>
+          <td>
+                <code>Stream</code>
+          </td>
+          <td><p>Binary data stream for Instance-Code generation</p></td>
+          <td>
+              <em>required</em>
+          </td>
+        </tr>
+        <tr>
+          <td><code>bits</code></td>
+          <td>
+                <code>int</code>
+          </td>
+          <td><p>Bit-length of resulting Instance-Code (multiple of 64)</p></td>
+          <td>
+                <code>ic.core_opts.instance_bits</code>
+          </td>
+        </tr>
+    </tbody>
+  </table>
+
+  <p><strong>Returns:</strong></p>
+  <table>
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+        <tr>
+          <td>
+                <code>dict</code>
+          </td>
+          <td><p>ISCC object with Instance-Code and properties: datahash, filesize</p></td>
+        </tr>
+    </tbody>
+  </table>
+
+      <details class="quote">
+        <summary>Source code in <code>iscc_core\code_instance.py</code></summary>
+        <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-0-30">30</a></span>
+<span class="normal"><a href="#__codelineno-0-31">31</a></span>
+<span class="normal"><a href="#__codelineno-0-32">32</a></span>
+<span class="normal"><a href="#__codelineno-0-33">33</a></span>
+<span class="normal"><a href="#__codelineno-0-34">34</a></span>
+<span class="normal"><a href="#__codelineno-0-35">35</a></span>
+<span class="normal"><a href="#__codelineno-0-36">36</a></span>
+<span class="normal"><a href="#__codelineno-0-37">37</a></span>
+<span class="normal"><a href="#__codelineno-0-38">38</a></span>
+<span class="normal"><a href="#__codelineno-0-39">39</a></span>
+<span class="normal"><a href="#__codelineno-0-40">40</a></span>
+<span class="normal"><a href="#__codelineno-0-41">41</a></span>
+<span class="normal"><a href="#__codelineno-0-42">42</a></span>
+<span class="normal"><a href="#__codelineno-0-43">43</a></span>
+<span class="normal"><a href="#__codelineno-0-44">44</a></span>
+<span class="normal"><a href="#__codelineno-0-45">45</a></span>
+<span class="normal"><a href="#__codelineno-0-46">46</a></span>
+<span class="normal"><a href="#__codelineno-0-47">47</a></span>
+<span class="normal"><a href="#__codelineno-0-48">48</a></span>
+<span class="normal"><a href="#__codelineno-0-49">49</a></span>
+<span class="normal"><a href="#__codelineno-0-50">50</a></span>
+<span class="normal"><a href="#__codelineno-0-51">51</a></span>
+<span class="normal"><a href="#__codelineno-0-52">52</a></span>
+<span class="normal"><a href="#__codelineno-0-53">53</a></span>
+<span class="normal"><a href="#__codelineno-0-54">54</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-0-30" name="__codelineno-0-30"></a><span class="k">def</span> <span class="nf">gen_instance_code_v0</span><span class="p">(</span><span class="n">stream</span><span class="p">,</span> <span class="n">bits</span><span class="o">=</span><span class="n">ic</span><span class="o">.</span><span class="n">core_opts</span><span class="o">.</span><span class="n">instance_bits</span><span class="p">):</span>
+<a id="__codelineno-0-31" name="__codelineno-0-31"></a>    <span class="c1"># type: (ic.Stream, int) -&gt; dict</span>
+<a id="__codelineno-0-32" name="__codelineno-0-32"></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<a id="__codelineno-0-33" name="__codelineno-0-33"></a><span class="sd">    Create an ISCC Instance-Code with algorithm v0.</span>
+<a id="__codelineno-0-34" name="__codelineno-0-34"></a>
+<a id="__codelineno-0-35" name="__codelineno-0-35"></a><span class="sd">    :param Stream stream: Binary data stream for Instance-Code generation</span>
+<a id="__codelineno-0-36" name="__codelineno-0-36"></a><span class="sd">    :param int bits: Bit-length of resulting Instance-Code (multiple of 64)</span>
+<a id="__codelineno-0-37" name="__codelineno-0-37"></a><span class="sd">    :return: ISCC object with Instance-Code and properties: datahash, filesize</span>
+<a id="__codelineno-0-38" name="__codelineno-0-38"></a><span class="sd">    :rtype: dict</span>
+<a id="__codelineno-0-39" name="__codelineno-0-39"></a><span class="sd">    &quot;&quot;&quot;</span>
+<a id="__codelineno-0-40" name="__codelineno-0-40"></a>    <span class="n">hasher</span> <span class="o">=</span> <span class="n">InstanceHasherV0</span><span class="p">()</span>
+<a id="__codelineno-0-41" name="__codelineno-0-41"></a>    <span class="n">data</span> <span class="o">=</span> <span class="n">stream</span><span class="o">.</span><span class="n">read</span><span class="p">(</span><span class="n">ic</span><span class="o">.</span><span class="n">core_opts</span><span class="o">.</span><span class="n">io_read_size</span><span class="p">)</span>
+<a id="__codelineno-0-42" name="__codelineno-0-42"></a>    <span class="k">while</span> <span class="n">data</span><span class="p">:</span>
+<a id="__codelineno-0-43" name="__codelineno-0-43"></a>        <span class="n">hasher</span><span class="o">.</span><span class="n">push</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+<a id="__codelineno-0-44" name="__codelineno-0-44"></a>        <span class="n">data</span> <span class="o">=</span> <span class="n">stream</span><span class="o">.</span><span class="n">read</span><span class="p">(</span><span class="n">ic</span><span class="o">.</span><span class="n">core_opts</span><span class="o">.</span><span class="n">io_read_size</span><span class="p">)</span>
+<a id="__codelineno-0-45" name="__codelineno-0-45"></a>
+<a id="__codelineno-0-46" name="__codelineno-0-46"></a>    <span class="n">instance_code</span> <span class="o">=</span> <span class="n">hasher</span><span class="o">.</span><span class="n">code</span><span class="p">(</span><span class="n">bits</span><span class="o">=</span><span class="n">bits</span><span class="p">)</span>
+<a id="__codelineno-0-47" name="__codelineno-0-47"></a>    <span class="n">iscc</span> <span class="o">=</span> <span class="s2">&quot;ISCC:&quot;</span> <span class="o">+</span> <span class="n">instance_code</span>
+<a id="__codelineno-0-48" name="__codelineno-0-48"></a>    <span class="n">instance_code_obj</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span>
+<a id="__codelineno-0-49" name="__codelineno-0-49"></a>        <span class="n">iscc</span><span class="o">=</span><span class="n">iscc</span><span class="p">,</span>
+<a id="__codelineno-0-50" name="__codelineno-0-50"></a>        <span class="n">datahash</span><span class="o">=</span><span class="n">hasher</span><span class="o">.</span><span class="n">multihash</span><span class="p">(),</span>
+<a id="__codelineno-0-51" name="__codelineno-0-51"></a>        <span class="n">filesize</span><span class="o">=</span><span class="n">hasher</span><span class="o">.</span><span class="n">filesize</span><span class="p">,</span>
+<a id="__codelineno-0-52" name="__codelineno-0-52"></a>    <span class="p">)</span>
+<a id="__codelineno-0-53" name="__codelineno-0-53"></a>
+<a id="__codelineno-0-54" name="__codelineno-0-54"></a>    <span class="k">return</span> <span class="n">instance_code_obj</span>
+</code></pre></div></td></tr></table></div>
+      </details>
+  </div>
+
+</div><h2 id="iso-24138-60-iscc-code">ISO 24138 / 6.0 ISCC-CODE<a class="headerlink" href="#iso-24138-60-iscc-code" title="Permanent link">#</a></h2>
+
+
+<div class="doc doc-object doc-function">
+
+
+
+<hnone id="iscc_core.gen_iscc_code_v0" class="doc doc-heading">
+<code class="highlight language-python"><span class="n">gen_iscc_code_v0</span><span class="p">(</span><span class="n">codes</span><span class="p">)</span></code>
+
+<a href="#iscc_core.gen_iscc_code_v0" class="headerlink" title="Permanent link">#</a></hnone>
+
+
+  <div class="doc doc-contents first">
+  
+      <p>Combine multiple ISCC-UNITS to an ISCC-CODE with a common header using
+algorithm v0.</p>
+
+  <p><strong>Parameters:</strong></p>
+  <table>
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Type</th>
+        <th>Description</th>
+        <th>Default</th>
+      </tr>
+    </thead>
+    <tbody>
+        <tr>
+          <td><code>codes</code></td>
+          <td>
+                <code>Sequence[str]</code>
+          </td>
+          <td><p>A valid sequence of singluar ISCC-UNITS.</p></td>
+          <td>
+              <em>required</em>
+          </td>
+        </tr>
+    </tbody>
+  </table>
+
+  <p><strong>Returns:</strong></p>
+  <table>
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+        <tr>
+          <td>
+                <code>dict</code>
+          </td>
+          <td><p>An ISCC object with ISCC-CODE</p></td>
+        </tr>
+    </tbody>
+  </table>
+
+      <details class="quote">
+        <summary>Source code in <code>iscc_core\iscc_code.py</code></summary>
+        <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-0-42">42</a></span>
+<span class="normal"><a href="#__codelineno-0-43">43</a></span>
+<span class="normal"><a href="#__codelineno-0-44">44</a></span>
+<span class="normal"><a href="#__codelineno-0-45">45</a></span>
+<span class="normal"><a href="#__codelineno-0-46">46</a></span>
+<span class="normal"><a href="#__codelineno-0-47">47</a></span>
+<span class="normal"><a href="#__codelineno-0-48">48</a></span>
+<span class="normal"><a href="#__codelineno-0-49">49</a></span>
+<span class="normal"><a href="#__codelineno-0-50">50</a></span>
+<span class="normal"><a href="#__codelineno-0-51">51</a></span>
+<span class="normal"><a href="#__codelineno-0-52">52</a></span>
+<span class="normal"><a href="#__codelineno-0-53">53</a></span>
+<span class="normal"><a href="#__codelineno-0-54">54</a></span>
+<span class="normal"><a href="#__codelineno-0-55">55</a></span>
+<span class="normal"><a href="#__codelineno-0-56">56</a></span>
+<span class="normal"><a href="#__codelineno-0-57">57</a></span>
+<span class="normal"><a href="#__codelineno-0-58">58</a></span>
+<span class="normal"><a href="#__codelineno-0-59">59</a></span>
+<span class="normal"><a href="#__codelineno-0-60">60</a></span>
+<span class="normal"><a href="#__codelineno-0-61">61</a></span>
+<span class="normal"><a href="#__codelineno-0-62">62</a></span>
+<span class="normal"><a href="#__codelineno-0-63">63</a></span>
+<span class="normal"><a href="#__codelineno-0-64">64</a></span>
+<span class="normal"><a href="#__codelineno-0-65">65</a></span>
+<span class="normal"><a href="#__codelineno-0-66">66</a></span>
+<span class="normal"><a href="#__codelineno-0-67">67</a></span>
+<span class="normal"><a href="#__codelineno-0-68">68</a></span>
+<span class="normal"><a href="#__codelineno-0-69">69</a></span>
+<span class="normal"><a href="#__codelineno-0-70">70</a></span>
+<span class="normal"><a href="#__codelineno-0-71">71</a></span>
+<span class="normal"><a href="#__codelineno-0-72">72</a></span>
+<span class="normal"><a href="#__codelineno-0-73">73</a></span>
+<span class="normal"><a href="#__codelineno-0-74">74</a></span>
+<span class="normal"><a href="#__codelineno-0-75">75</a></span>
+<span class="normal"><a href="#__codelineno-0-76">76</a></span>
+<span class="normal"><a href="#__codelineno-0-77">77</a></span>
+<span class="normal"><a href="#__codelineno-0-78">78</a></span>
+<span class="normal"><a href="#__codelineno-0-79">79</a></span>
+<span class="normal"><a href="#__codelineno-0-80">80</a></span>
+<span class="normal"><a href="#__codelineno-0-81">81</a></span>
+<span class="normal"><a href="#__codelineno-0-82">82</a></span>
+<span class="normal"><a href="#__codelineno-0-83">83</a></span>
+<span class="normal"><a href="#__codelineno-0-84">84</a></span>
+<span class="normal"><a href="#__codelineno-0-85">85</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-0-42" name="__codelineno-0-42"></a><span class="k">def</span> <span class="nf">gen_iscc_code_v0</span><span class="p">(</span><span class="n">codes</span><span class="p">):</span>
+<a id="__codelineno-0-43" name="__codelineno-0-43"></a>    <span class="c1"># type: (Sequence[str]) -&gt; dict</span>
+<a id="__codelineno-0-44" name="__codelineno-0-44"></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<a id="__codelineno-0-45" name="__codelineno-0-45"></a><span class="sd">    Combine multiple ISCC-UNITS to an ISCC-CODE with a common header using</span>
+<a id="__codelineno-0-46" name="__codelineno-0-46"></a><span class="sd">    algorithm v0.</span>
+<a id="__codelineno-0-47" name="__codelineno-0-47"></a>
+<a id="__codelineno-0-48" name="__codelineno-0-48"></a><span class="sd">    :param Sequence[str] codes: A valid sequence of singluar ISCC-UNITS.</span>
+<a id="__codelineno-0-49" name="__codelineno-0-49"></a><span class="sd">    :return: An ISCC object with ISCC-CODE</span>
+<a id="__codelineno-0-50" name="__codelineno-0-50"></a><span class="sd">    :rtype: dict</span>
+<a id="__codelineno-0-51" name="__codelineno-0-51"></a><span class="sd">    &quot;&quot;&quot;</span>
+<a id="__codelineno-0-52" name="__codelineno-0-52"></a>
+<a id="__codelineno-0-53" name="__codelineno-0-53"></a>    <span class="n">codes</span> <span class="o">=</span> <span class="p">[</span><span class="n">ic</span><span class="o">.</span><span class="n">iscc_clean</span><span class="p">(</span><span class="n">code</span><span class="p">)</span> <span class="k">for</span> <span class="n">code</span> <span class="ow">in</span> <span class="n">codes</span><span class="p">]</span>
+<a id="__codelineno-0-54" name="__codelineno-0-54"></a>
+<a id="__codelineno-0-55" name="__codelineno-0-55"></a>    <span class="c1"># Check basic constraints</span>
+<a id="__codelineno-0-56" name="__codelineno-0-56"></a>    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">codes</span><span class="p">)</span> <span class="o">&lt;</span> <span class="mi">2</span><span class="p">:</span>
+<a id="__codelineno-0-57" name="__codelineno-0-57"></a>        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Minimum two ISCC units required to generate valid ISCC-CODE&quot;</span><span class="p">)</span>
+<a id="__codelineno-0-58" name="__codelineno-0-58"></a>    <span class="k">for</span> <span class="n">code</span> <span class="ow">in</span> <span class="n">codes</span><span class="p">:</span>
+<a id="__codelineno-0-59" name="__codelineno-0-59"></a>        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">code</span><span class="p">)</span> <span class="o">&lt;</span> <span class="mi">16</span><span class="p">:</span>
+<a id="__codelineno-0-60" name="__codelineno-0-60"></a>            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Cannot build ISCC-CODE from units shorter than 64-bits: </span><span class="si">{</span><span class="n">code</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<a id="__codelineno-0-61" name="__codelineno-0-61"></a>
+<a id="__codelineno-0-62" name="__codelineno-0-62"></a>    <span class="c1"># Decode units and sort by MainType</span>
+<a id="__codelineno-0-63" name="__codelineno-0-63"></a>    <span class="n">decoded</span> <span class="o">=</span> <span class="nb">sorted</span><span class="p">(</span>
+<a id="__codelineno-0-64" name="__codelineno-0-64"></a>        <span class="p">[</span><span class="n">ic</span><span class="o">.</span><span class="n">decode_header</span><span class="p">(</span><span class="n">ic</span><span class="o">.</span><span class="n">decode_base32</span><span class="p">(</span><span class="n">code</span><span class="p">))</span> <span class="k">for</span> <span class="n">code</span> <span class="ow">in</span> <span class="n">codes</span><span class="p">],</span> <span class="n">key</span><span class="o">=</span><span class="n">itemgetter</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+<a id="__codelineno-0-65" name="__codelineno-0-65"></a>    <span class="p">)</span>
+<a id="__codelineno-0-66" name="__codelineno-0-66"></a>    <span class="n">main_types</span> <span class="o">=</span> <span class="nb">tuple</span><span class="p">(</span><span class="n">d</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="k">for</span> <span class="n">d</span> <span class="ow">in</span> <span class="n">decoded</span><span class="p">)</span>
+<a id="__codelineno-0-67" name="__codelineno-0-67"></a>    <span class="k">if</span> <span class="n">main_types</span><span class="p">[</span><span class="o">-</span><span class="mi">2</span><span class="p">:]</span> <span class="o">!=</span> <span class="p">(</span><span class="n">ic</span><span class="o">.</span><span class="n">MT</span><span class="o">.</span><span class="n">DATA</span><span class="p">,</span> <span class="n">ic</span><span class="o">.</span><span class="n">MT</span><span class="o">.</span><span class="n">INSTANCE</span><span class="p">):</span>
+<a id="__codelineno-0-68" name="__codelineno-0-68"></a>        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;ISCC-CODE requires at least MT.DATA and MT.INSTANCE units.&quot;</span><span class="p">)</span>
+<a id="__codelineno-0-69" name="__codelineno-0-69"></a>
+<a id="__codelineno-0-70" name="__codelineno-0-70"></a>    <span class="c1"># Determine SubType (generic mediatype)</span>
+<a id="__codelineno-0-71" name="__codelineno-0-71"></a>    <span class="n">sub_types</span> <span class="o">=</span> <span class="p">[</span><span class="n">t</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="k">for</span> <span class="n">t</span> <span class="ow">in</span> <span class="n">decoded</span> <span class="k">if</span> <span class="n">t</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="ow">in</span> <span class="p">{</span><span class="n">ic</span><span class="o">.</span><span class="n">MT</span><span class="o">.</span><span class="n">SEMANTIC</span><span class="p">,</span> <span class="n">ic</span><span class="o">.</span><span class="n">MT</span><span class="o">.</span><span class="n">CONTENT</span><span class="p">}]</span>
+<a id="__codelineno-0-72" name="__codelineno-0-72"></a>    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="nb">set</span><span class="p">(</span><span class="n">sub_types</span><span class="p">))</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">:</span>
+<a id="__codelineno-0-73" name="__codelineno-0-73"></a>        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Semantic-Code and Content-Code must be of same SubType&quot;</span><span class="p">)</span>
+<a id="__codelineno-0-74" name="__codelineno-0-74"></a>    <span class="n">st</span> <span class="o">=</span> <span class="n">sub_types</span><span class="o">.</span><span class="n">pop</span><span class="p">()</span> <span class="k">if</span> <span class="n">sub_types</span> <span class="k">else</span> <span class="n">ic</span><span class="o">.</span><span class="n">ST_ISCC</span><span class="o">.</span><span class="n">SUM</span> <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">codes</span><span class="p">)</span> <span class="o">==</span> <span class="mi">2</span> <span class="k">else</span> <span class="n">ic</span><span class="o">.</span><span class="n">ST_ISCC</span><span class="o">.</span><span class="n">NONE</span>
+<a id="__codelineno-0-75" name="__codelineno-0-75"></a>
+<a id="__codelineno-0-76" name="__codelineno-0-76"></a>    <span class="c1"># Encode unit combination</span>
+<a id="__codelineno-0-77" name="__codelineno-0-77"></a>    <span class="n">encoded_length</span> <span class="o">=</span> <span class="n">ic</span><span class="o">.</span><span class="n">encode_units</span><span class="p">(</span><span class="n">main_types</span><span class="p">[:</span><span class="o">-</span><span class="mi">2</span><span class="p">])</span>
+<a id="__codelineno-0-78" name="__codelineno-0-78"></a>
+<a id="__codelineno-0-79" name="__codelineno-0-79"></a>    <span class="c1"># Collect and truncate unit digests to 64-bit</span>
+<a id="__codelineno-0-80" name="__codelineno-0-80"></a>    <span class="n">digest</span> <span class="o">=</span> <span class="sa">b</span><span class="s2">&quot;&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">([</span><span class="n">t</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">][:</span><span class="mi">8</span><span class="p">]</span> <span class="k">for</span> <span class="n">t</span> <span class="ow">in</span> <span class="n">decoded</span><span class="p">])</span>
+<a id="__codelineno-0-81" name="__codelineno-0-81"></a>    <span class="n">header</span> <span class="o">=</span> <span class="n">ic</span><span class="o">.</span><span class="n">encode_header</span><span class="p">(</span><span class="n">ic</span><span class="o">.</span><span class="n">MT</span><span class="o">.</span><span class="n">ISCC</span><span class="p">,</span> <span class="n">st</span><span class="p">,</span> <span class="n">ic</span><span class="o">.</span><span class="n">VS</span><span class="o">.</span><span class="n">V0</span><span class="p">,</span> <span class="n">encoded_length</span><span class="p">)</span>
+<a id="__codelineno-0-82" name="__codelineno-0-82"></a>
+<a id="__codelineno-0-83" name="__codelineno-0-83"></a>    <span class="n">code</span> <span class="o">=</span> <span class="n">ic</span><span class="o">.</span><span class="n">encode_base32</span><span class="p">(</span><span class="n">header</span> <span class="o">+</span> <span class="n">digest</span><span class="p">)</span>
+<a id="__codelineno-0-84" name="__codelineno-0-84"></a>    <span class="n">iscc</span> <span class="o">=</span> <span class="s2">&quot;ISCC:&quot;</span> <span class="o">+</span> <span class="n">code</span>
+<a id="__codelineno-0-85" name="__codelineno-0-85"></a>    <span class="k">return</span> <span class="nb">dict</span><span class="p">(</span><span class="n">iscc</span><span class="o">=</span><span class="n">iscc</span><span class="p">)</span>
+</code></pre></div></td></tr></table></div>
+      </details>
+  </div>
+
+</div>
+
+
+  
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+    <div class="md-copyright__highlight">
+      Copyright © 2016-2022 The Authors | <a href="https://iscc.foundation/privacy">Privacy Policy</a> | <a href="https://iscc.foundation/cookies">Cookie Policy</a> | <a href="https://iscc.foundation/imprint">Imprint</a> | <a href="https://iscc.foundation/disclaimer">Disclaimer</a>
+    </div>
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    <script id="__config" type="application/json">{"base": "..", "features": ["toc.integrate", "navigation.indexes", "navigation.tracking", "navigation.tabs", "navigation.tabs.sticky", "navigation.expand"], "search": "../assets/javascripts/workers/search.e5c33ebb.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
+    
+    
+      <script src="../assets/javascripts/bundle.51d95adb.min.js"></script>
+      
+    
+  </body>
+</html>

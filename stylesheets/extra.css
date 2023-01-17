@@ -1,11 +1,11 @@
 @font-face {
   font-family: "Readex Pro";
-  src: url("/fonts/ReadexPro-VariableFont_wght.ttf");
+  src: url("/fonts/ReadexPro-ExtraLight.ttf");
 }
 
 @font-face {
   font-family: "JetBrains Mono";
-  src: url("/fonts/JetBrainsMono-VariableFont_wght.ttf");
+  src: url("/fonts/JetBrainsMono-Thin.ttf");
 }
 
 :root {
@@ -36,8 +36,8 @@
 }
 
 
-.md-typeset {
-    font-weight: 200;
+.md-nav__item {
+    font-size: 0.6rem;
 }
 
 .md-typeset code {
@@ -45,6 +45,6 @@
 }
 
 .doc-heading code {
-    font-weight: bold;
     font-size: 0.9rem;
 }
+
