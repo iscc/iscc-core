@@ -36,6 +36,12 @@ ISCC codes. It also a good reference for porting ISCC to other programming langu
     the [iscc-sdk](https://github.com/iscc/iscc-sdk) which adds those higher level features on top
     of the `iscc-core` library.
 
+## Project Status
+
+The ISCC is under development as [ISO/CD 24138](https://www.iso.org/standard/77899.html) -
+International Standard Content Code within
+[ISO/TC 46/SC 9/WG 18](https://www.iso.org/committee/48836.html).
+
 ## ISCC Architecture
 
 ![ISCC Architecture](https://raw.githubusercontent.com/iscc/iscc-core/master/docs/images/iscc-codec-light.png#only-light)
@@ -192,16 +198,6 @@ CONFIGURED TASKS
 ```
 
 Use `poe all` to run all tasks before committing any changes.
-
-## Project Status
-
-The ISCC is under development as ISO/CD 24138 - International Standard Content Code within ISO TC
-46/SC 9/WG 18. https://www.iso.org/standard/77899.html
-
-!!! attention
-    The iscc-core reference library and the accompanying documentation is under development. API
-    changes and other backward incompatible changes are to be expected until the upcoming v1.0
-    stable release.
 
 ## Maintainers
 
