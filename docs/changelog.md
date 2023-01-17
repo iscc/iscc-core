@@ -1,5 +1,8 @@
 # Changelog
 
+## [0.2.14] - Unreleased
+- Improved documentation CSS
+
 ## [0.2.13] - 2023-01-16
 - Added documentation for options
 - Added python 3.11 support
