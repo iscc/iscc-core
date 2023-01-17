@@ -1,6 +1,7 @@
 # Changelog
 
 ## [0.2.14] - Unreleased
+- Removed non-standard conformance tests
 - Improved documentation CSS
 
 ## [0.2.13] - 2023-01-16
