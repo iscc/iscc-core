@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "iscc-core"
-version = "0.2.14"
+version = "1.0.0"
 build = "build.py"
 description = "ISCC - Core Algorithms"
 authors = ["Titusz <tp@py7.de>"]
@@ -62,7 +62,7 @@ turbo = ["cython"]
 [tool.poetry.dev-dependencies]
 pytest = "*"
 black = { version = "*", allow-prereleases = true }
-mkdocs-material = "*"
+mkdocs-material = "^9.0.6"
 mkdocstrings-python = "^0.8"
 toml = "*"
 PyYAML = "*"

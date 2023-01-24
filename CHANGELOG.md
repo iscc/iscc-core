@@ -1,5 +1,9 @@
 # Changelog
 
+## [1.0.0] - Unreleased
+- ISO/CD 24138 v1 Release
+- Updateted dependencies
+
 ## [0.2.14] - 2023-01-17
 - Added ISO Reference documentation
 - Removed non-standard conformance tests
