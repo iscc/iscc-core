@@ -797,18 +797,19 @@ typing-extensions = {version = ">=3.7.4", markers = "python_version < \"3.8\""}
 
 [[package]]
 name = "mdformat-admon"
-version = "1.0.0"
+version = "1.0.1"
 description = "An mdformat plugin for admonitions."
 category = "dev"
 optional = false
 python-versions = ">=3.7.2"
 files = [
-    {file = "mdformat_admon-1.0.0-py3-none-any.whl", hash = "sha256:0019d88fe822e9380b77f0bf2cf1af36b1bcdf63ec48c4164478074f4738657e"},
-    {file = "mdformat_admon-1.0.0.tar.gz", hash = "sha256:bd39ca5de584f144c80c5fa54cc4f8697bef70073b1963e1a5393d1c353ce0a0"},
+    {file = "mdformat_admon-1.0.1-py3-none-any.whl", hash = "sha256:0fe25914cfccd150c88481c90a920dfa827c46a327301eb4f5220c8e2798ee39"},
+    {file = "mdformat_admon-1.0.1.tar.gz", hash = "sha256:3f0c672b9fdced9b45f7c0287bc636429a882130f2f11e4d2468c959ed3fb7fe"},
 ]
 
 [package.dependencies]
 mdformat = ">=0.7.16"
+mdit-py-plugins = ">=0.3.2"
 
 [package.extras]
 dev = ["pre-commit"]
@@ -831,6 +832,26 @@ mdformat = ">=0.7.5,<0.8.0"
 
 [package.extras]
 test = ["coverage", "pytest (>=6.0,<7.0)", "pytest-cov"]
+
+[[package]]
+name = "mdit-py-plugins"
+version = "0.3.3"
+description = "Collection of plugins for markdown-it-py"
+category = "dev"
+optional = false
+python-versions = ">=3.7"
+files = [
+    {file = "mdit-py-plugins-0.3.3.tar.gz", hash = "sha256:5cfd7e7ac582a594e23ba6546a2f406e94e42eb33ae596d0734781261c251260"},
+    {file = "mdit_py_plugins-0.3.3-py3-none-any.whl", hash = "sha256:36d08a29def19ec43acdcd8ba471d3ebab132e7879d442760d963f19913e04b9"},
+]
+
+[package.dependencies]
+markdown-it-py = ">=1.0.0,<3.0.0"
+
+[package.extras]
+code-style = ["pre-commit"]
+rtd = ["attrs", "myst-parser (>=0.16.1,<0.17.0)", "sphinx-book-theme (>=0.1.0,<0.2.0)"]
+testing = ["coverage", "pytest", "pytest-cov", "pytest-regressions"]
 
 [[package]]
 name = "mdurl"
