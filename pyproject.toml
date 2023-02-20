@@ -62,7 +62,7 @@ turbo = ["cython"]
 [tool.poetry.dev-dependencies]
 pytest = "*"
 black = { version = "*", allow-prereleases = true }
-mkdocs-material = "^9.0.6"
+mkdocs-material = "^9.0.13"
 mkdocstrings-python = "^0.8"
 toml = "*"
 PyYAML = "*"
