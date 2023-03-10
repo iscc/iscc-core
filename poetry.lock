@@ -904,14 +904,14 @@ mkdocs = ">=1.1"
 
 [[package]]
 name = "mkdocs-material"
-version = "9.0.6"
+version = "9.1.2"
 description = "Documentation that simply works"
 category = "dev"
 optional = false
 python-versions = ">=3.7"
 files = [
-    {file = "mkdocs_material-9.0.6-py3-none-any.whl", hash = "sha256:4a71195ddc100dddf07d4b23b53373f36c5f0f1010fa4ea301ca7a8e949dd9e7"},
-    {file = "mkdocs_material-9.0.6.tar.gz", hash = "sha256:6065b573e38746dc267d7fc84252be31b73da955b2ce553687806b6030e51ee0"},
+    {file = "mkdocs_material-9.1.2-py3-none-any.whl", hash = "sha256:344a1c66f0e217e5ceaf67739d274e51c61ac9f9d7af55a5b4805a4a2ab54184"},
+    {file = "mkdocs_material-9.1.2.tar.gz", hash = "sha256:9ca8c980c30aab3b70e3bfbec691f9ffcbea8319873911c86e8af145147e2a9d"},
 ]
 
 [package.dependencies]
@@ -1904,4 +1904,4 @@ turbo = ["cython"]
 [metadata]
 lock-version = "2.0"
 python-versions = ">=3.7.2,<4.0"
-content-hash = "3a5c6ffe96391c88b1dceb1ee38de1c94f2385b1c6f81ac8ea197d57ece16032"
+content-hash = "6b931959ffda39115edd006917e6fb75f3e12df9762e600dfd83718df3f5d453"
