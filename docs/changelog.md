@@ -2,6 +2,8 @@
 
 ## [1.0.1] - Unreleased
 - Switch to standard bitarray module
+- Switch tests to latest environments
+- Add Python 3.11 support to TROVE classifiers
 
 ## [1.0.0] - 2023-01-24
 - ISO/CD 24138 v1 Release
