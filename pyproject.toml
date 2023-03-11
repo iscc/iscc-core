@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "iscc-core"
-version = "1.0.0"
+version = "1.0.1"
 build = "build.py"
 description = "ISCC - Core Algorithms"
 authors = ["Titusz <tp@py7.de>"]
