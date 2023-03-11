@@ -1,6 +1,6 @@
 # Changelog
 
-## [1.0.1] - Unreleased
+## [1.0.1] - 2023-03-11
 - Switch to standard bitarray module
 - Switch tests to latest environments
 - Add Python 3.11 support to TROVE classifiers
