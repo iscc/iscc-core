@@ -12,9 +12,11 @@ jobs:
 
     steps:
       - uses: actions/checkout@v3
+      - uses: abatilo/actions-poetry@v2.0.0
       - name: Build wheels
         uses: pypa/cibuildwheel@v2.12.1
         env:
+         CIBW_BEFORE_BUILD: poetry install --extras turbo
          CIBW_PROJECT_REQUIRES_PYTHON: ">=3.7.2"
       - uses: actions/upload-artifact@v3
         with:
