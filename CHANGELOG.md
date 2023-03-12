@@ -1,6 +1,6 @@
 # Changelog
 
-## [1.0.3] - 2023-03-13
+## [1.0.3] - Unreleased
 - Fix binary wheels
 
 ## [1.0.2] - 2023-03-12
