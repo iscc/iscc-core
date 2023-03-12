@@ -1,7 +1,6 @@
 [tool.poetry]
 name = "iscc-core"
 version = "1.0.1"
-build = "build.py"
 description = "ISCC - Core Algorithms"
 authors = ["Titusz <tp@py7.de>"]
 license = "Apache-2.0"
@@ -75,6 +74,7 @@ bandit = "^1.7"
 mdformat = "*"
 mdformat_admon = "*"
 mdformat_tables = "*"
+twine = "^4.0.2"
 
 [tool.black]
 skip-string-normalization = false
@@ -90,6 +90,10 @@ lf = { cmd = "poetry run python -m tools.lf", help = "Convert line endings to lf
 test = { cmd = "poetry run pytest --cov=iscc_core --cov-fail-under=100", help = "Run tests with coverage" }
 sec = { cmd = "poetry run bandit -r iscc_core -q", help = "Security check with bandit" }
 all = ["gentests", "format", "docs", "format-md", "lf", "test", "sec"]
+
+[tool.poetry.build]
+generate-setup-file = true
+script = "build.py"
 
 [build-system]
 requires = ["poetry-core>=1.0.0", "setuptools", "wheel", "cython"]

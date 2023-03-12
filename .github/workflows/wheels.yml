@@ -15,7 +15,10 @@ jobs:
       - name: Build wheels
         uses: pypa/cibuildwheel@v2.12.1
         env:
-         CIBW_BEFORE_BUILD: pip install Cython && cythonize -X language_level=3 -i ./iscc_core/cdc.py && cythonize -X language_level=3 -i ./iscc_core/minhash.py && cythonize -X language_level=3 -i ./iscc_core/simhash.py
+         CIBW_ARCHS_LINUX: x86_64
+         CIBW_ARCHS_MACOS: x86_64
+         CIBW_ARCHS_WINDOWS: AMD64
+         CIBW_BEFORE_BUILD: pip install Cython
          CIBW_PROJECT_REQUIRES_PYTHON: ">=3.7.2"
       - uses: actions/upload-artifact@v3
         with:
