@@ -1,5 +1,8 @@
 # Changelog
 
+# [1.0.2] - Unreleased
+- Publish binary wheels
+
 ## [1.0.1] - 2023-03-11
 - Switch to standard bitarray module
 - Switch tests to latest environments
