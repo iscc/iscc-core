@@ -37,7 +37,7 @@ jobs:
         if: matrix.os == 'ubuntu-latest' && matrix.python-version == '3.7'
 
       - name: Build Wheel
-        run: poetry build -wheel
+        run: poetry build -f wheel
 
       - name: Collect Wheel
         uses: actions/upload-artifact@v3
