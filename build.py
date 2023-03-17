@@ -11,13 +11,13 @@ try:
     from Cython.Build import cythonize, build_ext
     from distutils.core import Distribution
 except ImportError:
-    # dummy build function for poetry
+    print("SKIPPING build of cython extensions")
     def build(setup_kwargs):
         return setup_kwargs
 
 else:
-
     def build(setup_kwargs):
+        print("BUILDING cython extensions")
         extensions = cythonize(["iscc_core/cdc.py", "iscc_core/minhash.py", "iscc_core/simhash.py"])
         setup_kwargs.update(dict(ext_modules=extensions))
         return setup_kwargs

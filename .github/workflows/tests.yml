@@ -35,3 +35,11 @@ jobs:
       - name: Upload coverage to Codecov
         uses: codecov/codecov-action@v3
         if: matrix.os == 'ubuntu-20.04' && matrix.python-version == '3.7'
+
+      - name: Build Wheel
+        run: poetry build -f wheel -vvv
+
+      - name: Collect Wheel
+        uses: actions/upload-artifact@v3
+        with:
+          path: dist/*.whl
