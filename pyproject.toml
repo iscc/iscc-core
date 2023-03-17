@@ -75,7 +75,6 @@ mdformat = "*"
 mdformat_admon = "*"
 mdformat_tables = "*"
 twine = "^4.0.2"
-check-wheel-contents = "*"
 
 [tool.black]
 skip-string-normalization = false
