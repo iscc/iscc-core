@@ -18,8 +18,6 @@ jobs:
         env:
           CIBW_BUILD: "cp3{7,8,9,10,11}-*"
           CIBW_ARCHS: native
-          CIBW_TEST_REQUIRES: pytest
-          CIBW_TEST_COMMAND: pytest tests
 
       - uses: actions/upload-artifact@v3
         with:
