@@ -14,7 +14,9 @@ except ImportError:
     # dummy build function for poetry
     def build(setup_kwargs):
         pass
+
 else:
+
     def build(setup_kwargs):
         try:
             from Cython.Build import cythonize
