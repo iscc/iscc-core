@@ -20,6 +20,18 @@ tests = ["attrs[tests-no-zope]", "zope.interface"]
 tests-no-zope = ["cloudpickle", "cloudpickle", "hypothesis", "hypothesis", "mypy (>=0.971,<0.990)", "mypy (>=0.971,<0.990)", "pympler", "pympler", "pytest (>=4.3.0)", "pytest (>=4.3.0)", "pytest-mypy-plugins", "pytest-mypy-plugins", "pytest-xdist[psutil]", "pytest-xdist[psutil]"]
 
 [[package]]
+name = "backports-cached-property"
+version = "1.0.2"
+description = "cached_property() - computed once per instance, cached as attribute"
+category = "dev"
+optional = false
+python-versions = ">=3.6.0"
+files = [
+    {file = "backports.cached-property-1.0.2.tar.gz", hash = "sha256:9306f9eed6ec55fd156ace6bc1094e2c86fae5fb2bf07b6a9c00745c656e75dd"},
+    {file = "backports.cached_property-1.0.2-py3-none-any.whl", hash = "sha256:baeb28e1cd619a3c9ab8941431fe34e8490861fb998c6c4590693d50171db0cc"},
+]
+
+[[package]]
 name = "bandit"
 version = "1.7.5"
 description = "Security oriented static analyser for python code."
@@ -464,6 +476,27 @@ files = [
     {file = "charset_normalizer-3.1.0-cp39-cp39-win_amd64.whl", hash = "sha256:830d2948a5ec37c386d3170c483063798d7879037492540f10a475e3fd6f244b"},
     {file = "charset_normalizer-3.1.0-py3-none-any.whl", hash = "sha256:3d9098b479e78c85080c98e1e35ff40b4a31d8953102bb0fd7d1b6f8a2111a3d"},
 ]
+
+[[package]]
+name = "check-wheel-contents"
+version = "0.4.0"
+description = "Check your wheels have the right contents"
+category = "dev"
+optional = false
+python-versions = ">=3.7"
+files = [
+    {file = "check-wheel-contents-0.4.0.tar.gz", hash = "sha256:ace25841b660987aea576940e8940b412fec149d100bca2cdf3fae3c9b0a88eb"},
+    {file = "check_wheel_contents-0.4.0-py3-none-any.whl", hash = "sha256:3789ff8380f9996298d99add97af71a10ddeef9c5187548e4044cbde77e53bf0"},
+]
+
+[package.dependencies]
+attrs = ">=18.1"
+"backports.cached-property" = {version = "*", markers = "python_version < \"3.8\""}
+click = ">=7.0"
+packaging = "*"
+pydantic = ">=1.7,<2.0"
+tomli = {version = ">=1.2,<3.0", markers = "python_version < \"3.11\""}
+wheel-filename = ">=1.1,<2.0"
 
 [[package]]
 name = "click"
@@ -2220,6 +2253,18 @@ files = [
 ]
 
 [[package]]
+name = "wheel-filename"
+version = "1.4.1"
+description = "Parse wheel filenames"
+category = "dev"
+optional = false
+python-versions = "~=3.6"
+files = [
+    {file = "wheel-filename-1.4.1.tar.gz", hash = "sha256:e2e1eb0780910a0148358252aad6394cc674250686c56c39aa379493438370b3"},
+    {file = "wheel_filename-1.4.1-py3-none-any.whl", hash = "sha256:a53d8ece58822eb27b3a8841c6b4bebf357f19ff0dd83ce9179756f64a4bc0df"},
+]
+
+[[package]]
 name = "win32-setctime"
 version = "1.1.0"
 description = "A small Python utility to set file creation time on Windows"
@@ -2364,4 +2409,4 @@ turbo = ["cython"]
 [metadata]
 lock-version = "2.0"
 python-versions = ">=3.7.2,<4.0"
-content-hash = "ee9a51c63e8508205de7efd8979cf62f0335c7224ea6fd07f73f4a4de23a8350"
+content-hash = "d76e334c108fa0482fa99df725db14905f98ff4ef9d1db9b0e2971a3ce24d52c"
