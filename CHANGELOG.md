@@ -2,6 +2,7 @@
 
 ## [1.0.4] - Unreleased
 - Removed bases dependency
+- Fixed mkdocstrings
 - Updated dependencies
 
 ## [1.0.3] - 2023-03-12

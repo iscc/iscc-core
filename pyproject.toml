@@ -62,7 +62,7 @@ turbo = ["cython"]
 pytest = "*"
 black = "^23.1"
 mkdocs-material = "^9.0"
-mkdocstrings-python = "^0.8"
+mkdocstrings-python = "<1.1"
 toml = "*"
 PyYAML = "*"
 coverage = "*"
@@ -74,6 +74,7 @@ mdformat = "*"
 mdformat_admon = "*"
 mdformat_tables = "*"
 twine = "^4.0.2"
+griffe = "<0.27.4"
 
 [tool.black]
 skip-string-normalization = false
