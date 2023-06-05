@@ -51,7 +51,6 @@ pydantic = {extras = ["dotenv"], version = "*"}
 uvarint = "^1.2"
 loguru = "^0.6"
 base58 = "^2.1"
-bases = "^0.2"
 data-url = "^1.0"
 jcs = "^0.2"
 bitarray = "^2.7"

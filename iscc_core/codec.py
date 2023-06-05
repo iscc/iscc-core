@@ -8,11 +8,7 @@ from bitarray import bitarray
 from bitarray.util import int2ba, ba2int
 from base64 import b32encode, b32decode
 from pybase64 import urlsafe_b64encode, urlsafe_b64decode
-from bases import base32hex
 from iscc_core.constants import *
-
-
-base32hexnopad = base32hex.nopad()
 
 
 ########################################################################################
@@ -256,7 +252,7 @@ def decode_length(mtype, length):
     """
     Dedoce raw length value from ISCC header to length of digest in number of bits.
 
-    Decodes a raw header integer value in to its semantically meaningfull value (eg.
+    Decodes a raw header integer value in to its semantically meaningfull value (e.g.
     number of bits)
     """
     if mtype in (MT.META, MT.SEMANTIC, MT.CONTENT, MT.DATA, MT.INSTANCE, MT.FLAKE):
@@ -289,7 +285,8 @@ def decode_base32(code):
     return bytes(b32decode(code + "=" * pad_length, casefold=True))
 
 
-def encode_base64(data: bytes) -> str:
+def encode_base64(data):
+    # type: (bytes) -> str
     """
     Standard RFC4648 base64url encoding without padding.
     """
@@ -297,7 +294,8 @@ def encode_base64(data: bytes) -> str:
     return code.rstrip("=")
 
 
-def decode_base64(code: str) -> bytes:
+def decode_base64(code):
+    # type: (str) -> bytes
     """
     Standard RFC4648 base64url decoding without padding.
     """
@@ -307,21 +305,25 @@ def decode_base64(code: str) -> bytes:
 
 
 def encode_base32hex(data):
+    # type: (bytes) ->  str
     """
     RFC4648 Base32hex encoding without padding
 
     see: https://tools.ietf.org/html/rfc4648#page-10
     """
-    return base32hexnopad.encode(data)
+    b32 = encode_base32(data)
+    return b32.translate(b32_to_hex)
 
 
-def decode_base32hex(data):
+def decode_base32hex(code):
+    # type: (str) -> bytes
     """
     RFC4648 Base32hex decoding without padding
 
     see: https://tools.ietf.org/html/rfc4648#page-10
     """
-    return base32hexnopad.decode(data)
+    b32 = code.translate(hex_to_b32)
+    return decode_base32(b32)
 
 
 def iscc_decompose(iscc_code):
@@ -436,7 +438,7 @@ def iscc_decode(iscc):
     Decode ISCC to an IsccTuple
 
     :param str iscc: ISCC string
-    :return: ISCC decoded to an IsccTuple
+    :return: ISCC decoded to a tuple
     :rtype: IsccTuple
     """
     iscc = iscc_clean(iscc_normalize(iscc))

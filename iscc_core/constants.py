@@ -20,6 +20,9 @@ IsccAny = Union[str, IsccTuple, bytes, "Code"]
 Meta = Union[dict, str]
 FrameSig = Tuple[int]
 
+b32_to_hex = str.maketrans("ABCDEFGHIJKLMNOPQRSTUVWXYZ234567", "0123456789ABCDEFGHIJKLMNOPQRSTUV")
+hex_to_b32 = str.maketrans("0123456789ABCDEFGHIJKLMNOPQRSTUV", "ABCDEFGHIJKLMNOPQRSTUVWXYZ234567")
+
 
 class MT(enum.IntEnum):
     """
