@@ -1,6 +1,6 @@
 # Changelog
 
-## [1.0.4] - Unreleased
+## [1.0.4] - 2023-06-05
 - Removed bases dependency
 - Fixed mkdocstrings
 - Updated dependencies
