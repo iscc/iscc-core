@@ -1,5 +1,4 @@
 # -*- coding: utf-8 -*-
-from bitarray import bitarray
 
 
 def alg_simhash(hash_digests):
@@ -17,17 +16,16 @@ def alg_simhash(hash_digests):
     vector = [0] * n_bits
 
     for digest in hash_digests:
-        h = bitarray()
-        h.frombytes(digest)
+        h = int.from_bytes(digest, "big", signed=False)
 
         for i in range(n_bits):
-            vector[i] += h[i]
+            vector[i] += h & 1
+            h >>= 1
 
-    minfeatures = len(hash_digests) / 2
-    shash = bitarray(n_bits)
-    shash.setall(0)
+    minfeatures = len(hash_digests) * 1.0 / 2
+    shash = 0
 
     for i in range(n_bits):
-        shash[i] = vector[i] >= minfeatures
+        shash |= int(vector[i] >= minfeatures) << i
 
-    return shash.tobytes()
+    return shash.to_bytes(n_bytes, "big", signed=False)
