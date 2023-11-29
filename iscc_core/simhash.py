@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+from bitarray import bitarray
 
 
 def alg_simhash(hash_digests):
@@ -6,7 +7,7 @@ def alg_simhash(hash_digests):
     """
     Creates a similarity preserving hash from a sequence of equal sized hash digests.
 
-    :param list hash_digests: A sequence of equaly sized byte-hashes.
+    :param list hash_digests: A sequence of equally sized byte-hashes.
     :returns: Similarity byte-hash
     :rtype: bytes
     """
@@ -16,16 +17,17 @@ def alg_simhash(hash_digests):
     vector = [0] * n_bits
 
     for digest in hash_digests:
-        h = int.from_bytes(digest, "big", signed=False)
+        h = bitarray()
+        h.frombytes(digest)
 
         for i in range(n_bits):
-            vector[i] += h & 1
-            h >>= 1
+            vector[i] += h[i]
 
-    minfeatures = len(hash_digests) * 1.0 / 2
-    shash = 0
+    minfeatures = len(hash_digests) / 2
+    shash = bitarray(n_bits)
+    shash.setall(0)
 
     for i in range(n_bits):
-        shash |= int(vector[i] >= minfeatures) << i
+        shash[i] = vector[i] >= minfeatures
 
-    return shash.to_bytes(n_bytes, "big", signed=False)
+    return shash.tobytes()

@@ -54,7 +54,7 @@ loguru = "^0.6"
 base58 = "^2.1"
 data-url = "^1.0"
 jcs = "^0.2"
-bitarray = "^2.7"
+bitarray = "^2.8"
 
 [tool.poetry.extras]
 turbo = ["cython"]

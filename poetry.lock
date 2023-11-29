@@ -2406,4 +2406,4 @@ turbo = ["cython"]
 [metadata]
 lock-version = "2.0"
 python-versions = ">=3.7.2,<4.0"
-content-hash = "797ecd5cd7d11b16c1ce9af33807643c582d511b9430b3199f2101bdbb2053bb"
+content-hash = "cf022e6a23d28b26a9be473c388bfcfb2c4b28c70b3f74647a5aa49a66642716"

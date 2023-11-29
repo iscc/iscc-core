@@ -1,1 +1,1 @@
-cpdef bytes alg_simhash(list hash_digests)
+cpdef bytes alg_simhash(list[bytes] hash_digests)
