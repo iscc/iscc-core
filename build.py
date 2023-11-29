@@ -48,7 +48,8 @@ else:
                             "iscc_core/cdc.py",
                             "iscc_core/minhash.py",
                             "iscc_core/simhash.py",
-                        ]
+                        ],
+                        language_level="3",
                     ),
                     cmdclass=dict(build_ext=build_ext_gracefull),
                 )
