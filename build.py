@@ -10,40 +10,40 @@ $ cythonize -X language_level=3 -a -i ./iscc_core/simhash.py
 try:
     from Cython.Build import cythonize, build_ext
 except ImportError:
-    # dummy build function for poetry
-    def build(setup_kwargs):
+    def build(setup_kwargs):  # type: (dict) -> None
         pass
 
 else:
 
-    class build_ext_gracefull(build_ext):
+    class build_ext_graceful(build_ext):
+        """Custom build extension class with error propagation."""
+
         def run(self):
+            """Compile C accelerator modules and propagate errors."""
             try:
                 print("Trying to compile C accelerator modules")
                 super().run()
-                print("Successfully comiled C accelerator modules")
+                print("Successfully compiled C accelerator modules")
             except Exception as e:
-                print(e)
-                print("********************************************************************")
-                print("Failed to compile C accelerator module, falling back to pure python.")
-                print("********************************************************************")
+                print(f"Error during compilation: {e}")
+                raise  # Rethrow the exception to ensure it's captured by poetry
 
         def build_extensions(self):
+            """Build extensions with error propagation."""
             try:
                 print("Trying to compile C accelerator modules")
                 super().build_extensions()
-                print("Successfully comiled C accelerator modules")
+                print("Successfully compiled C accelerator modules")
             except Exception as e:
-                print(e)
-                print("********************************************************************")
-                print("Failed to compile C accelerator module, falling back to pure python.")
-                print("********************************************************************")
+                print(f"Error during compilation: {e}")
+                raise  # Rethrow the exception
 
-    def build(setup_kwargs):
+    def build(setup_kwargs):  # type: (dict) -> None
+        """Configure setup kwargs for Cython compilation with error propagation."""
         try:
             setup_kwargs.update(
-                dict(
-                    ext_modules=cythonize(
+                {
+                    "ext_modules": cythonize(
                         [
                             "iscc_core/cdc.py",
                             "iscc_core/minhash.py",
@@ -51,11 +51,9 @@ else:
                         ],
                         language_level="3",
                     ),
-                    cmdclass=dict(build_ext=build_ext_gracefull),
-                )
+                    "cmdclass": {"build_ext": build_ext_graceful},
+                }
             )
         except Exception as e:
-            print(e)
-            print("********************************************************************")
-            print("Failed to compile C accelerator module, falling back to pure python.")
-            print("********************************************************************")
+            print(f"Error in setup configuration: {e}")
+            raise  # Rethrow the exception

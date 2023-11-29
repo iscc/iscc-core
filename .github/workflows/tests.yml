@@ -21,7 +21,7 @@ jobs:
           poetry-version: 1.5.1
 
       - name: Install Dependencies
-        run: poetry install
+        run: poetry install -vvv
 
       - name: Run Tests (Pure Python with coverage)
         run: poetry run pytest --cov=iscc_core --cov-report=xml -q tests
