@@ -1,6 +1,8 @@
 # Changelog
 
 ## [1.0.5] - Unreleased
+- Updated dependencies
+
 
 ## [1.0.4] - 2023-06-05
 - Removed bases dependency
