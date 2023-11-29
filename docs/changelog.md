@@ -1,8 +1,8 @@
 # Changelog
 
 ## [1.0.5] - Unreleased
+- Added python 3.12 support
 - Updated dependencies
-
 
 ## [1.0.4] - 2023-06-05
 - Removed bases dependency
