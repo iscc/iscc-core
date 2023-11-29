@@ -37,7 +37,7 @@ def gen_text_code(text, bits=ic.core_opts.text_bits):
 
     :param str text: Plain text for Text-Code creation.
     :param int bits: Bit-length (multiple of 32) for ISCC Code Hash (default 64).
-    :return: ISCC schema instance with Text-Code and an aditional property `characters`
+    :return: ISCC schema instance with Text-Code and an additional property `characters`
     :rtype: dict
     """
     return gen_text_code_v0(text, bits)
@@ -54,7 +54,7 @@ def gen_text_code_v0(text, bits=ic.core_opts.text_bits):
 
     :param str text: Text for Text-Code creation
     :param int bits: Bit-length of ISCC Code Hash (default 64)
-    :return: ISCC schema instance with Text-Code and an aditional property `characters`
+    :return: ISCC schema instance with Text-Code and an additional property `characters`
     :rtype: dict
     """
 
