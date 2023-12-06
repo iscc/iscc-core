@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-from datetime import datetime, UTC
+from datetime import datetime
 import random
 from typing import List, Union
 import base58
@@ -353,7 +353,7 @@ class Flake:
     def time(self):
         """Time component as string in ISO 8601 format"""
         ts = int.from_bytes(self._flake[0:6], "big", signed=False) / 1000
-        return datetime.fromtimestamp(ts, UTC).isoformat(timespec="milliseconds").split("+")[0]
+        return datetime.utcfromtimestamp(ts).isoformat(timespec="milliseconds")
 
     @property
     def int(self):
