@@ -27,7 +27,7 @@ jobs:
         run: poetry run pytest --cov=iscc_core --cov-report=xml -q tests
 
       - name: Build Extension modules
-        run: poetry install --extras turbo
+        run: poetry install --extras turbo -vvv
 
       - name: Run Tests (With Extension Modules)
         run: poetry run pytest -q tests --turbo
