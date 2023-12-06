@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "iscc-core"
-version = "1.0.4"
+version = "1.0.5"
 description = "ISCC - Core Algorithms"
 authors = ["Titusz <tp@py7.de>"]
 license = "Apache-2.0"
