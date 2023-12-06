@@ -8,7 +8,7 @@ readme = "README.md"
 homepage = "https://iscc.codes"
 repository = "https://github.com/iscc/iscc-core"
 documentation = "https://core.iscc.codes/"
-keywords=["iscc", "identifier", "media", "content", "hash", "blockchain", "similarity"]
+keywords=["iscc", "identifier", "media", "hash", "similarity"]
 classifiers=[
     "Development Status :: 4 - Beta",
     "Intended Audience :: Developers",
