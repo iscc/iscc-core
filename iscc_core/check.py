@@ -6,7 +6,7 @@ import inspect
 __all__ = ["turbo"]
 
 
-def turbo():
+def turbo():  # pragma: no cover
     # type: () -> bool
     """Check whether all optional cython extensions have been compiled to native modules."""
     from iscc_core import cdc, minhash
@@ -16,4 +16,4 @@ def turbo():
         module_file = inspect.getfile(module)
         if module_file.endswith(".py"):
             return False
-    return True  # pragma: no cover
+    return True
