@@ -2,137 +2,137 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
     <url>
          <loc>https://core.iscc.codes/</loc>
-         <lastmod>2023-06-05</lastmod>
+         <lastmod>2023-12-07</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://core.iscc.codes/changelog/</loc>
-         <lastmod>2023-06-05</lastmod>
+         <lastmod>2023-12-07</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://core.iscc.codes/conformance/</loc>
-         <lastmod>2023-06-05</lastmod>
+         <lastmod>2023-12-07</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://core.iscc.codes/constants/</loc>
-         <lastmod>2023-06-05</lastmod>
+         <lastmod>2023-12-07</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://core.iscc.codes/iscc_code/</loc>
-         <lastmod>2023-06-05</lastmod>
+         <lastmod>2023-12-07</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://core.iscc.codes/iscc_id/</loc>
-         <lastmod>2023-06-05</lastmod>
+         <lastmod>2023-12-07</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://core.iscc.codes/iso-reference/</loc>
-         <lastmod>2023-06-05</lastmod>
+         <lastmod>2023-12-07</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://core.iscc.codes/algorithms/cdc/</loc>
-         <lastmod>2023-06-05</lastmod>
+         <lastmod>2023-12-07</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://core.iscc.codes/algorithms/dct/</loc>
-         <lastmod>2023-06-05</lastmod>
+         <lastmod>2023-12-07</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://core.iscc.codes/algorithms/minhash/</loc>
-         <lastmod>2023-06-05</lastmod>
+         <lastmod>2023-12-07</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://core.iscc.codes/algorithms/simhash/</loc>
-         <lastmod>2023-06-05</lastmod>
+         <lastmod>2023-12-07</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://core.iscc.codes/algorithms/wtahash/</loc>
-         <lastmod>2023-06-05</lastmod>
+         <lastmod>2023-12-07</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://core.iscc.codes/codec/</loc>
-         <lastmod>2023-06-05</lastmod>
+         <lastmod>2023-12-07</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://core.iscc.codes/includes/abbr/</loc>
-         <lastmod>2023-06-05</lastmod>
+         <lastmod>2023-12-07</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://core.iscc.codes/options/options/</loc>
-         <lastmod>2023-06-05</lastmod>
+         <lastmod>2023-12-07</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://core.iscc.codes/units/</loc>
-         <lastmod>2023-06-05</lastmod>
+         <lastmod>2023-12-07</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://core.iscc.codes/units/code_data/</loc>
-         <lastmod>2023-06-05</lastmod>
+         <lastmod>2023-12-07</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://core.iscc.codes/units/code_flake/</loc>
-         <lastmod>2023-06-05</lastmod>
+         <lastmod>2023-12-07</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://core.iscc.codes/units/code_instance/</loc>
-         <lastmod>2023-06-05</lastmod>
+         <lastmod>2023-12-07</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://core.iscc.codes/units/code_meta/</loc>
-         <lastmod>2023-06-05</lastmod>
+         <lastmod>2023-12-07</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://core.iscc.codes/units/content/</loc>
-         <lastmod>2023-06-05</lastmod>
+         <lastmod>2023-12-07</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://core.iscc.codes/units/content/code_content_audio/</loc>
-         <lastmod>2023-06-05</lastmod>
+         <lastmod>2023-12-07</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://core.iscc.codes/units/content/code_content_image/</loc>
-         <lastmod>2023-06-05</lastmod>
+         <lastmod>2023-12-07</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://core.iscc.codes/units/content/code_content_mixed/</loc>
-         <lastmod>2023-06-05</lastmod>
+         <lastmod>2023-12-07</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://core.iscc.codes/units/content/code_content_text/</loc>
-         <lastmod>2023-06-05</lastmod>
+         <lastmod>2023-12-07</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://core.iscc.codes/units/content/code_content_video/</loc>
-         <lastmod>2023-06-05</lastmod>
+         <lastmod>2023-12-07</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://core.iscc.codes/utilities/utils/</loc>
-         <lastmod>2023-06-05</lastmod>
+         <lastmod>2023-12-07</lastmod>
          <changefreq>daily</changefreq>
     </url>
 </urlset>
