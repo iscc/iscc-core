@@ -1,5 +1,11 @@
 # Changelog
 
+## [1.0.5] - Unreleased
+- Improved simhash performance
+- Added native dct and wtahash support
+- Added Python 3.12 support
+- Updated and relax dependencies
+
 ## [1.0.4] - 2023-06-05
 - Removed bases dependency
 - Fixed mkdocstrings
