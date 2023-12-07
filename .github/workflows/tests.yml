@@ -18,7 +18,7 @@ jobs:
       - name: Install Poetry
         uses: abatilo/actions-poetry@v2.0.0
         with:
-          poetry-version: 1.5.1
+          poetry-version: 1.6.1
 
       - name: Install Dependencies
         run: poetry install
@@ -27,7 +27,7 @@ jobs:
         run: poetry run pytest --cov=iscc_core --cov-report=xml -q tests
 
       - name: Build Extension modules
-        run: poetry install --extras turbo -vvv
+        run: poetry install --extras turbo
 
       - name: Run Tests (With Extension Modules)
         run: poetry run pytest -q tests --turbo
