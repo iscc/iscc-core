@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
-from datetime import datetime
+import sys
+import datetime
 import random
 from typing import List, Union
 import base58
@@ -350,10 +351,14 @@ class Flake:
         )
 
     @property
-    def time(self):
+    def time(self):  # pragma: no cover
         """Time component as string in ISO 8601 format"""
         ts = int.from_bytes(self._flake[0:6], "big", signed=False) / 1000
-        return datetime.utcfromtimestamp(ts).isoformat(timespec="milliseconds")
+        if sys.version_info >= (3, 12):
+            dt = datetime.datetime.fromtimestamp(ts, datetime.timezone.utc)
+        else:
+            dt = datetime.datetime.utcfromtimestamp(ts)
+        return dt.isoformat(timespec="milliseconds").replace("+00:00", "")
 
     @property
     def int(self):
