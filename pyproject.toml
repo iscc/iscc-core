@@ -47,7 +47,7 @@ blake3 = "*"
 xxhash = "*"
 more-itertools = "*"
 pybase64 = "*"
-pydantic = {extras = ["dotenv"], version = "<2"}
+pydantic = {extras = ["dotenv"], version = "*"}
 uvarint = "*"
 loguru = "*"
 base58 = "*"
