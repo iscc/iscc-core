@@ -47,6 +47,10 @@ jobs:
       - name: Test Wheel Installation
         run: |
           python -m venv venv
-          . venv/bin/activate
+          if [[ ${{ runner.os }} == 'Windows' ]]; then
+            venv\Scripts\activate
+          else
+            source venv/bin/activate
+          fi
           pip install dist/*.whl
           python -c "import iscc_core; iscc_core.conformance_selftest()"
