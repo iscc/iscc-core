@@ -43,3 +43,10 @@ jobs:
         uses: actions/upload-artifact@v3
         with:
           path: dist/*.whl
+
+      - name: Test Wheel Installation
+        run: |
+          python -m venv venv
+          . venv/bin/activate
+          pip install dist/*.whl
+          python -c "import iscc_core; iscc_core.conformance_selftest()"
