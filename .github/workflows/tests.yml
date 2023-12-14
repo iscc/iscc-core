@@ -47,8 +47,8 @@ jobs:
       - name: Test Wheel Installation
         run: |
           python -m venv venv
-          if [[ ${{ runner.os }} == 'Windows' ]]; then
-            venv\Scripts\activate
+          if [ "${{ runner.os }}" = "Windows" ]; then
+            venv\Scripts\Activate.ps1
           else
             source venv/bin/activate
           fi
