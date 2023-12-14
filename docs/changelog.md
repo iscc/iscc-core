@@ -1,5 +1,7 @@
 # Changelog
 
+## [1.0.6] - Unreleased
+
 ## [1.0.5] - 2023-12-07
 - Improved simhash performance
 - Added native dct and wtahash support
