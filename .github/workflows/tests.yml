@@ -45,12 +45,17 @@ jobs:
           path: dist/*.whl
 
       - name: Test Wheel Installation
+        if: runner.os != 'Windows'
         run: |
           python -m venv venv
-          if [ "${{ runner.os }}" = "Windows" ]; then
-            venv\Scripts\Activate.ps1
-          else
-            source venv/bin/activate
-          fi
+          source venv/bin/activate
+          pip install dist/*.whl
+          python -c "import iscc_core; iscc_core.conformance_selftest()"
+
+      - name: Test Wheel Installation on Windows
+        if: runner.os == 'Windows'
+        run: |
+          python -m venv venv
+          venv\Scripts\Activate.ps1
           pip install dist/*.whl
           python -c "import iscc_core; iscc_core.conformance_selftest()"
