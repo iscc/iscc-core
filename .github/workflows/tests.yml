@@ -57,5 +57,6 @@ jobs:
         run: |
           python -m venv venv
           venv\Scripts\Activate.ps1
-          pip install iscc-core --no-index -f dist
+          $wheelFile = (Get-ChildItem dist/*.whl -Name)
+          pip install "dist/$wheelFile"
           python -c "import iscc_core; iscc_core.conformance_selftest()"
