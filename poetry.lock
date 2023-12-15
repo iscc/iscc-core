@@ -1614,7 +1614,6 @@ files = [
 ]
 
 [package.dependencies]
-python-dotenv = {version = ">=0.10.4", optional = true, markers = "extra == \"dotenv\""}
 typing-extensions = ">=4.2.0"
 
 [package.extras]
@@ -2379,4 +2378,4 @@ turbo = ["cython"]
 [metadata]
 lock-version = "2.0"
 python-versions = ">=3.7.2,<4.0"
-content-hash = "3a8839445fa6ea3186bdb648b9548136b113df3d96c255f04bddf2f2e4a19753"
+content-hash = "5edd6b731b06ed1361432464db9ab0daa72ace6fa3dc02d5b6958a5835b3bfad"
