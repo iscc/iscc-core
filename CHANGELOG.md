@@ -1,6 +1,8 @@
 # Changelog
 
 ## [1.0.6] - Unreleased
+- Added wheel package testing to CI
+- Fixed incompatible dependencies
 
 ## [1.0.5] - 2023-12-07
 - Improved simhash performance
