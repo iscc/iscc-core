@@ -10,16 +10,16 @@ jobs:
         os: [ubuntu-20.04, macos-11, windows-2019]
     runs-on: ${{ matrix.os }}
     steps:
+      - name: Install Poetry
+        uses: abatilo/actions-poetry@v2.0.0
+        with:
+          poetry-version: 1.5.1
+
       - uses: actions/checkout@v4
       - uses: actions/setup-python@v5
         with:
           python-version: ${{ matrix.python-version }}
           cache: 'poetry'
-
-      - name: Install Poetry
-        uses: abatilo/actions-poetry@v2.0.0
-        with:
-          poetry-version: 1.5.1
 
       - name: Install Dependencies
         run: poetry install
