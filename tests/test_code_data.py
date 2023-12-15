@@ -1,8 +1,5 @@
 from io import BytesIO
 import random
-
-from iscc_schema import IsccMeta
-
 import iscc_core
 
 
@@ -90,5 +87,5 @@ def test_DataHasher(static_bytes):
 
 
 def test_gen_data_code_schema_conformance():
-    iscc_obj = IsccMeta(**iscc_core.gen_data_code_v0(BytesIO(b"\xff")))
-    assert iscc_obj.iscc == "ISCC:GAAV5ZIQC4WCUBIK"
+    iscc_obj = iscc_core.gen_data_code_v0(BytesIO(b"\xff"))
+    assert iscc_obj == {"iscc": "ISCC:GAAV5ZIQC4WCUBIK"}

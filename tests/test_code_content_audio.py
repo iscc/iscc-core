@@ -1,6 +1,4 @@
 # -*- coding: utf-8 -*-
-from iscc_schema import IsccMeta
-
 import iscc_core.code_content_audio
 
 
@@ -79,9 +77,9 @@ def test_gen_audio_code():
     }
 
 
-def test_cen_audio_code_schema_conformance():
-    iscc_obj = IsccMeta(**iscc_core.gen_audio_code_v0(CHROMA_VECTOR))
-    assert iscc_obj.iscc == "ISCC:EIAWUJFCEZZOJYVD"
+def test_gen_audio_code_schema_conformance():
+    iscc_obj = iscc_core.gen_audio_code_v0(CHROMA_VECTOR)
+    assert iscc_obj == {"iscc": "ISCC:EIAWUJFCEZZOJYVD"}
 
 
 CHROMA_VECTOR = [

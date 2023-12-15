@@ -1,7 +1,5 @@
 # -*- coding: utf-8 -*-
 import pytest
-from iscc_schema import IsccMeta
-
 import iscc_core
 
 TEXT_A = """
@@ -92,5 +90,5 @@ def test_code_text_empty():
 
 
 def test_gen_text_code_schema_conformance():
-    iscc_obj = IsccMeta(**iscc_core.gen_text_code_v0("Hello World"))
-    assert iscc_obj.iscc == "ISCC:EAASKDNZNYGUUF5A"
+    iscc_obj = iscc_core.gen_text_code_v0("Hello World")
+    assert iscc_obj == {"iscc": "ISCC:EAASKDNZNYGUUF5A", "characters": 10}

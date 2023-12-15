@@ -1,5 +1,4 @@
 from io import BytesIO
-from iscc_schema import IsccMeta
 import iscc_core
 
 
@@ -50,5 +49,9 @@ def test_gen_code_instance_hello_world_256():
 
 
 def test_gen_instance_code_schema_conformance():
-    iscc_obj = IsccMeta(**iscc_core.gen_instance_code_v0(BytesIO(b"hello world")))
-    assert iscc_obj.iscc == "ISCC:IAA5OSMB56TQUDEI"
+    iscc_obj = iscc_core.gen_instance_code_v0(BytesIO(b"hello world"))
+    assert iscc_obj == {
+        "iscc": "ISCC:IAA5OSMB56TQUDEI",
+        "datahash": "1e20d74981efa70a0c880b8d8c1985d075dbcbf679b99a5f9914e5aaf96b831a9e24",
+        "filesize": 11,
+    }

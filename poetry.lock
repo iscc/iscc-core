@@ -862,21 +862,6 @@ files = [
 ]
 
 [[package]]
-name = "iscc-schema"
-version = "0.4.0"
-description = "ISCC - JSON-LD Metadata and OpenAPI Service Descriptions"
-optional = false
-python-versions = ">=3.7,<4.0.0"
-files = [
-    {file = "iscc-schema-0.4.0.tar.gz", hash = "sha256:fdc9367cd022c2aea7b93d9c81f6496cf9260e138333ce0a314dbb932fcc76b6"},
-    {file = "iscc_schema-0.4.0-py3-none-any.whl", hash = "sha256:2ab1265e526a8d6c4e1e558c7b15ff2b494923caf6dcfdc188d4a9f58130e492"},
-]
-
-[package.dependencies]
-jcs = ">=0.2,<0.3"
-pydantic = ">=1.9,<2.0"
-
-[[package]]
 name = "jaraco-classes"
 version = "3.2.3"
 description = "Utility functions for Python class constructs"
@@ -2394,4 +2379,4 @@ turbo = ["cython"]
 [metadata]
 lock-version = "2.0"
 python-versions = ">=3.7.2,<4.0"
-content-hash = "4734fa6320604e4b1ad89ee8697d7ff39f341ef4739aefc6c9b8fd872fdd321a"
+content-hash = "0813fc3b125848082f77087e295efe947fd5993218e6059efe5b1d6a14679325"
