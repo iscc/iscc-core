@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 """An application that claims ISCC conformance MUST pass all core functions from the
 ISCC conformance test suite. The test suite is available as JSON data on
-[Github](https://raw.githubusercontent.com/iscc/iscc-core/master/iscc_core/data.json).
+[GitHub](https://raw.githubusercontent.com/iscc/iscc-core/master/iscc_core/data.json).
 Test data is structured as follows:
 
 ```json
