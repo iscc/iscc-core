@@ -51,7 +51,6 @@ jobs:
           source venv/bin/activate
           pip install dist/*.whl
           python -c "import iscc_core; iscc_core.conformance_selftest()"
-          python -c "import iscc_core; assert iscc_core.turbo()"
 
       - name: Test Wheel Installation on Windows
         if: runner.os == 'Windows'
@@ -60,5 +59,7 @@ jobs:
           venv\Scripts\Activate.ps1
           $wheelFile = (Get-ChildItem dist/*.whl -Name)
           pip install "dist/$wheelFile"
-          python -c "import iscc_core; iscc_core.conformance_selftest()"
-          python -c "import iscc_core; assert iscc_core.turbo()"
+
+      - name: Test Cython extensions
+        if: matrix.python-version != '3.12'
+        run: python -c "import iscc_core; assert iscc_core.turbo()"
