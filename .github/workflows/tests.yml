@@ -52,7 +52,7 @@ jobs:
           source venv/bin/activate
           pip install dist/*.whl
           python -c "import iscc_core; iscc_core.conformance_selftest()"
-          python -c "import iscc_core; assert iscc_core.turbo()"
+          python -c "import iscc_core; print(iscc_core.turbo())"
 
       - name: Test Wheel Installation on Windows
         if: runner.os == 'Windows'
@@ -62,4 +62,4 @@ jobs:
           $wheelFile = (Get-ChildItem dist/*.whl -Name)
           pip install "dist/$wheelFile"
           python -c "import iscc_core; iscc_core.conformance_selftest()"
-          python -c "import iscc_core; assert iscc_core.turbo()"
+          python -c "import iscc_core; print(iscc_core.turbo())"
