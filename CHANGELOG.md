@@ -1,6 +1,6 @@
 # Changelog
 
-## [1.0.6] - Unreleased
+## [1.0.6] - 2023-12-15
 - Added wheel package testing to CI
 - Fixed incompatible dependencies
 
