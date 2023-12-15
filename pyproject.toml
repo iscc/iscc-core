@@ -42,7 +42,7 @@ classifiers=[
 
 [tool.poetry.dependencies]
 python = ">=3.7.2,<4.0"
-cython = { version = "*", optional = true }
+cython = { version = "<3", optional = true }
 blake3 = "*"
 xxhash = "*"
 more-itertools = "*"
@@ -95,5 +95,5 @@ generate-setup-file = true
 script = "build.py"
 
 [build-system]
-requires = ["poetry-core>=1.0.0", "Cython", "setuptools", "wheel"]
+requires = ["poetry-core>=1.0.0", "Cython<3", "setuptools", "wheel"]
 build-backend = "poetry.core.masonry.api"
