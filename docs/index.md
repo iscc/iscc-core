@@ -151,7 +151,7 @@ Documentation is published at<https://core.iscc.codes>
 
 **Requirements**
 
-- [Python 3.7.2](https://www.python.org/) or higher for code generation and static site building.
+- [Python 3.8](https://www.python.org/) or higher for code generation and static site building.
 - [Poetry](https://python-poetry.org/) for installation and dependency management.
 
 **Development Setup**

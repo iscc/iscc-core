@@ -17,7 +17,6 @@ classifiers=[
     "Natural Language :: English",
     "Operating System :: OS Independent",
     "Programming Language :: Cython",
-    "Programming Language :: Python :: 3.7",
     "Programming Language :: Python :: 3.8",
     "Programming Language :: Python :: 3.9",
     "Programming Language :: Python :: 3.10",
@@ -41,7 +40,7 @@ classifiers=[
 
 
 [tool.poetry.dependencies]
-python = ">=3.7.2,<4.0"
+python = "^3.8"
 cython = { version = ">=3", optional = true }
 blake3 = "*"
 xxhash = "*"
