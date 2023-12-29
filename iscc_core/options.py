@@ -12,8 +12,12 @@ the class-attribute but prefixed with `ISCC_CORE_` and upper-cased.
     ```
 """
 from typing import Tuple
-from pydantic import BaseSettings, Field
 from loguru import logger as log
+
+try:
+    from pydantic import BaseSettings, Field
+except ImportError:
+    from pydantic.v1 import BaseSettings, Field
 
 
 class CoreOptions(BaseSettings):
