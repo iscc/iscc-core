@@ -1,6 +1,6 @@
 # Changelog
 
-## [1.0.7] - Unreleased
+## [1.0.7] - 2024-01-07
 - Support pydantic v1 & v2
 - Updated dependencies
 
