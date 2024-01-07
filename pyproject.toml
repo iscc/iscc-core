@@ -59,21 +59,22 @@ bitarray = "*"
 [tool.poetry.extras]
 turbo = ["cython"]
 
-[tool.poetry.dev-dependencies]
+[tool.poetry.group.test.dependencies]
 pytest = "*"
-black = "^23.1"
-mkdocs-material = "^9.0"
-mkdocstrings-python = "<1.1"
-toml = "*"
-PyYAML = "*"
 coverage = "*"
 pytest-cov = "*"
+
+[tool.poetry.group.dev.dependencies]
 poethepoet = "*"
+black = "^23.1"
 bandit = "^1.7"
+
+[tool.poetry.group.docs.dependencies]
+mkdocs-material = "^9.0"
+mkdocstrings-python = "<1.1"
 mdformat = "*"
 mdformat_admon = "*"
 mdformat_tables = "*"
-twine = "^4.0.2"
 griffe = "<0.27.4"
 
 [tool.black]
