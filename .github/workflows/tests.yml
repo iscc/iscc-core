@@ -22,7 +22,7 @@ jobs:
           cache: 'poetry'
 
       - name: Install Dependencies
-        run: poetry install
+        run: poetry install --without dev,docs
 
       - name: Run Tests (Pure Python with coverage)
         run: poetry run pytest --cov=iscc_core --cov-report=xml -q tests
