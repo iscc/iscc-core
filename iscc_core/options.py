@@ -15,9 +15,9 @@ from typing import Tuple
 from loguru import logger as log
 
 try:
-    from pydantic import BaseSettings, Field
-except ImportError:
     from pydantic.v1 import BaseSettings, Field
+except ImportError:  # pragma: no cover
+    from pydantic import BaseSettings, Field
 
 
 class CoreOptions(BaseSettings):
