@@ -418,7 +418,7 @@ def iscc_normalize(iscc_code):
             raise ValueError(f"Malformed multiformat codec: {decoded[:2]}")
         iscc_code = encode_base32(decoded[2:])
     else:
-        prefix = iscc_code.lstrip("ISCC:").lstrip("iscc:")[:2].upper()
+        prefix = iscc_code.upper().replace("ISCC:", "")[:2]
         if prefix not in PREFIXES:
             raise ValueError(f"ISCC starts with invalid prefix {prefix}")
 

@@ -2,6 +2,7 @@
 
 ## [1.0.8] - Unreleased
 - Import from pydantic v2 lib first
+- Fixed prefix extraction during normalization
 
 ## [1.0.7] - 2024-01-07
 - Support pydantic v1 & v2
