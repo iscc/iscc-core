@@ -2,7 +2,7 @@
 import inspect
 from pprint import pprint
 import iscc_core
-import imp
+import importlib.util
 import os
 import ast
 from os.path import dirname, join
@@ -13,14 +13,19 @@ PKG_DIR = dirname(iscc_core.__file__)
 
 
 def package_contents(package_name):
-    file, pathname, description = imp.find_module(package_name)
-    if file:
-        raise ImportError("Not a package: %r", package_name)
-    # Use a set because some may be both source and compiled.
+    spec = importlib.util.find_spec(package_name)
+    if spec is None:
+        raise ImportError("Package not found: %r" % package_name)
+
+    if spec.submodule_search_locations is None:
+        raise ImportError("Not a package: %r" % package_name)
+
+    package_path = spec.submodule_search_locations[0]
+
     return set(
         [
-            join(PKG_DIR, module)
-            for module in os.listdir(pathname)
+            os.path.join(package_path, module)
+            for module in os.listdir(package_path)
             if module.endswith(MODULE_EXTENSIONS)
         ]
     )
