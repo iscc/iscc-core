@@ -246,7 +246,6 @@ class Code:
         # Length
         ln_bits = bits or cls.rgen.choice(list(LN)).value
         if mt == MT.ISCC:
-            # TODO fix ramdom ISCC with custom SubType generation
             ln_code = encode_units(units)
         else:
             ln_code = encode_length(mt, bits)
@@ -289,15 +288,6 @@ class Code:
     def mf_base64url(self) -> str:
         """Multiformats base64url encoded."""
         return "u" + encode_base64(self.mc_bytes)
-
-    # TODO: bech32m support
-    # @property
-    # def bech32m(self):
-    #     """Encode as bech32m with hrp `iscc`"""
-    #     data = [bech32.CHARSET.find(c) for c in self.code.lower()]
-    #     return bech32.bech32_encode(
-    #         "iscc", data, bech32.Encoding.BECH32M
-    #     )
 
     def __xor__(self, other) -> int:
         """Use XOR operator for hamming distance calculation."""

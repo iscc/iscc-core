@@ -23,7 +23,6 @@ def test_gen_meta_code_name_only():
 
 
 def test_gen_meta_code_name_and_desc():
-    # TODO handle cases with consecutive newlines and spaces in between
     result = ic.gen_meta_code_v0("Hello  World", "# Some\n\n\n description")
     assert result == {
         "iscc": "ISCC:AAAWN77F72MBZZK3",

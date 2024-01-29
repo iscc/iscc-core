@@ -41,7 +41,6 @@ def test_gen_iscc_code_v0_no_meta():
 def test_gen_iscc_code_v0_no_meta_content():
     icode = ic.gen_iscc_code_v0([DID_128, IID_256])
     assert icode == {"iscc": "ISCC:KUAFVC5DMJJGYKZ4MQV6B6THIBBUG"}
-    # TODO mabye show length for SubType SUM as we now the unit composition.
     # we may also get a ISCC-SUM-V0-256 version
     assert ic.iscc_explain(icode["iscc"]) == "ISCC-SUM-V0-DI-5a8ba362526c2b3c642be0fa67404343"
 

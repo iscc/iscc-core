@@ -617,3 +617,23 @@ def test_iscc_code_no_content_code():
 def test_models_Code_rnd_custom_subtype_raises():
     with pytest.raises(ValueError):
         ic.Code.rnd(ic.MT.ISCC, st=ic.ST_ISCC.TEXT)
+
+
+def test_iscc_validate_base_encoding_error():
+    sample = "ISCC:KACT4EBWK27737D2AYCJRAL5Z36G76RFRMO4554RU26HZ4ORJGIVHDI"
+    assert ic.iscc_validate(sample, strict=False) is True
+
+    assert ic.iscc_validate(sample[:-1], strict=False) is False
+
+    with pytest.raises(ValueError) as excinfo:
+        ic.iscc_validate(sample[:-1], strict=True)
+    assert str(excinfo.value) == "Incorrect padding"
+
+
+def test_iscc_validate_bad_length():
+    sample = "ISCC:KACT4EBWK27737D2AYCJRAL5Z36G76RFRMO4554RU26HZ"
+    assert ic.iscc_validate(sample, strict=False) is False
+
+    with pytest.raises(ValueError) as excinfo:
+        ic.iscc_validate(sample, strict=True)
+    assert str(excinfo.value) == "Header expects 32 but got 26 bytes"

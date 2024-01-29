@@ -19,7 +19,7 @@ from iscc_core.constants import *
 def encode_component(mtype, stype, version, bit_length, digest):
     # type: (MainType, SubType, Version, Length, bytes) -> str
     """
-    Encode an ISCC unit inlcuding header and body with standard base32 encoding.
+    Encode an ISCC-UNIT inlcuding header and body with standard base32 encoding.
 
     !!! note
         The `length` value must be the **length in number of bits** for the component.
@@ -67,11 +67,10 @@ def encode_header(mtype, stype, version=0, length=1):
     :rtype: bytes
 
     """
-    # TODO verify that all header params and there combination is valid
     header = bitarray()
     for n in (mtype, stype, version, length):
         header += encode_varnibble(n)
-    # Append zero-padding if required (right side, least significant bits).
+    # Append zero-padding if required (right side, least-significant bits).
     header.fill()
     return header.tobytes()
 
@@ -238,7 +237,7 @@ def encode_length(mtype, length):
         if 0 <= length <= 7:
             return length
         raise ValueError(error)
-    # counter byte lenght encoding
+    # counter byte length encoding
     elif mtype == MT.ID:
         if 64 <= length <= 96:
             return (length - 64) // 8
@@ -503,7 +502,7 @@ def iscc_validate(iscc, strict=True):
     - an ISCC-CODE or ISCC-UNIT
     - encoded with base32 upper without padding
     - has a valid combination of header values
-    - is represented in its canonical URI form
+    - is represented in its canonical form
 
     :param str iscc: ISCC string
     :param bool strict: Raise an exeption if validation fails (default True)
@@ -519,7 +518,18 @@ def iscc_validate(iscc, strict=True):
         else:
             return False
 
+    # Base32 encoding test
+    try:
+        decode_base32(iscc.split(":")[1])
+    except Exception as e:
+        if strict:
+            raise ValueError(e)
+        else:
+            return False
+
     cleaned = iscc_clean(iscc)
+
+    # Prefix test
     prefix = cleaned[:2]
     if prefix not in PREFIXES:
         if strict:
@@ -527,10 +537,20 @@ def iscc_validate(iscc, strict=True):
         else:
             return False
 
+    # Version test
     m, s, v, l, t = decode_header(decode_base32(cleaned))
     if v != 0:
         if strict:
             raise ValueError(f"Unknown version {v} in version header")
+        else:
+            return False
+
+    # Length test
+    expected_nbyptes = decode_length(m, l).value // 8
+    actual_nbyptes = len(t)
+    if expected_nbyptes != actual_nbyptes:
+        if strict:
+            raise ValueError(f"Header expects {expected_nbyptes} but got {actual_nbyptes} bytes")
         else:
             return False
 
