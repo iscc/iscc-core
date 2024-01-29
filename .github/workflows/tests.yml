@@ -62,5 +62,5 @@ jobs:
       - name: Collect Wheel
         uses: actions/upload-artifact@v4
         with:
-          name: wheel-${{ matrix.os }}-${{ matrix.version }}
+          name: wheel-${{ matrix.os }}-${{ matrix.python-version }}
           path: dist/*.whl
