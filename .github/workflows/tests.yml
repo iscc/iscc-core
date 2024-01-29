@@ -40,12 +40,6 @@ jobs:
       - name: Build Wheel
         run: poetry build -f wheel
 
-      - name: Collect Wheel
-        uses: actions/upload-artifact@v4
-        with:
-          path: dist/*.whl
-          overwrite: true
-
       - name: Test Wheel Installation
         if: runner.os != 'Windows'
         run: |
@@ -64,3 +58,9 @@ jobs:
           pip install "dist/$wheelFile"
           python -c "import iscc_core; iscc_core.conformance_selftest()"
           python -c "import iscc_core; print(iscc_core.turbo())"
+
+      - name: Collect Wheel
+        uses: actions/upload-artifact@v4
+        with:
+          name: wheel-${{ matrix.os }}-${{ matrix.version }}
+          path: dist/*.whl
