@@ -27,20 +27,56 @@ general digital asset management use-cases.
 
 ## What is `iscc-core`
 
-`iscc-core` is a python based reference library of the core algorithms to create standard-compliant
-ISCC codes. It also a good reference for porting ISCC to other programming languages.
+`iscc-core` is the python based reference implementation of the ISCC core algorithms as defined by
+[ISO 24138](https://www.iso.org/standard/77899.html). It also a good reference for porting ISCC to
+other programming languages.
 
 !!! tip
     This is a low level reference implementation that does not inlcude features like mediatype
     detection, metadata extraction or file format specific content extraction. Please have a look at
-    the [iscc-sdk](https://github.com/iscc/iscc-sdk) which adds those higher level features on top
-    of the `iscc-core` library.
+    [iscc-sdk](https://github.com/iscc/iscc-sdk) which adds those higher level features on top of
+    the `iscc-core` library.
 
-## Project Status
+## Implementors Guide
 
-The ISCC is under development as [ISO/CD 24138](https://www.iso.org/standard/77899.html) -
-International Standard Content Code within
-[ISO/TC 46/SC 9/WG 18](https://www.iso.org/committee/48836.html).
+### Reproducible Environment
+
+For reproducible installation of the reference implementation we included a `poetry.lock` file with
+pinned dependencies. Install them using [Python Poetry](https://pypi.org/project/poetry/) with the
+command `poetry install` in the root folder.
+
+### Repository structure
+
+```
+iscc-core
+├── docs       # Markdown and other assets for mkdocs documentation
+├── examples   # Example scripts using the reference code
+├── iscc_core  # Actual source code of the reference implementation
+├── tests      # Tests for the reference implementation
+└── tools      # Development tools
+```
+
+### Testing & Conformance
+
+The reference implementation comes with 100% test coverage. To run the conformance selftest from the
+repository root use `poetry run python -m iscc_core`. To run the complete test suite use
+`poetry run pytest`.
+
+To build a conformant implementation work through the follwing top level entrypoint functions:
+
+```
+gen_meta_code_v0
+gen_text_code_v0
+gen_image_code_v0
+gen_audio_code_v0
+gen_video_code_v0
+gen_mixed_code_v0
+gen_data_code_v0
+gen_instance_code_v0
+gen_iscc_code_v0
+```
+
+The corresponding test vectors can be found in `iscc_core/data.json`.
 
 ## ISCC Architecture
 

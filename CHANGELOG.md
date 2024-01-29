@@ -1,8 +1,9 @@
 # Changelog
 
 ## [1.0.8] - Unreleased
-- Import from pydantic v2 lib first
-- Fixed prefix extraction during normalization
+- Added implementors guide to README.md
+- Improved pydantic v2 import logic
+- Improved prefix extraction during normalization
 - Improved canonical ISCC string validation
 
 ## [1.0.7] - 2024-01-07
