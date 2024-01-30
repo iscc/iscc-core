@@ -95,7 +95,7 @@ The corresponding test vectors can be found in `iscc_core/data.json`.
 
 ## Installation
 
-Use the package manager [pip](https://pip.pypa.io/en/stable/) to install `iscc-core`.
+Use the package manager [pip](https://pip.pypa.io/en/stable/) to install `iscc-core` as a library.
 
 ```bash
 pip install iscc-core
@@ -180,7 +180,7 @@ ISCC:KACT4EBWK27737D2AYCJRAL5Z36G7Y7HA2BMECKMVRBEQXR2BJOS6NA
 
 ## Documentation
 
-Documentation is published at<https://core.iscc.codes>
+Documentation is published at <https://core.iscc.codes>
 
 ## Development
 
