@@ -525,9 +525,36 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#project-status" class="md-nav__link">
-    Project Status
+  <a href="#implementors-guide" class="md-nav__link">
+    Implementors Guide
   </a>
+  
+    <nav class="md-nav" aria-label="Implementors Guide">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#reproducible-environment" class="md-nav__link">
+    Reproducible Environment
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#repository-structure" class="md-nav__link">
+    Repository structure
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#testing-conformance" class="md-nav__link">
+    Testing &amp; Conformance
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
   
 </li>
       
@@ -1238,19 +1265,45 @@ synchronization, indexing, integrity verification, timestamping, versioning, dat
 similarity clustering, anomaly detection, usage tracking, allocation of royalties, fact-checking and
 general digital asset management use-cases.</p>
 <h2 id="what-is-iscc-core">What is <code>iscc-core</code><a class="headerlink" href="#what-is-iscc-core" title="Permanent link">#</a></h2>
-<p><code>iscc-core</code> is a python based reference library of the core algorithms to create standard-compliant
-ISCC codes. It also a good reference for porting ISCC to other programming languages.</p>
+<p><code>iscc-core</code> is the python based reference implementation of the ISCC core algorithms as defined by
+<a href="https://www.iso.org/standard/77899.html">ISO 24138</a>. It also a good reference for porting ISCC to
+other programming languages.</p>
 <div class="admonition tip">
 <p class="admonition-title">Tip</p>
 <p>This is a low level reference implementation that does not inlcude features like mediatype
 detection, metadata extraction or file format specific content extraction. Please have a look at
-the <a href="https://github.com/iscc/iscc-sdk">iscc-sdk</a> which adds those higher level features on top
-of the <code>iscc-core</code> library.</p>
+<a href="https://github.com/iscc/iscc-sdk">iscc-sdk</a> which adds those higher level features on top of
+the <code>iscc-core</code> library.</p>
 </div>
-<h2 id="project-status">Project Status<a class="headerlink" href="#project-status" title="Permanent link">#</a></h2>
-<p>The ISCC is under development as <a href="https://www.iso.org/standard/77899.html">ISO/CD 24138</a> -
-International Standard Content Code within
-<a href="https://www.iso.org/committee/48836.html">ISO/TC 46/SC 9/WG 18</a>.</p>
+<h2 id="implementors-guide">Implementors Guide<a class="headerlink" href="#implementors-guide" title="Permanent link">#</a></h2>
+<h3 id="reproducible-environment">Reproducible Environment<a class="headerlink" href="#reproducible-environment" title="Permanent link">#</a></h3>
+<p>For reproducible installation of the reference implementation we included a <code>poetry.lock</code> file with
+pinned dependencies. Install them using <a href="https://pypi.org/project/poetry/">Python Poetry</a> with the
+command <code>poetry install</code> in the root folder.</p>
+<h3 id="repository-structure">Repository structure<a class="headerlink" href="#repository-structure" title="Permanent link">#</a></h3>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>iscc-core
+<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>├── docs       # Markdown and other assets for mkdocs documentation
+<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>├── examples   # Example scripts using the reference code
+<a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a>├── iscc_core  # Actual source code of the reference implementation
+<a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a>├── tests      # Tests for the reference implementation
+<a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a>└── tools      # Development tools
+</code></pre></div>
+<h3 id="testing-conformance">Testing &amp; Conformance<a class="headerlink" href="#testing-conformance" title="Permanent link">#</a></h3>
+<p>The reference implementation comes with 100% test coverage. To run the conformance selftest from the
+repository root use <code>poetry run python -m iscc_core</code>. To run the complete test suite use
+<code>poetry run pytest</code>.</p>
+<p>To build a conformant implementation work through the follwing top level entrypoint functions:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>gen_meta_code_v0
+<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>gen_text_code_v0
+<a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a>gen_image_code_v0
+<a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a>gen_audio_code_v0
+<a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a>gen_video_code_v0
+<a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a>gen_mixed_code_v0
+<a id="__codelineno-1-7" name="__codelineno-1-7" href="#__codelineno-1-7"></a>gen_data_code_v0
+<a id="__codelineno-1-8" name="__codelineno-1-8" href="#__codelineno-1-8"></a>gen_instance_code_v0
+<a id="__codelineno-1-9" name="__codelineno-1-9" href="#__codelineno-1-9"></a>gen_iscc_code_v0
+</code></pre></div>
+<p>The corresponding test vectors can be found in <code>iscc_core/data.json</code>.</p>
 <h2 id="iscc-architecture">ISCC Architecture<a class="headerlink" href="#iscc-architecture" title="Permanent link">#</a></h2>
 <p><img alt="ISCC Architecture" src="https://raw.githubusercontent.com/iscc/iscc-core/master/docs/images/iscc-codec-light.png#only-light" />
 <img alt="ISCC Architecture" src="https://raw.githubusercontent.com/iscc/iscc-core/master/docs/images/iscc-codec-dark.png#only-dark" /></p>
@@ -1305,78 +1358,78 @@ International Standard Content Code within
 </table>
 <h2 id="installation">Installation<a class="headerlink" href="#installation" title="Permanent link">#</a></h2>
 <p>Use the package manager <a href="https://pip.pypa.io/en/stable/">pip</a> to install <code>iscc-core</code>.</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>pip<span class="w"> </span>install<span class="w"> </span>iscc-core
+<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>pip<span class="w"> </span>install<span class="w"> </span>iscc-core
 </code></pre></div>
 <h2 id="quick-start">Quick Start<a class="headerlink" href="#quick-start" title="Permanent link">#</a></h2>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="kn">import</span> <span class="nn">json</span>
-<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="kn">import</span> <span class="nn">iscc_core</span> <span class="k">as</span> <span class="nn">ic</span>
-<a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a>
-<a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a><span class="n">meta_code</span> <span class="o">=</span> <span class="n">ic</span><span class="o">.</span><span class="n">gen_meta_code</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s2">&quot;ISCC Test Document!&quot;</span><span class="p">)</span>
-<a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a>
-<a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a><span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Meta-Code:     </span><span class="si">{</span><span class="n">meta_code</span><span class="p">[</span><span class="s1">&#39;iscc&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
-<a id="__codelineno-1-7" name="__codelineno-1-7" href="#__codelineno-1-7"></a><span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Structure:     </span><span class="si">{</span><span class="n">ic</span><span class="o">.</span><span class="n">iscc_explain</span><span class="p">(</span><span class="n">meta_code</span><span class="p">[</span><span class="s1">&#39;iscc&#39;</span><span class="p">])</span><span class="si">}</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
-<a id="__codelineno-1-8" name="__codelineno-1-8" href="#__codelineno-1-8"></a>
-<a id="__codelineno-1-9" name="__codelineno-1-9" href="#__codelineno-1-9"></a><span class="c1"># Extract text from file</span>
-<a id="__codelineno-1-10" name="__codelineno-1-10" href="#__codelineno-1-10"></a><span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s2">&quot;demo.txt&quot;</span><span class="p">,</span> <span class="s2">&quot;rt&quot;</span><span class="p">,</span> <span class="n">encoding</span><span class="o">=</span><span class="s2">&quot;utf-8&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">stream</span><span class="p">:</span>
-<a id="__codelineno-1-11" name="__codelineno-1-11" href="#__codelineno-1-11"></a>    <span class="n">text</span> <span class="o">=</span> <span class="n">stream</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
-<a id="__codelineno-1-12" name="__codelineno-1-12" href="#__codelineno-1-12"></a>    <span class="n">text_code</span> <span class="o">=</span> <span class="n">ic</span><span class="o">.</span><span class="n">gen_text_code_v0</span><span class="p">(</span><span class="n">text</span><span class="p">)</span>
-<a id="__codelineno-1-13" name="__codelineno-1-13" href="#__codelineno-1-13"></a>    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Text-Code:     </span><span class="si">{</span><span class="n">text_code</span><span class="p">[</span><span class="s1">&#39;iscc&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
-<a id="__codelineno-1-14" name="__codelineno-1-14" href="#__codelineno-1-14"></a>    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Structure:     </span><span class="si">{</span><span class="n">ic</span><span class="o">.</span><span class="n">iscc_explain</span><span class="p">(</span><span class="n">text_code</span><span class="p">[</span><span class="s1">&#39;iscc&#39;</span><span class="p">])</span><span class="si">}</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
-<a id="__codelineno-1-15" name="__codelineno-1-15" href="#__codelineno-1-15"></a>
-<a id="__codelineno-1-16" name="__codelineno-1-16" href="#__codelineno-1-16"></a><span class="c1"># Process raw bytes of textfile</span>
-<a id="__codelineno-1-17" name="__codelineno-1-17" href="#__codelineno-1-17"></a><span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s2">&quot;demo.txt&quot;</span><span class="p">,</span> <span class="s2">&quot;rb&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">stream</span><span class="p">:</span>
-<a id="__codelineno-1-18" name="__codelineno-1-18" href="#__codelineno-1-18"></a>    <span class="n">data_code</span> <span class="o">=</span> <span class="n">ic</span><span class="o">.</span><span class="n">gen_data_code</span><span class="p">(</span><span class="n">stream</span><span class="p">)</span>
-<a id="__codelineno-1-19" name="__codelineno-1-19" href="#__codelineno-1-19"></a>    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Data-Code:     </span><span class="si">{</span><span class="n">data_code</span><span class="p">[</span><span class="s1">&#39;iscc&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
-<a id="__codelineno-1-20" name="__codelineno-1-20" href="#__codelineno-1-20"></a>    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Structure:     </span><span class="si">{</span><span class="n">ic</span><span class="o">.</span><span class="n">iscc_explain</span><span class="p">(</span><span class="n">data_code</span><span class="p">[</span><span class="s1">&#39;iscc&#39;</span><span class="p">])</span><span class="si">}</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
-<a id="__codelineno-1-21" name="__codelineno-1-21" href="#__codelineno-1-21"></a>
-<a id="__codelineno-1-22" name="__codelineno-1-22" href="#__codelineno-1-22"></a>    <span class="n">stream</span><span class="o">.</span><span class="n">seek</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
-<a id="__codelineno-1-23" name="__codelineno-1-23" href="#__codelineno-1-23"></a>    <span class="n">instance_code</span> <span class="o">=</span> <span class="n">ic</span><span class="o">.</span><span class="n">gen_instance_code</span><span class="p">(</span><span class="n">stream</span><span class="p">)</span>
-<a id="__codelineno-1-24" name="__codelineno-1-24" href="#__codelineno-1-24"></a>    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Instance-Code: </span><span class="si">{</span><span class="n">instance_code</span><span class="p">[</span><span class="s1">&#39;iscc&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
-<a id="__codelineno-1-25" name="__codelineno-1-25" href="#__codelineno-1-25"></a>    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Structure:     </span><span class="si">{</span><span class="n">ic</span><span class="o">.</span><span class="n">iscc_explain</span><span class="p">(</span><span class="n">instance_code</span><span class="p">[</span><span class="s1">&#39;iscc&#39;</span><span class="p">])</span><span class="si">}</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
-<a id="__codelineno-1-26" name="__codelineno-1-26" href="#__codelineno-1-26"></a>
-<a id="__codelineno-1-27" name="__codelineno-1-27" href="#__codelineno-1-27"></a><span class="c1"># Combine ISCC-UNITs into ISCC-CODE</span>
-<a id="__codelineno-1-28" name="__codelineno-1-28" href="#__codelineno-1-28"></a><span class="n">iscc_code</span> <span class="o">=</span> <span class="n">ic</span><span class="o">.</span><span class="n">gen_iscc_code</span><span class="p">(</span>
-<a id="__codelineno-1-29" name="__codelineno-1-29" href="#__codelineno-1-29"></a>    <span class="p">(</span><span class="n">meta_code</span><span class="p">[</span><span class="s2">&quot;iscc&quot;</span><span class="p">],</span> <span class="n">text_code</span><span class="p">[</span><span class="s2">&quot;iscc&quot;</span><span class="p">],</span> <span class="n">data_code</span><span class="p">[</span><span class="s2">&quot;iscc&quot;</span><span class="p">],</span> <span class="n">instance_code</span><span class="p">[</span><span class="s2">&quot;iscc&quot;</span><span class="p">])</span>
-<a id="__codelineno-1-30" name="__codelineno-1-30" href="#__codelineno-1-30"></a><span class="p">)</span>
-<a id="__codelineno-1-31" name="__codelineno-1-31" href="#__codelineno-1-31"></a>
-<a id="__codelineno-1-32" name="__codelineno-1-32" href="#__codelineno-1-32"></a><span class="c1"># Create convenience `Code` object from ISCC string</span>
-<a id="__codelineno-1-33" name="__codelineno-1-33" href="#__codelineno-1-33"></a><span class="n">iscc_obj</span> <span class="o">=</span> <span class="n">ic</span><span class="o">.</span><span class="n">Code</span><span class="p">(</span><span class="n">iscc_code</span><span class="p">[</span><span class="s2">&quot;iscc&quot;</span><span class="p">])</span>
-<a id="__codelineno-1-34" name="__codelineno-1-34" href="#__codelineno-1-34"></a><span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;ISCC-CODE:     </span><span class="si">{</span><span class="n">ic</span><span class="o">.</span><span class="n">iscc_normalize</span><span class="p">(</span><span class="n">iscc_obj</span><span class="o">.</span><span class="n">code</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
-<a id="__codelineno-1-35" name="__codelineno-1-35" href="#__codelineno-1-35"></a><span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Structure:     </span><span class="si">{</span><span class="n">iscc_obj</span><span class="o">.</span><span class="n">explain</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
-<a id="__codelineno-1-36" name="__codelineno-1-36" href="#__codelineno-1-36"></a><span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Multiformat:   </span><span class="si">{</span><span class="n">iscc_obj</span><span class="o">.</span><span class="n">mf_base32</span><span class="si">}</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
-<a id="__codelineno-1-37" name="__codelineno-1-37" href="#__codelineno-1-37"></a>
-<a id="__codelineno-1-38" name="__codelineno-1-38" href="#__codelineno-1-38"></a><span class="c1"># Compare with changed ISCC-CODE:</span>
-<a id="__codelineno-1-39" name="__codelineno-1-39" href="#__codelineno-1-39"></a><span class="n">new_dc</span><span class="p">,</span> <span class="n">new_ic</span> <span class="o">=</span> <span class="n">ic</span><span class="o">.</span><span class="n">Code</span><span class="o">.</span><span class="n">rnd</span><span class="p">(</span><span class="n">mt</span><span class="o">=</span><span class="n">ic</span><span class="o">.</span><span class="n">MT</span><span class="o">.</span><span class="n">DATA</span><span class="p">),</span> <span class="n">ic</span><span class="o">.</span><span class="n">Code</span><span class="o">.</span><span class="n">rnd</span><span class="p">(</span><span class="n">mt</span><span class="o">=</span><span class="n">ic</span><span class="o">.</span><span class="n">MT</span><span class="o">.</span><span class="n">INSTANCE</span><span class="p">)</span>
-<a id="__codelineno-1-40" name="__codelineno-1-40" href="#__codelineno-1-40"></a><span class="n">new_iscc</span> <span class="o">=</span> <span class="n">ic</span><span class="o">.</span><span class="n">gen_iscc_code</span><span class="p">((</span><span class="n">meta_code</span><span class="p">[</span><span class="s2">&quot;iscc&quot;</span><span class="p">],</span> <span class="n">text_code</span><span class="p">[</span><span class="s2">&quot;iscc&quot;</span><span class="p">],</span> <span class="n">new_dc</span><span class="o">.</span><span class="n">uri</span><span class="p">,</span> <span class="n">new_ic</span><span class="o">.</span><span class="n">uri</span><span class="p">))</span>
-<a id="__codelineno-1-41" name="__codelineno-1-41" href="#__codelineno-1-41"></a><span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Compare ISCC-CODES:</span><span class="se">\n</span><span class="si">{</span><span class="n">iscc_obj</span><span class="o">.</span><span class="n">uri</span><span class="si">}</span><span class="se">\n</span><span class="si">{</span><span class="n">new_iscc</span><span class="p">[</span><span class="s1">&#39;iscc&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
-<a id="__codelineno-1-42" name="__codelineno-1-42" href="#__codelineno-1-42"></a><span class="nb">print</span><span class="p">(</span><span class="n">json</span><span class="o">.</span><span class="n">dumps</span><span class="p">(</span><span class="n">ic</span><span class="o">.</span><span class="n">iscc_compare</span><span class="p">(</span><span class="n">iscc_obj</span><span class="o">.</span><span class="n">code</span><span class="p">,</span> <span class="n">new_iscc</span><span class="p">[</span><span class="s2">&quot;iscc&quot;</span><span class="p">]),</span> <span class="n">indent</span><span class="o">=</span><span class="mi">2</span><span class="p">))</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="kn">import</span> <span class="nn">json</span>
+<a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a><span class="kn">import</span> <span class="nn">iscc_core</span> <span class="k">as</span> <span class="nn">ic</span>
+<a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a>
+<a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a><span class="n">meta_code</span> <span class="o">=</span> <span class="n">ic</span><span class="o">.</span><span class="n">gen_meta_code</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s2">&quot;ISCC Test Document!&quot;</span><span class="p">)</span>
+<a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a>
+<a id="__codelineno-3-6" name="__codelineno-3-6" href="#__codelineno-3-6"></a><span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Meta-Code:     </span><span class="si">{</span><span class="n">meta_code</span><span class="p">[</span><span class="s1">&#39;iscc&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<a id="__codelineno-3-7" name="__codelineno-3-7" href="#__codelineno-3-7"></a><span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Structure:     </span><span class="si">{</span><span class="n">ic</span><span class="o">.</span><span class="n">iscc_explain</span><span class="p">(</span><span class="n">meta_code</span><span class="p">[</span><span class="s1">&#39;iscc&#39;</span><span class="p">])</span><span class="si">}</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+<a id="__codelineno-3-8" name="__codelineno-3-8" href="#__codelineno-3-8"></a>
+<a id="__codelineno-3-9" name="__codelineno-3-9" href="#__codelineno-3-9"></a><span class="c1"># Extract text from file</span>
+<a id="__codelineno-3-10" name="__codelineno-3-10" href="#__codelineno-3-10"></a><span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s2">&quot;demo.txt&quot;</span><span class="p">,</span> <span class="s2">&quot;rt&quot;</span><span class="p">,</span> <span class="n">encoding</span><span class="o">=</span><span class="s2">&quot;utf-8&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">stream</span><span class="p">:</span>
+<a id="__codelineno-3-11" name="__codelineno-3-11" href="#__codelineno-3-11"></a>    <span class="n">text</span> <span class="o">=</span> <span class="n">stream</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
+<a id="__codelineno-3-12" name="__codelineno-3-12" href="#__codelineno-3-12"></a>    <span class="n">text_code</span> <span class="o">=</span> <span class="n">ic</span><span class="o">.</span><span class="n">gen_text_code_v0</span><span class="p">(</span><span class="n">text</span><span class="p">)</span>
+<a id="__codelineno-3-13" name="__codelineno-3-13" href="#__codelineno-3-13"></a>    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Text-Code:     </span><span class="si">{</span><span class="n">text_code</span><span class="p">[</span><span class="s1">&#39;iscc&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<a id="__codelineno-3-14" name="__codelineno-3-14" href="#__codelineno-3-14"></a>    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Structure:     </span><span class="si">{</span><span class="n">ic</span><span class="o">.</span><span class="n">iscc_explain</span><span class="p">(</span><span class="n">text_code</span><span class="p">[</span><span class="s1">&#39;iscc&#39;</span><span class="p">])</span><span class="si">}</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+<a id="__codelineno-3-15" name="__codelineno-3-15" href="#__codelineno-3-15"></a>
+<a id="__codelineno-3-16" name="__codelineno-3-16" href="#__codelineno-3-16"></a><span class="c1"># Process raw bytes of textfile</span>
+<a id="__codelineno-3-17" name="__codelineno-3-17" href="#__codelineno-3-17"></a><span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s2">&quot;demo.txt&quot;</span><span class="p">,</span> <span class="s2">&quot;rb&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">stream</span><span class="p">:</span>
+<a id="__codelineno-3-18" name="__codelineno-3-18" href="#__codelineno-3-18"></a>    <span class="n">data_code</span> <span class="o">=</span> <span class="n">ic</span><span class="o">.</span><span class="n">gen_data_code</span><span class="p">(</span><span class="n">stream</span><span class="p">)</span>
+<a id="__codelineno-3-19" name="__codelineno-3-19" href="#__codelineno-3-19"></a>    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Data-Code:     </span><span class="si">{</span><span class="n">data_code</span><span class="p">[</span><span class="s1">&#39;iscc&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<a id="__codelineno-3-20" name="__codelineno-3-20" href="#__codelineno-3-20"></a>    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Structure:     </span><span class="si">{</span><span class="n">ic</span><span class="o">.</span><span class="n">iscc_explain</span><span class="p">(</span><span class="n">data_code</span><span class="p">[</span><span class="s1">&#39;iscc&#39;</span><span class="p">])</span><span class="si">}</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+<a id="__codelineno-3-21" name="__codelineno-3-21" href="#__codelineno-3-21"></a>
+<a id="__codelineno-3-22" name="__codelineno-3-22" href="#__codelineno-3-22"></a>    <span class="n">stream</span><span class="o">.</span><span class="n">seek</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+<a id="__codelineno-3-23" name="__codelineno-3-23" href="#__codelineno-3-23"></a>    <span class="n">instance_code</span> <span class="o">=</span> <span class="n">ic</span><span class="o">.</span><span class="n">gen_instance_code</span><span class="p">(</span><span class="n">stream</span><span class="p">)</span>
+<a id="__codelineno-3-24" name="__codelineno-3-24" href="#__codelineno-3-24"></a>    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Instance-Code: </span><span class="si">{</span><span class="n">instance_code</span><span class="p">[</span><span class="s1">&#39;iscc&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<a id="__codelineno-3-25" name="__codelineno-3-25" href="#__codelineno-3-25"></a>    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Structure:     </span><span class="si">{</span><span class="n">ic</span><span class="o">.</span><span class="n">iscc_explain</span><span class="p">(</span><span class="n">instance_code</span><span class="p">[</span><span class="s1">&#39;iscc&#39;</span><span class="p">])</span><span class="si">}</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+<a id="__codelineno-3-26" name="__codelineno-3-26" href="#__codelineno-3-26"></a>
+<a id="__codelineno-3-27" name="__codelineno-3-27" href="#__codelineno-3-27"></a><span class="c1"># Combine ISCC-UNITs into ISCC-CODE</span>
+<a id="__codelineno-3-28" name="__codelineno-3-28" href="#__codelineno-3-28"></a><span class="n">iscc_code</span> <span class="o">=</span> <span class="n">ic</span><span class="o">.</span><span class="n">gen_iscc_code</span><span class="p">(</span>
+<a id="__codelineno-3-29" name="__codelineno-3-29" href="#__codelineno-3-29"></a>    <span class="p">(</span><span class="n">meta_code</span><span class="p">[</span><span class="s2">&quot;iscc&quot;</span><span class="p">],</span> <span class="n">text_code</span><span class="p">[</span><span class="s2">&quot;iscc&quot;</span><span class="p">],</span> <span class="n">data_code</span><span class="p">[</span><span class="s2">&quot;iscc&quot;</span><span class="p">],</span> <span class="n">instance_code</span><span class="p">[</span><span class="s2">&quot;iscc&quot;</span><span class="p">])</span>
+<a id="__codelineno-3-30" name="__codelineno-3-30" href="#__codelineno-3-30"></a><span class="p">)</span>
+<a id="__codelineno-3-31" name="__codelineno-3-31" href="#__codelineno-3-31"></a>
+<a id="__codelineno-3-32" name="__codelineno-3-32" href="#__codelineno-3-32"></a><span class="c1"># Create convenience `Code` object from ISCC string</span>
+<a id="__codelineno-3-33" name="__codelineno-3-33" href="#__codelineno-3-33"></a><span class="n">iscc_obj</span> <span class="o">=</span> <span class="n">ic</span><span class="o">.</span><span class="n">Code</span><span class="p">(</span><span class="n">iscc_code</span><span class="p">[</span><span class="s2">&quot;iscc&quot;</span><span class="p">])</span>
+<a id="__codelineno-3-34" name="__codelineno-3-34" href="#__codelineno-3-34"></a><span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;ISCC-CODE:     </span><span class="si">{</span><span class="n">ic</span><span class="o">.</span><span class="n">iscc_normalize</span><span class="p">(</span><span class="n">iscc_obj</span><span class="o">.</span><span class="n">code</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<a id="__codelineno-3-35" name="__codelineno-3-35" href="#__codelineno-3-35"></a><span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Structure:     </span><span class="si">{</span><span class="n">iscc_obj</span><span class="o">.</span><span class="n">explain</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<a id="__codelineno-3-36" name="__codelineno-3-36" href="#__codelineno-3-36"></a><span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Multiformat:   </span><span class="si">{</span><span class="n">iscc_obj</span><span class="o">.</span><span class="n">mf_base32</span><span class="si">}</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+<a id="__codelineno-3-37" name="__codelineno-3-37" href="#__codelineno-3-37"></a>
+<a id="__codelineno-3-38" name="__codelineno-3-38" href="#__codelineno-3-38"></a><span class="c1"># Compare with changed ISCC-CODE:</span>
+<a id="__codelineno-3-39" name="__codelineno-3-39" href="#__codelineno-3-39"></a><span class="n">new_dc</span><span class="p">,</span> <span class="n">new_ic</span> <span class="o">=</span> <span class="n">ic</span><span class="o">.</span><span class="n">Code</span><span class="o">.</span><span class="n">rnd</span><span class="p">(</span><span class="n">mt</span><span class="o">=</span><span class="n">ic</span><span class="o">.</span><span class="n">MT</span><span class="o">.</span><span class="n">DATA</span><span class="p">),</span> <span class="n">ic</span><span class="o">.</span><span class="n">Code</span><span class="o">.</span><span class="n">rnd</span><span class="p">(</span><span class="n">mt</span><span class="o">=</span><span class="n">ic</span><span class="o">.</span><span class="n">MT</span><span class="o">.</span><span class="n">INSTANCE</span><span class="p">)</span>
+<a id="__codelineno-3-40" name="__codelineno-3-40" href="#__codelineno-3-40"></a><span class="n">new_iscc</span> <span class="o">=</span> <span class="n">ic</span><span class="o">.</span><span class="n">gen_iscc_code</span><span class="p">((</span><span class="n">meta_code</span><span class="p">[</span><span class="s2">&quot;iscc&quot;</span><span class="p">],</span> <span class="n">text_code</span><span class="p">[</span><span class="s2">&quot;iscc&quot;</span><span class="p">],</span> <span class="n">new_dc</span><span class="o">.</span><span class="n">uri</span><span class="p">,</span> <span class="n">new_ic</span><span class="o">.</span><span class="n">uri</span><span class="p">))</span>
+<a id="__codelineno-3-41" name="__codelineno-3-41" href="#__codelineno-3-41"></a><span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Compare ISCC-CODES:</span><span class="se">\n</span><span class="si">{</span><span class="n">iscc_obj</span><span class="o">.</span><span class="n">uri</span><span class="si">}</span><span class="se">\n</span><span class="si">{</span><span class="n">new_iscc</span><span class="p">[</span><span class="s1">&#39;iscc&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<a id="__codelineno-3-42" name="__codelineno-3-42" href="#__codelineno-3-42"></a><span class="nb">print</span><span class="p">(</span><span class="n">json</span><span class="o">.</span><span class="n">dumps</span><span class="p">(</span><span class="n">ic</span><span class="o">.</span><span class="n">iscc_compare</span><span class="p">(</span><span class="n">iscc_obj</span><span class="o">.</span><span class="n">code</span><span class="p">,</span> <span class="n">new_iscc</span><span class="p">[</span><span class="s2">&quot;iscc&quot;</span><span class="p">]),</span> <span class="n">indent</span><span class="o">=</span><span class="mi">2</span><span class="p">))</span>
 </code></pre></div>
 <p>The output of this example is as follows:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>Meta-Code:     ISCC:AAAT4EBWK27737D2
-<a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>Structure:     META-NONE-V0-64-3e103656bffdfc7a
-<a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a>
-<a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a>Text-Code:     ISCC:EAAQMBEYQF6457DP
-<a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a>Structure:     CONTENT-TEXT-V0-64-060498817dcefc6f
-<a id="__codelineno-2-6" name="__codelineno-2-6" href="#__codelineno-2-6"></a>
-<a id="__codelineno-2-7" name="__codelineno-2-7" href="#__codelineno-2-7"></a>Data-Code:     ISCC:GAA7UJMLDXHPPENG
-<a id="__codelineno-2-8" name="__codelineno-2-8" href="#__codelineno-2-8"></a>Structure:     DATA-NONE-V0-64-fa258b1dcef791a6
-<a id="__codelineno-2-9" name="__codelineno-2-9" href="#__codelineno-2-9"></a>
-<a id="__codelineno-2-10" name="__codelineno-2-10" href="#__codelineno-2-10"></a>Instance-Code: ISCC:IAA3Y7HR2FEZCU4N
-<a id="__codelineno-2-11" name="__codelineno-2-11" href="#__codelineno-2-11"></a>Structure:     INSTANCE-NONE-V0-64-bc7cf1d14991538d
-<a id="__codelineno-2-12" name="__codelineno-2-12" href="#__codelineno-2-12"></a>
-<a id="__codelineno-2-13" name="__codelineno-2-13" href="#__codelineno-2-13"></a>ISCC-CODE:     ISCC:KACT4EBWK27737D2AYCJRAL5Z36G76RFRMO4554RU26HZ4ORJGIVHDI
-<a id="__codelineno-2-14" name="__codelineno-2-14" href="#__codelineno-2-14"></a>Structure:     ISCC-TEXT-V0-MCDI-3e103656bffdfc7a060498817dcefc6ffa258b1dcef791a6bc7cf1d14991538d
-<a id="__codelineno-2-15" name="__codelineno-2-15" href="#__codelineno-2-15"></a>Multiformat:   bzqavabj6ca3fnp757r5ambeyqf6457dp7isywhoo66i2npd46hiutektru
-<a id="__codelineno-2-16" name="__codelineno-2-16" href="#__codelineno-2-16"></a>
-<a id="__codelineno-2-17" name="__codelineno-2-17" href="#__codelineno-2-17"></a>Compare ISCC-CODES:
-<a id="__codelineno-2-18" name="__codelineno-2-18" href="#__codelineno-2-18"></a>ISCC:KACT4EBWK27737D2AYCJRAL5Z36G76RFRMO4554RU26HZ4ORJGIVHDI
-<a id="__codelineno-2-19" name="__codelineno-2-19" href="#__codelineno-2-19"></a>ISCC:KACT4EBWK27737D2AYCJRAL5Z36G7Y7HA2BMECKMVRBEQXR2BJOS6NA
-<a id="__codelineno-2-20" name="__codelineno-2-20" href="#__codelineno-2-20"></a>{
-<a id="__codelineno-2-21" name="__codelineno-2-21" href="#__codelineno-2-21"></a>  &quot;meta_dist&quot;: 0,
-<a id="__codelineno-2-22" name="__codelineno-2-22" href="#__codelineno-2-22"></a>  &quot;content_dist&quot;: 0,
-<a id="__codelineno-2-23" name="__codelineno-2-23" href="#__codelineno-2-23"></a>  &quot;data_dist&quot;: 33,
-<a id="__codelineno-2-24" name="__codelineno-2-24" href="#__codelineno-2-24"></a>  &quot;instance_match&quot;: false
-<a id="__codelineno-2-25" name="__codelineno-2-25" href="#__codelineno-2-25"></a>}
+<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>Meta-Code:     ISCC:AAAT4EBWK27737D2
+<a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a>Structure:     META-NONE-V0-64-3e103656bffdfc7a
+<a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a>
+<a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a>Text-Code:     ISCC:EAAQMBEYQF6457DP
+<a id="__codelineno-4-5" name="__codelineno-4-5" href="#__codelineno-4-5"></a>Structure:     CONTENT-TEXT-V0-64-060498817dcefc6f
+<a id="__codelineno-4-6" name="__codelineno-4-6" href="#__codelineno-4-6"></a>
+<a id="__codelineno-4-7" name="__codelineno-4-7" href="#__codelineno-4-7"></a>Data-Code:     ISCC:GAA7UJMLDXHPPENG
+<a id="__codelineno-4-8" name="__codelineno-4-8" href="#__codelineno-4-8"></a>Structure:     DATA-NONE-V0-64-fa258b1dcef791a6
+<a id="__codelineno-4-9" name="__codelineno-4-9" href="#__codelineno-4-9"></a>
+<a id="__codelineno-4-10" name="__codelineno-4-10" href="#__codelineno-4-10"></a>Instance-Code: ISCC:IAA3Y7HR2FEZCU4N
+<a id="__codelineno-4-11" name="__codelineno-4-11" href="#__codelineno-4-11"></a>Structure:     INSTANCE-NONE-V0-64-bc7cf1d14991538d
+<a id="__codelineno-4-12" name="__codelineno-4-12" href="#__codelineno-4-12"></a>
+<a id="__codelineno-4-13" name="__codelineno-4-13" href="#__codelineno-4-13"></a>ISCC-CODE:     ISCC:KACT4EBWK27737D2AYCJRAL5Z36G76RFRMO4554RU26HZ4ORJGIVHDI
+<a id="__codelineno-4-14" name="__codelineno-4-14" href="#__codelineno-4-14"></a>Structure:     ISCC-TEXT-V0-MCDI-3e103656bffdfc7a060498817dcefc6ffa258b1dcef791a6bc7cf1d14991538d
+<a id="__codelineno-4-15" name="__codelineno-4-15" href="#__codelineno-4-15"></a>Multiformat:   bzqavabj6ca3fnp757r5ambeyqf6457dp7isywhoo66i2npd46hiutektru
+<a id="__codelineno-4-16" name="__codelineno-4-16" href="#__codelineno-4-16"></a>
+<a id="__codelineno-4-17" name="__codelineno-4-17" href="#__codelineno-4-17"></a>Compare ISCC-CODES:
+<a id="__codelineno-4-18" name="__codelineno-4-18" href="#__codelineno-4-18"></a>ISCC:KACT4EBWK27737D2AYCJRAL5Z36G76RFRMO4554RU26HZ4ORJGIVHDI
+<a id="__codelineno-4-19" name="__codelineno-4-19" href="#__codelineno-4-19"></a>ISCC:KACT4EBWK27737D2AYCJRAL5Z36G7Y7HA2BMECKMVRBEQXR2BJOS6NA
+<a id="__codelineno-4-20" name="__codelineno-4-20" href="#__codelineno-4-20"></a>{
+<a id="__codelineno-4-21" name="__codelineno-4-21" href="#__codelineno-4-21"></a>  &quot;meta_dist&quot;: 0,
+<a id="__codelineno-4-22" name="__codelineno-4-22" href="#__codelineno-4-22"></a>  &quot;content_dist&quot;: 0,
+<a id="__codelineno-4-23" name="__codelineno-4-23" href="#__codelineno-4-23"></a>  &quot;data_dist&quot;: 33,
+<a id="__codelineno-4-24" name="__codelineno-4-24" href="#__codelineno-4-24"></a>  &quot;instance_match&quot;: false
+<a id="__codelineno-4-25" name="__codelineno-4-25" href="#__codelineno-4-25"></a>}
 </code></pre></div>
 <h2 id="documentation">Documentation<a class="headerlink" href="#documentation" title="Permanent link">#</a></h2>
 <p>Documentation is published at<a href="https://core.iscc.codes">https://core.iscc.codes</a></p>
@@ -1387,40 +1440,40 @@ International Standard Content Code within
 <li><a href="https://python-poetry.org/">Poetry</a> for installation and dependency management.</li>
 </ul>
 <p><strong>Development Setup</strong></p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>git<span class="w"> </span>clone<span class="w"> </span>https://github.com/iscc/iscc-core.git
-<a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a><span class="nb">cd</span><span class="w"> </span>iscc-core
-<a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a>poetry<span class="w"> </span>install
+<div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a>git<span class="w"> </span>clone<span class="w"> </span>https://github.com/iscc/iscc-core.git
+<a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a><span class="nb">cd</span><span class="w"> </span>iscc-core
+<a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a>poetry<span class="w"> </span>install
 </code></pre></div>
 <p><strong>Development Tasks</strong></p>
 <p>Tests, coverage, code formatting and other tasks can be run with the <code>poe</code> command:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>poe
-<a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a>
-<a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a>Poe<span class="w"> </span>the<span class="w"> </span>Poet<span class="w"> </span>-<span class="w"> </span>A<span class="w"> </span>task<span class="w"> </span>runner<span class="w"> </span>that<span class="w"> </span>works<span class="w"> </span>well<span class="w"> </span>with<span class="w"> </span>poetry.
-<a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a>version<span class="w"> </span><span class="m">0</span>.18.1
-<a id="__codelineno-4-5" name="__codelineno-4-5" href="#__codelineno-4-5"></a>
-<a id="__codelineno-4-6" name="__codelineno-4-6" href="#__codelineno-4-6"></a>Result:<span class="w"> </span>No<span class="w"> </span>task<span class="w"> </span>specified.
-<a id="__codelineno-4-7" name="__codelineno-4-7" href="#__codelineno-4-7"></a>
-<a id="__codelineno-4-8" name="__codelineno-4-8" href="#__codelineno-4-8"></a>USAGE
-<a id="__codelineno-4-9" name="__codelineno-4-9" href="#__codelineno-4-9"></a><span class="w">  </span>poe<span class="w"> </span><span class="o">[</span>-h<span class="o">]</span><span class="w"> </span><span class="o">[</span>-v<span class="w"> </span><span class="p">|</span><span class="w"> </span>-q<span class="o">]</span><span class="w"> </span><span class="o">[</span>--root<span class="w"> </span>PATH<span class="o">]</span><span class="w"> </span><span class="o">[</span>--ansi<span class="w"> </span><span class="p">|</span><span class="w"> </span>--no-ansi<span class="o">]</span><span class="w"> </span>task<span class="w"> </span><span class="o">[</span>task<span class="w"> </span>arguments<span class="o">]</span>
-<a id="__codelineno-4-10" name="__codelineno-4-10" href="#__codelineno-4-10"></a>
-<a id="__codelineno-4-11" name="__codelineno-4-11" href="#__codelineno-4-11"></a>GLOBAL<span class="w"> </span>OPTIONS
-<a id="__codelineno-4-12" name="__codelineno-4-12" href="#__codelineno-4-12"></a><span class="w">  </span>-h,<span class="w"> </span>--help<span class="w">     </span>Show<span class="w"> </span>this<span class="w"> </span><span class="nb">help</span><span class="w"> </span>page<span class="w"> </span>and<span class="w"> </span><span class="nb">exit</span>
-<a id="__codelineno-4-13" name="__codelineno-4-13" href="#__codelineno-4-13"></a><span class="w">  </span>--version<span class="w">      </span>Print<span class="w"> </span>the<span class="w"> </span>version<span class="w"> </span>and<span class="w"> </span><span class="nb">exit</span>
-<a id="__codelineno-4-14" name="__codelineno-4-14" href="#__codelineno-4-14"></a><span class="w">  </span>-v,<span class="w"> </span>--verbose<span class="w">  </span>Increase<span class="w"> </span><span class="nb">command</span><span class="w"> </span>output<span class="w"> </span><span class="o">(</span>repeatable<span class="o">)</span>
-<a id="__codelineno-4-15" name="__codelineno-4-15" href="#__codelineno-4-15"></a><span class="w">  </span>-q,<span class="w"> </span>--quiet<span class="w">    </span>Decrease<span class="w"> </span><span class="nb">command</span><span class="w"> </span>output<span class="w"> </span><span class="o">(</span>repeatable<span class="o">)</span>
-<a id="__codelineno-4-16" name="__codelineno-4-16" href="#__codelineno-4-16"></a><span class="w">  </span>-d,<span class="w"> </span>--dry-run<span class="w">  </span>Print<span class="w"> </span>the<span class="w"> </span>task<span class="w"> </span>contents<span class="w"> </span>but<span class="w"> </span>don<span class="err">&#39;</span>t<span class="w"> </span>actually<span class="w"> </span>run<span class="w"> </span>it
-<a id="__codelineno-4-17" name="__codelineno-4-17" href="#__codelineno-4-17"></a><span class="w">  </span>--root<span class="w"> </span>PATH<span class="w">    </span>Specify<span class="w"> </span>where<span class="w"> </span>to<span class="w"> </span>find<span class="w"> </span>the<span class="w"> </span>pyproject.toml
-<a id="__codelineno-4-18" name="__codelineno-4-18" href="#__codelineno-4-18"></a><span class="w">  </span>--ansi<span class="w">         </span>Force<span class="w"> </span><span class="nb">enable</span><span class="w"> </span>ANSI<span class="w"> </span>output
-<a id="__codelineno-4-19" name="__codelineno-4-19" href="#__codelineno-4-19"></a><span class="w">  </span>--no-ansi<span class="w">      </span>Force<span class="w"> </span>disable<span class="w"> </span>ANSI<span class="w"> </span>output
-<a id="__codelineno-4-20" name="__codelineno-4-20" href="#__codelineno-4-20"></a>CONFIGURED<span class="w"> </span>TASKS
-<a id="__codelineno-4-21" name="__codelineno-4-21" href="#__codelineno-4-21"></a><span class="w">  </span>gentests<span class="w">       </span>Generate<span class="w"> </span>conformance<span class="w"> </span><span class="nb">test</span><span class="w"> </span>data
-<a id="__codelineno-4-22" name="__codelineno-4-22" href="#__codelineno-4-22"></a><span class="w">  </span>format<span class="w">         </span>Code<span class="w"> </span>style<span class="w"> </span>formating<span class="w"> </span>with<span class="w"> </span>black
-<a id="__codelineno-4-23" name="__codelineno-4-23" href="#__codelineno-4-23"></a><span class="w">  </span>docs<span class="w">           </span>Copy<span class="w"> </span>README.md<span class="w"> </span>to<span class="w"> </span>/docs
-<a id="__codelineno-4-24" name="__codelineno-4-24" href="#__codelineno-4-24"></a><span class="w">  </span>format-md<span class="w">      </span>Markdown<span class="w"> </span>formating<span class="w"> </span>with<span class="w"> </span>mdformat
-<a id="__codelineno-4-25" name="__codelineno-4-25" href="#__codelineno-4-25"></a><span class="w">  </span>lf<span class="w">             </span>Convert<span class="w"> </span>line<span class="w"> </span>endings<span class="w"> </span>to<span class="w"> </span>lf
-<a id="__codelineno-4-26" name="__codelineno-4-26" href="#__codelineno-4-26"></a><span class="w">  </span><span class="nb">test</span><span class="w">           </span>Run<span class="w"> </span>tests<span class="w"> </span>with<span class="w"> </span>coverage
-<a id="__codelineno-4-27" name="__codelineno-4-27" href="#__codelineno-4-27"></a><span class="w">  </span>sec<span class="w">            </span>Security<span class="w"> </span>check<span class="w"> </span>with<span class="w"> </span>bandit
-<a id="__codelineno-4-28" name="__codelineno-4-28" href="#__codelineno-4-28"></a><span class="w">  </span>all
+<div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a>poe
+<a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a>
+<a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a>Poe<span class="w"> </span>the<span class="w"> </span>Poet<span class="w"> </span>-<span class="w"> </span>A<span class="w"> </span>task<span class="w"> </span>runner<span class="w"> </span>that<span class="w"> </span>works<span class="w"> </span>well<span class="w"> </span>with<span class="w"> </span>poetry.
+<a id="__codelineno-6-4" name="__codelineno-6-4" href="#__codelineno-6-4"></a>version<span class="w"> </span><span class="m">0</span>.18.1
+<a id="__codelineno-6-5" name="__codelineno-6-5" href="#__codelineno-6-5"></a>
+<a id="__codelineno-6-6" name="__codelineno-6-6" href="#__codelineno-6-6"></a>Result:<span class="w"> </span>No<span class="w"> </span>task<span class="w"> </span>specified.
+<a id="__codelineno-6-7" name="__codelineno-6-7" href="#__codelineno-6-7"></a>
+<a id="__codelineno-6-8" name="__codelineno-6-8" href="#__codelineno-6-8"></a>USAGE
+<a id="__codelineno-6-9" name="__codelineno-6-9" href="#__codelineno-6-9"></a><span class="w">  </span>poe<span class="w"> </span><span class="o">[</span>-h<span class="o">]</span><span class="w"> </span><span class="o">[</span>-v<span class="w"> </span><span class="p">|</span><span class="w"> </span>-q<span class="o">]</span><span class="w"> </span><span class="o">[</span>--root<span class="w"> </span>PATH<span class="o">]</span><span class="w"> </span><span class="o">[</span>--ansi<span class="w"> </span><span class="p">|</span><span class="w"> </span>--no-ansi<span class="o">]</span><span class="w"> </span>task<span class="w"> </span><span class="o">[</span>task<span class="w"> </span>arguments<span class="o">]</span>
+<a id="__codelineno-6-10" name="__codelineno-6-10" href="#__codelineno-6-10"></a>
+<a id="__codelineno-6-11" name="__codelineno-6-11" href="#__codelineno-6-11"></a>GLOBAL<span class="w"> </span>OPTIONS
+<a id="__codelineno-6-12" name="__codelineno-6-12" href="#__codelineno-6-12"></a><span class="w">  </span>-h,<span class="w"> </span>--help<span class="w">     </span>Show<span class="w"> </span>this<span class="w"> </span><span class="nb">help</span><span class="w"> </span>page<span class="w"> </span>and<span class="w"> </span><span class="nb">exit</span>
+<a id="__codelineno-6-13" name="__codelineno-6-13" href="#__codelineno-6-13"></a><span class="w">  </span>--version<span class="w">      </span>Print<span class="w"> </span>the<span class="w"> </span>version<span class="w"> </span>and<span class="w"> </span><span class="nb">exit</span>
+<a id="__codelineno-6-14" name="__codelineno-6-14" href="#__codelineno-6-14"></a><span class="w">  </span>-v,<span class="w"> </span>--verbose<span class="w">  </span>Increase<span class="w"> </span><span class="nb">command</span><span class="w"> </span>output<span class="w"> </span><span class="o">(</span>repeatable<span class="o">)</span>
+<a id="__codelineno-6-15" name="__codelineno-6-15" href="#__codelineno-6-15"></a><span class="w">  </span>-q,<span class="w"> </span>--quiet<span class="w">    </span>Decrease<span class="w"> </span><span class="nb">command</span><span class="w"> </span>output<span class="w"> </span><span class="o">(</span>repeatable<span class="o">)</span>
+<a id="__codelineno-6-16" name="__codelineno-6-16" href="#__codelineno-6-16"></a><span class="w">  </span>-d,<span class="w"> </span>--dry-run<span class="w">  </span>Print<span class="w"> </span>the<span class="w"> </span>task<span class="w"> </span>contents<span class="w"> </span>but<span class="w"> </span>don<span class="err">&#39;</span>t<span class="w"> </span>actually<span class="w"> </span>run<span class="w"> </span>it
+<a id="__codelineno-6-17" name="__codelineno-6-17" href="#__codelineno-6-17"></a><span class="w">  </span>--root<span class="w"> </span>PATH<span class="w">    </span>Specify<span class="w"> </span>where<span class="w"> </span>to<span class="w"> </span>find<span class="w"> </span>the<span class="w"> </span>pyproject.toml
+<a id="__codelineno-6-18" name="__codelineno-6-18" href="#__codelineno-6-18"></a><span class="w">  </span>--ansi<span class="w">         </span>Force<span class="w"> </span><span class="nb">enable</span><span class="w"> </span>ANSI<span class="w"> </span>output
+<a id="__codelineno-6-19" name="__codelineno-6-19" href="#__codelineno-6-19"></a><span class="w">  </span>--no-ansi<span class="w">      </span>Force<span class="w"> </span>disable<span class="w"> </span>ANSI<span class="w"> </span>output
+<a id="__codelineno-6-20" name="__codelineno-6-20" href="#__codelineno-6-20"></a>CONFIGURED<span class="w"> </span>TASKS
+<a id="__codelineno-6-21" name="__codelineno-6-21" href="#__codelineno-6-21"></a><span class="w">  </span>gentests<span class="w">       </span>Generate<span class="w"> </span>conformance<span class="w"> </span><span class="nb">test</span><span class="w"> </span>data
+<a id="__codelineno-6-22" name="__codelineno-6-22" href="#__codelineno-6-22"></a><span class="w">  </span>format<span class="w">         </span>Code<span class="w"> </span>style<span class="w"> </span>formating<span class="w"> </span>with<span class="w"> </span>black
+<a id="__codelineno-6-23" name="__codelineno-6-23" href="#__codelineno-6-23"></a><span class="w">  </span>docs<span class="w">           </span>Copy<span class="w"> </span>README.md<span class="w"> </span>to<span class="w"> </span>/docs
+<a id="__codelineno-6-24" name="__codelineno-6-24" href="#__codelineno-6-24"></a><span class="w">  </span>format-md<span class="w">      </span>Markdown<span class="w"> </span>formating<span class="w"> </span>with<span class="w"> </span>mdformat
+<a id="__codelineno-6-25" name="__codelineno-6-25" href="#__codelineno-6-25"></a><span class="w">  </span>lf<span class="w">             </span>Convert<span class="w"> </span>line<span class="w"> </span>endings<span class="w"> </span>to<span class="w"> </span>lf
+<a id="__codelineno-6-26" name="__codelineno-6-26" href="#__codelineno-6-26"></a><span class="w">  </span><span class="nb">test</span><span class="w">           </span>Run<span class="w"> </span>tests<span class="w"> </span>with<span class="w"> </span>coverage
+<a id="__codelineno-6-27" name="__codelineno-6-27" href="#__codelineno-6-27"></a><span class="w">  </span>sec<span class="w">            </span>Security<span class="w"> </span>check<span class="w"> </span>with<span class="w"> </span>bandit
+<a id="__codelineno-6-28" name="__codelineno-6-28" href="#__codelineno-6-28"></a><span class="w">  </span>all
 </code></pre></div>
 <p>Use <code>poe all</code> to run all tasks before committing any changes.</p>
 <h2 id="maintainers">Maintainers<a class="headerlink" href="#maintainers" title="Permanent link">#</a></h2>
