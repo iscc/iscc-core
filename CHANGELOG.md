@@ -1,5 +1,7 @@
 # Changelog
 
+## [1.0.9] - Unreleased
+
 ## [1.0.8] - 2024-01-30
 - Added implementors guide to README.md
 - Improved pydantic v2 import logic
