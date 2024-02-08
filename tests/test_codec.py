@@ -637,3 +637,12 @@ def test_iscc_validate_bad_length():
     with pytest.raises(ValueError) as excinfo:
         ic.iscc_validate(sample, strict=True)
     assert str(excinfo.value) == "Header expects 32 but got 26 bytes"
+
+
+def test_iscc_validate_mscdi():
+    sample = "ISCC:KEDRRHYRYJ7XELW7HAO5FFGQRX75HJUKSUSZVWTTRNHTF2YL5SKP7XIUFXM4KMKXEZZA"
+    assert ic.iscc_validate(sample, strict=False) is True
+    assert ic.iscc_validate(sample, strict=True) is True
+    with pytest.raises(ValueError) as excinfo:
+        ic.iscc_validate(sample + "A", strict=True)
+    assert str(excinfo.value) == "ISCC string does not match ^ISCC:[A-Z2-7]{10,68}$"

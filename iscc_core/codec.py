@@ -1,6 +1,5 @@
 # -*- coding: utf-8 -*-
 import math
-import re
 import uvarint
 from typing import List, Tuple
 import base58
@@ -511,10 +510,10 @@ def iscc_validate(iscc, strict=True):
     """
 
     # Basic regex validation
-    match = re.match("^ISCC:[A-Z2-7]{10,60}$", iscc)
+    match = CANONICAL_REGEX.match(iscc)
     if not match:
         if strict:
-            raise ValueError("ISCC string does not match ^ISCC:[A-Z2-7]{10,60}$")
+            raise ValueError("ISCC string does not match ^ISCC:[A-Z2-7]{10,68}$")
         else:
             return False
 

@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+import re
 import enum
 from typing import Tuple, Union
 
@@ -171,6 +172,7 @@ class LN(enum.IntEnum):
     L192 = 192
     L224 = 224
     L256 = 256
+    L320 = 320
 
 
 class MULTIBASE(str, enum.Enum):
@@ -245,3 +247,5 @@ PREFIXES = [
     "MM",
     "OA",
 ]
+
+CANONICAL_REGEX = re.compile("^ISCC:[A-Z2-7]{10,68}$")

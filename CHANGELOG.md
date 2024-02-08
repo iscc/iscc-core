@@ -2,6 +2,7 @@
 
 ## [1.0.9] - Unreleased
 - Updated dependencies
+- Added support for MSCDI validation
 
 ## [1.0.8] - 2024-01-30
 - Added implementors guide to README.md
