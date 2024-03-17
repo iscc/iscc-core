@@ -260,7 +260,7 @@ class Code:
         return cls((mt, st, vs, ln_code, data))
 
     @property
-    def mc_bytes(self):
+    def mc_bytes(self) -> bytes:
         """ISCC header + body with multicodec prefix."""
         return MC_PREFIX + self.bytes
 
@@ -276,7 +276,7 @@ class Code:
 
     @property
     def mf_base32hex(self) -> str:
-        """Multiformats base32 encoded."""
+        """Multiformats base32hex encoded."""
         return "v" + encode_base32hex(self.mc_bytes).lower()
 
     @property

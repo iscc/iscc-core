@@ -320,7 +320,8 @@ def decode_base32hex(code):
 
     see: https://tools.ietf.org/html/rfc4648#page-10
     """
-    b32 = code.translate(hex_to_b32)
+    # Make sure we use upper-case version for translation
+    b32 = code.upper().translate(hex_to_b32)
     return decode_base32(b32)
 
 

@@ -2,6 +2,7 @@
 
 ## [1.0.9] - Unreleased
 - Updated dependencies
+- Fixed issue with decoding lower case base32hex strings
 - Added support for MSCDI validation
 
 ## [1.0.8] - 2024-01-30

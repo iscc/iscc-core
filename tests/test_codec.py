@@ -560,6 +560,13 @@ def test_encode_base32hex():
     assert ic.encode_base32hex(b"hello world") == "D1IMOR3F41RMUSJCCG"
 
 
+def test_base32hex_roundtrip_lower():
+    data = bytes.fromhex("cc01cd9d2b7d247a8333f7b0b7d2cda8056c3d15eef738c1962e9148624feac1c14f")
+    expected_b32hex = "PG0SR79BFKI7L0PJUUOBFKMDL02MOF8LTRRJHGCM5Q8KGOIFTB0S2JO"
+    assert ic.encode_base32hex(data) == "PG0SR79BFKI7L0PJUUOBFKMDL02MOF8LTRRJHGCM5Q8KGOIFTB0S2JO"
+    assert ic.decode_base32hex(expected_b32hex.lower()) == data
+
+
 def test_decode_base32hex():
     assert ic.decode_base32hex("D1IMOR3F41RMUSJCCG") == b"hello world"
 
