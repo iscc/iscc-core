@@ -1,6 +1,6 @@
 # Changelog
 
-## [1.0.9] - Unreleased
+## [1.0.9] - 2024-03-17
 - Updated dependencies
 - Fixed issue with decoding lower case base32hex strings
 - Added support for MSCDI validation
