@@ -214,10 +214,10 @@
         64
       ],
       "outputs": {
-        "iscc": "ISCC:AAAWKLHFXN43ICP2",
+        "iscc": "ISCC:AAAWKLHFXN63LHL2",
         "name": "Hello",
         "meta": "data:application/json;charset=utf-8;base64,eyJzb21lIjogIm9iamVjdCJ9",
-        "metahash": "1e20796fdfd4ba8db1a63a1ad1377fa735cad99a10ff08bc655a7095d6508e815a0f"
+        "metahash": "1e20111d3302b0605ec558c390ee013ae89ec6eea68ad2317a8b2de3f4169afeb2ca"
       }
     }
   },
