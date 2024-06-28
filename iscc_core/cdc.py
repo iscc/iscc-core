@@ -12,7 +12,7 @@ __all__ = [
 
 
 def alg_cdc_chunks(data, utf32, avg_chunk_size=ic.core_opts.data_avg_chunk_size):
-    # type: (Data, bool, int) -> Generator[bytes, None, None]
+    # type: (ic.Data, bool, int) -> Generator[bytes, None, None]
     """
     A generator that yields data-dependent chunks for `data`.
 
@@ -67,8 +67,8 @@ def alg_cdc_offset(buffer, mi, ma, cs, mask_s, mask_l):
     """
 
     pattern = 0
-    i = mi
     size = len(buffer)
+    i = min(mi, size)
     barrier = min(cs, size)
     while i < barrier:
         pattern = (pattern >> 1) + ic.core_opts.cdc_gear[buffer[i]]
