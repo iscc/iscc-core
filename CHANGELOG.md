@@ -1,5 +1,11 @@
 # Changelog
 
+## [1.1.0] - Unreleased
+- Set CDC index to size if size is smaller than minimum chunk size
+- Added Python 3.13 support
+- Updeted locked dependencies
+- Removed EOL Python 3.8/3.9 support
+
 ## [1.0.9] - 2024-03-17
 - Updated dependencies
 - Fixed issue with decoding lower case base32hex strings

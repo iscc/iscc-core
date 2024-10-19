@@ -34,8 +34,8 @@ other programming languages.
 !!! tip
     This is a low level reference implementation that does not inlcude features like mediatype
     detection, metadata extraction or file format specific content extraction. Please have a look at
-    [iscc-sdk](https://github.com/iscc/iscc-sdk) which adds those higher level features on top of
-    the `iscc-core` library.
+    [iscc-sdk](https://github.com/iscc/iscc-sdk) which adds those higher level features on top of the
+    `iscc-core` library.
 
 ## Implementors Guide
 
