@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "iscc-core"
-version = "1.0.9"
+version = "1.1.0"
 description = "ISCC - Core Algorithms"
 authors = ["Titusz <tp@py7.de>"]
 license = "Apache-2.0"
@@ -41,7 +41,7 @@ classifiers=[
 
 
 [tool.poetry.dependencies]
-python = ">=3.7.2,<4.0"
+python = ">=3.9,<4.0"
 cython = { version = ">=3", optional = true }
 blake3 = "*"
 xxhash = "*"
