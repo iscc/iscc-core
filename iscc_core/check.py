@@ -16,6 +16,6 @@ def turbo():  # pragma: no cover
     for module in modules:
         module_file = inspect.getfile(module)
         log.debug(f"Module {module.__name__} file: {module_file}")
-        if module_file.endswith(".py"):
+        if module_file.endswith(".py") or module_file.endswith(".pyc"):
             return False
     return True
