@@ -1,4 +1,5 @@
 """Copy README.md to documentation index.md"""
+
 from os.path import abspath, dirname, join
 
 
@@ -13,9 +14,18 @@ def main():
     """Copy root files to documentation site."""
     with open(SRC, "rt", encoding="utf-8") as infile:
         text = infile.read()
-    m = "![ISCC Architecture](https://raw.githubusercontent.com/iscc/iscc-core/master/docs/images/iscc-codec-light.png)\n"
-    r1 = "![ISCC Architecture](https://raw.githubusercontent.com/iscc/iscc-core/master/docs/images/iscc-codec-light.png#only-light)\n"
-    r2 = "![ISCC Architecture](https://raw.githubusercontent.com/iscc/iscc-core/master/docs/images/iscc-codec-dark.png#only-dark)\n"
+    m = (
+        "![ISCC"
+        " Architecture](https://raw.githubusercontent.com/iscc/iscc-core/master/docs/images/iscc-codec-light.png)\n"
+    )
+    r1 = (
+        "![ISCC"
+        " Architecture](https://raw.githubusercontent.com/iscc/iscc-core/master/docs/images/iscc-codec-light.png#only-light)\n"
+    )
+    r2 = (
+        "![ISCC"
+        " Architecture](https://raw.githubusercontent.com/iscc/iscc-core/master/docs/images/iscc-codec-dark.png#only-dark)\n"
+    )
     text = text.replace(m, r1 + r2)
     with open(DST, "wt", encoding="utf-8", newline="\n") as outf:
         outf.write(text)

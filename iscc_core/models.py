@@ -118,7 +118,7 @@ class Code:
             length = "".join([t.name[0] for t in mtypes]) + "DI"
         else:
             length = self.length
-        return f"{self.maintype.name}-" f"{self.subtype.name}-" f"{self.version.name}-" f"{length}"
+        return f"{self.maintype.name}-{self.subtype.name}-{self.version.name}-{length}"
 
     @property
     def explain(self) -> str:

@@ -66,7 +66,7 @@ def test_code_text_c_256_bits():
 
 
 def test_normalize_text():
-    txt = "  Iñtërnâtiôn\nàlizætiøn☃💩 –  is a tric\t ky \u00A0 thing!\r"
+    txt = "  Iñtërnâtiôn\nàlizætiøn☃💩 –  is a tric\t ky \u00a0 thing!\r"
 
     normalized = iscc_core.code_content_text.text_collapse(txt)
     assert normalized == "internationalizætiøn☃💩isatrickything"

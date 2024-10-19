@@ -1,4 +1,5 @@
 """Inspect full iscc_core api"""
+
 import inspect
 from pprint import pprint
 import iscc_core

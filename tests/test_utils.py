@@ -190,11 +190,13 @@ def test_hamming_distance_raises():
 
 
 def test_multi_hash_blake3():
-    assert ic.multi_hash_blake3(b"") == (
-        "1e20af1349b9f5f9a1a6a0404dea36dcc9499bcb25c9adc112b7cc9a93cae41f3262"
+    assert (
+        ic.multi_hash_blake3(b"")
+        == "1e20af1349b9f5f9a1a6a0404dea36dcc9499bcb25c9adc112b7cc9a93cae41f3262"
     )
-    assert ic.multi_hash_blake3(b"hello world") == (
-        "1e20d74981efa70a0c880b8d8c1985d075dbcbf679b99a5f9914e5aaf96b831a9e24"
+    assert (
+        ic.multi_hash_blake3(b"hello world")
+        == "1e20d74981efa70a0c880b8d8c1985d075dbcbf679b99a5f9914e5aaf96b831a9e24"
     )
 
 

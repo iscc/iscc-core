@@ -149,8 +149,9 @@ Some Text **text**! Also Iñtërnâtiôn\nàlizætiøn☃💩.
 More Text
 """
 
-    assert ic.text_clean(text) == (
-        "# Document\n"
+    assert (
+        ic.text_clean(text)
+        == "# Document\n"
         "\n"
         "*Subtitle*\n"
         "\n"

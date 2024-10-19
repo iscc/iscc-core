@@ -66,8 +66,9 @@ pytest-cov = "*"
 
 [tool.poetry.group.dev.dependencies]
 poethepoet = "*"
-black = "^23.1"
-bandit = "^1.7"
+black = "*"
+ruff = "*"
+bandit = "*"
 
 [tool.poetry.group.docs.dependencies]
 mkdocs-material = "^9.0"
@@ -78,9 +79,10 @@ mdformat_tables = "*"
 griffe = "<0.27.4"
 
 [tool.black]
-skip-string-normalization = false
 line-length = 100
-target-version = ['py37']
+preview = true
+enable-unstable-feature = ["string_processing"]
+target-version = ['py39']
 
 [tool.poe.tasks]
 gentests = { cmd = "poetry run python -m tests.build_test_data", help = "Generate conformance test data" }

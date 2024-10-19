@@ -1,4 +1,5 @@
 """Convert line endings to LF"""
+
 import pathlib
 
 HERE = pathlib.Path(__file__).parent.parent.absolute()
