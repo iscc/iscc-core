@@ -95,8 +95,9 @@ sec = { cmd = "poetry run bandit -r iscc_core -q", help = "Security check with b
 all = ["gentests", "format", "docs", "format-md", "lf", "test", "sec"]
 
 [tool.poetry.build]
+generate-setup-file = true
 script = "build.py"
 
 [build-system]
-requires = ["poetry-core", "setuptools", "wheel"]
+requires = ["poetry-core", "setuptools", "cython>=3;extra=='turbo'"]
 build-backend = "poetry.core.masonry.api"
