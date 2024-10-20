@@ -33,7 +33,7 @@ jobs:
         run: poetry run pytest -q tests --turbo
 
       - name: Benchmark (With Extension Modules)
-        run: poetry run python tests\benchmark.py
+        run: poetry run python ./tests/benchmark.py
 
       - name: Upload coverage to Codecov
         uses: codecov/codecov-action@v3
