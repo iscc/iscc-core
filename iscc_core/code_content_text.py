@@ -17,6 +17,7 @@ from a media assets.
 - Count characters of collapsed text
 - Apply [`soft_hash_text_v0`][iscc_core.code_content_text.soft_hash_text_v0] to collapsed text
 """
+
 import unicodedata
 import xxhash
 import iscc_core as ic
@@ -124,18 +125,15 @@ def text_collapse(text):
     :rtype: str
     """
 
-    # Decompose with NFD
-    text = unicodedata.normalize("NFD", text)
+    # Decompose with NFD and convert to lower case
+    text = unicodedata.normalize("NFD", text).lower()
 
-    # Remove all whitespace and convert text to lower case
-    text = "".join(text.split()).lower()
+    # Remove whitespace and filter characters in one pass
+    filtered_chars = []
 
-    # Filter control characters, marks (diacritics), and punctuation
-    text = "".join(
-        ch for ch in text if unicodedata.category(ch)[0] not in ic.core_opts.text_unicode_filter
-    )
+    for ch in text:
+        if not ch.isspace() and unicodedata.category(ch)[0] not in ic.core_opts.text_unicode_filter:
+            filtered_chars.append(ch)
 
     # Recombine
-    text = unicodedata.normalize("NFKC", text)
-
-    return text
+    return unicodedata.normalize("NFKC", "".join(filtered_chars))
