@@ -70,6 +70,10 @@ black = "*"
 ruff = "*"
 bandit = "*"
 
+[tool.poetry.group.benchmark.dependencies]
+psutil = "*"
+py-cpuinfo = "*"
+
 [tool.poetry.group.docs.dependencies]
 mkdocs-material = "^9.0"
 mkdocstrings-python = "<1.1"

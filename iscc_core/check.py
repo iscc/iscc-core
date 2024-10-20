@@ -1,7 +1,6 @@
 # -*- coding: utf-8 -*-
 """Inspect lib environment/installation"""
 import inspect
-from loguru import logger as log
 
 
 __all__ = ["turbo"]
@@ -15,7 +14,6 @@ def turbo():  # pragma: no cover
     modules = (cdc, minhash, simhash, dct, wtahash)
     for module in modules:
         module_file = inspect.getfile(module)
-        log.debug(f"Module {module.__name__} file: {module_file}")
         if module_file.endswith(".py") or module_file.endswith(".pyc"):
             return False
     return True
