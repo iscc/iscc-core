@@ -2,8 +2,6 @@
 import time
 import psutil
 import random
-import string
-import unicodedata
 import platform
 import iscc_core as ic
 from iscc_core.code_content_text import gen_text_code
@@ -16,33 +14,35 @@ except ImportError:
 
 
 def generate_text(length, seed=42):
-    random.seed(seed)
-    unicode_ranges = [
-        (0x0021, 0x007E),  # Basic Latin
+    """
+    Generates deterministic random Unicode text with a given length and seed.
+
+    Parameters:
+        length (int): The number of characters to generate.
+        seed (int): The seed for the random generator to make the function deterministic.
+
+    Returns:
+        str: A deterministic random Unicode string of the specified length.
+    """
+    # UTF-8 encodable Unicode character ranges
+    ranges = [
+        (0x0020, 0x007E),  # Basic Latin (includes common characters, numbers, punctuation)
         (0x00A1, 0x00FF),  # Latin-1 Supplement
-        (0x0100, 0x017F),  # Latin Extended-A
-        (0x0180, 0x024F),  # Latin Extended-B
-        (0x0370, 0x03FF),  # Greek and Coptic
         (0x0400, 0x04FF),  # Cyrillic
-        (0x3040, 0x309F),  # Hiragana
-        (0x4E00, 0x9FFF),  # CJK Unified Ideographs (subset)
+        (0x0370, 0x03FF),  # Greek
+        (0x0530, 0x058F),  # Armenian
+        (0x4E00, 0x9FFF),  # CJK Unified Ideographs (common in Chinese, Japanese, Korean)
+        (0x1F300, 0x1F5FF),  # Miscellaneous Symbols and Pictographs (includes emojis)
     ]
 
-    text = []
-    while len("".join(text)) < length:
-        char_type = random.choice(["letter", "digit", "punctuation", "whitespace"])
-        if char_type == "letter":
-            range_start, range_end = random.choice(unicode_ranges)
-            char = chr(random.randint(range_start, range_end))
-        elif char_type == "digit":
-            char = random.choice(string.digits)
-        elif char_type == "punctuation":
-            char = random.choice(string.punctuation)
-        else:
-            char = " "
-        text.append(char)
+    random.seed(seed)
 
-    return "".join(text)[:length]
+    def get_random_char():
+        # Choose a random range and then pick a random character within that range
+        char_range = random.choice(ranges)
+        return chr(random.randint(*char_range))
+
+    return "".join(get_random_char() for _ in range(length))
 
 
 def benchmark_gen_text_code(text_length, iterations=100):
@@ -63,10 +63,8 @@ def benchmark_gen_text_code(text_length, iterations=100):
 
 
 def main():
-    text_length = 3000 * 10  # 10 pages
-    iterations = 10
-
-    pages_per_second, memory_increase = benchmark_gen_text_code(text_length, iterations)
+    text_length = 3000 * 100  # 100 pages
+    iterations = 3
 
     print("System Information:")
     print(f"OS: {platform.system()} {platform.release()}")
@@ -102,6 +100,8 @@ def main():
         ]
         supported_flags = [flag for flag in relevant_flags if flag in cpu_info["flags"]]
         print(f"Instructions: {', '.join(supported_flags)}")
+
+    pages_per_second, memory_increase = benchmark_gen_text_code(text_length, iterations)
 
     print("\nBenchmark results for gen_text_code:")
     print(f"Pages per second: {pages_per_second:.2f}")
