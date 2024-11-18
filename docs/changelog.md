@@ -3,6 +3,7 @@
 ## [1.1.0] - Unreleased
 - Set CDC index to size if size is smaller than minimum chunk size
 - Added Python 3.13 support
+- Added .env to .gitignore
 - Updeted locked dependencies
 - Removed EOL Python 3.8/3.9 support
 
