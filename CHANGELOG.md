@@ -4,6 +4,7 @@
 - Set CDC index to size if size is smaller than minimum chunk size
 - Added Python 3.13 support
 - Added .env to .gitignore
+- Added multiformats support for codec convenience functions
 - Updeted locked dependencies
 - Removed EOL Python 3.8/3.9 support
 

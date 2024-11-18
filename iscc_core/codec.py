@@ -325,6 +325,33 @@ def decode_base32hex(code):
     return decode_base32(b32)
 
 
+def normalize_multiformat(iscc_code):
+    """
+    Transcode a multiformat encoded ISCC to standard base32 encoding.
+    Returns the input unchanged (but cleaned) if it's not multiformat encoded.
+    """
+    decoders = {
+        MULTIBASE.base16.value: bytes.fromhex,  # f
+        MULTIBASE.base32.value: decode_base32,  # b
+        MULTIBASE.base32hex.value: decode_base32hex,  # v
+        MULTIBASE.base58btc.value: base58.b58decode,  # z
+        MULTIBASE.base64url.value: decode_base64,  # u
+    }
+
+    # Clean the ISCC code first
+    iscc_code = iscc_clean(iscc_code)
+
+    # Check for multibase prefix
+    multibase_prefix = iscc_code[0]
+    if multibase_prefix in decoders.keys():
+        decoder = decoders[multibase_prefix]
+        decoded = decoder(iscc_code[1:])
+        if not decoded.startswith(MC_PREFIX):
+            raise ValueError(f"Malformed multiformat codec: {decoded[:2]}")
+        return encode_base32(decoded[2:])
+    return iscc_code
+
+
 def iscc_decompose(iscc_code):
     # type: (str) -> List[str]
     """
@@ -333,9 +360,10 @@ def iscc_decompose(iscc_code):
     A valid ISCC sequence is a string concatenation of ISCC-UNITS optionally seperated
     by a hyphen.
     """
-    iscc_code = iscc_clean(iscc_code)
-    components = []
+    # Handle multiformat encoding first
+    iscc_code = normalize_multiformat(iscc_code)
 
+    components = []
     raw_code = decode_base32(iscc_code)
     while raw_code:
         mt, st, vs, ln, body = decode_header(raw_code)
@@ -400,26 +428,13 @@ def iscc_normalize(iscc_code):
     """
     from iscc_core.iscc_code import gen_iscc_code_v0
 
-    decoders = {
-        MULTIBASE.base16.value: bytes.fromhex,  # f
-        MULTIBASE.base32.value: decode_base32,  # b
-        MULTIBASE.base32hex.value: decode_base32hex,  # v
-        MULTIBASE.base58btc.value: base58.b58decode,  # z
-        MULTIBASE.base64url.value: decode_base64,  # u
-    }
+    # Handle multiformat encoding first
+    iscc_code = normalize_multiformat(iscc_code)
 
-    # Transcode to base32 if <multibase><multicodec> encoded
-    multibase_prefix = iscc_code[0]
-    if multibase_prefix in decoders.keys():
-        decoder = decoders[multibase_prefix]
-        decoded = decoder(iscc_code[1:])
-        if not decoded.startswith(MC_PREFIX):
-            raise ValueError(f"Malformed multiformat codec: {decoded[:2]}")
-        iscc_code = encode_base32(decoded[2:])
-    else:
-        prefix = iscc_code.upper().replace("ISCC:", "")[:2]
-        if prefix not in PREFIXES:
-            raise ValueError(f"ISCC starts with invalid prefix {prefix}")
+    # Validate prefix
+    prefix = iscc_code.upper()[:2]
+    if prefix not in PREFIXES:
+        raise ValueError(f"ISCC starts with invalid prefix {prefix}")
 
     decomposed = iscc_decompose(iscc_code)
     recomposed = gen_iscc_code_v0(decomposed)["iscc"] if len(decomposed) >= 2 else decomposed[0]
