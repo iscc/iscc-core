@@ -666,6 +666,9 @@ def test_iscc_validate_mf_invalid():
         ic.iscc_validate_mf(sample, strict=True)
     assert str(excinfo.value) == "Header expects 32 but got 26 bytes"
 
+    INVALID_MF_B32H = "vpg0i00b2jtnrtm1c0v6"
+    assert ic.iscc_validate_mf(INVALID_MF_B32H, strict=False) is False
+
 
 def test_iscc_validate_mscdi():
     sample = "ISCC:KEDRRHYRYJ7XELW7HAO5FFGQRX75HJUKSUSZVWTTRNHTF2YL5SKP7XIUFXM4KMKXEZZA"
