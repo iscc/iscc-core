@@ -572,6 +572,25 @@ def iscc_validate(iscc, strict=True):
     return True
 
 
+def iscc_validate_mf(iscc, strict=True):
+    # type: (str, bool) -> bool
+    """
+    Validate that a given string is a well-formed ISCC in any supported encoding format.
+
+    :param str iscc: ISCC string in any supported encoding
+    :param bool strict: Raise an exception if validation fails (default True)
+    :return: True if string is valid else false. (raises ValueError in strict mode)
+    :rtype: bool
+    """
+    try:
+        normalized = normalize_multiformat(iscc)
+        return iscc_validate(f"ISCC:{normalized}", strict)
+    except Exception as e:
+        if strict:
+            raise ValueError(f"Invalid ISCC: {e}")
+        return False
+
+
 def iscc_clean(iscc):
     # type: (str) -> str
     """

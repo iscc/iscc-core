@@ -5,6 +5,7 @@
 - Added Python 3.13 support
 - Added .env to .gitignore
 - Added multiformats support for codec convenience functions
+- Added `iscc_validate_mf` for validation of canonical and multiformat codes
 - Updeted locked dependencies
 - Removed EOL Python 3.8/3.9 support
 
