@@ -585,9 +585,9 @@ def iscc_validate_mf(iscc, strict=True):
     try:
         normalized = normalize_multiformat(iscc)
         return iscc_validate(f"ISCC:{normalized}", strict)
-    except Exception as e:
+    except Exception:
         if strict:
-            raise ValueError(f"Invalid ISCC: {e}")
+            raise
         return False
 
 

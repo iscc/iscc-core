@@ -646,6 +646,27 @@ def test_iscc_validate_bad_length():
     assert str(excinfo.value) == "Header expects 32 but got 26 bytes"
 
 
+def test_iscc_validate_mf_valid():
+    VALID_CANONICAL = "ISCC:EAAWFH3PX3MCYB6N"
+    VALID_MF_B32H = "vpg0i00b2jtnrtm1c0v6g"
+    VALID_MF_B32H_P = "iscc:vpg0i00b2jtnrtm1c0v6g"
+    assert ic.iscc_validate_mf(VALID_CANONICAL, strict=False) is True
+    assert ic.iscc_validate_mf(VALID_MF_B32H, strict=False) is True
+    assert ic.iscc_validate_mf(VALID_MF_B32H_P, strict=False) is True
+    assert ic.iscc_validate_mf(VALID_CANONICAL, strict=True) is True
+    assert ic.iscc_validate_mf(VALID_MF_B32H, strict=True) is True
+    assert ic.iscc_validate_mf(VALID_MF_B32H_P, strict=True) is True
+
+
+def test_iscc_validate_mf_invalid():
+    sample = "ISCC:KACT4EBWK27737D2AYCJRAL5Z36G76RFRMO4554RU26HZ"
+    assert ic.iscc_validate_mf(sample, strict=False) is False
+
+    with pytest.raises(ValueError) as excinfo:
+        ic.iscc_validate_mf(sample, strict=True)
+    assert str(excinfo.value) == "Header expects 32 but got 26 bytes"
+
+
 def test_iscc_validate_mscdi():
     sample = "ISCC:KEDRRHYRYJ7XELW7HAO5FFGQRX75HJUKSUSZVWTTRNHTF2YL5SKP7XIUFXM4KMKXEZZA"
     assert ic.iscc_validate(sample, strict=False) is True
