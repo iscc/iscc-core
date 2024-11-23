@@ -73,7 +73,7 @@ def gen_meta_code_v0(name, description=None, meta=None, bits=ic.core_opts.meta_b
             meta_code_digest = soft_hash_meta_v0(name, payload)
             metahash = ic.multi_hash_blake3(payload)
             media_type = "application/ld+json" if "@context" in meta else "application/json"
-            durl_obj = DataURL.from_data(media_type, base64_encode=True, data=payload)
+            durl_obj = DataURL.from_byte_data(media_type, data=payload)
             metadata_value = durl_obj.url
         else:
             raise TypeError(f"metadata must be Data-URL string or dict not {type(meta)}")

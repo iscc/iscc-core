@@ -6,7 +6,8 @@
 - Added .env to .gitignore
 - Added multiformats support for codec convenience functions
 - Added `iscc_validate_mf` for validation of canonical and multiformat codes
-- Updeted locked dependencies
+- Fixed data-url api change
+- Updated dependency lock file
 - Removed EOL Python 3.8/3.9 support
 
 ## [1.0.9] - 2024-03-17
