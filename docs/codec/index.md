@@ -39,6 +39,7 @@ This module implements encoding, decoding and transcoding functions of ISCC
             - decode_base64
             - encode_base32hex
             - decode_base32hex
+            - normalize_multiformat
 
 
 ## Helper Functions
@@ -52,4 +53,5 @@ This module implements encoding, decoding and transcoding functions of ISCC
             - iscc_explain
             - iscc_type_id
             - iscc_validate
+            - iscc_validate_mf
             - iscc_clean

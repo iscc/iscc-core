@@ -1,14 +1,13 @@
 # Changelog
 
 ## [1.1.0] - Unreleased
-- Set CDC index to size if size is smaller than minimum chunk size
-- Added Python 3.13 support
-- Added .env to .gitignore
+- Added support for Python 3.13
 - Added multiformats support for codec convenience functions
-- Added `iscc_validate_mf` for validation of canonical and multiformat codes
-- Fixed data-url api change
+- Added `iscc_validate_mf` for validation of multiformat codes
+- Changed CDC index to size if size is smaller than minimum chunk size
 - Updated dependency lock file
-- Removed EOL Python 3.8/3.9 support
+- Fixed `data-url` api change
+- Removed Python 3.8 support (EOL)
 
 ## [1.0.9] - 2024-03-17
 - Updated dependencies

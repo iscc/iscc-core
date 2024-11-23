@@ -327,7 +327,7 @@ def decode_base32hex(code):
 
 def normalize_multiformat(iscc_code):
     """
-    Transcode a multiformat encoded ISCC to standard base32 encoding.
+    Normalize a multiformat encoded ISCC to standard base32 encoding.
     Returns the input unchanged (but cleaned) if it's not multiformat encoded.
     """
     decoders = {
