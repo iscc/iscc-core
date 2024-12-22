@@ -1,6 +1,8 @@
 # Changelog
 
 ## [1.2.0] - Unreleased
+- Improved `text_clean` function to better handle whitespace-only lines and trailing newlines
+- Fixed `text_clean` behavior to match test expectations
 
 ## [1.1.0] - 2024-11-23
 - Added support for Python 3.13
