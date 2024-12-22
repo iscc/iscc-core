@@ -1,5 +1,7 @@
 # Changelog
 
+## [1.2.0] - Unreleased
+
 ## [1.1.0] - 2024-11-23
 - Added support for Python 3.13
 - Added multiformats support for codec convenience functions
