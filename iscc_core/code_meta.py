@@ -211,18 +211,19 @@ def text_clean(text):
         ch for ch in text if unicodedata.category(ch)[0] != "C" or ch in ic.core_opts.text_newlines
     )
 
-    # Collapse more than two consecutive newlines
-    chars = []
+    # Process lines efficiently
+    lines = text.splitlines()
+    result = []
     newline_count = 0
-    for c in text:
-        if c in ic.core_opts.text_newlines:
-            if newline_count < 2:
-                chars.append("\n")
-                newline_count += 1
-            continue
-        else:
-            newline_count = 0
-        chars.append(c)
-    text = "".join(chars)
 
-    return text.strip()
+    for line in lines:
+        if not line.strip():  # Line is whitespace only
+            if newline_count < 1:  # Only allow one empty line
+                result.append("")
+                newline_count += 1
+        else:
+            result.append(line)
+            newline_count = 0
+
+    # Join with newlines but don't add trailing newline
+    return "\n".join(result).strip()

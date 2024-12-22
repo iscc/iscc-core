@@ -129,7 +129,7 @@ def test_clean_text_lead_trail():
     assert ic.text_clean(" Hello World! ") == "Hello World!"
 
 
-def test_clean_text_markdowsn():
+def test_clean_text_markdown():
     text = """
 
 # Document
@@ -167,6 +167,12 @@ More Text
         "\n"
         "More Text"
     )
+
+
+def test_clean_text_whitespace_lines():
+    text = "Hello\n    \n    \n    \n    \nWorld"
+
+    assert ic.text_clean(text) == "Hello\n\nWorld"
 
 
 def test_remove_newlines():
