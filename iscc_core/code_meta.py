@@ -197,9 +197,9 @@ def text_clean(text):
     """
     Clean text for display.
 
-    - Normalize with NFKC normalization.
+    - Normalize with NFKC normalization
     - Remove Control Characters (except newlines)
-    - Reduce multiple consecutive newlines to a maximum of two newlines
+    - Remove whitespace-only lines, keeping at most one empty line between content
     - Strip leading and trailing whitespace
     """
 
