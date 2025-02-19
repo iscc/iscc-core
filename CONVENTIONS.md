@@ -23,3 +23,7 @@ def tokenize_chunks(chunks, max_len=None):
     :return: Dictionary of tokenized data including input IDs, attention masks, and type IDs.
     """
 ```
+
+This repository is the normative reference implementation for ISO 24138:2024.
+All code edits must be made with the utmost care and attention to detail and with backwards
+compatibility in mind. Implementation correctness and performance are crucial.
