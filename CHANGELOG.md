@@ -4,6 +4,8 @@
 - Improved `text_clean` function to better handle whitespace-only lines and trailing newlines
 - Fixed `text_clean` behavior to match test expectations
 - Updated CI configuration to use latest test environments
+- Optimized DataHasherV0.push() to improve streaming efficiency
+- Added input validation for empty frame signatures in video code generation
 
 ## [1.1.0] - 2024-11-23
 - Added support for Python 3.13
