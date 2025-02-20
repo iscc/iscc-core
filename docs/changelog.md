@@ -6,6 +6,7 @@
 - Updated CI configuration to use latest test environments
 - Optimized DataHasherV0.push() to improve streaming efficiency
 - Added input validation for empty frame signatures in video code generation
+- Improve erro handling and validation in `decode_varnibble`
 
 ## [1.1.0] - 2024-11-23
 - Added support for Python 3.13
