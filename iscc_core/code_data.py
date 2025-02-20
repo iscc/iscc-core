@@ -88,16 +88,22 @@ class DataHasherV0:
         """Push data to the Data-Hash generator."""
         if self.tail:
             data = self.tail + data
+            self.tail = None
 
-        for chunk in ic.alg_cdc_chunks(
+        chunks = ic.alg_cdc_chunks(
             data, utf32=False, avg_chunk_size=ic.core_opts.data_avg_chunk_size
-        ):
-            self.chunk_sizes.append(len(chunk))
-            self.chunk_features.append(xxhash.xxh32_intdigest(chunk))
-            self.tail = chunk  # Last chunk may not be final
+        )
 
-        self.chunk_features = self.chunk_features[:-1]
-        self.chunk_sizes = self.chunk_sizes[:-1]
+        # Process chunks one at a time but keep track of last one
+        last_chunk = None
+        for chunk in chunks:
+            if last_chunk is not None:
+                self.chunk_sizes.append(len(last_chunk))
+                self.chunk_features.append(xxhash.xxh32_intdigest(last_chunk))
+            last_chunk = chunk
+
+        # Buffer the last chunk as it may be incomplete
+        self.tail = last_chunk if last_chunk is not None else None
 
     def digest(self):
         # type: () -> bytes
