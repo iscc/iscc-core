@@ -173,3 +173,8 @@ def alg_simhash_from_iscc_id(iscc_id, wallet):
     iscc_id_xor_digest = iscc_tuple[4][:8]
     iscc_id_digest = bytes(a ^ b for (a, b) in zip(iscc_id_xor_digest, wallet_hash_digest))
     return iscc_id_digest.hex()
+
+
+####################################################################################################
+# ISCC-IDv1 - New Timestamp/Server-ID based ISCC-ID                                                #
+####################################################################################################
