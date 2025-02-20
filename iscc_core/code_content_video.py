@@ -61,7 +61,10 @@ def soft_hash_video_v0(frame_sigs, bits=ic.core_opts.video_bits):
 
     :param ic.FrameSig frame_sigs: 2D matrix of MP7 frame signatures
     :param int bits: Bit-length of resulting Video-Code (multiple of 64)
+    :raises ValueError: If frame_sigs is empty
     """
+    if not frame_sigs:
+        raise ValueError("frame_sigs cannot be empty")
 
     if not isinstance(frame_sigs[0], tuple):
         frame_sigs = [tuple(sig) for sig in frame_sigs]

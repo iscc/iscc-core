@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+import pytest
 import iscc_core
 
 
@@ -64,3 +65,8 @@ def test_gen_video_code_schema_confromance():
     frame_vectors = [fa, fb]
     iscc_obj = iscc_core.gen_video_code_v0(frame_vectors)
     assert iscc_obj == {"iscc": "ISCC:EMAZEMGSDFIB4AHU"}
+
+
+def test_empty_frame_sigs():
+    with pytest.raises(ValueError, match="frame_sigs cannot be empty"):
+        iscc_core.code_content_video.soft_hash_video_v0([])
