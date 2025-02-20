@@ -83,14 +83,23 @@ def test_write_varnibble():
 
 
 def test_read_varnibble():
-    with pytest.raises(ValueError):
+    # Test input too short errors
+    with pytest.raises(ValueError, match="Input too short - minimum 4 bits required"):
         ic.decode_varnibble(ba("0"))
-    with pytest.raises(ValueError):
+    with pytest.raises(ValueError, match="Input too short - minimum 4 bits required"):
         ic.decode_varnibble(ba("1"))
-    with pytest.raises(ValueError):
+    with pytest.raises(ValueError, match="Input too short - minimum 4 bits required"):
         ic.decode_varnibble(ba("011"))
-    with pytest.raises(ValueError):
-        ic.decode_varnibble(ba("100"))
+    with pytest.raises(
+        ValueError, match="Input too short - got 6 bits but need more based on prefix"
+    ):
+        ic.decode_varnibble(ba("111000"))
+
+    # Test invalid prefix pattern
+    with pytest.raises(
+        ValueError, match="Invalid prefix pattern '1111' - must be one of: 0, 10, 110, 1110"
+    ):
+        ic.decode_varnibble(ba("1111000000000000"))
     assert ic.decode_varnibble(ba("0000")) == (0, ba())
     assert ic.decode_varnibble(ba("000000")) == (0, ba("00"))
     assert ic.decode_varnibble(ba("0111")) == (7, ba())

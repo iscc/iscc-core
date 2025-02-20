@@ -141,20 +141,29 @@ def decode_varnibble(b):
     :param bitarray b: Array of header bits
     :return: A tuple of the integer value of first varnible and the remaining bits.
     :rtype: Tuple[int, bitarray]
+    :raises ValueError: If input is invalid or too short
     """
-
     bits = len(b)
 
-    if bits >= 4 and b[0] == 0:
+    if bits < 4:
+        raise ValueError("Input too short - minimum 4 bits required")
+
+    # Check prefix patterns and required lengths
+    if b[0] == 0 and bits >= 4:  # 0xxx
         return ba2int(b[:4]), b[4:]
-    if bits >= 8 and b[1] == 0:
+    if b[0:2] == bitarray("10") and bits >= 8:  # 10xxxxxx
         return ba2int(b[2:8]) + 8, b[8:]
-    if bits >= 12 and b[2] == 0:
+    if b[0:3] == bitarray("110") and bits >= 12:  # 110xxxxxxxxx
         return ba2int(b[3:12]) + 72, b[12:]
-    if bits >= 16 and b[3] == 0:
+    if b[0:4] == bitarray("1110") and bits >= 16:  # 1110xxxxxxxxxxxx
         return ba2int(b[4:16]) + 584, b[16:]
 
-    raise ValueError("Invalid bitarray")
+    # Determine actual error for better feedback
+    if bits < 16:
+        raise ValueError(f"Input too short - got {bits} bits but need more based on prefix")
+    else:
+        prefix = b[:4].to01()
+        raise ValueError(f"Invalid prefix pattern '{prefix}' - must be one of: 0, 10, 110, 1110")
 
 
 def encode_units(units):
