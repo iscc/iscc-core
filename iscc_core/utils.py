@@ -11,7 +11,6 @@ import iscc_core as ic
 import jcs
 from iscc_core.constants import Stream
 
-
 __all__ = [
     "json_canonical",
     "cidv1_hex",

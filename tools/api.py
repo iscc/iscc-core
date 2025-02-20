@@ -8,7 +8,6 @@ import os
 import ast
 from os.path import dirname, join
 
-
 MODULE_EXTENSIONS = (".py",)
 PKG_DIR = dirname(iscc_core.__file__)
 

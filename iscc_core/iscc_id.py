@@ -15,7 +15,6 @@ from typing import Optional
 import uvarint
 import iscc_core as ic
 
-
 __all__ = [
     "gen_iscc_id",
     "gen_iscc_id_v0",

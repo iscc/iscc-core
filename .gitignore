@@ -2,6 +2,7 @@
 build
 dist
 site
+context
 *.egg-info
 __pycache__
 .coverage

@@ -4,7 +4,6 @@ from blake3 import blake3
 from typing import Optional
 import iscc_core as ic
 
-
 __all__ = [
     "gen_instance_code",
     "gen_instance_code_v0",

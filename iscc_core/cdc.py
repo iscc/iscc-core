@@ -5,7 +5,6 @@ from math import log2
 from typing import Generator
 import iscc_core as ic
 
-
 __all__ = [
     "alg_cdc_chunks",
 ]

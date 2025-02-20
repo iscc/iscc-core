@@ -22,7 +22,6 @@ import unicodedata
 import xxhash
 import iscc_core as ic
 
-
 __all__ = [
     "gen_text_code",
     "gen_text_code_v0",

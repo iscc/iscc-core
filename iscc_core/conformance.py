@@ -42,7 +42,6 @@ import io
 from typing import Generator, Tuple, Callable, Any, List
 import iscc_core as ic
 
-
 HERE = pathlib.Path(__file__).parent.absolute()
 TEST_DATA = HERE / "data.json"
 

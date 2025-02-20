@@ -39,7 +39,6 @@ from collections import Counter
 from typing import Optional
 import iscc_core as ic
 
-
 __all__ = [
     "gen_flake_code",
     "gen_flake_code_v0",

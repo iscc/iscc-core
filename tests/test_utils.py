@@ -6,7 +6,6 @@ import random
 import pytest
 import iscc_core as ic
 
-
 A_INT = 0b00000000_00001111_00000000_00000000_00000000_00000000_00000000_00000000
 B_INT = 0b11110000_00001111_00000000_00000000_00000000_00000000_00000000_00000000
 A_BYT = A_INT.to_bytes(length=8, byteorder="big", signed=False)

@@ -6,7 +6,6 @@ from typing import Optional, Union
 from data_url import DataURL
 import iscc_core as ic
 
-
 __all__ = [
     "gen_meta_code",
     "gen_meta_code_v0",

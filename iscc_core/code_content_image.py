@@ -19,7 +19,6 @@ from typing import Sequence
 from more_itertools import chunked
 import iscc_core as ic
 
-
 __all__ = [
     "gen_image_code",
     "gen_image_code_v0",

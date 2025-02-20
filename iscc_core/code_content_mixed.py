@@ -15,7 +15,6 @@ assets and create individual Content-Codes per asset.
 from typing import Iterable, Sequence
 import iscc_core as ic
 
-
 __all__ = [
     "gen_mixed_code",
     "gen_mixed_code_v0",

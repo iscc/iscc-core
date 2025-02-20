@@ -9,7 +9,6 @@ from base64 import b32encode, b32decode
 from pybase64 import urlsafe_b64encode, urlsafe_b64decode
 from iscc_core.constants import *
 
-
 ########################################################################################
 # Core codec functions                                                                 #
 ########################################################################################
