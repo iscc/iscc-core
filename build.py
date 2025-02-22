@@ -3,7 +3,7 @@
 Build cython extension modules.
 
 The shared library can also be built manually using the command:
-$ cythonize -X language_level=3 -a -i ./iscc_core/cdc.py
+$ cythonize -X language_level=3 -a -i ./iscc_core/cdc.pyx
 $ cythonize -X language_level=3 -a -i ./iscc_core/minhash.py
 $ cythonize -X language_level=3 -a -i ./iscc_core/simhash.py
 $ cythonize -X language_level=3 -a -i ./iscc_core/dct.py
@@ -47,7 +47,7 @@ else:
                 dict(
                     ext_modules=cythonize(
                         [
-                            "iscc_core/cdc.py",
+                            "iscc_core/cdc.pyx",
                             "iscc_core/minhash.py",
                             "iscc_core/simhash.py",
                             "iscc_core/dct.py",
