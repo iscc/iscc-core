@@ -5,16 +5,24 @@ import random
 import iscc_core as ic
 
 
-def generate_test_data(size_mb=100):
-    """Generate random test data of specified size in MB."""
+def generate_test_data(size_mb=1024):
+    """Generate random test data of specified size in MB (default 1GB)."""
     size_bytes = size_mb * 1024 * 1024
-    # Generate random bytes
-    data = random.randbytes(size_bytes)
-    return io.BytesIO(data)
+    chunk_size = 64 * 1024 * 1024  # 64MB chunks
+    buffer = io.BytesIO()
+
+    remaining = size_bytes
+    while remaining > 0:
+        chunk = min(remaining, chunk_size)
+        buffer.write(random.randbytes(chunk))
+        remaining -= chunk
+
+    buffer.seek(0)
+    return buffer
 
 
 def benchmark_gen_data_code():
-    """Benchmark data code generation with 100MB of random data."""
+    """Benchmark data code generation with 1GB of random data."""
     data = generate_test_data()
     file_size = data.getbuffer().nbytes
 
