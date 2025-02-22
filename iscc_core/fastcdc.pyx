@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 import mmap
-from io import BufferedReader
+from io import BufferedReader, BytesIO
 from pathlib import Path
 from typing import Callable, Iterator, Union
 
@@ -8,7 +8,7 @@ cimport cython
 from libc.stdint cimport uint32_t, uint8_t
 from libc.math cimport log2, lround
 
-Data = Union[str, Path, BufferedReader, bytes, bytearray, mmap.mmap, memoryview]
+Data = Union[str, Path, BufferedReader, BytesIO, bytes, bytearray, mmap.mmap, memoryview]
 
 
 def get_memoryview(data):
@@ -17,6 +17,10 @@ def get_memoryview(data):
         with open(data, "rb") as f:
             mm = mmap.mmap(f.fileno(), 0, access=mmap.ACCESS_READ)
             return memoryview(mm)
+
+    # Handle BytesIO
+    if isinstance(data, BytesIO):
+        return memoryview(data.getbuffer())
 
     # Handle file object opened in 'rb' mode
     if hasattr(data, "fileno"):

@@ -47,7 +47,8 @@ else:
                 dict(
                     ext_modules=cythonize(
                         [
-                            "iscc_core/cdc.pyx",
+                            "iscc_core/cdc.py",
+                            "iscc_core/fastcdc.pyx",
                             "iscc_core/minhash.py",
                             "iscc_core/simhash.py",
                             "iscc_core/dct.py",
