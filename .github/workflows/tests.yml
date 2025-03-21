@@ -32,9 +32,6 @@ jobs:
       - name: Run Tests (With Extension Modules)
         run: poetry run pytest -q tests --turbo
 
-      - name: Benchmark (With Extension Modules)
-        run: poetry run python ./tests/benchmark.py
-
       - name: Upload coverage to Codecov
         uses: codecov/codecov-action@v3
         if: matrix.os == 'ubuntu-20.04' && matrix.python-version == '3.9'
