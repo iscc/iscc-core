@@ -88,6 +88,9 @@ preview = true
 enable-unstable-feature = ["string_processing"]
 target-version = ['py39']
 
+[tool.coverage.report]
+show_missing = true
+
 [tool.poe.tasks]
 gentests = { cmd = "poetry run python -m tests.build_test_data", help = "Generate conformance test data" }
 format = { cmd = "poetry run black .", help = "Code style formating with black" }
