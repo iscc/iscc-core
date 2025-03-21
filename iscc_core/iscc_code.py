@@ -21,6 +21,7 @@ The following sequences of ISCC-UNITs are possible:
 - Meta, Semantic, Data, Instance
 - Meta, Semantic, Content, Data, Instance
 """
+
 from typing import Sequence
 from operator import itemgetter
 import iscc_core as ic
@@ -39,13 +40,14 @@ def gen_iscc_code(codes):
     return gen_iscc_code_v0(codes)
 
 
-def gen_iscc_code_v0(codes):
-    # type: (Sequence[str]) -> dict
+def gen_iscc_code_v0(codes, wide=False):
+    # type: (Sequence[str], bool) -> dict
     """
     Combine multiple ISCC-UNITS to an ISCC-CODE with a common header using
     algorithm v0.
 
     :param Sequence[str] codes: A valid sequence of singluar ISCC-UNITS.
+    :param bool wide: If True, use 128-bit digests for Data and Instance codes (requires both to be at least 128-bit)
     :return: An ISCC object with ISCC-CODE
     :rtype: dict
     """
@@ -67,17 +69,38 @@ def gen_iscc_code_v0(codes):
     if main_types[-2:] != (ic.MT.DATA, ic.MT.INSTANCE):
         raise ValueError(f"ISCC-CODE requires at least MT.DATA and MT.INSTANCE units.")
 
+    # Check if this is a special case of 128-bit Data+Instance composite
+    is_wide_composite = (
+        wide
+        and len(codes) == 2
+        and main_types == (ic.MT.DATA, ic.MT.INSTANCE)
+        and all(
+            ic.decode_length(t[0], t[3]) >= 128 for t in decoded
+        )  # Check if both units are at least 128-bit
+    )
+
     # Determine SubType (generic mediatype)
-    sub_types = [t[1] for t in decoded if t[0] in {ic.MT.SEMANTIC, ic.MT.CONTENT}]
-    if len(set(sub_types)) > 1:
-        raise ValueError(f"Semantic-Code and Content-Code must be of same SubType")
-    st = sub_types.pop() if sub_types else ic.ST_ISCC.SUM if len(codes) == 2 else ic.ST_ISCC.NONE
+    if is_wide_composite:
+        st = ic.ST_ISCC.WIDE
+    else:
+        sub_types = [t[1] for t in decoded if t[0] in {ic.MT.SEMANTIC, ic.MT.CONTENT}]
+        if len(set(sub_types)) > 1:
+            raise ValueError(f"Semantic-Code and Content-Code must be of same SubType")
+        st = (
+            sub_types.pop() if sub_types else ic.ST_ISCC.SUM if len(codes) == 2 else ic.ST_ISCC.NONE
+        )
 
     # Encode unit combination
     encoded_length = ic.encode_units(main_types[:-2])
 
-    # Collect and truncate unit digests to 64-bit
-    digest = b"".join([t[-1][:8] for t in decoded])
+    # Collect unit digests
+    if is_wide_composite:
+        # For wide case, use full 128-bit digests
+        digest = b"".join([t[-1][:16] for t in decoded])
+    else:
+        # For standard case, truncate unit digests to 64-bit
+        digest = b"".join([t[-1][:8] for t in decoded])
+
     header = ic.encode_header(ic.MT.ISCC, st, ic.VS.V0, encoded_length)
 
     code = ic.encode_base32(header + digest)

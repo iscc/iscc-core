@@ -97,6 +97,7 @@ class ST_ISCC(enum.IntEnum):
     | 4    | MIXED    | 0100 | Composite ISCC inlcuding Mixed-Code                     |
     | 5    | SUM      | 0101 | Composite ISCC inlcuding only Data- and Instance-Code   |
     | 6    | NONE     | 0110 | Composite ISCC including Meta, Data and Instance-Code   |
+    | 7    | WIDE     | 0111 | Composite ISCC with 128-bit Data- and Instance-Code     |
     """
 
     TEXT = 0
@@ -106,6 +107,7 @@ class ST_ISCC(enum.IntEnum):
     MIXED = 4
     SUM = 5
     NONE = 6
+    WIDE = 7
 
 
 class ST_ID(enum.IntEnum):

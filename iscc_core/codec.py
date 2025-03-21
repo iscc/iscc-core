@@ -253,8 +253,8 @@ def encode_length(mtype, length):
         raise ValueError(error)
 
 
-def decode_length(mtype, length):
-    # type: (MainType, Length) -> LN
+def decode_length(mtype, length, subtype=None):
+    # type: (MainType, Length, SubType|None) -> LN
     """
     Dedoce raw length value from ISCC header to length of digest in number of bits.
 
@@ -264,6 +264,8 @@ def decode_length(mtype, length):
     if mtype in (MT.META, MT.SEMANTIC, MT.CONTENT, MT.DATA, MT.INSTANCE, MT.FLAKE):
         return LN((length + 1) * 32)
     elif mtype == MT.ISCC:
+        if subtype == ST_ISCC.WIDE:
+            return LN(256)  # 128-bit Data + 128-bit Instance
         return LN(len(decode_units(length)) * 64 + 128)
     elif mtype == MT.ID:
         return LN(length * 8 + 64)
@@ -385,6 +387,13 @@ def iscc_decompose(iscc_code):
 
         # ISCC-CODE
         main_types = decode_units(ln)
+
+        # Special case for WIDE subtype (128-bit Data + 128-bit Instance)
+        if st == ST_ISCC.WIDE:
+            data_code = encode_component(MT.DATA, ST.NONE, vs, 128, body[:16])
+            instance_code = encode_component(MT.INSTANCE, ST.NONE, vs, 128, body[16:32])
+            components.extend([data_code, instance_code])
+            break
 
         # rebuild dynamic units (META, SEMANTIC, CONTENT)
         for idx, mtype in enumerate(main_types):
