@@ -92,11 +92,15 @@ def test_read_varnibble():
         ic.decode_varnibble(ba("1"))
     with pytest.raises(ValueError, match="Input too short - minimum 4 bits required"):
         ic.decode_varnibble(ba("011"))
-    with pytest.raises(ValueError, match="Input too short - got 6 bits but need more based on prefix"):
+    with pytest.raises(
+        ValueError, match="Input too short - got 6 bits but need more based on prefix"
+    ):
         ic.decode_varnibble(ba("111000"))
 
     # Test invalid prefix pattern
-    with pytest.raises(ValueError, match="Invalid prefix pattern '1111' - must be one of: 0, 10, 110, 1110"):
+    with pytest.raises(
+        ValueError, match="Invalid prefix pattern '1111' - must be one of: 0, 10, 110, 1110"
+    ):
         ic.decode_varnibble(ba("1111000000000000"))
     assert ic.decode_varnibble(ba("0000")) == (0, ba())
     assert ic.decode_varnibble(ba("000000")) == (0, ba("00"))
@@ -155,7 +159,10 @@ def test_code_properties():
     assert c64.hash_bits == "".join(str(i) for i in c64.hash_ints)
     assert c256.hash_bits == "".join(str(i) for i in c256.hash_ints)
     assert c64.hash_uint == 7421903593216395922
-    assert c256.hash_uint == 46588043924851280427026156359332814243502099936826263036193519252570625504970
+    assert (
+        c256.hash_uint
+        == 46588043924851280427026156359332814243502099936826263036193519252570625504970
+    )
 
     assert c64.hash_base32 == "M376L7V63PFJE"
     assert c64.base32hex == "000MDVV5VQVDNIKI"
@@ -527,6 +534,11 @@ def test_codec_decode_length_mt_iscc():
     assert ic.decode_length(ic.MT.ISCC, 3) == 256
 
 
+def test_codec_decode_length_mt_iscc_wide():
+    # Test the special case for WIDE subtype (128-bit Data + 128-bit Instance)
+    assert ic.decode_length(ic.MT.ISCC, 0, ic.ST_ISCC.WIDE) == 256
+
+
 def test_codec_decode_length_invaid_type_raises():
     with pytest.raises(ValueError):
         ic.decode_length(8, 3)
@@ -636,7 +648,10 @@ def test_Code_rnd_iscc_320():
 def test_Code_rnd_iscc_256():
     co = ic.Code.rnd(ic.MT.ISCC, bits=256)
     assert co.code == "KEDJCSDCJ7VMDQKPGDU4LTAQD66MZXWXGPULIIPK5NJUBF6KXLZYS6Q"
-    assert co.explain == "ISCC-IMAGE-V0-MSDI-9148624feac1c14f30e9c5cc101fbcccded733e8b421eaeb534097cabaf3897a"
+    assert (
+        co.explain
+        == "ISCC-IMAGE-V0-MSDI-9148624feac1c14f30e9c5cc101fbcccded733e8b421eaeb534097cabaf3897a"
+    )
 
 
 def test_Code_rnd_iscc_192():
