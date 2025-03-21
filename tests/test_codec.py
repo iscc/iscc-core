@@ -1,6 +1,8 @@
 # -*- coding: utf-8 -*-
 import os
 from binascii import unhexlify
+from io import BytesIO
+
 import pytest
 from bitarray import bitarray as ba, frozenbitarray
 import iscc_core as ic
@@ -288,7 +290,12 @@ def test_decompose_invalid():
         ic.encode_component(ic.MT.ISCC, ic.ST_ISCC.TEXT, 0, 128, body)
 
 
-def test_decompose_str_of_codes():
+def test_decompose_str_of_codes_64():
+    """
+    # WARNING:
+        This only works with 64-bit units (base32 special case)
+    """
+
     mco = ic.Code.rnd(ic.MT.META)
     cco = ic.Code.rnd(ic.MT.CONTENT)
     dco = ic.Code.rnd(ic.MT.DATA)
@@ -296,6 +303,31 @@ def test_decompose_str_of_codes():
     iscc = f"ISCC:{mco.code}-{cco.code}-{dco.code}-{ico.code}"
     codes = ic.codec.iscc_decompose(iscc)
     assert codes == [mco.code, cco.code, dco.code, ico.code]
+
+    iscc = f"ISCC:{mco.code}{cco.code}{dco.code}{ico.code}"
+    codes = ic.codec.iscc_decompose(iscc)
+    assert codes == [mco.code, cco.code, dco.code, ico.code]
+
+
+def test_decompose_str_of_codes_128(static_bytes):
+    dco = ic.gen_data_code_v0(BytesIO(static_bytes), bits=128)["iscc"]
+    assert dco == "ISCC:GAB6LM626EIYZ4E4WXC2YMR2T5UMU"
+
+    ico = ic.gen_instance_code(BytesIO(static_bytes), bits=128)["iscc"]
+    assert ico == "ISCC:IABWJTQQ72BYW6U3HK76O6TG5JU2E"
+
+    dco_obj = ic.Code(dco)
+    assert dco_obj.code == "GAB6LM626EIYZ4E4WXC2YMR2T5UMU"
+
+    ico_obj = ic.Code(ico)
+    assert ico_obj.code == "IABWJTQQ72BYW6U3HK76O6TG5JU2E"
+
+    # Pre-encode joining of ISCC-UNITS (including their header)
+    iscc_sequencce = ic.encode_base32(dco_obj.bytes + ico_obj.bytes)
+    assert iscc_sequencce == "GAB6LM626EIYZ4E4WXC2YMR2T5UMUQADMTHBB7UDRN5JWOV7455GN2TJUI"
+
+    expected = ["GAB6LM626EIYZ4E4WXC2YMR2T5UMU", "IABWJTQQ72BYW6U3HK76O6TG5JU2E"]
+    assert ic.iscc_decompose(iscc_sequencce) == expected
 
 
 def test_Code_rnd():
