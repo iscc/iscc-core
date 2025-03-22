@@ -26,19 +26,19 @@ __all__ = [
 ]
 
 
-def gen_iscc_id(iscc_code, chain_id, wallet, uc=0):
-    # type: (str, int, str, Optional[int]) -> dict
+def gen_iscc_id(timestamp, server_id, realm_id=0):
+    # type: (int, int, int) -> dict
     """
     Generate  ISCC-ID from ISCC-CODE with the latest standard algorithm.
 
-    :param str iscc_code: The ISCC-CODE from which to mint the ISCC-ID.
-    :param int chain_id: Chain-ID of blockchain from which the ISCC-ID is minted.
-    :param str wallet: The wallet address that signes the ISCC declaration
-    :param int uc: Uniqueness counter of ISCC-ID.
-    :return: ISCC object with an ISCC-ID
+    :param int timestamp: Microseconds since 1970-01-01T00:00:00Z (must be < 2^52)
+    :param int server_id: Server-ID that minted the ISCC-ID (0-4095)
+    :param int realm_id: Realm ID for the ISCC-ID (default: 0)
+    :return: Dictionary with the ISCC-ID under the key 'iscc'
     :rtype: dict
+    :raises ValueError: If an input is invalid
     """
-    return gen_iscc_id_v0(iscc_code, chain_id, wallet, uc)
+    return gen_iscc_id_v1(timestamp, server_id, realm_id)
 
 
 def gen_iscc_id_v0(iscc_code, chain_id, wallet, uc=0):
@@ -239,7 +239,7 @@ def gen_iscc_id_v1(timestamp, server_id, realm_id=0):
     :param int realm_id: Realm ID for the ISCC-ID (default: 0)
     :return: Dictionary with the ISCC-ID under the key 'iscc'
     :rtype: dict
-    :raises ValueError: If timestamp is >= 2^52 (overflow)
+    :raises ValueError: If an input is invalid
     """
 
     if timestamp >= 2**52:  # Ensure timestamp fits in 52 bits
