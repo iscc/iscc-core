@@ -248,6 +248,9 @@ def gen_iscc_id_v1(timestamp, server_id, realm_id=0):
     if server_id >= 2**12:  # Ensure server-id fits in 12 bits
         raise ValueError("Server-ID overflow")
 
+    if realm_id != 0:  # For the beginning we only support REALM 0
+        raise ValueError("Realm-ID overflow")
+
     # Shift timestamp left by 12 bits and combine with server ID
     body = (timestamp << 12) | server_id
 

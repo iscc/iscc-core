@@ -204,15 +204,9 @@ def test_gen_iscc_id_v1_different_realms():
     timestamp = 1714503123456789
     server_id = 42
 
-    # Test with realm_id = 1
-    realm1 = ic.gen_iscc_id_v1(timestamp=timestamp, server_id=server_id, realm_id=1)
-    assert realm1 == {"iscc": "ISCC:MEIGC5KN3I6TCUBK"}
-    assert ic.iscc_explain(realm1["iscc"]) == "ID-REALM_1-V1-64-1714503123456789-42"
-
-    # Test with realm_id = 15 (maximum valid realm_id)
-    realm15 = ic.gen_iscc_id_v1(timestamp=timestamp, server_id=server_id, realm_id=15)
-    assert realm15 == {"iscc": "ISCC:NBYQAYLVJXND2MKQFI"}
-    assert ic.iscc_explain(realm15["iscc"]) == "ID-REALM_15-V1-64-1714503123456789-42"
+    # Test with non-zero realm_id
+    with pytest.raises(ValueError, match="Realm-ID overflow"):
+        ic.gen_iscc_id_v1(timestamp=timestamp, server_id=server_id, realm_id=1)
 
 
 def test_gen_iscc_id_v1_structure():
