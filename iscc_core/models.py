@@ -4,19 +4,17 @@ import datetime
 import random
 from typing import List, Union
 import base58
-import uvarint
 from bitarray import bitarray, frozenbitarray
 from bitarray.util import ba2hex, ba2int, count_xor
 
 from iscc_core import core_opts
-from iscc_core.constants import IsccAny, UNITS, LN, MT, ST, ST_CC, ST_ID, ST_ISCC, VS, MC_PREFIX
+from iscc_core.constants import IsccAny, LN, MT, ST, ST_CC, ST_ID, ST_ISCC, VS, MC_PREFIX
 from iscc_core.code_flake import uid_flake_v0
 
 from iscc_core.codec import (
     iscc_clean,
     decode_base32,
     decode_length,
-    decode_units,
     encode_base32,
     encode_base64,
     encode_length,
@@ -27,6 +25,7 @@ from iscc_core.codec import (
     encode_base32hex,
     encode_component,
     iscc_type_id,
+    iscc_explain,
 )
 
 __all__ = [
@@ -119,12 +118,7 @@ class Code:
     @property
     def explain(self) -> str:
         """Human readble representation of code header."""
-        if self.maintype == MT.ID:
-            counter_bytes = self.hash_bytes[8:]
-            if counter_bytes:
-                counter = uvarint.decode(counter_bytes)
-                return f"{self.type_id}-{self.hash_bytes[:8].hex()}-{counter.integer}"
-        return f"{self.type_id}-{self.hash_hex}"
+        return iscc_explain(self.code)
 
     @property
     def hash_bytes(self) -> bytes:
