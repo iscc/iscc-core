@@ -19,6 +19,7 @@ import iscc_core as ic
 __all__ = [
     "gen_iscc_id",
     "gen_iscc_id_v0",
+    "gen_iscc_id_v1",
     "iscc_id_incr",
     "iscc_id_incr_v0",
     "alg_simhash_from_iscc_id",
