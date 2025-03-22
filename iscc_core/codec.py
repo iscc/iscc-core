@@ -455,13 +455,8 @@ def iscc_normalize(iscc_code):
 
     # Check if this is a WIDE ISCC code
     cleaned_code = iscc_clean(iscc_code)
-    is_wide = False
-    try:
-        header = decode_header(decode_base32(cleaned_code))
-        is_wide = header[0] == MT.ISCC and header[1] == ST_ISCC.WIDE
-    except Exception:
-        # If we can't decode the header properly, assume it's not WIDE
-        pass
+    header = decode_header(decode_base32(cleaned_code))
+    is_wide = header[0] == MT.ISCC and header[1] == ST_ISCC.WIDE
 
     decomposed = iscc_decompose(iscc_code)
     recomposed = (
