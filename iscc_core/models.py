@@ -8,7 +8,7 @@ from bitarray import bitarray, frozenbitarray
 from bitarray.util import ba2hex, ba2int, count_xor
 
 from iscc_core import core_opts
-from iscc_core.constants import IsccAny, LN, MT, ST, ST_CC, ST_ID, ST_ISCC, VS, MC_PREFIX
+from iscc_core.constants import IsccAny, LN, MT, ST, ST_CC, ST_ID, ST_ISCC, VS, MC_PREFIX, SUBTYPE_MAP
 from iscc_core.code_flake import uid_flake_v0
 
 from iscc_core.codec import (
@@ -173,13 +173,8 @@ class Code:
     @property
     def subtype(self) -> Union[ST, ST_CC, ST_ISCC, ST_ID]:
         """Enum subtype of code."""
-        if self.maintype in (MT.CONTENT, MT.SEMANTIC):
-            return ST_CC(self._head[1])
-        elif self.maintype == MT.ISCC:
-            return ST_ISCC(self._head[1])
-        elif self.maintype == MT.ID:
-            return ST_ID(self._head[1])
-        return ST(self._head[1])
+        st = SUBTYPE_MAP[(self._head[0], self._head[2])]
+        return st(self._head[1])
 
     @property
     def version(self) -> VS:
