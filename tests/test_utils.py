@@ -257,3 +257,32 @@ def test_wide_subtype_compare():
     assert "instance_match" in result
     assert result["data_dist"] > 0
     assert result["instance_match"] is False
+
+
+def test_similarity_iscc_idv1():
+    """Test that similarity comparison raises for ISCC-IDv1."""
+    # Generate two different ISCC-IDv1s
+    id1 = ic.gen_iscc_id_v1(1234567890, 42)["iscc"]
+    id2 = ic.gen_iscc_id_v1(1234567891, 42)["iscc"]
+
+    # Create a regular ISCC code for testing
+    regular_code = ic.Code.rnd(mt=ic.MT.CONTENT, st=ic.ST_CC.TEXT, bits=64).code
+
+    # Test both branches - IDv1 as first arg and as second arg
+    with pytest.raises(ValueError, match="Similarity comparison not supported for ISCC-IDv1"):
+        ic.iscc_similarity(id1, regular_code)  # IDv1 as first arg
+
+    with pytest.raises(ValueError, match="Similarity comparison not supported for ISCC-IDv1"):
+        ic.iscc_similarity(regular_code, id1)  # IDv1 as second arg
+
+    with pytest.raises(ValueError, match="Similarity comparison not supported for ISCC-IDv1"):
+        ic.iscc_distance(id1, regular_code)
+
+    # Compare should return simple match result
+    result = ic.iscc_compare(id1, id2)
+    assert "id_match" in result
+    assert isinstance(result["id_match"], bool)
+
+    # Same IDs should match
+    result = ic.iscc_compare(id1, id1)
+    assert result["id_match"] is True

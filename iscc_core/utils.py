@@ -213,13 +213,20 @@ def sliding_window(seq, width):
 def iscc_compare(a, b):
     # type: (str, str) -> dict
     """
-    Calculate separate hamming distances of compatible components of two ISCCs
+    Calculate separate hamming distances of compatible components of two ISCCs.
+    For ISCC-IDv1, returns a simple match comparison result.
 
-    :return: A dict with keys meta_dist, semantic_dist, content_dist, data_dist, instance_match
+    :return: A dict with component distances or match result for ISCC-IDv1
     :rtype: dict
     """
     ac = [ic.Code(unit) for unit in ic.iscc_decompose(a)]
     bc = [ic.Code(unit) for unit in ic.iscc_decompose(b)]
+
+    # Special handling for ISCC-IDv1
+    for code in ac + bc:
+        if code.maintype == ic.MT.ID and code.version == ic.VS.V1:
+            return {"id_match": code.hash_bytes == code.hash_bytes}
+
     result = {}
     for ca in ac:
         for cb in bc:
@@ -299,11 +306,18 @@ def iscc_pair_unpack(a, b):
     :param b: ISCC b
     :return: Tuple with hash digests of a and b
     :rtype: Tuple[bytes, bytes]
-    :raise ValueError: If ISCC headers don´t match
+    :raise ValueError: If ISCC headers don´t match or for unsupported types
     """
     a, b = ic.iscc_clean(ic.iscc_normalize(a)), ic.iscc_clean(ic.iscc_normalize(b))
     a, b = ic.decode_base32(a), ic.decode_base32(b)
     a, b = ic.decode_header(a), ic.decode_header(b)
+
+    # Check for ISCC-IDv1 which doesn't support similarity comparison
+    if a[0] == ic.MT.ID and a[2] == ic.VS.V1:
+        raise ValueError("Similarity comparison not supported for ISCC-IDv1")
+    if b[0] == ic.MT.ID and b[2] == ic.VS.V1:
+        raise ValueError("Similarity comparison not supported for ISCC-IDv1")
+
     if not a[:-1] == b[:-1]:
         raise ValueError(f"ISCC headers don´t match: {a}, {b}")
     return a[-1], b[-1]
