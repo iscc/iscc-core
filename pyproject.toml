@@ -2,7 +2,7 @@
 name = "iscc-core"
 version = "1.2.0"
 description = "ISCC - Core Algorithms"
-authors = ["Titusz <tp@py7.de>"]
+authors = ["Titusz <tp@iscc.io>"]
 license = "Apache-2.0"
 readme = "README.md"
 homepage = "https://iscc.codes"
@@ -17,11 +17,11 @@ classifiers=[
     "Natural Language :: English",
     "Operating System :: OS Independent",
     "Programming Language :: Cython",
-    "Programming Language :: Python :: 3.7",
-    "Programming Language :: Python :: 3.8",
     "Programming Language :: Python :: 3.9",
     "Programming Language :: Python :: 3.10",
     "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Programming Language :: Python :: 3.13",
     "Topic :: Multimedia",
     "Topic :: Multimedia :: Graphics",
     "Topic :: Multimedia :: Sound/Audio",
@@ -75,7 +75,7 @@ psutil = "*"
 py-cpuinfo = "*"
 
 [tool.poetry.group.docs.dependencies]
-mkdocs-material = "^9.0"
+mkdocs-material = "*"
 mkdocstrings-python = "<1.1"
 mdformat = "*"
 mdformat_admon = "*"
