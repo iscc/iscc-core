@@ -26,6 +26,7 @@ from iscc_core.codec import (
     decode_base32hex,
     encode_base32hex,
     encode_component,
+    iscc_type_id,
 )
 
 __all__ = [
@@ -113,12 +114,7 @@ class Code:
     @property
     def type_id(self) -> str:
         """A unique composite type-id (use as name to index codes seperately)."""
-        if self.maintype == MT.ISCC:
-            mtypes = decode_units(self._head[3])
-            length = "".join([t.name[0] for t in mtypes]) + "DI"
-        else:
-            length = self.length
-        return f"{self.maintype.name}-{self.subtype.name}-{self.version.name}-{length}"
+        return iscc_type_id(self.code)
 
     @property
     def explain(self) -> str:

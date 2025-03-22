@@ -657,7 +657,7 @@ def test_Code_rnd_iscc_256():
 def test_Code_rnd_iscc_192():
     co = ic.Code.rnd(ic.MT.ISCC, bits=192)
     assert co.code == "KECHFLRCISFQCY6BZWOSW7JEPKBTH55QW7JM3KAFNQ"
-    assert co.explain == "ISCC-IMAGE-V0-MDI-72ae22448b0163c1cd9d2b7d247a8333f7b0b7d2cda8056c"
+    assert co.explain == "ISCC-NONE-V0-MDI-72ae22448b0163c1cd9d2b7d247a8333f7b0b7d2cda8056c"
 
 
 def test_Code_rnd_iscc_128():
