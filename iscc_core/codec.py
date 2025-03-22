@@ -524,7 +524,7 @@ def iscc_type_id(iscc):
     """
     fields = iscc_decode(iscc)
     mtype = MT(fields[0])
-    stype = SUBTYPE_MAP[fields[0]](fields[1])
+    stype = SUBTYPE_MAP[(fields[0], fields[2])](fields[1])
 
     if mtype == MT.ISCC:
         mtypes = decode_units(fields[3])

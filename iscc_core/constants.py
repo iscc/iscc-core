@@ -130,6 +130,20 @@ class ST_ID(enum.IntEnum):
     POLYGON = 3
 
 
+class ST_ID_REALM(enum.IntEnum):
+    """
+    ### ST_ID_REALM
+
+    SubTypes for `MT.ID` with Version V1 (Realm IDs)
+
+    | Uint | Symbol   | Bits | Purpose                                                 |
+    |----- |:---------|------|---------------------------------------------------------|
+    | 0    | REALM0   | 0000 | Default realm for ISCC-IDv1                             |
+    """
+
+    REALM_0 = 0  # additional realms can be added as needed
+
+
 class VS(enum.IntEnum):
     """
     ## VS - Version
@@ -210,14 +224,15 @@ UNITS = (
 
 #: Map MainTypes to SubTypes
 SUBTYPE_MAP = {
-    MT.META: ST,
-    MT.SEMANTIC: ST_CC,
-    MT.CONTENT: ST_CC,
-    MT.DATA: ST,
-    MT.INSTANCE: ST,
-    MT.ISCC: ST_ISCC,
-    MT.ID: ST_ID,
-    MT.FLAKE: ST,
+    (MT.META, VS.V0): ST,
+    (MT.SEMANTIC, VS.V0): ST_CC,
+    (MT.CONTENT, VS.V0): ST_CC,
+    (MT.DATA, VS.V0): ST,
+    (MT.INSTANCE, VS.V0): ST,
+    (MT.ISCC, VS.V0): ST_ISCC,
+    (MT.ID, VS.V0): ST_ID,
+    (MT.ID, VS.V1): ST_ID_REALM,
+    (MT.FLAKE, VS.V0): ST,
 }
 
 #: Multicodec prefix code
