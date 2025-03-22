@@ -138,11 +138,13 @@ class VS(enum.IntEnum):
 
     | Uint | Symbol   | Bits | Purpose                                                 |
     |----- |:---------|------|---------------------------------------------------------|
-    | 0    | V0       | 0000 | Initial Version of Code without breaking changes        |
+    | 0    | V0       | 0000 | Initial Version of Code or Unit                         |
+    | 1    | V1       | 0001 | Updated Version of Code or Unit                         |
 
     """
 
     V0 = 0
+    V1 = 1
 
 
 class LN(enum.IntEnum):
