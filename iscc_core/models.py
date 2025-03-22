@@ -8,7 +8,18 @@ from bitarray import bitarray, frozenbitarray
 from bitarray.util import ba2hex, ba2int, count_xor
 
 from iscc_core import core_opts
-from iscc_core.constants import IsccAny, LN, MT, ST, ST_CC, ST_ID, ST_ISCC, VS, MC_PREFIX, SUBTYPE_MAP
+from iscc_core.constants import (
+    IsccAny,
+    LN,
+    MT,
+    ST,
+    ST_CC,
+    ST_ID,
+    ST_ISCC,
+    VS,
+    MC_PREFIX,
+    SUBTYPE_MAP,
+)
 from iscc_core.code_flake import uid_flake_v0
 
 from iscc_core.codec import (
