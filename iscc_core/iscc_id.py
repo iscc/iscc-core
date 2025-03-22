@@ -225,7 +225,7 @@ def gen_iscc_id_v1(timestamp, server_id, realm_id=0):
     :param int timestamp: Microseconds since 1970-01-01T00:00:00Z.
     :param int server_id: Server-ID that minted the ISCC-ID.
     :param int realm_id: Realm that minted the ISCC-ID.
-    :return: ISCC object with an ISCC-ID (key: `iscc_id`)
+    :return: ISCC object with an ISCC-ID (key: `iscc`)
     :rtype: dict
     """
 
