@@ -488,12 +488,25 @@ def iscc_explain(iscc):
     """
     tid = iscc_type_id(iscc)
     fields = iscc_decode(iscc)
+
+    # Special handling for ISCC-ID
     if fields[0] == MT.ID:
+        # Special handling for ISCC-IDv1
+        if fields[2] == VS.V1:
+            # For IDv1, format as ID-REALM_<id>-V1-64-<timestamp>-<serverid>
+            realm_id = fields[1]
+            digest_int = int.from_bytes(fields[-1], byteorder="big")
+            server_id = digest_int & 0xFFF  # Extract server_id (last 12 bits)
+            timestamp = digest_int >> 12  # Extract timestamp (first 52 bits)
+            return f"ID-REALM_{realm_id}-V1-64-{timestamp}-{server_id}"
+
+        # Regular handling for ISCC-IDv0 with counter
         counter_bytes = fields[-1][8:]
         if counter_bytes:
             counter = uvarint.decode(counter_bytes)
             hex_hash = fields[-1][:8].hex()
             return f"{tid}-{hex_hash}-{counter.integer}"
+
     hex_hash = fields[-1].hex()
     return f"{tid}-{hex_hash}"
 
