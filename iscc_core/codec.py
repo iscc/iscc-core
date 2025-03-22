@@ -464,7 +464,11 @@ def iscc_normalize(iscc_code):
         pass
 
     decomposed = iscc_decompose(iscc_code)
-    recomposed = gen_iscc_code_v0(decomposed, wide=is_wide)["iscc"] if len(decomposed) >= 2 else decomposed[0]
+    recomposed = (
+        gen_iscc_code_v0(decomposed, wide=is_wide)["iscc"]
+        if len(decomposed) >= 2
+        else decomposed[0]
+    )
     return f"ISCC:{recomposed}" if not recomposed.startswith("ISCC:") else recomposed
 
 
