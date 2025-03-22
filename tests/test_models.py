@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 from iscc_core.models import Code
-from iscc_core.constants import MT, ST_ISCC
+from iscc_core.constants import MT, ST_ISCC, ST_ID_REALM, VS
 
 
 def test_code_rnd_wide():
@@ -82,3 +82,42 @@ def test_code_wide_multiformat():
     # Verify that multicodec prefix is included
     assert len(code.mc_bytes) == len(code.bytes) + 2
     assert code.mc_bytes[:2] == b"\xcc\x01"
+
+
+def test_code_iscc_idv1():
+    """Test Code class compatibility with ISCC-IDv1."""
+    # Create test data
+    timestamp = 1647312000000000  # 2022-03-15 12:00:00 UTC in microseconds
+    server_id = 42
+
+    # Generate an ISCC-IDv1 using the generator function
+    from iscc_core.iscc_id import gen_iscc_id_v1
+
+    iscc_id = gen_iscc_id_v1(timestamp, server_id)["iscc"]
+
+    # Initialize Code object from ISCC-IDv1 string
+    code = Code(iscc_id)
+
+    # Test basic properties
+    assert code.maintype == MT.ID
+    assert code.subtype == ST_ID_REALM.REALM_0
+    assert code.version == VS.V1
+    assert code.length == 64
+
+    # Test type identification
+    assert code.type_id == "ID-REALM_0-V1-64"
+    assert "ID-REALM_0-V1-64" in code.explain
+    assert f"{timestamp}-{server_id}" in code.explain
+
+    # Test hash properties contain correct data
+    # Body should be 8 bytes: 52 bits timestamp + 12 bits server_id
+    assert len(code.hash_bytes) == 8
+    body_int = int.from_bytes(code.hash_bytes, byteorder="big")
+    decoded_server_id = body_int & 0xFFF
+    decoded_timestamp = body_int >> 12
+    assert decoded_timestamp == timestamp
+    assert decoded_server_id == server_id
+
+    # Test string representations
+    assert code.uri.startswith("ISCC:")
+    assert code == Code(code.code)  # Test round-trip through string encoding
