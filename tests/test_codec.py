@@ -868,6 +868,28 @@ def test_iscc_validate_mscdi():
     assert str(excinfo.value) == "ISCC string does not match ^ISCC:[A-Z2-7]{10,68}$"
 
 
+def test_explain_iscc_idv1():
+    timestamp = 1647312000000000  # 2022-03-15 12:00:00 UTC in microseconds
+    server_id = 42
+    iscc_idv1 = ic.gen_iscc_id_v1(timestamp, server_id)["iscc"]
+    expected = f"ID-REALM_0-V1-64-{timestamp}-{server_id}"
+    assert ic.iscc_explain(iscc_idv1) == expected
+
+
+def test_validate_iscc_id_v1():
+    timestamp = 1647312000000000
+    server_id = 42
+    iscc_idv1 = ic.gen_iscc_id_v1(timestamp, server_id)["iscc"]
+    assert ic.iscc_validate(iscc_idv1, strict=True) is True
+
+
+def test_normalize_iscc_id_v1():
+    timestamp = 1647312000000000
+    server_id = 42
+    iscc_idv1 = ic.gen_iscc_id_v1(timestamp, server_id)["iscc"]
+    assert ic.iscc_normalize(iscc_idv1) == iscc_idv1
+
+
 def test_normalize_wide_iscc():
     """Test normalizing a WIDE ISCC code."""
     assert wide_iscc_code is not None
