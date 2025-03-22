@@ -10,6 +10,7 @@ mint colides with a pre-existing **ISCC-ID** minted from the same blockchain fro
 different **ISCC-CODE** or from an identical **ISCC-CODE** registered by a different
 signatory.
 """
+
 from hashlib import sha256
 from typing import Optional
 import uvarint
@@ -185,48 +186,59 @@ def gen_iscc_id_v1(timestamp, server_id, realm_id=0):
     """
     Generate an ISCC-IDv1 from a timestamp and a server-id with algorithm v1.
 
-    The ISCC-IDv1 is a 64-bit identifier constructed from a timestamp and a server-id
-    where the first 52 bits denote the UTC time in microseconds since UNIX timestamp epoch and the
-    last 12 bits denote the ID of the timestamping server. With 52-bit timestamps a single server
-    can issue up to 1 Million timestamps per second until the year 2112. The server-id suffix
-    allows for a deployment of up to 4096 timestamp servers and ensures that timestampes are
-    distributed, globaly unique and support total ordering in integer and base32hex representations.
-    With 52-bits for the timestamp and 12-bits for server-ids the system supports a theoretical
-    maximum of ~4 billion unique timestamps per second. In the unlikely case that the ID-Space
-    becomes to crowded we can further extend it by intrducing REALMs via additional ISCC-HEADER
-    SUBTYPEs.
+    The ISCC-IDv1 is a 64-bit identifier constructed from a timestamp and a server-id:
+    - First 52 bits: UTC time in microseconds since UNIX epoch (1970-01-01T00:00:00Z)
+    - Last 12 bits: ID of the timestamping server (0-4095)
 
-    ISCC-IDv1 are minted and digitally signed by authoritative ISCC Notary Servers organized in a
-    federated system. The validity of an ISCC-IDv1 depends on the correct minting procedure as
-    defined by the `ISCC Notary Protocol` (IEP-0016).
+    With this structure:
+    - A single server can issue up to 1 million timestamps per second until the year 2112
+    - The system supports up to 4096 timestamp servers (IDs 0-4095)
+    - Timestamps are globally unique and support total ordering in both integer and base32hex forms
+    - The theoretical maximum throughput is ~4 billion unique timestamps per second
 
-    Timestamp minting requirements:
-        - A time source of at least microsecond precision
-        - Yielding strictly monotonic (always increasing) integer timestamps
-        - Measures to prevent front-running of actual time
+    If the ID space becomes crowded, it can be extended by introducing additional REALMS via
+    ISCC-HEADER SUBTYPEs.
 
-    Server-ID `0` is reserved for sandbox/testing purposes. As such an ISCC-IDv1 with Server-ID 0:
-        - makes no promises about uniqueness
-        - is not authoritative
-        - shall not be relied upon in production systems
+    ## Minting Authority
+
+    ISCC-IDv1s are minted and digitally signed by authoritative ISCC Notary Servers in a
+    federated system. A valid ISCC-IDv1 is guanteed to be bound to an owner represented by a
+    cryptographic public key. The rules by which ISCC-IDv1 can be verified and resolved are defined
+    by the `ISCC Notary Protocol` (IEP-0011 - TBD).
+
+    ## Timestamp Requirements
+
+    Timestamp minting requires:
+    - A time source with at least microsecond precision
+    - Strictly monotonic (always increasing) integer timestamps
+    - Measures to prevent front-running of actual time
+
+    ## Server ID Reservations
+
+    Server-ID `0` is reserved for sandbox/testing purposes. An ISCC-IDv1 with Server-ID 0:
+    - Makes no promises about uniqueness
+    - Is not authoritative
+    - Should not be used in production systems
+
+    ## Technical Format
 
     The ISCC-IDv1 has the following format:
-
     - Scheme Prefix: `ISCC:`
     - Base32-Encoded concatenation of:
-      - 16-bit header: Concatenation of the nibbles:
-        - MAINTYPE = "0110"  # ISCC-ID
-        - SUBTYPE  = "0000"  # REALM
-        - VERSION  = "0001"  # V1
-        - LENGTH   = "0001"  # 64-bit
-      - 52-bit timestamp: Current microseconds since 1970-01-01T00:00:00Z
-      - 12-bit server-id: The Time Server ID
+      - 16-bit header:
+        - MAINTYPE = "0110" (ISCC-ID)
+        - SUBTYPE  = "0000" (REALM, configurable via realm_id)
+        - VERSION  = "0001" (V1)
+        - LENGTH   = "0001" (64-bit)
+      - 52-bit timestamp: Microseconds since 1970-01-01T00:00:00Z
+      - 12-bit server-id: The Time Server ID (0-4095)
 
-    :param int timestamp: Microseconds since 1970-01-01T00:00:00Z.
-    :param int server_id: Server-ID that minted the ISCC-ID.
-    :param int realm_id: Realm that minted the ISCC-ID.
-    :return: ISCC object with an ISCC-ID (key: `iscc`)
+    :param int timestamp: Microseconds since 1970-01-01T00:00:00Z (must be < 2^52)
+    :param int server_id: Server-ID that minted the ISCC-ID (0-4095)
+    :param int realm_id: Realm ID for the ISCC-ID (default: 0)
+    :return: Dictionary with the ISCC-ID under the key 'iscc'
     :rtype: dict
+    :raises ValueError: If timestamp is >= 2^52 (overflow)
     """
 
     if timestamp >= 2**52:  # Ensure timestamp fits in 52 bits
