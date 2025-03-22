@@ -33,6 +33,52 @@ def test_read_header():
     assert rh(bytes([0b1000_0000, 0b1000_0000, 0b0001_0001])) == (8, 8, 1, 1, b"")
 
 
+def test_encode_decode_header_idv1():
+    # Test encoding a header for IDv1
+    header = ic.encode_header(ic.MT.ID, ic.ST_ID_REALM.REALM_0, ic.VS.V1, 0)
+
+    # Decode and verify
+    mt, st, vs, ln, tail = ic.decode_header(header)
+    assert mt == ic.MT.ID
+    assert st == ic.ST_ID_REALM.REALM_0
+    assert vs == ic.VS.V1
+    assert ln == 0
+
+    # Test full encoding/decoding with a real IDv1 value
+    timestamp = 1647312000000000  # 2022-03-15 12:00:00 UTC in microseconds
+    server_id = 42
+
+    # Construct the 64-bit body
+    body = (timestamp << 12) | server_id
+    digest = body.to_bytes(8, byteorder="big")
+
+    # Encode component
+    iscc_id = ic.encode_component(
+        mtype=ic.MT.ID,
+        stype=ic.ST_ID_REALM.REALM_0,
+        version=ic.VS.V1,
+        bit_length=64,
+        digest=digest,
+    )
+
+    # Verify we can decode it back correctly
+    decoded = ic.decode_base32(iscc_id)
+    header_parts = ic.decode_header(decoded)
+
+    assert header_parts[0] == ic.MT.ID
+    assert header_parts[1] == ic.ST_ID_REALM.REALM_0
+    assert header_parts[2] == ic.VS.V1
+    assert header_parts[3] == 0  # length field for 64-bit
+
+    # Verify the body decodes correctly
+    decoded_body = int.from_bytes(header_parts[4], byteorder="big")
+    decoded_server_id = decoded_body & 0xFFF
+    decoded_timestamp = decoded_body >> 12
+
+    assert decoded_server_id == server_id
+    assert decoded_timestamp == timestamp
+
+
 def test_encode_base32():
     assert ic.encode_base32(b"") == ""
     assert ic.encode_base32(b"f") == "MY"
@@ -263,6 +309,18 @@ def test_decompose_data_instance():
     assert ic.iscc_decompose(code) == ["GAATMCHNLCHTI2NH", "IAA3GN6WUSNSX3MJ"]
 
 
+def test_decompose_iscc_idv1():
+    # Create a valid ISCC-IDv1
+    timestamp = 1647312000000000  # 2022-03-15 12:00:00 UTC in microseconds
+    server_id = 42
+    iscc_idv1 = ic.gen_iscc_id_v1(timestamp, server_id)["iscc"]
+
+    # Test decomposition (should return the same code since it's just one unit)
+    components = ic.iscc_decompose(iscc_idv1)
+    assert len(components) == 1
+    assert components[0] == iscc_idv1.replace("ISCC:", "")
+
+
 def test_decompose_wide_data_instance():
     # Test the special case of wide composite (128-bit Data + 128-bit Instance)
     data = "GABTMCHNLCHTI2NHZFXOLEB53KSPU"  # 128-bit Data code
@@ -478,6 +536,22 @@ def test_normalize_iscc_id_scheme_mixed():
     assert ic.iscc_normalize("Iscc:Maagztfqttvizpjr") == "ISCC:MAAGZTFQTTVIZPJR"
 
 
+def test_normalize_iscc_idv1():
+    # Create a valid ISCC-IDv1
+    timestamp = 1647312000000000  # 2022-03-15 12:00:00 UTC in microseconds
+    server_id = 42
+    iscc_idv1 = ic.gen_iscc_id_v1(timestamp, server_id)["iscc"]
+
+    # Test various forms of normalization
+    assert ic.iscc_normalize(iscc_idv1) == iscc_idv1
+    assert ic.iscc_normalize(iscc_idv1.lower()) == iscc_idv1
+    assert ic.iscc_normalize(iscc_idv1.replace("ISCC:", "")) == iscc_idv1
+
+    # Test with mixed case
+    mixed_case = iscc_idv1.replace("ISCC:", "Iscc:").lower().title()
+    assert ic.iscc_normalize(mixed_case) == iscc_idv1
+
+
 def test_normalize_mf_base16_single():
     assert ic.iscc_normalize("fcc0120016c017dac75fe4613") == "ISCC:EAAWYAL5VR274RQT"
 
@@ -577,6 +651,16 @@ def test_codec_validate_iscc_id():
     assert ic.iscc_validate("ISCC:MMAMRVPW22XVU4FR", strict=False) is True
 
 
+def test_validate_iscc_idv1():
+    # Create a valid ISCC-IDv1
+    timestamp = 1647312000000000  # 2022-03-15 12:00:00 UTC in microseconds
+    server_id = 42
+    iscc_idv1 = ic.gen_iscc_id_v1(timestamp, server_id)["iscc"]
+
+    # Test validation
+    assert ic.iscc_validate(iscc_idv1, strict=True) is True
+
+
 def test_codecc_validate_wrong_version():
     assert ic.iscc_validate("ISCC:CE22222222", strict=False) is False
     with pytest.raises(ValueError):
@@ -601,6 +685,17 @@ def test_type_id_maintype_iscc_id():
     assert ic.iscc_type_id(iscc) == "ID-BITCOIN-V0-64"
 
 
+def test_type_id_maintype_iscc_idv1():
+    # Create a valid ISCC-IDv1
+    timestamp = 1647312000000000  # 2022-03-15 12:00:00 UTC in microseconds
+    server_id = 42
+    iscc_idv1 = ic.gen_iscc_id_v1(timestamp, server_id)["iscc"]
+
+    # Test type_id function with IDv1
+    type_id = ic.iscc_type_id(iscc_idv1)
+    assert type_id == "ID-REALM_0-V1-64"
+
+
 def test_explain_maintype_meta():
     assert ic.iscc_explain("AAAQCAAAAABAAAAA") == "META-NONE-V0-64-0100000002000000"
 
@@ -621,6 +716,17 @@ def test_explain_maintype_iscc_id_no_counter():
 def test_explain_maintype_iscc_id_counter():
     iscc = "ISCC:MAASAJINXFXA2SQXAE"
     assert ic.iscc_explain(iscc) == "ID-PRIVATE-V0-72-20250db96e0d4a17-1"
+
+
+def test_explain_maintype_iscc_idv1():
+    # Create a valid ISCC-IDv1 with known values
+    timestamp = 1647312000000000  # 2022-03-15 12:00:00 UTC in microseconds
+    server_id = 42
+    iscc_idv1 = ic.gen_iscc_id_v1(timestamp, server_id)["iscc"]
+
+    # Test explain function with IDv1
+    explanation = ic.iscc_explain(iscc_idv1)
+    assert explanation == f"ID-REALM_0-V1-64-{timestamp}-{server_id}"
 
 
 def test_encode_base32hex():
@@ -737,6 +843,22 @@ def test_iscc_validate_mf_invalid():
     assert ic.iscc_validate_mf(INVALID_MF_B32H, strict=False) is False
 
 
+def test_validate_mf_iscc_idv1():
+    # Create a valid ISCC-IDv1
+    timestamp = 1647312000000000  # 2022-03-15 12:00:00 UTC in microseconds
+    server_id = 42
+    iscc_idv1 = ic.gen_iscc_id_v1(timestamp, server_id)["iscc"]
+
+    # Get the code in various multiformat encodings
+    code_obj = ic.Code(iscc_idv1)
+
+    # Test with different multiformat encodings
+    assert ic.iscc_validate_mf(code_obj.mf_base32hex, strict=True) is True
+    assert ic.iscc_validate_mf(code_obj.mf_base16, strict=True) is True
+    assert ic.iscc_validate_mf(code_obj.mf_base58btc, strict=True) is True
+    assert ic.iscc_validate_mf(code_obj.mf_base64url, strict=True) is True
+
+
 def test_iscc_validate_mscdi():
     sample = "ISCC:KEDRRHYRYJ7XELW7HAO5FFGQRX75HJUKSUSZVWTTRNHTF2YL5SKP7XIUFXM4KMKXEZZA"
     assert ic.iscc_validate(sample, strict=False) is True
@@ -794,3 +916,29 @@ def test_explain_wide_iscc():
     # The hash should be 32 bytes (256 bits)
     hash_hex = explanation.split("-")[-1]
     assert len(hash_hex) == 64  # 32 bytes in hex is 64 chars
+
+
+def test_iscc_idv1_creation_validation():
+    """Test creation and validation of ISCC-IDv1 with edge cases."""
+    # Test with minimum timestamp (0)
+    min_id = ic.gen_iscc_id_v1(0, 0)["iscc"]
+    assert ic.iscc_validate(min_id, strict=True) is True
+
+    # Test with maximum valid timestamp (just under 2^52)
+    max_timestamp = (2**52) - 1
+    max_id = ic.gen_iscc_id_v1(max_timestamp, 0)["iscc"]
+    assert ic.iscc_validate(max_id, strict=True) is True
+
+    # Test with maximum valid server_id (4095)
+    max_server_id = ic.gen_iscc_id_v1(0, 4095)["iscc"]
+    assert ic.iscc_validate(max_server_id, strict=True) is True
+
+    # Test invalid values raise appropriate errors
+    with pytest.raises(ValueError):
+        ic.gen_iscc_id_v1(2**52, 0)  # Timestamp overflow
+
+    with pytest.raises(ValueError):
+        ic.gen_iscc_id_v1(0, 4096)  # Server-ID overflow
+
+    with pytest.raises(ValueError):
+        ic.gen_iscc_id_v1(0, 0, 1)  # Only realm 0 is currently supported
