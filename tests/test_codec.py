@@ -92,15 +92,11 @@ def test_read_varnibble():
         ic.decode_varnibble(ba("1"))
     with pytest.raises(ValueError, match="Input too short - minimum 4 bits required"):
         ic.decode_varnibble(ba("011"))
-    with pytest.raises(
-        ValueError, match="Input too short - got 6 bits but need more based on prefix"
-    ):
+    with pytest.raises(ValueError, match="Input too short - got 6 bits but need more based on prefix"):
         ic.decode_varnibble(ba("111000"))
 
     # Test invalid prefix pattern
-    with pytest.raises(
-        ValueError, match="Invalid prefix pattern '1111' - must be one of: 0, 10, 110, 1110"
-    ):
+    with pytest.raises(ValueError, match="Invalid prefix pattern '1111' - must be one of: 0, 10, 110, 1110"):
         ic.decode_varnibble(ba("1111000000000000"))
     assert ic.decode_varnibble(ba("0000")) == (0, ba())
     assert ic.decode_varnibble(ba("000000")) == (0, ba("00"))
@@ -159,10 +155,7 @@ def test_code_properties():
     assert c64.hash_bits == "".join(str(i) for i in c64.hash_ints)
     assert c256.hash_bits == "".join(str(i) for i in c256.hash_ints)
     assert c64.hash_uint == 7421903593216395922
-    assert (
-        c256.hash_uint
-        == 46588043924851280427026156359332814243502099936826263036193519252570625504970
-    )
+    assert c256.hash_uint == 46588043924851280427026156359332814243502099936826263036193519252570625504970
 
     assert c64.hash_base32 == "M376L7V63PFJE"
     assert c64.base32hex == "000MDVV5VQVDNIKI"
@@ -274,6 +267,14 @@ def test_decompose_wide_data_instance():
     assert len(decomposed) == 2
     assert decomposed[0].startswith("GAB")  # Data code
     assert decomposed[1].startswith("IAB")  # Instance code
+
+    # Save the code for other tests
+    global wide_iscc_code
+    wide_iscc_code = code
+
+
+# Create a global variable to store the wide ISCC code for reuse in other tests
+wide_iscc_code = None
 
 
 def test_decompose_content_data_instance():
@@ -648,10 +649,7 @@ def test_Code_rnd_iscc_320():
 def test_Code_rnd_iscc_256():
     co = ic.Code.rnd(ic.MT.ISCC, bits=256)
     assert co.code == "KEDJCSDCJ7VMDQKPGDU4LTAQD66MZXWXGPULIIPK5NJUBF6KXLZYS6Q"
-    assert (
-        co.explain
-        == "ISCC-IMAGE-V0-MSDI-9148624feac1c14f30e9c5cc101fbcccded733e8b421eaeb534097cabaf3897a"
-    )
+    assert co.explain == "ISCC-IMAGE-V0-MSDI-9148624feac1c14f30e9c5cc101fbcccded733e8b421eaeb534097cabaf3897a"
 
 
 def test_Code_rnd_iscc_192():
@@ -736,3 +734,52 @@ def test_iscc_validate_mscdi():
     with pytest.raises(ValueError) as excinfo:
         ic.iscc_validate(sample + "A", strict=True)
     assert str(excinfo.value) == "ISCC string does not match ^ISCC:[A-Z2-7]{10,68}$"
+
+
+def test_normalize_wide_iscc():
+    """Test normalizing a WIDE ISCC code."""
+    assert wide_iscc_code is not None
+    # Test normalizing the WIDE ISCC code (it should remain unchanged)
+    normalized = ic.iscc_normalize(wide_iscc_code)
+    assert normalized == wide_iscc_code
+
+    # Test normalizing without the ISCC prefix
+    code_without_prefix = wide_iscc_code.replace("ISCC:", "")
+    normalized = ic.iscc_normalize(code_without_prefix)
+    assert normalized == wide_iscc_code
+
+    # Test normalizing with lowercase
+    normalized = ic.iscc_normalize(wide_iscc_code.lower())
+    assert normalized == wide_iscc_code
+
+
+def test_validate_wide_iscc():
+    """Test validating a WIDE ISCC code."""
+    assert wide_iscc_code is not None
+    # Test that the WIDE ISCC code is valid
+    assert ic.iscc_validate(wide_iscc_code, strict=True) is True
+
+    # Test with a slightly modified invalid code
+    invalid_code = wide_iscc_code[:-1] + "X"
+    assert ic.iscc_validate(invalid_code, strict=False) is False
+    with pytest.raises(ValueError):
+        ic.iscc_validate(invalid_code, strict=True)
+
+
+def test_type_id_wide_iscc():
+    """Test getting the type ID of a WIDE ISCC code."""
+    assert wide_iscc_code is not None
+    # The type ID should indicate WIDE subtype
+    type_id = ic.iscc_type_id(wide_iscc_code)
+    assert "ISCC-WIDE-V0-256" in type_id
+
+
+def test_explain_wide_iscc():
+    """Test explaining a WIDE ISCC code."""
+    assert wide_iscc_code is not None
+    # The explanation should include WIDE subtype
+    explanation = ic.iscc_explain(wide_iscc_code)
+    assert "ISCC-WIDE-V0-256" in explanation
+    # The hash should be 32 bytes (256 bits)
+    hash_hex = explanation.split("-")[-1]
+    assert len(hash_hex) == 64  # 32 bytes in hex is 64 chars

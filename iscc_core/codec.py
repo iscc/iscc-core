@@ -453,8 +453,18 @@ def iscc_normalize(iscc_code):
     if prefix not in PREFIXES:
         raise ValueError(f"ISCC starts with invalid prefix {prefix}")
 
+    # Check if this is a WIDE ISCC code
+    cleaned_code = iscc_clean(iscc_code)
+    is_wide = False
+    try:
+        header = decode_header(decode_base32(cleaned_code))
+        is_wide = header[0] == MT.ISCC and header[1] == ST_ISCC.WIDE
+    except Exception:
+        # If we can't decode the header properly, assume it's not WIDE
+        pass
+
     decomposed = iscc_decompose(iscc_code)
-    recomposed = gen_iscc_code_v0(decomposed)["iscc"] if len(decomposed) >= 2 else decomposed[0]
+    recomposed = gen_iscc_code_v0(decomposed, wide=is_wide)["iscc"] if len(decomposed) >= 2 else decomposed[0]
     return f"ISCC:{recomposed}" if not recomposed.startswith("ISCC:") else recomposed
 
 
