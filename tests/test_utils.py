@@ -217,3 +217,43 @@ def test_iscc_compare():
         "data_dist": 30,
         "instance_match": False,
     }
+
+
+def test_wide_subtype_similarity():
+    """Test similarity calculation for ISCC codes with WIDE subtype."""
+    # Two identical WIDE ISCCs (128-bit Data + 128-bit Instance)
+    a = "K4AP5Q74YXNZC4EKRCQEKOXKMYHCJV2JQHX2OCQMRAFY3DAZQXIHLWY"
+    b = "K4AP5Q74YXNZC4EKRCQEKOXKMYHCJV2JQHX2OCQMRAFY3DAZQXIHLWY"
+    assert ic.iscc_similarity(a, b) == 100
+
+    # WIDE ISCCs with some differences in both Data and Instance parts
+    c = "K4AP5Q74YXNZC4EKRCQEKOXKMYHCJV2JQHX2OCQMRAFY3DAZQXIHLWY"
+    d = "K4AJVXNYPUVJYVGZOOX2V6MOWVBJEG4ET747CO7OEXGK5ZHMFAUXLCI"
+    # Should detect the differences
+    sim = ic.iscc_similarity(c, d)
+    assert 50 <= sim < 100
+
+
+def test_wide_subtype_compare():
+    """Test component-wise comparison for ISCC codes with WIDE subtype."""
+    # Create WIDE ISCCs that should decompose into two 128-bit components
+    a = "K4AP5Q74YXNZC4EKRCQEKOXKMYHCJV2JQHX2OCQMRAFY3DAZQXIHLWY"
+    b = "K4AP5Q74YXNZC4EKRCQEKOXKMYHCJV2JQHX2OCQMRAFY3DAZQXIHLWY"
+
+    # Same codes should have zero distance and instance match
+    result = ic.iscc_compare(a, b)
+    assert "data_dist" in result
+    assert "instance_match" in result
+    assert result["data_dist"] == 0
+    assert result["instance_match"] is True
+
+    # Different WIDE ISCCs
+    c = "K4AP5Q74YXNZC4EKRCQEKOXKMYHCJV2JQHX2OCQMRAFY3DAZQXIHLWY"
+    d = "K4AJVXNYPUVJYVGZOOX2V6MOWVBJEG4ET747CO7OEXGK5ZHMFAUXLCI"
+
+    # Should correctly detect differences in components
+    result = ic.iscc_compare(c, d)
+    assert "data_dist" in result
+    assert "instance_match" in result
+    assert result["data_dist"] > 0
+    assert result["instance_match"] is False
