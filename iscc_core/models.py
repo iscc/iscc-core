@@ -195,6 +195,9 @@ class Code:
     @property
     def length(self) -> int:
         """Length of code hash in number of bits (without header)."""
+        # Pass subtype as third parameter for MT.ISCC to properly handle WIDE subtype
+        if self._head[0] == MT.ISCC:
+            return decode_length(self._head[0], self._head[3], self._head[1])
         return decode_length(self._head[0], self._head[3])
 
     rgen = random.Random(0)  # nosec
@@ -234,7 +237,14 @@ class Code:
                 st = cls.rgen.choice(list(ST))
         else:
             if mt == MT.ISCC:
-                raise ValueError(f"Custom subtype selection not supported for MT.ISCC")
+                if st == ST_ISCC.WIDE:
+                    # Special case for WIDE subtype (128-bit Data + 128-bit Instance)
+                    units = tuple()
+                    bits = 256
+                else:
+                    raise ValueError(
+                        f"Custom subtype selection not supported for MT.ISCC except ST_ISCC.WIDE"
+                    )
 
         # Version
         vs = VS.V0
