@@ -246,4 +246,4 @@ def gen_iscc_id_v1(timestamp, server_id, realm_id=0):
         digest=digest,
     )
     iscc = "ISCC:" + iscc_id
-    return dict(iscc_id=iscc)
+    return dict(iscc=iscc)
