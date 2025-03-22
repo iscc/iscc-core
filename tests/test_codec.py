@@ -759,8 +759,9 @@ def test_validate_wide_iscc():
     # Test that the WIDE ISCC code is valid
     assert ic.iscc_validate(wide_iscc_code, strict=True) is True
 
-    # Test with a slightly modified invalid code
-    invalid_code = wide_iscc_code[:-1] + "X"
+    # Test with a truncated code that should be invalid
+    # Remove last 8 characters to create a code that's too short
+    invalid_code = wide_iscc_code[:-8]
     assert ic.iscc_validate(invalid_code, strict=False) is False
     with pytest.raises(ValueError):
         ic.iscc_validate(invalid_code, strict=True)

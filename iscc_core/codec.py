@@ -601,7 +601,7 @@ def iscc_validate(iscc, strict=True):
             return False
 
     # Length test
-    expected_nbyptes = decode_length(m, l).value // 8
+    expected_nbyptes = decode_length(m, l, s).value // 8
     actual_nbyptes = len(t)
     if expected_nbyptes != actual_nbyptes:
         if strict:
