@@ -1,6 +1,6 @@
 # Changelog
 
-## [1.2.0] - Unreleased
+## [1.2.0] - 2025-03-23
 
 - Improved `text_clean` function to better handle whitespace-only lines and trailing newlines
 - Fixed `text_clean` behavior to match test expectations
@@ -9,6 +9,7 @@
 - Added input validation for empty frame signatures in video code generation
 - Improve erro handling and validation in `decode_varnibble`
 - Added experimental WIDE subtype in ISCC-CODE for 128-bit Data and Instance codes
+- Added experimatnal ISCC-IDv1
 
 ## [1.1.0] - 2024-11-23
 
