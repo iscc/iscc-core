@@ -6,8 +6,19 @@
 [![Quality](https://app.codacy.com/project/badge/Grade/ad1cc48ac0c0413ea2373a938148f019)](https://www.codacy.com/gh/iscc/iscc-core/dashboard)
 [![Downloads](https://pepy.tech/badge/iscc-core)](https://pepy.tech/project/iscc-core)
 
-`iscc-core` is the reference implementation of the core algorithms of the [ISCC](https://iscc.codes)
-(*International Standard Content Code*)
+**Create similarity-preserving identifiers for digital content**
+
+`iscc-core` is the reference implementation of the core algorithms of
+[ISO 24138](https://www.iso.org/standard/77899.html) – [ISCC](https://iscc.io) (*International
+Standard Content Code*)
+
+## Key Features
+
+- **Similarity-Preserving**: Detect similar content even after modifications
+- **Multi-Level Identification**: Identify content at metadata, perceptual, and data levels
+- **Self-Describing**: Each component contains its own type and version information
+- **ISO Standardized**: Implements the official ISO 24138:2024 specification
+- **Highly Tested**: 100% test coverage with conformance test vectors
 
 ## What is the ISCC
 
