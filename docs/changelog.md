@@ -1,5 +1,8 @@
 # Changelog
 
+## [1.2.1] - Unreleased
+
+
 ## [1.2.0] - 2025-03-23
 
 - Improved `text_clean` function to better handle whitespace-only lines and trailing newlines

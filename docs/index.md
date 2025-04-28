@@ -39,8 +39,8 @@ general digital asset management use-cases.
 ## What is `iscc-core`
 
 `iscc-core` is the python based reference implementation of the ISCC core algorithms as defined by
-[ISO 24138](https://www.iso.org/standard/77899.html). It also a good reference for porting ISCC to
-other programming languages.
+[ISO 24138](https://www.iso.org/standard/77899.html). It is also a good reference for porting ISCC
+to other programming languages.
 
 !!! tip
     This is a low level reference implementation that does not inlcude features like mediatype
