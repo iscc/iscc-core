@@ -2,6 +2,8 @@
 
 ## [1.2.1] - Unreleased
 
+- Updated CI runners to latest versions
+- Updated Dependencies
 
 ## [1.2.0] - 2025-03-23
 
