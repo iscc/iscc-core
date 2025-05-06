@@ -2,6 +2,7 @@
 
 ## [1.2.1] - Unreleased
 
+- Added utility for calculating Normalized Prefix Hamming Distance/Similarity (NPHD/NPHS)
 - Updated CI runners to latest versions
 - Updated Dependencies
 

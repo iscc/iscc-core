@@ -286,3 +286,137 @@ def test_similarity_iscc_idv1():
     # Same IDs should match
     result = ic.iscc_compare(id1, id1)
     assert result["id_match"] is True
+
+
+def test_iscc_nph_distance_equal_length():
+    """Test Normalized Prefix Hamming Distance with equal length byte strings."""
+    # Test with identical byte strings
+    a = b"hello world"
+    b = b"hello world"
+    result = ic.utils.iscc_nph_distance(a, b)
+    assert result["distance"] == 0.0
+    assert result["common_prefix_bits"] == len(a) * 8
+
+    # Test with different byte strings of equal length
+    a = b"hello world"
+    b = b"jello world"  # One character different
+    result = ic.utils.iscc_nph_distance(a, b)
+    # 'h' (0x68) vs 'j' (0x6A) has 2 bits different
+    assert 0.0 < result["distance"] < 1.0
+    assert result["common_prefix_bits"] == len(a) * 8
+
+    # Test with completely different byte strings
+    a = b"hello world"
+    b = b"HELLO WORLD"  # All characters different in case
+    result = ic.utils.iscc_nph_distance(a, b)
+    assert 0.0 < result["distance"] < 1.0
+    assert result["common_prefix_bits"] == len(a) * 8
+
+
+def test_iscc_nph_distance_different_length():
+    """Test Normalized Prefix Hamming Distance with different length byte strings."""
+    # Test with one string longer than the other
+    a = b"hello world"
+    b = b"hello"
+    result = ic.utils.iscc_nph_distance(a, b)
+    assert result["distance"] == 0.0  # Common prefix is identical
+    assert result["common_prefix_bits"] == len(b) * 8
+
+    # Test with one string longer and different content
+    a = b"hello world"
+    b = b"jello"
+    result = ic.utils.iscc_nph_distance(a, b)
+    # 'h' (0x68) vs 'j' (0x6A) has 2 bits different
+    assert 0.0 < result["distance"] < 1.0
+    assert result["common_prefix_bits"] == len(b) * 8
+
+
+def test_iscc_nph_distance_empty():
+    """Test Normalized Prefix Hamming Distance with empty byte strings."""
+    # Both strings empty
+    a = b""
+    b = b""
+    result = ic.utils.iscc_nph_distance(a, b)
+    assert result["distance"] == 0.0
+    assert result["common_prefix_bits"] == 0
+
+    # One string empty
+    a = b"hello world"
+    b = b""
+    result = ic.utils.iscc_nph_distance(a, b)
+    assert result["distance"] == 1.0
+    assert result["common_prefix_bits"] == 0
+
+    # Other string empty
+    a = b""
+    b = b"hello world"
+    result = ic.utils.iscc_nph_distance(a, b)
+    assert result["distance"] == 1.0
+    assert result["common_prefix_bits"] == 0
+
+
+def test_iscc_nph_similarity_equal_length():
+    """Test Normalized Prefix Hamming Similarity with equal length byte strings."""
+    # Test with identical byte strings
+    a = b"hello world"
+    b = b"hello world"
+    result = ic.utils.iscc_nph_similarity(a, b)
+    assert result["similarity"] == 1.0
+    assert result["common_prefix_bits"] == len(a) * 8
+
+    # Test with different byte strings of equal length
+    a = b"hello world"
+    b = b"jello world"  # One character different
+    result = ic.utils.iscc_nph_similarity(a, b)
+    # 'h' (0x68) vs 'j' (0x6A) has 2 bits different
+    assert 0.0 < result["similarity"] < 1.0
+    assert result["common_prefix_bits"] == len(a) * 8
+
+    # Test with completely different byte strings
+    a = b"hello world"
+    b = b"HELLO WORLD"  # All characters different in case
+    result = ic.utils.iscc_nph_similarity(a, b)
+    assert 0.0 < result["similarity"] < 1.0
+    assert result["common_prefix_bits"] == len(a) * 8
+
+
+def test_iscc_nph_similarity_different_length():
+    """Test Normalized Prefix Hamming Similarity with different length byte strings."""
+    # Test with one string longer than the other
+    a = b"hello world"
+    b = b"hello"
+    result = ic.utils.iscc_nph_similarity(a, b)
+    assert result["similarity"] == 1.0  # Common prefix is identical
+    assert result["common_prefix_bits"] == len(b) * 8
+
+    # Test with one string longer and different content
+    a = b"hello world"
+    b = b"jello"
+    result = ic.utils.iscc_nph_similarity(a, b)
+    # 'h' (0x68) vs 'j' (0x6A) has 2 bits different
+    assert 0.0 < result["similarity"] < 1.0
+    assert result["common_prefix_bits"] == len(b) * 8
+
+
+def test_iscc_nph_similarity_empty():
+    """Test Normalized Prefix Hamming Similarity with empty byte strings."""
+    # Both strings empty
+    a = b""
+    b = b""
+    result = ic.utils.iscc_nph_similarity(a, b)
+    assert result["similarity"] == 1.0
+    assert result["common_prefix_bits"] == 0
+
+    # One string empty
+    a = b"hello world"
+    b = b""
+    result = ic.utils.iscc_nph_similarity(a, b)
+    assert result["similarity"] == 0.0
+    assert result["common_prefix_bits"] == 0
+
+    # Other string empty
+    a = b""
+    b = b"hello world"
+    result = ic.utils.iscc_nph_similarity(a, b)
+    assert result["similarity"] == 0.0
+    assert result["common_prefix_bits"] == 0

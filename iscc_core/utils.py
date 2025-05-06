@@ -97,7 +97,9 @@ def cidv1_hex(stream):
 
     # fail if we have more data than ipfs_max_size
     if stream.read(1):
-        raise ValueError(f"Data exceeds current max size {ipfs_max_size} for ipfs_hash: {len(data)}")
+        raise ValueError(
+            f"Data exceeds current max size {ipfs_max_size} for ipfs_hash: {len(data)}"
+        )
 
     digest = sha256(data).digest()
     multibase_prefix = "f"
