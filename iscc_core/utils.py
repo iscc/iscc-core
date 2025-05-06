@@ -340,9 +340,10 @@ def iscc_nph_distance(a, b):
     common_bits = common_bytes * 8
     if common_bits == 0:
         return {"distance": 0.0 if (len(a) == 0 and len(b) == 0) else 1.0, "common_prefix_bits": 0}
-    hd = (
-        int.from_bytes(a[:common_bytes], "big") ^ int.from_bytes(b[:common_bytes], "big")
-    ).bit_count()
+    ba, bb = bitarray(), bitarray()
+    ba.frombytes(a[:common_bytes])
+    bb.frombytes(b[:common_bytes])
+    hd = count_xor(ba, bb)
     return {"distance": hd / common_bits, "common_prefix_bits": common_bits}
 
 
@@ -366,7 +367,8 @@ def iscc_nph_similarity(a, b):
             "similarity": 1.0 if (len(a) == 0 and len(b) == 0) else 0.0,
             "common_prefix_bits": 0,
         }
-    hd = (
-        int.from_bytes(a[:common_bytes], "big") ^ int.from_bytes(b[:common_bytes], "big")
-    ).bit_count()
+    ba, bb = bitarray(), bitarray()
+    ba.frombytes(a[:common_bytes])
+    bb.frombytes(b[:common_bytes])
+    hd = count_xor(ba, bb)
     return {"similarity": 1.0 - (hd / common_bits), "common_prefix_bits": common_bits}
