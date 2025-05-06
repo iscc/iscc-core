@@ -97,9 +97,7 @@ def cidv1_hex(stream):
 
     # fail if we have more data than ipfs_max_size
     if stream.read(1):
-        raise ValueError(
-            f"Data exceeds current max size {ipfs_max_size} for ipfs_hash: {len(data)}"
-        )
+        raise ValueError(f"Data exceeds current max size {ipfs_max_size} for ipfs_hash: {len(data)}")
 
     digest = sha256(data).digest()
     multibase_prefix = "f"
@@ -326,19 +324,15 @@ def iscc_pair_unpack(a, b):
 def iscc_nph_distance(a, b):
     # type: (bytes, bytes) -> dict
     """
-    Calculates the Normalized Prefix Hamming Distance (NPHD) between two byte strings.
+    Calculate Normalized Prefix Hamming Distance (NPHD) between two byte strings.
 
     NPHD is defined as the Hamming distance of their common prefix, normalized by
     the length of that common prefix in bits.
 
-    Args:
-        a: The first byte string.
-        b: The second byte string.
-
-    Returns:
-        A dictionary containing:
-            - "distance": The NPHD score (float, 0.0 to 1.0).
-            - "common_prefix_bits": The length of the common prefix in bits (int).
+    :param a: First byte string
+    :param b: Second byte string
+    :return: Dictionary with NPHD score and common prefix length
+             {"distance": float, "common_prefix_bits": int}
     """
     len_a_bytes = len(a)
     len_b_bytes = len(b)
@@ -377,19 +371,15 @@ def iscc_nph_distance(a, b):
 def iscc_nph_similarity(a, b):
     # type: (bytes, bytes) -> dict
     """
-    Calculates the Normalized Prefix Hamming Similarity (NPHS) between two byte strings.
+    Calculate Normalized Prefix Hamming Similarity (NPHS) between two byte strings.
 
     NPHS is defined as 1.0 minus the Normalized Prefix Hamming Distance (NPHD).
     It represents the fraction of matching bits within the common prefix.
 
-    Args:
-        a: The first byte string.
-        b: The second byte string.
-
-    Returns:
-        A dictionary containing:
-            - "similarity": The NPHS score (float, 0.0 to 1.0).
-            - "common_prefix_bits": The length of the common prefix in bits (int).
+    :param a: First byte string
+    :param b: Second byte string
+    :return: Dictionary with NPHS score and common prefix length
+             {"similarity": float, "common_prefix_bits": int}
     """
     len_a_bytes = len(a)
     len_b_bytes = len(b)
