@@ -336,38 +336,14 @@ def iscc_nph_distance(a, b):
     :return: Dictionary with NPHD score and common prefix length
              {"distance": float, "common_prefix_bits": int}
     """
-    len_a_bytes = len(a)
-    len_b_bytes = len(b)
-
-    common_len_bytes = min(len_a_bytes, len_b_bytes)
-    common_len_bits = common_len_bytes * 8
-
-    if common_len_bits == 0:
-        # If there's no common prefix (e.g., one or both strings are empty).
-        # If both are empty, they are identical (distance 0).
-        # If one is empty and the other is not, they are maximally different (distance 1).
-        distance = 0.0 if len_a_bytes == 0 and len_b_bytes == 0 else 1.0
-        return {"distance": distance, "common_prefix_bits": 0}
-
-    a_prefix_bytes = a[:common_len_bytes]
-    b_prefix_bytes = b[:common_len_bytes]
-
-    # Convert byte prefixes to bitarrays
-    ba_a = bitarray()
-    ba_a.frombytes(a_prefix_bytes)
-
-    ba_b = bitarray()
-    ba_b.frombytes(b_prefix_bytes)
-
-    # Calculate Hamming distance over the common prefix
-    # count_xor requires bitarrays of the same length, which ba_a and ba_b will have.
-    hd_prefix = count_xor(ba_a, ba_b)
-
-    # Normalize Hamming distance by the length of the common prefix in bits
-    # common_len_bits is guaranteed to be > 0 here.
-    nphd_score = hd_prefix / common_len_bits
-
-    return {"distance": nphd_score, "common_prefix_bits": common_len_bits}
+    common_bytes = min(len(a), len(b))
+    common_bits = common_bytes * 8
+    if common_bits == 0:
+        return {"distance": 0.0 if (len(a) == 0 and len(b) == 0) else 1.0, "common_prefix_bits": 0}
+    hd = (
+        int.from_bytes(a[:common_bytes], "big") ^ int.from_bytes(b[:common_bytes], "big")
+    ).bit_count()
+    return {"distance": hd / common_bits, "common_prefix_bits": common_bits}
 
 
 def iscc_nph_similarity(a, b):
@@ -383,34 +359,14 @@ def iscc_nph_similarity(a, b):
     :return: Dictionary with NPHS score and common prefix length
              {"similarity": float, "common_prefix_bits": int}
     """
-    len_a_bytes = len(a)
-    len_b_bytes = len(b)
-
-    common_len_bytes = min(len_a_bytes, len_b_bytes)
-    common_len_bits = common_len_bytes * 8
-
-    if common_len_bits == 0:
-        # If there's no common prefix.
-        # If both are empty, they are identical (similarity 1).
-        # If one is empty and the other is not, they are maximally different (similarity 0).
-        similarity = 1.0 if len_a_bytes == 0 and len_b_bytes == 0 else 0.0
-        return {"similarity": similarity, "common_prefix_bits": 0}
-
-    a_prefix_bytes = a[:common_len_bytes]
-    b_prefix_bytes = b[:common_len_bytes]
-
-    # Convert byte prefixes to bitarrays
-    ba_a = bitarray()
-    ba_a.frombytes(a_prefix_bytes)
-
-    ba_b = bitarray()
-    ba_b.frombytes(b_prefix_bytes)
-
-    # Calculate Hamming distance over the common prefix
-    hd_prefix = count_xor(ba_a, ba_b)
-
-    # Calculate NPHS
-    # common_len_bits is guaranteed to be > 0 here.
-    nphs_score = 1.0 - (hd_prefix / common_len_bits)
-
-    return {"similarity": nphs_score, "common_prefix_bits": common_len_bits}
+    common_bytes = min(len(a), len(b))
+    common_bits = common_bytes * 8
+    if common_bits == 0:
+        return {
+            "similarity": 1.0 if (len(a) == 0 and len(b) == 0) else 0.0,
+            "common_prefix_bits": 0,
+        }
+    hd = (
+        int.from_bytes(a[:common_bytes], "big") ^ int.from_bytes(b[:common_bytes], "big")
+    ).bit_count()
+    return {"similarity": 1.0 - (hd / common_bits), "common_prefix_bits": common_bits}
