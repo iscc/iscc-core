@@ -1,6 +1,6 @@
 # Changelog
 
-## [1.2.1] - Unreleased
+## [1.2.1] - 2025-05-08
 
 - Fixed order in UNITs constant for SEMANTIC/CONTENT unit combination
 - Improved error message for invalid ISCC-UNIT combinations in `encode_units`
@@ -15,7 +15,7 @@
 - Updated CI configuration to use latest test environments
 - Optimized DataHasherV0.push() to improve streaming efficiency
 - Added input validation for empty frame signatures in video code generation
-- Improve erro handling and validation in `decode_varnibble`
+- Improve error handling and validation in `decode_varnibble`
 - Added experimental WIDE subtype in ISCC-CODE for 128-bit Data and Instance codes
 - Added experimatnal ISCC-IDv1
 
