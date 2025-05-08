@@ -12,6 +12,8 @@ import jcs
 from iscc_core.constants import Stream
 
 __all__ = [
+    "iscc_nph_similarity",
+    "iscc_nph_distance",
     "json_canonical",
     "cidv1_hex",
     "cidv1_to_token_id",
@@ -23,6 +25,57 @@ __all__ = [
     "iscc_distance_bytes",
     "multi_hash_blake3",
 ]
+
+
+def iscc_nph_similarity(a, b):
+    # type: (bytes, bytes) -> dict
+    """
+    Calculate Normalized Prefix Hamming Similarity (NPHS) between two byte strings.
+
+    NPHS is defined as 1.0 minus the Normalized Prefix Hamming Distance (NPHD).
+    It represents the fraction of matching bits within the common prefix.
+
+    :param a: First byte string
+    :param b: Second byte string
+    :return: Dictionary with NPHS score and common prefix length
+             {"similarity": float, "common_prefix_bits": int}
+    """
+    common_bytes = min(len(a), len(b))
+    common_bits = common_bytes * 8
+    if common_bits == 0:
+        return {
+            "similarity": 1.0 if (len(a) == 0 and len(b) == 0) else 0.0,
+            "common_prefix_bits": 0,
+        }
+    ba, bb = bitarray(), bitarray()
+    ba.frombytes(a[:common_bytes])
+    bb.frombytes(b[:common_bytes])
+    hd = count_xor(ba, bb)
+    return {"similarity": 1.0 - (hd / common_bits), "common_prefix_bits": common_bits}
+
+
+def iscc_nph_distance(a, b):
+    # type: (bytes, bytes) -> dict
+    """
+    Calculate Normalized Prefix Hamming Distance (NPHD) between two byte strings.
+
+    NPHD is defined as the Hamming distance of their common prefix, normalized by
+    the length of that common prefix in bits.
+
+    :param a: First byte string
+    :param b: Second byte string
+    :return: Dictionary with NPHD score and common prefix length
+             {"distance": float, "common_prefix_bits": int}
+    """
+    common_bytes = min(len(a), len(b))
+    common_bits = common_bytes * 8
+    if common_bits == 0:
+        return {"distance": 0.0 if (len(a) == 0 and len(b) == 0) else 1.0, "common_prefix_bits": 0}
+    ba, bb = bitarray(), bitarray()
+    ba.frombytes(a[:common_bytes])
+    bb.frombytes(b[:common_bytes])
+    hd = count_xor(ba, bb)
+    return {"distance": hd / common_bits, "common_prefix_bits": common_bits}
 
 
 def json_canonical(obj):
@@ -321,54 +374,3 @@ def iscc_pair_unpack(a, b):
     if not a[:-1] == b[:-1]:
         raise ValueError(f"ISCC headers don´t match: {a}, {b}")
     return a[-1], b[-1]
-
-
-def iscc_nph_distance(a, b):
-    # type: (bytes, bytes) -> dict
-    """
-    Calculate Normalized Prefix Hamming Distance (NPHD) between two byte strings.
-
-    NPHD is defined as the Hamming distance of their common prefix, normalized by
-    the length of that common prefix in bits.
-
-    :param a: First byte string
-    :param b: Second byte string
-    :return: Dictionary with NPHD score and common prefix length
-             {"distance": float, "common_prefix_bits": int}
-    """
-    common_bytes = min(len(a), len(b))
-    common_bits = common_bytes * 8
-    if common_bits == 0:
-        return {"distance": 0.0 if (len(a) == 0 and len(b) == 0) else 1.0, "common_prefix_bits": 0}
-    ba, bb = bitarray(), bitarray()
-    ba.frombytes(a[:common_bytes])
-    bb.frombytes(b[:common_bytes])
-    hd = count_xor(ba, bb)
-    return {"distance": hd / common_bits, "common_prefix_bits": common_bits}
-
-
-def iscc_nph_similarity(a, b):
-    # type: (bytes, bytes) -> dict
-    """
-    Calculate Normalized Prefix Hamming Similarity (NPHS) between two byte strings.
-
-    NPHS is defined as 1.0 minus the Normalized Prefix Hamming Distance (NPHD).
-    It represents the fraction of matching bits within the common prefix.
-
-    :param a: First byte string
-    :param b: Second byte string
-    :return: Dictionary with NPHS score and common prefix length
-             {"similarity": float, "common_prefix_bits": int}
-    """
-    common_bytes = min(len(a), len(b))
-    common_bits = common_bytes * 8
-    if common_bits == 0:
-        return {
-            "similarity": 1.0 if (len(a) == 0 and len(b) == 0) else 0.0,
-            "common_prefix_bits": 0,
-        }
-    ba, bb = bitarray(), bitarray()
-    ba.frombytes(a[:common_bytes])
-    bb.frombytes(b[:common_bytes])
-    hd = count_xor(ba, bb)
-    return {"similarity": 1.0 - (hd / common_bits), "common_prefix_bits": common_bits}

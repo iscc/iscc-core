@@ -5,6 +5,8 @@
         show_source: true
         heading_level: 3
         members:
+            - iscc_nph_similarity
+            - iscc_nph_distance
             - json_canonical
             - sliding_window
             - iscc_compare
