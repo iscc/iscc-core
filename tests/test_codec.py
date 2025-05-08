@@ -964,3 +964,48 @@ def test_iscc_idv1_creation_validation():
 
     with pytest.raises(ValueError):
         ic.gen_iscc_id_v1(0, 0, 1)  # Only realm 0 is currently supported
+
+
+def test_encode_units_valid():
+    """Test encode_units with valid unit combinations."""
+    # Test all valid combinations from UNITS tuple
+    assert ic.encode_units(tuple()) == 0
+    assert ic.encode_units((ic.MT.CONTENT,)) == 1
+    assert ic.encode_units((ic.MT.SEMANTIC,)) == 2
+    assert ic.encode_units((ic.MT.SEMANTIC, ic.MT.CONTENT)) == 3
+    assert ic.encode_units((ic.MT.META,)) == 4
+    assert ic.encode_units((ic.MT.META, ic.MT.CONTENT)) == 5
+    assert ic.encode_units((ic.MT.META, ic.MT.SEMANTIC)) == 6
+    assert ic.encode_units((ic.MT.META, ic.MT.SEMANTIC, ic.MT.CONTENT)) == 7
+
+
+def test_encode_units_invalid():
+    """Test encode_units with invalid unit combinations."""
+    # Test invalid combinations
+    with pytest.raises(ValueError, match="Invalid ISCC-UNIT combination: DATA"):
+        ic.encode_units((ic.MT.DATA,))
+
+    with pytest.raises(ValueError, match="Invalid ISCC-UNIT combination: INSTANCE"):
+        ic.encode_units((ic.MT.INSTANCE,))
+
+    with pytest.raises(ValueError, match="Invalid ISCC-UNIT combination: META, DATA"):
+        ic.encode_units((ic.MT.META, ic.MT.DATA))
+
+    with pytest.raises(ValueError, match="Invalid ISCC-UNIT 99 - must be of type MT"):
+        ic.encode_units((99,))  # Non-existent MT value
+
+
+def test_encode_units_wrong_order():
+    """Test encode_units with units in wrong order."""
+    # Test valid combinations but in wrong order
+    with pytest.raises(ValueError, match="Invalid ISCC-UNIT combination: CONTENT, META"):
+        ic.encode_units((ic.MT.CONTENT, ic.MT.META))
+
+    with pytest.raises(ValueError, match="Invalid ISCC-UNIT combination: CONTENT, SEMANTIC"):
+        ic.encode_units((ic.MT.CONTENT, ic.MT.SEMANTIC))
+
+    with pytest.raises(ValueError, match="Invalid ISCC-UNIT combination: SEMANTIC, META"):
+        ic.encode_units((ic.MT.SEMANTIC, ic.MT.META))
+
+    with pytest.raises(ValueError, match="Invalid ISCC-UNIT combination: CONTENT, SEMANTIC, META"):
+        ic.encode_units((ic.MT.CONTENT, ic.MT.SEMANTIC, ic.MT.META))

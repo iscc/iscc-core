@@ -3,8 +3,9 @@
 ## [1.2.1] - Unreleased
 
 - Fixed order in UNITs constant for SEMANTIC/CONTENT unit combination
+- Improved error message for invalid ISCC-UNIT combinations in `encode_units`
 - Added utility for calculating Normalized Prefix Hamming Distance/Similarity (NPHD/NPHS)
-- Updated CI runners to latest versions
+- Updated CI runners to the latest versions
 - Updated Dependencies
 
 ## [1.2.0] - 2025-03-23

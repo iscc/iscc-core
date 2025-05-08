@@ -169,14 +169,25 @@ def decode_varnibble(b):
 def encode_units(units):
     # type: (Tuple[MT, ...]) -> int
     """
-    Encodes a combination of ISCC units to an integer between 0-7 to be used as length
+    Encodes a combination of ISCC units to an integer between 0-7 to be used as a length
     value for the final encoding of MT.ISCC
 
     :param Tuple units: A tuple of a MainType combination (can be empty)
     :return: Integer value to be used as length-value for header encoding
     :rtype: int
+    :raises ValueError: If the combination of ISCC-UNITs is invalid
     """
-    return UNITS.index(units)
+    try:
+        return UNITS.index(units)
+    except ValueError:
+        # First check if all units are valid MT enum values
+        for u in units:
+            if not isinstance(u, MT):
+                raise ValueError(f"Invalid ISCC-UNIT {u} - must be of type MT")
+
+        # If all units are valid, create a helpful error message
+        unit_names = [f"{MT(u).name}" for u in units] if units else ["empty"]
+        raise ValueError(f"Invalid ISCC-UNIT combination: {', '.join(unit_names)}")
 
 
 def decode_units(unit_id):
