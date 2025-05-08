@@ -215,7 +215,7 @@ UNITS = (
     tuple(),
     (MT.CONTENT,),
     (MT.SEMANTIC,),
-    (MT.CONTENT, MT.SEMANTIC),
+    (MT.SEMANTIC,MT.CONTENT,),
     (MT.META,),
     (MT.META, MT.CONTENT),
     (MT.META, MT.SEMANTIC),

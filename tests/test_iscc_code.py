@@ -83,3 +83,16 @@ def test_gen_iscc_code_v0_incompat_semantic_content_raises():
     with pytest.raises(ValueError) as e:
         ic.gen_iscc_code_v0([sema, cont, DID_64, IID_256])
         assert "Semantic-Code" in str(e)
+
+
+def test_gen_iscc_code_v0_no_meta_256bit_units():
+    units = [
+        "ISCC:CADR6SWKRPW5ZV25SQIHSHRXHIVKXPCU2ZBEGJPZLTEBCAX2K2CFS2Y",
+        "ISCC:EADQJV6YHB6TD24CIVIF6SCAWBX4TQJZ3Z6G2RRN7AFUHQYVF6D6C3I",
+        "ISCC:GADQJV6YHB6TD24CIVIF6SCAWBX4TQJZ3Z6G2RRN7AFUHQYVF6D6C3I",
+        "ISCC:IADSETL3YMLTGKMNKSA2MVY45JTDN3GBSKA6PZMH2WPOH2NX2BEDDLY",
+    ]
+
+    result = ic.gen_iscc_code_v0(units)
+    assert isinstance(result, dict)
+    assert result == {'iscc': 'ISCC:KABR6SWKRPW5ZV25ATL5QOD5GHVYEBGX3A4H2MPLQIRE266DC4ZSTDI'}
