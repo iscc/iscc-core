@@ -95,4 +95,4 @@ def test_gen_iscc_code_v0_no_meta_256bit_units():
 
     result = ic.gen_iscc_code_v0(units)
     assert isinstance(result, dict)
-    assert result == {'iscc': 'ISCC:KABR6SWKRPW5ZV25ATL5QOD5GHVYEBGX3A4H2MPLQIRE266DC4ZSTDI'}
+    assert result == {"iscc": "ISCC:KABR6SWKRPW5ZV25ATL5QOD5GHVYEBGX3A4H2MPLQIRE266DC4ZSTDI"}

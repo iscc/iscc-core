@@ -2,6 +2,7 @@
 
 ## [1.2.1] - Unreleased
 
+- Fixed order in UNITs constant for SEMANTIC/CONTENT unit combination
 - Added utility for calculating Normalized Prefix Hamming Distance/Similarity (NPHD/NPHS)
 - Updated CI runners to latest versions
 - Updated Dependencies
