@@ -9,5 +9,6 @@ __pycache__
 coverage.xml
 
 .aider*
+CLAUDE.md
 .env
 last
