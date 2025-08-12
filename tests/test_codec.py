@@ -46,10 +46,10 @@ def test_encode_decode_header_idv1():
 
     # Test full encoding/decoding with a real IDv1 value
     timestamp = 1647312000000000  # 2022-03-15 12:00:00 UTC in microseconds
-    server_id = 42
+    hub_id = 42
 
     # Construct the 64-bit body
-    body = (timestamp << 12) | server_id
+    body = (timestamp << 12) | hub_id
     digest = body.to_bytes(8, byteorder="big")
 
     # Encode component
@@ -72,10 +72,10 @@ def test_encode_decode_header_idv1():
 
     # Verify the body decodes correctly
     decoded_body = int.from_bytes(header_parts[4], byteorder="big")
-    decoded_server_id = decoded_body & 0xFFF
+    decoded_hub_id = decoded_body & 0xFFF
     decoded_timestamp = decoded_body >> 12
 
-    assert decoded_server_id == server_id
+    assert decoded_hub_id == hub_id
     assert decoded_timestamp == timestamp
 
 
@@ -312,8 +312,8 @@ def test_decompose_data_instance():
 def test_decompose_iscc_idv1():
     # Create a valid ISCC-IDv1
     timestamp = 1647312000000000  # 2022-03-15 12:00:00 UTC in microseconds
-    server_id = 42
-    iscc_idv1 = ic.gen_iscc_id_v1(timestamp, server_id)["iscc"]
+    hub_id = 42
+    iscc_idv1 = ic.gen_iscc_id_v1(timestamp, hub_id, realm_id=0)["iscc"]
 
     # Test decomposition (should return the same code since it's just one unit)
     components = ic.iscc_decompose(iscc_idv1)
@@ -539,8 +539,8 @@ def test_normalize_iscc_id_scheme_mixed():
 def test_normalize_iscc_idv1():
     # Create a valid ISCC-IDv1
     timestamp = 1647312000000000  # 2022-03-15 12:00:00 UTC in microseconds
-    server_id = 42
-    iscc_idv1 = ic.gen_iscc_id_v1(timestamp, server_id)["iscc"]
+    hub_id = 42
+    iscc_idv1 = ic.gen_iscc_id_v1(timestamp, hub_id, realm_id=0)["iscc"]
 
     # Test various forms of normalization
     assert ic.iscc_normalize(iscc_idv1) == iscc_idv1
@@ -654,8 +654,8 @@ def test_codec_validate_iscc_id():
 def test_validate_iscc_idv1():
     # Create a valid ISCC-IDv1
     timestamp = 1647312000000000  # 2022-03-15 12:00:00 UTC in microseconds
-    server_id = 42
-    iscc_idv1 = ic.gen_iscc_id_v1(timestamp, server_id)["iscc"]
+    hub_id = 42
+    iscc_idv1 = ic.gen_iscc_id_v1(timestamp, hub_id, realm_id=0)["iscc"]
 
     # Test validation
     assert ic.iscc_validate(iscc_idv1, strict=True) is True
@@ -688,8 +688,8 @@ def test_type_id_maintype_iscc_id():
 def test_type_id_maintype_iscc_idv1():
     # Create a valid ISCC-IDv1
     timestamp = 1647312000000000  # 2022-03-15 12:00:00 UTC in microseconds
-    server_id = 42
-    iscc_idv1 = ic.gen_iscc_id_v1(timestamp, server_id)["iscc"]
+    hub_id = 42
+    iscc_idv1 = ic.gen_iscc_id_v1(timestamp, hub_id, realm_id=0)["iscc"]
 
     # Test type_id function with IDv1
     type_id = ic.iscc_type_id(iscc_idv1)
@@ -721,12 +721,12 @@ def test_explain_maintype_iscc_id_counter():
 def test_explain_maintype_iscc_idv1():
     # Create a valid ISCC-IDv1 with known values
     timestamp = 1647312000000000  # 2022-03-15 12:00:00 UTC in microseconds
-    server_id = 42
-    iscc_idv1 = ic.gen_iscc_id_v1(timestamp, server_id)["iscc"]
+    hub_id = 42
+    iscc_idv1 = ic.gen_iscc_id_v1(timestamp, hub_id, realm_id=0)["iscc"]
 
     # Test explain function with IDv1
     explanation = ic.iscc_explain(iscc_idv1)
-    assert explanation == f"ID-REALM_0-V1-64-{timestamp}-{server_id}"
+    assert explanation == f"ID-REALM_0-V1-64-{timestamp}-{hub_id}"
 
 
 def test_encode_base32hex():
@@ -846,8 +846,8 @@ def test_iscc_validate_mf_invalid():
 def test_validate_mf_iscc_idv1():
     # Create a valid ISCC-IDv1
     timestamp = 1647312000000000  # 2022-03-15 12:00:00 UTC in microseconds
-    server_id = 42
-    iscc_idv1 = ic.gen_iscc_id_v1(timestamp, server_id)["iscc"]
+    hub_id = 42
+    iscc_idv1 = ic.gen_iscc_id_v1(timestamp, hub_id, realm_id=0)["iscc"]
 
     # Get the code in various multiformat encodings
     code_obj = ic.Code(iscc_idv1)
@@ -870,23 +870,23 @@ def test_iscc_validate_mscdi():
 
 def test_explain_iscc_idv1():
     timestamp = 1647312000000000  # 2022-03-15 12:00:00 UTC in microseconds
-    server_id = 42
-    iscc_idv1 = ic.gen_iscc_id_v1(timestamp, server_id)["iscc"]
-    expected = f"ID-REALM_0-V1-64-{timestamp}-{server_id}"
+    hub_id = 42
+    iscc_idv1 = ic.gen_iscc_id_v1(timestamp, hub_id, realm_id=0)["iscc"]
+    expected = f"ID-REALM_0-V1-64-{timestamp}-{hub_id}"
     assert ic.iscc_explain(iscc_idv1) == expected
 
 
 def test_validate_iscc_id_v1():
     timestamp = 1647312000000000
-    server_id = 42
-    iscc_idv1 = ic.gen_iscc_id_v1(timestamp, server_id)["iscc"]
+    hub_id = 42
+    iscc_idv1 = ic.gen_iscc_id_v1(timestamp, hub_id, realm_id=0)["iscc"]
     assert ic.iscc_validate(iscc_idv1, strict=True) is True
 
 
 def test_normalize_iscc_id_v1():
     timestamp = 1647312000000000
-    server_id = 42
-    iscc_idv1 = ic.gen_iscc_id_v1(timestamp, server_id)["iscc"]
+    hub_id = 42
+    iscc_idv1 = ic.gen_iscc_id_v1(timestamp, hub_id, realm_id=0)["iscc"]
     assert ic.iscc_normalize(iscc_idv1) == iscc_idv1
 
 
@@ -943,27 +943,27 @@ def test_explain_wide_iscc():
 def test_iscc_idv1_creation_validation():
     """Test creation and validation of ISCC-IDv1 with edge cases."""
     # Test with minimum timestamp (0)
-    min_id = ic.gen_iscc_id_v1(0, 0)["iscc"]
+    min_id = ic.gen_iscc_id_v1(0, 0, realm_id=0)["iscc"]
     assert ic.iscc_validate(min_id, strict=True) is True
 
     # Test with maximum valid timestamp (just under 2^52)
     max_timestamp = (2**52) - 1
-    max_id = ic.gen_iscc_id_v1(max_timestamp, 0)["iscc"]
+    max_id = ic.gen_iscc_id_v1(max_timestamp, 0, realm_id=0)["iscc"]
     assert ic.iscc_validate(max_id, strict=True) is True
 
-    # Test with maximum valid server_id (4095)
-    max_server_id = ic.gen_iscc_id_v1(0, 4095)["iscc"]
-    assert ic.iscc_validate(max_server_id, strict=True) is True
+    # Test with maximum valid hub_id (4095)
+    max_hub_id = ic.gen_iscc_id_v1(0, 4095, realm_id=0)["iscc"]
+    assert ic.iscc_validate(max_hub_id, strict=True) is True
 
     # Test invalid values raise appropriate errors
     with pytest.raises(ValueError):
         ic.gen_iscc_id_v1(2**52, 0)  # Timestamp overflow
 
     with pytest.raises(ValueError):
-        ic.gen_iscc_id_v1(0, 4096)  # Server-ID overflow
+        ic.gen_iscc_id_v1(0, 4096)  # HUB-ID overflow
 
     with pytest.raises(ValueError):
-        ic.gen_iscc_id_v1(0, 0, 1)  # Only realm 0 is currently supported
+        ic.gen_iscc_id_v1(0, 0, 2)  # Only realm 0 and 1 are currently supported
 
 
 def test_encode_units_valid():

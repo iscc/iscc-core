@@ -88,12 +88,12 @@ def test_code_iscc_idv1():
     """Test Code class compatibility with ISCC-IDv1."""
     # Create test data
     timestamp = 1647312000000000  # 2022-03-15 12:00:00 UTC in microseconds
-    server_id = 42
+    hub_id = 42
 
     # Generate an ISCC-IDv1 using the generator function
     from iscc_core.iscc_id import gen_iscc_id_v1
 
-    iscc_id = gen_iscc_id_v1(timestamp, server_id)["iscc"]
+    iscc_id = gen_iscc_id_v1(timestamp, hub_id, realm_id=0)["iscc"]
 
     # Initialize Code object from ISCC-IDv1 string
     code = Code(iscc_id)
@@ -107,16 +107,16 @@ def test_code_iscc_idv1():
     # Test type identification
     assert code.type_id == "ID-REALM_0-V1-64"
     assert "ID-REALM_0-V1-64" in code.explain
-    assert f"{timestamp}-{server_id}" in code.explain
+    assert f"{timestamp}-{hub_id}" in code.explain
 
     # Test hash properties contain correct data
-    # Body should be 8 bytes: 52 bits timestamp + 12 bits server_id
+    # Body should be 8 bytes: 52 bits timestamp + 12 bits HUB-ID
     assert len(code.hash_bytes) == 8
     body_int = int.from_bytes(code.hash_bytes, byteorder="big")
-    decoded_server_id = body_int & 0xFFF
+    decoded_hub_id = body_int & 0xFFF
     decoded_timestamp = body_int >> 12
     assert decoded_timestamp == timestamp
-    assert decoded_server_id == server_id
+    assert decoded_hub_id == hub_id
 
     # Test string representations
     assert code.uri.startswith("ISCC:")

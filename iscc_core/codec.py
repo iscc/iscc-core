@@ -459,7 +459,7 @@ def iscc_normalize(iscc_code):
     # Handle multiformat encoding first
     iscc_code = normalize_multiformat(iscc_code)
 
-    # Validate prefix
+    # Validate prefix (2 characters - note: MA and ME are ambiguous between V0 and V1)
     prefix = iscc_code.upper()[:2]
     if prefix not in PREFIXES:
         raise ValueError(f"ISCC starts with invalid prefix {prefix}")
@@ -594,7 +594,7 @@ def iscc_validate(iscc, strict=True):
 
     cleaned = iscc_clean(iscc)
 
-    # Prefix test
+    # Prefix test (2 characters - note: MA and ME are ambiguous between V0 and V1)
     prefix = cleaned[:2]
     if prefix not in PREFIXES:
         if strict:

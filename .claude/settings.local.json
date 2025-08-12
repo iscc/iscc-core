@@ -1,0 +1,8 @@
+{
+  "permissions": {
+    "allow": [
+      "mcp__deepwiki__ask_question"
+    ],
+    "deny": []
+  }
+}

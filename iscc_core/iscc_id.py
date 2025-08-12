@@ -1,20 +1,20 @@
 # -*- coding: utf-8 -*-
 """*A globally unique, owned, and short identifier for digital assets.*
 
-The **ISCC-ID** is a 64-bit identifier constructed from a timestamp and a server-ID:
+The **ISCC-ID** is a 64-bit identifier constructed from a timestamp and a HUB-ID:
 - First 52 bits: UTC time in microseconds since UNIX epoch (1970-01-01T00:00:00Z)
-- Last 12 bits: ID of the timestamping server (0-4095)
+- Last 12 bits: ID of the timestamping HUB (0-4095)
 
 With this structure:
-- A single server can issue up to 1 million timestamps per second until the year 2112
-- The system supports up to 4096 timestamp servers (IDs 0-4095)
+- A single HUB can issue up to 1 million timestamps per second until the year 2112
+- The system supports up to 4096 timestamp HUBs (IDs 0-4095)
 - Timestamps are globally unique and support total ordering in both integer and base32hex forms
 - The theoretical maximum throughput is ~4 billion unique timestamps per second
 
-ISCC-IDs are minted and digitally signed by authoritative ISCC Notary Servers in a
+ISCC-IDs are issued and digitally signed by authoritative ISCC-HUB servers in a
 federated system. A valid ISCC-ID is guaranteed to be bound to an owner represented by a
 cryptographic public key. The rules by which ISCC-IDs can be verified and resolved are defined
-by the `ISCC Notary Protocol` (IEP-0011 - TBD).
+by the `ISCC Discovery Protocol` (IDP).
 
 The module also contains legacy support for the older v0 ISCC-ID format that was based on
 blockchain wallet addresses and similarity-hashes of ISCC-CODE units.
@@ -35,64 +35,66 @@ __all__ = [
 ]
 
 
-def gen_iscc_id(timestamp, server_id, realm_id=0):
+def gen_iscc_id(timestamp, hub_id, realm_id=1):
     # type: (int, int, int) -> dict
     """
-    Generate  ISCC-ID from ISCC-CODE with the latest standard algorithm.
+    Generate ISCC-ID from ISCC-CODE with the latest standard algorithm.
 
     :param int timestamp: Microseconds since 1970-01-01T00:00:00Z (must be < 2^52)
-    :param int server_id: Server-ID that minted the ISCC-ID (0-4095)
-    :param int realm_id: Realm ID for the ISCC-ID (default: 0)
+    :param int hub_id: HUB-ID that issued the ISCC-ID (0-4095)
+    :param int realm_id: Realm ID for the ISCC-ID (default: 1 for operational, 0 for test)
     :return: Dictionary with the ISCC-ID under the key 'iscc'
     :rtype: dict
     :raises ValueError: If an input is invalid
     """
-    return gen_iscc_id_v1(timestamp, server_id, realm_id)
+    return gen_iscc_id_v1(timestamp, hub_id, realm_id)
 
 
 ####################################################################################################
-# ISCC-IDv1 - Timestamp/Server-ID based ISCC-ID                                                    #
+# ISCC-IDv1 - Timestamp/HUB-ID based ISCC-ID                                                      #
 ####################################################################################################
 
 
-def gen_iscc_id_v1(timestamp, server_id, realm_id=0):
+def gen_iscc_id_v1(timestamp, hub_id, realm_id=1):
     # type: (int, int, int) -> dict
     """
-    Generate an ISCC-IDv1 from a timestamp and a server-id with algorithm v1.
+    Generate an ISCC-ID from a timestamp and a HUB-ID with algorithm v1.
 
-    The ISCC-IDv1 is a 64-bit identifier constructed from a timestamp and a server-id:
+    The ISCC-IDv1 is a 64-bit identifier constructed from a timestamp and a HUB-ID:
     - First 52 bits: UTC time in microseconds since UNIX epoch (1970-01-01T00:00:00Z)
-    - Last 12 bits: ID of the timestamping server (0-4095)
+    - Last 12 bits: ID of the timestamping HUB (0-4095)
 
     With this structure:
-    - A single server can issue up to 1 million timestamps per second until the year 2112
-    - The system supports up to 4096 timestamp servers (IDs 0-4095)
+    - A single HUB can issue up to 1 million timestamps per second until the year 2112
+    - The system supports up to 4096 timestamp HUBs (IDs 0-4095)
     - Timestamps are globally unique and support total ordering in both integer and base32hex forms
     - The theoretical maximum throughput is ~4 billion unique timestamps per second
 
     If the ID space becomes crowded, it can be extended by introducing additional REALMS via
     ISCC-HEADER SUBTYPEs.
 
-    ## Minting Authority
+    ## Issuing ISCC-IDs
 
-    ISCC-IDv1s are minted and digitally signed by authoritative ISCC Notary Servers in a
-    federated system. A valid ISCC-IDv1 is guanteed to be bound to an owner represented by a
+    ISCC-IDv1s are issued and digitally signed by authoritative ISCC-HUB servers in a
+    federated system. A valid ISCC-IDv1 is guaranteed to be bound to an owner represented by a
     cryptographic public key. The rules by which ISCC-IDv1 can be verified and resolved are defined
-    by the `ISCC Notary Protocol` (IEP-0011 - TBD).
+    by the `ISCC Discovery Protocol` (IDP).
 
     ## Timestamp Requirements
 
-    Timestamp minting requires:
+    Timestamp issuing requires:
     - A time source with at least microsecond precision
     - Strictly monotonic (always increasing) integer timestamps
     - Measures to prevent front-running of actual time
 
-    ## Server ID Reservations
+    ## Realm ID Reservations
 
-    Server-ID `0` is reserved for sandbox/testing purposes. An ISCC-IDv1 with Server-ID 0:
-    - Makes no promises about uniqueness
-    - Is not authoritative
+    Realm-ID `0` is reserved for test HUB network purposes. An ISCC-IDv1 with Realm-ID 0:
+    - Is intended for testing and development
     - Should not be used in production systems
+    - May not guarantee global uniqueness
+
+    Realm-ID `1` is the first operational Realm-ID for production use.
 
     ## Technical Format
 
@@ -105,11 +107,11 @@ def gen_iscc_id_v1(timestamp, server_id, realm_id=0):
         - VERSION  = "0001" (V1)
         - LENGTH   = "0001" (64-bit)
       - 52-bit timestamp: Microseconds since 1970-01-01T00:00:00Z
-      - 12-bit server-id: The Time Server ID (0-4095)
+      - 12-bit HUB-ID: The HUB ID (0-4095)
 
     :param int timestamp: Microseconds since 1970-01-01T00:00:00Z (must be < 2^52)
-    :param int server_id: Server-ID that minted the ISCC-ID (0-4095)
-    :param int realm_id: Realm ID for the ISCC-ID (default: 0)
+    :param int hub_id: HUB-ID that issued the ISCC-ID (0-4095)
+    :param int realm_id: Realm ID for the ISCC-ID (default: 1 for operational, 0 for test)
     :return: Dictionary with the ISCC-ID under the key 'iscc'
     :rtype: dict
     :raises ValueError: If an input is invalid
@@ -118,14 +120,14 @@ def gen_iscc_id_v1(timestamp, server_id, realm_id=0):
     if timestamp >= 2**52:  # Ensure timestamp fits in 52 bits
         raise ValueError("Timestamp overflow")
 
-    if server_id >= 2**12:  # Ensure server-id fits in 12 bits
-        raise ValueError("Server-ID overflow")
+    if hub_id >= 2**12:  # Ensure HUB-ID fits in 12 bits
+        raise ValueError("HUB-ID overflow")
 
-    if realm_id != 0:  # For the beginning we only support REALM 0
-        raise ValueError("Realm-ID overflow")
+    if realm_id not in (0, 1):  # Currently support REALM 0 (test) and REALM 1 (operational)
+        raise ValueError("Realm-ID must be 0 (test) or 1 (operational)")
 
-    # Shift timestamp left by 12 bits and combine with server ID
-    body = (timestamp << 12) | server_id
+    # Shift timestamp left by 12 bits and combine with HUB ID
+    body = (timestamp << 12) | hub_id
 
     # Pack the 64-bit body into 8 bytes
     digest = body.to_bytes(8, byteorder="big")

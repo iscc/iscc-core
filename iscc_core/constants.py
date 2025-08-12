@@ -138,10 +138,12 @@ class ST_ID_REALM(enum.IntEnum):
 
     | Uint | Symbol   | Bits | Purpose                                                 |
     |----- |:---------|------|---------------------------------------------------------|
-    | 0    | REALM0   | 0000 | Default realm for ISCC-IDv1                             |
+    | 0    | REALM_0  | 0000 | Test HUB network realm for ISCC-IDv1                   |
+    | 1    | REALM_1  | 0001 | First operational HUB network realm for ISCC-IDv1      |
     """
 
-    REALM_0 = 0  # additional realms can be added as needed
+    REALM_0 = 0  # Test HUB network
+    REALM_1 = 1  # First operational realm
 
 
 class VS(enum.IntEnum):
@@ -241,33 +243,34 @@ SUBTYPE_MAP = {
 #: Multicodec prefix code
 MC_PREFIX: bytes = b"\xcc\x01"
 
+# Valid 2-character ISCC prefixes (note: MA and ME are ambiguous between V0 and V1)
 PREFIXES = [
-    "AA",
-    "CA",
-    "CE",
-    "CI",
-    "CM",
-    "CQ",
-    "EA",
-    "EE",
-    "EI",
-    "EM",
-    "EQ",
-    "GA",
-    "IA",
-    "KA",
-    "KE",
-    "KI",
-    "KM",
-    "KQ",
-    "KU",
-    "KY",
-    "K4",
-    "MA",
-    "ME",
-    "MI",
-    "MM",
-    "OA",
+    "AA",  # META-NONE
+    "CA",  # SEMANTIC-TEXT
+    "CE",  # SEMANTIC-IMAGE
+    "CI",  # SEMANTIC-AUDIO
+    "CM",  # SEMANTIC-VIDEO
+    "CQ",  # SEMANTIC-MIXED
+    "EA",  # CONTENT-TEXT
+    "EE",  # CONTENT-IMAGE
+    "EI",  # CONTENT-AUDIO
+    "EM",  # CONTENT-VIDEO
+    "EQ",  # CONTENT-MIXED
+    "GA",  # DATA-NONE
+    "IA",  # INSTANCE-NONE
+    "KA",  # ISCC-TEXT
+    "KE",  # ISCC-IMAGE
+    "KI",  # ISCC-AUDIO
+    "KM",  # ISCC-VIDEO
+    "KQ",  # ISCC-MIXED
+    "KU",  # ISCC-SUM
+    "KY",  # ISCC-NONE
+    "K4",  # ISCC-WIDE
+    "MA",  # ID-PRIVATE-V0 / ID-REALM_0-V1 (ambiguous)
+    "ME",  # ID-BITCOIN-V0 / ID-REALM_1-V1 (ambiguous)
+    "MI",  # ID-ETHEREUM-V0
+    "MM",  # ID-POLYGON-V0
+    "OA",  # FLAKE-NONE
 ]
 
 CANONICAL_REGEX = re.compile("^ISCC:[A-Z2-7]{10,68}$")
