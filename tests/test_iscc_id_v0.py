@@ -93,12 +93,6 @@ def test_incr_iscc_id_v0_raises_wrong_vs():
         ic.iscc_id_incr_v0(mc.code)
 
 
-def test_gen_iscc_id_v0_raises_chain_id():
-    code = ic.Code.rnd(ic.MT.ISCC, bits=256)
-    with pytest.raises(ValueError):
-        ic.gen_iscc_id_v0(code.code, 5, wallet=wallet)
-
-
 def test_alg_simhash_from_iscc_id():
     shash = ic.alg_simhash_from_iscc_id("MAAJU3Y6GCTXLVKA", wallet=wallet)
     assert shash == "20250db96e0d4a17"
@@ -129,13 +123,6 @@ def test_iscc_id_incr_v0_vs_uc():
 
     # both increments are identical
     assert iscc_id_b == "ISCC:" + iscc_id_c
-
-
-def test_iscc_id_incr_v0_raises_bad_chain_id():
-    iscc_id = ic.encode_component(ic.MT.ID, 4, 0, 64, b"\x00" * 8)
-    assert iscc_id == "MQAAAAAAAAAAAAAA"
-    with pytest.raises(ValueError):
-        ic.iscc_id_incr_v0(iscc_id)
 
 
 def test_iscc_id_incr_wrong_maintype():

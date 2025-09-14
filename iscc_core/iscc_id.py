@@ -167,8 +167,6 @@ def gen_iscc_id_v0(iscc_code, chain_id, wallet, uc=0):
     :return: ISCC object with an ISCC-ID
     :rtype: dict
     """
-    if chain_id not in ic.ST_ID:
-        raise ValueError("Unknown Chain-ID {}".format(chain_id))
     iscc_id_digest = soft_hash_iscc_id_v0(iscc_code, wallet, uc)
     iscc_id_len = len(iscc_id_digest) * 8
     iscc_id = ic.encode_component(
@@ -268,8 +266,6 @@ def iscc_id_incr_v0(iscc_id):
     mt, st, vs, ln, data = ic.decode_header(code_digest)
     if mt != ic.MT.ID:
         raise ValueError(f"MainType {mt} is not ISCC-ID")
-    if st not in ic.ST_ID:
-        raise ValueError(f"Unsupported chain-id {st}")
     if vs != ic.VS.V0:
         raise ValueError(f"Version {vs} is not v0")
     if len(data) == 8:

@@ -12,4 +12,4 @@ coverage.xml
 CLAUDE.md
 .env
 last
-.claude/
+.claude*
