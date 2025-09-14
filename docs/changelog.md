@@ -1,5 +1,13 @@
 # Changelog
 
+## [1.2.2] - Unreleased
+
+- Added automatic timestamp generation for ISCC-IDv1 using current system time when none provided
+- Added operational realm support for ISCC-IDv1 with default testnet (0) instead of mainnet (1)
+- Improved ISCC-IDv1 generation with better error handling and validation
+- Updated ISCC-IDv1 terminology and documentation throughout codebase
+- Updated bitarray dependency to 3.7.1
+
 ## [1.2.1] - 2025-05-08
 
 - Fixed order in UNITs constant for SEMANTIC/CONTENT unit combination
