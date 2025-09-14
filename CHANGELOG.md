@@ -1,6 +1,6 @@
 # Changelog
 
-## [1.2.2] - Unreleased
+## [1.2.2] - 2025-09-14
 
 - Added automatic timestamp generation for ISCC-IDv1 using current system time when none provided
 - Added operational realm support for ISCC-IDv1 with default testnet (0) instead of mainnet (1)
