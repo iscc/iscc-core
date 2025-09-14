@@ -80,7 +80,7 @@ def test_incr_iscc_id_v0():
 
 def test_incr_iscc_id_v0_raises_wrong_mt():
     mc = ic.Code.rnd(ic.MT.META).code
-    with pytest.raises(AssertionError):
+    with pytest.raises(ValueError):
         ic.iscc_id_incr_v0(mc)
 
 
@@ -89,13 +89,13 @@ def test_incr_iscc_id_v0_raises_wrong_vs():
     head = list(mc._head)
     head[2] = 1
     mc._head = tuple(head)
-    with pytest.raises(AssertionError):
+    with pytest.raises(ValueError):
         ic.iscc_id_incr_v0(mc.code)
 
 
 def test_gen_iscc_id_v0_raises_chain_id():
     code = ic.Code.rnd(ic.MT.ISCC, bits=256)
-    with pytest.raises(AssertionError):
+    with pytest.raises(ValueError):
         ic.gen_iscc_id_v0(code.code, 5, wallet=wallet)
 
 
@@ -134,8 +134,26 @@ def test_iscc_id_incr_v0_vs_uc():
 def test_iscc_id_incr_v0_raises_bad_chain_id():
     iscc_id = ic.encode_component(ic.MT.ID, 4, 0, 64, b"\x00" * 8)
     assert iscc_id == "MQAAAAAAAAAAAAAA"
-    with pytest.raises(AssertionError):
+    with pytest.raises(ValueError):
         ic.iscc_id_incr_v0(iscc_id)
+
+
+def test_iscc_id_incr_wrong_maintype():
+    # Test with META MainType instead of ID
+    meta_code = ic.encode_component(ic.MT.META, ic.ST.NONE, 0, 64, b"\x00" * 8)
+    with pytest.raises(ValueError, match="MainType .* is not ISCC-ID"):
+        ic.iscc_id_incr(meta_code)
+
+
+def test_iscc_id_incr_unsupported_version():
+    # Create an ID with an unsupported version (e.g., version 2)
+    # We need to manually construct this as normal functions won't create version 2
+    header = ic.encode_header(ic.MT.ID, ic.ST_ID.PRIVATE, 2, 64)  # Version 2
+    digest = b"\x00" * 8
+    code_bytes = header + digest
+    iscc_code = ic.encode_base32(code_bytes)
+    with pytest.raises(ValueError, match="Unsupported ISCC-ID version"):
+        ic.iscc_id_incr(iscc_code)
 
 
 def test_iscc_id_unit_types():

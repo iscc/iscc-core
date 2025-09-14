@@ -67,7 +67,7 @@ def test_gen_iscc_id_v1_different_realms():
     assert operational_id["iscc"] != test_id["iscc"]
 
     # Test with invalid realm_id
-    with pytest.raises(ValueError, match="Realm-ID must be 0 \(test\) or 1 \(operational\)"):
+    with pytest.raises(ValueError, match=r"Realm-ID must be 0 \(test\) or 1 \(operational\)"):
         ic.gen_iscc_id_v1(timestamp=timestamp, hub_id=hub_id, realm_id=2)
 
 
@@ -105,6 +105,80 @@ def test_gen_iscc_id_v1_structure():
 def test_idv1_validates(idv1):
     assert ic.iscc_validate(idv1)
     assert ic.iscc_validate(idv1, strict=True)
+
+
+def test_gen_iscc_id_v1_no_timestamp():
+    """Test gen_iscc_id_v1 without providing a timestamp (should use current time)."""
+    # Test without providing timestamp - should use current time
+    iscc_id_1 = ic.gen_iscc_id_v1(hub_id=100, realm_id=0)
+    iscc_id_2 = ic.gen_iscc_id_v1(hub_id=100, realm_id=0)
+
+    # Both should be valid ISCC-IDs
+    assert "iscc" in iscc_id_1
+    assert "iscc" in iscc_id_2
+
+    # They should be different (different timestamps)
+    # Note: there's a tiny chance they could be the same if executed in the same microsecond
+    # but that's extremely unlikely
+
+    # Decode to verify structure
+    code1 = ic.Code(iscc_id_1["iscc"])
+    code2 = ic.Code(iscc_id_2["iscc"])
+
+    assert code1.maintype == ic.MT.ID
+    assert code1.version == ic.VS.V1
+    assert code2.maintype == ic.MT.ID
+    assert code2.version == ic.VS.V1
+
+    # Extract timestamps to ensure they're reasonable
+    digest_int_1 = int.from_bytes(code1.hash_bytes, byteorder="big")
+    digest_int_2 = int.from_bytes(code2.hash_bytes, byteorder="big")
+
+    timestamp_1 = digest_int_1 >> 12
+    timestamp_2 = digest_int_2 >> 12
+
+    # Timestamps should be recent (within last year)
+    import time
+
+    current_time_us = time.time() * 1_000_000
+    one_year_us = 365 * 24 * 60 * 60 * 1_000_000
+
+    assert timestamp_1 > current_time_us - one_year_us
+    assert timestamp_2 > current_time_us - one_year_us
+    assert timestamp_1 < current_time_us + 1_000_000  # Not in the future (with 1s tolerance)
+    assert timestamp_2 < current_time_us + 1_000_000
+
+
+def test_gen_iscc_id_no_timestamp():
+    """Test gen_iscc_id without providing a timestamp (wrapper function)."""
+    # Test the wrapper function without timestamp
+    iscc_id = ic.gen_iscc_id(hub_id=200, realm_id=1)
+
+    # Should be valid ISCC-ID
+    assert "iscc" in iscc_id
+
+    # Decode to verify it's using v1 with realm_id=1
+    code = ic.Code(iscc_id["iscc"])
+    assert code.maintype == ic.MT.ID
+    assert code.version == ic.VS.V1
+    assert code.subtype == 1  # realm_id=1 (operational)
+
+    # Extract hub_id to verify
+    digest_int = int.from_bytes(code.hash_bytes, byteorder="big")
+    extracted_hub_id = digest_int & 0xFFF
+    assert extracted_hub_id == 200
+
+
+def test_iscc_id_incr_v1_raises():
+    """Test that iscc_id_incr raises error for v1 IDs."""
+    # Create a v1 ISCC-ID
+    timestamp = 1714503123456789
+    hub_id = 42
+    iscc_id_v1 = ic.gen_iscc_id_v1(timestamp=timestamp, hub_id=hub_id, realm_id=0)["iscc"]
+
+    # Should raise ValueError when trying to increment v1 ID
+    with pytest.raises(ValueError, match="ISCC-IDv1 does not support uniqueness counters"):
+        ic.iscc_id_incr(iscc_id_v1)
 
 
 def test_idv1_multiformat(idv1):

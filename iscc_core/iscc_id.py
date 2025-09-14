@@ -19,7 +19,7 @@ by the `ISCC Discovery Protocol` (IDP).
 The module also contains legacy support for the older v0 ISCC-ID format that was based on
 blockchain wallet addresses and similarity-hashes of ISCC-CODE units.
 """
-
+import time
 from hashlib import sha256
 from typing import Optional
 import uvarint
@@ -35,14 +35,14 @@ __all__ = [
 ]
 
 
-def gen_iscc_id(timestamp, hub_id, realm_id=1):
-    # type: (int, int, int) -> dict
+def gen_iscc_id(timestamp=None, hub_id=0, realm_id=0):
+    # type: (Optional[int], int, int) -> dict
     """
-    Generate ISCC-ID from ISCC-CODE with the latest standard algorithm.
+    Generate ISCC-ID from microsecond `timestamp` with the latest standard algorithm.
 
     :param int timestamp: Microseconds since 1970-01-01T00:00:00Z (must be < 2^52)
     :param int hub_id: HUB-ID that issued the ISCC-ID (0-4095)
-    :param int realm_id: Realm ID for the ISCC-ID (default: 1 for operational, 0 for test)
+    :param int realm_id: Realm ID for the ISCC-ID (0 for testnet, 1 for mainnet, default: 0)
     :return: Dictionary with the ISCC-ID under the key 'iscc'
     :rtype: dict
     :raises ValueError: If an input is invalid
@@ -55,10 +55,13 @@ def gen_iscc_id(timestamp, hub_id, realm_id=1):
 ####################################################################################################
 
 
-def gen_iscc_id_v1(timestamp, hub_id, realm_id=1):
-    # type: (int, int, int) -> dict
+def gen_iscc_id_v1(timestamp=None, hub_id=0, realm_id=0):
+    # type: (Optional[int], int, int) -> dict
     """
     Generate an ISCC-ID from a timestamp and a HUB-ID with algorithm v1.
+
+    If no arguments are provided, a new ISCC-ID is generated with the current system time and both
+    hub_id and realm_id set to 0 (testnet).
 
     The ISCC-IDv1 is a 64-bit identifier constructed from a timestamp and a HUB-ID:
     - First 52 bits: UTC time in microseconds since UNIX epoch (1970-01-01T00:00:00Z)
@@ -68,7 +71,7 @@ def gen_iscc_id_v1(timestamp, hub_id, realm_id=1):
     - A single HUB can issue up to 1 million timestamps per second until the year 2112
     - The system supports up to 4096 timestamp HUBs (IDs 0-4095)
     - Timestamps are globally unique and support total ordering in both integer and base32hex forms
-    - The theoretical maximum throughput is ~4 billion unique timestamps per second
+    - The theoretical maximum system throughput is ~4 billion unique timestamps per second
 
     If the ID space becomes crowded, it can be extended by introducing additional REALMS via
     ISCC-HEADER SUBTYPEs.
@@ -89,12 +92,12 @@ def gen_iscc_id_v1(timestamp, hub_id, realm_id=1):
 
     ## Realm ID Reservations
 
-    Realm-ID `0` is reserved for test HUB network purposes. An ISCC-IDv1 with Realm-ID 0:
+    Realm-ID `0` is reserved for testnet purposes. An ISCC-IDv1 with Realm-ID 0:
     - Is intended for testing and development
     - Should not be used in production systems
     - May not guarantee global uniqueness
 
-    Realm-ID `1` is the first operational Realm-ID for production use.
+    Realm-ID `1` is the first operational mainnet Realm-ID for production use.
 
     ## Technical Format
 
@@ -111,11 +114,14 @@ def gen_iscc_id_v1(timestamp, hub_id, realm_id=1):
 
     :param int timestamp: Microseconds since 1970-01-01T00:00:00Z (must be < 2^52)
     :param int hub_id: HUB-ID that issued the ISCC-ID (0-4095)
-    :param int realm_id: Realm ID for the ISCC-ID (default: 1 for operational, 0 for test)
+    :param int realm_id: Realm ID for the ISCC-ID (0 for testnet, 1 for mainnet, default: 0)
     :return: Dictionary with the ISCC-ID under the key 'iscc'
     :rtype: dict
     :raises ValueError: If an input is invalid
     """
+
+    if timestamp is None:
+        timestamp = time.time_ns() // 1000
 
     if timestamp >= 2**52:  # Ensure timestamp fits in 52 bits
         raise ValueError("Timestamp overflow")
@@ -144,7 +150,7 @@ def gen_iscc_id_v1(timestamp, hub_id, realm_id=1):
 
 
 ####################################################################################################
-# ISCC-IDv0 - Legacy experimental ISCC-IDv0 keept for backward compatibility                       #
+# ISCC-IDv0 - Legacy experimental ISCC-IDv0 kept for backward compatibility                        #
 ####################################################################################################
 
 
@@ -161,8 +167,8 @@ def gen_iscc_id_v0(iscc_code, chain_id, wallet, uc=0):
     :return: ISCC object with an ISCC-ID
     :rtype: dict
     """
-    if chain_id not in list(ic.ST_ID):
-        raise AssertionError("Unknown Chain-ID {}".format(chain_id))
+    if chain_id not in ic.ST_ID:
+        raise ValueError("Unknown Chain-ID {}".format(chain_id))
     iscc_id_digest = soft_hash_iscc_id_v0(iscc_code, wallet, uc)
     iscc_id_len = len(iscc_id_digest) * 8
     iscc_id = ic.encode_component(
@@ -222,13 +228,30 @@ def soft_hash_iscc_id_v0(iscc_code, wallet, uc=0):
 def iscc_id_incr(iscc_id):
     # type: (str) -> str
     """
-    Increment uniqueness counter of an ISCC-ID with latest standard algorithm.
+    Increment uniqueness counter of an ISCC-ID.
+
+    Note: Only ISCC-IDv0 supports uniqueness counters. ISCC-IDv1 uses timestamps
+    and will raise an error if passed to this function.
 
     :param str iscc_id: Base32-encoded ISCC-ID.
     :return: Base32-encoded ISCC-ID with counter incremented by one.
     :rtype: str
+    :raises ValueError: If the ISCC-ID is v1 (which doesn't support counters).
     """
-    return iscc_id_incr_v0(iscc_id)
+    # Check version to provide clear error for v1
+    clean = ic.iscc_clean(iscc_id)
+    code_digest = ic.decode_base32(clean)
+    mt, st, vs, ln, data = ic.decode_header(code_digest)
+
+    if mt != ic.MT.ID:
+        raise ValueError(f"MainType {mt} is not ISCC-ID")
+
+    if vs == ic.VS.V1:
+        raise ValueError("ISCC-IDv1 does not support uniqueness counters (uses timestamps instead)")
+    elif vs == ic.VS.V0:
+        return iscc_id_incr_v0(iscc_id)
+    else:
+        raise ValueError(f"Unsupported ISCC-ID version {vs}")
 
 
 def iscc_id_incr_v0(iscc_id):
@@ -244,11 +267,11 @@ def iscc_id_incr_v0(iscc_id):
     code_digest = ic.decode_base32(clean)
     mt, st, vs, ln, data = ic.decode_header(code_digest)
     if mt != ic.MT.ID:
-        raise AssertionError(f"MainType {mt} is not ISCC-ID")
-    if st not in list(ic.ST_ID):
-        raise AssertionError(f"Unsupported chain-id {st}")
+        raise ValueError(f"MainType {mt} is not ISCC-ID")
+    if st not in ic.ST_ID:
+        raise ValueError(f"Unsupported chain-id {st}")
     if vs != ic.VS.V0:
-        raise AssertionError(f"Version {vs} is not v0")
+        raise ValueError(f"Version {vs} is not v0")
     if len(data) == 8:
         data += uvarint.encode(1)
     else:
