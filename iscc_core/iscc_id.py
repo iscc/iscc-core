@@ -108,7 +108,7 @@ def gen_iscc_id_v1(timestamp=None, hub_id=0, realm_id=0):
         - MAINTYPE = "0110" (ISCC-ID)
         - SUBTYPE  = "0000" (REALM, configurable via realm_id)
         - VERSION  = "0001" (V1)
-        - LENGTH   = "0001" (64-bit)
+        - LENGTH   = "0000" (64-bit)
       - 52-bit timestamp: Microseconds since 1970-01-01T00:00:00Z
       - 12-bit HUB-ID: The HUB ID (0-4095)
 
