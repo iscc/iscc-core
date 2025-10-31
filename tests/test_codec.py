@@ -1040,3 +1040,44 @@ def test_validate_malformed_iscc_idv1_wrong_length():
     assert ic.iscc_validate(malformed_iscc_full, strict=False) is False
     with pytest.raises(ValueError):
         ic.iscc_validate(malformed_iscc_full, strict=True)
+
+
+def test_validate_invalid_maintype_version_combinations():
+    """Test that iscc_validate rejects invalid MainType/Version combinations.
+
+    Only MT.ID supports V1. All other MainTypes (META, SEMANTIC, CONTENT, DATA,
+    INSTANCE, ISCC, FLAKE) only support V0.
+    """
+    # Test invalid V1 combinations (only MT.ID should have V1)
+    invalid_v1_cases = [
+        (ic.MT.META, ic.ST.NONE, "META-V1"),
+        (ic.MT.SEMANTIC, ic.ST_CC.TEXT, "SEMANTIC-TEXT-V1"),
+        (ic.MT.CONTENT, ic.ST_CC.IMAGE, "CONTENT-IMAGE-V1"),
+        (ic.MT.DATA, ic.ST.NONE, "DATA-V1"),
+        (ic.MT.INSTANCE, ic.ST.NONE, "INSTANCE-V1"),
+        (ic.MT.ISCC, ic.ST_ISCC.TEXT, "ISCC-TEXT-V1"),
+        (ic.MT.FLAKE, ic.ST.NONE, "FLAKE-V1"),
+    ]
+
+    for mtype, stype, description in invalid_v1_cases:
+        # Manually construct ISCC with invalid V1
+        header = ic.encode_header(
+            mtype=mtype,
+            stype=stype,
+            version=ic.VS.V1,  # Invalid for all except MT.ID
+            length=1,
+        )
+        body = b"\x00" * 8
+        malformed_iscc = ic.encode_base32(header + body)
+        malformed_iscc_full = f"ISCC:{malformed_iscc}"
+
+        # Should be rejected
+        assert (
+            ic.iscc_validate(malformed_iscc_full, strict=False) is False
+        ), f"{description} should be invalid"
+        with pytest.raises(ValueError, match="Invalid version .* for MainType"):
+            ic.iscc_validate(malformed_iscc_full, strict=True)
+
+    # Verify that valid ID-V1 still passes
+    valid_idv1 = ic.gen_iscc_id_v1(1647312000000000, 42, realm_id=0)["iscc"]
+    assert ic.iscc_validate(valid_idv1, strict=True) is True

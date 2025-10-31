@@ -602,11 +602,11 @@ def iscc_validate(iscc, strict=True):
         else:
             return False
 
-    # Version test
+    # Version test - check if (MainType, Version) combination is valid
     m, s, v, l, t = decode_header(decode_base32(cleaned))
-    if v not in (0, 1):
+    if (m, v) not in SUBTYPE_MAP:
         if strict:
-            raise ValueError(f"Unknown version {v} in version header")
+            raise ValueError(f"Invalid version {v} for MainType {MT(m).name}")
         else:
             return False
 
