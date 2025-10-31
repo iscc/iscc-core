@@ -293,14 +293,14 @@ def test_iscc_nph_distance_equal_length():
     # Test with identical byte strings
     a = b"hello world"
     b = b"hello world"
-    result = ic.utils.iscc_nph_distance(a, b)
+    result = ic.utils.iscc_nph_distance_bytes(a, b)
     assert result["distance"] == 0.0
     assert result["common_prefix_bits"] == len(a) * 8
 
     # Test with different byte strings of equal length
     a = b"hello world"
     b = b"jello world"  # One character different
-    result = ic.utils.iscc_nph_distance(a, b)
+    result = ic.utils.iscc_nph_distance_bytes(a, b)
     # 'h' (0x68) vs 'j' (0x6A) has 2 bits different
     assert 0.0 < result["distance"] < 1.0
     assert result["common_prefix_bits"] == len(a) * 8
@@ -308,7 +308,7 @@ def test_iscc_nph_distance_equal_length():
     # Test with completely different byte strings
     a = b"hello world"
     b = b"HELLO WORLD"  # All characters different in case
-    result = ic.utils.iscc_nph_distance(a, b)
+    result = ic.utils.iscc_nph_distance_bytes(a, b)
     assert 0.0 < result["distance"] < 1.0
     assert result["common_prefix_bits"] == len(a) * 8
 
@@ -318,14 +318,14 @@ def test_iscc_nph_distance_different_length():
     # Test with one string longer than the other
     a = b"hello world"
     b = b"hello"
-    result = ic.utils.iscc_nph_distance(a, b)
+    result = ic.utils.iscc_nph_distance_bytes(a, b)
     assert result["distance"] == 0.0  # Common prefix is identical
     assert result["common_prefix_bits"] == len(b) * 8
 
     # Test with one string longer and different content
     a = b"hello world"
     b = b"jello"
-    result = ic.utils.iscc_nph_distance(a, b)
+    result = ic.utils.iscc_nph_distance_bytes(a, b)
     # 'h' (0x68) vs 'j' (0x6A) has 2 bits different
     assert 0.0 < result["distance"] < 1.0
     assert result["common_prefix_bits"] == len(b) * 8
@@ -336,21 +336,21 @@ def test_iscc_nph_distance_empty():
     # Both strings empty
     a = b""
     b = b""
-    result = ic.utils.iscc_nph_distance(a, b)
+    result = ic.utils.iscc_nph_distance_bytes(a, b)
     assert result["distance"] == 0.0
     assert result["common_prefix_bits"] == 0
 
     # One string empty
     a = b"hello world"
     b = b""
-    result = ic.utils.iscc_nph_distance(a, b)
+    result = ic.utils.iscc_nph_distance_bytes(a, b)
     assert result["distance"] == 1.0
     assert result["common_prefix_bits"] == 0
 
     # Other string empty
     a = b""
     b = b"hello world"
-    result = ic.utils.iscc_nph_distance(a, b)
+    result = ic.utils.iscc_nph_distance_bytes(a, b)
     assert result["distance"] == 1.0
     assert result["common_prefix_bits"] == 0
 
@@ -360,14 +360,14 @@ def test_iscc_nph_similarity_equal_length():
     # Test with identical byte strings
     a = b"hello world"
     b = b"hello world"
-    result = ic.utils.iscc_nph_similarity(a, b)
+    result = ic.utils.iscc_nph_similarity_bytes(a, b)
     assert result["similarity"] == 1.0
     assert result["common_prefix_bits"] == len(a) * 8
 
     # Test with different byte strings of equal length
     a = b"hello world"
     b = b"jello world"  # One character different
-    result = ic.utils.iscc_nph_similarity(a, b)
+    result = ic.utils.iscc_nph_similarity_bytes(a, b)
     # 'h' (0x68) vs 'j' (0x6A) has 2 bits different
     assert 0.0 < result["similarity"] < 1.0
     assert result["common_prefix_bits"] == len(a) * 8
@@ -375,7 +375,7 @@ def test_iscc_nph_similarity_equal_length():
     # Test with completely different byte strings
     a = b"hello world"
     b = b"HELLO WORLD"  # All characters different in case
-    result = ic.utils.iscc_nph_similarity(a, b)
+    result = ic.utils.iscc_nph_similarity_bytes(a, b)
     assert 0.0 < result["similarity"] < 1.0
     assert result["common_prefix_bits"] == len(a) * 8
 
@@ -385,14 +385,14 @@ def test_iscc_nph_similarity_different_length():
     # Test with one string longer than the other
     a = b"hello world"
     b = b"hello"
-    result = ic.utils.iscc_nph_similarity(a, b)
+    result = ic.utils.iscc_nph_similarity_bytes(a, b)
     assert result["similarity"] == 1.0  # Common prefix is identical
     assert result["common_prefix_bits"] == len(b) * 8
 
     # Test with one string longer and different content
     a = b"hello world"
     b = b"jello"
-    result = ic.utils.iscc_nph_similarity(a, b)
+    result = ic.utils.iscc_nph_similarity_bytes(a, b)
     # 'h' (0x68) vs 'j' (0x6A) has 2 bits different
     assert 0.0 < result["similarity"] < 1.0
     assert result["common_prefix_bits"] == len(b) * 8
@@ -403,20 +403,138 @@ def test_iscc_nph_similarity_empty():
     # Both strings empty
     a = b""
     b = b""
-    result = ic.utils.iscc_nph_similarity(a, b)
+    result = ic.utils.iscc_nph_similarity_bytes(a, b)
     assert result["similarity"] == 1.0
     assert result["common_prefix_bits"] == 0
 
     # One string empty
     a = b"hello world"
     b = b""
-    result = ic.utils.iscc_nph_similarity(a, b)
+    result = ic.utils.iscc_nph_similarity_bytes(a, b)
     assert result["similarity"] == 0.0
     assert result["common_prefix_bits"] == 0
 
     # Other string empty
     a = b""
     b = b"hello world"
-    result = ic.utils.iscc_nph_similarity(a, b)
+    result = ic.utils.iscc_nph_similarity_bytes(a, b)
     assert result["similarity"] == 0.0
     assert result["common_prefix_bits"] == 0
+
+
+def test_iscc_nph_compare_identical_units():
+    """Test NPH comparison of identical ISCC units."""
+    # Create identical content codes
+    code = ic.Code.rnd(mt=ic.MT.CONTENT, st=ic.ST_CC.TEXT, bits=64)
+    result = ic.iscc_nph_compare(code.code, code.code)
+
+    assert "CONTENT_TEXT_V0" in result
+    assert result["CONTENT_TEXT_V0"]["similarity"] == 1.0
+    assert result["CONTENT_TEXT_V0"]["common_prefix_bits"] == 64
+
+
+def test_iscc_nph_compare_different_units():
+    """Test NPH comparison of different ISCC units of same type."""
+    ic.Code.rgen = random.Random(0)
+    code_a = ic.Code.rnd(mt=ic.MT.CONTENT, st=ic.ST_CC.TEXT, bits=64)
+    code_b = ic.Code.rnd(mt=ic.MT.CONTENT, st=ic.ST_CC.TEXT, bits=64)
+
+    result = ic.iscc_nph_compare(code_a.code, code_b.code)
+
+    assert "CONTENT_TEXT_V0" in result
+    assert 0.0 <= result["CONTENT_TEXT_V0"]["similarity"] <= 1.0
+    assert result["CONTENT_TEXT_V0"]["common_prefix_bits"] == 64
+
+
+def test_iscc_nph_compare_different_lengths():
+    """Test NPH comparison handles different length components."""
+    # Create codes with different bit lengths
+    code_64 = ic.Code.rnd(mt=ic.MT.CONTENT, st=ic.ST_CC.TEXT, bits=64)
+    code_128 = ic.Code.rnd(mt=ic.MT.CONTENT, st=ic.ST_CC.TEXT, bits=128)
+
+    result = ic.iscc_nph_compare(code_64.code, code_128.code)
+
+    assert "CONTENT_TEXT_V0" in result
+    # Should compare common prefix (64 bits)
+    assert result["CONTENT_TEXT_V0"]["common_prefix_bits"] == 64
+
+
+def test_iscc_nph_compare_iscc_code():
+    """Test NPH comparison of ISCC-CODEs."""
+    ic.Code.rgen = random.Random(0)
+    code_a = ic.Code.rnd(mt=ic.MT.ISCC, bits=256)
+    code_b = ic.Code.rnd(mt=ic.MT.ISCC, bits=256)
+
+    result = ic.iscc_nph_compare(code_a.code, code_b.code)
+
+    # Should have results for meta, semantic, data, and instance components
+    # The exact keys depend on the subtypes, but we can check the structure
+    assert len(result) >= 4  # At least 4 components
+
+    # All results should have similarity and common_prefix_bits
+    for key, value in result.items():
+        assert "similarity" in value
+        assert "common_prefix_bits" in value
+        assert 0.0 <= value["similarity"] <= 1.0
+        # Keys should be in format MAINTYPE_SUBTYPE_VERSION
+        assert key.count("_") == 2
+
+
+def test_iscc_nph_compare_mixed_unit_and_code():
+    """Test NPH comparison between ISCC-UNIT and ISCC-CODE."""
+    ic.Code.rgen = random.Random(0)
+    content_unit = ic.Code.rnd(mt=ic.MT.CONTENT, st=ic.ST_CC.TEXT, bits=64)
+    iscc_code = ic.Code.rnd(mt=ic.MT.ISCC, bits=256)
+
+    # The ISCC-CODE should contain a semantic component that might match
+    result = ic.iscc_nph_compare(content_unit.code, iscc_code.code)
+
+    # Should compare the matching semantic component if present
+    # Result depends on the random generation
+    assert isinstance(result, dict)
+
+
+def test_iscc_nph_compare_non_matching_types():
+    """Test NPH comparison with non-matching component types."""
+    ic.Code.rgen = random.Random(0)
+    meta_code = ic.Code.rnd(mt=ic.MT.META, bits=64)
+    content_code = ic.Code.rnd(mt=ic.MT.CONTENT, st=ic.ST_CC.TEXT, bits=64)
+
+    result = ic.iscc_nph_compare(meta_code.code, content_code.code)
+
+    # No matching components, should return empty dict
+    assert result == {}
+
+
+def test_iscc_nph_compare_instance_component():
+    """Test NPH comparison with INSTANCE components."""
+    ic.Code.rgen = random.Random(0)
+    code_a = ic.Code.rnd(mt=ic.MT.ISCC, bits=256)
+    code_b = ic.Code.rnd(mt=ic.MT.ISCC, bits=256)
+
+    result = ic.iscc_nph_compare(code_a.code, code_b.code)
+
+    # Should have an INSTANCE component with binary similarity (0.0 or 1.0)
+    instance_keys = [k for k in result.keys() if k.startswith("INSTANCE_")]
+    assert len(instance_keys) == 1
+
+    instance_key = instance_keys[0]
+    assert "similarity" in result[instance_key]
+    assert "common_prefix_bits" in result[instance_key]
+    # INSTANCE similarity should be binary
+    assert result[instance_key]["similarity"] in [0.0, 1.0]
+
+
+def test_iscc_nph_compare_skips_iscc_id():
+    """Test NPH comparison skips ISCC-ID components."""
+    # Create an ISCC-IDv1
+    iscc_id = ic.gen_iscc_id_v1(1234567890, 42)["iscc"]
+
+    # Create a regular content code
+    content_code = ic.Code.rnd(mt=ic.MT.CONTENT, st=ic.ST_CC.TEXT, bits=64).code
+
+    # Compare ISCC-ID with content code - ID should be skipped
+    result = ic.iscc_nph_compare(iscc_id, content_code)
+
+    # Result should be empty since ID components are skipped and there's no match
+    assert result == {}

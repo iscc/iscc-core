@@ -12,8 +12,9 @@ import jcs
 from iscc_core.constants import Stream
 
 __all__ = [
-    "iscc_nph_similarity",
-    "iscc_nph_distance",
+    "iscc_nph_similarity_bytes",
+    "iscc_nph_distance_bytes",
+    "iscc_nph_compare",
     "json_canonical",
     "cidv1_hex",
     "cidv1_to_token_id",
@@ -27,7 +28,58 @@ __all__ = [
 ]
 
 
-def iscc_nph_similarity(a, b):
+def iscc_nph_compare(a, b):
+    # type: (str, str) -> dict
+    """
+    Compare ISCCs using Normalized Prefix Hamming metrics.
+
+    Automatically handles ISCC-UNITs, ISCC-CODEs, and mixed combinations.
+    Decomposes codes, finds compatible components (matching MainType, SubType, Version),
+    and calculates NPH similarity for each matching pair. Handles different-length
+    components gracefully.
+
+    Note: ISCC-IDs are not supported. Use simple string equality for ID comparison.
+
+    :param a: First ISCC string (UNIT or CODE, excluding ISCC-ID)
+    :param b: Second ISCC string (UNIT or CODE, excluding ISCC-ID)
+    :return: Dictionary with per-component NPH results
+             Format:
+             {
+                "{MAINTYPE}_{SUBTYPE}_{VERSION}": {
+                    "similarity": float,
+                    "common_prefix_bits": int}
+                ...
+             }
+             For INSTANCE components, similarity is binary (0.0 or 1.0)
+    :rtype: dict
+    """
+    ac = [ic.Code(unit) for unit in ic.iscc_decompose(a)]
+    bc = [ic.Code(unit) for unit in ic.iscc_decompose(b)]
+
+    result = {}
+    for ca in ac:
+        for cb in bc:
+            # Skip ISCC-ID components (not supported for similarity comparison)
+            if ca.maintype == ic.MT.ID or cb.maintype == ic.MT.ID:
+                continue
+
+            cat = (ca.maintype, ca.subtype, ca.version)
+            cbt = (cb.maintype, cb.subtype, cb.version)
+            if cat == cbt:
+                key = f"{ca.maintype.name}_{ca.subtype.name}_{ca.version.name}"
+                if ca.maintype != ic.MT.INSTANCE:
+                    result[key] = iscc_nph_similarity_bytes(ca.hash_bytes, cb.hash_bytes)
+                else:
+                    # INSTANCE is binary match (0.0 or 1.0)
+                    match = ca.hash_bytes == cb.hash_bytes
+                    result[key] = {
+                        "similarity": 1.0 if match else 0.0,
+                        "common_prefix_bits": len(ca.hash_bytes) * 8,
+                    }
+    return result
+
+
+def iscc_nph_similarity_bytes(a, b):
     # type: (bytes, bytes) -> dict
     """
     Calculate Normalized Prefix Hamming Similarity (NPHS) between two byte strings.
@@ -54,7 +106,7 @@ def iscc_nph_similarity(a, b):
     return {"similarity": 1.0 - (hd / common_bits), "common_prefix_bits": common_bits}
 
 
-def iscc_nph_distance(a, b):
+def iscc_nph_distance_bytes(a, b):
     # type: (bytes, bytes) -> dict
     """
     Calculate Normalized Prefix Hamming Distance (NPHD) between two byte strings.
