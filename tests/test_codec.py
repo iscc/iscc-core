@@ -1009,3 +1009,34 @@ def test_encode_units_wrong_order():
 
     with pytest.raises(ValueError, match="Invalid ISCC-UNIT combination: CONTENT, SEMANTIC, META"):
         ic.encode_units((ic.MT.CONTENT, ic.MT.SEMANTIC, ic.MT.META))
+
+
+def test_validate_malformed_iscc_idv1_wrong_length():
+    """Test that ISCC-IDv1 with incorrect length field (1 instead of 0) is detected as invalid.
+
+    ISCC-IDv1 must always have length field = 0 (64-bit body).
+    This test creates a malformed IDv1 with length = 1 in the header but 64-bit body.
+    """
+    # Manually construct a malformed ISCC-IDv1 with length=1 instead of 0
+    timestamp = 1647312000000000
+    hub_id = 42
+
+    # Construct the 64-bit body (correct size for IDv1)
+    body = ((timestamp << 12) | hub_id).to_bytes(8, byteorder="big")
+
+    # Manually encode with length=1 (which is WRONG for IDv1 - should be 0)
+    malformed_header = ic.encode_header(
+        mtype=ic.MT.ID,
+        stype=ic.ST_ID_REALM.REALM_0,
+        version=ic.VS.V1,
+        length=1,  # This is WRONG for IDv1 - should always be 0
+    )
+
+    # Encode the malformed ISCC
+    malformed_iscc = ic.encode_base32(malformed_header + body)
+    malformed_iscc_full = f"ISCC:{malformed_iscc}"
+
+    # This SHOULD be detected as invalid, but let's see if current validation catches it
+    assert ic.iscc_validate(malformed_iscc_full, strict=False) is False
+    with pytest.raises(ValueError):
+        ic.iscc_validate(malformed_iscc_full, strict=True)
