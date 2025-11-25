@@ -14,6 +14,7 @@ Images must be normalized before using gen_image_code. Prepare images as follows
 - Resize image to 32x32
 - Flatten 32x32 matrix to an array of 1024 grayscale (uint8) pixel values
 """
+
 from statistics import median
 from typing import Sequence
 from more_itertools import chunked

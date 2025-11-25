@@ -15,6 +15,7 @@ The relevant frame signatures can be parsed from the following elements in sig.x
     It is also possible to extract the signatures in a more compact binary format.
     But the format requires a custom binary parser to decode the frame signaturs.
 """
+
 from typing import Sequence, Tuple
 import iscc_core as ic
 

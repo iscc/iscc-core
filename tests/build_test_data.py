@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 """Build conformance `data.json` from `inputs.yaml`"""
+
 import io
 from copy import copy
 

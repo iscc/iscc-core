@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 """*A data checksum.*"""
+
 from blake3 import blake3
 from typing import Optional
 import iscc_core as ic

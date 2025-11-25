@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 """Run conformance tests"""
+
 from typing import Generator
 import pytest
 from iscc_core import conformance

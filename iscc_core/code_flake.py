@@ -33,6 +33,7 @@ is compatible with UUID.
     '05VGS063JGQBU'
     ```
 """
+
 import os
 import time
 from collections import Counter

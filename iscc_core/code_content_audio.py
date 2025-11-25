@@ -11,6 +11,7 @@ command line parameters:
 
 `$ fpcalc -raw -json -signed -length 0 myaudiofile.mp3`
 """
+
 from typing import Iterable
 from more_itertools import divide
 import iscc_core as ic

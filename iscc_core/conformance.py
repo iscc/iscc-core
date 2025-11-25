@@ -35,6 +35,7 @@ implementation testing.
       ...
     ```
 """
+
 from loguru import logger as log
 import pathlib
 import json

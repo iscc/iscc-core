@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 """*A similarity perserving hash for binary data (soft hash).*"""
+
 from typing import Optional
 import xxhash
 import iscc_core as ic

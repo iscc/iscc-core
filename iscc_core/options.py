@@ -11,6 +11,7 @@ the class-attribute but prefixed with `ISCC_CORE_` and upper-cased.
     text_ngram_size: int = ic.core_opts.text_ngram_size
     ```
 """
+
 from typing import Tuple
 from loguru import logger as log
 

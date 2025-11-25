@@ -12,6 +12,7 @@ different mediatypes that may occur in a multimedia asset.
 Applications that create mixed Content-Codes must be capable to extract embedded
 assets and create individual Content-Codes per asset.
 """
+
 from typing import Iterable, Sequence
 import iscc_core as ic
 

@@ -12,6 +12,7 @@ The PREFIXES constant in constants.py uses 2-character prefixes for validation, 
 
 Full disambiguation requires decoding the complete header to check the Version field.
 """
+
 import iscc_core as ic
 from collections import defaultdict
 

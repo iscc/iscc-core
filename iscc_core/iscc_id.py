@@ -19,6 +19,7 @@ by the `ISCC Discovery Protocol` (IDP).
 The module also contains legacy support for the older v0 ISCC-ID format that was based on
 blockchain wallet addresses and similarity-hashes of ISCC-CODE units.
 """
+
 import time
 from hashlib import sha256
 from typing import Optional

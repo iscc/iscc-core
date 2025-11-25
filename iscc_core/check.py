@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 """Inspect lib environment/installation"""
+
 import inspect
 
 __all__ = ["turbo"]

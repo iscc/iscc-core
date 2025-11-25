@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 """Compatible with [fastcdc](https://pypi.org/project/fastcdc/)"""
+
 import io
 from math import log2
 from typing import Generator

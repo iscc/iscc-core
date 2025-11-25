@@ -9,6 +9,7 @@ $ cythonize -X language_level=3 -a -i ./iscc_core/simhash.py
 $ cythonize -X language_level=3 -a -i ./iscc_core/dct.py
 $ cythonize -X language_level=3 -a -i ./iscc_core/wtahash.py
 """
+
 try:
     from Cython.Build import cythonize, build_ext
 except ImportError:
