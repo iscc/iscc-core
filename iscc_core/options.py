@@ -34,6 +34,10 @@ class CoreOptions(BaseSettings):
     meta_trim_description: int = Field(
         4096, description="Trim `description` to this number of bytes"
     )
+    meta_trim_meta: int = Field(
+        128_000,
+        description="Maximum decoded payload size in bytes for the meta element. 0 = no limit.",
+    )
     meta_ngram_size_text: int = Field(
         3, description="Sliding window width (characters) for metadata"
     )
@@ -366,6 +370,7 @@ class CoreOptions(BaseSettings):
 conformanc_critical = {
     "meta_trim_name",
     "meta_trim_description",
+    "meta_trim_meta",
     "meta_ngram_size_text",
     "meta_ngram_size_bytes",
     "text_ngram_size",

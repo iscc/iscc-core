@@ -64,18 +64,26 @@ def gen_meta_code_v0(name, description=None, meta=None, bits=ic.core_opts.meta_b
             # Data-URL expected
             durl = meta
             payload = DataURL.from_url(durl).data
-            meta_code_digest = soft_hash_meta_v0(name, payload)
-            metahash = ic.multi_hash_blake3(payload)
-            metadata_value = durl
         elif isinstance(meta, dict):
             payload = jcs.canonicalize(meta)
-            meta_code_digest = soft_hash_meta_v0(name, payload)
-            metahash = ic.multi_hash_blake3(payload)
+        else:
+            raise TypeError(f"metadata must be Data-URL string or dict not {type(meta)}")
+
+        limit = ic.core_opts.meta_trim_meta
+        if limit and len(payload) > limit:
+            raise ValueError(
+                f"meta payload size ({len(payload)} bytes) exceeds META_TRIM_META ({limit} bytes)"
+            )
+
+        meta_code_digest = soft_hash_meta_v0(name, payload)
+        metahash = ic.multi_hash_blake3(payload)
+
+        if isinstance(meta, str):
+            metadata_value = durl
+        else:
             media_type = "application/ld+json" if "@context" in meta else "application/json"
             durl_obj = DataURL.from_byte_data(media_type, data=payload)
             metadata_value = durl_obj.url
-        else:
-            raise TypeError(f"metadata must be Data-URL string or dict not {type(meta)}")
     else:
         payload = " ".join((name, description)).strip().encode("utf-8")
         meta_code_digest = soft_hash_meta_v0(name, description)

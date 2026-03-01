@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+import base64
 import pytest
 import iscc_core as ic
 
@@ -179,3 +180,41 @@ def test_remove_newlines():
     txt = "   Hello\nWorld!  - How Are you   "
     exp = "Hello World! - How Are you"
     assert ic.text_remove_newlines(txt) == exp
+
+
+def test_meta_trim_meta_at_limit(monkeypatch):
+    """Payload exactly at limit should succeed."""
+    monkeypatch.setattr(ic.core_opts, "meta_trim_meta", 100)
+    payload = b"x" * 100
+    encoded = base64.b64encode(payload).decode("ascii")
+    durl = f"data:application/octet-stream;base64,{encoded}"
+    result = ic.gen_meta_code_v0("Test", meta=durl)
+    assert "iscc" in result
+
+
+def test_meta_trim_meta_over_limit(monkeypatch):
+    """Payload exceeding limit should raise ValueError."""
+    monkeypatch.setattr(ic.core_opts, "meta_trim_meta", 100)
+    payload = b"x" * 101
+    encoded = base64.b64encode(payload).decode("ascii")
+    durl = f"data:application/octet-stream;base64,{encoded}"
+    with pytest.raises(ValueError, match="META_TRIM_META"):
+        ic.gen_meta_code_v0("Test", meta=durl)
+
+
+def test_meta_trim_meta_disabled(monkeypatch):
+    """Limit of 0 disables the check."""
+    monkeypatch.setattr(ic.core_opts, "meta_trim_meta", 0)
+    payload = b"x" * 200_000
+    encoded = base64.b64encode(payload).decode("ascii")
+    durl = f"data:application/octet-stream;base64,{encoded}"
+    result = ic.gen_meta_code_v0("Test", meta=durl)
+    assert "iscc" in result
+
+
+def test_meta_trim_meta_dict_over_limit(monkeypatch):
+    """Dict meta exceeding limit after JCS canonicalization should raise ValueError."""
+    monkeypatch.setattr(ic.core_opts, "meta_trim_meta", 50)
+    big_dict = {"key": "v" * 100}
+    with pytest.raises(ValueError, match="META_TRIM_META"):
+        ic.gen_meta_code_v0("Test", meta=big_dict)

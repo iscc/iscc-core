@@ -2,6 +2,7 @@
 
 ## [1.3.0] - Unreleased
 
+- Added `meta_trim_meta` option to limit decoded `meta` payload size in `gen_meta_code_v0` (Fixes #132)
 - Added conformance test vectors for JCS number canonicalization in Meta-Code (Fixes #131)
 - Migrated from Poetry to uv for dependency management and build tooling
 - Migrated pyproject.toml from Poetry format to PEP 621 with setuptools backend
