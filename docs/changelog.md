@@ -1,5 +1,24 @@
 # Changelog
 
+## [1.3.0] - Unreleased
+
+- Migrated from Poetry to uv for dependency management and build tooling
+- Migrated pyproject.toml from Poetry format to PEP 621 with setuptools backend
+- Migrated CI test workflow from Poetry to uv
+- Added release workflow with cibuildwheel for binary wheel builds and PyPI publishing
+- Added `iscc_nph_compare` for high-level ISCC comparison
+- Added setup.py for conditional Cython compilation during wheel builds
+- Added Python 3.14 to test matrix and classifiers
+- Fixed MainType/Version combination validation in `iscc_validate`
+- Fixed PEP 517 build isolation by adding Cython to build-system requires
+- Fixed setuptools requirement (>=77) for PEP 639 license metadata
+- Fixed CI to explicitly pin Python version for uv sync/run
+- Removed incorrect BSD license classifier
+- Removed Poetry build script (build.py)
+- Updated bitarray dependency
+- Updated copyright year to 2021-2026
+- Updated documentation references from Poetry to uv
+
 ## [1.2.2] - 2025-09-14
 
 - Added automatic timestamp generation for ISCC-IDv1 using current system time when none provided

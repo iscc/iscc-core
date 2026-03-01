@@ -1,0 +1,114 @@
+name: Release
+on:
+  push:
+    tags: ["v*"]
+
+jobs:
+  tests:
+    uses: ./.github/workflows/tests.yml
+
+  build-wheels:
+    name: Build wheels (${{ matrix.os }})
+    needs: [tests]
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        os: [ubuntu-latest, macos-latest, windows-latest]
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up QEMU
+        if: runner.os == 'Linux'
+        uses: docker/setup-qemu-action@v3
+        with:
+          platforms: arm64
+
+      - name: Build wheels
+        uses: pypa/cibuildwheel@v2.22
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: wheels-${{ matrix.os }}
+          path: ./wheelhouse/*.whl
+
+  build-sdist:
+    name: Build sdist
+    needs: [tests]
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: astral-sh/setup-uv@v4
+      - run: uv build --sdist
+      - uses: actions/upload-artifact@v4
+        with:
+          name: sdist
+          path: dist/*.tar.gz
+
+  verify-wheels:
+    name: Verify wheels (${{ matrix.os }}, ${{ matrix.python-version }})
+    needs: [build-wheels]
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, macos-latest, windows-latest]
+        python-version: ['3.12']
+    runs-on: ${{ matrix.os }}
+    steps:
+      - uses: actions/setup-python@v5
+        with:
+          python-version: ${{ matrix.python-version }}
+
+      - uses: actions/download-artifact@v4
+        with:
+          pattern: wheels-${{ matrix.os }}
+          path: wheels
+          merge-multiple: true
+
+      - name: Install wheel
+        shell: bash
+        run: pip install wheels/*.whl
+
+      - name: Verify turbo mode is active
+        run: python -c "import iscc_core; assert iscc_core.turbo(), 'Turbo mode not active'"
+
+      - name: Run conformance selftest
+        run: python -c "import iscc_core; assert iscc_core.conformance_selftest(), 'Conformance selftest failed'"
+
+  verify-sdist:
+    name: Verify sdist
+    needs: [build-sdist]
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - uses: actions/download-artifact@v4
+        with:
+          name: sdist
+          path: dist
+
+      - name: Install sdist
+        run: pip install dist/*.tar.gz
+
+      - name: Verify pure-Python mode
+        run: python -c "import iscc_core; assert not iscc_core.turbo(), 'Expected pure-Python mode'"
+
+      - name: Run conformance selftest
+        run: python -c "import iscc_core; assert iscc_core.conformance_selftest(), 'Conformance selftest failed'"
+
+  publish:
+    name: Publish to PyPI
+    needs: [verify-wheels, verify-sdist]
+    runs-on: ubuntu-latest
+    environment: release
+    permissions:
+      id-token: write
+    steps:
+      - uses: actions/download-artifact@v4
+        with:
+          path: dist
+          merge-multiple: true
+
+      - name: Publish to PyPI
+        uses: pypa/gh-action-pypi-publish@release/v1

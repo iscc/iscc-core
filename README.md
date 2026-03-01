@@ -52,9 +52,9 @@ to other programming languages.
 
 ### Reproducible Environment
 
-For reproducible installation of the reference implementation we included a `poetry.lock` file with
-pinned dependencies. Install them using [Python Poetry](https://pypi.org/project/poetry/) with the
-command `poetry install` in the root folder.
+For reproducible installation of the reference implementation we included a `uv.lock` file with
+pinned dependencies. Install them using [uv](https://docs.astral.sh/uv/) with the command `uv sync`
+in the root folder.
 
 ### Repository structure
 
@@ -70,8 +70,8 @@ iscc-core
 ### Testing & Conformance
 
 The reference implementation comes with 100% test coverage. To run the conformance selftest from the
-repository root use `poetry run python -m iscc_core`. To run the complete test suite use
-`poetry run pytest`.
+repository root use `uv run python -m iscc_core`. To run the complete test suite use
+`uv run pytest`.
 
 To build a conformant implementation work through the follwing top level entrypoint functions:
 
@@ -198,22 +198,22 @@ Documentation is published at <https://core.iscc.codes>
 **Requirements**
 
 - [Python 3.9](https://www.python.org/) or higher for code generation and static site building.
-- [Poetry](https://python-poetry.org/) for installation and dependency management.
+- [uv](https://docs.astral.sh/uv/) for installation and dependency management.
 
 **Development Setup**
 
 ```shell
 git clone https://github.com/iscc/iscc-core.git
 cd iscc-core
-poetry install
+uv sync
 ```
 
 **Development Tasks**
 
-Tests, coverage, code formatting and other tasks can be run with the `poe` command:
+Tests, coverage, code formatting and other tasks can be run with the `uv run poe` command:
 
 ```shell
-poe
+uv run poe
 
 Poe the Poet - A task runner that works well with poetry.
 version 0.18.1
@@ -234,16 +234,16 @@ GLOBAL OPTIONS
   --no-ansi      Force disable ANSI output
 CONFIGURED TASKS
   gentests       Generate conformance test data
-  format         Code style formating with black
+  format         Code style formatting with black
   docs           Copy README.md to /docs
-  format-md      Markdown formating with mdformat
+  format-md      Markdown formatting with mdformat
   lf             Convert line endings to lf
   test           Run tests with coverage
   sec            Security check with bandit
   all
 ```
 
-Use `poe all` to run all tasks before committing any changes.
+Use `uv run poe all` to run all tasks before committing any changes.
 
 ## Maintainers
 

@@ -11,7 +11,7 @@ The following functions are the reference implementations of
         show_root_full_path: false
         show_signature_annotations: false
         show_source: true
-        heading_level: none
+        heading_level: 3
 
 ## ISO 24138 / 5.3 Text-Code
 
@@ -21,7 +21,7 @@ The following functions are the reference implementations of
         show_root_full_path: false
         show_signature_annotations: false
         show_source: true
-        heading_level: none
+        heading_level: 3
 
 ## ISO 24138 / 5.4 Image-Code
 
@@ -31,7 +31,7 @@ The following functions are the reference implementations of
         show_root_full_path: false
         show_signature_annotations: false
         show_source: true
-        heading_level: none
+        heading_level: 3
 
 ## ISO 24138 / 5.5 Audio-Code
 
@@ -41,7 +41,7 @@ The following functions are the reference implementations of
         show_root_full_path: false
         show_signature_annotations: false
         show_source: true
-        heading_level: none
+        heading_level: 3
 
 ## ISO 24138 / 5.6 Video-Code
 
@@ -51,7 +51,7 @@ The following functions are the reference implementations of
         show_root_full_path: false
         show_signature_annotations: false
         show_source: true
-        heading_level: none
+        heading_level: 3
 
 ## ISO 24138 / 5.7 Mixed-Code
 
@@ -61,7 +61,7 @@ The following functions are the reference implementations of
         show_root_full_path: false
         show_signature_annotations: false
         show_source: true
-        heading_level: none
+        heading_level: 3
 
 ## ISO 24138 / 5.8 Data-Code
 
@@ -71,7 +71,7 @@ The following functions are the reference implementations of
         show_root_full_path: false
         show_signature_annotations: false
         show_source: true
-        heading_level: none
+        heading_level: 3
 
 ## ISO 24138 / 5.9 Instance-Code
 
@@ -81,7 +81,7 @@ The following functions are the reference implementations of
         show_root_full_path: false
         show_signature_annotations: false
         show_source: true
-        heading_level: none
+        heading_level: 3
 
 ## ISO 24138 / 6.0 ISCC-CODE
 
@@ -91,4 +91,4 @@ The following functions are the reference implementations of
         show_root_full_path: false
         show_signature_annotations: false
         show_source: true
-        heading_level: none
+        heading_level: 3
