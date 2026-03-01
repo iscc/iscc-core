@@ -1,4 +1,9 @@
 {
+  "_metadata": {
+    "generated": "2026-03-01T18:41:54Z",
+    "generator": "iscc-core 1.3.0",
+    "description": "ISCC conformance test data (ISO 24138:2024)"
+  },
   "gen_meta_code_v0": {
     "test_0001_title_only": {
       "inputs": [

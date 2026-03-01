@@ -3,6 +3,7 @@
 
 import io
 from copy import copy
+from datetime import datetime, timezone
 
 import yaml
 import json
@@ -80,8 +81,18 @@ def main():
                 raise
 
             testdata["outputs"] = result
+
+    timestamp = datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ")
+    out = {
+        "_metadata": {
+            "generated": timestamp,
+            "generator": f"iscc-core {iscc_core.__version__}",
+            "description": "ISCC conformance test data (ISO 24138:2024)",
+        },
+        **data,
+    }
     with open(TEST_DATA, "w", encoding="utf-8", newline="\n") as outf:
-        out_data = dump_compact(data)
+        out_data = dump_compact(out)
         outf.write(out_data)
 
 

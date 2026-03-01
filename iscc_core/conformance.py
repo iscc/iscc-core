@@ -6,6 +6,11 @@ Test data is structured as follows:
 
 ```json
 {
+  "_metadata": {
+    "generated": "<ISO 8601 UTC timestamp>",
+    "generator": "<iscc-core version>",
+    "description": "ISCC conformance test data (ISO 24138:2024)"
+  },
   "<function_name>": {
     "<test_name>": {
       "inputs": ["<value1>", "<value2>"],
@@ -58,6 +63,8 @@ def conformance_testdata():
     with open(TEST_DATA, "rb") as stream:
         data = json.load(stream)
     for func_name, tests in data.items():
+        if func_name.startswith("_"):
+            continue
         func_obj = getattr(ic, func_name)
         for test_name, test_values in tests.items():
             # Convert stream and bytes test values
