@@ -2,6 +2,7 @@
 
 ## [1.3.0] - Unreleased
 
+- Added conformance test vectors for JCS number canonicalization in Meta-Code (Fixes #131)
 - Migrated from Poetry to uv for dependency management and build tooling
 - Migrated pyproject.toml from Poetry format to PEP 621 with setuptools backend
 - Migrated CI test workflow from Poetry to uv

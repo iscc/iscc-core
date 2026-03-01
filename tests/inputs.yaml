@@ -96,6 +96,18 @@ gen_meta_code_v0:
             - ""
             - "data:application/json;charset=utf-8;base64,eyJzb21lIjogIm9iamVjdCJ9"
             - 64
+    test_0017_meta_jcs_float_as_integer:
+        inputs:
+            - "Test"
+            - ""
+            - {"value": 1.0}
+            - 64
+    test_0018_meta_jcs_large_float:
+        inputs:
+            - "Test"
+            - ""
+            - {"value": 1.0e+20}
+            - 64
 gen_text_code_v0:
     test_0000_empty_str:
         inputs:

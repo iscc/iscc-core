@@ -219,6 +219,34 @@
         "meta": "data:application/json;charset=utf-8;base64,eyJzb21lIjogIm9iamVjdCJ9",
         "metahash": "1e20796fdfd4ba8db1a63a1ad1377fa735cad99a10ff08bc655a7095d6508e815a0f"
       }
+    },
+    "test_0017_meta_jcs_float_as_integer": {
+      "inputs": [
+        "Test",
+        "",
+        {"value": 1.0},
+        64
+      ],
+      "outputs": {
+        "iscc": "ISCC:AAAX4GX3RZH2I6QZ",
+        "name": "Test",
+        "meta": "data:application/json;base64,eyJ2YWx1ZSI6MX0=",
+        "metahash": "1e2010b291d392b6999ffe4aa4661fb343fc371fca3bfb5bb4e8d8226fdf85743232"
+      }
+    },
+    "test_0018_meta_jcs_large_float": {
+      "inputs": [
+        "Test",
+        "",
+        {"value": 1e+20},
+        64
+      ],
+      "outputs": {
+        "iscc": "ISCC:AAAX4GX3R32YH5P7",
+        "name": "Test",
+        "meta": "data:application/json;base64,eyJ2YWx1ZSI6MTAwMDAwMDAwMDAwMDAwMDAwMDAwfQ==",
+        "metahash": "1e201ff83c1822c348717658a0b4713739646da7c59832691b337a457416ddd1c73d"
+      }
     }
   },
   "gen_text_code_v0": {
