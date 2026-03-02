@@ -82,7 +82,18 @@ def main():
 
             testdata["outputs"] = result
 
+    # Preserve existing timestamp if test vectors are unchanged
     timestamp = datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ")
+    if TEST_DATA.exists():
+        with open(TEST_DATA, "r", encoding="utf-8") as inf:
+            existing = json.load(inf)
+        existing_vectors = {k: v for k, v in existing.items() if k != "_metadata"}
+        if existing_vectors == data:
+            timestamp = existing["_metadata"]["generated"]
+            log.info("Test vectors unchanged, preserving existing timestamp")
+        else:
+            log.info("Test vectors changed, updating timestamp")
+
     out = {
         "_metadata": {
             "generated": timestamp,
