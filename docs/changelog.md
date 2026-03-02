@@ -1,6 +1,6 @@
 # Changelog
 
-## [1.3.0] - Unreleased
+## [1.3.0] - 2026-03-02
 
 - Added `meta_trim_meta` option to limit decoded `meta` payload size in `gen_meta_code_v0` (Fixes #132)
 - Added conformance test vectors for description trimming boundary cases (Fixes #133)
