@@ -118,17 +118,17 @@ sec = { cmd = "bandit -r iscc_core -q", help = "Security check with bandit" }
 all = ["gentests", "format", "docs", "format-md", "lf", "test", "sec"]
 
 [tool.cibuildwheel]
-build = "cp39-* cp310-* cp311-* cp312-* cp313-* cp314-*"
+build = "cp39-* cp310-* cp311-* cp312-* cp313-*"
 skip = "*-musllinux_i686 *-manylinux_i686 *-win32"
 before-build = "pip install cython>=3"
 test-requires = ["pytest"]
 test-command = """python -c "import iscc_core; assert iscc_core.turbo(), 'Extensions not active'; assert iscc_core.conformance_selftest(), 'Conformance failed'" && pytest {project}/tests --turbo -q"""
 
 [tool.cibuildwheel.linux]
-archs = ["x86_64", "aarch64"]
+archs = ["x86_64"]
 
 [tool.cibuildwheel.macos]
-archs = ["x86_64", "arm64"]
+archs = ["arm64"]
 
 [tool.cibuildwheel.windows]
 archs = ["AMD64"]

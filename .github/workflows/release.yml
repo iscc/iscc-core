@@ -17,12 +17,6 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - name: Set up QEMU
-        if: runner.os == 'Linux'
-        uses: docker/setup-qemu-action@v3
-        with:
-          platforms: arm64
-
       - name: Build wheels
         uses: pypa/cibuildwheel@v2.22
 
@@ -66,7 +60,7 @@ jobs:
 
       - name: Install wheel
         shell: bash
-        run: pip install wheels/*.whl
+        run: pip install --only-binary iscc_core --find-links wheels iscc_core
 
       - name: Verify turbo mode is active
         run: python -c "import iscc_core; assert iscc_core.turbo(), 'Turbo mode not active'"
