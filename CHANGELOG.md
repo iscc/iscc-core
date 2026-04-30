@@ -1,5 +1,9 @@
 # Changelog
 
+## [1.3.1] - 2026-04-30
+
+- Improved human-readable representation of ISCC-IDv1 in `iscc_explain` to use ISO 8601 UTC timestamp and labeled `HUB_<id>` field (e.g. `ID-REALM_1-V1-64-2026-04-30T08:38:19.376583Z-HUB_1`)
+
 ## [1.3.0] - 2026-03-02
 
 - Added `meta_trim_meta` option to limit decoded `meta` payload size in `gen_meta_code_v0` (Fixes #132)
