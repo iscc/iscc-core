@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+import datetime
 import math
 import uvarint
 from typing import List, Tuple
@@ -513,12 +514,17 @@ def iscc_explain(iscc):
     if fields[0] == MT.ID:
         # Special handling for ISCC-IDv1
         if fields[2] == VS.V1:
-            # For IDv1, format as ID-REALM_<id>-V1-64-<timestamp>-<serverid>
+            # For IDv1, format as ID-REALM_<id>-V1-64-<iso8601-timestamp>-HUB_<hub_id>
             realm_id = fields[1]
             digest_int = int.from_bytes(fields[-1], byteorder="big")
-            server_id = digest_int & 0xFFF  # Extract server_id (last 12 bits)
+            hub_id = digest_int & 0xFFF  # Extract HUB-ID (last 12 bits)
             timestamp = digest_int >> 12  # Extract timestamp (first 52 bits)
-            return f"ID-REALM_{realm_id}-V1-64-{timestamp}-{server_id}"
+            seconds, micros = divmod(timestamp, 1_000_000)
+            dt = datetime.datetime.fromtimestamp(seconds, datetime.timezone.utc).replace(
+                microsecond=micros
+            )
+            iso = dt.isoformat(timespec="microseconds").replace("+00:00", "Z")
+            return f"ID-REALM_{realm_id}-V1-64-{iso}-HUB_{hub_id}"
 
         # Regular handling for ISCC-IDv0 with counter
         counter_bytes = fields[-1][8:]

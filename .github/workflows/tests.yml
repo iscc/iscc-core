@@ -13,10 +13,12 @@ jobs:
         os: [ubuntu-latest, macos-latest, windows-latest]
     runs-on: ${{ matrix.os }}
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v6
 
       - name: Install uv
-        uses: astral-sh/setup-uv@v4
+        uses: astral-sh/setup-uv@v7
+        with:
+          cache-suffix: ${{ matrix.python-version }}
 
       - name: Set up Python ${{ matrix.python-version }}
         run: uv python install ${{ matrix.python-version }}
@@ -28,5 +30,5 @@ jobs:
         run: uv run --python ${{ matrix.python-version }} pytest --cov=iscc_core --cov-report=xml -q tests
 
       - name: Upload coverage to Codecov
-        uses: codecov/codecov-action@v4
+        uses: codecov/codecov-action@v6
         if: matrix.os == 'ubuntu-latest' && matrix.python-version == '3.12'

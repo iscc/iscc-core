@@ -18,7 +18,7 @@ def test_gen_iscc_id_v1_basic():
     # Test with realm_id=0 (test network)
     iscc_id = ic.gen_iscc_id_v1(timestamp=timestamp, hub_id=hub_id, realm_id=0)
     assert iscc_id == {"iscc": "ISCC:MAIGC5KN3I6TCUBK"}
-    assert ic.iscc_explain(iscc_id["iscc"]) == "ID-REALM_0-V1-64-1714503123456789-42"
+    assert ic.iscc_explain(iscc_id["iscc"]) == "ID-REALM_0-V1-64-2024-04-30T18:52:03.456789Z-HUB_42"
 
     # Test with realm_id=1 (operational network) - now the default
     iscc_id_default = ic.gen_iscc_id(timestamp=timestamp, hub_id=hub_id)
