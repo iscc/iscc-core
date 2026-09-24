@@ -720,13 +720,13 @@ def test_explain_maintype_iscc_id_counter():
 
 def test_explain_maintype_iscc_idv1():
     # Create a valid ISCC-IDv1 with known values
-    timestamp = 1647312000000000  # 2022-03-15 12:00:00 UTC in microseconds
+    timestamp = 1647312000000000  # 2022-03-15T02:40:00 UTC in microseconds
     hub_id = 42
     iscc_idv1 = ic.gen_iscc_id_v1(timestamp, hub_id, realm_id=0)["iscc"]
 
     # Test explain function with IDv1
     explanation = ic.iscc_explain(iscc_idv1)
-    assert explanation == f"ID-REALM_0-V1-64-{timestamp}-{hub_id}"
+    assert explanation == "ID-REALM_0-V1-64-2022-03-15T02:40:00.000000Z-HUB_42"
 
 
 def test_encode_base32hex():
@@ -869,10 +869,10 @@ def test_iscc_validate_mscdi():
 
 
 def test_explain_iscc_idv1():
-    timestamp = 1647312000000000  # 2022-03-15 12:00:00 UTC in microseconds
+    timestamp = 1647312000000000  # 2022-03-15T02:40:00 UTC in microseconds
     hub_id = 42
     iscc_idv1 = ic.gen_iscc_id_v1(timestamp, hub_id, realm_id=0)["iscc"]
-    expected = f"ID-REALM_0-V1-64-{timestamp}-{hub_id}"
+    expected = "ID-REALM_0-V1-64-2022-03-15T02:40:00.000000Z-HUB_42"
     assert ic.iscc_explain(iscc_idv1) == expected
 
 

@@ -1,6 +1,6 @@
 [project]
 name = "iscc-core"
-version = "1.3.0"
+version = "1.4.0"
 description = "ISCC - Core Algorithms"
 authors = [{ name = "Titusz", email = "tp@iscc.io" }]
 requires-python = ">=3.9,<4.0"
@@ -111,21 +111,21 @@ show_missing = true
 gentests = { cmd = "python -m tests.build_test_data", help = "Generate conformance test data" }
 format = { cmd = "black .", help = "Code style formatting with black" }
 docs = { script = "tests.build_docs:main", help = "Copy README.md to /docs" }
-format-md = { cmd = "mdformat --wrap 100 README.md", help = "Markdown formatting with mdformat" }
+format-md = { cmd = "mdformat --wrap 100 README.md CHANGELOG.md", help = "Markdown formatting with mdformat" }
 lf = { cmd = "python -m tools.lf", help = "Convert line endings to lf" }
 test = { cmd = "pytest --cov=iscc_core --cov-fail-under=100", help = "Run tests with coverage" }
 sec = { cmd = "bandit -r iscc_core -q", help = "Security check with bandit" }
-all = ["gentests", "format", "docs", "format-md", "lf", "test", "sec"]
+all = ["gentests", "format", "format-md", "docs", "lf", "test", "sec"]
 
 [tool.cibuildwheel]
-build = "cp39-* cp310-* cp311-* cp312-* cp313-*"
+build = "cp39-* cp310-* cp311-* cp312-* cp313-* cp314-*"
 skip = "*-musllinux_i686 *-manylinux_i686 *-win32"
 before-build = "pip install cython>=3"
 test-requires = ["pytest"]
 test-command = """python -c "import iscc_core; assert iscc_core.turbo(), 'Extensions not active'; assert iscc_core.conformance_selftest(), 'Conformance failed'" && pytest {project}/tests --turbo -q"""
 
 [tool.cibuildwheel.linux]
-archs = ["x86_64"]
+archs = ["native"]
 
 [tool.cibuildwheel.macos]
 archs = ["arm64"]

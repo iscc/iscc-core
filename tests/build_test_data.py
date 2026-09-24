@@ -1,14 +1,13 @@
 # -*- coding: utf-8 -*-
 """Build conformance `data.json` from `inputs.yaml`"""
 
-import io
-from copy import copy
 from datetime import datetime, timezone
 
 import yaml
 import json
 import pathlib
 import iscc_core
+from iscc_core.conformance import _decode_input
 from loguru import logger as log
 
 HERE = pathlib.Path(__file__).parent.absolute()
@@ -63,16 +62,7 @@ def main():
             func = getattr(iscc_core, funcname)
             args = testdata["inputs"]
 
-            # Convert stream and bytes inputs
-            dargs = copy(args)
-            nargs = []
-            for darg in dargs:
-                if isinstance(darg, str) and darg.startswith("stream:"):
-                    nargs.append(io.BytesIO(bytes.fromhex(darg.lstrip("stream:"))))
-                elif isinstance(darg, str) and darg.startswith("bytes:"):
-                    nargs.append(bytes.fromhex(darg.lstrip("bytes:")))
-                else:
-                    nargs.append(darg)
+            nargs = [_decode_input(arg) for arg in args]
 
             try:
                 result = func(*nargs)
@@ -80,6 +70,8 @@ def main():
                 log.error(f"{testname}.{funcname} called with {nargs} raised {e}")
                 raise
 
+            if isinstance(result, bytes):
+                result = "bytes:" + result.hex()
             testdata["outputs"] = result
 
     # Preserve existing timestamp if test vectors are unchanged

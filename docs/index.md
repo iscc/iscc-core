@@ -43,8 +43,13 @@ general digital asset management use-cases.
 [ISO 24138](https://www.iso.org/standard/77899.html). It is also a good reference for porting ISCC
 to other programming languages.
 
+For ISCC in languages other than Python see [iscc-lib](https://github.com/iscc/iscc-lib), a
+high-performance polyglot implementation with a Rust core and bindings for Python, Java, Go, Ruby,
+C#, Node.js, WebAssembly and more. It is conformance-tested against `iscc-core` and produces
+identical results for all test vectors.
+
 !!! tip
-    This is a low level reference implementation that does not inlcude features like mediatype
+    This is a low level reference implementation that does not include features like mediatype
     detection, metadata extraction or file format specific content extraction. Please have a look at
     [iscc-sdk](https://github.com/iscc/iscc-sdk) which adds those higher level features on top of the
     `iscc-core` library.
@@ -74,7 +79,7 @@ The reference implementation comes with 100% test coverage. To run the conforman
 repository root use `uv run python -m iscc_core`. To run the complete test suite use
 `uv run pytest`.
 
-To build a conformant implementation work through the follwing top level entrypoint functions:
+To build a conformant implementation work through the following top level entrypoint functions:
 
 ```
 gen_meta_code_v0

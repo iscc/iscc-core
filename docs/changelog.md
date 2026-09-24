@@ -1,8 +1,35 @@
 # Changelog
 
+## [1.4.0] - 2026-09-24
+
+- Added `encode_seq`, `decode_seq` and `read_unit` for strict byte-level encoding and validation of
+  ISCC-UNIT sequences, the concatenated unit format that `iscc_decompose` has decoded since the ISO
+  24138 release and that IEP-0020 uses for C2PA soft binding values
+- Added `SEQ_MAINTYPES` constant listing the MainTypes permitted in an ISCC-UNIT sequence (IEP-0020)
+- Added `bytes:` output prefix to conformance test data
+- Fixed `iscc_decompose` docstring to state that only the base32 form of concatenated ISCC-UNIT
+  bytes is a valid ISCC sequence
+- Fixed `alg_cdc_params` to reject an `avg_size` below 2 with a `ValueError` instead of a math
+  domain error or type error (#134)
+- Added reference to the `iscc-lib` polyglot implementation in the README (#136)
+- Fixed typos in the README
+- Added `CHANGELOG.md` to the `format-md` task so changelog entries wrap at 100 columns
+- Improved human-readable representation of ISCC-IDv1 in `iscc_explain` to use ISO 8601 UTC
+  timestamp and labeled `HUB_<id>` field (e.g. `ID-REALM_1-V1-64-2026-04-30T08:38:19.376583Z-HUB_1`)
+- Fixed pytest deprecation warning by passing conformance test data to `parametrize` as a list
+- Fixed Cython 3.3 wheel build failure caused by a duplicate type annotation in `minhash.py`
+- Fixed conformance input decoding to strip the `stream:` prefix exactly and to support the `bytes:`
+  prefix at runtime
+- Added Python 3.14 binary wheels to the release build
+- Added Linux aarch64 binary wheels to the release build
+- Added standalone build workflow to verify wheels and sdist without publishing
+- Updated GitHub Actions to current versions
+- Updated dependencies
+
 ## [1.3.0] - 2026-03-02
 
-- Added `meta_trim_meta` option to limit decoded `meta` payload size in `gen_meta_code_v0` (Fixes #132)
+- Added `meta_trim_meta` option to limit decoded `meta` payload size in `gen_meta_code_v0` (Fixes
+  #132)
 - Added conformance test vectors for description trimming boundary cases (Fixes #133)
 - Added conformance test vectors for JCS number canonicalization in Meta-Code (Fixes #131)
 - Added timestamp metadata to conformance test data (Fixes #27)

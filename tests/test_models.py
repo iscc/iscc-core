@@ -107,7 +107,7 @@ def test_code_iscc_idv1():
     # Test type identification
     assert code.type_id == "ID-REALM_0-V1-64"
     assert "ID-REALM_0-V1-64" in code.explain
-    assert f"{timestamp}-{hub_id}" in code.explain
+    assert code.explain.endswith(f"-HUB_{hub_id}")
 
     # Test hash properties contain correct data
     # Body should be 8 bytes: 52 bits timestamp + 12 bits HUB-ID
