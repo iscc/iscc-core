@@ -43,6 +43,11 @@ general digital asset management use-cases.
 [ISO 24138](https://www.iso.org/standard/77899.html). It is also a good reference for porting ISCC
 to other programming languages.
 
+For ISCC in languages other than Python see [iscc-lib](https://github.com/iscc/iscc-lib), a
+high-performance polyglot implementation with a Rust core and bindings for Python, Java, Go, Ruby,
+C#, Node.js, WebAssembly and more. It is conformance-tested against `iscc-core` and produces
+identical results for all test vectors.
+
 !!! tip
     This is a low level reference implementation that does not inlcude features like mediatype
     detection, metadata extraction or file format specific content extraction. Please have a look at
