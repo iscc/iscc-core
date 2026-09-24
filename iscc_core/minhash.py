@@ -54,7 +54,7 @@ def alg_minhash_compress(mhash, lsb=4):
     :return: 256-bit binary from the least significant bits of the minhash values
     :rtype: bytes
     """
-    bits: str = ""
+    bits = ""
     for bitpos in range(lsb):
         for h in mhash:
             bits += str(h >> bitpos & 1)
