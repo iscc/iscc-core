@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-"""Tests for the ISCC-SEQ codec (IEP-0020, C2PA soft binding values)"""
+"""Tests for the ISCC-SEQ codec (IEP-0020, C2PA soft binding values)."""
 
 import base64
 import io
