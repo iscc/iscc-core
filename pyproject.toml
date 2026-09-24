@@ -125,7 +125,7 @@ test-requires = ["pytest"]
 test-command = """python -c "import iscc_core; assert iscc_core.turbo(), 'Extensions not active'; assert iscc_core.conformance_selftest(), 'Conformance failed'" && pytest {project}/tests --turbo -q"""
 
 [tool.cibuildwheel.linux]
-archs = ["x86_64"]
+archs = ["native"]
 
 [tool.cibuildwheel.macos]
 archs = ["arm64"]

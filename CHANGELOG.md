@@ -6,6 +6,7 @@
 - Fixed pytest deprecation warning by passing conformance test data to `parametrize` as a list
 - Fixed Cython 3.3 wheel build failure caused by a duplicate type annotation in `minhash.py`
 - Added Python 3.14 binary wheels to the release build
+- Added Linux aarch64 binary wheels to the release build
 - Added standalone build workflow to verify wheels and sdist without publishing
 - Updated GitHub Actions to current versions
 - Updated dependencies
