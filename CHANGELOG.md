@@ -8,6 +8,7 @@
 - Fixed `iscc_decompose` docstring to state that only the base32 form of concatenated ISCC-UNIT bytes is a valid ISCC sequence
 - Fixed `alg_cdc_params` to reject an `avg_size` below 2 with a `ValueError` instead of a math domain error or type error (#134)
 - Added reference to the `iscc-lib` polyglot implementation in the README (#136)
+- Fixed typos in the README
 - Improved human-readable representation of ISCC-IDv1 in `iscc_explain` to use ISO 8601 UTC timestamp and labeled `HUB_<id>` field (e.g. `ID-REALM_1-V1-64-2026-04-30T08:38:19.376583Z-HUB_1`)
 - Fixed pytest deprecation warning by passing conformance test data to `parametrize` as a list
 - Fixed Cython 3.3 wheel build failure caused by a duplicate type annotation in `minhash.py`
