@@ -20,7 +20,9 @@ def test_confromance_selftest():
     assert conformance.conformance_selftest()
 
 
-@pytest.mark.parametrize("testname,function,inputs,outputs", conformance.conformance_testdata())
+@pytest.mark.parametrize(
+    "testname,function,inputs,outputs", list(conformance.conformance_testdata())
+)
 def test_conformance(testname, function, inputs, outputs):
     result = function(*inputs)
     if hasattr(result, "dict"):
