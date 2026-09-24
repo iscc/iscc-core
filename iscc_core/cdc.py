@@ -88,9 +88,12 @@ def alg_cdc_params(avg_size: int) -> tuple:
     """
     Calculate CDC parameters
 
-    :param int avg_size: Target average size of chunks in number of bytes.
+    :param int avg_size: Target average size of chunks in number of bytes (at least 2).
     :returns: Tuple of (min_size, max_size, center_size, mask_s, mask_l).
+    :raises ValueError: If `avg_size` is below 2.
     """
+    if avg_size < 2:
+        raise ValueError(f"avg_size must be at least 2, got {avg_size}")
     ceil_div = lambda x, y: (x + y - 1) // y
     mask = lambda b: 2**b - 1
     min_size = avg_size // 4

@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+import pytest
 from blake3 import blake3
 from .conftest import static_bytes
 import iscc_core.cdc
@@ -7,6 +8,18 @@ import iscc_core.cdc
 def test_get_params():
     assert iscc_core.cdc.alg_cdc_params(1024) == (256, 8192, 640, 2047, 511)
     assert iscc_core.cdc.alg_cdc_params(8192) == (2048, 65536, 5120, 16383, 4095)
+
+
+@pytest.mark.parametrize("avg_size", [-1, 0, 1])
+def test_get_params_rejects_avg_size_below_2(avg_size):
+    with pytest.raises(ValueError, match="at least 2"):
+        iscc_core.cdc.alg_cdc_params(avg_size)
+
+
+def test_data_chunks_min_avg_size():
+    data = static_bytes(64)
+    chunks = list(iscc_core.cdc.alg_cdc_chunks(data, utf32=False, avg_chunk_size=2))
+    assert b"".join(chunks) == data
 
 
 def test_data_chunks_empty():
