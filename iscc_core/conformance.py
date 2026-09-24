@@ -22,7 +22,8 @@ Test data is structured as follows:
 
 Inputs that are expected to be `raw bytes or byte-streams` are embedded as HEX encoded strings
 in JSON and prefixed with `stream:` or `bytes:` to support automated decoding during
-implementation testing.
+implementation testing. Outputs that are raw bytes are embedded the same way with the
+`bytes:` prefix.
 
 !!! example
     Byte-stream inputs in JSON test data:
@@ -54,7 +55,7 @@ TEST_DATA = HERE / "data.json"
 
 def _decode_input(value):
     # type: (Any) -> Any
-    """Decode a serialized test input: `stream:<hex>` to BytesIO, `bytes:<hex>` to bytes."""
+    """Decode a serialized test value: `stream:<hex>` to BytesIO, `bytes:<hex>` to bytes."""
     if isinstance(value, str) and value.startswith("stream:"):
         return io.BytesIO(bytes.fromhex(value.removeprefix("stream:")))
     if isinstance(value, str) and value.startswith("bytes:"):
@@ -78,6 +79,7 @@ def conformance_testdata():
         func_obj = getattr(ic, func_name)
         for test_name, test_values in tests.items():
             test_values["inputs"] = [_decode_input(tv) for tv in test_values["inputs"]]
+            test_values["outputs"] = _decode_input(test_values["outputs"])
 
             yield test_name, func_obj, test_values["inputs"], test_values["outputs"]
 

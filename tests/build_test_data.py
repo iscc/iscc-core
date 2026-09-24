@@ -70,6 +70,8 @@ def main():
                 log.error(f"{testname}.{funcname} called with {nargs} raised {e}")
                 raise
 
+            if isinstance(result, bytes):
+                result = "bytes:" + result.hex()
             testdata["outputs"] = result
 
     # Preserve existing timestamp if test vectors are unchanged
