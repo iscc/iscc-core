@@ -4,6 +4,7 @@
 
 - Improved human-readable representation of ISCC-IDv1 in `iscc_explain` to use ISO 8601 UTC timestamp and labeled `HUB_<id>` field (e.g. `ID-REALM_1-V1-64-2026-04-30T08:38:19.376583Z-HUB_1`)
 - Fixed pytest deprecation warning by passing conformance test data to `parametrize` as a list
+- Updated GitHub Actions to current versions
 - Updated dependencies
 
 ## [1.3.0] - 2026-03-02
