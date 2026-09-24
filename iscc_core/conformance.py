@@ -21,11 +21,11 @@ Test data is structured as follows:
 ```
 
 Inputs that are expected to be `raw bytes or byte-streams` are embedded as HEX encoded strings
-in JSON and prefixed with `stream:` or `bytes` to support automated decoding during
+in JSON and prefixed with `stream:` or `bytes:` to support automated decoding during
 implementation testing.
 
 !!! example
-    Byte-stream outputs in JSON test data:
+    Byte-stream inputs in JSON test data:
     ```json
     "gen_data_code_v0": {
       "test_0000_two_bytes_64": {
@@ -52,6 +52,16 @@ HERE = pathlib.Path(__file__).parent.absolute()
 TEST_DATA = HERE / "data.json"
 
 
+def _decode_input(value):
+    # type: (Any) -> Any
+    """Decode a serialized test input: `stream:<hex>` to BytesIO, `bytes:<hex>` to bytes."""
+    if isinstance(value, str) and value.startswith("stream:"):
+        return io.BytesIO(bytes.fromhex(value.removeprefix("stream:")))
+    if isinstance(value, str) and value.startswith("bytes:"):
+        return bytes.fromhex(value.removeprefix("bytes:"))
+    return value
+
+
 def conformance_testdata():
     # type: () -> Generator[Tuple[str, Callable, List[Any], List[Any]]]
     """
@@ -67,14 +77,7 @@ def conformance_testdata():
             continue
         func_obj = getattr(ic, func_name)
         for test_name, test_values in tests.items():
-            # Convert stream and bytes test values
-            ntv = []
-            for tv in test_values["inputs"]:
-                if isinstance(tv, str) and tv.startswith("stream:"):
-                    ntv.append(io.BytesIO(bytes.fromhex(tv.lstrip("stream:"))))
-                else:
-                    ntv.append(tv)
-            test_values["inputs"] = ntv
+            test_values["inputs"] = [_decode_input(tv) for tv in test_values["inputs"]]
 
             yield test_name, func_obj, test_values["inputs"], test_values["outputs"]
 
