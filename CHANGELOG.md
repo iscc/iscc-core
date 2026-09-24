@@ -1,5 +1,10 @@
 # Changelog
 
+## [1.4.1] - Unreleased
+
+- Fixed absolute links to the ISCC-UNIT pages in the `iscc_code` module documentation
+- Updated documentation copyright year to 2026
+
 ## [1.4.0] - 2026-09-24
 
 - Added `encode_seq`, `decode_seq` and `read_unit` for strict byte-level encoding and validation of

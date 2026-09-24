@@ -4,11 +4,11 @@
 An **ISCC-CODE** can be generated from the concatenation of the digests of the following
 five **ISCC-UNITs** together with a single common header:
 
-- [Meta-Code](/units/code_meta/) - Encodes metadata similarity
+- [Meta-Code](units/code_meta.md) - Encodes metadata similarity
 - Semantic-Code - Encodes semantic content similarity (to be developed)
-- [Content-Code](/units/content/) - Encodes syntactic/perceptual similarity
-- [Data-Code](/units/code_data/) - Encodes raw bitstream similarity
-- [Instance-Code](/units/code_instance/) - Data checksum
+- [Content-Code](units/content/index.md) - Encodes syntactic/perceptual similarity
+- [Data-Code](units/code_data.md) - Encodes raw bitstream similarity
+- [Instance-Code](units/code_instance.md) - Data checksum
 
 The following sequences of ISCC-UNITs are possible:
 
