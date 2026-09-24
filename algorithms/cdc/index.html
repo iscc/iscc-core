@@ -25,7 +25,7 @@
       
       
       <link rel="icon" href="../../images/iscc-logo-icon-black.svg">
-      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.3">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.7">
     
     
       
@@ -33,7 +33,7 @@
       
     
     
-      <link rel="stylesheet" href="../../assets/stylesheets/main.484c7ddc.min.css">
+      <link rel="stylesheet" href="../../assets/stylesheets/main.ec1eaa64.min.css">
       
         
         <link rel="stylesheet" href="../../assets/stylesheets/palette.ab4e12ef.min.css">
@@ -1610,7 +1610,7 @@
 <span class="normal"><a href="#__codelineno-0-50">50</a></span>
 <span class="normal"><a href="#__codelineno-0-51">51</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-0-14" name="__codelineno-0-14"></a><span class="k">def</span><span class="w"> </span><span class="nf">alg_cdc_chunks</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">utf32</span><span class="p">,</span> <span class="n">avg_chunk_size</span><span class="o">=</span><span class="n">ic</span><span class="o">.</span><span class="n">core_opts</span><span class="o">.</span><span class="n">data_avg_chunk_size</span><span class="p">):</span>
 <a id="__codelineno-0-15" name="__codelineno-0-15"></a>    <span class="c1"># type: (ic.Data, bool, int) -&gt; Generator[bytes, None, None]</span>
-<a id="__codelineno-0-16" name="__codelineno-0-16"></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<a id="__codelineno-0-16" name="__codelineno-0-16"></a><span class="w">    </span><span class="sd">"""</span>
 <a id="__codelineno-0-17" name="__codelineno-0-17"></a><span class="sd">    A generator that yields data-dependent chunks for `data`.</span>
 <a id="__codelineno-0-18" name="__codelineno-0-18"></a>
 <a id="__codelineno-0-19" name="__codelineno-0-19"></a><span class="sd">    Usage Example:</span>
@@ -1625,12 +1625,12 @@
 <a id="__codelineno-0-28" name="__codelineno-0-28"></a><span class="sd">    :param int avg_chunk_size: Target chunk size in number of bytes.</span>
 <a id="__codelineno-0-29" name="__codelineno-0-29"></a><span class="sd">    :return: A generator that yields data chunks of variable sizes.</span>
 <a id="__codelineno-0-30" name="__codelineno-0-30"></a><span class="sd">    :rtype: Generator[bytes]</span>
-<a id="__codelineno-0-31" name="__codelineno-0-31"></a><span class="sd">    &quot;&quot;&quot;</span>
+<a id="__codelineno-0-31" name="__codelineno-0-31"></a><span class="sd">    """</span>
 <a id="__codelineno-0-32" name="__codelineno-0-32"></a>
 <a id="__codelineno-0-33" name="__codelineno-0-33"></a>    <span class="n">stream</span> <span class="o">=</span> <span class="n">io</span><span class="o">.</span><span class="n">BytesIO</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
 <a id="__codelineno-0-34" name="__codelineno-0-34"></a>    <span class="n">buffer</span> <span class="o">=</span> <span class="n">stream</span><span class="o">.</span><span class="n">read</span><span class="p">(</span><span class="n">ic</span><span class="o">.</span><span class="n">core_opts</span><span class="o">.</span><span class="n">io_read_size</span><span class="p">)</span>
 <a id="__codelineno-0-35" name="__codelineno-0-35"></a>    <span class="k">if</span> <span class="ow">not</span> <span class="n">buffer</span><span class="p">:</span>
-<a id="__codelineno-0-36" name="__codelineno-0-36"></a>        <span class="k">yield</span> <span class="sa">b</span><span class="s2">&quot;&quot;</span>
+<a id="__codelineno-0-36" name="__codelineno-0-36"></a>        <span class="k">yield</span> <span class="sa">b</span><span class="s2">""</span>
 <a id="__codelineno-0-37" name="__codelineno-0-37"></a>
 <a id="__codelineno-0-38" name="__codelineno-0-38"></a>    <span class="n">mi</span><span class="p">,</span> <span class="n">ma</span><span class="p">,</span> <span class="n">cs</span><span class="p">,</span> <span class="n">mask_s</span><span class="p">,</span> <span class="n">mask_l</span> <span class="o">=</span> <span class="n">alg_cdc_params</span><span class="p">(</span><span class="n">avg_chunk_size</span><span class="p">)</span>
 <a id="__codelineno-0-39" name="__codelineno-0-39"></a>
@@ -1839,7 +1839,7 @@
 <span class="normal"><a href="#__codelineno-0-83">83</a></span>
 <span class="normal"><a href="#__codelineno-0-84">84</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-0-54" name="__codelineno-0-54"></a><span class="k">def</span><span class="w"> </span><span class="nf">alg_cdc_offset</span><span class="p">(</span><span class="n">buffer</span><span class="p">,</span> <span class="n">mi</span><span class="p">,</span> <span class="n">ma</span><span class="p">,</span> <span class="n">cs</span><span class="p">,</span> <span class="n">mask_s</span><span class="p">,</span> <span class="n">mask_l</span><span class="p">):</span>
 <a id="__codelineno-0-55" name="__codelineno-0-55"></a>    <span class="c1"># type: (ic.Data, int, int, int, int, int) -&gt; int</span>
-<a id="__codelineno-0-56" name="__codelineno-0-56"></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<a id="__codelineno-0-56" name="__codelineno-0-56"></a><span class="w">    </span><span class="sd">"""</span>
 <a id="__codelineno-0-57" name="__codelineno-0-57"></a><span class="sd">    Find breakpoint offset for a given buffer.</span>
 <a id="__codelineno-0-58" name="__codelineno-0-58"></a>
 <a id="__codelineno-0-59" name="__codelineno-0-59"></a><span class="sd">    :param Data buffer: The data to be chunked.</span>
@@ -1850,7 +1850,7 @@
 <a id="__codelineno-0-64" name="__codelineno-0-64"></a><span class="sd">    :param int mask_l: Large mask.</span>
 <a id="__codelineno-0-65" name="__codelineno-0-65"></a><span class="sd">    :return: Offset of dynamic cutpoint in number of bytes.</span>
 <a id="__codelineno-0-66" name="__codelineno-0-66"></a><span class="sd">    :rtype: int</span>
-<a id="__codelineno-0-67" name="__codelineno-0-67"></a><span class="sd">    &quot;&quot;&quot;</span>
+<a id="__codelineno-0-67" name="__codelineno-0-67"></a><span class="sd">    """</span>
 <a id="__codelineno-0-68" name="__codelineno-0-68"></a>
 <a id="__codelineno-0-69" name="__codelineno-0-69"></a>    <span class="n">pattern</span> <span class="o">=</span> <span class="mi">0</span>
 <a id="__codelineno-0-70" name="__codelineno-0-70"></a>    <span class="n">size</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">buffer</span><span class="p">)</span>
@@ -1913,7 +1913,7 @@
             </td>
             <td>
               <div class="doc-md-description">
-                <p>Target average size of chunks in number of bytes.</p>
+                <p>Target average size of chunks in number of bytes (at least 2).</p>
               </div>
             </td>
             <td>
@@ -1947,6 +1947,29 @@
     </table>
 
 
+<p><span class="doc-section-title">Raises:</span></p>
+    <table>
+      <thead>
+        <tr>
+          <th>Type</th>
+          <th>Description</th>
+        </tr>
+      </thead>
+      <tbody>
+          <tr class="doc-section-item">
+            <td>
+                  <code>ValueError</code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>If <code>avg_size</code> is below 2.</p>
+              </div>
+            </td>
+          </tr>
+      </tbody>
+    </table>
+
+
             <details class="mkdocstrings-source">
               <summary>Source code in <code>iscc_core\cdc.py</code></summary>
               <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-0-87"> 87</a></span>
@@ -1965,23 +1988,29 @@
 <span class="normal"><a href="#__codelineno-0-100">100</a></span>
 <span class="normal"><a href="#__codelineno-0-101">101</a></span>
 <span class="normal"><a href="#__codelineno-0-102">102</a></span>
-<span class="normal"><a href="#__codelineno-0-103">103</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-0-87" name="__codelineno-0-87"></a><span class="k">def</span><span class="w"> </span><span class="nf">alg_cdc_params</span><span class="p">(</span><span class="n">avg_size</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">tuple</span><span class="p">:</span>
-<a id="__codelineno-0-88" name="__codelineno-0-88"></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="normal"><a href="#__codelineno-0-103">103</a></span>
+<span class="normal"><a href="#__codelineno-0-104">104</a></span>
+<span class="normal"><a href="#__codelineno-0-105">105</a></span>
+<span class="normal"><a href="#__codelineno-0-106">106</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-0-87" name="__codelineno-0-87"></a><span class="k">def</span><span class="w"> </span><span class="nf">alg_cdc_params</span><span class="p">(</span><span class="n">avg_size</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">tuple</span><span class="p">:</span>
+<a id="__codelineno-0-88" name="__codelineno-0-88"></a><span class="w">    </span><span class="sd">"""</span>
 <a id="__codelineno-0-89" name="__codelineno-0-89"></a><span class="sd">    Calculate CDC parameters</span>
 <a id="__codelineno-0-90" name="__codelineno-0-90"></a>
-<a id="__codelineno-0-91" name="__codelineno-0-91"></a><span class="sd">    :param int avg_size: Target average size of chunks in number of bytes.</span>
+<a id="__codelineno-0-91" name="__codelineno-0-91"></a><span class="sd">    :param int avg_size: Target average size of chunks in number of bytes (at least 2).</span>
 <a id="__codelineno-0-92" name="__codelineno-0-92"></a><span class="sd">    :returns: Tuple of (min_size, max_size, center_size, mask_s, mask_l).</span>
-<a id="__codelineno-0-93" name="__codelineno-0-93"></a><span class="sd">    &quot;&quot;&quot;</span>
-<a id="__codelineno-0-94" name="__codelineno-0-94"></a>    <span class="n">ceil_div</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">:</span> <span class="p">(</span><span class="n">x</span> <span class="o">+</span> <span class="n">y</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span> <span class="o">//</span> <span class="n">y</span>
-<a id="__codelineno-0-95" name="__codelineno-0-95"></a>    <span class="n">mask</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">b</span><span class="p">:</span> <span class="mi">2</span><span class="o">**</span><span class="n">b</span> <span class="o">-</span> <span class="mi">1</span>
-<a id="__codelineno-0-96" name="__codelineno-0-96"></a>    <span class="n">min_size</span> <span class="o">=</span> <span class="n">avg_size</span> <span class="o">//</span> <span class="mi">4</span>
-<a id="__codelineno-0-97" name="__codelineno-0-97"></a>    <span class="n">max_size</span> <span class="o">=</span> <span class="n">avg_size</span> <span class="o">*</span> <span class="mi">8</span>
-<a id="__codelineno-0-98" name="__codelineno-0-98"></a>    <span class="n">offset</span> <span class="o">=</span> <span class="n">min_size</span> <span class="o">+</span> <span class="n">ceil_div</span><span class="p">(</span><span class="n">min_size</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
-<a id="__codelineno-0-99" name="__codelineno-0-99"></a>    <span class="n">center_size</span> <span class="o">=</span> <span class="n">avg_size</span> <span class="o">-</span> <span class="n">offset</span>
-<a id="__codelineno-0-100" name="__codelineno-0-100"></a>    <span class="n">bits</span> <span class="o">=</span> <span class="nb">round</span><span class="p">(</span><span class="n">log2</span><span class="p">(</span><span class="n">avg_size</span><span class="p">))</span>
-<a id="__codelineno-0-101" name="__codelineno-0-101"></a>    <span class="n">mask_s</span> <span class="o">=</span> <span class="n">mask</span><span class="p">(</span><span class="n">bits</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>
-<a id="__codelineno-0-102" name="__codelineno-0-102"></a>    <span class="n">mask_l</span> <span class="o">=</span> <span class="n">mask</span><span class="p">(</span><span class="n">bits</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span>
-<a id="__codelineno-0-103" name="__codelineno-0-103"></a>    <span class="k">return</span> <span class="n">min_size</span><span class="p">,</span> <span class="n">max_size</span><span class="p">,</span> <span class="n">center_size</span><span class="p">,</span> <span class="n">mask_s</span><span class="p">,</span> <span class="n">mask_l</span>
+<a id="__codelineno-0-93" name="__codelineno-0-93"></a><span class="sd">    :raises ValueError: If `avg_size` is below 2.</span>
+<a id="__codelineno-0-94" name="__codelineno-0-94"></a><span class="sd">    """</span>
+<a id="__codelineno-0-95" name="__codelineno-0-95"></a>    <span class="k">if</span> <span class="n">avg_size</span> <span class="o">&lt;</span> <span class="mi">2</span><span class="p">:</span>
+<a id="__codelineno-0-96" name="__codelineno-0-96"></a>        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">"avg_size must be at least 2, got </span><span class="si">{</span><span class="n">avg_size</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+<a id="__codelineno-0-97" name="__codelineno-0-97"></a>    <span class="n">ceil_div</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">:</span> <span class="p">(</span><span class="n">x</span> <span class="o">+</span> <span class="n">y</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span> <span class="o">//</span> <span class="n">y</span>
+<a id="__codelineno-0-98" name="__codelineno-0-98"></a>    <span class="n">mask</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">b</span><span class="p">:</span> <span class="mi">2</span><span class="o">**</span><span class="n">b</span> <span class="o">-</span> <span class="mi">1</span>
+<a id="__codelineno-0-99" name="__codelineno-0-99"></a>    <span class="n">min_size</span> <span class="o">=</span> <span class="n">avg_size</span> <span class="o">//</span> <span class="mi">4</span>
+<a id="__codelineno-0-100" name="__codelineno-0-100"></a>    <span class="n">max_size</span> <span class="o">=</span> <span class="n">avg_size</span> <span class="o">*</span> <span class="mi">8</span>
+<a id="__codelineno-0-101" name="__codelineno-0-101"></a>    <span class="n">offset</span> <span class="o">=</span> <span class="n">min_size</span> <span class="o">+</span> <span class="n">ceil_div</span><span class="p">(</span><span class="n">min_size</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
+<a id="__codelineno-0-102" name="__codelineno-0-102"></a>    <span class="n">center_size</span> <span class="o">=</span> <span class="n">avg_size</span> <span class="o">-</span> <span class="n">offset</span>
+<a id="__codelineno-0-103" name="__codelineno-0-103"></a>    <span class="n">bits</span> <span class="o">=</span> <span class="nb">round</span><span class="p">(</span><span class="n">log2</span><span class="p">(</span><span class="n">avg_size</span><span class="p">))</span>
+<a id="__codelineno-0-104" name="__codelineno-0-104"></a>    <span class="n">mask_s</span> <span class="o">=</span> <span class="n">mask</span><span class="p">(</span><span class="n">bits</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>
+<a id="__codelineno-0-105" name="__codelineno-0-105"></a>    <span class="n">mask_l</span> <span class="o">=</span> <span class="n">mask</span><span class="p">(</span><span class="n">bits</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span>
+<a id="__codelineno-0-106" name="__codelineno-0-106"></a>    <span class="k">return</span> <span class="n">min_size</span><span class="p">,</span> <span class="n">max_size</span><span class="p">,</span> <span class="n">center_size</span><span class="p">,</span> <span class="n">mask_s</span><span class="p">,</span> <span class="n">mask_l</span>
 </code></pre></div></td></tr></table></div>
             </details>
     </div>
@@ -2054,7 +2083,7 @@
       <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": ["toc.integrate", "navigation.indexes", "navigation.tracking", "navigation.tabs", "navigation.tabs.sticky", "navigation.expand"], "search": "../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
     
     
-      <script src="../../assets/javascripts/bundle.79ae519e.min.js"></script>
+      <script src="../../assets/javascripts/bundle.d7400e89.min.js"></script>
       
     
   </body>

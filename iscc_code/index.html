@@ -25,7 +25,7 @@
       
       
       <link rel="icon" href="../images/iscc-logo-icon-black.svg">
-      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.3">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.7">
     
     
       
@@ -33,7 +33,7 @@
       
     
     
-      <link rel="stylesheet" href="../assets/stylesheets/main.484c7ddc.min.css">
+      <link rel="stylesheet" href="../assets/stylesheets/main.ec1eaa64.min.css">
       
         
         <link rel="stylesheet" href="../assets/stylesheets/palette.ab4e12ef.min.css">
@@ -1614,7 +1614,7 @@ algorithm v0.</p>
 <span class="normal"><a href="#__codelineno-0-107">107</a></span>
 <span class="normal"><a href="#__codelineno-0-108">108</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-0-43" name="__codelineno-0-43"></a><span class="k">def</span><span class="w"> </span><span class="nf">gen_iscc_code_v0</span><span class="p">(</span><span class="n">codes</span><span class="p">,</span> <span class="n">wide</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
 <a id="__codelineno-0-44" name="__codelineno-0-44"></a>    <span class="c1"># type: (Sequence[str], bool) -&gt; dict</span>
-<a id="__codelineno-0-45" name="__codelineno-0-45"></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<a id="__codelineno-0-45" name="__codelineno-0-45"></a><span class="w">    </span><span class="sd">"""</span>
 <a id="__codelineno-0-46" name="__codelineno-0-46"></a><span class="sd">    Combine multiple ISCC-UNITS to an ISCC-CODE with a common header using</span>
 <a id="__codelineno-0-47" name="__codelineno-0-47"></a><span class="sd">    algorithm v0.</span>
 <a id="__codelineno-0-48" name="__codelineno-0-48"></a>
@@ -1622,16 +1622,16 @@ algorithm v0.</p>
 <a id="__codelineno-0-50" name="__codelineno-0-50"></a><span class="sd">    :param bool wide: If True, use 128-bit digests for Data and Instance codes (requires both to be at least 128-bit)</span>
 <a id="__codelineno-0-51" name="__codelineno-0-51"></a><span class="sd">    :return: An ISCC object with ISCC-CODE</span>
 <a id="__codelineno-0-52" name="__codelineno-0-52"></a><span class="sd">    :rtype: dict</span>
-<a id="__codelineno-0-53" name="__codelineno-0-53"></a><span class="sd">    &quot;&quot;&quot;</span>
+<a id="__codelineno-0-53" name="__codelineno-0-53"></a><span class="sd">    """</span>
 <a id="__codelineno-0-54" name="__codelineno-0-54"></a>
 <a id="__codelineno-0-55" name="__codelineno-0-55"></a>    <span class="n">codes</span> <span class="o">=</span> <span class="p">[</span><span class="n">ic</span><span class="o">.</span><span class="n">iscc_clean</span><span class="p">(</span><span class="n">code</span><span class="p">)</span> <span class="k">for</span> <span class="n">code</span> <span class="ow">in</span> <span class="n">codes</span><span class="p">]</span>
 <a id="__codelineno-0-56" name="__codelineno-0-56"></a>
 <a id="__codelineno-0-57" name="__codelineno-0-57"></a>    <span class="c1"># Check basic constraints</span>
 <a id="__codelineno-0-58" name="__codelineno-0-58"></a>    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">codes</span><span class="p">)</span> <span class="o">&lt;</span> <span class="mi">2</span><span class="p">:</span>
-<a id="__codelineno-0-59" name="__codelineno-0-59"></a>        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Minimum two ISCC units required to generate valid ISCC-CODE&quot;</span><span class="p">)</span>
+<a id="__codelineno-0-59" name="__codelineno-0-59"></a>        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">"Minimum two ISCC units required to generate valid ISCC-CODE"</span><span class="p">)</span>
 <a id="__codelineno-0-60" name="__codelineno-0-60"></a>    <span class="k">for</span> <span class="n">code</span> <span class="ow">in</span> <span class="n">codes</span><span class="p">:</span>
 <a id="__codelineno-0-61" name="__codelineno-0-61"></a>        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">code</span><span class="p">)</span> <span class="o">&lt;</span> <span class="mi">16</span><span class="p">:</span>
-<a id="__codelineno-0-62" name="__codelineno-0-62"></a>            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Cannot build ISCC-CODE from units shorter than 64-bits: </span><span class="si">{</span><span class="n">code</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<a id="__codelineno-0-62" name="__codelineno-0-62"></a>            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Cannot build ISCC-CODE from units shorter than 64-bits: </span><span class="si">{</span><span class="n">code</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
 <a id="__codelineno-0-63" name="__codelineno-0-63"></a>
 <a id="__codelineno-0-64" name="__codelineno-0-64"></a>    <span class="c1"># Decode units and sort by MainType</span>
 <a id="__codelineno-0-65" name="__codelineno-0-65"></a>    <span class="n">decoded</span> <span class="o">=</span> <span class="nb">sorted</span><span class="p">(</span>
@@ -1639,7 +1639,7 @@ algorithm v0.</p>
 <a id="__codelineno-0-67" name="__codelineno-0-67"></a>    <span class="p">)</span>
 <a id="__codelineno-0-68" name="__codelineno-0-68"></a>    <span class="n">main_types</span> <span class="o">=</span> <span class="nb">tuple</span><span class="p">(</span><span class="n">d</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="k">for</span> <span class="n">d</span> <span class="ow">in</span> <span class="n">decoded</span><span class="p">)</span>
 <a id="__codelineno-0-69" name="__codelineno-0-69"></a>    <span class="k">if</span> <span class="n">main_types</span><span class="p">[</span><span class="o">-</span><span class="mi">2</span><span class="p">:]</span> <span class="o">!=</span> <span class="p">(</span><span class="n">ic</span><span class="o">.</span><span class="n">MT</span><span class="o">.</span><span class="n">DATA</span><span class="p">,</span> <span class="n">ic</span><span class="o">.</span><span class="n">MT</span><span class="o">.</span><span class="n">INSTANCE</span><span class="p">):</span>
-<a id="__codelineno-0-70" name="__codelineno-0-70"></a>        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;ISCC-CODE requires at least MT.DATA and MT.INSTANCE units.&quot;</span><span class="p">)</span>
+<a id="__codelineno-0-70" name="__codelineno-0-70"></a>        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">"ISCC-CODE requires at least MT.DATA and MT.INSTANCE units."</span><span class="p">)</span>
 <a id="__codelineno-0-71" name="__codelineno-0-71"></a>
 <a id="__codelineno-0-72" name="__codelineno-0-72"></a>    <span class="c1"># Check if this is a special case of 128-bit Data+Instance composite</span>
 <a id="__codelineno-0-73" name="__codelineno-0-73"></a>    <span class="n">is_wide_composite</span> <span class="o">=</span> <span class="p">(</span>
@@ -1657,7 +1657,7 @@ algorithm v0.</p>
 <a id="__codelineno-0-85" name="__codelineno-0-85"></a>    <span class="k">else</span><span class="p">:</span>
 <a id="__codelineno-0-86" name="__codelineno-0-86"></a>        <span class="n">sub_types</span> <span class="o">=</span> <span class="p">[</span><span class="n">t</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="k">for</span> <span class="n">t</span> <span class="ow">in</span> <span class="n">decoded</span> <span class="k">if</span> <span class="n">t</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="ow">in</span> <span class="p">{</span><span class="n">ic</span><span class="o">.</span><span class="n">MT</span><span class="o">.</span><span class="n">SEMANTIC</span><span class="p">,</span> <span class="n">ic</span><span class="o">.</span><span class="n">MT</span><span class="o">.</span><span class="n">CONTENT</span><span class="p">}]</span>
 <a id="__codelineno-0-87" name="__codelineno-0-87"></a>        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="nb">set</span><span class="p">(</span><span class="n">sub_types</span><span class="p">))</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">:</span>
-<a id="__codelineno-0-88" name="__codelineno-0-88"></a>            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Semantic-Code and Content-Code must be of same SubType&quot;</span><span class="p">)</span>
+<a id="__codelineno-0-88" name="__codelineno-0-88"></a>            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Semantic-Code and Content-Code must be of same SubType"</span><span class="p">)</span>
 <a id="__codelineno-0-89" name="__codelineno-0-89"></a>        <span class="n">st</span> <span class="o">=</span> <span class="p">(</span>
 <a id="__codelineno-0-90" name="__codelineno-0-90"></a>            <span class="n">sub_types</span><span class="o">.</span><span class="n">pop</span><span class="p">()</span> <span class="k">if</span> <span class="n">sub_types</span> <span class="k">else</span> <span class="n">ic</span><span class="o">.</span><span class="n">ST_ISCC</span><span class="o">.</span><span class="n">SUM</span> <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">codes</span><span class="p">)</span> <span class="o">==</span> <span class="mi">2</span> <span class="k">else</span> <span class="n">ic</span><span class="o">.</span><span class="n">ST_ISCC</span><span class="o">.</span><span class="n">NONE</span>
 <a id="__codelineno-0-91" name="__codelineno-0-91"></a>        <span class="p">)</span>
@@ -1668,15 +1668,15 @@ algorithm v0.</p>
 <a id="__codelineno-0-96" name="__codelineno-0-96"></a>    <span class="c1"># Collect unit digests</span>
 <a id="__codelineno-0-97" name="__codelineno-0-97"></a>    <span class="k">if</span> <span class="n">is_wide_composite</span><span class="p">:</span>
 <a id="__codelineno-0-98" name="__codelineno-0-98"></a>        <span class="c1"># For wide case, use full 128-bit digests</span>
-<a id="__codelineno-0-99" name="__codelineno-0-99"></a>        <span class="n">digest</span> <span class="o">=</span> <span class="sa">b</span><span class="s2">&quot;&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">([</span><span class="n">t</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">][:</span><span class="mi">16</span><span class="p">]</span> <span class="k">for</span> <span class="n">t</span> <span class="ow">in</span> <span class="n">decoded</span><span class="p">])</span>
+<a id="__codelineno-0-99" name="__codelineno-0-99"></a>        <span class="n">digest</span> <span class="o">=</span> <span class="sa">b</span><span class="s2">""</span><span class="o">.</span><span class="n">join</span><span class="p">([</span><span class="n">t</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">][:</span><span class="mi">16</span><span class="p">]</span> <span class="k">for</span> <span class="n">t</span> <span class="ow">in</span> <span class="n">decoded</span><span class="p">])</span>
 <a id="__codelineno-0-100" name="__codelineno-0-100"></a>    <span class="k">else</span><span class="p">:</span>
 <a id="__codelineno-0-101" name="__codelineno-0-101"></a>        <span class="c1"># For standard case, truncate unit digests to 64-bit</span>
-<a id="__codelineno-0-102" name="__codelineno-0-102"></a>        <span class="n">digest</span> <span class="o">=</span> <span class="sa">b</span><span class="s2">&quot;&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">([</span><span class="n">t</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">][:</span><span class="mi">8</span><span class="p">]</span> <span class="k">for</span> <span class="n">t</span> <span class="ow">in</span> <span class="n">decoded</span><span class="p">])</span>
+<a id="__codelineno-0-102" name="__codelineno-0-102"></a>        <span class="n">digest</span> <span class="o">=</span> <span class="sa">b</span><span class="s2">""</span><span class="o">.</span><span class="n">join</span><span class="p">([</span><span class="n">t</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">][:</span><span class="mi">8</span><span class="p">]</span> <span class="k">for</span> <span class="n">t</span> <span class="ow">in</span> <span class="n">decoded</span><span class="p">])</span>
 <a id="__codelineno-0-103" name="__codelineno-0-103"></a>
 <a id="__codelineno-0-104" name="__codelineno-0-104"></a>    <span class="n">header</span> <span class="o">=</span> <span class="n">ic</span><span class="o">.</span><span class="n">encode_header</span><span class="p">(</span><span class="n">ic</span><span class="o">.</span><span class="n">MT</span><span class="o">.</span><span class="n">ISCC</span><span class="p">,</span> <span class="n">st</span><span class="p">,</span> <span class="n">ic</span><span class="o">.</span><span class="n">VS</span><span class="o">.</span><span class="n">V0</span><span class="p">,</span> <span class="n">encoded_length</span><span class="p">)</span>
 <a id="__codelineno-0-105" name="__codelineno-0-105"></a>
 <a id="__codelineno-0-106" name="__codelineno-0-106"></a>    <span class="n">code</span> <span class="o">=</span> <span class="n">ic</span><span class="o">.</span><span class="n">encode_base32</span><span class="p">(</span><span class="n">header</span> <span class="o">+</span> <span class="n">digest</span><span class="p">)</span>
-<a id="__codelineno-0-107" name="__codelineno-0-107"></a>    <span class="n">iscc</span> <span class="o">=</span> <span class="s2">&quot;ISCC:&quot;</span> <span class="o">+</span> <span class="n">code</span>
+<a id="__codelineno-0-107" name="__codelineno-0-107"></a>    <span class="n">iscc</span> <span class="o">=</span> <span class="s2">"ISCC:"</span> <span class="o">+</span> <span class="n">code</span>
 <a id="__codelineno-0-108" name="__codelineno-0-108"></a>    <span class="k">return</span> <span class="nb">dict</span><span class="p">(</span><span class="n">iscc</span><span class="o">=</span><span class="n">iscc</span><span class="p">)</span>
 </code></pre></div></td></tr></table></div>
             </details>
@@ -1750,7 +1750,7 @@ algorithm v0.</p>
       <script id="__config" type="application/json">{"annotate": null, "base": "..", "features": ["toc.integrate", "navigation.indexes", "navigation.tracking", "navigation.tabs", "navigation.tabs.sticky", "navigation.expand"], "search": "../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
     
     
-      <script src="../assets/javascripts/bundle.79ae519e.min.js"></script>
+      <script src="../assets/javascripts/bundle.d7400e89.min.js"></script>
       
     
   </body>

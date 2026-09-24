@@ -23,7 +23,7 @@
       
       
       <link rel="icon" href="../images/iscc-logo-icon-black.svg">
-      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.3">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.7">
     
     
       
@@ -31,7 +31,7 @@
       
     
     
-      <link rel="stylesheet" href="../assets/stylesheets/main.484c7ddc.min.css">
+      <link rel="stylesheet" href="../assets/stylesheets/main.ec1eaa64.min.css">
       
         
         <link rel="stylesheet" href="../assets/stylesheets/palette.ab4e12ef.min.css">
@@ -1371,6 +1371,17 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
+  <a href="#140-2026-09-24" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        [1.4.0] - 2026-09-24
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#130-2026-03-02" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -1828,9 +1839,36 @@
 
 
 <h1 id="changelog">Changelog<a class="headerlink" href="#changelog" title="Permanent link">#</a></h1>
+<h2 id="140-2026-09-24">[1.4.0] - 2026-09-24<a class="headerlink" href="#140-2026-09-24" title="Permanent link">#</a></h2>
+<ul>
+<li>Added <code>encode_seq</code>, <code>decode_seq</code> and <code>read_unit</code> for strict byte-level encoding and validation of
+  ISCC-UNIT sequences, the concatenated unit format that <code>iscc_decompose</code> has decoded since the ISO
+  24138 release and that IEP-0020 uses for C2PA soft binding values</li>
+<li>Added <code>SEQ_MAINTYPES</code> constant listing the MainTypes permitted in an ISCC-UNIT sequence (IEP-0020)</li>
+<li>Added <code>bytes:</code> output prefix to conformance test data</li>
+<li>Fixed <code>iscc_decompose</code> docstring to state that only the base32 form of concatenated ISCC-UNIT
+  bytes is a valid ISCC sequence</li>
+<li>Fixed <code>alg_cdc_params</code> to reject an <code>avg_size</code> below 2 with a <code>ValueError</code> instead of a math
+  domain error or type error (#134)</li>
+<li>Added reference to the <code>iscc-lib</code> polyglot implementation in the README (#136)</li>
+<li>Fixed typos in the README</li>
+<li>Added <code>CHANGELOG.md</code> to the <code>format-md</code> task so changelog entries wrap at 100 columns</li>
+<li>Improved human-readable representation of ISCC-IDv1 in <code>iscc_explain</code> to use ISO 8601 UTC
+  timestamp and labeled <code>HUB_&lt;id&gt;</code> field (e.g. <code>ID-REALM_1-V1-64-2026-04-30T08:38:19.376583Z-HUB_1</code>)</li>
+<li>Fixed pytest deprecation warning by passing conformance test data to <code>parametrize</code> as a list</li>
+<li>Fixed Cython 3.3 wheel build failure caused by a duplicate type annotation in <code>minhash.py</code></li>
+<li>Fixed conformance input decoding to strip the <code>stream:</code> prefix exactly and to support the <code>bytes:</code>
+  prefix at runtime</li>
+<li>Added Python 3.14 binary wheels to the release build</li>
+<li>Added Linux aarch64 binary wheels to the release build</li>
+<li>Added standalone build workflow to verify wheels and sdist without publishing</li>
+<li>Updated GitHub Actions to current versions</li>
+<li>Updated dependencies</li>
+</ul>
 <h2 id="130-2026-03-02">[1.3.0] - 2026-03-02<a class="headerlink" href="#130-2026-03-02" title="Permanent link">#</a></h2>
 <ul>
-<li>Added <code>meta_trim_meta</code> option to limit decoded <code>meta</code> payload size in <code>gen_meta_code_v0</code> (Fixes #132)</li>
+<li>Added <code>meta_trim_meta</code> option to limit decoded <code>meta</code> payload size in <code>gen_meta_code_v0</code> (Fixes
+  #132)</li>
 <li>Added conformance test vectors for description trimming boundary cases (Fixes #133)</li>
 <li>Added conformance test vectors for JCS number canonicalization in Meta-Code (Fixes #131)</li>
 <li>Added timestamp metadata to conformance test data (Fixes #27)</li>
@@ -2178,7 +2216,7 @@
       <script id="__config" type="application/json">{"annotate": null, "base": "..", "features": ["toc.integrate", "navigation.indexes", "navigation.tracking", "navigation.tabs", "navigation.tabs.sticky", "navigation.expand"], "search": "../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
     
     
-      <script src="../assets/javascripts/bundle.79ae519e.min.js"></script>
+      <script src="../assets/javascripts/bundle.d7400e89.min.js"></script>
       
     
   </body>
