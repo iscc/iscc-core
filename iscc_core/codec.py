@@ -2,7 +2,7 @@
 import datetime
 import math
 import uvarint
-from typing import List, Tuple
+from typing import List, Sequence, Tuple
 import base58
 from bitarray import bitarray
 from bitarray.util import int2ba, ba2int
@@ -377,10 +377,17 @@ def normalize_multiformat(iscc_code):
 def iscc_decompose(iscc_code):
     # type: (str) -> List[str]
     """
-    Decompose a normalized ISCC-CODE or any valid ISCC sequence into a list of ISCC-UNITS.
+    Decompose a normalized ISCC-CODE or the base32 form of concatenated ISCC-UNIT bytes into a
+    list of ISCC-UNITS.
 
-    A valid ISCC sequence is a string concatenation of ISCC-UNITS optionally seperated
-    by a hyphen.
+    The second form is the display form of an ISCC-SEQ (IEP-0020): `ISCC:` followed by the base32
+    encoding of the ISCC-SEQ bytes (see `encode_seq`). Concatenating ISCC-UNIT strings, with or
+    without hyphens, yields such a string only for 64-bit units, whose 10-byte encoding is exactly
+    16 base32 characters; longer units misalign the bit stream.
+
+    !!! note
+        This is the lenient reader for ISCC strings. Use `decode_seq` to strictly decode
+        ISCC-SEQ byte strings (IEP-0020), e.g. C2PA soft binding values.
     """
     # Handle multiformat encoding first
     iscc_code = normalize_multiformat(iscc_code)
@@ -420,6 +427,111 @@ def iscc_decompose(iscc_code):
         break
 
     return components
+
+
+#: Upper bound of an encoded ISCC-HEADER in bytes (see encode_header)
+_HEADER_MAX = 8
+
+
+def read_unit(data, offset=0):
+    # type: (bytes, int) -> int
+    """
+    Read one strictly encoded ISCC-UNIT from an ISCC-SEQ byte string (IEP-0020).
+
+    Validates the ISCC-UNIT at `offset` and returns the offset of the next one, which allows
+    sequential decoding of an ISCC-SEQ.
+
+    :param data: ISCC-SEQ byte string (bytes-like)
+    :param offset: Start of the ISCC-UNIT within `data`
+    :return: Offset of the next ISCC-UNIT (end of this one)
+    :raises ValueError: If the header is incomplete or non-canonical, the MainType or Length is
+        not permitted, or the body is truncated
+    """
+    # Byte-oriented view so that offsets and lengths are in bytes for any buffer format
+    data = memoryview(data).cast("B")
+    window = bytes(data[offset : offset + _HEADER_MAX])
+    try:
+        mt, st, vs, ln, _ = decode_header(window)
+    except ValueError as e:
+        raise ValueError(f"Malformed ISCC-HEADER at offset {offset}: {e}") from e
+    header = encode_header(mt, st, vs, ln)
+    if not window.startswith(header):
+        raise ValueError(f"Non-canonical ISCC-HEADER at offset {offset}")
+    if mt not in SEQ_MAINTYPES:
+        raise ValueError(f"MainType {mt} is not permitted in an ISCC-SEQ (offset {offset})")
+    if ln > 7:
+        raise ValueError(f"Unsupported Length field {ln} at offset {offset}")
+    end = offset + len(header) + 4 * (ln + 1)
+    if end > len(data):
+        raise ValueError(f"Truncated ISCC-UNIT at offset {offset}")
+    return end
+
+
+def encode_seq(units):
+    # type: (Sequence[str]) -> bytes
+    """
+    Encode ISCC-UNIT strings as an ISCC-SEQ byte string (IEP-0020).
+
+    The result is the concatenation of the header and body bytes of each ISCC-UNIT in the given
+    order. A C2PA `c2pa.soft-binding` block value for `io.iscc.v0` is an ISCC-SEQ whose units
+    all have Version 0 and 256-bit bodies (IEP-0020). This function accepts any 32 to 256-bit
+    unit of any Version and does not enforce that constraint, so callers producing `io.iscc.v0`
+    values must.
+
+    Unit strings may omit the `ISCC:` prefix and may be lowercase or contain hyphens.
+
+    :param units: ISCC-UNIT strings of MainType META, SEMANTIC, CONTENT, DATA or INSTANCE with
+        32 to 256 bits
+    :return: ISCC-SEQ byte string
+    :raises ValueError: If `units` is empty or contains an empty, malformed, ISCC-CODE, ISCC-ID
+        or FLAKE unit
+    :raises TypeError: If `units` is not a sequence of strings
+    """
+    if isinstance(units, (str, bytes)):
+        raise TypeError("units must be a sequence of ISCC-UNIT strings")
+    units = list(units)
+    if not units:
+        raise ValueError("ISCC-SEQ requires at least one ISCC-UNIT")
+    seq = bytearray()
+    for unit in units:
+        if not isinstance(unit, str):
+            raise TypeError("ISCC-UNIT must be a string")
+        if not unit.strip():
+            raise ValueError("ISCC-UNIT must not be empty")
+        # Uppercase first: iscc_clean keeps hyphens in bare strings that start with a multibase
+        # prefix character, and bare lowercase units with SubType >= 8 start with "b" or "f".
+        raw = decode_base32(iscc_clean(unit.upper()))
+        if read_unit(raw) != len(raw):
+            raise ValueError(f"Trailing data in ISCC-UNIT {unit!r}")
+        seq += raw
+    return bytes(seq)
+
+
+def decode_seq(data):
+    # type: (bytes) -> list[str]
+    """
+    Decode an ISCC-SEQ byte string to canonical ISCC-UNIT strings (IEP-0020).
+
+    Strict: rejects non-canonical headers, MainTypes other than META, SEMANTIC, CONTENT, DATA
+    and INSTANCE, Length fields above 7, truncated units and trailing bytes. Unknown SubType or
+    Version values are preserved. Encoding the result reproduces `data`.
+
+    :param data: ISCC-SEQ byte string, e.g. the content of a C2PA soft binding block value
+    :return: ISCC-UNIT strings (`ISCC:` prefixed) in wire order
+    :raises ValueError: If `data` is empty or malformed
+    :raises TypeError: If `data` is not a bytes-like object
+    """
+    if not isinstance(data, (bytes, bytearray, memoryview)):
+        raise TypeError("ISCC-SEQ must be bytes")
+    data = bytes(data)
+    if not data:
+        raise ValueError("Empty ISCC-SEQ")
+    units, offset = [], 0
+    while offset < len(data):
+        end = read_unit(data, offset)
+        units.append("ISCC:" + encode_base32(data[offset:end]))
+        offset = end
+    return units
 
 
 def iscc_normalize(iscc_code):

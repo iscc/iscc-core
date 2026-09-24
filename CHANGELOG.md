@@ -2,7 +2,10 @@
 
 ## [1.4.0] - Unreleased
 
+- Added `encode_seq`, `decode_seq` and `read_unit` for strict byte-level encoding and validation of ISCC-UNIT sequences, the concatenated unit format that `iscc_decompose` has decoded since the ISO 24138 release and that IEP-0020 uses for C2PA soft binding values
+- Added `SEQ_MAINTYPES` constant listing the MainTypes permitted in an ISCC-UNIT sequence (IEP-0020)
 - Added `bytes:` output prefix to conformance test data
+- Fixed `iscc_decompose` docstring to state that only the base32 form of concatenated ISCC-UNIT bytes is a valid ISCC sequence
 - Improved human-readable representation of ISCC-IDv1 in `iscc_explain` to use ISO 8601 UTC timestamp and labeled `HUB_<id>` field (e.g. `ID-REALM_1-V1-64-2026-04-30T08:38:19.376583Z-HUB_1`)
 - Fixed pytest deprecation warning by passing conformance test data to `parametrize` as a list
 - Fixed Cython 3.3 wheel build failure caused by a duplicate type annotation in `minhash.py`

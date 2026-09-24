@@ -243,7 +243,10 @@ SUBTYPE_MAP = {
 #: Multicodec prefix code
 MC_PREFIX: bytes = b"\xcc\x01"
 
-# Valid 2-character ISCC prefixes (note: MA and ME are ambiguous between V0 and V1)
+#: MainTypes permitted in an ISCC-SEQ (IEP-0020)
+SEQ_MAINTYPES = frozenset((MT.META, MT.SEMANTIC, MT.CONTENT, MT.DATA, MT.INSTANCE))
+
+#: Valid 2-character ISCC prefixes (note: MA and ME are ambiguous between V0 and V1)
 PREFIXES = [
     "AA",  # META-NONE
     "CA",  # SEMANTIC-TEXT

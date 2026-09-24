@@ -13,3 +13,4 @@
             - VS
             - LN
             - MULTIBASE
+            - SEQ_MAINTYPES

@@ -27,6 +27,9 @@ This module implements encoding, decoding and transcoding functions of ISCC
             - decode_base32
             - iscc_decompose
             - iscc_normalize
+            - encode_seq
+            - decode_seq
+            - read_unit
 
 ## Alternate Encodings
 
