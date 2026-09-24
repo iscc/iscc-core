@@ -1,6 +1,6 @@
 # Changelog
 
-## [1.4.0] - Unreleased
+## [1.4.0] - 2026-09-24
 
 - Added `encode_seq`, `decode_seq` and `read_unit` for strict byte-level encoding and validation of
   ISCC-UNIT sequences, the concatenated unit format that `iscc_decompose` has decoded since the ISO
