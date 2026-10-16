@@ -4,6 +4,7 @@
 
 - Fixed absolute links to the ISCC-UNIT pages in the `iscc_code` module documentation
 - Updated documentation copyright year to 2026
+- Updated dependencies
 
 ## [1.4.0] - 2026-09-24
 
