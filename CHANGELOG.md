@@ -1,5 +1,15 @@
 # Changelog
 
+## [1.5.0] - 2026-10-16
+
+- **Breaking:** Fixed Image-Code bits beyond 64 to be calculated from the top-right, bottom-left and
+  bottom-right 8x8 squares of the upper-left 16x16 DCT coefficients as specified in ISO 24138
+  5.4.5.2 e) instead of from copies of the first square shifted by one coefficient. Image-Codes
+  longer than 64 bits change, while 64-bit Image-Codes and ISCC-CODEs are unaffected
+- Fixed absolute links to the ISCC-UNIT pages in the `iscc_code` module documentation
+- Updated documentation copyright year to 2026
+- Updated dependencies
+
 ## [1.4.0] - 2026-09-24
 
 - Added `encode_seq`, `decode_seq` and `read_unit` for strict byte-level encoding and validation of

@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+from statistics import median
 import pytest
 import iscc_core as ic
 
@@ -15,7 +16,7 @@ def test_gen_image_code_v0_32bit():
 
 def test_gen_image_code_v0_256bit():
     ic_obj = ic.gen_image_code_v0(IMG_SAMPLE_PIXELS, bits=256)
-    assert ic_obj == {"iscc": "ISCC:EED4GQZQTY6J5DTHQ2DWCPDZHQOM6QZQTY6J5DTFZ2DWCPDZHQOMXDI"}
+    assert ic_obj == {"iscc": "ISCC:EED4GQZQTY6J5DTHNDQ7S7EGNENJNRTEGLGHFWXFGNDZHSMO4HEZGZI"}
 
 
 def test_hash_image_v0_white():
@@ -39,8 +40,17 @@ def test_hash_image_v0_sample():
 
     assert (
         ic.soft_hash_image_v0(IMG_SAMPLE_PIXELS, 256).hex()
-        == "c343309e3c9e8e678687613c793c1ccf43309e3c9e8e65ce87613c793c1ccb8d"
+        == "c343309e3c9e8e6768e1f97c86691a96c66432cc72dae5334793c98ee1c99365"
     )
+
+
+def test_hash_image_v0_256_quadrant_layout():
+    # Blocks follow the top-left, top-right, bottom-left and bottom-right 8x8 DCT squares
+    digest = ic.soft_hash_image_v0(IMG_SAMPLE_PIXELS, bits=256)
+    matrix = dct_matrix(IMG_SAMPLE_PIXELS)
+    for i, (x, y) in enumerate(((0, 0), (8, 0), (0, 8), (8, 8))):
+        square = [v for row in matrix[y : y + 8] for v in row[x : x + 8]]
+        assert digest[i * 8 : (i + 1) * 8] == median_bits(square)
 
 
 def test_gen_code_image_v0_white():
@@ -58,13 +68,13 @@ def test_gen_code_image_v0_white():
 
 def test_get_code_image_v0():
     assert ic.gen_image_code_v0(IMG_SAMPLE_PIXELS, bits=256) == {
-        "iscc": "ISCC:EED4GQZQTY6J5DTHQ2DWCPDZHQOM6QZQTY6J5DTFZ2DWCPDZHQOMXDI"
+        "iscc": "ISCC:EED4GQZQTY6J5DTHNDQ7S7EGNENJNRTEGLGHFWXFGNDZHSMO4HEZGZI"
     }
 
 
 def test_get_code_image():
     assert ic.gen_image_code(IMG_SAMPLE_PIXELS, bits=256) == {
-        "iscc": "ISCC:EED4GQZQTY6J5DTHQ2DWCPDZHQOM6QZQTY6J5DTFZ2DWCPDZHQOMXDI"
+        "iscc": "ISCC:EED4GQZQTY6J5DTHNDQ7S7EGNENJNRTEGLGHFWXFGNDZHSMO4HEZGZI"
     }
 
 
@@ -93,6 +103,22 @@ def test_gen_image_code_schema_conformance():
 def test_soft_hash_image_v0_larger_256_raises():
     with pytest.raises(AssertionError):
         ic.soft_hash_image_v0(IMG_SAMPLE_PIXELS, bits=288)
+
+
+def dct_matrix(pixels):
+    # type: (list[int]) -> list[list[float]]
+    """Compute the 2D DCT of a flattened 32x32 pixel matrix as a list of rows."""
+    rows = [ic.alg_dct(pixels[i : i + 32]) for i in range(0, 1024, 32)]
+    cols = [ic.alg_dct(list(col)) for col in zip(*rows)]
+    return [list(row) for row in zip(*cols)]
+
+
+def median_bits(values):
+    # type: (list[float]) -> bytes
+    """Encode values as bits that are set where a value exceeds the median."""
+    med = median(values)
+    bits = "".join("1" if v > med else "0" for v in values)
+    return int(bits, 2).to_bytes(len(values) // 8, "big")
 
 
 IMG_WHITE_PIXELS = [255] * 1024

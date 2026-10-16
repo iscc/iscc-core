@@ -1,7 +1,7 @@
 {
   "_metadata": {
-    "generated": "2026-09-24T16:00:50Z",
-    "generator": "iscc-core 1.4.0",
+    "generated": "2026-10-16T11:38:38Z",
+    "generator": "iscc-core 1.5.0",
     "description": "ISCC conformance test data (ISO 24138:2024)"
   },
   "gen_meta_code_v0": {
@@ -359,7 +359,7 @@
         256
       ],
       "outputs": {
-        "iscc": "ISCC:EED4GQZQTY6J5DTHQ2DWCPDZHQOM6QZQTY6J5DTFZ2DWCPDZHQOMXDI"
+        "iscc": "ISCC:EED4GQZQTY6J5DTHNDQ7S7EGNENJNRTEGLGHFWXFGNDZHSMO4HEZGZI"
       }
     }
   },

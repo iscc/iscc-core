@@ -93,7 +93,8 @@ def soft_hash_image_v0(pixels, bits=ic.core_opts.image_bits):
         return [v for sublist in m[y : y + 8] for v in sublist[x : x + 8]]
 
     bitstring = ""
-    slices = ((0, 0), (1, 0), (0, 1), (1, 1))
+    # Top-left, top-right, bottom-left and bottom-right 8 x 8 squares of the upper-left 16 x 16
+    slices = ((0, 0), (8, 0), (0, 8), (8, 8))
 
     for xy in slices:
         # Extract 8 x 8 slice
