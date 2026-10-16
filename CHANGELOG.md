@@ -1,6 +1,6 @@
 # Changelog
 
-## [1.4.1] - Unreleased
+## [1.5.0] - Unreleased
 
 - Fixed absolute links to the ISCC-UNIT pages in the `iscc_code` module documentation
 - Updated documentation copyright year to 2026
