@@ -1,6 +1,6 @@
 # Changelog
 
-## [1.5.0] - Unreleased
+## [1.5.0] - 2026-10-16
 
 - **Breaking:** Fixed Image-Code bits beyond 64 to be calculated from the top-right, bottom-left and
   bottom-right 8x8 squares of the upper-left 16x16 DCT coefficients as specified in ISO 24138
