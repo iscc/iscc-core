@@ -1371,6 +1371,17 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
+  <a href="#150-2026-10-16" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        [1.5.0] - 2026-10-16
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#140-2026-09-24" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -1839,6 +1850,16 @@
 
 
 <h1 id="changelog">Changelog<a class="headerlink" href="#changelog" title="Permanent link">#</a></h1>
+<h2 id="150-2026-10-16">[1.5.0] - 2026-10-16<a class="headerlink" href="#150-2026-10-16" title="Permanent link">#</a></h2>
+<ul>
+<li><strong>Breaking:</strong> Fixed Image-Code bits beyond 64 to be calculated from the top-right, bottom-left and
+  bottom-right 8x8 squares of the upper-left 16x16 DCT coefficients as specified in ISO 24138
+  5.4.5.2 e) instead of from copies of the first square shifted by one coefficient. Image-Codes
+  longer than 64 bits change, while 64-bit Image-Codes and ISCC-CODEs are unaffected</li>
+<li>Fixed absolute links to the ISCC-UNIT pages in the <code>iscc_code</code> module documentation</li>
+<li>Updated documentation copyright year to 2026</li>
+<li>Updated dependencies</li>
+</ul>
 <h2 id="140-2026-09-24">[1.4.0] - 2026-09-24<a class="headerlink" href="#140-2026-09-24" title="Permanent link">#</a></h2>
 <ul>
 <li>Added <code>encode_seq</code>, <code>decode_seq</code> and <code>read_unit</code> for strict byte-level encoding and validation of
@@ -2189,7 +2210,7 @@
       <div class="md-copyright">
   
     <div class="md-copyright__highlight">
-      Copyright © 2016-2025 Titusz Pan | <a href="https://iscc.foundation/privacy">Privacy Policy</a> | <a href="https://iscc.foundation/cookies">Cookie Policy</a> | <a href="https://iscc.foundation/imprint">Imprint</a> | <a href="https://iscc.foundation/disclaimer">Disclaimer</a>
+      Copyright © 2016-2026 Titusz Pan | <a href="https://iscc.foundation/privacy">Privacy Policy</a> | <a href="https://iscc.foundation/cookies">Cookie Policy</a> | <a href="https://iscc.foundation/imprint">Imprint</a> | <a href="https://iscc.foundation/disclaimer">Disclaimer</a>
     </div>
   
   
